@@ -1,0 +1,91 @@
+{
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
+  "parser": "babel-eslint",
+  "globals": {
+    "graphql": false
+  },
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/no-named-as-default": "off",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          "parent",
+          ["sibling", "index"]
+        ]
+      }
+    ],
+    "react/jsx-filename-extension": "off",
+    "react/destructuring-assignment": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", {
+      "aspects": ["invalidHref"]
+    }],
+    "jsx-a11y/no-autofocus": "off",
+    "jsx-a11y/label-has-associated-control": [2, {
+      "controlComponents": ["input"]
+    }],
+    "jsx-a11y/label-has-for": [2, {
+      "components": ["Label"],
+      "required": {
+        "some": ["nesting", "id"]
+      },
+      "allowChildren": true
+    }],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+    }],
+    "no-underscore-dangle": ["error", {
+      "allow": ["_id"],
+      "allowAfterThis": true,
+      "allowAfterSuper": true
+    }],
+    "class-methods-use-this": "off",
+    "no-confusing-arrow": "warn",
+    "max-params": ["error", 3],
+    "max-classes-per-file": ["error", 1],
+    "max-depth": ["error", 3],
+    "max-nested-callbacks": ["error", 2],
+    "complexity": ["error", 4]
+  },
+  "plugins": [
+    "import",
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "jest"
+  ],
+  "overrides": [{
+    "files": ["**/*.spec.js", "**/__tests__/*", "**/__mocks__/*"],
+    "env": {
+      "jest": true
+    },
+    "rules": {
+      "max-nested-callbacks": ["error", 5],
+      "max-depth": ["error", 5]
+    }
+  }],
+  "parserOptions": {
+    "ecmaVersion": 10,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}

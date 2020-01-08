@@ -1,0 +1,87 @@
+name: Ockam-website-$(Date:yyyyMMdd).$(Rev:r)
+
+trigger:
+  branches:
+    include:
+    - master
+    - stage
+    - dev
+
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  ACCOUNT_NAME: ockamio2$(Build.SourceBranchName)
+
+
+steps:
+- task: NodeTool@0
+  displayName: 'Install Node.js'
+  inputs:
+    versionSpec: '12.x'
+
+- bash: |
+    set -ex
+    ./scripts/get-depended-repos.sh $(TOKEN)
+    npm ci
+    npm run build
+  displayName: 'Install & build docs'
+
+- bash: |
+    set -ex
+    rm -f ./public/*.map
+    rm -f ./public/webpack.stats.json
+  displayName: 'Remove vulnerabilities'
+
+- bash: |
+    set -ex
+    case $(Build.SourceBranchName) in
+      master)
+        az storage blob delete-batch \
+          --account-name $(ACCOUNT_NAME) \
+          --account-key $(ACCOUNT_KEY_MASTER) \
+          --source $(CONTAINER)
+        az storage blob upload-batch \
+          --account-name $(ACCOUNT_NAME) \
+          --account-key $(ACCOUNT_KEY_MASTER) \
+          --source ./public/  \
+          --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+        ;;
+      stage)
+        az storage blob delete-batch \
+          --account-name $(ACCOUNT_NAME) \
+          --account-key $(ACCOUNT_KEY_STAGE) \
+          --source $(CONTAINER)
+        az storage blob upload-batch \
+          --account-name $(ACCOUNT_NAME) \
+          --account-key $(ACCOUNT_KEY_STAGE) \
+          --source ./public/  \
+          --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+        ;;
+      dev)
+        az storage blob delete-batch \
+          --account-name $(ACCOUNT_NAME) \
+          --account-key $(ACCOUNT_KEY_DEV) \
+          --source $(CONTAINER)
+        az storage blob upload-batch \
+          --account-name $(ACCOUNT_NAME) \
+          --account-key $(ACCOUNT_KEY_DEV) \
+          --source ./public/  \
+          --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+        ;;
+    esac
+  displayName: 'Deploy to storage'
+
+- bash: |
+    set -ex
+    # waiting for privileges to create service principal
+    #az login --service-principal -u http://ockam-pipeline -p $(SP_PASSWORD) --tenant xxxxxxxxxxxxxx.com
+    az cdn endpoint purge \
+      --resource-group ockam2master \
+      --name $(CDN_ENDPOINT) \
+      --profile-name $(CDN_PROFILE) \
+      --content-paths '/*'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master')) # only for PRODUCTION
+  displayName: "Purge CDN"
