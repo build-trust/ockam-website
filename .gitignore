@@ -6,7 +6,8 @@ node_modules
 .idea/
 ockam-sample-documentation
 .gitmodules
-
+**/cli.config
+**/*.swp
 
 # Created by https://www.gitignore.io/api/terraform
 # Edit at https://www.gitignore.io/?templates=terraform

@@ -1,0 +1,242 @@
+CLI_DIR=$(dirname "$(pwd)/$BASH_SOURCE")
+source $CLI_DIR/cli.config
+
+
+## Example how to batch delete storage account blob
+alias ockam.example.delete-blob="echo 'az storage blob delete-batch --account-name \$ACCOUNT_NAME --account-key \$ACCOUNT_KEY --source \$web'"
+
+## Example how to batch upload to storage account blob
+alias ockam.example.upload-blob="echo 'az storage blob upload-batch --account-name \$ACCOUNT_NAME --account-key \$ACCOUNT_KEY --source ./public/  --destination \"https://\$ACCOUNT_NAME.blob.core.windows.net/<CONTAINER_NAME>\"'"
+
+function _ockam_usage() {
+  echo 'usage: ockam <environment> <command>'
+}
+
+function _error_msg() {
+  echo "Ockam: $1"
+}
+
+function _error_no_workspace() {
+  _ockam_usage
+  _error_msg "No workspace supplied"
+  cd $OCKAM_REPO_DIR/terraform && \
+  terraform workspace list | tail -n+2; # show all except DEFAULT workspace
+  cd - > /dev/null
+}
+
+function ockam() {
+  ockam.help
+}
+
+## Prints this help page
+function ockam.help() {
+  HELP=$(sed -En '/^[[:space:]]*##/,/(^[[:space:]]*function|^alias)/p' $CLI_DIR/ockam.aliases | sed -E 's/^[[:space:]]+//')
+
+  echo "Ockam helper commands"
+  while ! [ -z "$HELP" ]; do
+    # Find the line number of the first command (above them there can be only
+    # comments describing it)
+    LINE=$(echo "$HELP" | grep -Enm 1 '^(function|alias)' | cut -d: -f1)
+
+    # Get one command-description block
+    BLOCK=$(echo "$HELP" | sed -n "1,${LINE}p")
+
+    # Delete last command-description block
+    HELP=$(echo "$HELP" | sed -e "1,${LINE}d")
+
+    # Get command line only and then decide is it alias or function after which
+    # do appropriate transformation
+    CMD_NAME=$(echo "$BLOCK" | tail -n1)
+    if [[ $CMD_NAME == alias* ]]
+    then
+      CMD_NAME=$(echo "$CMD_NAME" | cut -d= -f1 | sed -E 's/^[[:space:]]*alias[[:space:]]+//')
+    elif [[ $CMD_NAME == function* ]]
+    then
+      CMD_NAME=$(echo "$CMD_NAME" | sed -E 's/\(\).*//' | sed -E 's/^[[:space:]]*function[[:space:]]+//')
+    fi
+
+    # Get command description
+    DESCRIPTION=$(echo "$BLOCK" | head -n-1 | sed 's/^##[[:space:]]*/    /')
+
+    # Print final command help
+    echo "- $CMD_NAME"
+    echo "$DESCRIPTION"
+    echo
+  done
+}
+
+## Run this each time you want to commit new version of help. This boils down
+## to 2 cases:
+## 1. when you add new command with new description
+## 2. when you update or add description to existing command
+## usage: run `ockam.generate-help-markdown` then commit changes
+function ockam.generate-help-markdown() {
+  echo '```' > $CLI_DIR/HELP.md
+  ockam.help >> $CLI_DIR/HELP.md
+  echo '```' >> $CLI_DIR/HELP.md
+}
+
+## Set pipeline variable
+## usage: ockam.pipeline-var <pipieline-name> <variable-command>
+function ockam.pipeline-var() {
+  ORGANIZATION=https://dev.azure.com/$OCKAM_DEV_AZURE_ORGANIZATION/
+  USAGE="Usage: ${FUNCNAME[0]} <pipieline-name> <variable-command>"
+
+  if [ -z "$1" ]
+  then
+    _error_msg "Missing pipeline name"
+    az pipelines list \
+      --organization $ORGANIZATION \
+      --project $OCKAM_DEV_AZURE_PROJECT | jq -r .[].name
+    _error_msg "$USAGE"
+    return
+  else
+    PIPELINE_NAME=$1
+  fi
+
+  if [ -z "$2" ]
+  then
+    _error_msg "Missing command"
+    az pipelines variable -h
+    _error_msg "$USAGE"
+  else
+    CMD=$2
+    shift
+    shift
+    az pipelines variable $CMD \
+      --organization $ORGANIZATION \
+      --project $OCKAM_DEV_AZURE_PROJECT \
+      --pipeline-name $PIPELINE_NAME $@
+  fi
+}
+
+
+## Run pipeline
+## usage: ockam.pipeline-run <pipieline-name> <git-branch>
+function ockam.pipeline-run() {
+  set -e
+  USAGE="Usage: ${FUNCNAME[0]} <pipieline-name> <git-branch>"
+  ORGANIZATION=https://dev.azure.com/$OCKAM_DEV_AZURE_ORGANIZATION/
+
+  if [ -z "$1" ]
+  then
+    _error_msg "Missing pipeline name"
+    az pipelines list \
+      --organization $ORGANIZATION \
+      --project $OCKAM_DEV_AZURE_PROJECT | jq -r .[].name
+    _error_msg "$USAGE"
+    return
+  else
+    PIPELINE_NAME=$1
+  fi
+
+  if [ -z "$2" ]
+  then
+    _error_msg "Missing branch name"
+    git branch
+    _error_msg "$USAGE"
+    return
+  else
+    BRANCH=$2
+  fi
+
+  BUILDNUMBER=$(az pipelines run \
+    --name $PIPELINE_NAME \
+    --branch $BRANCH \
+    --organization $ORGANIZATION \
+    --project $OCKAM_DEV_AZURE_PROJECT | jq .buildNumber)
+
+  echo "Build number: $BUILDNUMBER triggered.."
+}
+
+
+## Set prefered website account storage access key
+## usage: ockam.set.storage-key <account-name>
+function ockam.set.storage-key() {
+  USAGE="Usage: ${FUNCNAME[0]} <account-name>"
+
+  if [ -z "$1" ]
+  then
+    _error_msg "Missing storage account name"
+    for SA in $(az resource list --tag client=Ockam | jq -r .[].name);
+    do
+      az storage account list -g ockam2$(echo $SA | cut -d'2' -f2 ) | jq .[].name;
+    done
+    _error_msg "$USAGE"
+    return
+  else
+    ACCOUNT_NAME=$1
+  fi
+  # get current azure storage key
+  export AZURE_STORAGE_KEY=$(az storage account keys list --account-name $ACCOUNT_NAME | jq -r .[0].value)
+}
+
+## If accidentally we left some of those setting then during creation of storage
+## by terraform static-web module (using command az storage blob
+## service-properties update) we will fail
+function ockam.unset.envs() {
+  unset AZURE_STORAGE_KEY
+  unset AZURE_STORAGE_CONNECTION_STRING
+  unset AZURE_STORAGE_SAS_TOKEN
+}
+
+
+if [[ -z "${ARM_ACCESS_KEY}" ]];
+then
+  >&2 cat <<MISSINGKEY
+Missing ARM_ACCESS_KEY variable
+Terraform related aliases will not load at the moment, if you want them then please setup above variable following \`/terraform/README.md\` and then rerun this script.
+MISSINGKEY
+
+else
+  ## Wrapper for `terraform` command
+  function ockam.terraform() {
+    if [ -z "$1" ]
+    then
+      _error_no_workspace
+    else
+      ENV=$1
+      shift
+      cd $OCKAM_REPO_DIR/terraform && \
+      terraform workspace select $ENV && \
+      terraform init && \
+      terraform $@ && cd - > /dev/null
+    fi
+  }
+
+  ## Wrapper for `terraform` command to run with appropriate environment
+  ## (.tfvars) based on desirable workspace
+  ##
+  ## Example command:
+  ## $ ockam.terraform.with-vars staging apply -auto-approve
+  ##
+  ## Executed command:
+  ## $ cd to/terraform/dir
+  ## $ terraform workspace select staging
+  ## $ terraform staging apply -var-file=tfvars/staging.tfvars -auto-approve
+  function ockam.terraform.with-vars() { # staging/production COMMAND [param1,param2,..]
+    if [ -z "$1" ]
+    then
+      _error_no_workspace
+      return
+    fi
+    ENVIRONMENT=$1; shift
+
+    if [ -z "$1" ]
+    then
+      _ockam_usage
+      _error_msg "Missing terraform command"
+      return
+    fi
+    CMD=$1; shift
+
+    ockam.terraform $ENVIRONMENT $CMD -var-file=tfvars/$ENVIRONMENT.tfvars $@
+  }
+fi
+
+
+ockam.unset.envs
+
+cat <<THEEND
+Ockam aliases loaded, try now type 'ockam<tab><tab>'
+THEEND
