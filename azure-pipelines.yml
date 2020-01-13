@@ -5,7 +5,7 @@ trigger:
     include:
     - master
     - stage
-    - dev
+    - develop
 
 pr: none
 
@@ -24,10 +24,16 @@ steps:
 
 - bash: |
     set -ex
-    ./scripts/get-depended-repos.sh $(TOKEN)
+    ./scripts/get-depended-repos.sh $T
+  displayName: 'Checkout depended repositories'
+  env:
+    T: $(TOKEN)
+
+- bash: |
+    set -ex
     npm ci
     npm run build
-  displayName: 'Install & build docs'
+  displayName: 'Install & build site'
 
 - bash: |
     set -ex
@@ -60,16 +66,16 @@ steps:
           --source ./public/  \
           --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
         ;;
-      dev)
+      develop | *)
         az storage blob delete-batch \
-          --account-name $(ACCOUNT_NAME) \
+          --account-name ockamio2dev \
           --account-key $(ACCOUNT_KEY_DEV) \
           --source $(CONTAINER)
         az storage blob upload-batch \
-          --account-name $(ACCOUNT_NAME) \
+          --account-name ockamio2dev \
           --account-key $(ACCOUNT_KEY_DEV) \
           --source ./public/  \
-          --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+          --destination "https://ockamio2dev.blob.core.windows.net/$(CONTAINER)"
         ;;
     esac
   displayName: 'Deploy to storage'

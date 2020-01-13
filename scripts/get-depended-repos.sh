@@ -3,6 +3,11 @@
 # Checkout depended repositories so gatsby has all necessary code to produce
 # the whole Ockam page.
 
+# exit when any command fails
+set -ex
+
+export TOKEN=$1
+
 function _message() {
   echo "$(basename $0): $@"
 }
@@ -18,13 +23,11 @@ fi
 while IFS=';' read -r ORGANIZATION REPO_NAME COMMIT SRC_DIR URL_PATH
 do
   REPO_PATH=src/content/$URL_PATH
-  REPO_URL_WTOKEN=$(echo "$ORGANIZATION" | sed "s#//github#//${TOKEN}@github#")/$REPO_NAME.git
-
   _message "Cloning $ORGANIZATION/$REPO_NAME.."
-  rm -rf /tmp/* # clean before to prevent space limit
-  git clone -n $REPO_URL_WTOKEN /tmp/$REPO_NAME
+  git clone -n https://$TOKEN@github.com/$ORGANIZATION/$REPO_NAME /tmp/$REPO_NAME
+  mkdir -p src/content/ # make sure subfolder exists
   mv /tmp/$REPO_NAME$SRC_DIR $REPO_PATH
-  rm -rf /tmp/* # .. and clean after so we don't left anything after ourselfs
+  rm -rf /tmp/$REPO_NAME # clean it
   echo
   cd $REPO_PATH;
   _message "Checking out $COMMIT.."
