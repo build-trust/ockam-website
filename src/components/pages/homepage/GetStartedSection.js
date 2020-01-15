@@ -14,6 +14,7 @@ import CardBody from '../../Card/CardBody';
 import Heading from '../../Heading';
 import Link from '../../Link';
 import Subheading from '../Subheading';
+import useSiteMetadata from "../../../hooks/useSiteMetadata";
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -33,8 +34,7 @@ const StyledCard = styled(Card)`
   &:hover {
     background-color: ${props =>
       lighten(0.08, props.theme.colors.accentBackground)};
-    //transform: scale(1.08);
-    box-shadow: 0px 0px 29px 3px
+    box-shadow: 0 0 29px 3px
       ${props => rgba(darken(0.2, props.theme.colors.background), 0.2)};
     z-index: 2;
     &:before {
@@ -54,7 +54,7 @@ const StyledCardBody = styled(CardBody)`
   align-items: center;
   transition: padding 300ms cubic-bezier(0.51, 0.92, 0.24, 1.15);
   &:hover {
-    padding: 3rem 2rem 3rem 0rem;
+    padding: 3rem 2rem 3rem 0;
   }
 `;
 
@@ -102,6 +102,7 @@ GetStartedCard.defaultProps = {
 };
 
 const GetStartedSection = () => {
+  const siteMetaData = useSiteMetadata();
   const openContactModal = () => {};
 
   return (
@@ -110,26 +111,26 @@ const GetStartedSection = () => {
         Get started with ockam
       </Subheading>
       <GesStartedGrid>
-        <GetStartedCard to="https://github.com/ockam-network/ockam">
+        <GetStartedCard to={siteMetaData.ockamLibraryRepo}>
           <img src={githubIcon} alt="github icon" />
           <HeadingOption as="h5" mb={0}>
             Github
           </HeadingOption>
         </GetStartedCard>
-        <GetStartedCard to="https://join.slack.com/t/ockam-community/shared_invite/enQtNDk5Nzk2NDA2NDcxLWQ0MjcyZWZjOWVlNGE5M2M3YjBkMjFkODZmODIwZWJmOTY3MThjNmU0ODc0ZDk4MjBjOGZmZDIzY2FhYTY4YTg">
-          <img src={slackIcon} alt="github icon" />
+        <GetStartedCard to={siteMetaData.slackChannel}>
+          <img src={slackIcon} alt="slack icon" />
           <HeadingOption as="h5" mb={0}>
             Join Community
           </HeadingOption>
         </GetStartedCard>
         <GetStartedCard onClick={openContactModal}>
-          <img src={sendIcon} alt="github icon" />
+          <img src={sendIcon} alt="send icon" />
           <HeadingOption as="h5" mb={0}>
             Request a demo
           </HeadingOption>
         </GetStartedCard>
-        <GetStartedCard to="https://twitter.com/Ockam_io">
-          <img src={sendIcon} alt="github icon" />
+        <GetStartedCard to={siteMetaData.twitter}>
+          <img src={sendIcon} alt="twitter icon" />
           <HeadingOption as="h5" mb={0}>
             Follow Ockam
           </HeadingOption>

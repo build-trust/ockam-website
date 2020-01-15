@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { space, color, typography, variant  } from 'styled-system';
+import { space, color, typography, border, variant  } from 'styled-system';
 
-const Button = styled('div')(
+const Button = styled('button')(
   props => ({
     padding: "1.4rem 2.5rem",
     borderRadius: props.theme.radii.button,
@@ -14,6 +14,7 @@ const Button = styled('div')(
   space,
   color,
   typography,
+  border,
   variant({
     variants: {
       white: {
@@ -31,13 +32,13 @@ const Button = styled('div')(
     variants: {
       default: {
         fontSize: 3,
-        padding: "1.6rem 2.4rem",
+        padding: "1.5rem 2.4rem",
         fontWeight: 'button',
 
       },
       small: {
         fontSize: 2,
-        padding: "1.2rem 2.4rem",
+        padding: "1rem 2.4rem",
         fontWeight: 'button',
 
       },
@@ -47,7 +48,27 @@ const Button = styled('div')(
         fontWeight: 'buttonSmall',
       },
     },
+  }),
+  variant({
+    prop: 'outline',
+    variants: {
+      primary: {
+        bg: 'transparent',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: 'dirtyPrimary',
+        color: 'primary',
+      },
+      white: {
+        bg: 'transparent',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: 'dirtyWhite',
+        color: 'white',
+      },
+    },
   })
+
 );
 
 Button.defaultProps = {

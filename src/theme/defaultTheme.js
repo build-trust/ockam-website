@@ -1,8 +1,11 @@
 import { lighten } from 'polished';
 
+import { BREAKPOINTS } from '../utils/rwd';
+
 const colors = {
   dark: '#242A31',
   white: '#fff',
+  dirtyWhite: '#D0DEFF',
   background: '#0A1A2B',
   accentBackground: '#162535',
   icon: '#e7e8e8',
@@ -10,6 +13,7 @@ const colors = {
   text: '#A2B6C7',
   code: '#e7e8e8',
   primary: '#52c7ea',
+  dirtyPrimary: '#3C8DA9',
   accent: '#EC432D',
   secondary: '#a4a9bf',
   caption: '#7A8895',
@@ -32,10 +36,10 @@ const	fonts = ['IBM Plex Sans'];
   fonts.body = fonts[0];
 
 const fontWeights = [300, 400, 500, 600, 700];
-fontWeights.body = fontWeights[1];
-fontWeights.heading = fontWeights[2];
-fontWeights.button = fontWeights[2];
-fontWeights.buttonSmall = fontWeights[1];
+  fontWeights.body = fontWeights[1];
+  fontWeights.heading = fontWeights[2];
+  fontWeights.button = fontWeights[2];
+  fontWeights.buttonSmall = fontWeights[1];
 
 
 const lineHeights = ['1.2', '1.5'];
@@ -56,10 +60,19 @@ const space = [0, '0.4rem', '0.8rem', '1.6rem', '3.2rem', '6.4rem', '12.8rem'];
   space.xLarge = space[5];
   space.huge = space[6];
 
-  const sizes = [8, 16, 24, 32, 48, 64];
+const sizes = [8, 16, 24, 32, 48, 64];
+
+const breakpoints = [`${BREAKPOINTS.phone}px`, `${BREAKPOINTS.tablet}px`, `${BREAKPOINTS.desktop}px`, `${BREAKPOINTS.ultraWide}px`];
+  breakpoints.sm = breakpoints[0];
+  breakpoints.md = breakpoints[1];
+  breakpoints.lg = breakpoints[2];
+  breakpoints.xl = breakpoints[3];
+  breakpoints.phone = breakpoints[0];
+  breakpoints.tablet = breakpoints[1];
+  breakpoints.desktop = breakpoints[2];
+  breakpoints.ultraWide = breakpoints[3];
 
 /* eslint-enable prefer-destructuring */
-
 
 const custom = {
   sidebar: {
@@ -91,6 +104,7 @@ const defaultTheme = {
   space,
   sizes,
   custom,
+  breakpoints,
 };
 
 export default defaultTheme;

@@ -7,6 +7,7 @@ const plugins = [
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp',
   'gatsby-plugin-styled-components',
+  'gatsby-plugin-svgr',
   {
     resolve: `gatsby-plugin-layout`,
     options: {
@@ -92,6 +93,9 @@ if (config.header.search && config.header.search.enabled && config.header.search
 module.exports = {
   pathPrefix: config.gatsby.pathPrefix,
   siteMetadata: {
+    ockamLibraryRepo: config.general.ockamLibraryRepo,
+    slackChannel: config.general.slackChannel,
+    twitter: config.general.twitter,
     title: config.siteMetadata.title,
     description: config.siteMetadata.description,
     docsLocation: config.siteMetadata.docsLocation,
