@@ -1,9 +1,19 @@
 import React from 'react';
 
+import HeaderSection from "../components/pages/product/HeaderSection";
+import FeaturesSection from "../components/pages/product/FeaturesSection";
+import TrustedDevicesSection from "../components/pages/product/TrustedDevicesSection";
+import VaultSection from "../components/pages/product/VaultSection";
+import SdkConnectSection from "../components/pages/product/SdkConnectSection";
+
 const Product = () => {
   return (
     <>
-      <h1>Product page DEMO</h1>
+      <HeaderSection />
+      <FeaturesSection />
+      <TrustedDevicesSection />
+      <VaultSection />
+      <SdkConnectSection />
     </>
   );
 };
