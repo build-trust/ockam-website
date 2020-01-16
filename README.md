@@ -19,37 +19,29 @@ Gatsby based generator for MD documents. Based on [gatsby-gitbook-starter](https
 ## Generating and managing MD files
 
 ### Folder structure and urls
-Under `/content` folder are stored all files related to generated documentation. Folder structure reflects to generated url in project, so i.e:
-- `src/content/samples/first-category/index.md` -> `locahost:3000/samples/first-category`
-- `src/content/samples/first-category/subpage-1.md` -> `locahost:3000/samples/first-category/subpage-1.md`
+Under `src/content` folder are stored all files related to generating html from md files. There is staticly one folder define in repository - `blog`, which stores files related to blog posts. 
 
-### Adding submodules as md files source
-All submodules should go under `/submodules` folder. After you add new one,  you should create `symlink` under content folder, i.e:
-```bash
-symlink-dir submodules/ockam/document/concept src/content/documentation
+However, the CI pipeline process mount under this directory, others repository defined in `dependencies_repos.csv`.
+So according to this  file specification ( please check  [Depended repositories](#depended-repositories) ) for entry like:
+`https://github.com/masterborn;ockam-sample-documentation;4f3789304ad3a4421fc772cd59d95b71af98d4d9;/;documentation` 'documentation' folder would be deployed under `src/content/`.
+
+Folder structure reflects to generated url in project, so i.e:
+- `src/content/documentation/general/index.md` -> `example.com/documentation/general`
+- `src/content/documentation/general/subpage.md` -> `example.com/documentation/general/subpage`
+
+### Documentation pages order in sidebar menu
+
+To order your documentation page in sidebar menu, just add `order` metadata field in metadata .md file. ie:
+```markdown
+title: "Subpage 1"
+metaTitle: "This is the title tag of this page"
+metaDescription: "This is the meta description"
+order: 2
 ```
 
-You should create 'npm script' creating this symlink and add it under npm `init` script.
-Since we don't want to make any modifications on submodules, and it's only used to generate documentation, please add also this linked folder to `.gitignore`  
+### Generals markdown managing approach
 
-
-## Depended repositories
-All depended repositories are placed in in `dependencies_repos.csv` file. Each
-line represent one repository.
-```
-ORGANIZATION;REPO_NAME;COMMIT;SRC_DIR;URL_PATH
-```
-Where
-* `ORGANIZATION` is github organization URL
-* `REPO_NAME` is the repository name inside organization
-* `COMMIT` is specific commit in repository
-* `SRC_DIR` is path in repository to source MD files
-* `URL_PATH` is where you want to have final URL (`/` is for front site; `/example` will end up with `<website>/example`)
-
-Example repo definition:
-```
-https://github.com/masterborn;ockam-sample-documentation;4f3789304ad3a4421fc772cd59d95b71af98d4d9;/;documentation
-```
+* All assets should be stored inside under `assets` folder, ie. `src/content/documentation/assets`.
 
 ## Using MDX
 
@@ -60,17 +52,16 @@ Thanks to MDX you can use any react component inside md files. Do do that you ha
 metaTitle: "This is the title tag of this page"
 metaDescription: "This is the meta description"
 ---
-import SampleComponent from '../tmp/SampleComponent.js'
-import json from '../tmp/json.js'
+import SampleComponent from '../sample/SampleComponent.js'
+import json from '../sample/json.js'
 ```
+Component path should be relative to current file.
 
-- use component like normal react element inside your md files
-
+Next, just use component like normal react element inside your md files:
 ```markdown
 ...
 ### Some markdown header
 <SampleComponent json={json} title="custom string" />
-
 ```
 
 ##### WARNING
@@ -78,6 +69,26 @@ There could be some issue while creating new/removing components/data which are 
 ```bash
 npm run clean
 npm run start
+```
+
+
+## Depended repositories
+All depended repositories are placed in in `dependencies_repos.csv` file. Each
+line represent one repository.
+One line include following parts:
+```
+ORGANIZATION;REPO_NAME;COMMIT;SRC_DIR;URL_PATH
+```
+Where
+* `ORGANIZATION` is github organization URL
+* `REPO_NAME` is the repository name inside organization
+* `COMMIT` is specific commit id in repository
+* `SRC_DIR` is path in repository where MD files are stored. Use `/` to use root repository folder 
+* `URL_PATH` is where you want to have final URL (`/` is for front site; `/example` will end up with `<website>/example`)
+
+Example repo definition:
+```
+https://github.com/masterborn;ockam-sample-documentation;4f3789304ad3a4421fc772cd59d95b71af98d4d9;/;documentation
 ```
 
 
