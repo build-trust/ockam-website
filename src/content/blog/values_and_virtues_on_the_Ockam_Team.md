@@ -5,7 +5,7 @@ description: "“Values are what you believe, Virtues are what you do.” "
 metaTitle: "Values and Virtues of The Ockam Team"
 metaDescription: "Values and Virtues of The Ockam Team"
 author: "Matthew Gregory"
-authorAvatar: ./assets/matt-gregory.jpg
+authorAvatar: ./assets/matthew_gregory-1.png
 ---
 
 # “What We Do Is Who We Are.”

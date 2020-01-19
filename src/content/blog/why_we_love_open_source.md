@@ -5,7 +5,7 @@ description: "5 reasons why Ockam loves open source, and you should too!"
 metaTitle: "Why Ockam loves open source, and you should too!"
 metaDescription: "Why Ockam loves open source, and you should too!"
 author: "Matthew Gregory"
-authorAvatar: ./assets/matt-gregory.jpg
+authorAvatar: ./assets/matthew_gregory-1.png
 ---
 # Why Ockam loves open source, and you should too!
 Every company must now at least dabble in software. In fact, to be competitive, many will need to make building and running software a core competency. To meet their software needs, companies obviously can’t write everything from scratch. They’ll need to work off the efforts of others.
@@ -28,6 +28,8 @@ There’s a reason that most of the Internet runs on open source. From Linux to 
 Reliability is one of the important benefits created by the contribution/usage cycle. As a follow up to this article I recommend that you look up Peter Levine’s [presentation and blog post](https://a16z.com/2019/10/04/commercializing-open-source/) where he describes the cycle related to open source based business models. As a first step to business success in open source, Levine cites project-community fit, where a group of developers actively contribute.
 
 As more developers rely upon an open source project, the more likely they’ll be able to contribute. One important side effect of contributions is that software becomes more reliable. It’s not just one company responsible for reliability, it’s a shared concern by the entire community that supports the project.
+
+![The Ockam ecosystem](./assets/open_source_ecosystem.png)
 
 ### Open source increases adoption
 Greater reliability and usage certainly encourage adoption of open sourced code, as well. It’s not simply a matter of developers choosing what’s most popular. The availability of open source itself helps drive adoption and makes it the prudent choice.
