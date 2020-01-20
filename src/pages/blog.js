@@ -4,6 +4,7 @@ import useAllBlogPosts from '../hooks/useAllBlogPosts';
 import PostReview from '../components/blog/PostReview';
 import Heading from '../components/Heading';
 import PageSection from '../components/pages/PageSection';
+import defaultAvatar from '../content/blog/assets/default_avatar.png';
 
 const mapBlogPostEdges = postsEdges => {
   return postsEdges.map(({ node }) => ({
@@ -15,7 +16,9 @@ const mapBlogPostEdges = postsEdges => {
     metaDescription: node.frontmatter.metaDescription,
     date: node.frontmatter.date,
     author: node.frontmatter.author,
-    authorAvatar: node.frontmatter.authorAvatar.childImageSharp.fixed,
+    authorAvatar: node.frontmatter.authorAvatar ? node.frontmatter.authorAvatar.childImageSharp.fixed : {
+      src: defaultAvatar,
+    },
   }));
 };
 
