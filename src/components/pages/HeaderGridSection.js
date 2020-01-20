@@ -13,6 +13,7 @@ const Section = styled(PageSection)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 10rem;
 
   text-align: center;
   &::before {

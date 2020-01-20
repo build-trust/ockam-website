@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import Content from './Content';
 
 const Wrapper = styled('div')(
-  () => ({
-    marginBottom: '14rem',
-  }),
+  {
+    marginBottom: '18rem',
+  },
   space,
   color
 );

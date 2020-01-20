@@ -48,6 +48,13 @@ const plugins = [
     },
   },
   {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: `images`,
+      path: `${__dirname}/src/assets`,
+    },
+  },
+  {
     resolve: `gatsby-plugin-gtag`,
     options: {
       // your google analytics tracking id

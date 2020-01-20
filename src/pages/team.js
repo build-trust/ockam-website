@@ -1,9 +1,15 @@
 import React from 'react';
 
+import HeaderSection from "../components/pages/team/HeaderSection";
+import ValuesSection from "../components/pages/team/ValuesSection";
+import JoinTeam from "../components/pages/team/JoinTeam";
+
 const Team = () => {
   return (
     <>
-      <h1>Team page</h1>
+      <HeaderSection />
+      <ValuesSection />
+      <JoinTeam />
     </>
   );
 };

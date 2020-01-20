@@ -7,7 +7,6 @@ import Heading from '../../Heading';
 import homepageHeaderImage from '../../../assets/homepage/header-section-image.svg';
 import HeaderGridSection from '../HeaderGridSection';
 
-
 const HeaderSection = () => (
   <HeaderGridSection image={homepageHeaderImage}>
     <Heading as="h1" fontSize={[5, 6, 8]}>
@@ -26,7 +25,5 @@ const HeaderSection = () => (
     </Button>
   </HeaderGridSection>
 );
-
-HeaderSection.propTypes = {};
 
 export default HeaderSection;
