@@ -6,8 +6,6 @@ variable "location" {
   default = "westeurope"
 }
 
-variable "environment" {}
-
 variable "client_name" {
   default = "Ockam"
 }

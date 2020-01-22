@@ -1,6 +1,6 @@
 # resources for ockam static site
 resource "azurerm_storage_account" "ockamio" {
-  name                     = "${var.storage_account_name}2${var.environment}"
+  name                     = "${var.storage_account_name}2${terraform.workspace}"
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
@@ -8,7 +8,7 @@ resource "azurerm_storage_account" "ockamio" {
   account_kind             = "StorageV2"
 
   tags = {
-    environment = var.environment
+    environment = terraform.workspace
     client = var.client_name
     project = var.project
   }

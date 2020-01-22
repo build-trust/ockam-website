@@ -14,7 +14,7 @@ ockam-sample-documentation
 ### Terraform ###
 # Local .terraform directories
 **/.terraform/*
-
+**/main.tf
 # .tfstate files
 *.tfstate
 *.tfstate.*
