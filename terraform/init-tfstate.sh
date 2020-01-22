@@ -3,7 +3,7 @@
 # Use *only for the first time* when you need to create storage for terraform state
 # Based on https://docs.microsoft.com/en-us/azure/terraform/terraform-backend
 RESOURCE_GROUP_NAME=ockam2website0terraform
-STORAGE_ACCOUNT_NAME=terraform$RANDOM
+STORAGE_ACCOUNT_NAME=terraform2website$RANDOM
 CONTAINER_NAME=tfstate
 KEY=terraform.tfstate
 LOCATION=westeurope

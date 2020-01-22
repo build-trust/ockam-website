@@ -6,7 +6,7 @@ resource "azurerm_cdn_profile" "ockamio" {
   sku                 = "Standard_Microsoft"
 
   tags = {
-    environment = var.environment
+    environment = terraform.workspace
     client = var.client_name
     project = var.project
   }
@@ -29,19 +29,3 @@ resource "azurerm_cdn_endpoint" "static" {
 
   depends_on = [azurerm_cdn_profile.ockamio]
 }
-
-# Add custom domain via module?
-# az cdn custom-domain create \
-#   --resource-group ockam2production \
-#   --profile-name ockamio \
-#   --endpoint-name ockamio-website \
-#   --hostname azure.allunel.pl \
-#   --name azure-allunel
-
-# enable ssl certificate on custom domain
-# ..via module?
-# az cdn custom-domain enable-https \
-#   --resource-group ockam2production \
-#   --profile-name ockamio \
-#   --endpoint-name ockamio-website \
-#   --name azure-allunel

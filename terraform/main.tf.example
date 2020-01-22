@@ -4,19 +4,19 @@ provider "azurerm" {
 }
 
 terraform {
+  # Repleace below details with output of init-tfstate.sh script
   backend "azurerm" {
-    storage_account_name  = "terraform24506"
-    container_name        = "tfstate"
-    key                   = "terraform.tfstate"
+    storage_account_name  = "<STORAGE-ACCOUNT-NAME>"
+    container_name        = "<CONTAINER-NAME>"
+    key                   = "<KEY-FILE>"
   }
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "ockam2${var.environment}"
+  name     = "ockam2${terraform.workspace}"
   location = var.location
 
   tags = {
-    environment = var.environment
     client = var.client_name
     project = var.project
   }
