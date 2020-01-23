@@ -39,7 +39,6 @@ const Wrapper = styled.div`
     `
       position: fixed;
       background-color: ${props.theme.colors.accentBackground};
- 
   `};
 `;
 

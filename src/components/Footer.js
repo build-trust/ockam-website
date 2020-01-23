@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {LinkedinBox as LinkedinLogo} from 'styled-icons/remix-fill/LinkedinBox'
-import {Twitter as TwitterLogo} from 'styled-icons/remix-fill/Twitter'
+import LinkedinLogo from 'emotion-icons/fa-brands/Linkedin'
+import TwitterLogo from 'emotion-icons/fa-brands/Twitter'
 import { lighten } from 'polished';
 import { useTheme } from 'emotion-theming';
 
@@ -89,8 +89,8 @@ const Footer = () => {
           <LogoOckam src={logoImage} alt='ockam logo' />
         </LogoContainer>
         <MenuContainer>
-          <MenuLink>Request Demo</MenuLink>
-          <MenuLink>Contact Sales</MenuLink>
+          <MenuLink to="/">Request Demo</MenuLink>
+          <MenuLink to="/">Contact Sales</MenuLink>
         </MenuContainer>
         <CopyrightContainer>
           <Caption>© 2017-2020 Ockam.io. All rights reserved.</Caption>

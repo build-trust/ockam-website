@@ -1,6 +1,6 @@
 ---
 title: "A Beginners Guide to the STRIDE Security Threat Model"
-date: "2020-2-01"
+date: 2020-01-02
 description: "A Beginners Guide to the STRIDE Security Threat Model"
 metaTitle: "A Beginners Guide to the STRIDE Security Threat Model"
 metaDescription: "A Beginners Guide to the STRIDE Security Threat Model"
@@ -8,7 +8,6 @@ author: "Mrinal Wadhwa"
 authorAvatar: ./assets/default_avatar.png
 ---
 
-# A Beginners Guide to the STRIDE Security Threat Model
 Everyone wants to build secure software, but it’s not simply a checkbox you select. There are a number of factors, from how you validate input to the libraries you choose that could cause vulnerabilities. Threat modeling provides a little preparation that can help you identify blind spots in your application’s security.
 
 One common threat modeling approach is the STRIDE framework, which has six areas of focus:

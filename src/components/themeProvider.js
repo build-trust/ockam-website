@@ -26,7 +26,7 @@ ThemeProvider.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   themeConfig: PropTypes.shape({}),
-  themeName: PropTypes.oneOf(['light', 'dark']),
+  themeName: PropTypes.oneOf(['light', 'dark', 'blog']),
 };
 
 ThemeProvider.defaultProps = {

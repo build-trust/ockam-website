@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { ArrowLeft2 } from 'styled-icons/icomoon/ArrowLeft2';
-import { ArrowRight2 } from 'styled-icons/icomoon/ArrowRight2';
+import  ArrowLeft  from 'emotion-icons/ion-md/ArrowBack';
+import  ArrowRight  from 'emotion-icons/ion-md/ArrowForward';
 import { space, typography  } from 'styled-system';
 import { rgba } from 'polished';
 
@@ -69,7 +69,7 @@ const NextPrevious = ({ currentNode, rootSlug }) => {
     <Container>
       {!isFirst ? (
         <NavigationButtonPrev to={prevNode.url}>
-          <StyledIcon icon={ArrowLeft2} size={16} ml={3} />
+          <StyledIcon icon={ArrowLeft} size={16} ml={3} />
           <Content ml='auto' mr={3} py={3} textAlign='right'>
             <Caption mb={1} display='block'>Previous</Caption>
             <Title>{prevNode.title}</Title>
@@ -82,7 +82,7 @@ const NextPrevious = ({ currentNode, rootSlug }) => {
             <Caption mb={1} display='block'>Next</Caption>
             <Title>{nextNode.title}</Title>
           </Content>
-          <StyledIcon icon={ArrowRight2} size={16} mr={3} />
+          <StyledIcon icon={ArrowRight} size={16} mr={3} />
         </NavigationButtonNext>
       ) : null}
     </Container>

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { ChevronDown as OpenIcon } from 'styled-icons/octicons/ChevronDown';
-import { ChevronRight as CloseIcon } from 'styled-icons/octicons/ChevronRight';
+import OpenIcon from 'emotion-icons/octicons/ChevronDown';
+import CloseIcon from 'emotion-icons/octicons/ChevronRight';
 
 import config from '../../../../config';
 import Icon from '../../Icon';

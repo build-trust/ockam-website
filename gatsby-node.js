@@ -1,7 +1,9 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 const path = require("path");
-const startCase = require("lodash.startcase");
+const { startCase } = require("lodash");
+
+const isNodeBlogPage = (node) => node.fields.slug && node.fields.slug.split("/")[1] === 'blog';
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -27,14 +29,16 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   results.data.allMdx.edges.forEach(({ node }) => {
-    createPage({
+    const isBlog = isNodeBlogPage(node);
+    const page = {
       path: node.fields.slug ? node.fields.slug : "/",
-      component: path.resolve("./src/templates/DocsTemplate.js"),
+      component: isBlog ? path.resolve("./src/templates/BlogTemplate.js") : path.resolve("./src/templates/DocsTemplate.js"),
       context: {
         id: node.fields.id,
-        pageType: 'doc',
+        pageType: isBlog ? 'blog' : 'doc',
       },
-    });
+    };
+    createPage(page);
   });
 };
 
@@ -53,10 +57,7 @@ exports.onCreatePage = ({ page, actions }) => {
     } else {
       createPage(page);
     }
-
-
-
-}
+};
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({

@@ -13,7 +13,6 @@ import { media } from '../utils/emotion';
 import DocsSidebar from '../components/docs/DocsSidebar/DocsSidebar';
 import DocsLayout from '../layouts/DocsLayout';
 
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,7 +23,6 @@ const Content = styled.div`
   `}
 `;
 export default function DocsTemplate(props) {
-
   const {
     data: { mdx },
     location,

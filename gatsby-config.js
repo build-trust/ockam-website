@@ -6,7 +6,6 @@ const plugins = [
   'gatsby-plugin-sitemap',
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp',
-  'gatsby-plugin-styled-components',
   'gatsby-plugin-svgr',
   {
     resolve: `gatsby-plugin-layout`,
@@ -81,6 +80,10 @@ const plugins = [
         {
           family: `IBM Plex Sans`,
           variants: ['300', '400', '400i', '500', '600', '700'],
+        },
+        {
+          family: `IBM Plex Mono`,
+          variants: ['300', '400', '500'],
         },
       ],
     },

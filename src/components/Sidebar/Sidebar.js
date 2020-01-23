@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { Times as CrossIcon } from 'styled-icons/fa-solid/Times';
+import CrossIcon from 'emotion-icons/fa-solid/Times';
 
 import { media } from '../../utils/emotion';
 import { matchBreakpointDown } from '../../utils/rwd';
@@ -29,12 +29,12 @@ const Container = styled('aside')`
   `};
 `;
 
-
 const StyledCrossIcon = styled(CrossIcon)`
   position: absolute;
   z-index: 2;
   left: 1.5rem;
   top: 1.5rem;
+  cursor: pointer;
   display: block;
   color: ${({theme}) => theme.colors.icon};
 

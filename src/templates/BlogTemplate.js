@@ -7,12 +7,31 @@ import SEO from '../components/SEO';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import PageLayout from '../layouts/PageLayout';
 import Post from '../components/blog/Post';
+import defaultAvatar from '../content/blog/assets/default_avatar.png';
+import SidebarMobileMenu from "../components/SidebarMobileMenu";
+
+const GreyWrapper = styled.div`
+  position: absolute;
+  top: -8rem;
+  left: 0;
+  width: 100%;
+  height: 62.5rem;
+  background-color: ${props => props.theme.colors.accentBackground};
+  z-index: 1;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  background-color: ${props => props.theme.colors.background};
+`;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 4rem 0;
+  z-index: 3;
+  position: relative;
+
 `;
 export default function BlogTemplate(props) {
   const {
@@ -21,13 +40,22 @@ export default function BlogTemplate(props) {
   } = props;
 
   const {
-    frontmatter: { metaTitle, metaDescription },
+    frontmatter: {
+      metaTitle,
+      metaDescription,
+      date,
+      author,
+      authorAvatar,
+    },
     fields: { slug, title },
     body,
   } = mdx;
 
+  const imageAvatar = authorAvatar ? authorAvatar.childImageSharp.fixed.src : defaultAvatar;
+
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
+  const menuId = 'main-menu';
 
   useOnClickOutside(ref, () => setIsOpen(false));
   return (
@@ -37,10 +65,14 @@ export default function BlogTemplate(props) {
       setIsOpenSidebar={setIsOpen}
       themeName="blog"
     >
+      <SidebarMobileMenu location={location} isOpen={isOpen} onClose={() => setIsOpen(false)} menuId={menuId} ref={ref} />
       <SEO title={metaTitle} description={metaDescription} slug={slug} />
-      <Content>
-        {body ? <Post body={body} title={title} /> : props.children}
-      </Content>
+      <Wrapper>
+        <GreyWrapper />
+        <Content>
+          {body ? <Post body={body} title={title} authorAvatar={imageAvatar} author={author} date={date} location={location} /> : props.children}
+        </Content>
+      </Wrapper>
     </PageLayout>
   );
 }
@@ -56,6 +88,15 @@ BlogTemplate.propTypes = {
       frontmatter: PropTypes.shape({
         metaTitle: PropTypes.string,
         metaDescription: PropTypes.string,
+        date: PropTypes.string,
+        author: PropTypes.string,
+        authorAvatar: PropTypes.shape({
+          childImageSharp: PropTypes.shape({
+            fixed: PropTypes.shape({
+              src:PropTypes.string,
+            }),
+          }),
+        }),
       }),
       body: PropTypes.string,
     }),
@@ -97,6 +138,15 @@ export const pageQuery = graphql`
       frontmatter {
         metaTitle
         metaDescription
+        date(fromNow: true)
+        author
+        authorAvatar {
+          childImageSharp {
+            fixed {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
       }
     }
   }

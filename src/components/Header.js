@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { ThMenu as MenuIcon } from 'styled-icons/typicons/ThMenu';
 
 import { media } from '../utils/emotion';
 import config from '../../config';
@@ -9,6 +8,7 @@ import useThemeLogo from '../hooks/useThemeLogo';
 
 import Menu from './Menu';
 import Link from './Link';
+import HamburgerButton from "./HamburgerButton";
 
 const Container = styled.nav`
   display: flex;
@@ -20,9 +20,10 @@ const Container = styled.nav`
   position: relative;
   height: ${props => (props.isCollapsedHeader ? '6rem' : '8rem')};
   width: inherit;
- 
+  color: ${props => props.theme.colors.menuText};
   .active {
-   border-bottom: 1px solid ${props => props.theme.colors.primary};
+   color: ${props => props.theme.colors.menuTextActive};
+   font-weight: ${props => props.theme.fontWeights[2]};
   };
 
 `;
@@ -51,19 +52,11 @@ const HeaderMenu = styled(Menu)`
   `};
 `;
 
-const StyledMenuIcon = styled(MenuIcon)`
-  color: ${({ theme }) => theme.colors.icons};
-  display: block;
-  ${media.desktop`
-      display: none !important;
-  `};
-`;
-
 const Header = ({ openSidebar, isCollapsedHeader }) => {
   const logo = useThemeLogo();
   return (
     <Container isCollapsedHeader={isCollapsedHeader}>
-      <StyledMenuIcon size={24} onClick={openSidebar} aria-controls="main-menu" />
+      <HamburgerButton onClick={openSidebar} />
       <StyledLink to="/">
         <Logo src={logo} alt="Ockam logo" isCollapsedHeader={isCollapsedHeader} />
       </StyledLink>

@@ -1,6 +1,6 @@
 ---
 title: "Introduction to building Trust Architectures"
-date: "2019-15-02"
+date: 2019-02-15
 description: "Introduction to building Trust Architectures"
 metaTitle: "Introduction to building Trust Architectures with DID:Ockam"
 metaDescription: "Introduction to building Trust Architectures"
