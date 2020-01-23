@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { ThMenu as MenuIcon } from 'styled-icons/typicons/ThMenu';
 
 import { media } from '../../utils/emotion';
 import config from '../../../config';
 import logo from '../../assets/ockam-logo.svg';
 import Menu from '../Menu';
+import HamburgerButton from "../HamburgerButton";
 
 const Container = styled.nav`
   display: flex;
@@ -19,9 +19,9 @@ const Container = styled.nav`
   position: relative;
   height: 8rem;
 
-  a.active {
-   color: ${props => props.theme.colors.primary};
-  }
+  color: ${props => props.theme.colors.menuText};
+  
+
   
 `;
 
@@ -38,8 +38,9 @@ const HeaderMenu = styled(Menu)`
     padding-left: 0;
   }
   a.active {
-      color: ${props => props.theme.colors.primary};
-  }
+   color: ${props => props.theme.colors.menuTextActive};
+   font-weight: ${props => props.theme.fontWeights[2]};
+  };
 
 `;
 
@@ -56,18 +57,10 @@ const LogoContainer = styled.div`
   `};
 `;
 
-const StyledMenuIcon = styled(MenuIcon)`
-  color: ${({ theme }) => theme.colors.icons};
-  display: block;
-  ${media.desktop`
-      display: none !important;
-  `};
-`;
-
 const DocsHeader = ({ openSidebar }) => {
   return (
     <Container>
-      <StyledMenuIcon size={24} onClick={openSidebar} aria-controls="main-menu" />
+      <HamburgerButton onClick={openSidebar} />
       <LogoContainer>
         <Logo src={logo} alt="Ockam logo" />
       </LogoContainer>

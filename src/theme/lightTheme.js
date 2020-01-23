@@ -9,11 +9,15 @@ const colors = {
   icon: '#9DAAB6',
   heading: '#242A31',
   text: '#3C454E',
+  menuText: '#7A8895',
+  menuTextActive: '#242A31',
   code: '#3C454E',
   primary: '#52c7ea',
   secondary: '#a4a9bf',
   caption: '#7A8895',
   white: '#fff',
+  blogTextBackground: '#fff',
+
 };
 
 /* eslint-disable prefer-destructuring */

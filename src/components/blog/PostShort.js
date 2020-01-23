@@ -4,39 +4,29 @@ import PropTypes from 'prop-types';
 
 import Heading from '../Heading';
 import Text from '../Text';
-import Caption from '../Caption';
-import Link from '../Link';
+import Hr from "../Hr";
 
-const AuthorBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Avatar = styled.img`
-  border-radius: 50%;
-  width:4rem;
-`;
+import AuthorBox from "./AuthorBox";
+import PostDetailsBox from "./PostDetailsBox";
+import PostLink from "./PostLink";
 
 const Container = styled.div`
   margin-bottom: ${props => props.theme.space.large};
 `;
 
-const PostReview = ({ post: { date, slug, title, description, authorAvatar, author} }) => {
+const PostShort = ({ post: { date, slug, title, description, authorAvatar, author} }) => {
   return (
     <Container>
-      <Caption>{date}</Caption>
-      <Link to={slug}><Heading as='h3'>{title}</Heading></Link>
+      <PostDetailsBox>{date}</PostDetailsBox>
+      <PostLink to={slug}><Heading as='h4' mb={2}>{title}</Heading></PostLink>
       <Text>{description}</Text>
-      <AuthorBox>
-        <Avatar src={authorAvatar.src} alt='image' />
-        <Caption>{author}</Caption>
-      </AuthorBox>
+      <AuthorBox image={authorAvatar} name={author} alt='author' />
+      <Hr mt={5} mb={5} />
     </Container>
   );
 };
 
-PostReview.propTypes = {
+PostShort.propTypes = {
   post: PropTypes.shape({
     slug: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -49,4 +39,4 @@ PostReview.propTypes = {
   }).isRequired,
 };
 
-export default PostReview;
+export default PostShort;

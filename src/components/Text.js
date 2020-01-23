@@ -13,6 +13,7 @@ Text.defaultProps = {
   mb: 3,
   fontWeight: 'body',
   fontSize: 'body',
+  color: 'text',
 };
 Text.displayName = 'Text';
 

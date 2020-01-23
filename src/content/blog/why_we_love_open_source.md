@@ -1,13 +1,13 @@
 ---
 title: "Why Ockam loves open source, and you should too!"
-date: "2020-20-01"
+date: 2020-01-20
 description: "5 reasons why Ockam loves open source, and you should too!"
 metaTitle: "Why Ockam loves open source, and you should too!"
 metaDescription: "Why Ockam loves open source, and you should too!"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
+isFeature: true
 ---
-# Why Ockam loves open source, and you should too!
 Every company must now at least dabble in software. In fact, to be competitive, many will need to make building and running software a core competency. To meet their software needs, companies obviously can’t write everything from scratch. They’ll need to work off the efforts of others.
 
 The future for building code is around community and people. That requires an open source approach, with contributions from a large number of developers. As a result, you’ll see more reliability, security, adoption, and interoperability—all at a faster velocity.

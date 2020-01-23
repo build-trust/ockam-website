@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { darken, lighten, rgba } from 'polished';
+import slice from 'lodash/slice'
 
 import PageSection from '../PageSection';
 import Heading from '../../Heading';
@@ -12,6 +13,7 @@ import ockamLogoMark from '../../../assets/ockam-logo-mark.svg';
 import { media } from '../../../utils/emotion';
 import Link from '../../Link';
 import Caption from '../../Caption';
+import useAllBlogPosts from "../../../hooks/useAllBlogPosts";
 
 const BlogGrid = styled.div`
   display: grid;
@@ -126,6 +128,8 @@ BlogCard.propTypes = {
 };
 
 const BlogSection = () => {
+  const posts = useAllBlogPosts();
+  const newestPosts = slice(posts,0 ,3);
   return (
     <PageSection>
       <BlogGrid>
@@ -135,21 +139,14 @@ const BlogSection = () => {
         <ButtonContainer>
           <Button ml='auto' as={Link}>Read more articles</Button>
         </ButtonContainer>
-        <BlogCard as={Link} to='/' gridArea='post1'>
-          <PostType mb={2}>Case Study</PostType>
-          <Heading mb={4} lineHeight='small' as="h5">Get The Boot A Birds Eye Look Into Mcse Boot Camps</Heading>
-          <Link to='/' color='primary'>Read article</Link>
-        </BlogCard>
-        <BlogCard as={Link} to='/' gridArea='post2'>
-          <PostType mb={2}>Case Study</PostType>
-          <Heading mb={4} lineHeight='small' as="h5">Get The Boot A Birds Eye Look Into Mcse Boot Camps</Heading>
-          <Link to='/' color='primary'>Read article</Link>
-        </BlogCard>
-        <BlogCard as={Link} to='/' gridArea='post3'>
-          <PostType mb={2}>Case Study</PostType>
-          <Heading mb={4} lineHeight='small' as="h5">Get The Boot A Birds Eye Look Into Mcse Boot Camps</Heading>
-          <Link to='/' color='primary'>Read article</Link>
-        </BlogCard>
+        {newestPosts.map((post, index) => (
+          <BlogCard as={Link} to={post.slug} gridArea={`post${index + 1}`}>
+            <PostType mb={2}>{post.description}</PostType>
+            <Heading mb={4} lineHeight='small' as="h5">{post.title}</Heading>
+            <Link to={post.slug} color='primary'>Read article</Link>
+          </BlogCard>
+        ))}
+
       </BlogGrid>
     </PageSection>
   );

@@ -1,8 +1,8 @@
 import React, { forwardRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Github as GithubIcon } from 'styled-icons/icomoon/Github';
-import { SendPlane as SendPlaneIcon } from 'styled-icons/remix-fill/SendPlane';
-import { Slack as SlackIcon } from 'styled-icons/fa-brands/Slack';
+import GithubIcon from 'emotion-icons/simpleIcons/GitHub';
+import SendPlaneIcon from 'emotion-icons/ion-ios/Send';
+import SlackIcon from 'emotion-icons/fa-brands/SlackHash';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'

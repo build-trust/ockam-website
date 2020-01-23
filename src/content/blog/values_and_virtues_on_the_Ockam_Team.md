@@ -1,6 +1,6 @@
 ---
 title: "Values and Virtues of The Ockam Team"
-date: "2020-15-01"
+date: 2020-01-15
 description: "“Values are what you believe, Virtues are what you do.” "
 metaTitle: "Values and Virtues of The Ockam Team"
 metaDescription: "Values and Virtues of The Ockam Team"

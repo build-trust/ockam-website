@@ -8,6 +8,8 @@ const colors = {
   dirtyWhite: '#D0DEFF',
   background: '#0A1A2B',
   accentBackground: '#162535',
+  menuText: '#A2B6C7',
+  menuTextActive: '#FFF',
   icon: '#e7e8e8',
   heading: '#fff',
   text: '#A2B6C7',
@@ -17,6 +19,7 @@ const colors = {
   accent: '#EC432D',
   secondary: '#a4a9bf',
   caption: '#7A8895',
+  blogTextBackground: '#0A1A2B',
 };
 
 /* eslint-disable prefer-destructuring */
@@ -31,9 +34,10 @@ const fontSizes = ['1.2rem', '1.4rem', '1.6rem', '1.8rem', '2rem', '2.5rem', '2.
   fontSizes.h5 = fontSizes[4];
   fontSizes.h6 = fontSizes[3];
 
-const	fonts = ['IBM Plex Sans'];
+const	fonts = ['IBM Plex Sans', 'IBM Plex Mono'];
   fonts.heading = fonts[0];
   fonts.body = fonts[0];
+  fonts.special = fonts[1];
 
 const fontWeights = [300, 400, 500, 600, 700];
   fontWeights.body = fontWeights[1];

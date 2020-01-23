@@ -1,6 +1,6 @@
 ---
 title: "What's the story behind the Ockam name?"
-date: "2017-15-11"
+date: 2017-11-15
 description: "What's behind the Ockam name?"
 metaTitle: "What's behind the Ockam name?"
 metaDescription: "What's behind the Ockam name?"

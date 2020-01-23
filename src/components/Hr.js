@@ -9,4 +9,9 @@ const Hr = styled('hr')(
   space,
   color
 );
+
+Hr.defaultProps = {
+  mb: 4,
+  mt: 4,
+}
 export default Hr;

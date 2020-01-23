@@ -7,6 +7,7 @@ import { color, space, layout } from 'styled-system'
 const generateStyledIcon = (Icon) => styled(Icon)(
   props => ({
     color: props.theme.colors.icon,
+    margin: 'initial',
   }),
   color,
   space,

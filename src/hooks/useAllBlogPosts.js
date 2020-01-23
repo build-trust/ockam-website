@@ -1,9 +1,26 @@
 import { useStaticQuery, graphql } from 'gatsby';
 
+import defaultAvatar from "../content/blog/assets/default_avatar.png";
+
+const mapBlogPostEdges = postsEdges => {
+  return postsEdges.map(({ node }) => ({
+    id: node.id,
+    slug: node.fields.slug,
+    title: node.fields.title,
+    metaTitle: node.frontmatter.metaTitle,
+    description: node.frontmatter.description || node.excerpt,
+    metaDescription: node.frontmatter.metaDescription,
+    date: node.frontmatter.date,
+    author: node.frontmatter.author,
+    isFeature: node.frontmatter.isFeature,
+    authorAvatar: node.frontmatter.authorAvatar ? node.frontmatter.authorAvatar.childImageSharp.fixed.src : defaultAvatar,
+  }));
+};
+
 const useAllBlogPosts = () => {
   const { allMdx } = useStaticQuery(graphql`
     query allBlogPostsQuery {
-      allMdx(filter: {fields: {slug: {regex: "/^/blog/.+/"}}}) {
+      allMdx(filter: {fields: {slug: {regex: "/^/blog/.+/"}}}, sort: {order: DESC, fields: frontmatter___date}) {
         edges {
           node {
             id
@@ -16,21 +33,13 @@ const useAllBlogPosts = () => {
               metaTitle
               metaDescription
               description
-              date
+              date(fromNow: true)
               author
+              isFeature
               authorAvatar {
                 childImageSharp {
-                  fixed(width: 80) {
-                    base64
-                    tracedSVG
-                    aspectRatio
-                    width
-                    height
-                    src
-                    srcSet
-                    srcWebp
-                    srcSetWebp
-                    originalName
+                  fixed {
+                    ...GatsbyImageSharpFixed
                   }
                 }
               }
@@ -41,7 +50,7 @@ const useAllBlogPosts = () => {
     }
 
   `);
-  return allMdx;
+  return mapBlogPostEdges(allMdx.edges);
 };
 
 export default useAllBlogPosts;
