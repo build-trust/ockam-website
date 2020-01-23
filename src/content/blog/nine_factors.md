@@ -5,7 +5,7 @@ description: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
 metaTitle: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
 metaDescription: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
 author: "Matthew Gregory"
-authorAvatar: ./assets/matt-gregory.jpg
+authorAvatar: ./assets/matthew_gregory-1.png
 ---
 ***“Ockam is tuned for connected devices”***
 

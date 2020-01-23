@@ -5,7 +5,7 @@ description: "The Next Wave In Developer Tools Will Be The Catalyst That Enables
 metaTitle: "The Next Wave In Developer Tools Will Be The Catalyst That Enables The Internet Of Things."
 metaDescription: "The Next Wave In Developer Tools Will Be The Catalyst That Enables The Internet Of Things."
 author: "Matthew Gregory"
-authorAvatar: ./assets/matt-gregory.jpg
+authorAvatar: ./assets/matthew_gregory-1.png
 ---
 At Ockam, we are breaking new ground for developers in IoT, but when juxtaposed against the broader cloud-developer-tool landscape our playbook is straightforward. Ockam has a developer experience (DX) layer that abstracts away the complexities of cloud infrastructure, cryptographic handshake protocol best practices, end-to-end encrypted messaging, embedded hardware configurations and secure key storage. The lazy way to describe Ockam is as ‘a developer platform for IoT’. Which begs the question: is Ockam similar, or does it compete with other IoT ‘platforms’, like say, the AWS IoT Platform?
 

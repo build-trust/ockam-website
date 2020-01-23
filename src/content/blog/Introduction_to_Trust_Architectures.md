@@ -5,7 +5,7 @@ description: "Introduction to building Trust Architectures"
 metaTitle: "Introduction to building Trust Architectures with DID:Ockam"
 metaDescription: "Introduction to building Trust Architectures"
 author: "Matthew Gregory"
-authorAvatar: ./assets/matt-gregory.jpg
+authorAvatar: ./assets/matthew_gregory-1.png
 ---
 In this week’s post we introduce Trust Architectures for connected devices. A reoccurring theme in the Ockam Blog is our position that there is a lot to learn about the future for connected devices by looking back through the history of cloud-native development.
 

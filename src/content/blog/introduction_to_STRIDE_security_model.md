@@ -5,7 +5,7 @@ description: "A Beginners Guide to the STRIDE Security Threat Model"
 metaTitle: "A Beginners Guide to the STRIDE Security Threat Model"
 metaDescription: "A Beginners Guide to the STRIDE Security Threat Model"
 author: "Mrinal Wadhwa"
-authorAvatar: ./assets/mrinal.jpg
+authorAvatar: ./assets/default_avatar.png
 ---
 
 # A Beginners Guide to the STRIDE Security Threat Model
