@@ -66,16 +66,16 @@ steps:
           --source ./public/  \
           --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
         ;;
-      develop | *)
+      develop)
         az storage blob delete-batch \
-          --account-name ockamio2dev \
+          --account-name $(ACCOUNT_NAME) \
           --account-key $(ACCOUNT_KEY_DEV) \
           --source $(CONTAINER)
         az storage blob upload-batch \
-          --account-name ockamio2dev \
+          --account-name $(ACCOUNT_NAME) \
           --account-key $(ACCOUNT_KEY_DEV) \
           --source ./public/  \
-          --destination "https://ockamio2dev.blob.core.windows.net/$(CONTAINER)"
+          --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
         ;;
     esac
   displayName: 'Deploy to storage'
