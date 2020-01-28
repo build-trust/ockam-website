@@ -1,6 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby';
 
-import defaultAvatar from "../content/blog/assets/default_avatar.png";
+import defaultAvatar from "../assets/default_avatar.png";
 
 const mapBlogPostEdges = postsEdges => {
   return postsEdges.map(({ node }) => ({

@@ -7,7 +7,7 @@ import SEO from '../components/SEO';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import PageLayout from '../layouts/PageLayout';
 import Post from '../components/blog/Post';
-import defaultAvatar from '../content/blog/assets/default_avatar.png';
+import defaultAvatar from '../assets/default_avatar.png';
 import SidebarMobileMenu from "../components/SidebarMobileMenu";
 
 const GreyWrapper = styled.div`
