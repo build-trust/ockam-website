@@ -4,10 +4,13 @@ const config = {
 		"siteUrl": "https://ockam.io/documentation",
 		"gaTrackingId": null,
 	},
-  general: {
+  "general": {
 	  "ockamLibraryRepo": "https://github.com/ockam-network/ockam",
     "slackChannel": "https://join.slack.com/t/ockam-community/shared_invite/enQtNDk5Nzk2NDA2NDcxLWQ0MjcyZWZjOWVlNGE5M2M3YjBkMjFkODZmODIwZWJmOTY3MThjNmU0ODc0ZDk4MjBjOGZmZDIzY2FhYTY4YTg",
     "twitter": "https://twitter.com/Ockam_io",
+  },
+  "api": {
+	  "leverUrl": "https://api.lever.co/v0",
   },
 	"header": {
     "title": "Ockam documentation",
