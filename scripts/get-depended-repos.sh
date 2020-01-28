@@ -6,8 +6,6 @@
 # exit when any command fails
 set -ex
 
-export TOKEN=$1
-
 function _message() {
   echo "$(basename $0): $@"
 }
@@ -23,14 +21,17 @@ fi
 while IFS=';' read -r ORGANIZATION REPO_NAME COMMIT SRC_DIR URL_PATH
 do
   REPO_PATH=src/content/$URL_PATH
+
   _message "Cloning $ORGANIZATION/$REPO_NAME.."
-  git clone -n https://$TOKEN@github.com/$ORGANIZATION/$REPO_NAME /tmp/$REPO_NAME
-  mkdir -p $REPO_PATH # make sure subfolder(s) exists
-  mv /tmp/$REPO_NAME$SRC_DIR $REPO_PATH
-  rm -rf /tmp/$REPO_NAME # clean it
-  echo
-  cd $REPO_PATH;
+  git clone -n "https://github.com/$ORGANIZATION/${REPO_NAME}.git" /tmp/$REPO_NAME
+
   _message "Checking out $COMMIT.."
-  git checkout -q $COMMIT
+  cd /tmp/$REPO_NAME;
+  git checkout -q $COMMIT;
   cd - > /dev/null
+
+  mkdir -p $REPO_PATH # make sure subfolder(s) exists
+  mv /tmp/${REPO_NAME}${SRC_DIR}/* $REPO_PATH
+
+  rm -rf /tmp/$REPO_NAME # clean it
 done < "$CONFIG"
