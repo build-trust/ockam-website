@@ -10,8 +10,9 @@ node_modules
 src/content/*
 
 src/content/learn/*
-!src/content/learn/blog/
-!src/content/learn/guides/
+!src/content/learn/index.md
+!src/content/learn/blog/*
+!src/content/learn/guides/*
 
 **/cli.config
 **/*.swp

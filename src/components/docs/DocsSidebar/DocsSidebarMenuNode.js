@@ -7,6 +7,7 @@ import CloseIcon from 'emotion-icons/octicons/ChevronRight';
 import config from '../../../../config';
 import Icon from '../../Icon';
 import SidebarMenuItem from '../../Sidebar/SidebarMenuItem';
+import capitalize from "../../../utils/capitalize";
 
 const NodeLink = styled(SidebarMenuItem)`
   padding-left: 1rem;
@@ -32,6 +33,7 @@ const DocsSidebarMenuNode = ({
   collapsed,
   url,
   title,
+  name,
   nodes,
   deepLevel,
   location,
@@ -49,6 +51,8 @@ const DocsSidebarMenuNode = ({
       location.pathname === config.gatsby.pathPrefix + url);
   const isActivePath = location && location.pathname.match(url);
 
+  const isDirectoryNode = (nodes && nodes[0]) ? nodes[0].url === url : false;
+  const directoryTitle = capitalize(name);
   const isLinkCollapsible = isCollapsed && hasChildren;
   return (
     <div>
@@ -60,7 +64,7 @@ const DocsSidebarMenuNode = ({
           onClick={isLinkCollapsible ? collapse : () => {}}
           to={url}
         >
-          {title}
+          {isDirectoryNode ? directoryTitle : title}
           {hasChildren && (
             <ButtonChevron type="button" onClick={collapse}>
               {!isCollapsed ? <Icon icon={OpenIcon} size={16} /> : <Icon icon={CloseIcon} size={16} />}
@@ -78,6 +82,7 @@ const DocsSidebarMenuNode = ({
               setCollapsed={setCollapsed}
               collapsed={collapsed}
               title={item.title}
+              name={item.name}
               url={item.url}
               deepLevel={item.deepLevel}
               nodes={item.nodes}
@@ -90,11 +95,14 @@ const DocsSidebarMenuNode = ({
 };
 
 DocsSidebarMenuNode.propTypes = {
-  nodes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  nodes: PropTypes.arrayOf(PropTypes.shape({
+    url: PropTypes.string,
+  })).isRequired,
   title: PropTypes.string,
   collapsed: PropTypes.shape({}).isRequired,
   deepLevel: PropTypes.number.isRequired,
   url: PropTypes.string,
+  name: PropTypes.string,
   setCollapsed: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
@@ -104,6 +112,7 @@ DocsSidebarMenuNode.propTypes = {
 DocsSidebarMenuNode.defaultProps = {
   url: '',
   title: '',
+  name: '',
 };
 
 export default DocsSidebarMenuNode;

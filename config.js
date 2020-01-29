@@ -1,10 +1,11 @@
 const config = {
 	"gatsby": {
 		"pathPrefix": "/",
-		"siteUrl": "https://ockam.io/documentation",
-		"gaTrackingId": null,
+		"siteUrl": "https://ockam.io",
+		"gaTrackingId": 'UA-142504862-1',
 	},
   "general": {
+	  "email": "hello@ockam.io",
 	  "ockamLibraryRepo": "https://github.com/ockam-network/ockam",
     "slackChannel": "https://join.slack.com/t/ockam-community/shared_invite/enQtNDk5Nzk2NDA2NDcxLWQ0MjcyZWZjOWVlNGE5M2M3YjBkMjFkODZmODIwZWJmOTY3MThjNmU0ODc0ZDk4MjBjOGZmZDIzY2FhYTY4YTg",
     "twitter": "https://twitter.com/Ockam_io",
@@ -21,14 +22,9 @@ const config = {
         "to": "/product",
       },
       {
-        "label": "Blog",
+        "label": "Learn",
         "type": "text",
-        "to": "/blog",
-      },
-      {
-        "label": "Documentation",
-        "type": "text",
-        "to": "/samples",
+        "to": "/learn",
       },
       {
         "label": "Team",
@@ -38,11 +34,9 @@ const config = {
       {
         "label": "Contact us",
         "type": "button",
-        "to": "/contact",
+        "to": "mailto:hello@ockam.io",
       },
     ],
-    "helpUrl": "",
-		"tweetText": "",
 		"search": {
 			"enabled": false,
 			"indexName": "",
@@ -58,8 +52,6 @@ const config = {
 		"title": "Ockam | Documentation",
 		"description": "Ockam is a collection of tools to help you establish secure connections and trustful exchange of information within connected systems. This documentation page describes the core concepts and the underlying technology behind Ockam.",
 		"ogImage": null,
-		"docsLocation": "https://github.com/masterborn/ockam-doc-generator/tree/master/src/content",
-		"favicon": "https://assets.website-files.com/5d020abd4e78f3888a3da9cd/5d0aaef2c48189e215bbf5c6_Icon_32x32_FullColor.png",
 	},
 };
 

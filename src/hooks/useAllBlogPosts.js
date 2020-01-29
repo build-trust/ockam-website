@@ -20,7 +20,7 @@ const mapBlogPostEdges = postsEdges => {
 const useAllBlogPosts = () => {
   const { allMdx } = useStaticQuery(graphql`
     query allBlogPostsQuery {
-      allMdx(filter: {fields: {slug: {regex: "/^/blog/.+/"}}}, sort: {order: DESC, fields: frontmatter___date}) {
+      allMdx(filter: {fields: {slug: {regex: "/^/learn/blog/.+/"}}}, sort: {order: DESC, fields: frontmatter___date}) {
         edges {
           node {
             id

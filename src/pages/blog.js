@@ -25,7 +25,6 @@ const BlogPostsContent = styled(BlogContent)`
   background-color: ${props => props.theme.colors.blogTextBackground};
 `;
 
-
 const Blog = () => {
   const posts = useAllBlogPosts();
   const featurePosts = posts.filter(item => item.isFeature === true);

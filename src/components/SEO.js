@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
+import appleTouchIcon from '../assets/apple-touch-icon.png';
+import favicon32 from '../assets/favicon-32x32.png';
+import favicon16 from '../assets/favicon-16x16.png';
 import config from '../../config';
 
 const SEO = ({ title, description, slug = '' }) => {
@@ -20,6 +23,9 @@ const SEO = ({ title, description, slug = '' }) => {
   return (
     <Helmet>
       <title>{metaTitle}</title>
+      <link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon} />
+      <link rel="icon" type="image/png" sizes="32x32" href={favicon32} />
+      <link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
       <meta name="description" content={metaDescription} />
       <meta property="og:title" content={metaTitle} />
       <meta property="og:description" content={metaDescription} />
