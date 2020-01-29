@@ -5,6 +5,10 @@ const { startCase } = require("lodash");
 
 const isNodeBlogPage = (node) => node.fields.slug && node.fields.slug.split("/")[1] === 'blog';
 
+const mapReadmeSlug = (slug) => {
+  return slug.replace(/\/readme/gi, '')
+};
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const results =  await graphql(`
@@ -80,11 +84,10 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   if (node.internal.type === `Mdx`) {
     const parent = getNode(node.parent);
     const value = createFilePath({ node, getNode, basePath: `content` });
-
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: mapReadmeSlug(value),
     });
 
     createNodeField({

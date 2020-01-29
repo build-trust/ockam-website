@@ -137,7 +137,7 @@ const BlogSection = () => {
           From Our Blog
         </StyledHeading>
         <ButtonContainer>
-          <Button ml='auto' as={Link}>Read more articles</Button>
+          <Button ml='auto' to='/learn/blog' as={Link}>Read more articles</Button>
         </ButtonContainer>
         {newestPosts.map((post, index) => (
           <BlogCard as={Link} to={post.slug} gridArea={`post${index + 1}`}>

@@ -30,7 +30,7 @@ const insert = (nodes = [], { id, slugs: [head, ...tail], ...rest }) => {
 };
 
 const generateTree = nodes => {
-  return nodes.reduce((children, path) => insert(children, path), []);
+  return nodes.reduce((children, node) => insert(children, node), []);
 };
 
 const sortBySlugLength = nodes => sortBy(nodes, item => item.slugs.length);

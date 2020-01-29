@@ -12,6 +12,8 @@ import useOnClickOutside from '../hooks/useOnClickOutside';
 import { media } from '../utils/emotion';
 import DocsSidebar from '../components/docs/DocsSidebar/DocsSidebar';
 import DocsLayout from '../layouts/DocsLayout';
+import defaultAvatar from "../assets/default_avatar.png";
+import LearnPost from "../components/blog/LearnPost";
 
 const Content = styled.div`
   display: flex;
@@ -28,7 +30,13 @@ export default function DocsTemplate(props) {
     location,
   } = props;
   const {
-    frontmatter: { metaTitle, metaDescription },
+    frontmatter: {
+      metaTitle,
+      metaDescription,
+      authorAvatar,
+      author,
+      date
+    },
     fields: { slug, title, id },
     body,
   } = mdx;
@@ -39,24 +47,47 @@ export default function DocsTemplate(props) {
     slug,
   };
 
-
   const rootSlug = getRootSlugFromPathname(location.pathname);
   const isRoot = currentNode.slug === '/';
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
   const menuId = 'main-menu';
-
+  const isBlogPath = currentNode.slug.match(/^\/learn\/blog\//);
+  const isPostPath = currentNode.slug.match(/^\/learn\/blog\/.+$/);
+  const imageAvatar = authorAvatar ? authorAvatar.childImageSharp.fixed.src : defaultAvatar;
 
   useOnClickOutside(ref, () => setIsOpen(false));
+
   return (
-    <DocsLayout location={location} isOpenSidebar={isOpen} setIsOpenSidebar={setIsOpen}>
-      <DocsSidebar location={location} isOpen={isOpen} onClose={() => setIsOpen(false)} menuId={menuId} ref={ref} />
+    <DocsLayout
+      location={location}
+      isOpenSidebar={isOpen}
+      setIsOpenSidebar={setIsOpen}
+    >
+      <DocsSidebar
+        location={location}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        menuId={menuId}
+        ref={ref}
+      />
       <Content>
         <SEO title={metaTitle} description={metaDescription} slug={slug} />
-        <Heading as="h1">{title}</Heading>
-        <div>
-          <MDXRenderer>{body}</MDXRenderer>
-        </div>
+        {!isBlogPath && <Heading as="h1">{title}</Heading>}
+        {isPostPath ? (
+          <LearnPost
+            body={body}
+            title={title}
+            authorAvatar={imageAvatar}
+            author={author}
+            date={date}
+            location={location}
+          />
+        ) : (
+          <div>
+            <MDXRenderer>{body}</MDXRenderer>
+          </div>
+        )}
         {!isRoot && (
           <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
         )}
@@ -76,6 +107,16 @@ DocsTemplate.propTypes = {
       frontmatter: PropTypes.shape({
         metaTitle: PropTypes.string,
         metaDescription: PropTypes.string,
+        date: PropTypes.string,
+        author: PropTypes.string,
+        authorAvatar: PropTypes.shape({
+          childImageSharp: PropTypes.shape({
+            fixed: PropTypes.shape({
+              src:PropTypes.string,
+            }),
+          }),
+        }),
+
       }),
       body: PropTypes.string,
     }),
@@ -102,6 +143,21 @@ export const pageQuery = graphql`
         id
         title
         slug
+      }
+      frontmatter {
+        metaTitle
+        metaDescription
+        description
+        date(fromNow: true)
+        author
+        isFeature
+        authorAvatar {
+          childImageSharp {
+            fixed {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
       }
       body
       tableOfContents

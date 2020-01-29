@@ -7,6 +7,7 @@ import config from '../../../config';
 import logo from '../../assets/ockam-logo.svg';
 import Menu from '../Menu';
 import HamburgerButton from "../HamburgerButton";
+import Link from "../Link";
 
 const Container = styled.nav`
   display: flex;
@@ -31,6 +32,7 @@ const Logo = styled.img`
 
 const HeaderMenu = styled(Menu)`
   display: none;
+  margin-left: auto;
   ${media.desktop`
       display: block;
   `};
@@ -62,7 +64,9 @@ const DocsHeader = ({ openSidebar }) => {
     <Container>
       <HamburgerButton onClick={openSidebar} />
       <LogoContainer>
-        <Logo src={logo} alt="Ockam logo" />
+        <Link to="/">
+          <Logo src={logo} alt="Ockam logo" />
+        </Link>
       </LogoContainer>
       <HeaderMenu items={config.header.menu} />
     </Container>

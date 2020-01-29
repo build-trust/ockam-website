@@ -11,6 +11,9 @@ import Scrollbar from "react-scrollbars-custom";
 import { media } from '../../../utils/emotion';
 import Icon from '../../Icon';
 import Sidebar from '../../Sidebar';
+import useSiteMetadata from "../../../hooks/useSiteMetadata";
+import Link from "../../Link";
+import config from "../../../../config";
 
 import DocsSidebarMenu from './DocsSidebarMenu';
 
@@ -69,6 +72,7 @@ const setHeightBasedOnOffset = (ref) => () => {
 const DocsSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
   useScrollPosition(setHeightBasedOnOffset(ref), [ref]);
   useEffect( setHeightBasedOnOffset(ref),[ref]);
+  const siteMetaData = useSiteMetadata();
 
   return (
     <StyledSidebar menuId={menuId} location={location} isOpen={isOpen} onClose={onClose} ref={ref}>
@@ -76,9 +80,9 @@ const DocsSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
         <ContentWrapper>
           <DocsSidebarMenu location={location} />
           <IconsContainer>
-            <Icon size={28} icon={GithubIcon} />
-            <Icon size={28} icon={SendPlaneIcon} />
-            <Icon size={28} icon={SlackIcon} />
+            <Link to={siteMetaData.ockamLibraryRepo}><Icon size={28} icon={GithubIcon} /></Link>
+            <Link to={`mailto:${config.general.email}`}><Icon size={28} icon={SendPlaneIcon} /></Link>
+            <Link to={siteMetaData.slackChannel}><Icon size={28} icon={SlackIcon} /></Link>
           </IconsContainer>
         </ContentWrapper>
       </Scrollbar>

@@ -16,14 +16,8 @@ import Caption from '../Caption';
 
 import AuthorBox from './AuthorBox';
 import PostDetailsBox from './PostDetailsBox';
-import BlogContent from './BlogContent';
 import ShareButton from "./ShareButton";
 
-const Wrapper = styled('div')`
-  ${media.desktop`
-    padding-top: 7rem;
-  `}
-`;
 
 const PostHeader = styled('div')`
   margin-bottom: 5.5rem;
@@ -52,50 +46,49 @@ const SocialBox = styled('div')`
   grid-area: social;
 `;
 
-const Post = ({ title, body, date, author, authorAvatar, location }) => {
+
+const LearnPost = ({ title, body, date, author, authorAvatar, location }) => {
   const url = location.href ? location.href : '';
   return (
-    <Wrapper>
-      <BlogContent>
-        <PostHeader>
-          <PostDetailsBox>{date}</PostDetailsBox>
-          <Heading as="h1" mb={3}>
-            {title}
-          </Heading>
-          <AuthorBox image={authorAvatar} name={author} />
-        </PostHeader>
-        <PostContent>
-          <PostBody>
-            <MDXRenderer>{body}</MDXRenderer>
-          </PostBody>
-          <SocialBox>
-            <Heading as="h6">Share</Heading>
-            <ShareButton button={LinkedinShareButton} url={url}>
-              <Icon icon={LinkedinSquare} />
-              <Caption fontSize={1} ml={2} fontWeight={2}>
+    <>
+      <PostHeader>
+        <PostDetailsBox>{date}</PostDetailsBox>
+        <Heading as="h1" mb={3}>
+          {title}
+        </Heading>
+        <AuthorBox image={authorAvatar} name={author} />
+      </PostHeader>
+      <PostContent>
+        <PostBody>
+          <MDXRenderer>{body}</MDXRenderer>
+        </PostBody>
+        <SocialBox>
+          <Heading as="h6">Share</Heading>
+          <ShareButton button={LinkedinShareButton} url={url}>
+            <Icon icon={LinkedinSquare} />
+            <Caption fontSize={1} ml={2} fontWeight={2}>
                 LinkedIn
-              </Caption>
-            </ShareButton>
-            <ShareButton button={TwitterShareButton} url={url}>
-              <Icon icon={Twitter} />
-              <Caption fontSize={1} ml={2} fontWeight={2}>
+            </Caption>
+          </ShareButton>
+          <ShareButton button={TwitterShareButton} url={url}>
+            <Icon icon={Twitter} />
+            <Caption fontSize={1} ml={2} fontWeight={2}>
                 Twitter
-              </Caption>
-            </ShareButton>
-            <ShareButton button={FacebookShareButton} url={url}>
-              <Icon icon={FacebookSquare} />
-              <Caption fontSize={1} ml={2} fontWeight={2}>
+            </Caption>
+          </ShareButton>
+          <ShareButton button={FacebookShareButton} url={url}>
+            <Icon icon={FacebookSquare} />
+            <Caption fontSize={1} ml={2} fontWeight={2}>
                 Facebook
-              </Caption>
-            </ShareButton>
-          </SocialBox>
-        </PostContent>
-      </BlogContent>
-    </Wrapper>
+            </Caption>
+          </ShareButton>
+        </SocialBox>
+      </PostContent>
+    </>
   );
 };
 
-Post.propTypes = {
+LearnPost.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.shape({}).isRequired,
   date: PropTypes.string.isRequired,
@@ -106,4 +99,4 @@ Post.propTypes = {
   }).isRequired,
 };
 
-export default Post;
+export default LearnPost;

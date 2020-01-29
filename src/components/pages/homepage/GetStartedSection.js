@@ -7,6 +7,7 @@ import arrowTopLeftIcon from '../../../assets/homepage/arrow-top-left-icon.svg';
 import githubIcon from '../../../assets/homepage/github-icon.svg';
 import slackIcon from '../../../assets/homepage/slack-icon.svg';
 import sendIcon from '../../../assets/homepage/send-icon.svg';
+import twitterIcon from '../../../assets/homepage/twitter-icon.svg';
 import { media } from '../../../utils/emotion';
 import PageSection from '../PageSection';
 import Card from '../../Card/Card';
@@ -15,6 +16,7 @@ import Heading from '../../Heading';
 import Link from '../../Link';
 import Subheading from '../Subheading';
 import useSiteMetadata from "../../../hooks/useSiteMetadata";
+import config from '../../../../config';
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -103,7 +105,6 @@ GetStartedCard.defaultProps = {
 
 const GetStartedSection = () => {
   const siteMetaData = useSiteMetadata();
-  const openContactModal = () => {};
 
   return (
     <PageSection>
@@ -123,14 +124,14 @@ const GetStartedSection = () => {
             Join Community
           </HeadingOption>
         </GetStartedCard>
-        <GetStartedCard onClick={openContactModal}>
+        <GetStartedCard to={`mailto:${config.general.email}`}>
           <img src={sendIcon} alt="send icon" />
           <HeadingOption as="h5" mb={0}>
             Request a demo
           </HeadingOption>
         </GetStartedCard>
         <GetStartedCard to={siteMetaData.twitter}>
-          <img src={sendIcon} alt="twitter icon" />
+          <img src={twitterIcon} width={40} alt="twitter icon" />
           <HeadingOption as="h5" mb={0}>
             Follow Ockam
           </HeadingOption>

@@ -8,6 +8,7 @@ import { useTheme } from 'emotion-theming';
 import { media } from '../utils/emotion';
 import ockamLogo from '../assets/ockam-logo.svg';
 import ockamLogoInvert from '../assets/ockam-logo-invert.svg';
+import config from '../../config';
 
 import PageSection from './pages/PageSection';
 import Link from './Link';
@@ -89,8 +90,8 @@ const Footer = () => {
           <LogoOckam src={logoImage} alt='ockam logo' />
         </LogoContainer>
         <MenuContainer>
-          <MenuLink to="/">Request Demo</MenuLink>
-          <MenuLink to="/">Contact Sales</MenuLink>
+          <MenuLink to={`mailto:${config.general.email}`}>Request Demo</MenuLink>
+          <MenuLink to={`mailto:${config.general.email}`}>Contact Sales</MenuLink>
         </MenuContainer>
         <CopyrightContainer>
           <Caption>© 2017-2020 Ockam.io. All rights reserved.</Caption>
