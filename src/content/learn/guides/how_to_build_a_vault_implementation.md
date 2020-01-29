@@ -5,7 +5,7 @@ order: 2
 
 # Overview
 
-The Ockam protocol requires the use of a number of cryptographic building blocks in order to establish secure channels. Since the Ockam protocol can be run on many different types of platforms, the protocol must be able to support a variety of different cryptographic functions; whether its in a software library, an external secure element or a combination of both. Ockam Vault provides the necessary common interface to cryptographic hardware and software to provide a set of building blocks needed for the Ockam protocol to establish secure channels.
+The Ockam protocols require the use of a number of cryptographic building blocks in order to establish secure channels. Since these protocols can be run on many different types of platforms, they must be able to support a variety of different cryptographic functions; whether its in a software library, an external secure element or a combination of both. Ockam Vault provides the necessary common interface to cryptographic hardware and software to provide a set of building blocks needed for the Ockam protocols to establish secure channels.
 
 This guide will look at how an Ockam Vault was built for the Microchip ATECC608A and look at how to implement a new Ockam Vault on an external secure element or a host-based software library. The guide has been broken up small groups of related cryptographic building blocks. An Ockam Vault has the flexibility to pick and choose which building blocks to implement, but once it has been decided that a Vault will implement a building block, all functions in that building block must be implemented. In cases where a Vault does not implement the full set of building blocks, another Vault must be used in conjunction to supplement the missing building blocks.
 
@@ -40,7 +40,7 @@ The sample of the configuration file for the Microchip ATECC608A as shown above 
 **Note**: This guide assumes the Microchip ATECC608A has already been configured and locked by an external utility. One slot must be configured to be the IO Protection Key and allow for it to be written on boot-up. There must be at least 2 slots available that support NIST P-256 key generation, public key retrieval and ECDH. Additionally there must be one 72 byte slot available for HMAC/SHA256, one 72 byte slot configured for AES operations and SHA-256 must be enabled.
 
 ## New Implementation
-A blank template config file can be found [here](https://github.com/ockam-network/ockam/blob/develop/implementations/c/config/vault_config.h). When adding a new platform to Vault, a define must be added to the `vault/define.h` file. There are two different types of Vaults that can be defined: host and tpm/secure element. A host Vault is code that runs on the same platform the Ockam protocol is running on. A TPM or Secure Element Vault is an external piece of hardware that requires the use of a communication protocol such as I2C, SPI, USB, or UART.
+A blank template config file can be found [here](https://github.com/ockam-network/ockam/blob/develop/implementations/c/config/vault_config.h). When adding a new platform to Vault, a define must be added to the `vault/define.h` file. There are two different types of Vaults that can be defined: host and tpm/secure element. A host Vault is code that runs on the same platform the Ockam protocols are run on. A TPM or Secure Element Vault is an external piece of hardware that requires the use of a communication protocol such as I2C, SPI, USB, or UART.
 
 After the new platform is added to the define file, a config header file can be built up from the template provided above. The config header file then must be included as a compiler definition in the following format `-DVAULT_CONFIG_FILE=vault_config.h`.
 
@@ -113,7 +113,7 @@ OCKAM_ERR ockam_vault_xxx_ecdh(OCKAM_VAULT_KEY_e key_type,
 ```
 
 ## ATECC608A
-The Microchip ATECC608A supports all four of the operations for this building block, but with one caveat. The ATECC608A only supports the NIST P-256 curve. This means all other devices running the Ockam protocol that wish to talk to this device must support the NIST P-256 curve. The Ockam protocol will be able to handle negotiations between devices to ensure communication is done via the right curve, but in order to establish a connection with another device they must both support the same elliptic curve.
+The Microchip ATECC608A supports all four of the operations for this building block, but with one caveat. The ATECC608A only supports the NIST P-256 curve. This means all other devices running the same Ockam protocols that wish to talk to this device must support the NIST P-256 curve. The protocols will be able to handle negotiations between devices to ensure communication is done via the right curve, but in order to establish a connection with another device they must both support the same elliptic curve.
 
 One of the most important features of the ATECC608A secure element, and most external secure elements, is the ability to securely generate private keys that can never be retrieved from the device. In order to generate a key on the ATECC608A, a random number must first be generated and fed back into the ATECC608A via the nonce load command to ensure randomness of the generated key. After the nonce is loaded into the ATECC608A, the key can be generated in the desired slot. Currently Vault supports a static and ephemeral key slot. After the key has been generated the public key can be retrieved via the get public key function.
 
@@ -130,7 +130,7 @@ As mentioned in the overview section, a Vault implementation for this building b
 # SHA-256
 
 ## Overview
-The Ockam protocol uses SHA-256 hashing to ensure both parties are communicating securely and in the expected order. Vault provides a simple SHA-256 hashing function for the protocol to use.
+Some Ockam protocols uses SHA-256 hashing to ensure both parties are communicating securely and in the expected order. Vault provides a simple SHA-256 hashing function for the protocols to use.
 
 ## Function
 ```
@@ -151,7 +151,7 @@ A new Ockam Vault implementation must offer a SHA-256 hashing function that can 
 # HKDF
 
 ## Overview
-After the Ockam protocol has generated the shared secret from the ECDH operation, the shared secret is run through the HMAC-based Extract-and-Expand Key Derivation Function (HKDF). Vault must implement a HKDF function following the standard set in [RFC 5869](https://tools.ietf.org/html/rfc5869).
+After a shared secret from the ECDH operation has been generated, the shared secret is run through the HMAC-based Extract-and-Expand Key Derivation Function (HKDF). Vault must implement a HKDF function following the standard set in [RFC 5869](https://tools.ietf.org/html/rfc5869).
 
 ## Function
 ```
@@ -175,7 +175,7 @@ Depending on the platform chosen for a new implementation of Vault, the level of
 # AES GCM
 
 ## Overview
-From the output of the HKDF operation, a secure key has now been established. The secure key is used for AES-GCM-128 to encrypt and decrypt data shared between the two parties who have established their secure channel. At this time only AES-GCM-128 is supported in the Ockam protocol due to the limited support of AES-GCM in hardware. 
+From the output of the HKDF operation, a secure key has now been established. The secure key is used for AES-GCM-128 to encrypt and decrypt data shared between the two parties who have established their secure channel. At this time only AES-GCM-128 is supported in the protocols due to the limited support of AES-GCM in hardware. 
 
 ## Functions
 ```
