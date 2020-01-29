@@ -24,10 +24,13 @@ steps:
 
 - bash: |
     set -ex
-    ./scripts/get-depended-repos.sh $T
+    ./scripts/get-depended-repos.sh
   displayName: 'Checkout depended repositories'
-  env:
-    T: $(TOKEN)
+
+- bash: |
+    set -ex
+    node ./scripts/fix-frontmatter.js
+  displayName: 'Fix frontmatter'
 
 - bash: |
     set -ex
