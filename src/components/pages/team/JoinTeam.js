@@ -7,6 +7,7 @@ import Text from "../../Text";
 import Button from "../../Button";
 import Link from "../../Link";
 import Heading from "../../Heading";
+import List from "../../List";
 
 const JoinTeam = ({ jobs, updatedJobs }) => {
   const items = updatedJobs.length > 0 ? updatedJobs : jobs;
@@ -14,9 +15,15 @@ const JoinTeam = ({ jobs, updatedJobs }) => {
     <PageSection>
       <Heading as='h2' textAlign='center' mb={5}>Join The Team</Heading>
       {items.map(job => (
-        <Collapse key={job.id} title={job.text}>
-          <Text mb={4}>{job.descriptionPlain}</Text>
-          <Button ml='auto' variant='primary' as={Link} to={job.hostedUrl}>Apply here</Button>
+        <Collapse key={job.createdAt.toString() + job.id} title={job.text}>
+          <Text dangerouslySetInnerHTML={{__html: job.description}} mb={4} />
+          {job.lists.map(item => (
+            <div key={item.text}>
+              <Heading as='h6'>{item.text}</Heading>
+              <List dangerouslySetInnerHTML={{__html: item.content}} />
+            </div>
+          ))}
+          <Button ml='auto' variant='primary' as={Link} to={job.applyUrl}>Apply here</Button>
         </Collapse>
       ))}
     </PageSection>
@@ -25,6 +32,10 @@ const JoinTeam = ({ jobs, updatedJobs }) => {
 const jobPropTypes = {
   text: PropTypes.string.isRequired,
   descriptionPlain: PropTypes.isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 JoinTeam.propTypes = {
@@ -35,6 +46,5 @@ JoinTeam.propTypes = {
 JoinTeam.defaultProps = {
   updatedJobs: [],
 };
-
 
 export default JoinTeam;
