@@ -7,7 +7,7 @@ node_modules
 .gitmodules
 
 src/content/learn/proposals
-src/content/learn/documentation
+src/content/learn/concepts
 
 **/cli.config
 **/*.swp
