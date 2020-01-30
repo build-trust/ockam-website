@@ -6,13 +6,8 @@ node_modules
 .idea/
 .gitmodules
 
-!src/content/
-src/content/*
-
-src/content/learn/*
-!src/content/learn/index.md
-!src/content/learn/blog/*
-!src/content/learn/guides/*
+src/content/learn/proposals
+src/content/learn/documentation
 
 **/cli.config
 **/*.swp
