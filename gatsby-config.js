@@ -3,7 +3,7 @@ const queries = require("./src/utils/algolia");
 const config = require("./config");
 
 const plugins = [
-  // 'gatsby-plugin-sitemap',
+  'gatsby-plugin-sitemap',
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp',
   'gatsby-plugin-svgr',
@@ -117,6 +117,7 @@ module.exports = {
     title: config.siteMetadata.title,
     description: config.siteMetadata.description,
     ogImage: config.siteMetadata.ogImage,
+    siteUrl: config.gatsby.siteUrl,
   },
   plugins,
 };
