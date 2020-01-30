@@ -1,6 +1,8 @@
 ---
 title: Learn
 ---
+# Learn
+
 Like you, Ockam envisions a connected future. It is inevitable that data and computing power will become evermore distributed and a part of our everyday lives. Consumer, enterprise, and industrial systems will become interconnected and automated around us. These systems require trust architectures to make our data secure and private.
 
 Ockam’s mission is to empower millions of builders just like you. Building distributed systems of interconnected devices is really difficult. It takes specialize skills and massive development budgets to do right. Very few teams have these resources. However, it will take millions of developers to build our connected future. This is why Ockam’s mission is to empower builders with our simple-to-use open source tools.
