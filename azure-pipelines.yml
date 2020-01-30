@@ -85,10 +85,13 @@ steps:
 
 - bash: |
     set -ex
-    # waiting for privileges to create service principal
-    #az login --service-principal -u http://ockam-pipeline -p $(SP_PASSWORD) --tenant xxxxxxxxxxxxxx.com
+
+    # Login as service principal
+    az login --service-principal -u $(SP_USERNAME) -p $(SP_PASSWORD) --tenant $(TENANT)
+
+    # Purge CDN
     az cdn endpoint purge \
-      --resource-group ockam2master \
+      --resource-group ockam2production \
       --name $(CDN_ENDPOINT) \
       --profile-name $(CDN_PROFILE) \
       --content-paths '/*'
