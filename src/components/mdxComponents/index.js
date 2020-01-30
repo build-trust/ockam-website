@@ -9,6 +9,7 @@ import AnchorTag from './Anchor';
 import Blockquote from './Blockqute';
 import Hr from './Hr';
 import List from './List';
+import ListOrdered from "./ListOrdered";
 
 const generateHeading = size => props => {
   let id;
@@ -37,6 +38,7 @@ export default {
   inlineCode: props => <Code {...props} />,
   a: props => <AnchorTag {...props} />,
   ul: props => <List {...props} />,
+  ol: props => <ListOrdered {...props} />,
   // TODO add `blockquote`
   // TODO add `li`
   // TODO add `table`

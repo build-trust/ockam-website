@@ -6,7 +6,6 @@ import styled from '@emotion/styled';
 
 import NextPrevious from '../components/NextPrevious';
 import SEO from '../components/SEO';
-import Heading from '../components/Heading';
 import getRootSlugFromPathname from '../utils/getRootSlugFromPathname';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { media } from '../utils/emotion';
@@ -35,7 +34,7 @@ export default function DocsTemplate(props) {
       metaDescription,
       authorAvatar,
       author,
-      date
+      date,
     },
     fields: { slug, title, id },
     body,
@@ -52,7 +51,6 @@ export default function DocsTemplate(props) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
   const menuId = 'main-menu';
-  const isBlogPath = currentNode.slug.match(/^\/learn\/blog\//);
   const isPostPath = currentNode.slug.match(/^\/learn\/blog\/.+$/);
   const imageAvatar = authorAvatar ? authorAvatar.childImageSharp.fixed.src : defaultAvatar;
 
@@ -73,7 +71,6 @@ export default function DocsTemplate(props) {
       />
       <Content>
         <SEO title={metaTitle} description={metaDescription} slug={slug} />
-        {!isBlogPath && <Heading as="h1">{title}</Heading>}
         {isPostPath ? (
           <LearnPost
             body={body}
