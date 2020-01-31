@@ -87,7 +87,7 @@ steps:
     set -ex
 
     # Login as service principal
-    az login --service-principal -u $(SP_USERNAME) -p $(SP_PASSWORD) --tenant $(TENANT)
+    az login --service-principal --allow-no-subscriptions -u $(SP_USERNAME) -p $(SP_PASSWORD) --tenant $(TENANT)
 
     # Purge CDN
     az cdn endpoint purge \
