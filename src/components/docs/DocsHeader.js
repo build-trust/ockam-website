@@ -13,21 +13,15 @@ const Container = styled.nav`
   display: flex;
   flex-direction: row;
   align-items: center;
-
   flex-wrap: wrap;
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   position: relative;
-  height: 8rem;
-
   color: ${props => props.theme.colors.menuText};
-  
-
-  
 `;
 
 const Logo = styled.img`
-  height: 4.8rem;
+  height: 5.5rem;
 `;
 
 const HeaderMenu = styled(Menu)`

@@ -16,9 +16,8 @@ const Container = styled.nav`
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  padding: ${props => (props.isCollapsedHeader ? '0.8rem 0' : '1.2rem 0')};
+  padding: ${props => (props.isCollapsedHeader ? '0.8rem 0' : '1.5rem 0')};
   position: relative;
-  height: ${props => (props.isCollapsedHeader ? '6rem' : '8rem')};
   width: inherit;
   color: ${props => props.theme.colors.menuText};
   .active {
@@ -38,7 +37,7 @@ const StyledLink = styled(Link)`
 `
 
 const Logo = styled.img`
-  height: 4.8rem;
+  height: 5.5rem;
   ${props => props.isCollapsedHeader && `
     height: 3rem;
   `}
