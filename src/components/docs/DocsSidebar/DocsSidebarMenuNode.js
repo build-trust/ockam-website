@@ -24,7 +24,6 @@ const ButtonChevron = styled.button`
   background: transparent;
   border: 0;
   margin-left: auto;
-  margin-right: 0.8rem;
 `;
 
 // eslint-disable-next-line complexity

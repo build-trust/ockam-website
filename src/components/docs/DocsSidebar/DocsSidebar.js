@@ -14,8 +14,10 @@ import Sidebar from '../../Sidebar';
 import useSiteMetadata from "../../../hooks/useSiteMetadata";
 import Link from "../../Link";
 import config from "../../../../config";
+import SidebarCrossIcon from "../../Sidebar/SidebarCrossIcon";
 
 import DocsSidebarMenu from './DocsSidebarMenu';
+
 
 const IconsContainer = styled.div`
   padding: 2.2rem 1.5rem;
@@ -60,8 +62,7 @@ const ContentWrapper = styled.div`
   ${media.desktop`
       padding-top: 3rem;
   `};
-
-`
+`;
 
 const setHeightBasedOnOffset = (ref) => () => {
   const viewportOffset = ref.current.getBoundingClientRect();
@@ -75,9 +76,10 @@ const DocsSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
   const siteMetaData = useSiteMetadata();
 
   return (
-    <StyledSidebar menuId={menuId} location={location} isOpen={isOpen} onClose={onClose} ref={ref}>
+    <StyledSidebar menuId={menuId} location={location} isOpen={isOpen} onClose={onClose} ref={ref} showCloseIcon={false}>
       <Scrollbar style={{ position: "" }}>
         <ContentWrapper>
+          <SidebarCrossIcon onClick={onClose} />
           <DocsSidebarMenu location={location} />
           <IconsContainer>
             <Link to={siteMetaData.ockamLibraryRepo}><Icon size={28} icon={GithubIcon} /></Link>

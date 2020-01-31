@@ -8,12 +8,13 @@ import PageSection from './PageSection';
 
 const Section = styled(PageSection)`
   background: ${({ theme }) => theme.colors.background};
-  height: calc(100vh - 8rem);
+  min-height: calc(100vh - 8rem);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 10rem;
+  margin-top: 3rem;
+
 
   text-align: center;
   &::before {
@@ -35,12 +36,16 @@ const Section = styled(PageSection)`
     &::before {
        background-position: top center;
     }
+    min-height: initial;
+    margin: 10rem 0;
+    
   `}
 
   ${media.ultraWide`
     text-align: initial;
-    min-height: 60rem;
-    height: 60vh;
+    min-height: 40rem;
+    height: initial;
+    margin: 10rem 0 15rem 0;
     &::before {
       content: none;
     }

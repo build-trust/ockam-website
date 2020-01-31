@@ -10,6 +10,7 @@ import Blockquote from './Blockqute';
 import Hr from './Hr';
 import List from './List';
 import ListOrdered from "./ListOrdered";
+import LinkedImage from "./LinkedImage";
 
 const generateHeading = size => props => {
   let id;
@@ -39,6 +40,7 @@ export default {
   a: props => <AnchorTag {...props} />,
   ul: props => <List {...props} />,
   ol: props => <ListOrdered {...props} />,
+  img: props => <LinkedImage {...props} />,
   // TODO add `blockquote`
   // TODO add `li`
   // TODO add `table`

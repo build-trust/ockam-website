@@ -15,7 +15,6 @@ const GridSection = styled(Grid)`
   ${media.desktop`
     grid-column-gap: 9rem;
     grid-rows-gap: 0;
-    grid-template-columns: 1fr 1fr;
 `};
 `;
 
@@ -33,26 +32,34 @@ const ImageContainer = styled('div')({
   maxWidth: '50rem',
 }, flexbox);
 
-const DefaultGridSection = ({ direction, image, children }) => {
+const Image = styled('img')`
+  width: 100%;
+`;
+
+const DefaultGridSection = ({ direction, image, gridLgProportions, children }) => {
   return (
     <PageSection>
       <GridSection
         gridTemplateAreas={{
-          sm: `"image"
+          _: `"image"
             "content";`,
           lg:
             direction === 'imageOnLeft'
               ? '"image content";'
               : '"content image";',
         }}
+        gridTemplateColumns={{
+          _: ' 1fr',
+          lg: `${gridLgProportions[0]} ${gridLgProportions[1]}`,
+        }}
       >
         <ImageContainer
           justifySelf={{
-            sm: 'center',
+            _: 'center',
             lg: direction === 'imageOnLeft' ? 'start' : 'end',
           }}
         >
-          <img alt='grid graphics' src={image} />
+          <Image alt='grid graphics' src={image} />
         </ImageContainer>
         <Content>{children}</Content>
       </GridSection>
@@ -67,6 +74,7 @@ DefaultGridSection.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
+  gridLgProportions: PropTypes.arrayOf(PropTypes.string),
 
 
 };
@@ -74,6 +82,7 @@ DefaultGridSection.propTypes = {
 DefaultGridSection.defaultProps = {
   direction: 'imageOnLeft',
   image: '',
+  gridLgProportions: ['1fr', '1fr'],
 };
 
 export default DefaultGridSection;

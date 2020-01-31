@@ -44,13 +44,15 @@ const Wrapper = styled.div`
 
 const AnimatedWrapper = animated(Wrapper);
 
+// @todo Find another way to fix jumping when scrolling;
 const ChildrenWrapper = styled('div')`
   ${props =>
     props.isCollapsedHeader &&
     `
-      margin-top: ${props.headerHeight}px;
+      margin-top: ${props.headerHeight + 100}px;
   `};
 `;
+
 
 const PageLayout = ({ children, isOpenSidebar, setIsOpenSidebar, themeName }) => {
   const ref = useRef();
