@@ -91,7 +91,7 @@ steps:
 
     # Purge CDN
     az cdn endpoint purge \
-      --resource-group ockam2production \
+      --resource-group ockam2$(Build.SourceBranchName) \
       --name $(CDN_ENDPOINT) \
       --profile-name $(CDN_PROFILE) \
       --content-paths '/*'
