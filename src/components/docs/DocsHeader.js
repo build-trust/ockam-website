@@ -47,7 +47,6 @@ const HeaderMenu = styled(Menu)`
 `;
 
 const LogoContainer = styled.div`
-  width: 30rem;
   margin-left: auto;
   margin-right: auto;
   text-align: center;

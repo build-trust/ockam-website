@@ -7,9 +7,9 @@ import DefaultGridSection from "../DefaultGridSection";
 
 const SeamlessConnectedSection = () => {
   return (
-    <DefaultGridSection image={seamlessImage} direction="imageOnRight">
-      <Heading as='h2'>Ockam Believes In A Seamless Connected Future.</Heading>
-      <Text>Vast interoperable systems of connected devices across consumer and enterprise will be able to interact trustfully. These systems will be secure and autonomously serve intuitive, user centric experiences that respect privacy.</Text>
+    <DefaultGridSection image={seamlessImage} direction="imageOnLeft">
+      <Heading as='h2'>Ockam Believes In <br/> A Connected Future.</Heading>
+      <Text>It is inevitable that data and computing power will become evermore distributed and a part of our everyday lives. Consumer, enterprise, and industrial systems will become interconnected and automated around us. These systems require trust architectures to make our data secure and private.</Text>
     </DefaultGridSection>
   );
 };

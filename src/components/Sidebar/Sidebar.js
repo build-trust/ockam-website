@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import CrossIcon from 'emotion-icons/fa-solid/Times';
 
 import { media } from '../../utils/emotion';
-import { matchBreakpointDown } from '../../utils/rwd';
+
+import SidebarCrossIcon from "./SidebarCrossIcon";
 
 const Container = styled('aside')`
   overflow: auto;
@@ -29,26 +29,13 @@ const Container = styled('aside')`
   `};
 `;
 
-const StyledCrossIcon = styled(CrossIcon)`
-  position: absolute;
-  z-index: 2;
-  left: 1.5rem;
-  top: 1.5rem;
-  cursor: pointer;
-  display: block;
-  color: ${({theme}) => theme.colors.icon};
 
-  ${media.desktop`
-      display: none;
-  `};
-`;
-
-const Sidebar = forwardRef(({ children, menuId, isOpen, onClose, ...rest }, ref) => {
+const Sidebar = forwardRef(({ children, showCloseIcon, menuId, isOpen, onClose, ...rest }, ref) => {
   const isHidden = !!isOpen;
 
   return (
     <Container id={menuId} isOpen={isOpen} aria-hidden={!isHidden} ref={ref} {...rest}>
-      {(matchBreakpointDown('desktop') ) && <StyledCrossIcon size={24} onClick={onClose} aria-controls='main-menu' />}
+      {showCloseIcon && <SidebarCrossIcon onClick={onClose} />}
       {children}
     </Container>
   );
@@ -60,6 +47,11 @@ Sidebar.propTypes = {
   onClose:  PropTypes.func.isRequired,
   menuId: PropTypes.string.isRequired,
   location: PropTypes.shape({}).isRequired,
+  showCloseIcon: PropTypes.bool,
+};
+
+Sidebar.defaultProps = {
+  showCloseIcon: true,
 };
 
 export default Sidebar;

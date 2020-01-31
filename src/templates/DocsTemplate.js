@@ -70,7 +70,7 @@ export default function DocsTemplate(props) {
         ref={ref}
       />
       <Content>
-        <SEO title={metaTitle} description={metaDescription} slug={slug} />
+        <SEO title={metaTitle || "Ockam | Learn"} description={metaDescription} slug={slug} />
         {isPostPath ? (
           <LearnPost
             body={body}

@@ -10,6 +10,7 @@ import Subheading from "../Subheading";
 import Button from "../../Button";
 import useSiteMetadata from "../../../hooks/useSiteMetadata";
 import Link from "../../Link";
+import config from "../../../../config";
 
 const ButtonsContainer = styled('div')({
   display: 'flex',
@@ -27,7 +28,7 @@ const TrustedDevicesSection = () => {
         <Text>Now those same open source tool skills can be used to connect apps to connected devices that live outside of the cloud infrastructure. With Ockam TrustedDevices all application developers can connect to and trust data that moves to and from devices at the edge.</Text>
         <ButtonsContainer mt={3}>
           <Button as={Link} mr={3} size='small' to={ockamLibraryRepo}>Build with Ockam</Button>
-          <Button outline='primary' size='small'>Contact sales</Button>
+          <Button outline='primary' size='small' as={Link} to={`mailto:${config.general.email}`}>Contact sales</Button>
         </ButtonsContainer>
       </DefaultGridSection>
     </>

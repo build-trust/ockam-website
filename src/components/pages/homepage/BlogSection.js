@@ -13,7 +13,7 @@ import ockamLogoMark from '../../../assets/ockam-logo-mark.svg';
 import { media } from '../../../utils/emotion';
 import Link from '../../Link';
 import Caption from '../../Caption';
-import useAllBlogPosts from "../../../hooks/useAllBlogPosts";
+import useHomepageBlogPosts from "../../../hooks/useHomepageBlogPosts";
 
 const BlogGrid = styled.div`
   display: grid;
@@ -49,7 +49,7 @@ const StyledCard = styled(Card)`
   padding-right: 6rem;  
   &:hover {
     background-color: ${props => lighten(0.08, props.theme.colors.accentBackground)};
-    box-shadow: 0px 0px 29px 3px ${props => rgba(darken(0.2, props.theme.colors.background), 0.2)};
+    box-shadow: 0 0 29px 3px ${props => rgba(darken(0.2, props.theme.colors.background), 0.2)};
    transform: scale(1.05);
     &:before {
       transform: rotate(90deg);
@@ -128,7 +128,7 @@ BlogCard.propTypes = {
 };
 
 const BlogSection = () => {
-  const posts = useAllBlogPosts();
+  const posts = useHomepageBlogPosts();
   const newestPosts = slice(posts,0 ,3);
   return (
     <PageSection>

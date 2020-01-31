@@ -6,6 +6,8 @@ metaTitle: "Values and Virtues of The Ockam Team"
 metaDescription: "Values and Virtues of The Ockam Team"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
+isHomepageFeatured: true
+homepageFeaturedOrder: 1
 ---
 
 # “What We Do Is Who We Are.”

@@ -13,23 +13,38 @@ const StyledContent = styled.div`
   text-align: center;
 `;
 
+const HomepageLink = styled(Link)`
+  text-decoration: underline;
+`;
+
 const NotFoundPage = ({ location }) => {
+  if (typeof window !== 'undefined') {
+    setTimeout(() => {
+     window.location = '/';
+    }, 5000)
+  }
+
+  const currentUrl = location.hostname + location.pathname;
+
   return (
     <>
       <StyledContent>
         <Global styles={normalizeCss} />
         <Global styles={globalStyles} />
         <SEO />
-        <Heading>404 not found</Heading>
+        <Heading as='h2'>404 not found</Heading>
         <div>
-          <h3>
-            Error while trying to get
-            {location.pathname}
-          </h3>
+          <Heading as='h5' color='white'>
+            Url &quot;
+            {currentUrl}
+            &quot; doesn&apos;t exist.
+
+          </Heading>
+          <h4>You will be redirected to homepage in 5 seconds...</h4>
           <p>
             Go to
             {' '}
-            <Link to='/'>Homepage</Link>
+            <HomepageLink to='/'>Homepage</HomepageLink>
           </p>
         </div>
       </StyledContent>
@@ -40,6 +55,7 @@ const NotFoundPage = ({ location }) => {
 NotFoundPage.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
+    hostname: PropTypes.string,
   }).isRequired,
 };
 
