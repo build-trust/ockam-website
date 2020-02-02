@@ -115,7 +115,7 @@ const GetStartedSection = () => {
         <GetStartedCard to={siteMetaData.ockamLibraryRepo}>
           <img src={githubIcon} alt="github icon" />
           <HeadingOption as="h5" mb={0}>
-            Github
+            {"{ockam}"}
           </HeadingOption>
         </GetStartedCard>
         <GetStartedCard to={siteMetaData.slackChannel}>

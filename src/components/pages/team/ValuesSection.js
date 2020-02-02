@@ -10,6 +10,7 @@ import { ReactComponent as CheckboxCircleIcon } from '../../../assets/check-circ
 import mattAvatar from '../../../assets/matthew-gregory.jpg';
 import Button from "../../Button";
 import Caption from "../../Caption";
+import Link from "../../Link";
 
 const Grid = styled('div')`
   display: grid;
@@ -50,10 +51,13 @@ const QuatationBox = styled('div')`
 
 const ValuesContainer = styled('div')`
   display: flex;
+  flex-direction: column;
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   ${media.desktop`
+    align-items: flex-start;
   justify-content: flex-start;
   `};
 `;
@@ -102,23 +106,23 @@ const ValuesSection = () => {
             </ValuesEntry>
             <ValuesEntry>
               <Icon icon={CheckboxCircleIcon} />
-              <Text mb={0} color='white'>The Team</Text>
+              <Text mb={0} color='white'>High Performance Team</Text>
             </ValuesEntry>
             <ValuesEntry>
               <Icon icon={CheckboxCircleIcon} />
-              <Text mb={0} color='white'>Product</Text>
+              <Text mb={0} color='white'>Builders Love Their Tools</Text>
             </ValuesEntry>
           </ValuesContainer>
           <Text>
-            The Ockam Team is guided by objectives, is driven by key results,
-            and has the ethos of a high-performance sports team.
+            Our Values are what we believe.
+            Our Virtues are what we do.
+            What we do is who we are.
           </Text>
           <Text mb={4}>
             Ockam is a distributed team and we have a remote-first culture.
           </Text>
           <ButtonsContainer>
-            <Button variant='primary' size='small'>Read more</Button>
-            <Button outline='primary' ml={4} size='small'>Join The Team</Button>
+            <Button as={Link} to='/learn/blog/values_and_virtues_on_the_Ockam_Team' variant='primary' size='small'>Read more</Button>
           </ButtonsContainer>
         </DescriptionBox>
         <QuatationBox>

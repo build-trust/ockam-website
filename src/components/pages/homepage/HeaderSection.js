@@ -47,7 +47,7 @@ const HeaderSection = () => (
       Ockam’s developer tools enable you to:
     </Text>
     <div>
-      <FeatureElement>Send end-to-end encrypted messages through your connected system</FeatureElement>
+      <FeatureElement>Send end-to-end encrypted messages through your connected system,</FeatureElement>
       <FeatureElement>Establish authenticated channels between endpoints regardless of the transports or route,</FeatureElement>
       <FeatureElement>Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments.</FeatureElement>
     </div>

@@ -11,7 +11,7 @@ const BuildersSection = () => {
       <Heading as="h2">Ockam’s mission is to empower millions of builders. Just like you.</Heading>
       <Text>
         Building distributed systems of interconnected devices is really difficult.
-        It takes specialize skills and massive development budgets to do right.
+        It takes specialized skills and massive development budgets to do right.
         Very few teams have these resources.
       </Text>
       <Text>
