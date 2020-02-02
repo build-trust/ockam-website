@@ -15,7 +15,7 @@ const HeaderSection = () => (
       Ockam Builds For Builders.
     </Heading>
     <Text mt={4}>
-      Builders of connected device systems are going to change the world. Ockam is building the infrastructure and the open source tools that will enable any developer, of any skill level, to build these ecosystems to be secure, trustworthy, and interoperable.
+      Builders are the ones that change the world. Ockam builds open source tools that empower any developer, of any skill level, to build trustful connected ecosystems.
     </Text>
   </HeaderGridSection>
 );
