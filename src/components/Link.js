@@ -7,10 +7,18 @@ import { space, color, typography, layout } from 'styled-system';
 
 const BaseLink = ({ to, children, ...rest }) => {
   const isAnchor = to ? false : to.charAt(0) === '#';
-  if(isAnchor || isAbsoluteUrl(to)) {
-    return <a href={to} {...rest}>{children}</a>
+  if (isAnchor || isAbsoluteUrl(to)) {
+    return (
+      <a href={to} {...rest}>
+        {children}
+      </a>
+    );
   }
-  return <GatsbyLink to={to} {...rest}>{children}</GatsbyLink>
+  return (
+    <GatsbyLink to={to} {...rest}>
+      {children}
+    </GatsbyLink>
+  );
 };
 
 const Link = styled(BaseLink)`
@@ -30,6 +38,6 @@ BaseLink.propTypes = {
 
 BaseLink.defaultProps = {
   to: '',
-}
+};
 
 export default Link;

@@ -8,9 +8,9 @@ import Text from '../../Text';
 import Icon from '../../Icon';
 import { ReactComponent as CheckboxCircleIcon } from '../../../assets/check-circle-icon.svg';
 import mattAvatar from '../../../assets/matthew-gregory.jpg';
-import Button from "../../Button";
-import Caption from "../../Caption";
-import Link from "../../Link";
+import Button from '../../Button';
+import Caption from '../../Caption';
+import Link from '../../Link';
 
 const Grid = styled('div')`
   display: grid;
@@ -82,7 +82,7 @@ const ValuesEntry = styled('div')`
 `;
 
 const ButtonsContainer = styled('div')`
-  display:flex;
+  display: flex;
 `;
 
 const MattAvatar = styled('img')`
@@ -97,36 +97,54 @@ const ValuesSection = () => {
   return (
     <PageSection>
       <Grid>
-        <Title as="h2" mb={{'_': 5, 'lg': 4}} textAlign={{ '_': 'center', 'lg': 'left'}}>Ockam Values</Title>
+        <Title
+          as="h2"
+          mb={{ _: 5, lg: 4 }}
+          textAlign={{ _: 'center', lg: 'left' }}
+        >
+          Ockam Values
+        </Title>
         <DescriptionBox>
           <ValuesContainer>
             <ValuesEntry>
               <Icon icon={CheckboxCircleIcon} />
-              <Text mb={0} color='white'>Simplicity</Text>
+              <Text mb={0} color="white">
+                Simplicity
+              </Text>
             </ValuesEntry>
             <ValuesEntry>
               <Icon icon={CheckboxCircleIcon} />
-              <Text mb={0} color='white'>High Performance Team</Text>
+              <Text mb={0} color="white">
+                High Performance Team
+              </Text>
             </ValuesEntry>
             <ValuesEntry>
               <Icon icon={CheckboxCircleIcon} />
-              <Text mb={0} color='white'>Builders Love Their Tools</Text>
+              <Text mb={0} color="white">
+                Builders Love Their Tools
+              </Text>
             </ValuesEntry>
           </ValuesContainer>
           <Text>
-            Our Values are what we believe.
-            Our Virtues are what we do.
-            What we do is who we are.
+            Our Values are what we believe. Our Virtues are what we do. What we
+            do is who we are.
           </Text>
           <Text mb={4}>
             Ockam is a distributed team and we have a remote-first culture.
           </Text>
           <ButtonsContainer>
-            <Button as={Link} to='/learn/blog/values_and_virtues_on_the_Ockam_Team' variant='primary' size='small'>Read more</Button>
+            <Button
+              as={Link}
+              to="/learn/blog/values_and_virtues_on_the_Ockam_Team"
+              variant="primary"
+              size="small"
+            >
+              Read more
+            </Button>
           </ButtonsContainer>
         </DescriptionBox>
         <QuatationBox>
-          <MattAvatar src={mattAvatar} alt='matthew-gregory' />
+          <MattAvatar src={mattAvatar} alt="matthew-gregory" />
           <Heading textAlign="center" as="h3" fontStyle="italic">
             Before We Wrote The Code, We Shipped Our Values.
           </Heading>

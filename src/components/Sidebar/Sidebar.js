@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { media } from '../../utils/emotion';
 
-import SidebarCrossIcon from "./SidebarCrossIcon";
+import SidebarCrossIcon from './SidebarCrossIcon';
 
 const Container = styled('aside')`
   overflow: auto;
@@ -20,7 +20,8 @@ const Container = styled('aside')`
   transition: transform 0.3s ease-in-out;
   background-color: ${props => props.theme.custom.sidebar.backgroundColor};
   border-radius: ${props => props.theme.radii.default};
-  transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
+  transform: ${({ isOpen }) =>
+    (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
   padding-top: 6rem;
   ${media.desktop`
      display: flex;
@@ -29,22 +30,29 @@ const Container = styled('aside')`
   `};
 `;
 
+const Sidebar = forwardRef(
+  ({ children, showCloseIcon, menuId, isOpen, onClose, ...rest }, ref) => {
+    const isHidden = !!isOpen;
 
-const Sidebar = forwardRef(({ children, showCloseIcon, menuId, isOpen, onClose, ...rest }, ref) => {
-  const isHidden = !!isOpen;
-
-  return (
-    <Container id={menuId} isOpen={isOpen} aria-hidden={!isHidden} ref={ref} {...rest}>
-      {showCloseIcon && <SidebarCrossIcon onClick={onClose} />}
-      {children}
-    </Container>
-  );
-});
+    return (
+      <Container
+        id={menuId}
+        isOpen={isOpen}
+        aria-hidden={!isHidden}
+        ref={ref}
+        {...rest}
+      >
+        {showCloseIcon && <SidebarCrossIcon onClick={onClose} />}
+        {children}
+      </Container>
+    );
+  }
+);
 
 Sidebar.propTypes = {
   children: PropTypes.node.isRequired,
-  isOpen:  PropTypes.bool.isRequired,
-  onClose:  PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
   menuId: PropTypes.string.isRequired,
   location: PropTypes.shape({}).isRequired,
   showCloseIcon: PropTypes.bool,

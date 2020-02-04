@@ -20,8 +20,8 @@ const HomepageLink = styled(Link)`
 const NotFoundPage = ({ location }) => {
   if (typeof window !== 'undefined') {
     setTimeout(() => {
-     window.location = '/';
-    }, 5000)
+      window.location = '/';
+    }, 5000);
   }
 
   const currentUrl = location.hostname + location.pathname;
@@ -32,19 +32,17 @@ const NotFoundPage = ({ location }) => {
         <Global styles={normalizeCss} />
         <Global styles={globalStyles} />
         <SEO />
-        <Heading as='h2'>404 not found</Heading>
+        <Heading as="h2">404 not found</Heading>
         <div>
-          <Heading as='h5' color='white'>
+          <Heading as="h5" color="white">
             Url &quot;
             {currentUrl}
             &quot; doesn&apos;t exist.
-
           </Heading>
           <h4>You will be redirected to homepage in 5 seconds...</h4>
           <p>
             Go to
-            {' '}
-            <HomepageLink to='/'>Homepage</HomepageLink>
+            <HomepageLink to="/">Homepage</HomepageLink>
           </p>
         </div>
       </StyledContent>

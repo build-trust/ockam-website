@@ -13,5 +13,5 @@ const Hr = styled('hr')(
 Hr.defaultProps = {
   mb: 4,
   mt: 4,
-}
+};
 export default Hr;

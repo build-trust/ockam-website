@@ -45,25 +45,26 @@ const Wrapper = styled.div`
 const AnimatedWrapper = animated(Wrapper);
 
 // @todo Find another way to fix jumping when scrolling;
+// this margin value comes from inner margin + header initial height
 const ChildrenWrapper = styled('div')`
-  ${props =>
-    props.isCollapsedHeader &&
-    `
-      margin-top: ${props.headerHeight + 100}px;
-  `};
+  ${props => props.isCollapsedHeader && `margin-top: 188px;`};
 `;
 
-
-const PageLayout = ({ children, isOpenSidebar, setIsOpenSidebar, themeName }) => {
+const PageLayout = ({
+  children,
+  isOpenSidebar,
+  setIsOpenSidebar,
+  themeName,
+}) => {
   const ref = useRef();
   const [isCollapsedHeader, headerHeight] = useUnderViewport(ref);
-  const toCollapsedAnimation = useSpring(
-    { height: isCollapsedHeader ? 0 : -headerHeight}
-  );
+  const toCollapsedAnimation = useSpring({
+    height: isCollapsedHeader ? 0 : -headerHeight,
+  });
 
-  const toFullAnimation = useSpring(
-    { height: isCollapsedHeader ? -headerHeight : 0}
-  );
+  const toFullAnimation = useSpring({
+    height: isCollapsedHeader ? -headerHeight : 0,
+  });
 
   const trans = value => `translateY(${value}px)`;
   return (
@@ -76,7 +77,11 @@ const PageLayout = ({ children, isOpenSidebar, setIsOpenSidebar, themeName }) =>
             <AnimatedWrapper
               ref={ref}
               isCollapsedHeader={isCollapsedHeader}
-              style={{ transform: isCollapsedHeader ? toCollapsedAnimation.height.interpolate(trans) : toFullAnimation.height.interpolate(trans)}}
+              style={{
+                transform: isCollapsedHeader
+                  ? toCollapsedAnimation.height.interpolate(trans)
+                  : toFullAnimation.height.interpolate(trans),
+              }}
             >
               <Content>
                 <Header
@@ -85,10 +90,7 @@ const PageLayout = ({ children, isOpenSidebar, setIsOpenSidebar, themeName }) =>
                 />
               </Content>
             </AnimatedWrapper>
-            <ChildrenWrapper
-              isCollapsedHeader={isCollapsedHeader}
-              headerHeight={headerHeight}
-            >
+            <ChildrenWrapper isCollapsedHeader={isCollapsedHeader}>
               {children}
             </ChildrenWrapper>
           </FocusLock>

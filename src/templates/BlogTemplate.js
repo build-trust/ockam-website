@@ -8,7 +8,7 @@ import useOnClickOutside from '../hooks/useOnClickOutside';
 import PageLayout from '../layouts/PageLayout';
 import Post from '../components/blog/Post';
 import defaultAvatar from '../assets/default_avatar.png';
-import SidebarMobileMenu from "../components/SidebarMobileMenu";
+import SidebarMobileMenu from '../components/SidebarMobileMenu';
 
 const GreyWrapper = styled.div`
   position: absolute;
@@ -31,7 +31,6 @@ const Content = styled.div`
   flex-grow: 1;
   z-index: 3;
   position: relative;
-
 `;
 export default function BlogTemplate(props) {
   const {
@@ -40,18 +39,14 @@ export default function BlogTemplate(props) {
   } = props;
 
   const {
-    frontmatter: {
-      metaTitle,
-      metaDescription,
-      date,
-      author,
-      authorAvatar,
-    },
+    frontmatter: { metaTitle, metaDescription, date, author, authorAvatar },
     fields: { slug, title },
     body,
   } = mdx;
 
-  const imageAvatar = authorAvatar ? authorAvatar.childImageSharp.fixed.src : defaultAvatar;
+  const imageAvatar = authorAvatar
+    ? authorAvatar.childImageSharp.fixed.src
+    : defaultAvatar;
 
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
@@ -65,12 +60,29 @@ export default function BlogTemplate(props) {
       setIsOpenSidebar={setIsOpen}
       themeName="blog"
     >
-      <SidebarMobileMenu location={location} isOpen={isOpen} onClose={() => setIsOpen(false)} menuId={menuId} ref={ref} />
+      <SidebarMobileMenu
+        location={location}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        menuId={menuId}
+        ref={ref}
+      />
       <SEO title={metaTitle} description={metaDescription} slug={slug} />
       <Wrapper>
         <GreyWrapper />
         <Content>
-          {body ? <Post body={body} title={title} authorAvatar={imageAvatar} author={author} date={date} location={location} /> : props.children}
+          {body ? (
+            <Post
+              body={body}
+              title={title}
+              authorAvatar={imageAvatar}
+              author={author}
+              date={date}
+              location={location}
+            />
+          ) : (
+            props.children
+          )}
         </Content>
       </Wrapper>
     </PageLayout>
@@ -93,7 +105,7 @@ BlogTemplate.propTypes = {
         authorAvatar: PropTypes.shape({
           childImageSharp: PropTypes.shape({
             fixed: PropTypes.shape({
-              src:PropTypes.string,
+              src: PropTypes.string,
             }),
           }),
         }),

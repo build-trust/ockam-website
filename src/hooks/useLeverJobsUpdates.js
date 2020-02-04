@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from 'react';
 
-import { getOckamJobs } from "../api/lever";
+import { getOckamJobs } from '../api/lever';
 
 const useLeverJobsUpdates = () => {
   const [jobs, setJobs] = useState([]);
@@ -10,10 +10,10 @@ const useLeverJobsUpdates = () => {
       const result = await getOckamJobs();
       setJobs(result);
     }
-    fetchAndSave()
+    fetchAndSave();
   }, []);
 
   return jobs;
 };
 
-export default useLeverJobsUpdates
+export default useLeverJobsUpdates;

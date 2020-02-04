@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
-const useUnderViewport = (ref, onChangeToHidden = () => {}, onChangeToVisible = () => {}) => {
+const useUnderViewport = (
+  ref,
+  onChangeToHidden = () => {},
+  onChangeToVisible = () => {}
+) => {
   const [isUnderViewport, setIsUnderViewport] = useState(false);
   const [elementHeight, setElementHeight] = useState(null);
 
@@ -18,7 +22,7 @@ const useUnderViewport = (ref, onChangeToHidden = () => {}, onChangeToVisible = 
     setIsUnderViewport(viewportOffset.height + currPos.y < 0);
   };
   useScrollPosition(makeCollapsed, [ref]);
-  return [ isUnderViewport, elementHeight];
+  return [isUnderViewport, elementHeight];
 };
 
 export default useUnderViewport;

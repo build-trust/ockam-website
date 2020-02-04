@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { darken, lighten, rgba } from 'polished';
-import slice from 'lodash/slice'
+import slice from 'lodash/slice';
 
 import PageSection from '../PageSection';
 import Heading from '../../Heading';
@@ -13,19 +13,20 @@ import ockamLogoMark from '../../../assets/ockam-logo-mark.svg';
 import { media } from '../../../utils/emotion';
 import Link from '../../Link';
 import Caption from '../../Caption';
-import useHomepageBlogPosts from "../../../hooks/useHomepageBlogPosts";
+import useHomepageBlogPosts from '../../../hooks/useHomepageBlogPosts';
+import Text from "../../Text";
 
 const BlogGrid = styled.div`
   display: grid;
   grid-row-gap: 4rem;
   grid-template-columns: 1fr;
   grid-template-rows: fit-content();
-  grid-template-areas: 
-  "title"
-  "post1"
-  "post2"
-  "post3"
-  "read-more";
+  grid-template-areas:
+    'title'
+    'post1'
+    'post2'
+    'post3'
+    'read-more';
   ${media.desktop`
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: fit-content() auto;
@@ -44,26 +45,27 @@ const StyledHeading = styled(Heading)`
 const StyledCard = styled(Card)`
   height: auto;
   position: relative;
-  transition: all 300ms cubic-bezier(.51,.92,.24,1.15);
+  transition: all 300ms cubic-bezier(0.51, 0.92, 0.24, 1.15);
   overflow: hidden;
-  padding-right: 6rem;  
+  padding-right: 6rem;
   &:hover {
-    background-color: ${props => lighten(0.08, props.theme.colors.accentBackground)};
-    box-shadow: 0 0 29px 3px ${props => rgba(darken(0.2, props.theme.colors.background), 0.2)};
-   transform: scale(1.05);
+    background-color: ${props =>
+      lighten(0.08, props.theme.colors.accentBackground)};
+    box-shadow: 0 0 29px 3px
+      ${props => rgba(darken(0.2, props.theme.colors.background), 0.2)};
+    transform: scale(1.05);
     &:before {
       transform: rotate(90deg);
       opacity: 0.4;
     }
   }
-  
+
   &:before {
-  
     transform-origin: center center;
     transform-style: preserve-3D;
-    transition: all 500ms cubic-bezier(.51,.92,.24,1.15);
+    transition: all 500ms cubic-bezier(0.51, 0.92, 0.24, 1.15);
     opacity: 0.13;
-    content:'';
+    content: '';
     position: absolute;
     z-index: 1;
     height: 100%;
@@ -73,7 +75,7 @@ const StyledCard = styled(Card)`
     background-size: 27.5rem 29.1rem;
     background-position: right -15.5rem center;
   }
-  
+
   ${media.desktop`
     height: 38rem;
     padding-right: 0;
@@ -86,12 +88,10 @@ const StyledCard = styled(Card)`
       background-position: initial;
     }
   `}
-
-
 `;
 
 const StyledCardBody = styled(CardBody)`
-position: relative;
+  position: relative;
   z-index: 2;
   height: 100%;
   display: flex;
@@ -114,9 +114,7 @@ const PostType = styled(Caption)`
 
 const BlogCard = ({ children, ...rest }) => (
   <StyledCard {...rest}>
-    <StyledCardBody>
-      {children}
-    </StyledCardBody>
+    <StyledCardBody>{children}</StyledCardBody>
   </StyledCard>
 );
 
@@ -129,31 +127,32 @@ BlogCard.propTypes = {
 
 const BlogSection = () => {
   const posts = useHomepageBlogPosts();
-  const newestPosts = slice(posts,0 ,3);
+  const newestPosts = slice(posts, 0, 3);
   return (
     <PageSection>
       <BlogGrid>
-        <StyledHeading as='h2'>
-          From Our Blog
-        </StyledHeading>
+        <StyledHeading as="h2">From Our Blog</StyledHeading>
         <ButtonContainer>
-          <Button ml='auto' to='/learn/blog' as={Link}>Read more articles</Button>
+          <Button ml="auto" to="/learn/blog" as={Link}>
+            Read more articles
+          </Button>
         </ButtonContainer>
         {newestPosts.map((post, index) => (
-          <BlogCard as={Link} to={post.slug} gridArea={`post${index + 1}`}>
+          <BlogCard key={post.slug} as={Link} to={post.slug} gridArea={`post${index + 1}`}>
             <PostType mb={2}>{post.description}</PostType>
-            <Heading mb={4} lineHeight='small' as="h5">{post.title}</Heading>
-            <Link to={post.slug} color='primary'>Read article</Link>
+            <Heading mb={4} lineHeight="small" as="h5">
+              {post.title}
+            </Heading>
+            <Text color="primary">
+              Read article
+            </Text>
           </BlogCard>
         ))}
-
       </BlogGrid>
     </PageSection>
   );
 };
 
-BlogSection.propTypes = {
-
-};
+BlogSection.propTypes = {};
 
 export default BlogSection;

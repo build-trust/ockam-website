@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import  ArrowLeft  from 'emotion-icons/ion-md/ArrowBack';
-import  ArrowRight  from 'emotion-icons/ion-md/ArrowForward';
-import { space, typography  } from 'styled-system';
+import ArrowLeft from 'emotion-icons/ion-md/ArrowBack';
+import ArrowRight from 'emotion-icons/ion-md/ArrowForward';
+import { space, typography } from 'styled-system';
 import { rgba } from 'polished';
 
 import usePrevNextNavigate from '../hooks/usePrevNextNavigate';
@@ -25,7 +25,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.p`
-  margin:0;
+  margin: 0;
   font-weight: ${props => props.theme.fontWeights.heading};
   transition: all 200ms ease-in-out;
 `;
@@ -42,18 +42,17 @@ const NavigationButton = styled(Link)`
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.primary};
     ${Title} {
-      color: ${({ theme }) =>theme.colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
     ${StyledIcon} {
-      color: ${({ theme }) =>theme.colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
-  box-shadow: ${({ theme }) => `0 3px 8px 0 ${rgba(theme.colors.accentBackground,0.6)}`};
+  box-shadow: ${({ theme }) =>
+    `0 3px 8px 0 ${rgba(theme.colors.accentBackground, 0.6)}`};
 `;
 
-const NavigationButtonPrev = styled(NavigationButton)`
-
-`;
+const NavigationButtonPrev = styled(NavigationButton)``;
 
 const NavigationButtonNext = styled(NavigationButton)`
   justify-content: flex-end;
@@ -63,23 +62,30 @@ const NavigationButtonNext = styled(NavigationButton)`
 const Content = styled('div')(space, typography);
 
 const NextPrevious = ({ currentNode, rootSlug }) => {
-  const { isFirst, isLast, nextNode, prevNode } = usePrevNextNavigate({currentNode, rootSlug});
+  const { isFirst, isLast, nextNode, prevNode } = usePrevNextNavigate({
+    currentNode,
+    rootSlug,
+  });
 
   return (
     <Container>
       {!isFirst ? (
         <NavigationButtonPrev to={prevNode.url}>
           <StyledIcon icon={ArrowLeft} size={16} ml={3} />
-          <Content ml='auto' mr={3} py={3} textAlign='right'>
-            <Caption mb={1} display='block'>Previous</Caption>
+          <Content ml="auto" mr={3} py={3} textAlign="right">
+            <Caption mb={1} display="block">
+              Previous
+            </Caption>
             <Title>{prevNode.title}</Title>
           </Content>
         </NavigationButtonPrev>
       ) : null}
       {!isLast ? (
         <NavigationButtonNext to={nextNode.url}>
-          <Content ml={3} mr='auto' py={3} textAlign='left'>
-            <Caption mb={1} display='block'>Next</Caption>
+          <Content ml={3} mr="auto" py={3} textAlign="left">
+            <Caption mb={1} display="block">
+              Next
+            </Caption>
             <Title>{nextNode.title}</Title>
           </Content>
           <StyledIcon icon={ArrowRight} size={16} mr={3} />

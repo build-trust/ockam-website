@@ -7,7 +7,7 @@ import CloseIcon from 'emotion-icons/octicons/ChevronRight';
 import config from '../../../../config';
 import Icon from '../../Icon';
 import SidebarMenuItem from '../../Sidebar/SidebarMenuItem';
-import capitalize from "../../../utils/capitalize";
+import capitalize from '../../../utils/capitalize';
 
 const NodeLink = styled(SidebarMenuItem)`
   padding-left: 1rem;
@@ -15,7 +15,9 @@ const NodeLink = styled(SidebarMenuItem)`
 `;
 
 const NodeList = styled.ul`
-  border-left: 1px solid ${props => (props.deepLevel >= 0 ? props.theme.colors.accentBackground : 'inherit')};
+  border-left: 1px solid
+    ${props =>
+      props.deepLevel >= 0 ? props.theme.colors.accentBackground : 'inherit'};
   margin-left: ${props => (props.deepLevel >= 0 ? '1.4rem' : '0')};
   padding-left: 0;
 `;
@@ -43,14 +45,13 @@ const DocsSidebarMenuNode = ({
   };
   const hasChildren = nodes.length !== 0;
 
-
   const isActive =
     location &&
     (location.pathname === url ||
       location.pathname === config.gatsby.pathPrefix + url);
   const isActivePath = location && location.pathname.match(url);
 
-  const isDirectoryNode = (nodes && nodes[0]) ? nodes[0].url === url : false;
+  const isDirectoryNode = nodes && nodes[0] ? nodes[0].url === url : false;
   const directoryTitle = capitalize(name);
   const isLinkCollapsible = isCollapsed && hasChildren;
   return (
@@ -66,7 +67,11 @@ const DocsSidebarMenuNode = ({
           {isDirectoryNode ? directoryTitle : title}
           {hasChildren && (
             <ButtonChevron type="button" onClick={collapse}>
-              {!isCollapsed ? <Icon icon={OpenIcon} size={16} /> : <Icon icon={CloseIcon} size={16} />}
+              {!isCollapsed ? (
+                <Icon icon={OpenIcon} size={16} />
+              ) : (
+                <Icon icon={CloseIcon} size={16} />
+              )}
             </ButtonChevron>
           )}
         </NodeLink>
@@ -94,9 +99,11 @@ const DocsSidebarMenuNode = ({
 };
 
 DocsSidebarMenuNode.propTypes = {
-  nodes: PropTypes.arrayOf(PropTypes.shape({
-    url: PropTypes.string,
-  })).isRequired,
+  nodes: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string,
+    })
+  ).isRequired,
   title: PropTypes.string,
   collapsed: PropTypes.shape({}).isRequired,
   deepLevel: PropTypes.number.isRequired,

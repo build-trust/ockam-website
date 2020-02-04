@@ -1,15 +1,17 @@
 import React from 'react';
 
-import Heading from "../Heading";
-import useAllBlogPosts from "../../hooks/useAllBlogPosts";
+import Heading from '../Heading';
+import useAllBlogPosts from '../../hooks/useAllBlogPosts';
 
-import PostShort from "./PostShort";
+import PostShort from './PostShort';
 
 const PostList = () => {
   const posts = useAllBlogPosts();
   return (
     <div>
-      <Heading as='h1' mb={5}>All Blog posts</Heading>
+      <Heading as="h1" mb={5}>
+        All Blog posts
+      </Heading>
       {posts.map(post => (
         <PostShort key={post.id} post={post} />
       ))}
@@ -17,8 +19,6 @@ const PostList = () => {
   );
 };
 
-PostList.propTypes = {
-
-};
+PostList.propTypes = {};
 
 export default PostList;

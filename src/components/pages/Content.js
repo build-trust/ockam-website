@@ -1,13 +1,10 @@
 import styled from '@emotion/styled';
 
 import { media } from '../../utils/emotion';
+import BaseContent from '../Content';
 
-const Content = styled.div`
-  max-width: 100%;
-  margin-left: auto;
-  padding: 0 2rem;
+const Content = styled(BaseContent)`
   z-index: 10;
-  margin-right: auto;
   ${media.desktop`
       width: 100%;
       max-width: 100%;
@@ -16,7 +13,6 @@ const Content = styled.div`
       width: 110rem;
       max-width: 110rem;
   `}
-
 `;
 
 export default Content;

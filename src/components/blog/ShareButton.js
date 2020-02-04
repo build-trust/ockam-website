@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import React from "react";
-import styled from "@emotion/styled";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled from '@emotion/styled';
 
-import {media} from "../../utils/emotion";
+import { media } from '../../utils/emotion';
 
 const ShareButtonStyled = styled('div')`
   margin-right: 2rem;

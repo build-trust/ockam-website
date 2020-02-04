@@ -26,7 +26,7 @@ const DocsSidebarMenu = ({ location }) => {
   const { tree } = useAllMdxAsTree(rootSlug);
   const [collapsed, setCollapsed] = useState(() => {
     if (config.sidebar.isDefaultExpand) return {};
-    const nestedNodes = getNestedNodesRecursively({nodes: tree});
+    const nestedNodes = getNestedNodesRecursively({ nodes: tree });
     return nestedNodes.reduce((o, key) => ({ ...o, [key]: true }), {});
   });
 

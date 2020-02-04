@@ -2,20 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import PageTemplate from './PageTemplate';
-import DocsTemplate from './DocsTemplate';
+import LearnTemplate from './LearnTemplate';
 import BlogTemplate from './BlogTemplate';
 
 const Index = ({ children, pageContext, location, ...rest }) => {
   const isDocPage = pageContext.pageType === 'doc';
   const isBlogPage = pageContext.pageType === 'blog';
   if (isBlogPage) {
-    return <BlogTemplate location={location} {...rest}>{children}</BlogTemplate>;
+    return (
+      <BlogTemplate location={location} {...rest}>
+        {children}
+      </BlogTemplate>
+    );
   }
   if (isDocPage) {
-    return <DocsTemplate location={location} {...rest}>{children}</DocsTemplate>;
+    return (
+      <LearnTemplate location={location} {...rest}>
+        {children}
+      </LearnTemplate>
+    );
   }
 
-  return <PageTemplate location={location} {...rest}>{children}</PageTemplate>;
+  return (
+    <PageTemplate location={location} {...rest}>
+      {children}
+    </PageTemplate>
+  );
 };
 
 Index.propTypes = {

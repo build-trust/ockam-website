@@ -6,7 +6,7 @@ import Link from '../Link';
 
 const StyledLink = styled(Link)`
   text-decoration: underline;
-  color: ${props => props.theme.colors.primary}
+  color: ${props => props.theme.colors.primary};
 `;
 
 const AnchorTag = ({ children: link, href }) => {

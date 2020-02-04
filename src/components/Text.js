@@ -1,11 +1,7 @@
-import { space, color, typography  } from 'styled-system';
+import { space, color, typography } from 'styled-system';
 import styled from '@emotion/styled';
 
-const Text = styled('p')(
-  space,
-  color,
-  typography
-);
+const Text = styled('p')(space, color, typography);
 Text.defaultProps = {
   marginTop: 0,
   fontFamily: 'body',

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from "@emotion/styled";
-import { grid } from 'styled-system'
+import styled from '@emotion/styled';
+import { grid } from 'styled-system';
 
-import {media} from "../../utils/emotion";
-import Icon from "../Icon";
-import Heading from "../Heading";
-import Text from "../Text";
+import { media } from '../../utils/emotion';
+import Icon from '../Icon';
+import Heading from '../Heading';
+import Text from '../Text';
 
-import FeatureCard from "./FeatureCard";
+import FeatureCard from './FeatureCard';
 
 const Grid = styled('div')(grid);
 const FeaturesGrid = styled(Grid)`
@@ -23,27 +23,32 @@ const FeaturesGrid = styled(Grid)`
 
 const FeaturesCardGrid = ({ features, cardPadding }) => {
   return (
-    <FeaturesGrid columnsCount={features.length} gridTemplateColumns={['','','',`repeat(${features.length}, 1fr);`]}>
+    <FeaturesGrid
+      columnsCount={features.length}
+      gridTemplateColumns={['', '', '', `repeat(${features.length}, 1fr);`]}
+    >
       {features.map(feature => (
         <FeatureCard key={feature.title} padding={cardPadding}>
           <Icon size={3} color="primary" icon={feature.icon} mb={2} />
-          <Heading as="h6" fontSize='bodySmall'>{feature.title}</Heading>
-          <Text fontSize="bodySmall">
-            {feature.description}
-          </Text>
+          <Heading as="h6" fontSize="bodySmall">
+            {feature.title}
+          </Heading>
+          <Text fontSize="bodySmall">{feature.description}</Text>
         </FeatureCard>
-        ))}
+      ))}
     </FeaturesGrid>
   );
 };
 
 FeaturesCardGrid.propTypes = {
   cardPadding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  features: PropTypes.arrayOf(PropTypes.shape({
-    icon: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  })).isRequired,
+  features: PropTypes.arrayOf(
+    PropTypes.shape({
+      icon: PropTypes.func.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 FeaturesCardGrid.defaultProps = {

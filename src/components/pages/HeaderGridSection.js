@@ -15,7 +15,6 @@ const Section = styled(PageSection)`
   justify-content: center;
   margin-top: 3rem;
 
-
   text-align: center;
   &::before {
     z-index: 1;
@@ -56,8 +55,7 @@ const HeaderSectionGrid = styled.div`
   z-index: 2;
   display: grid;
   width: 100%;
-  grid-template-areas:
-    'left-box';
+  grid-template-areas: 'left-box';
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   ${media.tablet`
@@ -94,12 +92,15 @@ const LeftBox = styled.div`
   grid-area: left-box;
 `;
 
-const HeaderGridSection = ({ image, alignImageRight, mobileImageOpacity, children}) => (
+const HeaderGridSection = ({
+  image,
+  alignImageRight,
+  mobileImageOpacity,
+  children,
+}) => (
   <Section mobileImageOpacity={mobileImageOpacity} image={image}>
     <HeaderSectionGrid>
-      <LeftBox>
-        {children}
-      </LeftBox>
+      <LeftBox>{children}</LeftBox>
       <ImageContainer>
         <Image src={image} alignImageRight={alignImageRight} />
       </ImageContainer>

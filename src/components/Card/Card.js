@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { space, color, grid, border  } from 'styled-system';
+import { space, color, grid, border } from 'styled-system';
 
 const Card = styled('div')(space, color, grid, border);
 

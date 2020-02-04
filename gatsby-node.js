@@ -36,7 +36,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const isBlog = isNodeBlogPage(node);
     const page = {
       path: node.fields.slug ? node.fields.slug : "/",
-      component: isBlog ? path.resolve("./src/templates/BlogTemplate.js") : path.resolve("./src/templates/DocsTemplate.js"),
+      component: isBlog ? path.resolve("./src/templates/BlogTemplate.js") : path.resolve("./src/templates/LearnTemplate.js"),
       context: {
         id: node.fields.id,
         pageType: isBlog ? 'blog' : 'doc',

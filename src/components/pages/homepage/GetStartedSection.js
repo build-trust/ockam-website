@@ -15,7 +15,7 @@ import CardBody from '../../Card/CardBody';
 import Heading from '../../Heading';
 import Link from '../../Link';
 import Subheading from '../Subheading';
-import useSiteMetadata from "../../../hooks/useSiteMetadata";
+import useSiteMetadata from '../../../hooks/useSiteMetadata';
 import config from '../../../../config';
 
 const StyledCard = styled(Card)`
@@ -115,7 +115,7 @@ const GetStartedSection = () => {
         <GetStartedCard to={siteMetaData.ockamLibraryRepo}>
           <img src={githubIcon} alt="github icon" />
           <HeadingOption as="h5" mb={0}>
-            {"{ockam}"}
+            {'{ockam}'}
           </HeadingOption>
         </GetStartedCard>
         <GetStartedCard to={siteMetaData.slackChannel}>

@@ -1,26 +1,17 @@
 import { useStaticQuery, graphql } from 'gatsby';
 
-import defaultAvatar from "../assets/default_avatar.png";
-
-const mapBlogPostEdges = postsEdges => {
-  return postsEdges.map(({ node }) => ({
-    id: node.id,
-    slug: node.fields.slug,
-    title: node.fields.title,
-    metaTitle: node.frontmatter.metaTitle,
-    description: node.frontmatter.description || node.excerpt,
-    metaDescription: node.frontmatter.metaDescription,
-    date: node.frontmatter.date,
-    author: node.frontmatter.author,
-    isFeature: node.frontmatter.isFeature,
-    authorAvatar: node.frontmatter.authorAvatar ? node.frontmatter.authorAvatar.childImageSharp.fixed.src : defaultAvatar,
-  }));
-};
+import mapBlogPostEdges from '../utils/mapBlogPostEdges';
 
 const useHomepageBlogPosts = () => {
   const { allMdx } = useStaticQuery(graphql`
     query allHomepageBlogPostsQuery {
-      allMdx(sort: {order: ASC, fields: frontmatter___homepageFeaturedOrder}, filter: {fields: {slug: {regex: "/^/learn/blog/.+/"}}, frontmatter: {isHomepageFeatured: {eq: true}}}) {
+      allMdx(
+        sort: { order: ASC, fields: frontmatter___homepageFeaturedOrder }
+        filter: {
+          fields: { slug: { regex: "/^/learn/blog/.+/" } }
+          frontmatter: { isHomepageFeatured: { eq: true } }
+        }
+      ) {
         edges {
           node {
             id
@@ -48,7 +39,6 @@ const useHomepageBlogPosts = () => {
         }
       }
     }
-
   `);
   return mapBlogPostEdges(allMdx.edges);
 };

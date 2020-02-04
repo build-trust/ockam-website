@@ -26,17 +26,25 @@ const Content = styled.div`
   flex-direction: column;
 `;
 
-const ImageContainer = styled('div')({
-  gridArea: "image",
-  alignSelf: "center",
-  maxWidth: '50rem',
-}, flexbox);
+const ImageContainer = styled('div')(
+  {
+    gridArea: 'image',
+    alignSelf: 'center',
+    maxWidth: '50rem',
+  },
+  flexbox
+);
 
 const Image = styled('img')`
   width: 100%;
 `;
 
-const DefaultGridSection = ({ direction, image, gridLgProportions, children }) => {
+const DefaultGridSection = ({
+  direction,
+  image,
+  gridLgProportions,
+  children,
+}) => {
   return (
     <PageSection>
       <GridSection
@@ -59,7 +67,7 @@ const DefaultGridSection = ({ direction, image, gridLgProportions, children }) =
             lg: direction === 'imageOnLeft' ? 'start' : 'end',
           }}
         >
-          <Image alt='grid graphics' src={image} />
+          <Image alt="grid graphics" src={image} />
         </ImageContainer>
         <Content>{children}</Content>
       </GridSection>
@@ -75,8 +83,6 @@ DefaultGridSection.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   gridLgProportions: PropTypes.arrayOf(PropTypes.string),
-
-
 };
 
 DefaultGridSection.defaultProps = {

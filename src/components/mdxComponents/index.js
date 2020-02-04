@@ -9,18 +9,19 @@ import AnchorTag from './Anchor';
 import Blockquote from './Blockqute';
 import Hr from './Hr';
 import List from './List';
-import ListOrdered from "./ListOrdered";
-import LinkedImage from "./LinkedImage";
+import ListOrdered from './ListOrdered';
+import LinkedImage from './LinkedImage';
+
+const isChildrenString = props =>
+  props && props.children && typeof props.children === 'string';
+const hasNestedStringChildren = props =>
+  typeof props.children === 'object' && isChildrenString(props.children.props);
 
 const generateHeading = size => props => {
   let id;
-  if (props.children && typeof props.children === 'string') {
+  if (isChildrenString(props)) {
     id = props.children.replace(/\s+/g, '').toLowerCase();
-  } else if (
-    typeof props.children === 'object' &&
-    props.children.props &&
-    typeof props.children.props.children === 'string'
-  ) {
+  } else if (hasNestedStringChildren(props)) {
     id = props.children.props.children.replace(/\s+/g, '').toLowerCase();
   }
   return <Heading id={id} {...props} as={size} />;

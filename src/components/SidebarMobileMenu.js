@@ -15,13 +15,21 @@ const StyledSidebar = styled(Sidebar)`
   `}
 `;
 
-const SidebarMobileMenu = forwardRef(({ location, isOpen, onClose, menuId}, ref) => {
-  return (
-    <StyledSidebar location={location} isOpen={isOpen} onClose={onClose} menuId={menuId} ref={ref}>
-      <MobileMenu items={config.header.menu} />
-    </StyledSidebar>
-  );
-});
+const SidebarMobileMenu = forwardRef(
+  ({ location, isOpen, onClose, menuId }, ref) => {
+    return (
+      <StyledSidebar
+        location={location}
+        isOpen={isOpen}
+        onClose={onClose}
+        menuId={menuId}
+        ref={ref}
+      >
+        <MobileMenu items={config.header.menu} />
+      </StyledSidebar>
+    );
+  }
+);
 
 SidebarMobileMenu.propTypes = {
   location: PropTypes.shape({}).isRequired,

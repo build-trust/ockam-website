@@ -17,7 +17,7 @@ import Caption from '../Caption';
 import AuthorBox from './AuthorBox';
 import PostDetailsBox from './PostDetailsBox';
 import BlogContent from './BlogContent';
-import ShareButton from "./ShareButton";
+import ShareButton from './ShareButton';
 
 const Wrapper = styled('div')`
   ${media.desktop`

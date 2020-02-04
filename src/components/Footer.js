@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import LinkedinLogo from 'emotion-icons/fa-brands/Linkedin'
-import TwitterLogo from 'emotion-icons/fa-brands/Twitter'
+import LinkedinLogo from 'emotion-icons/fa-brands/Linkedin';
+import TwitterLogo from 'emotion-icons/fa-brands/Twitter';
 import { lighten } from 'polished';
 import { useTheme } from 'emotion-theming';
 
@@ -15,19 +15,18 @@ import Link from './Link';
 import Caption from './Caption';
 import Icon from './Icon';
 
-
-
 const FooterGrid = styled.div`
   padding-top: ${props => props.theme.space.large};
-  border-top: 1px solid ${props => lighten(0.05, props.theme.colors.accentBackground)};
+  border-top: 1px solid
+    ${props => lighten(0.05, props.theme.colors.accentBackground)};
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-row-gap: 4rem;
-  grid-template-areas: 
-  "logo logo logo"
-  "menu menu menu"
-  "copyright copyright social-icons";
+  grid-template-areas:
+    'logo logo logo'
+    'menu menu menu'
+    'copyright copyright social-icons';
   ${media.tablet`
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
@@ -57,13 +56,13 @@ const MenuContainer = styled.div`
 
 const MenuLink = styled(Link)`
   padding-left: 2rem;
-  &:first-child {
+  &:first-of-type {
     padding-left: 0;
   }
   ${media.tablet`
     padding-left: 6rem;
   `};
-`
+`;
 
 const CopyrightContainer = styled.div`
   grid-area: copyright;
@@ -78,7 +77,7 @@ const SocialContainer = styled.div`
 
 const LogoOckam = styled.img`
   height: 4.8rem;
-`
+`;
 
 const Footer = () => {
   const theme = useTheme();
@@ -87,18 +86,26 @@ const Footer = () => {
     <PageSection mb={3}>
       <FooterGrid>
         <LogoContainer>
-          <LogoOckam src={logoImage} alt='ockam logo' />
+          <LogoOckam src={logoImage} alt="ockam logo" />
         </LogoContainer>
         <MenuContainer>
-          <MenuLink to={`mailto:${config.general.email}`}>Request Demo</MenuLink>
-          <MenuLink to={`mailto:${config.general.email}`}>Contact Sales</MenuLink>
+          <MenuLink to={`mailto:${config.general.email}`}>
+            Request Demo
+          </MenuLink>
+          <MenuLink to={`mailto:${config.general.email}`}>
+            Contact Sales
+          </MenuLink>
         </MenuContainer>
         <CopyrightContainer>
           <Caption>© 2017-2020 Ockam.io. All rights reserved.</Caption>
         </CopyrightContainer>
         <SocialContainer>
-          <Link to='https://www.linkedin.com/company/ockam.io/'><Icon icon={LinkedinLogo} color='caption' /></Link>
-          <Link to='https://twitter.com/ockam_io'><Icon ml={3} icon={TwitterLogo} color='caption' /></Link>
+          <Link to="https://www.linkedin.com/company/ockam.io/">
+            <Icon icon={LinkedinLogo} color="caption" />
+          </Link>
+          <Link to="https://twitter.com/ockam_io">
+            <Icon ml={3} icon={TwitterLogo} color="caption" />
+          </Link>
         </SocialContainer>
       </FooterGrid>
     </PageSection>

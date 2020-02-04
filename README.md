@@ -1,6 +1,6 @@
-# Ockam documentation generator
+# Ockam website
 
-Gatsby based generator for MD documents. Based on [gatsby-gitbook-starter](https://github.com/hasura/gatsby-gitbook-starter)
+Ockam website withing generator for MD documents. Based on [gatsby-gitbook-starter](https://github.com/hasura/gatsby-gitbook-starter)
 
 ## 🚀 Quick start
 

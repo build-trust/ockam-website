@@ -1,10 +1,10 @@
-import PropTypes from "prop-types";
-import React from "react";
-import styled from "@emotion/styled";
-import {darken, rgba} from "polished";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled from '@emotion/styled';
+import { darken, rgba } from 'polished';
 
-import Card from "../Card";
-import CardBody from "../Card/CardBody";
+import Card from '../Card';
+import CardBody from '../Card/CardBody';
 
 const StyledCard = styled(Card)`
   transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;

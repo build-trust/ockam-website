@@ -14,7 +14,7 @@ const theme = {
 
 const ThemeProvider = ({ children, themeName, themeConfig = {} }) => {
   return (
-    <EmotionThemeProvider theme={{ ...theme[themeName],  ...themeConfig }}>
+    <EmotionThemeProvider theme={{ ...theme[themeName], ...themeConfig }}>
       {children}
     </EmotionThemeProvider>
   );

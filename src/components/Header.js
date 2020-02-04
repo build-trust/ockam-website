@@ -8,7 +8,7 @@ import useThemeLogo from '../hooks/useThemeLogo';
 
 import Menu from './Menu';
 import Link from './Link';
-import HamburgerButton from "./HamburgerButton";
+import HamburgerButton from './HamburgerButton';
 
 const Container = styled.nav`
   display: flex;
@@ -21,10 +21,9 @@ const Container = styled.nav`
   width: inherit;
   color: ${props => props.theme.colors.menuText};
   .active {
-   color: ${props => props.theme.colors.menuTextActive};
-   font-weight: ${props => props.theme.fontWeights[2]};
-  };
-
+    color: ${props => props.theme.colors.menuTextActive};
+    font-weight: ${props => props.theme.fontWeights[2]};
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -34,11 +33,13 @@ const StyledLink = styled(Link)`
     margin-left: initial;
     margin-right: initial;
   `}
-`
+`;
 
 const Logo = styled.img`
   height: 5.5rem;
-  ${props => props.isCollapsedHeader && `
+  ${props =>
+    props.isCollapsedHeader &&
+    `
     height: 3rem;
   `}
 `;
@@ -57,9 +58,16 @@ const Header = ({ openSidebar, isCollapsedHeader }) => {
     <Container isCollapsedHeader={isCollapsedHeader}>
       <HamburgerButton onClick={openSidebar} />
       <StyledLink to="/">
-        <Logo src={logo} alt="Ockam logo" isCollapsedHeader={isCollapsedHeader} />
+        <Logo
+          src={logo}
+          alt="Ockam logo"
+          isCollapsedHeader={isCollapsedHeader}
+        />
       </StyledLink>
-      <HeaderMenu isCollapsedHeader={isCollapsedHeader} items={config.header.menu} />
+      <HeaderMenu
+        isCollapsedHeader={isCollapsedHeader}
+        items={config.header.menu}
+      />
     </Container>
   );
 };

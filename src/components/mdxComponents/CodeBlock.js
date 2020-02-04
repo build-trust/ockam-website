@@ -16,7 +16,6 @@ const CodeBlockContainer = styled('div')`
   }
 `;
 
-
 /** Removes the last token from a code example if it's empty. */
 function cleanTokens(tokens) {
   const tokensLength = tokens.length;
@@ -33,7 +32,7 @@ function cleanTokens(tokens) {
 /* eslint-disable */
 const CodeBlock = ({ children: code, className }) => {
   const theme = useTheme();
-  const lang = className && className.split("-")[1];
+  const lang = className && className.split('-')[1];
   return (
     <CodeBlockContainer>
       <Highlight
@@ -106,10 +105,10 @@ const CodeBlock = ({ children: code, className }) => {
                           };
                           return (
                             <React.Fragment>
-                            <span
-                              {...getTokenProps({ token: firstChar, key })}
-                              style={diffStyle}
-                            />
+                              <span
+                                {...getTokenProps({ token: firstChar, key })}
+                                style={diffStyle}
+                              />
                               <span
                                 {...getTokenProps({ token: splitToken, key })}
                               />

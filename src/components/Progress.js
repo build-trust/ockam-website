@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 const Container = styled('div')`
- background-color: #272a36;
- width: 100%;
- position: relative;
- display: flex;
- height: 2rem;
+  background-color: #272a36;
+  width: 100%;
+  position: relative;
+  display: flex;
+  height: 2rem;
 `;
 
 const Bar = styled('div')`

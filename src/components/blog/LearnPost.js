@@ -16,8 +16,7 @@ import Caption from '../Caption';
 
 import AuthorBox from './AuthorBox';
 import PostDetailsBox from './PostDetailsBox';
-import ShareButton from "./ShareButton";
-
+import ShareButton from './ShareButton';
 
 const PostHeader = styled('div')`
   margin-bottom: 5.5rem;
@@ -46,7 +45,6 @@ const SocialBox = styled('div')`
   grid-area: social;
 `;
 
-
 const LearnPost = ({ title, body, date, author, authorAvatar, location }) => {
   const url = location.href ? location.href : '';
   return (
@@ -67,19 +65,19 @@ const LearnPost = ({ title, body, date, author, authorAvatar, location }) => {
           <ShareButton button={LinkedinShareButton} url={url}>
             <Icon icon={LinkedinSquare} />
             <Caption fontSize={1} ml={2} fontWeight={2}>
-                LinkedIn
+              LinkedIn
             </Caption>
           </ShareButton>
           <ShareButton button={TwitterShareButton} url={url}>
             <Icon icon={Twitter} />
             <Caption fontSize={1} ml={2} fontWeight={2}>
-                Twitter
+              Twitter
             </Caption>
           </ShareButton>
           <ShareButton button={FacebookShareButton} url={url}>
             <Icon icon={FacebookSquare} />
             <Caption fontSize={1} ml={2} fontWeight={2}>
-                Facebook
+              Facebook
             </Caption>
           </ShareButton>
         </SocialBox>

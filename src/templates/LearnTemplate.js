@@ -10,9 +10,9 @@ import getRootSlugFromPathname from '../utils/getRootSlugFromPathname';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { media } from '../utils/emotion';
 import DocsSidebar from '../components/docs/DocsSidebar/DocsSidebar';
-import DocsLayout from '../layouts/DocsLayout';
-import defaultAvatar from "../assets/default_avatar.png";
-import LearnPost from "../components/blog/LearnPost";
+import LearnLayout from '../layouts/LearnLayout';
+import defaultAvatar from '../assets/default_avatar.png';
+import LearnPost from '../components/blog/LearnPost';
 
 const Content = styled.div`
   display: flex;
@@ -23,19 +23,14 @@ const Content = styled.div`
       padding-left: 8rem;
   `}
 `;
-export default function DocsTemplate(props) {
+
+export default function LearnTemplate(props) {
   const {
     data: { mdx },
     location,
   } = props;
   const {
-    frontmatter: {
-      metaTitle,
-      metaDescription,
-      authorAvatar,
-      author,
-      date,
-    },
+    frontmatter: { metaTitle, metaDescription, authorAvatar, author, date },
     fields: { slug, title, id },
     body,
   } = mdx;
@@ -52,12 +47,14 @@ export default function DocsTemplate(props) {
   const ref = useRef();
   const menuId = 'main-menu';
   const isPostPath = currentNode.slug.match(/^\/learn\/blog\/.+$/);
-  const imageAvatar = authorAvatar ? authorAvatar.childImageSharp.fixed.src : defaultAvatar;
+  const imageAvatar = authorAvatar
+    ? authorAvatar.childImageSharp.fixed.src
+    : defaultAvatar;
 
   useOnClickOutside(ref, () => setIsOpen(false));
 
   return (
-    <DocsLayout
+    <LearnLayout
       location={location}
       isOpenSidebar={isOpen}
       setIsOpenSidebar={setIsOpen}
@@ -70,7 +67,11 @@ export default function DocsTemplate(props) {
         ref={ref}
       />
       <Content>
-        <SEO title={metaTitle || "Ockam | Learn"} description={metaDescription} slug={slug} />
+        <SEO
+          title={metaTitle || 'Ockam | Learn'}
+          description={metaDescription}
+          slug={slug}
+        />
         {isPostPath ? (
           <LearnPost
             body={body}
@@ -89,11 +90,11 @@ export default function DocsTemplate(props) {
           <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
         )}
       </Content>
-    </DocsLayout>
+    </LearnLayout>
   );
 }
 
-DocsTemplate.propTypes = {
+LearnTemplate.propTypes = {
   data: PropTypes.shape({
     mdx: PropTypes.shape({
       fields: PropTypes.shape({
@@ -109,11 +110,10 @@ DocsTemplate.propTypes = {
         authorAvatar: PropTypes.shape({
           childImageSharp: PropTypes.shape({
             fixed: PropTypes.shape({
-              src:PropTypes.string,
+              src: PropTypes.string,
             }),
           }),
         }),
-
       }),
       body: PropTypes.string,
     }),
@@ -123,7 +123,7 @@ DocsTemplate.propTypes = {
   }).isRequired,
 };
 
-DocsTemplate.defaultProps = {
+LearnTemplate.defaultProps = {
   data: {
     mdx: {
       fields: {},

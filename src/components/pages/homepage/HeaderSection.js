@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../../Button';
 import Link from '../../Link';
@@ -24,7 +25,7 @@ const FeatureElementContainer = styled.div`
 `;
 
 const CircleCheck = styled.img`
-  padding-top: .4rem;
+  padding-top: 0.4rem;
 `;
 
 const FeatureElement = ({ children }) => (
@@ -36,7 +37,6 @@ const FeatureElement = ({ children }) => (
   </FeatureElementContainer>
 );
 
-
 const HeaderSection = () => (
   <HeaderGridSection image={homepageHeaderImage}>
     <Heading as="h1" fontSize={[5, 6, 8]}>
@@ -47,15 +47,35 @@ const HeaderSection = () => (
       Ockam’s developer tools enable you to:
     </Text>
     <div>
-      <FeatureElement>Send end-to-end encrypted messages through your connected system,</FeatureElement>
-      <FeatureElement>Establish authenticated channels between endpoints regardless of the transports or route,</FeatureElement>
-      <FeatureElement>Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments.</FeatureElement>
+      <FeatureElement>
+        Send end-to-end encrypted messages through your connected system,
+      </FeatureElement>
+      <FeatureElement>
+        Establish authenticated channels between endpoints regardless of the
+        transports or route,
+      </FeatureElement>
+      <FeatureElement>
+        Create and manage cryptographic keys, unique device identifiers, and
+        verifiable credentials in your connected environments.
+      </FeatureElement>
     </div>
     <Text color="primary">Ockam makes it as simple as it should be.</Text>
-    <Button mt="5.5rem" variant="white" as={Link} to={`mailto:${config.general.email}`}>
+    <Button
+      mt="5.5rem"
+      variant="white"
+      as={Link}
+      to={`mailto:${config.general.email}`}
+    >
       Get started with Ockam
     </Button>
   </HeaderGridSection>
 );
+
+FeatureElement.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
+};
 
 export default HeaderSection;

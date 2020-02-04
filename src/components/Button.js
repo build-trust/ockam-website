@@ -1,15 +1,14 @@
 import styled from '@emotion/styled';
-import { space, color, typography, border, variant  } from 'styled-system';
+import { space, color, typography, border, variant } from 'styled-system';
 
 const Button = styled('button')(
   props => ({
-    padding: "1.4rem 2.5rem",
+    padding: '1.4rem 2.5rem',
     borderRadius: props.theme.radii.button,
     fontSize: props.theme.fontSizes.body,
     fontWeight: props.theme.fontWeights.button,
     lineHeight: props.theme.lineHeights.body,
     display: 'inline-block',
-
   }),
   space,
   color,
@@ -32,19 +31,17 @@ const Button = styled('button')(
     variants: {
       default: {
         fontSize: 3,
-        padding: "1.5rem 2.4rem",
+        padding: '1.5rem 2.4rem',
         fontWeight: 'button',
-
       },
       small: {
         fontSize: 2,
-        padding: "1rem 2.4rem",
+        padding: '1rem 2.4rem',
         fontWeight: 'button',
-
       },
       xSmall: {
         fontSize: 1,
-        padding: "0.9rem 1.5rem",
+        padding: '0.9rem 1.5rem',
         fontWeight: 'buttonSmall',
       },
     },
@@ -68,7 +65,6 @@ const Button = styled('button')(
       },
     },
   })
-
 );
 
 Button.defaultProps = {

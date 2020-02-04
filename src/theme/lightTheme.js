@@ -17,11 +17,13 @@ const colors = {
   caption: '#7A8895',
   white: '#fff',
   blogTextBackground: '#fff',
-
 };
 
 /* eslint-disable prefer-destructuring */
-const fontSizes = Object.assign([...defaultTheme.fontSizes], defaultTheme.fontSizes);
+const fontSizes = Object.assign(
+  [...defaultTheme.fontSizes],
+  defaultTheme.fontSizes
+);
 fontSizes.body = fontSizes[2];
 /* eslint-enable prefer-destructuring */
 
@@ -49,7 +51,7 @@ const lightTheme = {
     },
     menu: {
       ...defaultTheme.custom.menu,
-      textColor: "#7A8895",
+      textColor: '#7A8895',
     },
     code: {
       ...defaultTheme.custom.code,
