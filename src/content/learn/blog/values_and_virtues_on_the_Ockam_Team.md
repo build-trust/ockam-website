@@ -25,12 +25,15 @@ I read Ben Horowitz’s new book “What you do is who you are” and it crystal
 
 I decided that this framework was the simplifying structure I was looking for; To connect Ockam’s Values with the best of proven management behaviors from iconic technology companies - including Intel & Google (OKRs), Amazon (Day One / Decisions), Salesforce (V2MOM), Gitlab & Hashicorp (Remote-First), Heroku (Maker Day) - and Ockam’s own innovations to build simple tools with a high performance team.
 
+I also recommend the following books for a deeper understanding of our culture and frameworks that we use everyday at Ockam;
+“The Score Takes Care of Itself” by Bill Walsh,
+"Growth Mindset" by Carol Dweck, and
+“Measure What Matters” by John Doerr.
+
 *Matthew Gregory*
 
 CEO at Ockam
 
-
-PS. I also recommend the following books for a deeper understanding of the culture at Ockam; “The Score Takes Care of Itself” by Bill Walsh, "Growth Mindset" by Carol Dweck, and “Measure What Matters” by John Doerr.
 
 ## Ockam’s Values
 
@@ -125,21 +128,21 @@ We think of our vision and our mission as inputs to our planning, not the output
 
 ###### Horizons
 
-Horizons reach as far as we can reasonably see into the future; about 15-20 months. Because Ockam is a venture-backed, deep-tech company our horizons roughly align with funding cycles.
+Horizons reach as far as we can reasonably see into the future; about 15-20 months. Because Ockam is a venture-backed, deep-tech company our horizons roughly align with projected funding cycles.
 
 ###### Campaign
 
-We break Horizon objectives down into 2 or 3 segments. We call these segments Campaigns. During a Campaign we aim to solve one major theme that changes the state of Ockam. When we close one Campaign and move to the next, it should feel like The Team is stepping up into a new level, and that individuals are moving onto newly defined roles.
+We break Horizon objectives down into 2 or 3 segments. We call these segments Campaigns. During a Campaign we aim to solve one major theme that changes the state of Ockam as a business. When we close one Campaign and move to the next, it should feel like The Team is stepping up into a new level, and that individuals are moving onto newly defined roles on The Team.
 
 ###### Race
 
-Races are subsets of a Campaign. We break generations down into more manageable objectives that the entire team is aligned to. This helps to focus The Team into a specific unifying effort, like acquiring a new type of customer, or shipping a major feature. All races have a starting line and a finish line. The last push in any race usually hurts a little bit as we 'do what it takes' to get to the finish. Because we define races and their finish lines we know that there will be an opportunity to catch our breath before the next race begins.
+Races are subsets of a Campaign. We break Campaigns down into more manageable objectives. This helps to focus The Team into a specific unifying effort, like acquiring a new type of customer, or launching a major feature. All races have a starting line and a finish line. The last push in any race usually hurts a little bit as we 'do what it takes' to get to the finish. Because we define races and their finish lines we know that there will be an opportunity to catch our breath before the next race begins.
 
 ###### Pace Check
 
-Just like a world class marathon runner, we break down our Races into well defined chunks to monitor our pace. We do Pace Checks every 2 weeks. Every other Tuesday we gather the team to show demos, raise major blockers, and to plan the next two weeks of our Race.
+Just like a world class marathon runner, we break down our Races into well defined chunks to monitor our pace. We do Pace Checks every 2 weeks. Every other Tuesday we gather The Team to show demos, raise major blockers, and to plan the next two weeks of our Race.
 
-Many teams call their two-week segments ‘Sprints’. We don’t like to pretend that we can maintain a cadence of never-ending sprints. Building great tools and products is a marathon not a sprint. Our Races are endurance events that require effective pacing.
+Many teams call their two-week segments ‘Sprints’. We don’t like to pretend that we can maintain a cadence of never-ending sprints. Building great tools and beautiful products is a marathon not a sprint. Our Races are endurance events that require effective pacing.
 
 ###### Maker Day
 
