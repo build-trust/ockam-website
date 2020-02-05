@@ -6,7 +6,7 @@ import { media } from '../utils/emotion';
 import config from '../../config';
 
 import Sidebar from './Sidebar';
-import MobileMenu from './MobileMenu';
+import MobileSidebarMenu from './MobileSidebarMenu';
 
 const StyledSidebar = styled(Sidebar)`
   z-index: 22;
@@ -25,7 +25,7 @@ const SidebarMobileMenu = forwardRef(
         menuId={menuId}
         ref={ref}
       >
-        <MobileMenu items={config.header.menu} />
+        <MobileSidebarMenu items={config.header.menu} />
       </StyledSidebar>
     );
   }

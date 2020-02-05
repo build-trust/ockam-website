@@ -58,7 +58,7 @@ const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar }) => {
           <FocusLock disabled={!isOpenSidebar}>
             <HeaderWrapper>
               <Content>
-                <Header openSidebar={() => setIsOpenSidebar(true)} />
+                <Header showMobileMenu openSidebar={() => setIsOpenSidebar(true)} />
               </Content>
             </HeaderWrapper>
             <Content>

@@ -85,6 +85,7 @@ const PageLayout = ({
             >
               <Content>
                 <Header
+                  showMobileMenu={false}
                   isCollapsedHeader={isCollapsedHeader}
                   openSidebar={() => setIsOpenSidebar(true)}
                 />

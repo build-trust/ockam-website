@@ -70,6 +70,7 @@
     "react-scrollbars-custom": "4.0.21",
     "react-share": "4.0.1",
     "react-spring": "8.0.27",
+    "resize-observer": "1.0.0",
     "styled-system": "5.1.4"
   },
   "devDependencies": {
