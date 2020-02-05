@@ -6,13 +6,12 @@ import Link from './Link';
 import Button from './Button';
 
 const Container = styled.div`
+  width: auto;
+  margin-left: auto;
+
   a:not(${Button}) {
     padding: 2rem;
-    ${props =>
-      props.isCollapsedHeader &&
-      `
-      padding: 1rem 1.5rem;
-    `}
+    ${props => props.isCollapsedHeader && `padding: 1rem 1.5rem;`}
   }
 `;
 

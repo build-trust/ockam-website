@@ -15,7 +15,7 @@ const AnimatedIcon = styled(animated.div)`
   align-items: center;
 `;
 
-const ToggleIcon = ({ isCollapsed }) => {
+const ToggleIcon = ({ isCollapsed, CollapsedIcon, UncollapsedIcon, ...rest }) => {
   const transitions = useTransition(isCollapsed, null, {
     from: { position: 'absolute', opacity: 0, transform: 'scale(0)' },
     enter: { opacity: 1, transform: 'scale(1)', position: 'relative' },
@@ -23,17 +23,17 @@ const ToggleIcon = ({ isCollapsed }) => {
   });
 
   return (
-    <IconContainer>
+    <IconContainer {...rest}>
       {transitions.map(({ item, key, props }) =>
-        item ? (
+        (item ? (
           <AnimatedIcon key={key} style={props}>
-            <Icon icon={ChevronRightIcon} width="14px" height="14px" />
+            <CollapsedIcon />
           </AnimatedIcon>
         ) : (
           <AnimatedIcon key={key} style={props}>
-            <Icon icon={CrossIcon} width="14px" height="14px" />
+            <UncollapsedIcon />
           </AnimatedIcon>
-        )
+        ))
       )}
     </IconContainer>
   );
@@ -41,6 +41,13 @@ const ToggleIcon = ({ isCollapsed }) => {
 
 ToggleIcon.propTypes = {
   isCollapsed: PropTypes.bool.isRequired,
+  CollapsedIcon: PropTypes.func,
+  UncollapsedIcon: PropTypes.func,
 };
+ToggleIcon.defaultProps = {
+  CollapsedIcon: () => <Icon icon={ChevronRightIcon} width="14px" height="14px" />,
+  UncollapsedIcon: () => <Icon icon={CrossIcon} width="14px" height="14px" />,
+};
+
 
 export default ToggleIcon;

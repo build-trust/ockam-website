@@ -16,12 +16,13 @@ const StyledMenuIcon = styled(MenuIcon)`
   `};
 `;
 
-const HamburgerButton = ({ onClick }) => (
+const HamburgerButton = ({ onClick, ...rest }) => (
   <Icon
     icon={StyledMenuIcon}
     size={32}
     onClick={onClick}
     aria-controls="main-menu"
+    {...rest}
   />
 );
 
