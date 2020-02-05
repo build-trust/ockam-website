@@ -6,6 +6,7 @@ const Heading = styled('h1')(
     fontSize: props.as
       ? props.theme.fontSizes[props.as]
       : props.theme.fontSizes[0],
+    textTransform: props.capitalize ? 'capitalize' : 'none',
   }),
   space,
   color,
@@ -22,6 +23,7 @@ Heading.defaultProps = {
   color: 'heading',
   fontFamily: 'heading',
   fontWeight: 'heading',
+  capitalize: true,
 };
 
 export default Heading;
