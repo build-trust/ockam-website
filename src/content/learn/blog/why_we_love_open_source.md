@@ -2,8 +2,6 @@
 title: "Why Ockam loves open source, and you should too!"
 date: 2020-01-20
 description: "5 reasons why Ockam loves open source, and you should too!"
-metaTitle: "Why Ockam loves open source, and you should too!"
-metaDescription: "Why Ockam loves open source, and you should too!"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 isFeature: true

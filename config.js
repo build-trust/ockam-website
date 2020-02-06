@@ -51,7 +51,6 @@ const config = {
 	"siteMetadata": {
 		"title": "Ockam",
 		"description": "Ockam is a collection of tools to help you establish secure connections and trustful exchange of information within connected systems. This documentation page describes the core concepts and the underlying technology behind Ockam.",
-		"ogImage": null,
 	},
 };
 

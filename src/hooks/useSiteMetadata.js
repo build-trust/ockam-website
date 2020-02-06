@@ -8,6 +8,8 @@ const useSiteMetadata = () => {
           slackChannel
           twitter
           ockamLibraryRepo
+          title
+          description
         }
       }
     }
