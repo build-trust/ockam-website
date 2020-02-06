@@ -2,8 +2,6 @@
 title: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
 date: 2019-04-15
 description: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
-metaTitle: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
-metaDescription: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---

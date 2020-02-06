@@ -116,7 +116,6 @@ module.exports = {
     email: config.general.email,
     title: config.siteMetadata.title,
     description: config.siteMetadata.description,
-    ogImage: config.siteMetadata.ogImage,
     siteUrl: config.gatsby.siteUrl,
   },
   plugins,

@@ -2,8 +2,6 @@
 title: "The Next Wave In Developer Tools Will Be The Catalyst That Enables The Internet Of Things."
 date: 2019-04-15
 description: "The Next Wave In Developer Tools Will Be The Catalyst That Enables The Internet Of Things."
-metaTitle: "The Next Wave In Developer Tools Will Be The Catalyst That Enables The Internet Of Things."
-metaDescription: "The Next Wave In Developer Tools Will Be The Catalyst That Enables The Internet Of Things."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---

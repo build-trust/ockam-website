@@ -25,12 +25,16 @@ const Content = styled.div`
 `;
 
 export default function LearnTemplate(props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef();
+
   const {
     data: { mdx },
     location,
   } = props;
   const {
-    frontmatter: { metaTitle, metaDescription, authorAvatar, author, date },
+    frontmatter: { metaTitle, metaDescription, metaImage, authorAvatar, author, date },
+    excerpt,
     fields: { slug, title, id },
     body,
   } = mdx;
@@ -41,10 +45,12 @@ export default function LearnTemplate(props) {
     slug,
   };
 
+  const seoTitle = metaTitle || title || 'Ockam | Learn';
+  const seoDescription = metaDescription || excerpt;
+  const seoImage = metaImage && metaImage.childImageSharp && metaImage.childImageSharp.fixed.src;
+
   const rootSlug = getRootSlugFromPathname(location.pathname);
   const isRoot = currentNode.slug === '/';
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef();
   const menuId = 'main-menu';
   const isPostPath = currentNode.slug.match(/^\/learn\/blog\/.+$/);
   const imageAvatar = authorAvatar
@@ -68,8 +74,9 @@ export default function LearnTemplate(props) {
       />
       <Content>
         <SEO
-          title={metaTitle || 'Ockam | Learn'}
-          description={metaDescription}
+          title={seoTitle}
+          image={seoImage}
+          description={seoDescription}
           slug={slug}
         />
         {isPostPath ? (
@@ -105,6 +112,7 @@ LearnTemplate.propTypes = {
       frontmatter: PropTypes.shape({
         metaTitle: PropTypes.string,
         metaDescription: PropTypes.string,
+        metaImage: PropTypes.string,
         date: PropTypes.string,
         author: PropTypes.string,
         authorAvatar: PropTypes.shape({
@@ -115,6 +123,7 @@ LearnTemplate.propTypes = {
           }),
         }),
       }),
+      excerpt: PropTypes.string,
       body: PropTypes.string,
     }),
   }),
@@ -141,9 +150,17 @@ export const pageQuery = graphql`
         title
         slug
       }
+      excerpt
       frontmatter {
         metaTitle
         metaDescription
+        metaImage {
+          childImageSharp {
+            fixed {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
         description
         date(fromNow: true)
         author
