@@ -64,7 +64,6 @@ const Header = ({ openSidebar, isCollapsedHeader, showMobileMenu }) => {
   const logo = useThemeLogo();
   const [isCollapsed, setIsCollapsed] = useState(true);
   const isDesktop = useMatchBreakpoint('desktop');
-  console.log('typeof ChevronDown', typeof ChevronDown);
   const toggleIsCollapsed = () => setIsCollapsed(state => !state);
   return (
     <Container isCollapsedHeader={isCollapsedHeader}>

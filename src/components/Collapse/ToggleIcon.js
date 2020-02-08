@@ -9,6 +9,7 @@ import { ReactComponent as CrossIcon } from '../../assets/cross-icon.svg';
 
 const IconContainer = styled('div')`
   position: relative;
+  cursor: pointer;
 `;
 const AnimatedIcon = styled(animated.div)`
   display: flex;

@@ -10,11 +10,11 @@ function useMatchBreakpoint(breakpoint) {
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (!isClient) return false;
+    if (!isClient) return true;
     mql.onchange = (e) => setMatchBreakpoint(e.matches);
   }, [mql, isClient]); // Empty array ensures that effect is only run on mount and unmount
 
-  if (!isClient) return undefined;
+  if (!isClient) return true;
   return matchBreakpoint;
 }
 
