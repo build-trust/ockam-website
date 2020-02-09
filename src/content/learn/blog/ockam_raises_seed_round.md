@@ -7,13 +7,13 @@ authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
 homepageFeaturedOrder: 2
 ---
-Today we are excited to announce a major milestone in the evolution of Ockam. We closed $4.9 million in seed funding from a group of world class investors: Future Ventures, Core Venture Group, Okta Ventures, and SGH Capital. These additional resources will accelerate our mission: to enable the builders who are ushering in our shared vision of a seamless connected world.
+Today we are excited to announce a major milestone in the evolution of Ockam. We closed $4.9 million in seed funding from a group of world class investors: Future Ventures, Core Ventures Group, Okta Ventures, and SGH Capital. These additional resources will accelerate our mission: to enable the builders who are ushering in our shared vision of a seamless connected world.
 
 Since inception we have forged our vision of a seamless, connected world into a simple suite of products that democratize secure IoT development. For far too long, it’s been exceptionally difficult and expensive to build secure connected device systems. These additional resources allow us to grow our high performance team, and to help the builders of IoT systems tackle their complex challenges.
 
 ## The Team
 
-Our team philosophy is central to our values at Ockam - so much so that we refer to “The Team” as a proper noun. We’re grateful for all the support we’ve received from mentors, advisors, customers, partners, analysts and press. The group of investors participating in this round takes the The Team to the next level.
+Our team philosophy is central to our values at Ockam - so much so that we refer to [“The Team”](https://www.ockam.io/team) as a proper noun. We’re grateful for all the support we’ve received from mentors, advisors, customers, partners, analysts and press. The group of investors participating in this round takes the The Team to the next level.
 
 ### Future Ventures
 
@@ -21,7 +21,7 @@ We are thrilled to be working with the amazing team of Maryanna Saenko and Steve
 
 ### Core Ventures Group
 
-We are excited to be working with Joanna Drake Earl, General Partner of Core Ventures Group, who brings hands-on operational expertise to The Team. Core’s focus on founders and their engaged investment model is a great fit for us. Joanna noted, “We are excited to invest in Ockam’s vision. Their approach to solve complex real world problems is a testament to the engineering and industry experience of Matthew Gregory and Mrinal Wadhwa. We are thrilled to be backing such a passionate group of builders.”
+We are excited to be working with Joanna Drake, General Partner of Core Ventures Group, who brings hands-on operational expertise to The Team. Core’s focus on founders and their engaged investment model is a great fit for us. Joanna noted, “We are excited to invest in Ockam’s vision. Their approach to solve complex real world problems is a testament to the engineering and industry experience of Matthew Gregory and Mrinal Wadhwa. We are thrilled to be backing such a passionate group of builders.”
 
 ### Okta Ventures
 
