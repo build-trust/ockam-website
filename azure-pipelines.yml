@@ -80,6 +80,17 @@ steps:
           --source ./public/  \
           --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
         ;;
+      *)
+        az storage blob delete-batch \
+          --account-name $(INTERNAL_ACCOUNT_NAME) \
+          --account-key $(INTERNAL_ACCOUNT_KEY) \
+          --source $(CONTAINER)
+        az storage blob upload-batch \
+          --account-name $(INTERNAL_ACCOUNT_NAME) \
+          --account-key $(INTERNAL_ACCOUNT_KEY) \
+          --source ./public/  \
+          --destination "https://${INTERNAL_ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+        ;;
     esac
   displayName: 'Deploy to storage'
 
