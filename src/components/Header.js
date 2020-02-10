@@ -6,7 +6,6 @@ import ChevronDown from 'emotion-icons/boxicons-regular/ChevronDown';
 import { media } from '../utils/emotion';
 import config from '../../config';
 import useThemeLogo from '../hooks/useThemeLogo';
-import useMatchBreakpoint from "../hooks/useMatchBreakpoint";
 
 import Menu from './Menu';
 import Link from './Link';
@@ -63,7 +62,6 @@ const ToggleMenuButton = styled(ToggleIcon)`
 const Header = ({ openSidebar, isCollapsedHeader, showMobileMenu }) => {
   const logo = useThemeLogo();
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const isDesktop = useMatchBreakpoint('desktop');
   const toggleIsCollapsed = () => setIsCollapsed(state => !state);
   return (
     <Container isCollapsedHeader={isCollapsedHeader}>
@@ -81,20 +79,17 @@ const Header = ({ openSidebar, isCollapsedHeader, showMobileMenu }) => {
         isCollapsed={isCollapsed}
         onClick={toggleIsCollapsed}
       />
-      {isDesktop ? (
+      <>
         <Menu
-          showMobileMenu={showMobileMenu && !isCollapsed}
           isCollapsedHeader={isCollapsedHeader}
           items={config.header.menu}
         />
-
-      ) : (
         <MobileMenu
           showMobileMenu={showMobileMenu && !isCollapsed}
           isCollapsedHeader={isCollapsedHeader}
           items={config.header.menu}
         />
-      )}
+      </>
     </Container>
   );
 };

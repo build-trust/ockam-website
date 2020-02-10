@@ -2,12 +2,20 @@ import React, { Fragment } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
+import { media } from '../utils/emotion';
+
 import Link from './Link';
 import Button from './Button';
+
+
 
 const Container = styled.div`
   width: auto;
   margin-left: auto;
+  display: none;
+  ${media.desktop`
+    display: block;
+  `}
 
   a:not(${Button}) {
     padding: 2rem;

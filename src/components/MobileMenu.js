@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useSpring, a, animated } from 'react-spring'
 
 import {useMeasure} from "../hooks/useMeasure";
+import { media } from '../utils/emotion';
 
 import Link from './Link';
 import Button from './Button';
@@ -18,6 +19,9 @@ const Wrapper = styled(animated.div)`
   a:not(${Button}) {
     padding: 1rem 0;
   }
+  ${media.desktop`
+    display: none;
+  `}
 `;
 
 const Content = styled(a.div)`
