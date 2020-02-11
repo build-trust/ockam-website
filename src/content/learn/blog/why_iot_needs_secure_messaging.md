@@ -17,8 +17,9 @@ from the transport layer removes complexity, minimizes the attack surface, and c
 end-to-end secure and private systems.
 
 <div id="presentation">
-  <script async class="speakerdeck-embed" data-id="813b28006e734a43b65a88d56bd37b7c" data-ratio="1.77777777777778"
-    src="//speakerdeck.com/assets/embed.js"></script>
+    <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.1972%;">
+        <iframe src="https://speakerdeck.com/player/813b28006e734a43b65a88d56bd37b7c" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" allowfullscreen scrolling="no" allow="encrypted-media"></iframe>
+    </div>
 </div>
 
 If you're interested in learning more about Ockam's approach to Secure Messaging, we're discussing our protocols
