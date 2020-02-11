@@ -1,7 +1,7 @@
 const config = {
 	"gatsby": {
 		"pathPrefix": "/",
-		"siteUrl": "https://ockam.io",
+		"siteUrl": "https://www.ockam.io",
 		"gaTrackingId": 'UA-142504862-1',
 	},
   "general": {

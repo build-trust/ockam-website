@@ -14,6 +14,7 @@ const SEO = ({ title, description, image, slug }) => {
   const siteMetadata = useSiteMetadata();
 
   const metaImage = image || (defaultOgImage && defaultOgImage.childImageSharp && defaultOgImage.childImageSharp.fixed.src);
+  const metaImageUrl = siteMetadata.siteUrl + metaImage;
   const metaTitle = title || siteMetadata.title;
   const metaDescription = description || siteMetadata.description;
 
@@ -30,12 +31,14 @@ const SEO = ({ title, description, image, slug }) => {
       <link rel="icon" type="image/png" sizes="32x32" href={favicon32} />
       <link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
       <meta name="description" content={metaDescription} />
+      <meta property="og:type" content="website" />
       <meta property="og:title" content={metaTitle} />
-      <meta property="og:image" content={metaImage} />
+      <meta property="og:image" content={metaImageUrl} />
       <meta property="og:description" content={metaDescription} />
       <meta property="twitter:title" content={metaTitle} />
       <meta property="twitter:description" content={metaDescription} />
-      <meta property="twitter:image" content={metaImage} />
+      <meta property="twitter:image" content={metaImageUrl} />
+      <meta property="og:url" content={canonicalUrl} />
       <link rel="canonical" href={canonicalUrl} />
     </Helmet>
   );
