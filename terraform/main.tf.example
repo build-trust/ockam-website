@@ -6,9 +6,11 @@ provider "azurerm" {
 terraform {
   # Repleace below details with output of init-tfstate.sh script
   backend "azurerm" {
+    # Name should starts with 'terraform2website' and ends with 5 digits
+    # Check README
     storage_account_name  = "<STORAGE-ACCOUNT-NAME>"
-    container_name        = "<CONTAINER-NAME>"
-    key                   = "<KEY-FILE>"
+    container_name        = "tfstate"
+    key                   = "terraform.tfstateenv"
   }
 }
 

@@ -8,15 +8,22 @@ endpoint. After setting up your environment (check below) run
 output.
 
 #### Setup terraform
-* Make sure you have [`az` cli tool](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)  and [`terraform`](https://learn.hashicorp.com/terraform/getting-started/install.html).
-* Make sure storage for terraform state exists. Check storage starting
+> Make sure you have [`az` cli tool](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)  and [`terraform`](https://learn.hashicorp.com/terraform/getting-started/install.html). Run
+[`ockam.check-toolbelt`](cli/README.md) to check do you have all necessary CLI tools
+
+> All below steps can be [run](cli/README.md) via command `ockam.init-project`
+
+1. Make sure storage for terraform state exists. Check storage starting
 with a name `terraform2website` followed by 5 digits, and container name
  `tfstate`. If it is for the first time and storage does not exists
  then run `init-tfstate.sh`.
-* Copy `main.tf.example` to `main.tf` and paste correct values from
-the output of `init-tfstate.sh`.
-* From within the same storage [grab Access key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string)
+1. Copy `main.tf.example` to `main.tf` and paste correct value from
+the output of `init-tfstate.sh` or you can get it from cli
+```
+az storage account list | jq -r '.[].name' | grep terraform2website
+```
+1. From within the same storage [grab Access key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string)
  (`key1`) and set your key as follow: `export ARM_ACCESS_KEY=<key1>`.
-* Login with `az login`
-* Run `terraform init` from within `/terraform` directory.
-* Everything should be ready to use.
+1. Login with `az login`
+1. Run `terraform init` from within `/terraform` directory.
+1. Everything should be ready to use. Run `terraform plan` then `terraform apply`.

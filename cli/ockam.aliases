@@ -19,9 +19,29 @@ function _error_msg() {
 function _error_no_workspace() {
   _ockam_usage
   _error_msg "No workspace supplied"
+
+  _check_command terraform > /dev/null
   cd $OCKAM_REPO_DIR/terraform && \
   terraform workspace list | tail -n+2; # show all except DEFAULT workspace
   cd - > /dev/null
+}
+
+# Check do we have particular command(s)
+function _check_command() {
+  EXIT_CODE=0
+  for TOOL in $@
+  do
+    command -v $TOOL > /dev/null
+    if [ $? -gt 0 ]
+    then
+      echo "$TOOL: missing"
+      EXIT_CODE=1
+    else
+      echo "$TOOL: OK"
+    fi
+  done
+
+  return $EXIT_CODE;
 }
 
 function ockam() {
@@ -36,7 +56,7 @@ function ockam.help() {
   while ! [ -z "$HELP" ]; do
     # Find the line number of the first command (above them there can be only
     # comments describing it)
-    LINE=$(echo "$HELP" | grep -Enm 1 '^(function|alias)' | cut -d: -f1)
+    LINE=$(echo "$HELP" | grep --color=never -Enm 1 '^(function|alias)' | cut -d: -f1)
 
     # Get one command-description block
     BLOCK=$(echo "$HELP" | sed -n "1,${LINE}p")
@@ -59,7 +79,7 @@ function ockam.help() {
     DESCRIPTION=$(echo "$BLOCK" | head -n-1 | sed 's/^##[[:space:]]*/    /')
 
     # Print final command help
-    echo "- $CMD_NAME"
+    echo "  $CMD_NAME"
     echo "$DESCRIPTION"
     echo
   done
@@ -79,6 +99,8 @@ function ockam.generate-help-markdown() {
 ## Set pipeline variable
 ## usage: ockam.pipeline-var <pipieline-name> <variable-command>
 function ockam.pipeline-var() {
+  _check_command az > /dev/null
+
   ORGANIZATION=https://dev.azure.com/$OCKAM_DEV_AZURE_ORGANIZATION/
   USAGE="Usage: ${FUNCNAME[0]} <pipieline-name> <variable-command>"
 
@@ -115,6 +137,7 @@ function ockam.pipeline-var() {
 ## usage: ockam.pipeline-run <pipieline-name> <git-branch>
 function ockam.pipeline-run() {
   set -e
+  _check_command git az > /dev/null
   USAGE="Usage: ${FUNCNAME[0]} <pipieline-name> <git-branch>"
   ORGANIZATION=https://dev.azure.com/$OCKAM_DEV_AZURE_ORGANIZATION/
 
@@ -133,6 +156,7 @@ function ockam.pipeline-run() {
   if [ -z "$2" ]
   then
     _error_msg "Missing branch name"
+    _check_command git > /dev/null
     git branch
     _error_msg "$USAGE"
     return
@@ -160,6 +184,7 @@ function ockam.set.storage-key() {
     _error_msg "Missing storage account name"
     for SA in $(az resource list --tag client=Ockam | jq -r .[].name);
     do
+      _check_command az > /dev/null
       az storage account list -g ockam2$(echo $SA | cut -d'2' -f2 ) | jq .[].name;
     done
     _error_msg "$USAGE"
@@ -180,59 +205,96 @@ function ockam.unset.envs() {
   unset AZURE_STORAGE_SAS_TOKEN
 }
 
+## Check do we have all necessary CLI tools
+function ockam.check-toolbelt() {
+  _check_command terraform az jq
+}
 
+## Initialize project, usually you want to do it when you cloned the repo for
+## the first time.
+function ockam.init-project() {
+  cd $OCKAM_REPO_DIR
+
+  # git setup upstream repo
+  _check_command git > /dev/null
+  git remote add ockam git@github.com:ockam-network/website.git
+
+  # copy and prepare main.tf
+  cd terraform;
+  cp main.tf.example main.tf
+  TERRAFORM_ACCOUNT_STATE=ockam.show.terraform-account-name;
+  sed -i 's#<STORAGE-ACCOUNT-NAME>#${TERRAFORM_ACCOUNT_STATE}#' main.tf
+
+  echo 'info: Copy and setup cli.config'
+
+  cd -
+}
+
+## Prints terraform account-name
+function ockam.show.terraform-account-name() {
+  _check_command az jq grep > /dev/null
+  az storage account list | jq -r '.[].name' | grep --color=never terraform2website
+}
+
+## Set local ARM_ACCESS_KEY env variable so remote state can be accessed by
+## Terraform
+function ockam.set.state-key() {
+  _check_command az > /dev/null
+  TERRAFORM_ACCOUNT_STATE=ockam.show.terraform-account-name;
+  export ARM_ACCESS_KEY=$(az storage account keys list --account-name TERRAFORM_ACCOUNT_STATE --query [0].value --output tsv)
+}
+
+
+# If storage account key for Terraform state is missing then load it
 if [[ -z "${ARM_ACCESS_KEY}" ]];
 then
-  >&2 cat <<MISSINGKEY
-Missing ARM_ACCESS_KEY variable
-Terraform related aliases will not load at the moment, if you want them then please setup above variable following \`/terraform/README.md\` and then rerun this script.
-MISSINGKEY
-
-else
-  ## Wrapper for `terraform` command
-  function ockam.terraform() {
-    if [ -z "$1" ]
-    then
-      _error_no_workspace
-    else
-      ENV=$1
-      shift
-      cd $OCKAM_REPO_DIR/terraform && \
-      terraform workspace select $ENV && \
-      terraform init && \
-      terraform $@ && cd - > /dev/null
-    fi
-  }
-
-  ## Wrapper for `terraform` command to run with appropriate environment
-  ## (.tfvars) based on desirable workspace
-  ##
-  ## Example command:
-  ## $ ockam.terraform.with-vars staging apply -auto-approve
-  ##
-  ## Executed command:
-  ## $ cd to/terraform/dir
-  ## $ terraform workspace select staging
-  ## $ terraform staging apply -var-file=tfvars/staging.tfvars -auto-approve
-  function ockam.terraform.with-vars() { # staging/production COMMAND [param1,param2,..]
-    if [ -z "$1" ]
-    then
-      _error_no_workspace
-      return
-    fi
-    ENVIRONMENT=$1; shift
-
-    if [ -z "$1" ]
-    then
-      _ockam_usage
-      _error_msg "Missing terraform command"
-      return
-    fi
-    CMD=$1; shift
-
-    ockam.terraform $ENVIRONMENT $CMD -var-file=tfvars/$ENVIRONMENT.tfvars $@
-  }
+  ockam.set.state-key
 fi
+
+## Wrapper for `terraform` command
+function ockam.terraform() {
+  if [ -z "$1" ]
+  then
+    _error_no_workspace
+  else
+    _check_command terraform > /dev/null
+    ENV=$1
+    shift
+    cd $OCKAM_REPO_DIR/terraform && \
+    terraform workspace select $ENV && \
+    terraform init && \
+    terraform $@ && cd - > /dev/null
+  fi
+}
+
+## Wrapper for `terraform` command to run with appropriate environment
+## (.tfvars) based on desirable workspace
+##
+## Example command:
+## $ ockam.terraform.with-vars staging apply -auto-approve
+##
+## Executed command:
+## $ cd to/terraform/dir
+## $ terraform workspace select staging
+## $ terraform staging apply -var-file=tfvars/staging.tfvars -auto-approve
+function ockam.terraform.with-vars() { # staging/production COMMAND [param1,param2,..]
+  if [ -z "$1" ]
+  then
+    _error_no_workspace
+    return
+  fi
+  ENVIRONMENT=$1; shift
+
+  if [ -z "$1" ]
+  then
+    _ockam_usage
+    _error_msg "Missing terraform command"
+    return
+  fi
+  CMD=$1; shift
+
+  ockam.terraform $ENVIRONMENT $CMD -var-file=tfvars/$ENVIRONMENT.tfvars $@
+}
 
 
 ockam.unset.envs

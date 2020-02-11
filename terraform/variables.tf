@@ -19,3 +19,7 @@ variable "cdn_count" {}
 variable "cdn_endpoint_name" {
   default = "ockamio-website"
 }
+
+variable "cdn_cache_endpoint" {
+  default = "cdn-ockamio-website"
+}

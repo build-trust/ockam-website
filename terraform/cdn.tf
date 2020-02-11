@@ -1,9 +1,9 @@
-resource "azurerm_cdn_profile" "ockamio" {
+resource "azurerm_cdn_profile" "ockam_verizon_premium" {
   count               = var.cdn_count
-  name                = "ockamio"
+  name                = "ockam-verizon-premium"
   location            = var.location
   resource_group_name = azurerm_resource_group.main.name
-  sku                 = "Standard_Microsoft"
+  sku                 = "Premium_Verizon"
 
   tags = {
     environment = terraform.workspace
@@ -14,18 +14,19 @@ resource "azurerm_cdn_profile" "ockamio" {
   depends_on = [data.azurerm_storage_account.ockamio]
 }
 
-resource "azurerm_cdn_endpoint" "static" {
-  count               = length(azurerm_cdn_profile.ockamio)
-  name                = var.cdn_endpoint_name
-  profile_name        = azurerm_cdn_profile.ockamio[count.index].name
+resource "azurerm_cdn_endpoint" "ockamio_website" {
+  count               = length(azurerm_cdn_profile.ockam_verizon_premium)
+  name                = var.cdn_cache_endpoint
+  profile_name        = azurerm_cdn_profile.ockam_verizon_premium[count.index].name
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
-  origin_host_header = data.azurerm_storage_account.ockamio.primary_web_host
+  origin_host_header =  azurerm_storage_account.ockamio.primary_web_host
+  querystring_caching_behaviour = "NotSet"
 
   origin {
     name      = "ockamio-website-origin"
-    host_name = data.azurerm_storage_account.ockamio.primary_web_host
+    host_name = azurerm_storage_account.ockamio.primary_web_host
   }
 
-  depends_on = [azurerm_cdn_profile.ockamio]
+  depends_on = [azurerm_cdn_profile.ockam_verizon_premium]
 }
