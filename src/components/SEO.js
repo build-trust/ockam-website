@@ -35,10 +35,11 @@ const SEO = ({ title, description, image, slug }) => {
       <meta property="og:title" content={metaTitle} />
       <meta property="og:image" content={metaImageUrl} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="twitter:title" content={metaTitle} />
-      <meta property="twitter:description" content={metaDescription} />
-      <meta property="twitter:image" content={metaImageUrl} />
       <meta property="og:url" content={canonicalUrl} />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content={metaTitle} />
+      <meta name="twitter:description" content={metaDescription} />
+      <meta name="twitter:image" content={metaImageUrl} />
       <link rel="canonical" href={canonicalUrl} />
     </Helmet>
   );
