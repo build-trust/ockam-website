@@ -17,7 +17,7 @@ const NodeLink = styled(SidebarMenuItem)`
 const NodeList = styled.ul`
   border-left: 1px solid
     ${props =>
-      props.deepLevel >= 0 ? props.theme.colors.accentBackground : 'inherit'};
+      (props.deepLevel >= 0 ? props.theme.colors.accentBackground : 'inherit')};
   margin-left: ${props => (props.deepLevel >= 0 ? '1.4rem' : '0')};
   padding-left: 0;
 `;

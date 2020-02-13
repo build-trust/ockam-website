@@ -5,12 +5,11 @@ import PageSection from '../PageSection';
 import { media } from '../../../utils/emotion';
 import Heading from '../../Heading';
 import Text from '../../Text';
-import Icon from '../../Icon';
-import { ReactComponent as CheckboxCircleIcon } from '../../../assets/check-circle-icon.svg';
 import mattAvatar from '../../../assets/matthew-gregory.jpg';
 import Button from '../../Button';
 import Caption from '../../Caption';
 import Link from '../../Link';
+import CheckedListElement from "../../CheckedListElement";
 
 const Grid = styled('div')`
   display: grid;
@@ -58,26 +57,7 @@ const ValuesContainer = styled('div')`
   align-items: center;
   ${media.desktop`
     align-items: flex-start;
-  justify-content: flex-start;
-  `};
-`;
-
-const ValuesEntry = styled('div')`
-  margin-right: 2.5rem;
-
-  display: flex;
-  align-items: center;
-  &:last-child {
-    margin-right: 0;
-  }
-  svg {
-    margin-right: 1rem;
-  }
-  ${media.desktop`
-    margin-right: 4.5rem;
-    svg {
-      margin-right: 1.5rem;
-    }
+    justify-content: flex-start;
   `};
 `;
 
@@ -93,6 +73,10 @@ const MattAvatar = styled('img')`
   transform: translateY(-50%);
 `;
 
+const ValuesListElement = styled(CheckedListElement)`
+  margin-bottom: 0;
+`;
+
 const ValuesSection = () => {
   return (
     <PageSection>
@@ -106,24 +90,21 @@ const ValuesSection = () => {
         </Title>
         <DescriptionBox>
           <ValuesContainer>
-            <ValuesEntry>
-              <Icon icon={CheckboxCircleIcon} />
+            <ValuesListElement>
               <Text mb={0} color="white">
                 Simplicity
               </Text>
-            </ValuesEntry>
-            <ValuesEntry>
-              <Icon icon={CheckboxCircleIcon} />
+            </ValuesListElement>
+            <ValuesListElement>
               <Text mb={0} color="white">
                 High Performance Team
               </Text>
-            </ValuesEntry>
-            <ValuesEntry>
-              <Icon icon={CheckboxCircleIcon} />
+            </ValuesListElement>
+            <ValuesListElement>
               <Text mb={0} color="white">
                 Builders Love Their Tools
               </Text>
-            </ValuesEntry>
+            </ValuesListElement>
           </ValuesContainer>
           <Text>
             Our Values are what we believe. Our Virtues are what we do. What we

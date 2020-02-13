@@ -27,11 +27,12 @@ const Content = styled.div`
 `;
 
 const ImageContainer = styled('div')(
-  {
+  props => ({
     gridArea: 'image',
-    alignSelf: 'center',
     maxWidth: '50rem',
-  },
+    position: props.isStickyImage ? `sticky` : `relative`,
+    top: 0,
+  }),
   flexbox
 );
 
@@ -44,6 +45,7 @@ const DefaultGridSection = ({
   image,
   gridLgProportions,
   children,
+  isStickyImage,
 }) => {
   return (
     <PageSection>
@@ -62,6 +64,7 @@ const DefaultGridSection = ({
         }}
       >
         <ImageContainer
+          isStickyImage={isStickyImage}
           justifySelf={{
             _: 'center',
             lg: direction === 'imageOnLeft' ? 'start' : 'end',
@@ -83,12 +86,14 @@ DefaultGridSection.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   gridLgProportions: PropTypes.arrayOf(PropTypes.string),
+  isStickyImage: PropTypes.bool,
 };
 
 DefaultGridSection.defaultProps = {
   direction: 'imageOnLeft',
   image: '',
   gridLgProportions: ['1fr', '1fr'],
+  isStickyImage: false,
 };
 
 export default DefaultGridSection;

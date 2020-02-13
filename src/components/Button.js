@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { space, color, typography, border, variant } from 'styled-system';
+import { space, color, typography, border, layout, variant } from 'styled-system';
 
 const Button = styled('button')(
   props => ({
@@ -9,11 +9,13 @@ const Button = styled('button')(
     fontWeight: props.theme.fontWeights.button,
     lineHeight: props.theme.lineHeights.body,
     display: 'inline-block',
+    width: props.width,
   }),
   space,
   color,
   typography,
   border,
+  layout,
   variant({
     variants: {
       white: {
@@ -65,11 +67,13 @@ const Button = styled('button')(
       },
     },
   })
+
 );
 
 Button.defaultProps = {
   variant: 'primary',
   size: 'default',
+  width: 'auto',
 };
 
 export default Button;

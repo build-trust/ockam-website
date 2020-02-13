@@ -1,6 +1,4 @@
-import styled from '@emotion/styled';
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Button from '../../Button';
 import Link from '../../Link';
@@ -8,34 +6,9 @@ import Text from '../../Text';
 import Heading from '../../Heading';
 import homepageHeaderImage from '../../../assets/homepage/header-section-image.svg';
 import HeaderGridSection from '../HeaderGridSection';
-import circleCheck from '../../../assets/check-circle-icon.svg';
 import config from '../../../../config';
-import { media } from '../../../utils/emotion';
+import CheckedListElement from "../../CheckedListElement";
 
-const FeatureElementContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 2rem;
-  ${media.tablet`
-    flex-direction:row;
-    align-items: flex-start;
-  `}
-`;
-
-const CircleCheck = styled.img`
-  padding-top: 0.4rem;
-`;
-
-const FeatureElement = ({ children }) => (
-  <FeatureElementContainer>
-    <CircleCheck src={circleCheck} />
-    <Text mb={0} ml={3}>
-      {children}
-    </Text>
-  </FeatureElementContainer>
-);
 
 const HeaderSection = () => (
   <HeaderGridSection image={homepageHeaderImage}>
@@ -47,17 +20,23 @@ const HeaderSection = () => (
       Ockam’s developer tools enable you to:
     </Text>
     <div>
-      <FeatureElement>
-        Send end-to-end encrypted messages through your connected system,
-      </FeatureElement>
-      <FeatureElement>
-        Establish authenticated channels between endpoints regardless of the
-        transports or route,
-      </FeatureElement>
-      <FeatureElement>
-        Create and manage cryptographic keys, unique device identifiers, and
-        verifiable credentials in your connected environments.
-      </FeatureElement>
+      <CheckedListElement>
+        <Text mb={0}>
+          Send end-to-end encrypted messages through your connected system,
+        </Text>
+      </CheckedListElement>
+      <CheckedListElement>
+        <Text mb={0}>
+          Establish authenticated channels between endpoints regardless of the
+          transports or route,
+        </Text>
+      </CheckedListElement>
+      <CheckedListElement>
+        <Text mb={0}>
+          Create and manage cryptographic keys, unique device identifiers, and
+          verifiable credentials in your connected environments.
+        </Text>
+      </CheckedListElement>
     </div>
     <Text color="primary">Ockam makes it as simple as it should be.</Text>
     <Button
@@ -71,11 +50,5 @@ const HeaderSection = () => (
   </HeaderGridSection>
 );
 
-FeatureElement.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]).isRequired,
-};
 
 export default HeaderSection;

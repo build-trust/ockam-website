@@ -11,10 +11,10 @@ import ToggleIcon from './ToggleIcon';
 
 const Container = styled(animated.div)`
   background-color: ${props =>
-    props.isCollapsed ? 'transparent' : props.theme.colors.accentBackground};
+    (props.isCollapsed ? 'transparent' : props.theme.colors.accentBackground)};
   border-bottom: 1px solid
     ${props =>
-      props.isCollapsed ? props.theme.colors.accentBackground : 'transparent'};
+      (props.isCollapsed ? props.theme.colors.accentBackground : 'transparent')};
 `;
 
 const Header = styled('div')`

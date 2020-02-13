@@ -10,7 +10,9 @@ const SeamlessConnectedSection = () => {
     <DefaultGridSection image={seamlessImage} direction="imageOnLeft">
       <Heading as="h2">
         Ockam Believes In
-        <br /> A Connected Future.
+        <br />
+        {' '}
+A Connected Future.
       </Heading>
       <Text>
         It is inevitable that data and computing power will become evermore

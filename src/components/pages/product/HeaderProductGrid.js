@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import {grid} from "styled-system";
+import { grid } from 'styled-system';
 
-import { media } from '../../utils/emotion';
-
-import PageSection from './PageSection';
+import { media } from '../../../utils/emotion';
+import PageSection from '../PageSection';
 
 const Section = styled(PageSection)`
   background: ${({ theme }) => theme.colors.background};
@@ -15,22 +14,7 @@ const Section = styled(PageSection)`
   flex-direction: column;
   justify-content: center;
   margin-top: 3rem;
-
   text-align: center;
-  &::before {
-    z-index: 1;
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-size: cover;
-    background-image: url(${props => props.image});
-    background-repeat: no-repeat;
-    background-position: top center;
-    opacity: ${props => props.mobileImageOpacity};
-  }
 
   ${media.tablet`
     &::before {
@@ -46,9 +30,6 @@ const Section = styled(PageSection)`
     min-height: 40rem;
     height: initial;
     margin: 10rem 0 15rem 0;
-    &::before {
-      content: none;
-    }
   `}
 `;
 const Grid = styled('div')(grid);
@@ -56,14 +37,18 @@ const HeaderSectionGrid = styled(Grid)`
   z-index: 2;
   display: grid;
   width: 100%;
-  grid-template-areas: 'left-box';
+  grid-template-areas:
+  'left-box'
+  'image';
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
   ${media.tablet`
     width: 70%;
     margin: 0 auto;
   `};
-  ${media.ultraWide`
+  ${media.desktop`
     width: 100%;
+    grid-template-columns: 5fr 5fr;
     grid-template-areas: 
       "left-box image";
      grid-column-gap: 3rem;
@@ -71,34 +56,43 @@ const HeaderSectionGrid = styled(Grid)`
 `;
 
 const Image = styled.img`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  ${props => props.alignImageRight && `right: 0;`}
+  display: none;
+  ${media.desktop`
+    display: inline;
+    width: 100%;
+    max-width: 100%;
+  `};
 `;
+
+const MobileImage = styled.img`
+  max-width: 70%;
+  ${media.desktop`
+    display: none;
+  `};
+`
 
 const ImageContainer = styled.div`
   grid-area: image;
   align-self: center;
   position: relative;
-  display: none;
-  ${media.ultraWide`
-    display: block;
-  `};
 `;
 
 const LeftBox = styled.div`
   grid-area: left-box;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  ${media.desktop`
+    margin-bottom: 0;
+  `};
 `;
 
-const HeaderGridSection = ({
+const HeaderProductGrid = ({
   image,
-  alignImageRight,
-  mobileImageOpacity,
+  mobileImage,
   gridXlProportions,
   children,
 }) => (
-  <Section mobileImageOpacity={mobileImageOpacity} image={image}>
+  <Section>
     <HeaderSectionGrid
       gridTemplateColumns={{
         _: ' 1fr',
@@ -107,27 +101,25 @@ const HeaderGridSection = ({
     >
       <LeftBox>{children}</LeftBox>
       <ImageContainer>
-        <Image src={image} alignImageRight={alignImageRight} />
+        <Image src={image} />
+        <MobileImage src={mobileImage} />
       </ImageContainer>
     </HeaderSectionGrid>
   </Section>
 );
 
-HeaderGridSection.propTypes = {
-  mobileImageOpacity: PropTypes.number,
+HeaderProductGrid.propTypes = {
   image: PropTypes.string.isRequired,
+  mobileImage: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
-  alignImageRight: PropTypes.bool,
   gridXlProportions: PropTypes.arrayOf(PropTypes.string),
 };
 
-HeaderGridSection.defaultProps = {
-  mobileImageOpacity: 0.1,
-  alignImageRight: false,
+HeaderProductGrid.defaultProps = {
   gridXlProportions: ['7fr', '5fr'],
 };
 
-export default HeaderGridSection;
+export default HeaderProductGrid;

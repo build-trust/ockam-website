@@ -71,7 +71,8 @@
     "react-share": "4.0.1",
     "react-spring": "8.0.27",
     "resize-observer": "1.0.0",
-    "styled-system": "5.1.4"
+    "styled-system": "5.1.4",
+    "use-is-in-viewport": "^1.0.7"
   },
   "devDependencies": {
     "@babel/core": "7.8.3",

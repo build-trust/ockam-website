@@ -7,8 +7,6 @@ import { media } from '../utils/emotion';
 import Link from './Link';
 import Button from './Button';
 
-
-
 const Container = styled.div`
   width: auto;
   margin-left: auto;

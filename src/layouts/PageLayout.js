@@ -20,7 +20,6 @@ const PageWrapper = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  overflow-y: hidden;
   min-height: 100vh;
   color: ${({ theme }) => theme.colors.text};
 
