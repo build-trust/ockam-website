@@ -34,6 +34,21 @@ steps:
 
 - bash: |
     set -ex
+    case $(Build.SourceBranchName) in
+      master)
+        GATSBY_ROOT_URL='https://www.ockam.io'
+        ;;
+      stage)
+        GATSBY_ROOT_URL='https://ockamio2stage.z6.web.core.windows.net'
+        ;;
+      develop)
+        GATSBY_ROOT_URL='https://ockamio2develop.z6.web.core.windows.net'
+        ;;
+      *)
+        GATSBY_ROOT_URL='https://fork1ockam2default.z6.web.core.windows.net'
+        ;;
+    esac
+
     npm ci
     npm run build
   displayName: 'Install & build site'
