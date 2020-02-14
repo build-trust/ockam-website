@@ -20,7 +20,7 @@ const Container = styled(Content)`
 const Image = styled('img')`
   
   ${media.desktop`
-      margin-left: 12%;
+      margin-left: 5%;
   `};
   
 `;

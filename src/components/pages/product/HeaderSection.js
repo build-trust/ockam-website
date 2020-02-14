@@ -6,9 +6,17 @@ import Heading from '../../Heading';
 import heroProductGraphics from '../../../assets/product/hero-product.svg';
 import heroProductMobileGraphics from '../../../assets/product/hero-product-mobile.svg';
 import { media } from '../../../utils/emotion';
+import { ReactComponent as ChipIcon} from '../../../assets/chip-icon.svg';
+import { ReactComponent as ServerIcon} from '../../../assets/server-icon.svg';
+import { ReactComponent as CloudIcon} from '../../../assets/cloud-icon.svg';
+import { ReactComponent as RouterIcon} from '../../../assets/router-icon.svg';
+import { ReactComponent as ListIcon} from '../../../assets/list-icon.svg';
+import { ReactComponent as HandsIcon} from '../../../assets/hands-icon.svg';
+import { ReactComponent as SupportIcon} from '../../../assets/support-icon.svg';
+
 
 import HeaderProductGrid from './HeaderProductGrid';
-import AccordionItem from './AccordionItem';
+import IconListItem from '../../IconLisItem';
 
 const HeroHeading = styled(Heading)`
   ${media.desktop`
@@ -17,16 +25,6 @@ const HeroHeading = styled(Heading)`
 `;
 
 const HeaderSection = () => {
-  const [activeAccordionNode, setActiveAccordionNode] = useState('SDK');
-  const toggleActiveAccordionNode = key =>
-    (key === activeAccordionNode
-      ? setActiveAccordionNode(null)
-      : setActiveAccordionNode(key));
-
-  const isSdkActive = activeAccordionNode === 'SDK';
-  const isHcsActive = activeAccordionNode === 'HCS';
-  const isPsActive = activeAccordionNode === 'PS';
-
   return (
     <HeaderProductGrid
       image={heroProductGraphics}
@@ -50,48 +48,18 @@ const HeaderSection = () => {
         Ockam’s enterprise-grade products make it easy
       </Text>
       <div>
-        <AccordionItem
-          isActive={isSdkActive}
-          identifier="SDK"
-          title="Software Development Kits"
-          onClick={key => toggleActiveAccordionNode(key)}
-        >
-          <Text color="caption" textAlign="left" mb={1}>
-            Embedded and IoT Devices
-          </Text>
-          <Text color="caption" textAlign="left" mb={1}>
-            Linux Boxes at the Edge
-          </Text>
-          <Text color="caption" textAlign="left" mb={1}>
-            Cloud Servers
-          </Text>
-        </AccordionItem>
-        <AccordionItem
-          isActive={isHcsActive}
-          identifier="HCS"
-          title="Hosted Cloud Services"
-          onClick={key => toggleActiveAccordionNode(key)}
-        >
-          <Text color="caption" textAlign="left" mb={1}>
-            Ockam Routers
-          </Text>
-          <Text color="caption" textAlign="left" mb={1}>
-            Ockam Registry
-          </Text>
-        </AccordionItem>
-        <AccordionItem
-          isActive={isPsActive}
-          identifier="PS"
-          title="Professional Services"
-          onClick={key => toggleActiveAccordionNode(key)}
-        >
-          <Text color="caption" textAlign="left" mb={1}>
-            Enterprise Support
-          </Text>
-          <Text color="caption" textAlign="left" mb={1}>
-            Custom Services
-          </Text>
-        </AccordionItem>
+        <Text fontWeight='bold'>Software Development Kits</Text>
+        <IconListItem icon={ChipIcon}>Embedded and IoT Devices</IconListItem>
+        <IconListItem icon={ServerIcon}> Linux Boxes at the Edge</IconListItem>
+        <IconListItem icon={CloudIcon}>Cloud Servers</IconListItem>
+
+        <Text mt={4} fontWeight='bold'>Hosted Cloud Services</Text>
+        <IconListItem icon={RouterIcon}>Ockam Routers</IconListItem>
+        <IconListItem icon={ListIcon}> Ockam Registry</IconListItem>
+
+        <Text mt={4} fontWeight='bold'>Professional Services</Text>
+        <IconListItem icon={HandsIcon}>Enterprise Support</IconListItem>
+        <IconListItem icon={SupportIcon}>Custom Services</IconListItem>
       </div>
     </HeaderProductGrid>
   );

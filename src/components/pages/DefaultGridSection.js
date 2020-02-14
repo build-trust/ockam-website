@@ -46,9 +46,10 @@ const DefaultGridSection = ({
   gridLgProportions,
   children,
   isStickyImage,
+  id,
 }) => {
   return (
-    <PageSection>
+    <PageSection id={id}>
       <GridSection
         gridTemplateAreas={{
           _: `"image"
@@ -87,6 +88,7 @@ DefaultGridSection.propTypes = {
   ]).isRequired,
   gridLgProportions: PropTypes.arrayOf(PropTypes.string),
   isStickyImage: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 DefaultGridSection.defaultProps = {
@@ -94,6 +96,7 @@ DefaultGridSection.defaultProps = {
   image: '',
   gridLgProportions: ['1fr', '1fr'],
   isStickyImage: false,
+  id: undefined,
 };
 
 export default DefaultGridSection;

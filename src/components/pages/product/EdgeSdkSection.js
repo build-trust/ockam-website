@@ -5,9 +5,7 @@ import edgedSdkMobileGraphics from '../../../assets/product/edge-section-mobile.
 import Text from '../../Text';
 import StickySection from '../StickySection';
 import Heading from '../../Heading';
-import StartBuildingButton from '../../StartBuildingButton';
-import ReadDocsButton from "../../ReadDocsButton";
-import Button from "../../Button";
+import LinkAccent from "../../LinkAccent";
 
 const EdgeSdkSection = () => {
   return (
@@ -16,12 +14,10 @@ const EdgeSdkSection = () => {
       <Text>
         The Ockam Edge SDK is made for ‘linux boxes at the edge’. Gateways, computers, phones and even cars are tasked with moving data between the far edges of networks and the cloud.
       </Text>
-      <ReadDocsButton width='24rem' to='/' />
-      <Button mb={5} width='24rem' variant='primary'>Learn more</Button>
       <Text>
         The Ockam Edge SDK supports the end-to-end encrypted messaging your complex systems integrations demand.
       </Text>
-      <StartBuildingButton width='24rem' />
+      <LinkAccent mt={3} to="product/edge-sdk">Learn more about the Edge SDK</LinkAccent>
     </StickySection>
   );
 };

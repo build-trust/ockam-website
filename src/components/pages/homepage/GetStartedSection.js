@@ -1,64 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { darken, lighten, rgba } from 'polished';
 
-import arrowTopLeftIcon from '../../../assets/homepage/arrow-top-left-icon.svg';
 import githubIcon from '../../../assets/homepage/github-icon.svg';
 import slackIcon from '../../../assets/homepage/slack-icon.svg';
 import sendIcon from '../../../assets/homepage/send-icon.svg';
 import twitterIcon from '../../../assets/homepage/twitter-icon.svg';
 import { media } from '../../../utils/emotion';
 import PageSection from '../PageSection';
-import Card from '../../Card/Card';
-import CardBody from '../../Card/CardBody';
-import Heading from '../../Heading';
-import Link from '../../Link';
 import Subheading from '../Subheading';
 import useSiteMetadata from '../../../hooks/useSiteMetadata';
 import config from '../../../../config';
+import GetStartedCard from "../../GetStartedCard";
 
-const StyledCard = styled(Card)`
-  position: relative;
-  transition: all 300ms cubic-bezier(0.51, 0.92, 0.24, 1.15);
-  &:before {
-    content: '';
-    width: 1.2rem;
-    height: 1.2rem;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    opacity: 0.6;
-    z-index: 2;
-    background: url(${arrowTopLeftIcon}) no-repeat;
-    transition: all 300ms cubic-bezier(0.51, 0.92, 0.24, 1.15);
-  }
-  &:hover {
-    background-color: ${props =>
-      lighten(0.08, props.theme.colors.accentBackground)};
-    box-shadow: 0 0 29px 3px
-      ${props => rgba(darken(0.2, props.theme.colors.background), 0.2)};
-    z-index: 2;
-    &:before {
-      transform: rotate(45deg) translateX(-50%);
-      top: 50%;
-      opacity: 1;
-    }
-  }
-`;
-
-const StyledCardBody = styled(CardBody)`
-  padding: 3rem 2.5rem;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  transition: padding 300ms cubic-bezier(0.51, 0.92, 0.24, 1.15);
-  &:hover {
-    padding: 3rem 2rem 3rem 0;
-  }
-`;
 
 const GesStartedGrid = styled.div`
   display: grid;
@@ -75,33 +29,8 @@ const GesStartedGrid = styled.div`
     grid-row-gap: 0;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 13.6rem;
-
   `}
 `;
-
-const HeadingOption = styled(Heading)`
-  margin-left: 1.6rem;
-`;
-
-const GetStartedCard = ({ children, to, onClick }) => (
-  <StyledCard as={to ? Link : 'div'} to={to} onClick={onClick}>
-    <StyledCardBody>{children}</StyledCardBody>
-  </StyledCard>
-);
-
-GetStartedCard.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]).isRequired,
-  to: PropTypes.string,
-  onClick: PropTypes.func,
-};
-
-GetStartedCard.defaultProps = {
-  to: '',
-  onClick() {},
-};
 
 const GetStartedSection = () => {
   const siteMetaData = useSiteMetadata();
@@ -112,30 +41,10 @@ const GetStartedSection = () => {
         Get started with ockam
       </Subheading>
       <GesStartedGrid>
-        <GetStartedCard to={siteMetaData.ockamLibraryRepo}>
-          <img src={githubIcon} alt="github icon" />
-          <HeadingOption as="h5" mb={0}>
-            {'{ockam}'}
-          </HeadingOption>
-        </GetStartedCard>
-        <GetStartedCard to={siteMetaData.slackChannel}>
-          <img src={slackIcon} alt="slack icon" />
-          <HeadingOption as="h5" mb={0}>
-            Join Community
-          </HeadingOption>
-        </GetStartedCard>
-        <GetStartedCard to={`mailto:${config.general.email}`}>
-          <img src={sendIcon} alt="send icon" />
-          <HeadingOption as="h5" mb={0}>
-            Request a demo
-          </HeadingOption>
-        </GetStartedCard>
-        <GetStartedCard to={siteMetaData.twitter}>
-          <img src={twitterIcon} width={40} alt="twitter icon" />
-          <HeadingOption as="h5" mb={0}>
-            Follow Ockam
-          </HeadingOption>
-        </GetStartedCard>
+        <GetStartedCard to={siteMetaData.ockamLibraryRepo} title={'{ockam}'} icon={githubIcon} />
+        <GetStartedCard to={siteMetaData.slackChannel} title="Join Community" icon={slackIcon} />
+        <GetStartedCard to={`mailto:${config.general.email}`} title="Request a demo" icon={sendIcon} />
+        <GetStartedCard to={siteMetaData.twitter} title="Follow Ockam" icon={twitterIcon} />
       </GesStartedGrid>
     </PageSection>
   );

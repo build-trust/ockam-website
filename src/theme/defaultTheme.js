@@ -62,9 +62,10 @@ lineHeights.small = lineHeights[0];
 lineHeights.heading = lineHeights[1];
 lineHeights.body = lineHeights[1];
 
-const radii = ['0.2rem', '0.4rem'];
+const radii = ['0.2rem', '0.4rem', '1.2rem'];
 radii.default = radii[0];
 radii.button = radii[0];
+radii.badge = radii[2];
 
 const space = [0, '0.4rem', '0.8rem', '1.6rem', '3.2rem', '6.4rem', '12.8rem'];
 space.none = space[0];

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { space, color, typography, layout } from 'styled-system';
+import { space, color, typography, layout, flexbox } from 'styled-system';
 
 const Heading = styled('h1')(
   props => ({
@@ -11,7 +11,9 @@ const Heading = styled('h1')(
   space,
   color,
   typography,
-  layout
+  layout,
+  flexbox
+
 );
 
 Heading.displayName = 'Heading';

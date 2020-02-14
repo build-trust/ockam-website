@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React, {Fragment, useCallback, useRef, useState} from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useSpring, a, animated } from 'react-spring'
 
-import {useMeasure} from "../hooks/useMeasure";
 import { media } from '../utils/emotion';
 
 import Link from './Link';
@@ -35,17 +34,23 @@ const isPartiallyActive = ({ isPartiallyCurrent }) => {
 };
 
 const MobileMenu = ({ items, showMobileMenu, isCollapsedHeader, ...rest }) => {
+  const [viewHeight, setViewHeight] = useState(0);
+  const onRefSet = useCallback(ref => {
+    console.log('ref',ref);
 
-  const [bind, { height: viewHeight }] = useMeasure();
+    if(!ref) return 0;
+    const height = ref.getBoundingClientRect().height;
+    setViewHeight(height);
+  },[]);
   const { height, opacity, transform } = useSpring({
     from: { height: 0, opacity: 0, transform: 'translate3d(0,-120px,0)' },
     to: { height: showMobileMenu ? viewHeight : 0, opacity: showMobileMenu ? 1 : 0, transform: `translate3d(0, ${showMobileMenu ? 0 : -120}px,0)` },
   });
-
+  console.log('aaa');
 
   return (
     <Wrapper style={{ opacity, height }} {...rest} isCollapsedHeader={isCollapsedHeader} showMobileMenu={showMobileMenu}>
-      <Content style={{ transform }} {...bind}>
+      <Content style={{ transform }} ref={onRefSet}>
         {items.map(item => (
           <Fragment key={item.to}>
             {item.type === 'text' && (

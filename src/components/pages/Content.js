@@ -10,8 +10,8 @@ const Content = styled(BaseContent)`
       max-width: 100%;
   `};
   ${media.ultraWide`
-      width: 110rem;
-      max-width: 110rem;
+      width: 114rem;
+      max-width: 114rem;
   `}
 `;
 

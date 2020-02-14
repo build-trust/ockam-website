@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="icon/desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M21,14 L3,14 L3,4 L21,4 M21,2 L3,2 C1.89,2 1,2.89 1,4 L1,16 C1,17.1045695 1.8954305,18 3,18 L10,18 L8,21 L8,22 L16,22 L16,21 L14,18 L21,18 C22.1045695,18 23,17.1045695 23,16 L23,4 C23,2.89 22.1,2 21,2 Z" id="Shape" fill="#00BAE9" fill-rule="nonzero"></path>
+    </g>
+</svg>

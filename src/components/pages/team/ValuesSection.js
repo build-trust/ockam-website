@@ -9,7 +9,8 @@ import mattAvatar from '../../../assets/matthew-gregory.jpg';
 import Button from '../../Button';
 import Caption from '../../Caption';
 import Link from '../../Link';
-import CheckedListElement from "../../CheckedListElement";
+import CheckedListItem from "../../CheckedListItem";
+import PropTypes from "prop-types";
 
 const Grid = styled('div')`
   display: grid;
@@ -73,9 +74,14 @@ const MattAvatar = styled('img')`
   transform: translateY(-50%);
 `;
 
-const ValuesListElement = styled(CheckedListElement)`
-  margin-bottom: 0;
-`;
+const ValuesListItem = ({ children }) => <CheckedListItem containerStyle={{ marginBottom: 0}}>{ children }</CheckedListItem>;
+
+ValuesListItem.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
+};
 
 const ValuesSection = () => {
   return (
@@ -90,21 +96,21 @@ const ValuesSection = () => {
         </Title>
         <DescriptionBox>
           <ValuesContainer>
-            <ValuesListElement>
+            <ValuesListItem>
               <Text mb={0} color="white">
                 Simplicity
               </Text>
-            </ValuesListElement>
-            <ValuesListElement>
+            </ValuesListItem>
+            <ValuesListItem>
               <Text mb={0} color="white">
                 High Performance Team
               </Text>
-            </ValuesListElement>
-            <ValuesListElement>
+            </ValuesListItem>
+            <ValuesListItem>
               <Text mb={0} color="white">
                 Builders Love Their Tools
               </Text>
-            </ValuesListElement>
+            </ValuesListItem>
           </ValuesContainer>
           <Text>
             Our Values are what we believe. Our Virtues are what we do. What we

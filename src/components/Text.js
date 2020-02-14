@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 const Text = styled('p')(space, color, typography);
 Text.defaultProps = {
-  marginTop: 0,
+  mt: 0,
   fontFamily: 'body',
   lineHeight: 'body',
   mb: 3,

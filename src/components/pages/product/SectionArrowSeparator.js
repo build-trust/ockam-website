@@ -8,8 +8,8 @@ import AnimateOnScroll from "../../AnimateOnScroll";
 
 const Container = styled(Content)`
   width: 100%;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-top: 8rem;
+  margin-bottom: 8rem;
   text-align: center;
   ${media.desktop`
     text-align:left;

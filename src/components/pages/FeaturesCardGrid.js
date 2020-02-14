@@ -29,7 +29,7 @@ const FeaturesCardGrid = ({ features, cardPadding }) => {
     >
       {features.map(feature => (
         <FeatureCard key={feature.title} padding={cardPadding}>
-          <Icon size={3} color="primary" icon={feature.icon} mb={2} />
+          <Icon size={feature.iconSize || 3} color="primary" icon={feature.icon} mb={2} />
           <Heading as="h6" fontSize="bodySmall">
             {feature.title}
           </Heading>
@@ -45,6 +45,7 @@ FeaturesCardGrid.propTypes = {
   features: PropTypes.arrayOf(
     PropTypes.shape({
       icon: PropTypes.func.isRequired,
+      iconSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
     })
