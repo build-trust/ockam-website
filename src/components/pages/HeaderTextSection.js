@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
-
-import PageSection from './PageSection';
+import PropTypes from "prop-types";
 
 import { media } from '../../utils/emotion';
 
+import PageSection from './PageSection';
+
 const Wrapper = styled('div')`
-  margin: 14rem 0;
+  margin-top: 14rem;
 `;
 
 const Container = styled('div')`
@@ -19,6 +20,10 @@ const Container = styled('div')`
   `}
 `;
 
+const AnchorScroller = styled('div')`
+  padding-bottom:  8rem;
+`;
+
 const HeaderTextSection = ({ children }) => {
   return (
     <Wrapper>
@@ -27,10 +32,16 @@ const HeaderTextSection = ({ children }) => {
           {children}
         </Container>
       </PageSection>
+      <AnchorScroller id="content">&nbsp;</AnchorScroller>
     </Wrapper>
   );
 };
 
-HeaderTextSection.propTypes = {};
+HeaderTextSection.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
+};
 
 export default HeaderTextSection;

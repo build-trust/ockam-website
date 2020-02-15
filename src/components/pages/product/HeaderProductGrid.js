@@ -79,7 +79,6 @@ const ImageContainer = styled.div`
 
 const LeftBox = styled.div`
   grid-area: left-box;
-  margin-top: 5rem;
   margin-bottom: 5rem;
   ${media.desktop`
     margin-bottom: 0;

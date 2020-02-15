@@ -6,7 +6,6 @@ import styled from '@emotion/styled';
 import { space, color, typography, layout } from 'styled-system';
 
 const BaseLink = ({ to, children, ...rest }) => {
-  console.log('to', to);
   const isAnchor = to ? false : to.charAt(0) === '#';
   if (isAnchor || isAbsoluteUrl(to)) {
     return (

@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { space } from 'styled-system';
 
 import {ReactComponent as CircleCheck } from "../assets/check-circle-icon.svg";
+
 import Icon from "./Icon";
 import Text from "./Text";
 
@@ -20,7 +21,6 @@ const StyledIcon = styled(Icon)`
 `;
 
 const IconListItem = ({ children, icon, iconStyle, containerStyle, ...rest }) => {
-  console.log('containerStyle',containerStyle);
   return (
     <Container {...containerStyle}>
       <StyledIcon icon={icon} mr={3} flex={1} {...iconStyle} />

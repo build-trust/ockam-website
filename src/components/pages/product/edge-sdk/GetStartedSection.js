@@ -16,6 +16,7 @@ import {ReactComponent as VaultIcon } from '../../../../assets/vault-icon.svg';
 import {ReactComponent as TransferIcon } from '../../../../assets/transfer-icon.svg';
 import {ReactComponent as DocIcon } from '../../../../assets/doc-icon.svg';
 import {ReactComponent as SupportIcon } from '../../../../assets/support-icon.svg';
+import AnimateOnScroll from "../../../AnimateOnScroll";
 
 const GetStartedGrid = styled('div')`
   display: grid;
@@ -40,46 +41,46 @@ GetStartedItem.propTypes = {
   ]).isRequired,
 };
 
-const GetStartedSection = props => {
+const GetStartedSection = () => {
   const siteMetaData = useSiteMetadata();
   return (
     <PageSection>
-      <Heading as="h2" mb={5} textAlign="center">
-        Get started!
-      </Heading>
-      <GetStartedGrid>
-        <GetStartedCard
-          to={siteMetaData.ockamLibraryRepo}
-          title="Build Your Own"
-          icon={githubIcon}
-        >
-          <GetStartedItem icon={CodeIcon}>
-            Get the Edge SDK Core
-          </GetStartedItem>
-          <GetStartedItem icon={TransferIcon}>
-            Determine Transport for your embedded hardware
-          </GetStartedItem>
-          <GetStartedItem icon={VaultIcon}>
-            Choose a Vault from the open source library, or build your own
-          </GetStartedItem>
-        </GetStartedCard>
-        <GetStartedCard
-          to={`mailto:${config.general.email}`}
-          title="Request a demo"
-          icon={sendIcon}
-        >
-          <GetStartedItem icon={DocIcon}>
-            OEM and Enterprise SLA licenses available.
-          </GetStartedItem>
-          <GetStartedItem icon={SupportIcon}>
-            Our team is ready to help you get started, to build, or support your Ockam Edge SDK
-          </GetStartedItem>
-        </GetStartedCard>
-      </GetStartedGrid>
+      <AnimateOnScroll transformY animateOnce>
+        <Heading as="h2" mb={5} textAlign="center">
+          Get started!
+        </Heading>
+        <GetStartedGrid>
+          <GetStartedCard
+            to={siteMetaData.ockamLibraryRepo}
+            title="Build Your Own"
+            icon={githubIcon}
+          >
+            <GetStartedItem icon={CodeIcon}>
+              Get the Edge SDK Core
+            </GetStartedItem>
+            <GetStartedItem icon={TransferIcon}>
+              Plugin the Transport SDK element for your edge hardware
+            </GetStartedItem>
+            <GetStartedItem icon={VaultIcon}>
+              Choose a Vault implimentation from the open source library, or build your own
+            </GetStartedItem>
+          </GetStartedCard>
+          <GetStartedCard
+            to={`mailto:${config.general.email}`}
+            title="Request a demo"
+            icon={sendIcon}
+          >
+            <GetStartedItem icon={DocIcon}>
+              OEM and Enterprise SLA licenses available.
+            </GetStartedItem>
+            <GetStartedItem icon={SupportIcon}>
+              Our team is ready to help you get started, to build, or support your Ockam Edge SDK
+            </GetStartedItem>
+          </GetStartedCard>
+        </GetStartedGrid>
+      </AnimateOnScroll>
     </PageSection>
   );
 };
-
-GetStartedSection.propTypes = {};
 
 export default GetStartedSection;

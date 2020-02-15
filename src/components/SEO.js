@@ -9,11 +9,13 @@ import config from '../../config';
 import useDefaultOgImage from "../hooks/useDefaultOgImage";
 import useSiteMetadata from "../hooks/useSiteMetadata";
 
+const getSrcFromGraphqlImage = image => image && image.childImageSharp && image.childImageSharp.fixed.sr
+
 const SEO = ({ title, description, image, slug }) => {
   const defaultOgImage = useDefaultOgImage();
   const siteMetadata = useSiteMetadata();
 
-  const metaImage = image || (defaultOgImage && defaultOgImage.childImageSharp && defaultOgImage.childImageSharp.fixed.src);
+  const metaImage = image || getSrcFromGraphqlImage(defaultOgImage);
   const metaImageUrl = siteMetadata.siteUrl + metaImage;
   const metaTitle = title || siteMetadata.title;
   const metaDescription = description || siteMetadata.description;

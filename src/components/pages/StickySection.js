@@ -24,7 +24,6 @@ const StickyBox = styled('div')`
 
   text-align: center;
   ${media.desktop`
-    position: -webkit-sticky;
     position: sticky;
     top: 8rem;
   `}

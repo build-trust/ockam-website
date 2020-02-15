@@ -14,14 +14,15 @@ Anchor.defaultProps = {
 };
 
 const SlideDownAnchor = ({ label, to }) => {
-
-  const handleScroll = (e) => {
+  const handleScroll = () => {
     document.querySelector(to).scrollIntoView({ behavior: 'smooth', top: 200 });
   };
 
   return (
     <Anchor color="accent" onClick={handleScroll}>
-      { label } <Icon ml={2} icon={ArrowDown} size={24} color="accent" />
+      { label }
+      {' '}
+      <Icon ml={2} icon={ArrowDown} size={24} color="accent" />
     </Anchor>
   );
 };

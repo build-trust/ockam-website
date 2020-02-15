@@ -11,27 +11,29 @@ import {ReactComponent as UplinkIcon} from '../../../../assets/uplink-icon.svg';
 import Heading from '../../../Heading';
 import Text from '../../../Text';
 import IconListItem from "../../../IconLisItem";
+import AnimateOnScroll from "../../../AnimateOnScroll";
 
 const DescriptionSection = () => {
   return (
-    <DefaultGridSection
-      image={edgeGraphics}
-      direction="imageOnRight"
-      id="content"
-    >
-      <Heading as="h2">
-        Ockam Edge SDK is tuned for machines with significant resources.
-      </Heading>
-      <Text>
-        Ockam Edge SDK will become available in Rust, Go, Swift and Objective C. Cloud Apps can easily connect, authenticate and trust data exchange with your edge systems.
-      </Text>
-      <IconListItem icon={DoorIcon}>Gateways</IconListItem>
-      <IconListItem icon={LinuxIcon}>Linux boxes at the Edge</IconListItem>
-      <IconListItem icon={PhoneIcon}>Phones</IconListItem>
-      <IconListItem icon={DesktopIcon}>Computers</IconListItem>
-      <IconListItem icon={CarIcon}>Cars</IconListItem>
-      <IconListItem icon={UplinkIcon}>Satellites</IconListItem>
-    </DefaultGridSection>
+    <AnimateOnScroll transformY animateOnce>
+      <DefaultGridSection
+        image={edgeGraphics}
+        direction="imageOnRight"
+      >
+        <Heading as="h2">
+          Ockam Edge SDK is tuned for machines with powerful compute, network, and storage capabilities outside of datacenters.
+        </Heading>
+        <Text>
+          Ockam Edge SDK will become available in Rust, Golang (Go), Erlang, Elixir, Swift and Objective C. Cloud applications can easily connect, authenticate, and trust data exchange with distributed networks at the edge.
+        </Text>
+        <IconListItem icon={DoorIcon}>Gateways</IconListItem>
+        <IconListItem icon={LinuxIcon}>Linux boxes at the Edge</IconListItem>
+        <IconListItem icon={PhoneIcon}>Phones</IconListItem>
+        <IconListItem icon={DesktopIcon}>Computers</IconListItem>
+        <IconListItem icon={CarIcon}>Cars</IconListItem>
+        <IconListItem icon={UplinkIcon}>Satellites</IconListItem>
+      </DefaultGridSection>
+    </AnimateOnScroll>
   );
 };
 

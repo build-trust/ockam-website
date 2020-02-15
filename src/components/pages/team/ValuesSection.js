@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from "prop-types";
 
 import PageSection from '../PageSection';
 import { media } from '../../../utils/emotion';
@@ -10,7 +11,6 @@ import Button from '../../Button';
 import Caption from '../../Caption';
 import Link from '../../Link';
 import CheckedListItem from "../../CheckedListItem";
-import PropTypes from "prop-types";
 
 const Grid = styled('div')`
   display: grid;

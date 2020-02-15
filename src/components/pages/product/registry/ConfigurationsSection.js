@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import PageSection from "../../PageSection";
 import styled from "@emotion/styled";
 import {darken} from "polished";
 import { flexbox, space } from 'styled-system'
-import { media } from '../../../../utils/emotion';
 
+import PageSection from "../../PageSection";
+import { media } from '../../../../utils/emotion';
 import Heading from "../../../Heading";
+import AnimateOnScroll from "../../../AnimateOnScroll";
 
 const StyledPageSection = styled(PageSection)`
   background-color: ${props => darken(0.02, props.theme.colors.background)};
@@ -25,7 +25,7 @@ const Container = styled('div')`
 const ConfigurationItem = styled('div')`
   color:  ${props => props.theme.colors.white};
   margin-bottom: 3.5rem;
-  &:before { 
+  &:before {
     content: "";
     width: .7rem;
     height: .7rem;
@@ -46,16 +46,21 @@ const ComingSoonBadge = styled('div')`
 
 const ConfigurationList = styled('div')(flexbox, space);
 
-const ConfigurationsSection = props => {
+const ConfigurationsSection = () => {
   return (
     <StyledPageSection>
       <Container>
-        <Heading textAlign={{ _: 'center', lg: 'left'}} flex={7} as="h2">Ockam Registry is available in the following configurations</Heading>
-        <ConfigurationList mt={{_:3, lg: 0}} flex={5}>
-          <ConfigurationItem>Single Party / Private Registry</ConfigurationItem>
-          <ConfigurationItem>Multi-Party / Private Registry</ConfigurationItem>
-          <ConfigurationItem>Multi-Party / Public Registry <ComingSoonBadge>Coming soon</ComingSoonBadge></ConfigurationItem>
-        </ConfigurationList>
+        <AnimateOnScroll transformY animateOnce>
+          <Heading textAlign={{ _: 'center', lg: 'left'}} flex={7} as="h2">Ockam Registry is available in the following configurations</Heading>
+          <ConfigurationList mt={{_:3, lg: 0}} flex={5}>
+            <ConfigurationItem>Single-Party / Private Registry</ConfigurationItem>
+            <ConfigurationItem>Multi-Party / Private Registry</ConfigurationItem>
+            <ConfigurationItem>
+  Multi-Party / Public Registry
+              <ComingSoonBadge>Coming soon</ComingSoonBadge>
+            </ConfigurationItem>
+          </ConfigurationList>
+        </AnimateOnScroll>
       </Container>
     </StyledPageSection>
   );

@@ -5,8 +5,6 @@ import embeddedSdkMobileGraphics from '../../../assets/product/embedded-section-
 import Text from '../../Text';
 import StickySection from '../StickySection';
 import Heading from '../../Heading';
-import ReadDocsButton from '../../ReadDocsButton';
-import Button from '../../Button';
 import LinkAccent from '../../LinkAccent';
 
 const EmbeddedSdkSection = () => {
@@ -21,16 +19,13 @@ const EmbeddedSdkSection = () => {
         Ockam Embedded SDK
       </Heading>
       <Text>
-        The Ockam Embedded SDK makes it easy for builders of connected systems
-        to access the cryptographic capabilities and key storage features of
-        modern chips.
+        The Ockam Embedded SDK makes it easy for builders to access the cryptographic functions and key storage features of modern chips. Move data between the device and the cloud with Ockam’s built in security protocols.
       </Text>
       <Text>
-        If you are a manufacturer of chipsets, boards or IoT devices the Ockam
-        Embedded SDK is for you. You’ve built cryptographic capabilities into
-        your silicon, Ockam’s SDK makes it easy for your customers to use it
-        securely. Move data between the device and the cloud with Ockam’s built
-        in security.
+        Most application developers struggle to utilize hardware&apos;s cryptographic functions and typically are not familiar with programming with hardware instruction sets. The Ockam Embedded SDK creates simple abstrations to these complex functions. The guarantees that application developers use hardware capabilities as their engineers intended.
+      </Text>
+      <Text>
+        If you are a manufacturer of chipsets, boards, or complete IoT devices, the Ockam Embedded SDK is also for you. You’ve built cryptographic capabilities into your silicon, Ockam’s SDK makes it easy for your customers to use it securely. Simply include the Ockam Embedded SDK along with your instruction set to simplify the developer experience for your customers.
       </Text>
       <LinkAccent mt={3} to="product/embedded-sdk">
         Learn more about the Embedded SDK

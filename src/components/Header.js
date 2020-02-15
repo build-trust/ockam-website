@@ -26,6 +26,7 @@ const Container = styled.nav`
   .active {
     color: ${props => props.theme.colors.menuTextActive};
     font-weight: ${props => props.theme.fontWeights[2]};
+    ${props => (props.isCollapsedHeader && `font-size: ${props.theme.fontSizes[1]}`)};;
   }
 `;
 
@@ -63,7 +64,6 @@ const Header = ({ openSidebar, isCollapsedHeader, showMobileMenu }) => {
   const logo = useThemeLogo();
   const [isCollapsed, setIsCollapsed] = useState(true);
   const toggleIsCollapsed = () => setIsCollapsed(state => !state);
-  console.log('rerender');
   return (
     <Container isCollapsedHeader={isCollapsedHeader}>
       <HamburgerButton onClick={openSidebar} />

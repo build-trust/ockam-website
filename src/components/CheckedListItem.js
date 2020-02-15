@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 
 import { ReactComponent as CircleCheck } from '../assets/check-circle-icon.svg';
+
 import IconListItem from './IconLisItem';
 
 const CheckedListItem = ({ children, containerStyle, ...rest }) => {
