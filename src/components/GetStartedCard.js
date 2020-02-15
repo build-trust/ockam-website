@@ -6,13 +6,10 @@ import { navigate } from 'gatsby';
 import isAbsoluteUrl from 'is-absolute-url';
 
 import arrowTopLeftIcon from '../assets/homepage/arrow-top-left-icon.svg';
-import githubIcon from '../assets/homepage/github-icon.svg';
 
-import Link from './Link';
 import Card from './Card/Card';
 import CardBody from './Card/CardBody';
 import Heading from './Heading';
-import Text from './Text';
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -96,7 +93,12 @@ const GetStartedCard = ({ children, icon, title, to, onClick }) => {
           </StyledHeading>
         </StyledCardBody>
       </StyledCard>
-      {children ? <CardContent> {children}</CardContent> : null}
+      {children ? (
+        <CardContent>
+          {' '}
+          {children}
+        </CardContent>
+) : null}
     </Wrapper>
   );
 };

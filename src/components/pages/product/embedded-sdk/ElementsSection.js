@@ -1,19 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import PageSection from '../../PageSection';
 import Heading from '../../../Heading';
 import FeaturesCardGrid from '../../FeaturesCardGrid';
-import PlaceholderIcon from 'emotion-icons/boxicons-regular/CodeCurly';
 import { ReactComponent as CodeIcon } from '../../../../assets/core-icon.svg';
 import { ReactComponent as VaultIcon } from '../../../../assets/vault-icon.svg';
 import { ReactComponent as TransferIcon } from '../../../../assets/transfer-icon.svg';
+import AnimateOnScroll from "../../../AnimateOnScroll";
 
 const features = [
   {
     title: 'Embedded Core SDK',
     icon: CodeIcon,
     description:
-      'The core functionality and protocols for Ockam are in the Core SDK. The Core creates interfaces to easily plug in Vaults and Transports to complete the Embedded SDK.',
+      'The core functionality and protocols for Ockam are in the Core SDK. The Core interfaces to easily plug in Vaults and Transports to complete the Embedded SDK.',
   },
   {
     title: 'Vault',
@@ -32,11 +32,13 @@ const features = [
 const ElementsSection = () => {
   return (
     <PageSection>
-      <Heading as="h2" mb={5} textAlign="center">
-        {' '}
-        Elements of the Ockam Embedded SDK
-      </Heading>
-      <FeaturesCardGrid features={features} />
+      <AnimateOnScroll transformY animateOnce>
+        <Heading as="h2" mb={5} textAlign="center">
+          {' '}
+          Elements of the Ockam Embedded SDK
+        </Heading>
+        <FeaturesCardGrid features={features} />
+      </AnimateOnScroll>
     </PageSection>
   );
 };

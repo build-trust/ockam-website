@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 
 import Text from '../../Text';
@@ -13,10 +13,9 @@ import { ReactComponent as RouterIcon} from '../../../assets/router-icon.svg';
 import { ReactComponent as ListIcon} from '../../../assets/list-icon.svg';
 import { ReactComponent as HandsIcon} from '../../../assets/hands-icon.svg';
 import { ReactComponent as SupportIcon} from '../../../assets/support-icon.svg';
-
+import IconListItem from '../../IconLisItem';
 
 import HeaderProductGrid from './HeaderProductGrid';
-import IconListItem from '../../IconLisItem';
 
 const HeroHeading = styled(Heading)`
   ${media.desktop`
@@ -41,6 +40,7 @@ const HeaderSection = () => {
       </HeroHeading>
       <Text
         mt={4}
+        color="primary"
         textAlign={{
           lg: 'left',
         }}
@@ -48,16 +48,16 @@ const HeaderSection = () => {
         Ockam’s enterprise-grade products make it easy
       </Text>
       <div>
-        <Text fontWeight='bold'>Software Development Kits</Text>
-        <IconListItem icon={ChipIcon}>Embedded and IoT Devices</IconListItem>
-        <IconListItem icon={ServerIcon}> Linux Boxes at the Edge</IconListItem>
+        <Text textAlign={{ desktop: 'left'}} fontWeight='bold'>Software Development Kits</Text>
         <IconListItem icon={CloudIcon}>Cloud Servers</IconListItem>
+        <IconListItem icon={ServerIcon}> Linux Boxes at the Edge</IconListItem>
+        <IconListItem icon={ChipIcon}>Embedded and IoT Devices</IconListItem>
 
-        <Text mt={4} fontWeight='bold'>Hosted Cloud Services</Text>
-        <IconListItem icon={RouterIcon}>Ockam Routers</IconListItem>
+        <Text textAlign={{ desktop: 'left'}} mt={4} fontWeight='bold'>Hosted Cloud Services</Text>
+        <IconListItem icon={RouterIcon}>Ockam Router</IconListItem>
         <IconListItem icon={ListIcon}> Ockam Registry</IconListItem>
 
-        <Text mt={4} fontWeight='bold'>Professional Services</Text>
+        <Text textAlign={{ desktop: 'left'}} mt={4} fontWeight='bold'>Professional Services</Text>
         <IconListItem icon={HandsIcon}>Enterprise Support</IconListItem>
         <IconListItem icon={SupportIcon}>Custom Services</IconListItem>
       </div>

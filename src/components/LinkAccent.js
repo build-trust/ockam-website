@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from "@emotion/styled";
-import Link from "./Link";
 import { space } from 'styled-system';
+
+import Link from "./Link";
 
 const BaseLink = styled(Link)(space);
 const LinkAccent = styled(BaseLink)`

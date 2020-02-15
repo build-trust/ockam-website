@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from "@emotion/styled";
-import useIsInViewport from "use-is-in-viewport";
 
 import Content from "../Content";
 import cloudDesign from "../../../assets/product/cloud-design.svg";
 import { media } from '../../../utils/emotion';
 import AnimateOnScroll from "../../AnimateOnScroll";
-
 
 const Container = styled(Content)`
   margin-top: 4rem;
@@ -27,16 +25,12 @@ const Image = styled('img')`
 
 const CloudSection = () => {
   return (
-    <AnimateOnScroll transformY animateOnce offsetTopViewport={300}>
+    <AnimateOnScroll transformY animateOnce>
       <Container>
         <Image src={cloudDesign} alt='cloud' />
       </Container>
     </AnimateOnScroll>
   );
-};
-
-CloudSection.propTypes = {
-
 };
 
 export default CloudSection;

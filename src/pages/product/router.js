@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import SEO from '../../components/SEO';
 import HeroSection from '../../components/pages/product/router/HeroSection';
 import DescriptionSection from '../../components/pages/product/router/DescriptionSection';
@@ -20,7 +20,5 @@ const Router = () => {
     </>
   );
 };
-
-Router.propTypes = {};
 
 export default Router;

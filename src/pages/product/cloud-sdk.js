@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import SEO from '../../components/SEO';
 import HeroSection from '../../components/pages/product/cloud-sdk/HeroSection';
 import DescriptionSection from '../../components/pages/product/cloud-sdk/DescriptionSection';
@@ -22,7 +22,5 @@ const CloudSdk = () => {
     </>
   );
 };
-
-CloudSdk.propTypes = {};
 
 export default CloudSdk;

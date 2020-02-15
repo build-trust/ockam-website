@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import githubIcon from '../../../assets/homepage/github-icon.svg';
@@ -49,7 +48,5 @@ const GetStartedSection = () => {
     </PageSection>
   );
 };
-
-GetStartedSection.propTypes = {};
 
 export default GetStartedSection;

@@ -29,6 +29,7 @@
     ],
     "react/jsx-filename-extension": "off",
     "react/destructuring-assignment": "off",
+    "react/jsx-props-no-spreading": "off",
     "jsx-a11y/href-no-hash": "off",
     "jsx-a11y/anchor-is-valid": ["warn", {
       "aspects": ["invalidHref"]

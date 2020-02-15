@@ -11,8 +11,7 @@ const SeamlessConnectedSection = () => {
       <Heading as="h2">
         Ockam Believes In
         <br />
-        {' '}
-A Connected Future.
+        A Connected Future.
       </Heading>
       <Text>
         It is inevitable that data and computing power will become evermore
