@@ -21,8 +21,8 @@ const RegistrySection = props => {
           <Text>
             An Ockam Registry is a foundational component in the Trust Architecture
             of any secure connected device ecosystem. The Ockam Registry is a hosted
-            cloud service that stores Decentralized Identifiers (DIDs) and verified
-            credentials for your devices.
+            cloud service that stores Decentralized Identifiers (DIDs), verified
+            credentials, and metadata for your devices.
           </Text>
           <LinkAccent mt={3} to="product/registry">Learn more about the Ockam Registry</LinkAccent>
         </DefaultGridSection>

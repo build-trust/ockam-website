@@ -25,7 +25,7 @@ const Container = styled('div')`
 const ConfigurationItem = styled('div')`
   color:  ${props => props.theme.colors.white};
   margin-bottom: 3.5rem;
-  &:before { 
+  &:before {
     content: "";
     width: .7rem;
     height: .7rem;
@@ -52,7 +52,7 @@ const ConfigurationsSection = props => {
       <Container>
         <Heading textAlign={{ _: 'center', lg: 'left'}} flex={7} as="h2">Ockam Registry is available in the following configurations</Heading>
         <ConfigurationList mt={{_:3, lg: 0}} flex={5}>
-          <ConfigurationItem>Single Party / Private Registry</ConfigurationItem>
+          <ConfigurationItem>Single-Party / Private Registry</ConfigurationItem>
           <ConfigurationItem>Multi-Party / Private Registry</ConfigurationItem>
           <ConfigurationItem>Multi-Party / Public Registry <ComingSoonBadge>Coming soon</ComingSoonBadge></ConfigurationItem>
         </ConfigurationList>

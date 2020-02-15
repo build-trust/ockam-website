@@ -13,7 +13,7 @@ const features = [
     title: 'Embedded Core SDK',
     icon: CodeIcon,
     description:
-      'The core functionality and protocols for Ockam are in the Core SDK. The Core creates interfaces to easily plug in Vaults and Transports to complete the Embedded SDK.',
+      'The core functionality and protocols for Ockam are in the Core SDK. The Core interfaces to easily plug in Vaults and Transports to complete the Embedded SDK.',
   },
   {
     title: 'Vault',

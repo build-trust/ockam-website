@@ -11,7 +11,7 @@ const HeroSection = () => {
       <Text mb={4}>
         Ockam Router is a service hosted in a cloud environment that makes it
         easy to route messages between an unlimited number of Ockam
-        authenticated connections in your business.
+        authenticated devices and applications in your trusted network.
       </Text>
       <SlideDownAnchor to="#content" />
     </HeaderTextSection>

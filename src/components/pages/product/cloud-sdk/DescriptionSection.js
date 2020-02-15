@@ -17,13 +17,13 @@ const DescriptionSection = () => {
         Ockam Cloud SDK is designed to run efficiently in public or private cloud deployments
       </Heading>
       <Text>
-        Ockam Cloud SDK will become available in Rust, Go, Erlang and Elixir. Devices at the edge can easily connect to, authenticate with and send encrypted data to your cloud service.
+        Ockam Cloud SDK will become available in Rust, Golang (Go), Java, Erlang and Elixir. Devices at the edge can easily connect to, authenticate with, and send encrypted data to your cloud service.
       </Text>
       <CheckedListItem>
-        AWS
+        Amazon Web Services (AWS)
       </CheckedListItem>
       <CheckedListItem>
-        Azure
+        Microsoft Azure
       </CheckedListItem>
       <CheckedListItem>
         Google Cloud

@@ -12,7 +12,7 @@ const HeroSection = () => {
         Ockam Cloud SDK includes everything you need to unblock the flow of data
         from edge environments to your cloud service. Developers of all skills
         and backgrounds can now use your cloud service without specific edge
-        integration skills or cryptographic know how.
+        integration skills or cryptographic security know how.
       </Text>
       <SlideDownAnchor to="#content"/>
     </HeaderTextSection>

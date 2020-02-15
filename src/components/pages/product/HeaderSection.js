@@ -54,7 +54,7 @@ const HeaderSection = () => {
         <IconListItem icon={CloudIcon}>Cloud Servers</IconListItem>
 
         <Text mt={4} fontWeight='bold'>Hosted Cloud Services</Text>
-        <IconListItem icon={RouterIcon}>Ockam Routers</IconListItem>
+        <IconListItem icon={RouterIcon}>Ockam Router</IconListItem>
         <IconListItem icon={ListIcon}> Ockam Registry</IconListItem>
 
         <Text mt={4} fontWeight='bold'>Professional Services</Text>

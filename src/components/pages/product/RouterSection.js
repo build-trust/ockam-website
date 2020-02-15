@@ -21,8 +21,8 @@ const RouterSection = props => {
           <Text>
             Routing secure messages in a connected device ecosystem is
             complicated to get right. The Ockam Router is a hosted cloud service
-            that combines an Ockam Router Service and the Cloud SDK, in an easy
-            to deploy, hosted instance.
+            that combines an Ockam Router Service and the Ockam Cloud SDK, in an easy
+            to deploy puclic cloud hosted instance.
           </Text>
           <LinkAccent mt={3} to="product/router">
             Learn more about the Ockam Router

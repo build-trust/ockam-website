@@ -34,7 +34,7 @@ const ElementsSection = () => {
     <PageSection>
       <Heading as="h2" mb={5} textAlign="center">
         {' '}
-        Elements of the Ockam Embedded SDK
+        Elements of the Ockam Edge SDK
       </Heading>
       <FeaturesCardGrid features={features} />
     </PageSection>

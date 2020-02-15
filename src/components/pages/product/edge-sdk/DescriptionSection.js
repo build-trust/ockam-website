@@ -20,10 +20,10 @@ const DescriptionSection = () => {
       id="content"
     >
       <Heading as="h2">
-        Ockam Edge SDK is tuned for machines with significant resources.
+        Ockam Edge SDK is tuned for machines with powerful compute, network, and storage capabilities outside of datacenters.
       </Heading>
       <Text>
-        Ockam Edge SDK will become available in Rust, Go, Swift and Objective C. Cloud Apps can easily connect, authenticate and trust data exchange with your edge systems.
+        Ockam Edge SDK will become available in Rust, Golang (Go), Erlang, Elixir, Swift and Objective C. Cloud applications can easily connect, authenticate, and trust data exchange with distributed networks at the edge.
       </Text>
       <IconListItem icon={DoorIcon}>Gateways</IconListItem>
       <IconListItem icon={LinuxIcon}>Linux boxes at the Edge</IconListItem>

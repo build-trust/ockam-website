@@ -57,10 +57,10 @@ const GetStartedSection = props => {
             Get the Cloud SDK Core
           </GetStartedItem>
           <GetStartedItem icon={TransferIcon}>
-            Determine Transport for your cloud environment
+            Plugin the Transport SDK element for your cloud environment
           </GetStartedItem>
           <GetStartedItem icon={VaultIcon}>
-            Choose a Vault from the open source library, or build your own
+            Choose a Vault implimentation for your cloud provider's HSM from the open source library, or build your own
           </GetStartedItem>
         </GetStartedCard>
         <GetStartedCard

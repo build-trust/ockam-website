@@ -22,7 +22,7 @@ const DescriptionSection = () => {
       <CheckedListItem>
         Ockam Cloud SDK
         <Text color="caption">
-          allows other services and environments to securely connect with an
+          allows other services and environments to authenticate and message with an
           Ockam Registry.
         </Text>
       </CheckedListItem>

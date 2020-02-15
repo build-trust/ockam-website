@@ -9,10 +9,7 @@ const HeroSection = () => {
     <HeaderTextSection>
       <Heading as="h1">Ockam Registry</Heading>
       <Text mb={4}>
-        Ockam Registry is an open source secure distributed device and service
-        registry based on distributed identifiers [DIDs] and verifiable claims.
-        Makes it easy to manage an unlimited number of keys and credentials and
-        speeds trustful authentication
+        The Ockam Registry is a hosted cloud service datastore. It stores Decentralized Identifiers (DIDs), verified credentials, and metadata for the devices in your network. An Ockam Registry is a foundational component in the Trust Architecture of conected systems.
       </Text>
       <SlideDownAnchor to="#content" />
     </HeaderTextSection>

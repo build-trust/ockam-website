@@ -57,10 +57,10 @@ const GetStartedSection = props => {
             Get the Edge SDK Core
           </GetStartedItem>
           <GetStartedItem icon={TransferIcon}>
-            Determine Transport for your embedded hardware
+            Plugin the Transport SDK element for your edge hardware
           </GetStartedItem>
           <GetStartedItem icon={VaultIcon}>
-            Choose a Vault from the open source library, or build your own
+            Choose a Vault implimentation from the open source library, or build your own
           </GetStartedItem>
         </GetStartedCard>
         <GetStartedCard

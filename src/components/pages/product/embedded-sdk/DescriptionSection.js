@@ -14,20 +14,20 @@ const DescriptionSection = () => {
       id="content"
     >
       <Heading as="h2">
-        Ockam Embedded SDK is written in C and tuned for small devices.
+        The Embedded SDK is written in C and tuned for small devices.
       </Heading>
       <Text>
-        Cloud Apps can easily connect, authenticate and trust data exchange with
-        your hardware.
+        Cloud applications can easily connect, authenticate, and trust data exchange with
+        your embedded-scale hardware including:
       </Text>
       <CheckedListItem>
-        Processors with Secure Enclaves
+        Processors with secure enclaves
       </CheckedListItem>
       <CheckedListItem>
-        Microcontroller Boards equipped with cryptographic security elements
+        Microcontroller boards equipped with cryptographic security elements
       </CheckedListItem>
       <CheckedListItem>
-        Trusted Platform Modules
+        Trusted platform modules (TPM)
       </CheckedListItem>
     </DefaultGridSection>
   );
