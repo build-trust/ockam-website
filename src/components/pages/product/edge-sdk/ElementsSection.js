@@ -22,7 +22,7 @@ const features = [
       'Vaults are adaptors that allow any cryptographically empowered chip to interface the Ockam Core. Store Ockam identifiers in trusted environments.',
   },
   {
-    title: 'Transport(2)',
+    title: 'Transport',
     icon: TransferIcon,
     description:
       'Transports are adaptors that allow any transport to interface with the Ockam Core. Pick from TCP, Bluetooth, and LoRaWAN.',

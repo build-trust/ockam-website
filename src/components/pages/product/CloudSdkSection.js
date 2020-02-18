@@ -19,11 +19,11 @@ const CloudSdkSection = () => {
         Ockam Cloud SDK
       </Heading>
       <Text>
-        Application developers take advantage of open-core cloud services as part of their stack. Datastores, stream processing engines, and Identity and Access Management (IAM) services are common examples. However, application workloads are not limited to the secure confines of the data center anymore; Builders want to connect cloud
-        services in the cloud to applications running at the edge!
+        Application developers rely on lots of open-core cloud services as part of their stack. Datastores, stream processing engines, and Identity and Access Management (IAM) services are common examples. However, application workloads are not limited to the secure confines of the data center anymore; Builders want to connect cloud
+        services to applications running in devices at the edge!
       </Text>
       <Text>
-        The Ockam Cloud SDK is crafted to create a common interface between cloud services, and edge networks. When cloud services include the Ockam Cloud SDK, applications can trust messages sent from applications running at the edge.
+        The Ockam Cloud SDK is crafted to create simple interfaces between cloud services, and edge appliocations. When cloud services include the Ockam Cloud SDK, cloud applications can trust messages sent from applications running in devices at the edge.
       </Text>
       <LinkAccent mt={3} to="product/cloud-sdk">Learn more about the  Cloud SDK</LinkAccent>
     </StickySection>
