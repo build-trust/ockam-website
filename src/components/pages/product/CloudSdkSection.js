@@ -11,7 +11,7 @@ import Subheading from "../Subheading";
 
 const CloudHeader = () => (
   <>
-    <Subheading textAlign={{ _: "center", lg: "left"}}>Ockam's Hosted Cloud Services</Subheading>
+    <Subheading textAlign={{ _: "center", lg: "left"}}>Environment Specific Software Development Kits</Subheading>
     <Heading textAlign={{ _: "center", lg: "left"}} as="h2"> Ockam Cloud SDK</Heading>
   </>
 );
