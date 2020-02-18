@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Heading from '../../Heading';
 import Text from '../../Text';
 import buildersSection from '../../../assets/homepage/builders-section-image.svg';
 import DefaultGridSection from '../DefaultGridSection';
@@ -11,10 +10,8 @@ const BuildersSection = () => {
       image={buildersSection}
       direction="imageOnRight"
       gridLgProportions={['4fr', '3fr']}
+      title="Ockam’s mission is to empower millions of builders. Just like you."
     >
-      <Heading as="h2">
-        Ockam’s mission is to empower millions of builders. Just like you.
-      </Heading>
       <Text>
         Building distributed systems of interconnected devices is really
         difficult. It takes specialized skills and massive development budgets

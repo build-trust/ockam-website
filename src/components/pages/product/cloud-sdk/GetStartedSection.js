@@ -16,6 +16,7 @@ import {ReactComponent as VaultIcon } from '../../../../assets/vault-icon.svg';
 import {ReactComponent as TransferIcon } from '../../../../assets/transfer-icon.svg';
 import {ReactComponent as DocIcon } from '../../../../assets/doc-icon.svg';
 import {ReactComponent as SupportIcon } from '../../../../assets/support-icon.svg';
+import {ReactComponent as CloudIcon } from '../../../../assets/cloud-icon.svg';
 import AnimateOnScroll from "../../../AnimateOnScroll";
 
 const GetStartedGrid = styled('div')`
@@ -63,6 +64,9 @@ const GetStartedSection = () => {
             </GetStartedItem>
             <GetStartedItem icon={VaultIcon}>
               Choose a Vault implimentation for your cloud provider&apos;s HSM from the open source library, or build your own
+            </GetStartedItem>
+            <GetStartedItem icon={CloudIcon}>
+              Add a Cloud Service integration from the Ockam Library.
             </GetStartedItem>
           </GetStartedCard>
           <GetStartedCard

@@ -34,21 +34,11 @@ const isPartiallyActive = ({ isPartiallyCurrent }) => {
 };
 
 const MobileMenu = ({ items, showMobileMenu, isCollapsedHeader, ...rest }) => {
-  const [viewHeight, setViewHeight] = useState(0);
-  const onRefSet = useCallback(ref => {
-    if(!ref) return 0;
-    const {height} = ref.getBoundingClientRect();
-    setViewHeight(height);
-  },[]);
 
-  const { height, opacity, transform } = useSpring({
-    from: { height: 0, opacity: 0, transform: 'translate3d(0,-120px,0)' },
-    to: { height: showMobileMenu ? viewHeight : 0, opacity: showMobileMenu ? 1 : 0, transform: `translate3d(0, ${showMobileMenu ? 0 : -120}px,0)` },
-  });
-
+  if(!showMobileMenu) return null;
   return (
-    <Wrapper style={{ opacity, height }} {...rest} isCollapsedHeader={isCollapsedHeader} showMobileMenu={showMobileMenu}>
-      <Content style={{ transform }} ref={onRefSet}>
+    <Wrapper {...rest} isCollapsedHeader={isCollapsedHeader} showMobileMenu={showMobileMenu}>
+      <Content>
         {items.map(item => (
           <Fragment key={item.to}>
             {item.type === 'text' && (

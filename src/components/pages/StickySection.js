@@ -10,12 +10,21 @@ import Content from "./Content";
 
 
 const StickySectionContent = styled(Content)`
-  display: flex;
-  flex-direction: column;
 
-  ${media.desktop`
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "title"
+    "image"
+    "content";
+  ${media.desktop`   
+      grid-template-columns: 7fr 4fr;
+      grid-template-rows: 1fr;
+      grid-column-gap: 11rem;
+      grid-template-areas: 
+      "image title"
+      "image content";
   `}
 
 `;
@@ -30,22 +39,24 @@ const StickyBox = styled('div')`
 `
 
 const TextBox = styled('div')`
+  grid-area: content;
   flex: 4;
   display: flex;
   flex-direction: column;
   ${media.desktop`
-    padding-left:11rem;
+
   `};
-  order: ${props => (props.order === 'imageOnLeft' ? 2 : 1)};
+
 `;
 
 const StickyContainer = styled('div')`
   flex: 8;
+  grid-area: image;
 
   ${media.desktop`
     margin-bottom: 0;
   `};
-  order: ${props => (props.order === 'imageOnLeft' ? 1 : 2)};
+
   position: relative;
 `;
 
@@ -53,10 +64,10 @@ const EnvironmentLabel = styled('div')`
   display: none;
    ${media.desktop`
       display: block;
-      font-size: 6rem;
-      opacity: 0.2;
+      font-size: 5rem;
+      opacity: 0.15;
       position: absolute;
-      left: -10rem;
+      left: -7rem;
       transform-origin: 0 0;
       transform: rotate(-90deg) translateX(-100%);
     `};
@@ -79,37 +90,35 @@ const MobileImage = styled('img')`
   `}
 `
 
-const MobileHeader = styled(Heading)`
-  width: 100%;
-   ${media.desktop`
-    display: none;
-  `}
+const Title = styled(Heading)`
+   grid-area: title;
 `
 
-const StickySection = ({ image, mobileImage, title, children, environmentTitle, order }) => {
+const StickySection = ({ image, mobileImage, title, TitleComponent, children, environmentTitle, order }) => {
 
   return (
-    <StickySectionContent>
-      <AnimateOnScroll transformY offsetTopViewport={300}>
-        <MobileHeader textAlign="center" as="h2">
-          {title}
-        </MobileHeader>
-      </AnimateOnScroll>
-      <StickyContainer>
-        <EnvironmentLabel>{environmentTitle}</EnvironmentLabel>
-        <StickyBox order={order}>
-          <AnimateOnScroll transformY offsetTopViewport={300}>
-            <Image src={image} alt='sticky' />
-            <MobileImage src={mobileImage} alt='mobileImage sticky' />
-          </AnimateOnScroll>
-        </StickyBox>
-      </StickyContainer>
-      <TextBox order={order}>
-        <AnimateOnScroll offsetTopViewport={300}>
+    <AnimateOnScroll>
+      <StickySectionContent>
+        <StickyContainer>
+          <EnvironmentLabel>{environmentTitle}</EnvironmentLabel>
+          <StickyBox order={order}>
+            <AnimateOnScroll transformY offsetTopViewport={300}>
+              <Image src={image} alt='sticky' />
+              <MobileImage src={mobileImage} alt='mobileImage sticky' />
+            </AnimateOnScroll>
+          </StickyBox>
+        </StickyContainer>
+        {title && (
+          <Title as="h2" textAlign={{ _: "center", lg: 'left'}}>
+            {title}
+          </Title>
+        )}
+        {TitleComponent && <Title as="div"><TitleComponent /></Title>}
+        <TextBox order={order}>
           {children}
-        </AnimateOnScroll>
-      </TextBox>
-    </StickySectionContent>
+        </TextBox>
+      </StickySectionContent>
+    </AnimateOnScroll>
   );
 };
 
@@ -117,7 +126,8 @@ StickySection.propTypes = {
   order: PropTypes.oneOf(['imageOnLeft', 'imageOnRight']),
   image: PropTypes.string.isRequired,
   mobileImage: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  TitleComponent: PropTypes.func,
   environmentTitle: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.node,
@@ -127,6 +137,8 @@ StickySection.propTypes = {
 
 StickySection.defaultProps = {
   order: 'imageOnLeft',
+  title: undefined,
+  TitleComponent: undefined,
 };
 
 export default StickySection;

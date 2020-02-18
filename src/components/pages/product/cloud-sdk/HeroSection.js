@@ -8,18 +8,18 @@ import AnimateOnScroll from "../../../AnimateOnScroll";
 
 const HeroSection = () => {
   return (
-    <AnimateOnScroll transformY animateOnce>
-      <HeaderTextSection>
+    <HeaderTextSection>
+      <AnimateOnScroll transformY animateOnce>
         <Heading as="h1">Ockam Cloud SDK</Heading>
         <Text mb={4}>
-          Ockam Cloud SDK includes everything you need to unblock the flow of data
-          from edge environments to your cloud service. Developers of all skills
-          and backgrounds can now use your cloud service without specific edge
-          integration skills or cryptographic security know how.
+            The Ockam Cloud SDK includes everything you need to trust the flow of data
+            from edge environments into the cloud services that your applications depend upon. Developers of all skills
+            and backgrounds can now connect cloud services to the edge without specific distributed systems
+            integration skills or cryptographic security know how.
         </Text>
         <SlideDownAnchor to="#content" />
-      </HeaderTextSection>
-    </AnimateOnScroll>
+      </AnimateOnScroll>
+    </HeaderTextSection>
   );
 };
 

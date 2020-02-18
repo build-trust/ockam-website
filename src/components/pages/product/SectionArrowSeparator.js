@@ -20,8 +20,10 @@ const Container = styled(Content)`
 const Image = styled('img')`
   margin-left: auto;
   margin-right: auto;
+  display: none;
    ${media.desktop`
     margin-left: 22%;
+    display: initial;
   `}
 `;
 

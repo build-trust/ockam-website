@@ -13,4 +13,4 @@ Ockam’s developer tools enable you to …
 * Establish authenticated channels between endpoints regardless of the transports or route,
 * Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments.
 
-The Ockam Team is here to help you. If you still have questions after reading through our published content, please reach out to us. We’d love to connect with you to hear about what you are building.
+**The Ockam Team is here to help you. If you still have questions after reading through our published content, please reach out to us. We’d love to connect with you to hear about what you are building.**

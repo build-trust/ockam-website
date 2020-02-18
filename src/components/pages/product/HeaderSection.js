@@ -7,7 +7,7 @@ import heroProductGraphics from '../../../assets/product/hero-product.svg';
 import heroProductMobileGraphics from '../../../assets/product/hero-product-mobile.svg';
 import { media } from '../../../utils/emotion';
 import { ReactComponent as ChipIcon} from '../../../assets/chip-icon.svg';
-import { ReactComponent as ServerIcon} from '../../../assets/server-icon.svg';
+import { ReactComponent as LinuxIcon} from '../../../assets/linux-icon.svg';
 import { ReactComponent as CloudIcon} from '../../../assets/cloud-icon.svg';
 import { ReactComponent as RouterIcon} from '../../../assets/router-icon.svg';
 import { ReactComponent as ListIcon} from '../../../assets/list-icon.svg';
@@ -50,7 +50,7 @@ const HeaderSection = () => {
       <div>
         <Text textAlign={{ desktop: 'left'}} fontWeight='bold'>Software Development Kits</Text>
         <IconListItem icon={CloudIcon}>Cloud Servers</IconListItem>
-        <IconListItem icon={ServerIcon}> Linux Boxes at the Edge</IconListItem>
+        <IconListItem icon={LinuxIcon}> Linux Boxes at the Edge</IconListItem>
         <IconListItem icon={ChipIcon}>Embedded and IoT Devices</IconListItem>
 
         <Text textAlign={{ desktop: 'left'}} mt={4} fontWeight='bold'>Hosted Cloud Services</Text>

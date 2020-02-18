@@ -46,9 +46,9 @@ const ImageBox = styled('div')`
 `;
 
 const DesktopImage = styled('div')`
-  background-image: url(${routerDiagram});
-  background-repeat: repeat-x;
-  background-position: center left;
+  background-image: url(${routerDiagram}), url(${routerDiagram});
+  background-repeat: no-repeat, no-repeat;
+  background-position: 0 center, 637px center;
   background-size: contain;
   position: absolute;
   height: 100%;
@@ -73,8 +73,9 @@ const RouterSection = styled(PageSection)`
 const DescriptionSection = () => {
   return (
     <RouterSection>
-      <Container>
-        <AnimateOnScroll transformY animateOnce>
+      <AnimateOnScroll transformY animateOnce>
+        <Container>
+
           <DescriptionBox>
             <Heading as="h2">Content of Ockam Router</Heading>
             <Text>Ockam Router includes:</Text>
@@ -97,8 +98,8 @@ const DescriptionSection = () => {
             <DesktopImage />
           </ImageBox>
           <ImageBoxMobile src={routerDiagramMobile} />
-        </AnimateOnScroll>
-      </Container>
+        </Container>
+      </AnimateOnScroll>
     </RouterSection>
   );
 };

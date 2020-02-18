@@ -1,13 +1,23 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { lighten } from 'polished';
 
 import { media } from '../../utils/emotion';
+import pattern from '../../assets/hero-pattern.svg';
 
 import PageSection from './PageSection';
 
 const Wrapper = styled('div')`
-  margin-top: 14rem;
+  margin-top: -8.8rem;
+  padding-top: 22.8rem;
+  ${({ theme }) =>
+    `background-image:  linear-gradient(0deg, ${
+      theme.colors.background
+    } 0%, transparent 30%), url(${pattern}), radial-gradient(50% 87%, ${lighten(
+      0.03,
+      theme.colors.background
+    )} 9%, ${theme.colors.background} 88%)`};
 `;
 
 const Container = styled('div')`
@@ -21,16 +31,14 @@ const Container = styled('div')`
 `;
 
 const AnchorScroller = styled('div')`
-  padding-bottom:  8rem;
+  padding-bottom: 8rem;
 `;
 
 const HeaderTextSection = ({ children }) => {
   return (
     <Wrapper>
-      <PageSection>
-        <Container>
-          {children}
-        </Container>
+      <PageSection backgroundColor="transparent">
+        <Container>{children}</Container>
       </PageSection>
       <AnchorScroller id="content">&nbsp;</AnchorScroller>
     </Wrapper>

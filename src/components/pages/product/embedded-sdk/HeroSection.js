@@ -12,10 +12,10 @@ const HeroSection = () => {
       <AnimateOnScroll transformY animateOnce>
         <Heading as="h1">Ockam Embedded SDK</Heading>
         <Text mb={4}>
-          Ockam Embedded SDK includes everything you need to unblock the flow of
-          data from your IoT hardware environment to the cloud. Developers of all
-          skills and backgrounds can now use your components without specific
-          embedded hardware skills or cryptographic security know how.
+          The Ockam Embedded SDK includes everything you need to trust the flow of data
+          between your IoT systems and cloud applications. Developers of all skills
+          and backgrounds can now connect IoT to cloud services without specific distributed systems
+          integration skills or cryptographic security know how.
         </Text>
 
         <SlideDownAnchor to="#content" />

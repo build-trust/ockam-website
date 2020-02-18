@@ -4,7 +4,7 @@ import { MDXProvider } from '@mdx-js/react';
 import PropTypes from 'prop-types';
 import FocusLock from 'react-focus-lock';
 import { Global } from '@emotion/core';
-import { useSpring, animated } from 'react-spring';
+import { animated, useTransition } from 'react-spring';
 
 import normalizeCss from '../theme/normalizeCss';
 import globalStyles from '../theme/globalStyles';
@@ -28,26 +28,21 @@ const PageWrapper = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
+const HeaderWrapper = styled.div`
   z-index: 11;
   position: relative;
   width: 100%;
   background-color: transparent;
-  ${props =>
-    props.isCollapsedHeader &&
-    `
-      position: fixed;
-      background-color: ${props.theme.colors.accentBackground};
-  `};
+
 `;
 
-const AnimatedWrapper = animated(Wrapper);
+const StickyMenuWrapper = styled(HeaderWrapper)`
+  position: fixed;
+  top: 0;
+  background-color: ${props => props.theme.colors.accentBackground};
+`
 
-// @todo Find another way to fix jumping when scrolling;
-// this margin value comes from inner margin + header initial height
-const ChildrenWrapper = styled('div')`
-  ${props => props.isCollapsedHeader && `margin-top: 188px;`};
-`;
+const AnimatedStickyMenuWrapper = animated(StickyMenuWrapper);
 
 const PageLayout = ({
   children,
@@ -56,16 +51,15 @@ const PageLayout = ({
   themeName,
 }) => {
   const ref = useRef();
-  const [isCollapsedHeader, headerHeight] = useUnderViewport(ref);
-  const toCollapsedAnimation = useSpring({
-    height: isCollapsedHeader ? 0 : -headerHeight,
+  const [isCollapsedHeader] = useUnderViewport(ref);
+  console.log('isCollapsedHeader',isCollapsedHeader);
+
+  const transitions = useTransition(isCollapsedHeader, null, {
+    from: { transform: 'translate3d(0,-80px,0)' },
+    enter: { transform: 'translate3d(0,0px,0)' },
+    leave: { transform: 'translate3d(0,-80px,0)' },
   });
 
-  const toFullAnimation = useSpring({
-    height: isCollapsedHeader ? -headerHeight : 0,
-  });
-
-  const trans = value => `translateY(${value}px)`;
   return (
     <ThemeProvider themeName={themeName}>
       <MDXProvider components={mdxComponents}>
@@ -73,26 +67,28 @@ const PageLayout = ({
           <Global styles={normalizeCss} />
           <Global styles={globalStyles} />
           <FocusLock disabled={!isOpenSidebar}>
-            <AnimatedWrapper
-              ref={ref}
-              isCollapsedHeader={isCollapsedHeader}
-              style={{
-                transform: isCollapsedHeader
-                  ? toCollapsedAnimation.height.interpolate(trans)
-                  : toFullAnimation.height.interpolate(trans),
-              }}
-            >
+            <HeaderWrapper ref={ref}>
               <Content>
                 <Header
-                  showMobileMenu={false}
-                  isCollapsedHeader={isCollapsedHeader}
+                  isCollapsedHeader={false}
                   openSidebar={() => setIsOpenSidebar(true)}
                 />
               </Content>
-            </AnimatedWrapper>
-            <ChildrenWrapper isCollapsedHeader={isCollapsedHeader}>
-              {children}
-            </ChildrenWrapper>
+            </HeaderWrapper>
+            {
+              transitions.map(({ item, props, key }) =>
+              item && (
+                <AnimatedStickyMenuWrapper key={key} style={props}>
+                  <Content>
+                    <Header
+                      isCollapsedHeader
+                      openSidebar={() => setIsOpenSidebar(true)}
+                    />
+                  </Content>
+                </AnimatedStickyMenuWrapper>
+              ))
+            }
+            {children}
           </FocusLock>
           <Footer />
         </PageWrapper>

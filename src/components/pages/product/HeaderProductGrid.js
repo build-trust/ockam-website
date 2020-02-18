@@ -29,7 +29,7 @@ const Section = styled(PageSection)`
     text-align: initial;
     min-height: 40rem;
     height: initial;
-    margin: 10rem 0 15rem 0;
+    margin: 10rem 0 18rem 0;
   `}
 `;
 const Grid = styled('div')(grid);
