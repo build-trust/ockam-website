@@ -13,6 +13,7 @@ const colors = {
   menuTextActive: '#242A31',
   code: '#3C454E',
   primary: '#52c7ea',
+  bleakPrimary: '#e9f7fc',
   secondary: '#a4a9bf',
   caption: '#7A8895',
   white: '#fff',

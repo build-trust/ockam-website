@@ -123,7 +123,7 @@ DefaultGridSection.propTypes = {
   gridLgProportions: PropTypes.arrayOf(PropTypes.string),
   isStickyImage: PropTypes.bool,
   id: PropTypes.string,
-  contentAlign: PropTypes.oneOf("top", "center"),
+  contentAlign: PropTypes.oneOf(["top", "center"]),
 };
 
 DefaultGridSection.defaultProps = {

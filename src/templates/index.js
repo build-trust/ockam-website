@@ -17,7 +17,7 @@ const Index = ({ children, pageContext, location, ...rest }) => {
   }
   if (isDocPage) {
     return (
-      <LearnTemplate location={location} {...rest}>
+      <LearnTemplate location={location} dependedRepos={pageContext.dependedRepos} {...rest}>
         {children}
       </LearnTemplate>
     );
@@ -34,6 +34,7 @@ Index.propTypes = {
   children: PropTypes.node.isRequired,
   pageContext: PropTypes.shape({
     pageType: PropTypes.oneOf(['doc', 'page', 'blog']),
+    dependedRepos: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
   location: PropTypes.shape({}).isRequired,
 };

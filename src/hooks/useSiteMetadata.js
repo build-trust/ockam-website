@@ -11,6 +11,9 @@ const useSiteMetadata = () => {
           ockamLibraryRepo
           title
           description
+          ockamWebsiteRepo
+          markdownPath
+          githubProductionPath
         }
       }
     }
