@@ -111,6 +111,9 @@ module.exports = {
   pathPrefix: config.gatsby.pathPrefix,
   siteMetadata: {
     ockamLibraryRepo: config.general.ockamLibraryRepo,
+    ockamWebsiteRepo: config.general.ockamWebsiteRepo,
+    markdownPath: config.general.markdownPath,
+    githubProductionPath: config.general.githubProductionPath,
     slackChannel: config.general.slackChannel,
     twitter: config.general.twitter,
     email: config.general.email,

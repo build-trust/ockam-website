@@ -26,6 +26,10 @@ const Button = styled('button')(
         color: 'white',
         bg: 'primary',
       },
+      bleakPrimary: {
+        color: 'primary',
+        bg: 'bleakPrimary',
+      },
     },
   }),
   variant({

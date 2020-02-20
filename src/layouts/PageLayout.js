@@ -52,7 +52,6 @@ const PageLayout = ({
 }) => {
   const ref = useRef();
   const [isCollapsedHeader] = useUnderViewport(ref);
-  console.log('isCollapsedHeader',isCollapsedHeader);
 
   const transitions = useTransition(isCollapsedHeader, null, {
     from: { transform: 'translate3d(0,-80px,0)' },

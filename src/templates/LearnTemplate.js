@@ -13,6 +13,7 @@ import DocsSidebar from '../components/docs/DocsSidebar/DocsSidebar';
 import LearnLayout from '../layouts/LearnLayout';
 import defaultAvatar from '../assets/default_avatar.png';
 import LearnPost from '../components/blog/LearnPost';
+import EditOnGithubLink from "../components/EditOnGithubLink";
 
 const Content = styled.div`
   display: flex;
@@ -31,10 +32,12 @@ export default function LearnTemplate(props) {
   const {
     data: { mdx },
     location,
+    dependedRepos,
   } = props;
   const {
     frontmatter: { metaTitle, metaDescription, metaImage, authorAvatar, author, date },
     excerpt,
+    parent: { relativePath },
     fields: { slug, title, id },
     body,
   } = mdx;
@@ -53,6 +56,7 @@ export default function LearnTemplate(props) {
   const isRoot = currentNode.slug === '/';
   const menuId = 'main-menu';
   const isPostPath = currentNode.slug.match(/^\/learn\/blog\/.+$/);
+  const isBlogRoot = currentNode.slug.match(/^\/learn\/blog\/$/);
   const imageAvatar = authorAvatar
     ? authorAvatar.childImageSharp.fixed.src
     : defaultAvatar;
@@ -91,9 +95,10 @@ export default function LearnTemplate(props) {
         ) : (
           <div>
             <MDXRenderer>{body}</MDXRenderer>
+            {!isBlogRoot && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
           </div>
         )}
-        {!isRoot && (
+        {!isRoot && !isBlogRoot && (
           <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
         )}
       </Content>
@@ -108,6 +113,9 @@ LearnTemplate.propTypes = {
         slug: PropTypes.string,
         title: PropTypes.string,
         id: PropTypes.string,
+      }),
+      parent: PropTypes.shape({
+        relativePath: PropTypes.string,
       }),
       frontmatter: PropTypes.shape({
         metaTitle: PropTypes.string,
@@ -127,6 +135,10 @@ LearnTemplate.propTypes = {
       body: PropTypes.string,
     }),
   }),
+  dependedRepos: PropTypes.arrayOf(PropTypes.shape({
+    githubUrl: PropTypes.string,
+    slug: PropTypes.string,
+  })),
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
@@ -140,6 +152,7 @@ LearnTemplate.defaultProps = {
       body: '',
     },
   },
+  dependedRepos: [],
 };
 
 export const pageQuery = graphql`

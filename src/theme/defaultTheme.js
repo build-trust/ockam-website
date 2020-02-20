@@ -15,6 +15,7 @@ const colors = {
   text: '#A2B6C7',
   code: '#e7e8e8',
   primary: '#52c7ea',
+  bleakPrimary: '#183643',
   dirtyPrimary: '#3C8DA9',
   accent: '#EC432D',
   secondary: '#a4a9bf',

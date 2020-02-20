@@ -1,7 +1,8 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
-
 const path = require("path");
 const { startCase } = require("lodash");
+
+const getDependedRepos = require('./scripts/get-depended-repos');
 
 const isNodeBlogPage = (node) => node.fields.slug && node.fields.slug.split("/")[1] === 'blog';
 
@@ -31,7 +32,7 @@ exports.createPages = async ({ graphql, actions }) => {
   if (results.errors) {
     console.log(results.errors); // eslint-disable-line no-console
   }
-
+  const dependedRepos = await getDependedRepos();
   results.data.allMdx.edges.forEach(({ node }) => {
     const isBlog = isNodeBlogPage(node);
     const page = {
@@ -40,6 +41,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         id: node.fields.id,
         pageType: isBlog ? 'blog' : 'doc',
+        dependedRepos,
       },
     };
     createPage(page);

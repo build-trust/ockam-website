@@ -59,6 +59,7 @@
     "graphql": "14.5.8",
     "is-absolute-url": "3.0.3",
     "lodash": "4.17.15",
+    "neat-csv": "5.2.0",
     "polished": "3.4.2",
     "prism-react-renderer": "1.0.2",
     "prop-types": "15.7.2",
