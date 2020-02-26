@@ -14,6 +14,10 @@ const useSiteMetadata = () => {
           ockamWebsiteRepo
           markdownPath
           githubProductionPath
+          env {
+            STAGE
+            GOOGLE_RECAPTCHA_SITEKEY
+          }
         }
       }
     }

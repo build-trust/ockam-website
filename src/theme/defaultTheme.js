@@ -21,6 +21,14 @@ const colors = {
   secondary: '#a4a9bf',
   caption: '#7A8895',
   blogTextBackground: '#0A1A2B',
+  inputBackground: '#0E2032',
+  inputBorder: '#0E2032',
+  inputText: '#fff',
+  inputPlaceholder: '#3E4D5B',
+  modalBackground: 'rgba(3,13,24,0.8)',
+  modalShadow: 'rgba(0,0,0,0.8)',
+  negative: "#EC432D",
+
 };
 
 /* eslint-disable prefer-destructuring */
@@ -37,6 +45,7 @@ const fontSizes = [
   '4.6rem',
 ];
 fontSizes.caption = fontSizes[0];
+fontSizes.small = fontSizes[1];
 fontSizes.body = fontSizes[3];
 fontSizes.bodySmall = fontSizes[2];
 fontSizes.h1 = fontSizes[8];

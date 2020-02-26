@@ -6,7 +6,6 @@ import PageSection from '../../PageSection';
 import Heading from '../../../Heading';
 import githubIcon from '../../../../assets/homepage/github-icon.svg';
 import GetStartedCard from '../../../GetStartedCard';
-import config from '../../../../../config';
 import sendIcon from '../../../../assets/homepage/send-icon.svg';
 import useSiteMetadata from '../../../../hooks/useSiteMetadata';
 import { media } from '../../../../utils/emotion';
@@ -18,6 +17,8 @@ import {ReactComponent as DocIcon } from '../../../../assets/doc-icon.svg';
 import {ReactComponent as SupportIcon } from '../../../../assets/support-icon.svg';
 import {ReactComponent as CloudIcon } from '../../../../assets/cloud-icon.svg';
 import AnimateOnScroll from "../../../AnimateOnScroll";
+import useModal from "../../../../hooks/useModal";
+import ContactModal from "../../../../modals/ContactModal";
 
 const GetStartedGrid = styled('div')`
   display: grid;
@@ -44,6 +45,7 @@ GetStartedItem.propTypes = {
 
 const GetStartedSection = () => {
   const siteMetaData = useSiteMetadata();
+  const [, showContactModal] = useModal(ContactModal);
   return (
     <PageSection>
       <AnimateOnScroll transformY animateOnce>
@@ -70,7 +72,7 @@ const GetStartedSection = () => {
             </GetStartedItem>
           </GetStartedCard>
           <GetStartedCard
-            to={`mailto:${config.general.email}`}
+            onClick={() => showContactModal()}
             title="Request a demo"
             icon={sendIcon}
           >

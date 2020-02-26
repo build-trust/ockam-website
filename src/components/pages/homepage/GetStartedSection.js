@@ -9,8 +9,9 @@ import { media } from '../../../utils/emotion';
 import PageSection from '../PageSection';
 import Subheading from '../Subheading';
 import useSiteMetadata from '../../../hooks/useSiteMetadata';
-import config from '../../../../config';
 import GetStartedCard from "../../GetStartedCard";
+import useModal from "../../../hooks/useModal";
+import ContactModal from "../../../modals/ContactModal";
 
 
 const GesStartedGrid = styled.div`
@@ -33,6 +34,8 @@ const GesStartedGrid = styled.div`
 
 const GetStartedSection = () => {
   const siteMetaData = useSiteMetadata();
+  const [, showContactModal] = useModal(ContactModal);
+  const onShowContactModal = () => showContactModal();
 
   return (
     <PageSection>
@@ -42,7 +45,7 @@ const GetStartedSection = () => {
       <GesStartedGrid>
         <GetStartedCard to={siteMetaData.ockamLibraryRepo} title={'{ockam}'} icon={githubIcon} />
         <GetStartedCard to={siteMetaData.slackChannel} title="Join Community" icon={slackIcon} />
-        <GetStartedCard to={`mailto:${config.general.email}`} title="Request a demo" icon={sendIcon} />
+        <GetStartedCard onClick={onShowContactModal} title="Request a demo" icon={sendIcon} />
         <GetStartedCard to={siteMetaData.twitter} title="Follow Ockam" icon={twitterIcon} />
       </GesStartedGrid>
     </PageSection>

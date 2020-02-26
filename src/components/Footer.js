@@ -8,12 +8,16 @@ import { useTheme } from 'emotion-theming';
 import { media } from '../utils/emotion';
 import ockamLogo from '../assets/ockam-logo.svg';
 import ockamLogoInvert from '../assets/ockam-logo-invert.svg';
-import config from '../../config';
+import useModal from "../hooks/useModal";
+import ContactModal from "../modals/ContactModal";
 
 import PageSection from './pages/PageSection';
 import Link from './Link';
 import Caption from './Caption';
+import Text from './Text';
 import Icon from './Icon';
+
+
 
 const FooterGrid = styled.div`
   padding-top: ${props => props.theme.space.large};
@@ -54,8 +58,10 @@ const MenuContainer = styled.div`
   `};
 `;
 
-const MenuLink = styled(Link)`
+const MenuLink = styled(Text)`
   padding-left: 2rem;
+  font-size: ${props => props.theme.fontSizes.bodySmall};
+  cursor: pointer;
   &:first-of-type {
     padding-left: 0;
   }
@@ -81,6 +87,8 @@ const LogoOckam = styled.img`
 
 const Footer = () => {
   const theme = useTheme();
+  const [, showContactModal] = useModal(ContactModal);
+  const openContactModal = () => showContactModal();
   const logoImage = theme.name === 'light' ? ockamLogo : ockamLogoInvert;
   return (
     <PageSection mb={3}>
@@ -89,10 +97,10 @@ const Footer = () => {
           <LogoOckam src={logoImage} alt="ockam logo" />
         </LogoContainer>
         <MenuContainer>
-          <MenuLink to={`mailto:${config.general.email}`}>
+          <MenuLink onClick={openContactModal}>
             Request Demo
           </MenuLink>
-          <MenuLink to={`mailto:${config.general.email}`}>
+          <MenuLink onClick={openContactModal}>
             Contact Sales
           </MenuLink>
         </MenuContainer>

@@ -13,8 +13,9 @@ import Icon from '../../Icon';
 import Sidebar from '../../Sidebar';
 import useSiteMetadata from '../../../hooks/useSiteMetadata';
 import Link from '../../Link';
-import config from '../../../../config';
 import SidebarCrossIcon from '../../Sidebar/SidebarCrossIcon';
+import useModal from "../../../hooks/useModal";
+import ContactModal from "../../../modals/ContactModal";
 
 import DocsSidebarMenu from './DocsSidebarMenu';
 
@@ -73,6 +74,7 @@ const setHeightBasedOnOffset = ref => () => {
 
 const DocsSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
   useScrollPosition(setHeightBasedOnOffset(ref), [ref]);
+  const [, showContactModal] = useModal(ContactModal);
   useEffect(setHeightBasedOnOffset(ref), [ref]);
   const siteMetaData = useSiteMetadata();
 
@@ -93,7 +95,7 @@ const DocsSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
             <Link to={siteMetaData.ockamLibraryRepo}>
               <Icon size={28} icon={GithubIcon} />
             </Link>
-            <Link to={`mailto:${config.general.email}`}>
+            <Link onClick={() => showContactModal()}>
               <Icon size={28} icon={SendPlaneIcon} />
             </Link>
             <Link to={siteMetaData.slackChannel}>
