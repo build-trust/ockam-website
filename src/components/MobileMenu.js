@@ -1,12 +1,14 @@
-import React, {Fragment, useCallback, useState} from 'react';
+import React, { Fragment } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { useSpring, a, animated } from 'react-spring'
+import { a, animated } from 'react-spring'
 
 import { media } from '../utils/emotion';
 
 import Link from './Link';
 import Button from './Button';
+import useModal from "../hooks/useModal";
+import ContactModal from "../modals/ContactModal";
 
 const Wrapper = styled(animated.div)`
   
@@ -34,7 +36,8 @@ const isPartiallyActive = ({ isPartiallyCurrent }) => {
 };
 
 const MobileMenu = ({ items, showMobileMenu, isCollapsedHeader, ...rest }) => {
-
+  const [, showContactModal] = useModal(ContactModal);
+  const onShowContactModal = () => showContactModal();
   if(!showMobileMenu) return null;
   return (
     <Wrapper {...rest} isCollapsedHeader={isCollapsedHeader} showMobileMenu={showMobileMenu}>
@@ -54,13 +57,12 @@ const MobileMenu = ({ items, showMobileMenu, isCollapsedHeader, ...rest }) => {
               <Button
                 variant="primary"
                 size={isCollapsedHeader ? 'xSmall' : 'small'}
-                as={Link}
                 ml={{
                   _: 0,
                   md: 3,
                 }}
                 getProps={isPartiallyActive}
-                to={item.to}
+                onClick={onShowContactModal}
               >
                 {item.label}
               </Button>

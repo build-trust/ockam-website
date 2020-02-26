@@ -18,6 +18,12 @@ const colors = {
   caption: '#7A8895',
   white: '#fff',
   blogTextBackground: '#fff',
+  inputBackground: '#F5F7F9',
+  inputBorder: '#E3E8EE',
+  inputText: '#0A1A2B',
+  inputPlaceholder: '#A2B6C7',
+  modalBackground: 'rgba(0,0,0,0.3)',
+  modalShadow: 'rgba(60,69,78,0.8)',
 };
 
 /* eslint-disable prefer-destructuring */

@@ -7,6 +7,7 @@ import CheckedListItem from '../../../CheckedListItem';
 import PageSection from '../../PageSection';
 import { media } from '../../../../utils/emotion';
 import routerDiagram from '../../../../assets/product/subpage-router-diagram.svg';
+import routerDiagramEdged from '../../../../assets/product/subpage-router-diagram-edged.svg';
 import routerDiagramMobile from '../../../../assets/product/subpage-router-diagram-mobile.svg';
 import AnimateOnScroll from "../../../AnimateOnScroll";
 
@@ -46,7 +47,7 @@ const ImageBox = styled('div')`
 `;
 
 const DesktopImage = styled('div')`
-  background-image: url(${routerDiagram}), url(${routerDiagram});
+  background-image: url(${routerDiagram}), url(${routerDiagramEdged});
   background-repeat: no-repeat, no-repeat;
   background-position: 0 center, 637px center;
   background-size: contain;
