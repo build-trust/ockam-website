@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 import { media } from '../utils/emotion';
+import useModal from "../hooks/useModal";
+import ContactModal from "../modals/ContactModal";
 
 import Link from './Link';
 import Button from './Button';
@@ -25,11 +27,14 @@ const isPartiallyActive = ({ isPartiallyCurrent }) => {
   return isPartiallyCurrent ? { className: 'active' } : null;
 };
 
-const Menu = ({ items, isCollapsedHeader, ...rest }) => (
-  <Container {...rest} isCollapsedHeader={isCollapsedHeader}>
-    {items.map(item => (
-      <Fragment key={item.to}>
-        {item.type === 'text' && (
+const Menu = ({ items, isCollapsedHeader, ...rest }) => {
+  const [, showContactModal] = useModal(ContactModal);
+  const onShowContactModal = () => showContactModal();
+  return (
+    <Container {...rest} isCollapsedHeader={isCollapsedHeader}>
+      {items.map(item => (
+        <Fragment key={item.to}>
+          {item.type === 'text' && (
           <Link
             fontSize={isCollapsedHeader && 1}
             getProps={isPartiallyActive}
@@ -39,23 +44,23 @@ const Menu = ({ items, isCollapsedHeader, ...rest }) => (
             {item.label}
           </Link>
         )}
-        {item.type === 'button' && (
+          {item.type === 'button' && (
           <Button
             variant="primary"
             size={isCollapsedHeader ? 'xSmall' : 'small'}
-            as={Link}
             ml={3}
             getProps={isPartiallyActive}
             key={item.to}
             to={item.to}
+            onClick={onShowContactModal}
           >
             {item.label}
           </Button>
         )}
-      </Fragment>
+        </Fragment>
     ))}
-  </Container>
-);
+    </Container>
+)};
 
 Menu.propTypes = {
   items: PropTypes.arrayOf(

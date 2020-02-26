@@ -14,6 +14,7 @@ import { ReactComponent as ListIcon} from '../../../assets/list-icon.svg';
 import { ReactComponent as HandsIcon} from '../../../assets/hands-icon.svg';
 import { ReactComponent as SupportIcon} from '../../../assets/support-icon.svg';
 import IconListItem from '../../IconLisItem';
+import Subheading from "../Subheading";
 
 import HeaderProductGrid from './HeaderProductGrid';
 
@@ -29,6 +30,16 @@ const HeaderSection = () => {
       image={heroProductGraphics}
       mobileImage={heroProductMobileGraphics}
     >
+      <Subheading
+        mb={3}
+        textAlign={{
+          lg: 'left',
+        }}
+      >
+        Ockam’s enterprise-grade
+        <br />
+        products make it easy
+      </Subheading>
       <HeroHeading
         as="h1"
         fontSize={[5, 6, 8]}
@@ -38,15 +49,7 @@ const HeaderSection = () => {
       >
         Building Connected Systems You Can Trust Is Hard
       </HeroHeading>
-      <Text
-        mt={4}
-        color="primary"
-        textAlign={{
-          lg: 'left',
-        }}
-      >
-        Ockam’s enterprise-grade products make it easy
-      </Text>
+
       <div>
         <Text textAlign={{ desktop: 'left'}} fontWeight='bold'>Software Development Kits</Text>
         <IconListItem icon={CloudIcon}>Cloud Servers</IconListItem>

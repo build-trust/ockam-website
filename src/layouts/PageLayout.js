@@ -14,6 +14,9 @@ import Header from '../components/Header';
 import Content from '../components/pages/Content';
 import useUnderViewport from '../hooks/useUnderViewport';
 import Footer from '../components/Footer';
+import {ModalContextProvider} from "../contexts/ModalContext";
+import {LocationContextProvider} from "../contexts/LocationContext";
+import TopBarContactFormMessage from "../components/TopBarContactFormMessage/TopBarContactFormMessage";
 
 const PageWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
@@ -49,6 +52,7 @@ const PageLayout = ({
   isOpenSidebar,
   setIsOpenSidebar,
   themeName,
+  location,
 }) => {
   const ref = useRef();
   const [isCollapsedHeader] = useUnderViewport(ref);
@@ -61,37 +65,42 @@ const PageLayout = ({
 
   return (
     <ThemeProvider themeName={themeName}>
-      <MDXProvider components={mdxComponents}>
-        <PageWrapper>
-          <Global styles={normalizeCss} />
-          <Global styles={globalStyles} />
-          <FocusLock disabled={!isOpenSidebar}>
-            <HeaderWrapper ref={ref}>
-              <Content>
-                <Header
-                  isCollapsedHeader={false}
-                  openSidebar={() => setIsOpenSidebar(true)}
-                />
-              </Content>
-            </HeaderWrapper>
-            {
-              transitions.map(({ item, props, key }) =>
-              item && (
-                <AnimatedStickyMenuWrapper key={key} style={props}>
+      <LocationContextProvider location={location}>
+        <ModalContextProvider>
+          <MDXProvider components={mdxComponents}>
+            <PageWrapper>
+              <Global styles={normalizeCss} />
+              <Global styles={globalStyles} />
+              <FocusLock disabled={!isOpenSidebar}>
+                <HeaderWrapper ref={ref}>
+                  <TopBarContactFormMessage />
                   <Content>
                     <Header
-                      isCollapsedHeader
+                      isCollapsedHeader={false}
                       openSidebar={() => setIsOpenSidebar(true)}
                     />
                   </Content>
-                </AnimatedStickyMenuWrapper>
-              ))
-            }
-            {children}
-          </FocusLock>
-          <Footer />
-        </PageWrapper>
-      </MDXProvider>
+                </HeaderWrapper>
+                {
+                  transitions.map(({ item, props, key }) =>
+                  item && (
+                    <AnimatedStickyMenuWrapper key={key} style={props}>
+                      <Content>
+                        <Header
+                          isCollapsedHeader
+                          openSidebar={() => setIsOpenSidebar(true)}
+                        />
+                      </Content>
+                    </AnimatedStickyMenuWrapper>
+                  ))
+                }
+                {children}
+              </FocusLock>
+              <Footer />
+            </PageWrapper>
+          </MDXProvider>
+        </ModalContextProvider>
+      </LocationContextProvider>
     </ThemeProvider>
   );
 };

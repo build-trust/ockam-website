@@ -5,6 +5,10 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { space, color, typography, layout } from 'styled-system';
 
+const ActionLink = styled('a')`
+  cursor: pointer;
+`;
+
 const BaseLink = ({ to, children, ...rest }) => {
   const isAnchor = to ? false : to.charAt(0) === '#';
   if (isAnchor || isAbsoluteUrl(to)) {
@@ -13,6 +17,13 @@ const BaseLink = ({ to, children, ...rest }) => {
         {children}
       </a>
     );
+  }
+  if(!to) {
+    return (
+      <ActionLink {...rest}>
+        {children}
+      </ActionLink>
+    )
   }
   return (
     <GatsbyLink to={to} {...rest}>

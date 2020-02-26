@@ -13,6 +13,9 @@ import ThemeProvider from '../components/themeProvider';
 import mdxComponents from '../components/mdxComponents';
 import Header from '../components/Header';
 import BaseContent from '../components/Content';
+import {ModalContextProvider} from "../contexts/ModalContext";
+import {LocationContextProvider} from "../contexts/LocationContext";
+import TopBarContactFormMessage from "../components/TopBarContactFormMessage/TopBarContactFormMessage";
 
 const PageWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
@@ -48,25 +51,30 @@ const HeaderWrapper = styled.div`
   position: relative;
 `;
 
-const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar }) => {
+const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location }) => {
   return (
     <ThemeProvider themeName="light">
-      <MDXProvider components={mdxComponents}>
-        <PageWrapper>
-          <Global styles={normalizeCss} />
-          <Global styles={globalStyles} />
-          <FocusLock disabled={!isOpenSidebar}>
-            <HeaderWrapper>
-              <Content>
-                <Header showMobileMenu openSidebar={() => setIsOpenSidebar(true)} />
-              </Content>
-            </HeaderWrapper>
-            <Content>
-              <Wrapper>{children}</Wrapper>
-            </Content>
-          </FocusLock>
-        </PageWrapper>
-      </MDXProvider>
+      <LocationContextProvider location={location}>
+        <ModalContextProvider>
+          <MDXProvider components={mdxComponents}>
+            <PageWrapper>
+              <Global styles={normalizeCss} />
+              <Global styles={globalStyles} />
+              <FocusLock disabled={!isOpenSidebar}>
+                <HeaderWrapper>
+                  <TopBarContactFormMessage />
+                  <Content>
+                    <Header showMobileMenu openSidebar={() => setIsOpenSidebar(true)} />
+                  </Content>
+                </HeaderWrapper>
+                <Content>
+                  <Wrapper>{children}</Wrapper>
+                </Content>
+              </FocusLock>
+            </PageWrapper>
+          </MDXProvider>
+        </ModalContextProvider>
+      </LocationContextProvider>
     </ThemeProvider>
   );
 };

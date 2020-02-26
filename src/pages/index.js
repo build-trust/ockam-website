@@ -12,9 +12,9 @@ const Index = () => {
     <>
       <SEO title="Ockam | Homepage" />
       <HeaderSection />
+      <GetStartedSection />
       <SeamlessConnectedSection />
       <BuildersSection />
-      <GetStartedSection />
       <BlogSection />
     </>
   );

@@ -120,6 +120,7 @@ module.exports = {
     title: config.siteMetadata.title,
     description: config.siteMetadata.description,
     siteUrl: config.gatsby.siteUrl,
+    env: config.env,
   },
   plugins,
 };
