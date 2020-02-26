@@ -9,7 +9,7 @@ import config from '../../config';
 import useDefaultOgImage from "../hooks/useDefaultOgImage";
 import useSiteMetadata from "../hooks/useSiteMetadata";
 
-const getSrcFromGraphqlImage = image => image && image.childImageSharp && image.childImageSharp.fixed.sr
+const getSrcFromGraphqlImage = image => image && image.childImageSharp && image.childImageSharp.fixed.src;
 
 const SEO = ({ title, description, image, slug }) => {
   const defaultOgImage = useDefaultOgImage();
