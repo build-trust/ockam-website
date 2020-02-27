@@ -37,15 +37,19 @@ steps:
     case $(Build.SourceBranchName) in
       master)
         GATSBY_ROOT_URL='https://www.ockam.io'
+        GATSBY_STAGE='PRODUCTION'
         ;;
       stage)
         GATSBY_ROOT_URL='https://ockamio2stage.z6.web.core.windows.net'
+        GATSBY_STAGE='STAGE'
         ;;
       develop)
         GATSBY_ROOT_URL='https://ockamio2develop.z6.web.core.windows.net'
+        GATSBY_STAGE='DEVELOPMENT'
         ;;
       *)
         GATSBY_ROOT_URL='https://fork1ockam2default.z6.web.core.windows.net'
+        GATSBY_STAGE='DEVELOPMENT_FORK'
         ;;
     esac
 
