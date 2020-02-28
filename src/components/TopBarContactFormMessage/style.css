@@ -1,0 +1,11 @@
+.topBarContactFormMessage {
+  width: 100%;
+  background-color: #52c7ea;
+  padding: 1.5rem 3rem;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
