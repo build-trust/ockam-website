@@ -28,7 +28,7 @@ const TopBarContactFormMessage = () => {
       <div className="topBarContactFormMessage">
         <Text color="white" mb={0}>
           <Icon icon={Check} size={24} color="white" mr={3} />
-          Your message was send successfully
+          Your message was sent successfully
         </Text>
         <StyledIcon
           onClick={() => setShow(false)}
