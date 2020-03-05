@@ -4,11 +4,6 @@ date: 2020-03-03
 description: "When it comes to device security think of technology stacks, not platforms."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
-<<<<<<< HEAD
-isHomepageFeatured: true
-homepageFeaturedOrder: 2
-=======
->>>>>>> docs: add new device security blog
 ---
 
 #  IOT Device Security is Not One-and-Done
