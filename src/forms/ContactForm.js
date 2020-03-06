@@ -7,7 +7,7 @@ import TextField from '../components/forms/TextField';
 import TextAreaField from '../components/forms/TextAreaField';
 import { media } from '../utils/emotion';
 import RecaptchaField from '../components/forms/RecaptchaField';
-import useLocation from "../hooks/useLocation";
+import useSiteMetadata from "../hooks/useSiteMetadata";
 
 const StyledForm = styled(Form)`
   grid-template-areas:
@@ -32,9 +32,9 @@ const StyledForm = styled(Form)`
 
 const ContactForm = forwardRef(
   ({ values, errors, onChange, pending, onSubmit, setRef }, ref) => {
-    const location = useLocation();
-    const isLocalStage = location.hostname === 'localhost';
-    const returnUrl = `${location.href}?contactFormStatus=success`;
+    const { env: { STAGE, ROOT_URL } } = useSiteMetadata();
+    const isLocalStage = STAGE === 'LOCAL';
+    const returnUrl = `${ROOT_URL}?contactFormStatus=success`;
     return (
       <StyledForm
         ref={ref}

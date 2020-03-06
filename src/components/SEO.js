@@ -13,23 +13,24 @@ const getSrcFromGraphqlImage = image => image && image.childImageSharp && image.
 
 const SEO = ({ title, description, image, slug }) => {
   const defaultOgImage = useDefaultOgImage();
-  const siteMetadata = useSiteMetadata();
-
+  const { env: { ROOT_URL }, title: defaultTitle, description: defaultDescription} = useSiteMetadata();
   const metaImage = image || getSrcFromGraphqlImage(defaultOgImage);
-  const metaImageUrl = siteMetadata.siteUrl + metaImage;
-  const metaTitle = title || siteMetadata.title;
-  const metaDescription = description || siteMetadata.description;
+  const metaImageUrl = ROOT_URL + metaImage;
+  const metaTitle = title || defaultTitle;
+  const metaDescription = description || defaultDescription;
 
+  const touchIconUrl = ROOT_URL + appleTouchIcon;
   let canonicalUrl =
     config.gatsby.pathPrefix !== '/'
-      ? siteMetadata.siteUrl + config.gatsby.pathPrefix
-      : siteMetadata.siteUrl;
+      ? ROOT_URL + config.gatsby.pathPrefix
+      : ROOT_URL;
   canonicalUrl += slug;
+
 
   return (
     <Helmet>
       <title>{metaTitle}</title>
-      <link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon} />
+      <link rel="apple-touch-icon" sizes="180x180" href={touchIconUrl} />
       <link rel="icon" type="image/png" sizes="32x32" href={favicon32} />
       <link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
       <meta name="description" content={metaDescription} />

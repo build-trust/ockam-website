@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { space, layout, flex, grid } from "styled-system";
 import ReCAPTCHA from "react-google-recaptcha";
 
-import useLocation from "../../hooks/useLocation";
+import useSiteMetadata from "../../hooks/useSiteMetadata";
 
 import HiddenField from "./HiddenField";
 
@@ -15,18 +15,15 @@ const Container = styled('div')({
 
 const RecaptchaField = ({ name, errors, value, gridArea, onChange}) => {
   const recaptchaRef  = useRef();
-  const location = useLocation();
-  const isLocalStage = location.hostname === 'localhost';
-  const GOOGLE_RECAPTCHA_SITEKEY = isLocalStage ? '6LfIDtwUAAAAAIt2vgTj7LTIJ9tqwlNKV4fZecbK' : '6Ldn5tYUAAAAACN3T6WAycLimoSDoolYQJ1hPuNj';
-
-  const onSuccessRecaptcha = (val) => onChange({ [name]: val || '' })
+  const { env: { RECAPTCHA_SITEKEY } } = useSiteMetadata();
+  const onSuccessRecaptcha = (val) => onChange({ [name]: val || '' });
 
   return (
     <Container gridArea={gridArea}>
       <ReCAPTCHA
         theme="light"
         ref={recaptchaRef}
-        sitekey={GOOGLE_RECAPTCHA_SITEKEY}
+        sitekey={RECAPTCHA_SITEKEY}
         onChange={onSuccessRecaptcha}
       />
       <HiddenField value={value} name={name} errors={errors} />
