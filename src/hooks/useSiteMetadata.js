@@ -7,7 +7,6 @@ const useSiteMetadata = () => {
         siteMetadata {
           slackChannel
           twitter
-          siteUrl
           ockamLibraryRepo
           title
           description
@@ -16,7 +15,8 @@ const useSiteMetadata = () => {
           githubProductionPath
           env {
             STAGE
-            GOOGLE_RECAPTCHA_SITEKEY
+            RECAPTCHA_SITEKEY
+            ROOT_URL
           }
         }
       }

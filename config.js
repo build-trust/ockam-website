@@ -1,12 +1,13 @@
 const config = {
 	"gatsby": {
 		"pathPrefix": "/",
-		"siteUrl": "https://www.ockam.io",
 		"gaTrackingId": 'UA-142504862-1',
+    "siteUrl": process.env.GATSBY_ROOT_URL || "http://localhost:3000",
 	},
   "env": {
 	  "STAGE": process.env.GATSBY_STAGE || 'LOCAL',
-    "GOOGLE_RECAPTCHA_SITEKEY": process.env.GATSBY_GOOGLE_RECAPTCHA_SITEKEY || "6LfIDtwUAAAAAIt2vgTj7LTIJ9tqwlNKV4fZecbK",
+    "RECAPTCHA_SITEKEY": process.env.GATSBY_GOOGLE_RECAPTCHA_SITEKEY || "6LfIDtwUAAAAAIt2vgTj7LTIJ9tqwlNKV4fZecbK",
+    "ROOT_URL": process.env.GATSBY_ROOT_URL || "http://localhost:3000",
   },
   "general": {
 	  "email": "hello@ockam.io",
