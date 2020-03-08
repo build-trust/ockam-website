@@ -57,7 +57,7 @@ const config = {
 	},
 	"siteMetadata": {
 		"title": "Ockam",
-		"description": "Ockam is a collection of tools to help you establish secure connections and trustful exchange of information within connected systems. This documentation page describes the core concepts and the underlying technology behind Ockam.",
+		"description": "Ockam is a Tool Company. Ockam's open source developer tools make it simple to send trustful end-to-end encrypted messages between connected devices and cloud services.",
 	},
 };
 

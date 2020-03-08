@@ -6,7 +6,6 @@ author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---
 
-#  IOT Device Security is Not One-and-Done
 A device may be in your pocket, in your home, or in the field. While it’s tempting to talk about “device security” as a singular thing, that disguises the complexity. Worse, it could keep you from recognizing how devices could be vulnerable. Much like the [STRIDE framework](https://www.ockam.io/learn/blog/introduction_to_STRIDE_security_model/) is used to anticipate potential threats, it can be useful to consider a broad view of what device security means.
 
 In this post, we’ll cover five common areas of device and network security you should consider:
