@@ -22,28 +22,6 @@ const config = {
   },
 	"header": {
     "title": "Ockam",
-    "menu": [
-      {
-        "label": "Product",
-        "type": "text",
-        "to": "/product",
-      },
-      {
-        "label": "Learn",
-        "type": "text",
-        "to": "/learn",
-      },
-      {
-        "label": "Team",
-        "type": "text",
-        "to": "/team",
-      },
-      {
-        "label": "Contact us",
-        "type": "button",
-        "context": "showContactModal",
-      },
-    ],
 		"search": {
 			"enabled": false,
 			"indexName": "",

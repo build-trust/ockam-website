@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import isAbsoluteUrl from 'is-absolute-url';
 import PropTypes from 'prop-types';
@@ -9,28 +9,28 @@ const ActionLink = styled('a')`
   cursor: pointer;
 `;
 
-const BaseLink = ({ to, children, ...rest }) => {
+const BaseLink = forwardRef(({ to, children, ...rest }, ref) => {
   const isAnchor = to ? false : to.charAt(0) === '#';
   if (isAnchor || isAbsoluteUrl(to)) {
     return (
-      <a href={to} {...rest}>
+      <a href={to} ref={ref} {...rest}>
         {children}
       </a>
     );
   }
   if(!to) {
     return (
-      <ActionLink {...rest}>
+      <ActionLink ref={ref} {...rest}>
         {children}
       </ActionLink>
     )
   }
   return (
-    <GatsbyLink to={to} {...rest}>
+    <GatsbyLink ref={ref} to={to} {...rest}>
       {children}
     </GatsbyLink>
   );
-};
+});
 
 const Link = styled(BaseLink)`
   ${space};
