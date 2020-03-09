@@ -9,8 +9,7 @@ import pattern from '../../assets/hero-pattern.svg';
 import PageSection from './PageSection';
 
 const Wrapper = styled('div')`
-  margin-top: -8.8rem;
-  padding-top: 22.8rem;
+
   ${({ theme }) =>
     `background-image:  linear-gradient(0deg, ${
       theme.colors.background
@@ -18,6 +17,11 @@ const Wrapper = styled('div')`
       0.03,
       theme.colors.background
     )} 9%, ${theme.colors.background} 88%)`};
+    padding-top: 8.8rem;
+    ${media.desktop`
+        margin-top: -8.8rem;
+        padding-top: 22.8rem;
+  `}
 `;
 
 const Container = styled('div')`

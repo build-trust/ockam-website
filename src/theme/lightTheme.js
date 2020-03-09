@@ -24,6 +24,10 @@ const colors = {
   inputPlaceholder: '#A2B6C7',
   modalBackground: 'rgba(0,0,0,0.3)',
   modalShadow: 'rgba(60,69,78,0.8)',
+  dropdownMenuBackground: "#fff",
+  dropdownMenuItemHover: "#F5F7F9",
+  dropdownMenuBorder: "#E6ECF1",
+  dropdownMenuShadow: "rgba(116,129,141,0.1)",
 };
 
 /* eslint-disable prefer-destructuring */

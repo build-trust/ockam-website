@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import ChevronDown from 'emotion-icons/boxicons-regular/ChevronDown';
+import MenuIcon from 'emotion-icons/feather/Menu';
+import CrossIcon from 'emotion-icons/feather/X';
 
 import { media } from '../utils/emotion';
-import config from '../../config';
 import useThemeLogo from '../hooks/useThemeLogo';
 
-import Menu from './Menu';
+import Menu from './Menu/Menu';
 import Link from './Link';
-import HamburgerButton from './HamburgerButton';
+import SidebarButton from './SidebarButton';
 import ToggleIcon from './Collapse/ToggleIcon';
-import MobileMenu from './MobileMenu';
+import MobileMenu from './Menu/MobileMenu';
+import Icon from "./Icon";
 
 const Container = styled.nav`
   display: flex;
@@ -23,11 +24,6 @@ const Container = styled.nav`
   position: relative;
   width: inherit;
   color: ${props => props.theme.colors.menuText};
-  .active {
-    color: ${props => props.theme.colors.menuTextActive};
-    font-weight: ${props => props.theme.fontWeights[2]};
-    ${props => (props.isCollapsedHeader && `font-size: ${props.theme.fontSizes[1]}`)};;
-  }
 `;
 
 const StyledLink = styled(Link)`
@@ -41,6 +37,7 @@ const StyledLink = styled(Link)`
 
 const Logo = styled.img`
   height: 5.5rem;
+  
   ${props =>
     props.isCollapsedHeader &&
     `
@@ -49,24 +46,26 @@ const Logo = styled.img`
 `;
 
 const ToggleMenuButton = styled(ToggleIcon)`
-  width: 32px;
-  height: 32px;
+  color: ${({ theme }) => theme.colors.icons};
   display: flex;
   align-items: center;
   justify-content: center;
-  ${props => !props.showMobileMenu && 'display: none;'};
   ${media.desktop`
     display: none;
   `}
 `;
 
-const Header = ({ openSidebar, isCollapsedHeader, showMobileMenu }) => {
+const BurgerIcon = () => <Icon icon={MenuIcon} size={28} />;
+const CloseIcon = () => <Icon icon={CrossIcon} size={28} />;
+
+
+const Header = ({ openSidebar, isCollapsedHeader }) => {
   const logo = useThemeLogo();
-  const [isCollapsed, setIsCollapsed] = useState(true);
-  const toggleIsCollapsed = () => setIsCollapsed(state => !state);
+  const [isVisibleMobileMenu, setIsVisibleMenu] = useState(false);
+  const toggleMobileMenu = () => setIsVisibleMenu(state => !state);
   return (
     <Container isCollapsedHeader={isCollapsedHeader}>
-      <HamburgerButton onClick={openSidebar} />
+      {openSidebar && <SidebarButton onClick={openSidebar} />}
       <StyledLink to="/">
         <Logo
           src={logo}
@@ -75,21 +74,22 @@ const Header = ({ openSidebar, isCollapsedHeader, showMobileMenu }) => {
         />
       </StyledLink>
       <ToggleMenuButton
-        CollapsedIcon={ChevronDown}
-        showMobileMenu={showMobileMenu}
-        isCollapsed={isCollapsed}
-        onClick={toggleIsCollapsed}
+        CollapsedIcon={BurgerIcon}
+        UncollapsedIcon={CloseIcon}
+        isCollapsed={!isVisibleMobileMenu}
+        onClick={toggleMobileMenu}
       />
       <>
         <Menu
           isCollapsedHeader={isCollapsedHeader}
-          items={config.header.menu}
         />
+        {isVisibleMobileMenu && (
         <MobileMenu
-          showMobileMenu={showMobileMenu && !isCollapsed}
+          onClickItem={toggleMobileMenu}
           isCollapsedHeader={isCollapsedHeader}
-          items={config.header.menu}
+
         />
+)}
       </>
     </Container>
   );
@@ -98,11 +98,9 @@ const Header = ({ openSidebar, isCollapsedHeader, showMobileMenu }) => {
 Header.propTypes = {
   openSidebar: PropTypes.func.isRequired,
   isCollapsedHeader: PropTypes.bool,
-  showMobileMenu: PropTypes.bool,
 };
 Header.defaultProps = {
   isCollapsedHeader: false,
-  showMobileMenu: false,
 };
 
 export default Header;

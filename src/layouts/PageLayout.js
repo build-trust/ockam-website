@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import styled from '@emotion/styled';
 import { MDXProvider } from '@mdx-js/react';
 import PropTypes from 'prop-types';
-import FocusLock from 'react-focus-lock';
 import { Global } from '@emotion/core';
 import { animated, useTransition } from 'react-spring';
 
@@ -49,8 +48,6 @@ const AnimatedStickyMenuWrapper = animated(StickyMenuWrapper);
 
 const PageLayout = ({
   children,
-  isOpenSidebar,
-  setIsOpenSidebar,
   themeName,
   location,
 }) => {
@@ -71,31 +68,25 @@ const PageLayout = ({
             <PageWrapper>
               <Global styles={normalizeCss} />
               <Global styles={globalStyles} />
-              <FocusLock disabled={!isOpenSidebar}>
-                <HeaderWrapper ref={ref}>
-                  <TopBarContactFormMessage />
-                  <Content>
-                    <Header
-                      isCollapsedHeader={false}
-                      openSidebar={() => setIsOpenSidebar(true)}
-                    />
-                  </Content>
-                </HeaderWrapper>
-                {
+              <HeaderWrapper ref={ref}>
+                <TopBarContactFormMessage />
+                <Content>
+                  <Header />
+                </Content>
+              </HeaderWrapper>
+              {
                   transitions.map(({ item, props, key }) =>
                   item && (
                     <AnimatedStickyMenuWrapper key={key} style={props}>
                       <Content>
                         <Header
                           isCollapsedHeader
-                          openSidebar={() => setIsOpenSidebar(true)}
                         />
                       </Content>
                     </AnimatedStickyMenuWrapper>
                   ))
                 }
-                {children}
-              </FocusLock>
+              {children}
               <Footer />
             </PageWrapper>
           </MDXProvider>
@@ -111,8 +102,6 @@ PageLayout.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   location: PropTypes.shape({}).isRequired,
-  isOpenSidebar: PropTypes.bool.isRequired,
-  setIsOpenSidebar: PropTypes.func.isRequired,
   themeName: PropTypes.string,
 };
 

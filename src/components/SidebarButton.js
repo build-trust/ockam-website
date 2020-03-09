@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import MenuIcon from 'emotion-icons/ion-ios/Menu';
+import MenuIcon from 'emotion-icons/feather/AlignLeft';
 
 import { media } from '../utils/emotion';
 
@@ -16,18 +16,18 @@ const StyledMenuIcon = styled(MenuIcon)`
   `};
 `;
 
-const HamburgerButton = ({ onClick, ...rest }) => (
+const SidebarButton = ({ onClick, ...rest }) => (
   <Icon
     icon={StyledMenuIcon}
-    size={32}
+    size={28}
     onClick={onClick}
     aria-controls="main-menu"
     {...rest}
   />
 );
 
-HamburgerButton.propTypes = {
+SidebarButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default HamburgerButton;
+export default SidebarButton;

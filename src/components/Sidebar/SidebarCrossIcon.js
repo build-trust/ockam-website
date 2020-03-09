@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import CrossIcon from 'emotion-icons/fa-solid/Times';
+import CrossIcon from 'emotion-icons/feather/X';
 
 import { matchBreakpointDown } from '../../utils/rwd';
 import { media } from '../../utils/emotion';
@@ -9,8 +9,8 @@ import { media } from '../../utils/emotion';
 const StyledCrossIcon = styled(CrossIcon)`
   position: absolute;
   z-index: 2;
-  left: 1.5rem;
-  top: 1.5rem;
+  left: 1.9rem;
+  top: 2.9rem;
   cursor: pointer;
   display: block;
   color: ${({ theme }) => theme.colors.icon};

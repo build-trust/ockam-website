@@ -28,6 +28,10 @@ const colors = {
   modalBackground: 'rgba(3,13,24,0.8)',
   modalShadow: 'rgba(0,0,0,0.8)',
   negative: "#EC432D",
+  dropdownMenuBackground: "#162535",
+  dropdownMenuItemHover: "#0A1A2B",
+  dropdownMenuBorder: "transparent",
+  dropdownMenuShadow: "rgba(0,0,0,0.2)",
 
 };
 

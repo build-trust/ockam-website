@@ -64,7 +64,7 @@ const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location }) =>
                 <HeaderWrapper>
                   <TopBarContactFormMessage />
                   <Content>
-                    <Header showMobileMenu openSidebar={() => setIsOpenSidebar(true)} />
+                    <Header openSidebar={() => setIsOpenSidebar(true)} />
                   </Content>
                 </HeaderWrapper>
                 <Content>

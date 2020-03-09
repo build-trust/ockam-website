@@ -1,14 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import SEO from '../components/SEO';
-import useOnClickOutside from '../hooks/useOnClickOutside';
 import PageLayout from '../layouts/PageLayout';
 import Post from '../components/blog/Post';
 import defaultAvatar from '../assets/default_avatar.png';
-import SidebarMobileMenu from '../components/SidebarMobileMenu';
+
 
 const GreyWrapper = styled.div`
   position: absolute;
@@ -48,25 +47,11 @@ export default function BlogTemplate(props) {
     ? authorAvatar.childImageSharp.fixed.src
     : defaultAvatar;
 
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef();
-  const menuId = 'main-menu';
-
-  useOnClickOutside(ref, () => setIsOpen(false));
   return (
     <PageLayout
       location={location}
-      isOpenSidebar={isOpen}
-      setIsOpenSidebar={setIsOpen}
       themeName="blog"
     >
-      <SidebarMobileMenu
-        location={location}
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        menuId={menuId}
-        ref={ref}
-      />
       <SEO title={metaTitle} description={metaDescription} slug={slug} />
       <Wrapper>
         <GreyWrapper />
