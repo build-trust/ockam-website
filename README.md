@@ -2,7 +2,7 @@
 
 This repository contains all of the content, code and build tools for [Ockam.io](https://www.ockam.io/).
 
-Ockam website is built with a static site generator that is based on [gatsby-gitbook-starter](https://github.com/hasura/gatsby-gitbook-starter). Gatsby builds websites powered by the [JAMStack] (https://www.gatsbyjs.org/docs/glossary/jamstack/), a modern architecture that uses JavaScript, APIs and Markdown without requiring the use of a database or server-side programming language.
+Ockam website is built with a static site generator that is based on [gatsby-gitbook-starter](https://github.com/hasura/gatsby-gitbook-starter). Gatsby builds websites powered by the [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/), a modern architecture that uses JavaScript, APIs and Markdown without requiring the use of a database or server-side programming language.
 
 [Ockam.io](https://www.ockam.io/) utilizes GitHub actions, Azure Pipelines and runs on Azure CDN.
 
