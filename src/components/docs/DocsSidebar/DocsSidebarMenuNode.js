@@ -8,6 +8,7 @@ import config from '../../../../config';
 import Icon from '../../Icon';
 import SidebarMenuItem from '../../Sidebar/SidebarMenuItem';
 import capitalize from '../../../utils/capitalize';
+import removeStartEndSlugSlash from "../../../utils/removeStartEndSlugSlash";
 
 const NodeLink = styled(SidebarMenuItem)`
   padding-left: 1rem;
@@ -44,16 +45,16 @@ const DocsSidebarMenuNode = ({
     setCollapsed(url);
   };
   const hasChildren = nodes.length !== 0;
-
+  const trimmedUrl = removeStartEndSlugSlash(url);
+  const trimmedPathname = removeStartEndSlugSlash(location.pathname);
   const isActive =
     location &&
-    (location.pathname === url ||
-      location.pathname === config.gatsby.pathPrefix + url);
-  const isActivePath = location && location.pathname.match(url);
+    (trimmedPathname === trimmedUrl ||
+      trimmedPathname === config.gatsby.pathPrefix + trimmedUrl);
+  const isActivePath = location && trimmedPathname.match(trimmedUrl);
 
   const isDirectoryNode = nodes && nodes[0] ? nodes[0].url === url : false;
   const directoryTitle = capitalize(name);
-  const isLinkCollapsible = isCollapsed && hasChildren;
   return (
     <div>
       {title && (
@@ -61,7 +62,7 @@ const DocsSidebarMenuNode = ({
           deepLevel={deepLevel}
           isActive={isActive ? '1' : undefined}
           isActivePath={isActivePath ? '1' : undefined}
-          onClick={isLinkCollapsible ? collapse : () => {}}
+          onClick={collapse}
           to={url}
         >
           {isDirectoryNode ? directoryTitle : title}
