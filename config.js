@@ -53,7 +53,7 @@ const config = {
 		},
 	},
 	"sidebar": {
-		"isDefaultExpand": true,
+		"isDefaultExpand": false,
 	},
 	"siteMetadata": {
 		"title": "Ockam",

@@ -5,6 +5,7 @@ import config from '../../../../config';
 import useAllMdxAsTree from '../../../hooks/useAllMdxAsTree';
 import getRootSlugFromPathname from '../../../utils/getRootSlugFromPathname';
 import SidebarMenuContainer from '../../Sidebar/SidebarMenuContainer';
+import isMatchingPath from "../../../utils/isMatchedPath";
 
 import DocsSidebarMenuNode from './DocsSidebarMenuNode';
 
@@ -27,7 +28,11 @@ const DocsSidebarMenu = ({ location }) => {
   const [collapsed, setCollapsed] = useState(() => {
     if (config.sidebar.isDefaultExpand) return {};
     const nestedNodes = getNestedNodesRecursively({ nodes: tree });
-    return nestedNodes.reduce((o, key) => ({ ...o, [key]: true }), {});
+    return nestedNodes.reduce((acc, key) => {
+      const isCollapsed = !isMatchingPath(location.pathname, key);
+      return { ...acc, [key]: isCollapsed }
+    }, {});
+
   });
 
   const nodes = tree.length === 1 ? tree[0].nodes : tree;
