@@ -13,8 +13,7 @@ const colors = {
   menuTextActive: '#242A31',
   code: '#3C454E',
   primary: '#52c7ea',
-  bleakPrimary: '#e9f7fc',
-  secondary: '#a4a9bf',
+  secondary: '#e9f7fc',
   caption: '#7A8895',
   white: '#fff',
   blogTextBackground: '#fff',
@@ -28,6 +27,19 @@ const colors = {
   dropdownMenuItemHover: "#F5F7F9",
   dropdownMenuBorder: "#E6ECF1",
   dropdownMenuShadow: "rgba(116,129,141,0.1)",
+  button: {
+    primaryShadow: "rgba(82,199,234,0.4)",
+    primaryActive: "#fff",
+    whiteActiveBackground: "#E6E8EA",
+    secondaryHover: "#00BAEA",
+    secondaryActive: "#9DDFF2",
+    secondaryText: "#25B8E4",
+  },
+  link: {
+    default: '#7A8895',
+    hover: '#242A31',
+    active: '#3C454E',
+  },
 };
 
 /* eslint-disable prefer-destructuring */
@@ -53,8 +65,8 @@ const lightTheme = {
       backgroundColor: 'white',
       itemColor: '#7A8895',
       itemColorActive: colors.heading,
-      customScrollTruckColor: lighten(0.25, colors.secondary),
-      customScrollThumbColor: colors.secondary,
+      customScrollTruckColor: lighten(0.25, "#a4a9bf"),
+      customScrollThumbColor: "#a4a9bf",
     },
     button: {
       ...defaultTheme.custom.button,

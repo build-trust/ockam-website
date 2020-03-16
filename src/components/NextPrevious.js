@@ -26,6 +26,7 @@ const Container = styled.div`
 
 const Title = styled.p`
   margin: 0;
+  color: ${props => props.theme.colors.dark};
   font-weight: ${props => props.theme.fontWeights.heading};
   transition: all 200ms ease-in-out;
 `;
@@ -40,12 +41,21 @@ const NavigationButton = styled(Link)`
   padding: 0.125rem;
   transition: all 200ms ease-in-out;
   &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.primary};
+    border: 1px solid ${({ theme }) => theme.colors.button.secondaryHover};
     ${Title} {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.button.secondaryHover};
     }
     ${StyledIcon} {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.button.secondaryHover};
+    }
+  }
+  &:active {
+    border: 1px solid ${({ theme }) => theme.colors.button.secondaryActive};
+    ${Title} {
+      color: ${({ theme }) => theme.colors.button.secondaryActive};
+    }
+    ${StyledIcon} {
+      color: ${({ theme }) => theme.colors.button.secondaryActive};
     }
   }
   box-shadow: ${({ theme }) =>

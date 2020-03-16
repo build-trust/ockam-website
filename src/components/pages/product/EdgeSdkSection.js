@@ -16,7 +16,7 @@ const EdgeSdkSection = () => {
       <Text>
         The Ockam Edge SDK supports the end-to-end encrypted message handling that your complex systems integrations demand.
       </Text>
-      <Button textAlign="center" as={Link} size="small" variant='white' mt={3} to="product/edge-sdk">Learn more about the Edge SDK</Button>
+      <Button textAlign="center" as={Link} variant='white' mt={3} to="product/edge-sdk">Learn more about the Edge SDK</Button>
     </StickySection>
   );
 };

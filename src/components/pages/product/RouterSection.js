@@ -23,7 +23,7 @@ const RouterSection = () => {
             that combines an Ockam Router Service and the Ockam Cloud SDK, in an easy
             to deploy puclic cloud hosted instance.
           </Text>
-          <Button textAlign="center" as={Link} size="small" width={{ _: "100%", lg: 'auto'}} variant='white' mt={3} to="product/router">
+          <Button textAlign="center" as={Link} width={{ _: "100%", lg: 'auto'}} variant='white' mt={3} to="product/router">
             Learn more about the Ockam Router
           </Button>
         </DefaultGridSection>

@@ -36,7 +36,7 @@ const EditOnGithubLink = ({ filePath, dependedRepos}) => {
 
   return (
     <Container>
-      <Button as={Link} size="xSmall" variant="bleakPrimary" to={githubUrl} target="_blank">
+      <Button as={Link} variant="secondary" to={githubUrl} target="_blank">
         <Icon mr={2} size={20} color="primary" icon={GithubIcon} />
         Edit this page
       </Button>

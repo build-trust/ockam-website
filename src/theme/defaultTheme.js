@@ -10,15 +10,16 @@ const colors = {
   accentBackground: '#162535',
   menuText: '#A2B6C7',
   menuTextActive: '#FFF',
-  icon: '#e7e8e8',
+  icon: '#7A8895',
   heading: '#fff',
   text: '#A2B6C7',
   code: '#e7e8e8',
   primary: '#52c7ea',
-  bleakPrimary: '#183643',
   dirtyPrimary: '#3C8DA9',
   accent: '#EC432D',
-  secondary: '#a4a9bf',
+  accentHover: '#FF2D11',
+  accentActive: '#BF3B2C',
+  secondary: '#0C293D',
   caption: '#7A8895',
   blogTextBackground: '#0A1A2B',
   inputBackground: '#0E2032',
@@ -32,7 +33,19 @@ const colors = {
   dropdownMenuItemHover: "#0A1A2B",
   dropdownMenuBorder: "transparent",
   dropdownMenuShadow: "rgba(0,0,0,0.2)",
-
+  button: {
+    primaryShadow: "rgba(82,199,234,0.4)",
+    primaryActive: "#0A1A2B",
+    whiteActiveBackground: "#E6E8EA",
+    secondaryHover: "#00BAEA",
+    secondaryActive: "#04698A",
+    secondaryText: "#25B8E4",
+  },
+  link: {
+    default: '#A2B6C7',
+    hover: '#D4DDE5',
+    active: '#64727F',
+  },
 };
 
 /* eslint-disable prefer-destructuring */

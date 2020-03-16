@@ -7,7 +7,11 @@ const generateStyledIcon = Icon =>
   styled(Icon)(
     props => ({
       color: props.theme.colors.icon,
+      transition: 'all 150ms ease-in-out',
       margin: 'initial',
+      ':hover': {
+        color: 'currentColor',
+      },
     }),
     color,
     space,

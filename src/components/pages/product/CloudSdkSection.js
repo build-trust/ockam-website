@@ -31,7 +31,7 @@ const CloudSdkSection = () => {
       <Text>
         The Ockam Cloud SDK is crafted to create simple interfaces between cloud services, and edge applications. When cloud services include the Ockam Cloud SDK, cloud applications can trust messages sent from applications running in devices at the edge.
       </Text>
-      <Button textAlign="center" as={Link} size="small" variant='white' mt={3} to="product/cloud-sdk">Learn more about the  Cloud SDK</Button>
+      <Button textAlign="center" as={Link} variant='white' mt={3} to="product/cloud-sdk">Learn more about the  Cloud SDK</Button>
     </StickySection>
   );
 };

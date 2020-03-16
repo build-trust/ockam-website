@@ -6,12 +6,30 @@ import { color, space, typography } from 'styled-system'
 
 import Icon from "./Icon";
 
-const Anchor = styled('a')(color, space, typography);
+const Anchor = styled('a')((props) => ({
+  ":hover" : {
+    color: props.theme.colors.accentHover,
+  },
+  ":active" : {
+    color: props.theme.colors.accentActive,
+  },
+  cursor: 'pointer',
+  transition: 'all 150ms ease-in-out',
+}), color, space, typography);
 
 Anchor.defaultProps = {
   color: 'accent',
   fontSize: 'body',
 };
+
+const AccentIcon = styled(Icon)`
+  &:hover {
+    color: ${ props => props.theme.colors.accentHover };
+  }
+  &:active {
+    color: ${ props => props.theme.colors.accentActive };
+  }
+`;
 
 const SlideDownAnchor = ({ label, to }) => {
   const handleScroll = () => {
@@ -22,7 +40,7 @@ const SlideDownAnchor = ({ label, to }) => {
     <Anchor color="accent" onClick={handleScroll}>
       { label }
       {' '}
-      <Icon ml={2} icon={ArrowDown} size={24} color="accent" />
+      <AccentIcon ml={2} icon={ArrowDown} size={24} color="accent" />
     </Anchor>
   );
 };
