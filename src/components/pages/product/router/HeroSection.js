@@ -9,7 +9,7 @@ import AnimateOnScroll from "../../../AnimateOnScroll";
 const HeroSection = () => {
   return (
     <HeaderTextSection>
-      <AnimateOnScroll transformY animateOnce>
+      <AnimateOnScroll slideIn="down" animateOnce>
         <Heading as="h1">Ockam Router</Heading>
         <Text mb={4}>
           Ockam Router is a service hosted in a cloud environment that makes it

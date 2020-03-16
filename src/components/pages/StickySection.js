@@ -46,7 +46,6 @@ const TextBox = styled('div')`
   ${media.desktop`
 
   `};
-
 `;
 
 const StickyContainer = styled('div')`
@@ -58,19 +57,6 @@ const StickyContainer = styled('div')`
   `};
 
   position: relative;
-`;
-
-const EnvironmentLabel = styled('div')`
-  display: none;
-   ${media.desktop`
-      display: block;
-      font-size: 5rem;
-      opacity: 0.15;
-      position: absolute;
-      left: -7rem;
-      transform-origin: 0 0;
-      transform: rotate(-90deg) translateX(-100%);
-    `};
 `;
 
 const Image = styled('img')`
@@ -94,15 +80,14 @@ const Title = styled(Heading)`
    grid-area: title;
 `
 
-const StickySection = ({ image, mobileImage, title, TitleComponent, children, environmentTitle, order }) => {
+const StickySection = ({ image, mobileImage, title, TitleComponent, children, order }) => {
 
   return (
     <AnimateOnScroll>
       <StickySectionContent>
         <StickyContainer>
-          <EnvironmentLabel>{environmentTitle}</EnvironmentLabel>
           <StickyBox order={order}>
-            <AnimateOnScroll transformY offsetTopViewport={300}>
+            <AnimateOnScroll slideIn="down" offsetTopViewport={300}>
               <Image src={image} alt='sticky' />
               <MobileImage src={mobileImage} alt='mobileImage sticky' />
             </AnimateOnScroll>
@@ -128,7 +113,6 @@ StickySection.propTypes = {
   mobileImage: PropTypes.string.isRequired,
   title: PropTypes.string,
   TitleComponent: PropTypes.func,
-  environmentTitle: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),

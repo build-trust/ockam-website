@@ -3,18 +3,42 @@ import PropTypes from 'prop-types';
 import useIsInViewport from "use-is-in-viewport";
 import { useSpring, a } from 'react-spring'
 
+const slideInDistance = '200';
 
-const AnimateOnScroll = ({ children, animateOnce, opacity, transformY, threshold, delay }) => {
+const slideInTranslateGenerator = {
+  'down': {
+    from: `translate3d(0,${slideInDistance}px,0)`,
+    to: (conditions) => `translate3d(0,${conditions ? 0 : slideInDistance}px,0)`,
+  },
+  'top': {
+    from: `translate3d(0,-${slideInDistance}px,0)`,
+    to: (conditions) => `translate3d(0,${conditions ? 0 : -slideInDistance}px,0)`,
+  },
+  'right': {
+    from: `translate3d(${slideInDistance}px,0,0)`,
+    to: (conditions) => `translate3d(${conditions ? 0 : slideInDistance}px,0,0)`,
+  },
+  'left': {
+    from: `translate3d(${-slideInDistance}px,0,0)`,
+    to: (conditions) => `translate3d(${conditions ? 0 : -slideInDistance}px,0,0)`,
+  },
+  'none': {
+    from: `translate3d(0,0,0)`,
+    to: () => `translate3d(0,0,0)`,
+  },
+};
+
+const AnimateOnScroll = ({ children, animateOnce, fadeIn, slideIn, threshold, delay, styles }) => {
   const targetRef = useRef(null);
   const [isVisibleOnce, setIsVisibleOnce] = useState(null);
   const [isInViewport, wrappedTargetRef] = useIsInViewport({ threshold, target: targetRef });
 
   const showOnce = isVisibleOnce && animateOnce;
-  const showTransformY = (isInViewport || !transformY) || showOnce;
-  const showOpacity = (isInViewport || !opacity) || showOnce;
+  const showAnimation = isInViewport || showOnce;
+  const showFadeIn = showAnimation || !fadeIn;
   const props = useSpring({
-    from: { opacity: 0, transform: `translate3d(0,200px,0)` },
-    to: { opacity: showOpacity ? 1 : 0, transform: `translate3d(0,${showTransformY ? 0 : 200}px,0)` },
+    from: { opacity: 0, transform: slideInTranslateGenerator[slideIn].from },
+    to: { opacity: showFadeIn ? 1 : 0, transform: slideInTranslateGenerator[slideIn].to(showAnimation) },
     delay,
   });
 
@@ -25,7 +49,7 @@ const AnimateOnScroll = ({ children, animateOnce, opacity, transformY, threshold
 
   return (
     <div ref={wrappedTargetRef}>
-      <a.div style={props}>
+      <a.div style={{...props, ...styles}}>
         {children}
       </a.div>
     </div>
@@ -35,9 +59,10 @@ const AnimateOnScroll = ({ children, animateOnce, opacity, transformY, threshold
 AnimateOnScroll.propTypes = {
   delay: PropTypes.number,
   threshold: PropTypes.number,
-  opacity: PropTypes.bool,
-  transformY: PropTypes.bool,
+  fadeIn: PropTypes.bool,
+  slideIn: PropTypes.oneOf(['none','down', 'up', 'left', 'right']),
   animateOnce: PropTypes.bool,
+  styles: PropTypes.shape({}),
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
@@ -48,8 +73,9 @@ AnimateOnScroll.propTypes = {
 AnimateOnScroll.defaultProps = {
   delay: 200,
   threshold: 20,
-  opacity: true,
-  transformY: false,
+  styles: {},
+  fadeIn: true,
+  slideIn: 'none',
   animateOnce: true,
 };
 

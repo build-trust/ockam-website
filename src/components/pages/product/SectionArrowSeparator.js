@@ -29,7 +29,7 @@ const Image = styled('img')`
 
 const SectionArrowSeparator = () => {
   return (
-    <AnimateOnScroll transformY offsetTopViewport={300}>
+    <AnimateOnScroll slideIn="down" offsetTopViewport={300}>
       <Container>
         <Image src={arrows} alt='connection arrow' />
       </Container>

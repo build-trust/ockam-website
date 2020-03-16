@@ -11,6 +11,7 @@ import Button from '../../Button';
 import Caption from '../../Caption';
 import Link from '../../Link';
 import CheckedListItem from "../../CheckedListItem";
+import AnimateOnScroll from "../../AnimateOnScroll";
 
 const Grid = styled('div')`
   display: grid;
@@ -37,8 +38,12 @@ const DescriptionBox = styled('div')`
   grid-area: description;
 `;
 
-const QuatationBox = styled('div')`
+const QuatationBoxWrapper = styled('div')`
   grid-area: quotation;
+`;
+
+const QuatationBox = styled('div')`
+
   border: 2px solid ${props => props.theme.colors.accentBackground};
   border-radius: ${props => props.theme.radii.default};
   display: flex;
@@ -92,9 +97,12 @@ const ValuesSection = () => {
           mb={{ _: 5, lg: 4 }}
           textAlign={{ _: 'center', lg: 'left' }}
         >
-          Ockam Values
+          <AnimateOnScroll>
+            Ockam Values
+          </AnimateOnScroll>
         </Title>
         <DescriptionBox>
+<<<<<<< HEAD
           <ValuesContainer>
             <ValuesListItem>
               <Text mb={0} color="white">
@@ -128,14 +136,57 @@ const ValuesSection = () => {
               Read more
             </Button>
           </ButtonsContainer>
+=======
+          <AnimateOnScroll>
+            <ValuesContainer>
+              <ValuesListItem>
+                <Text mb={0} color="white">
+                  Simplicity
+                </Text>
+              </ValuesListItem>
+              <ValuesListItem>
+                <Text mb={0} color="white">
+                  High Performance Team
+                </Text>
+              </ValuesListItem>
+              <ValuesListItem>
+                <Text mb={0} color="white">
+                  Builders Love Their Tools
+                </Text>
+              </ValuesListItem>
+            </ValuesContainer>
+            <Text>
+              Our Values are what we believe. Our Virtues are what we do. What we
+              do is who we are.
+            </Text>
+            <Text mb={4}>
+              Ockam is a distributed team and we have a remote-first culture.
+            </Text>
+            <ButtonsContainer>
+              <Button
+                as={Link}
+                to="/learn/blog/values_and_virtues_on_the_Ockam_Team"
+                variant="primary"
+                size="small"
+              >
+                Read more
+              </Button>
+            </ButtonsContainer>
+          </AnimateOnScroll>
+>>>>>>> feat: Add animations for sections/elements on show/scroll down
         </DescriptionBox>
-        <QuatationBox>
-          <MattAvatar src={mattAvatar} alt="matthew-gregory" />
-          <Heading textAlign="center" as="h3" fontStyle="italic">
-            Before We Wrote The Code, We Shipped Our Values.
-          </Heading>
-          <Caption fontSize={2}>Matthew Gregory, CEO</Caption>
-        </QuatationBox>
+        <QuatationBoxWrapper>
+          <AnimateOnScroll slideIn='right'>
+            <QuatationBox>
+              <MattAvatar src={mattAvatar} alt="matthew-gregory" />
+              <Heading textAlign="center" as="h3" fontStyle="italic">
+                Before We Wrote The Code, We Shipped Our Values.
+              </Heading>
+              <Caption fontSize={2}>Matthew Gregory, CEO</Caption>
+            </QuatationBox>
+          </AnimateOnScroll>
+        </QuatationBoxWrapper>
+
       </Grid>
     </PageSection>
   );

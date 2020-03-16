@@ -14,7 +14,7 @@ import AnimateOnScroll from "../../../AnimateOnScroll";
 
 const DescriptionSection = () => {
   return (
-    <AnimateOnScroll transformY animateOnce>
+    <AnimateOnScroll slideIn="down" animateOnce>
       <DefaultGridSection
         image={edgeGraphics}
         direction="imageOnRight"

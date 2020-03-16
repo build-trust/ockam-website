@@ -13,7 +13,7 @@ const DescriptionSection = () => {
       direction="imageOnRight"
       title="The Embedded SDK is written in C and tuned for small devices."
     >
-      <AnimateOnScroll transformY animateOnce>
+      <AnimateOnScroll slideIn="down" animateOnce>
         <Text>
           Cloud applications can easily connect, authenticate, and trust data exchange with
           your embedded-scale hardware including:
