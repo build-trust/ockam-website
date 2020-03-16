@@ -9,7 +9,7 @@ import AnimateOnScroll from "../../../AnimateOnScroll";
 const HeroSection = () => {
   return (
     <HeaderTextSection>
-      <AnimateOnScroll transformY animateOnce>
+      <AnimateOnScroll slideIn="down" animateOnce>
         <Heading as="h1">Ockam Edge SDK</Heading>
         <Text mb={4}>
           The Ockam Edge SDK includes everything you need to trust the flow of data

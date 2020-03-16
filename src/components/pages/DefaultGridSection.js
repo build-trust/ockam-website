@@ -5,6 +5,7 @@ import { grid, flexbox } from 'styled-system';
 
 import { media } from '../../utils/emotion';
 import Heading from "../Heading";
+import AnimateOnScroll from "../AnimateOnScroll";
 
 import PageSection from './PageSection';
 
@@ -96,16 +97,24 @@ const DefaultGridSection = ({
             lg: direction === 'imageOnLeft' ? 'start' : 'end',
           }}
         >
-          <Image alt="grid graphics" src={image} />
+          <AnimateOnScroll slideIn="down">
+            <Image alt="grid graphics" src={image} />
+          </AnimateOnScroll>
         </ImageContainer>
         {title && (
           <Title as="h2" textAlign={{ _: "center", lg: 'left'}}>
-            {title}
+            <AnimateOnScroll>
+              {title}
+            </AnimateOnScroll>
           </Title>
         )}
-        {TitleComponent && <Title as="div"><TitleComponent /></Title>}
+        {TitleComponent && <Title as="div"><AnimateOnScroll><TitleComponent /></AnimateOnScroll></Title>}
 
-        <Content>{children}</Content>
+        <Content>
+          <AnimateOnScroll>
+            {children}
+          </AnimateOnScroll>
+        </Content>
       </GridSection>
     </PageSection>
   );

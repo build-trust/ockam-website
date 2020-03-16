@@ -50,17 +50,21 @@ const ConfigurationsSection = () => {
   return (
     <StyledPageSection>
       <Container>
-        <AnimateOnScroll transformY animateOnce>
-          <Heading textAlign={{ _: 'center', lg: 'left'}} flex={7} as="h2">Ockam Registry is available in the following configurations</Heading>
-          <ConfigurationList mt={{_:3, lg: 0}} flex={5}>
+        <Heading textAlign={{ _: 'center', lg: 'left'}} flex={7} as="h2">
+          <AnimateOnScroll slideIn="left">
+            Ockam Registry is available in the following configurations
+          </AnimateOnScroll>
+        </Heading>
+        <ConfigurationList mt={{_:3, lg: 0}} flex={5}>
+          <AnimateOnScroll slideIn="right">
             <ConfigurationItem>Single-Party / Private Registry</ConfigurationItem>
             <ConfigurationItem>Multi-Party / Private Registry</ConfigurationItem>
             <ConfigurationItem>
-  Multi-Party / Public Registry
+              Multi-Party / Public Registry
               <ComingSoonBadge>Coming soon</ComingSoonBadge>
             </ConfigurationItem>
-          </ConfigurationList>
-        </AnimateOnScroll>
+          </AnimateOnScroll>
+        </ConfigurationList>
       </Container>
     </StyledPageSection>
   );

@@ -12,6 +12,7 @@ import useSiteMetadata from '../../../hooks/useSiteMetadata';
 import GetStartedCard from "../../GetStartedCard";
 import useModal from "../../../hooks/useModal";
 import ContactModal from "../../../modals/ContactModal";
+import AnimateOnScroll from "../../AnimateOnScroll";
 
 
 const GesStartedGrid = styled.div`
@@ -39,15 +40,17 @@ const GetStartedSection = () => {
 
   return (
     <PageSection>
-      <Subheading textAlign="center" mb={5}>
-        Get started with ockam
-      </Subheading>
-      <GesStartedGrid>
-        <GetStartedCard to={siteMetaData.ockamLibraryRepo} title={'{ockam}'} icon={githubIcon} />
-        <GetStartedCard to={siteMetaData.slackChannel} title="Join Community" icon={slackIcon} />
-        <GetStartedCard onClick={onShowContactModal} title="Request a demo" icon={sendIcon} />
-        <GetStartedCard to={siteMetaData.twitter} title="Follow Ockam" icon={twitterIcon} />
-      </GesStartedGrid>
+      <AnimateOnScroll>
+        <Subheading textAlign="center" mb={5}>
+          Get started with ockam
+        </Subheading>
+        <GesStartedGrid>
+          <GetStartedCard to={siteMetaData.ockamLibraryRepo} title={'{ockam}'} icon={githubIcon} />
+          <GetStartedCard to={siteMetaData.slackChannel} title="Join Community" icon={slackIcon} />
+          <GetStartedCard onClick={onShowContactModal} title="Request a demo" icon={sendIcon} />
+          <GetStartedCard to={siteMetaData.twitter} title="Follow Ockam" icon={twitterIcon} />
+        </GesStartedGrid>
+      </AnimateOnScroll>
     </PageSection>
   );
 };

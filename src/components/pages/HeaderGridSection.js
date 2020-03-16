@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {grid} from "styled-system";
 
 import { media } from '../../utils/emotion';
+import AnimateOnScroll from "../AnimateOnScroll";
 
 import PageSection from './PageSection';
 
@@ -105,9 +106,15 @@ const HeaderGridSection = ({
         xl: `${gridXlProportions[0]} ${gridXlProportions[1]}`,
       }}
     >
-      <LeftBox>{children}</LeftBox>
+      <LeftBox>
+        <AnimateOnScroll slideIn='left'>
+          {children}
+        </AnimateOnScroll>
+      </LeftBox>
       <ImageContainer>
-        <Image src={image} alignImageRight={alignImageRight} />
+        <AnimateOnScroll slideIn='right'>
+          <Image src={image} alignImageRight={alignImageRight} />
+        </AnimateOnScroll>
       </ImageContainer>
     </HeaderSectionGrid>
   </Section>

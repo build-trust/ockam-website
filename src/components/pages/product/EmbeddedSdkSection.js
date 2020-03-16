@@ -13,7 +13,6 @@ const EmbeddedSdkSection = () => {
       image={embeddedSdkGraphics}
       mobileImage={embeddedSdkMobileGraphics}
       title="Ockam Embedded SDK"
-      environmentTitle="Embedded Environment"
     >
       <Text>
         The Ockam Embedded SDK makes it easy for builders to access the cryptographic functions and key storage features of modern chips. Move data between the device and the cloud with Ockam’s built in security protocols.

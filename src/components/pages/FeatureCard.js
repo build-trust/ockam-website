@@ -8,6 +8,7 @@ import CardBody from '../Card/CardBody';
 
 const StyledCard = styled(Card)`
   transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+  height: 100%;
 
   &:hover {
     transform: scale(1.1);

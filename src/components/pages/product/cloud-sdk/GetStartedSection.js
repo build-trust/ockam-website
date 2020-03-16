@@ -48,7 +48,7 @@ const GetStartedSection = () => {
   const [, showContactModal] = useModal(ContactModal);
   return (
     <PageSection>
-      <AnimateOnScroll transformY animateOnce>
+      <AnimateOnScroll slideIn="down" animateOnce>
         <Heading as="h2" mb={5} textAlign="center">
           Get started!
         </Heading>

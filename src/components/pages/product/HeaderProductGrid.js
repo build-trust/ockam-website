@@ -5,6 +5,7 @@ import { grid } from 'styled-system';
 
 import { media } from '../../../utils/emotion';
 import PageSection from '../PageSection';
+import AnimateOnScroll from "../../AnimateOnScroll";
 
 const Section = styled(PageSection)`
   background: ${({ theme }) => theme.colors.background};
@@ -98,9 +99,15 @@ const HeaderProductGrid = ({
         xl: `${gridXlProportions[0]} ${gridXlProportions[1]}`,
       }}
     >
-      <LeftBox>{children}</LeftBox>
+      <LeftBox>
+        <AnimateOnScroll slideIn="left">
+          {children}
+        </AnimateOnScroll>
+      </LeftBox>
       <ImageContainer>
-        <Image src={image} />
+        <AnimateOnScroll slideIn="right">
+          <Image src={image} />
+        </AnimateOnScroll>
         <MobileImage src={mobileImage} />
       </ImageContainer>
     </HeaderSectionGrid>

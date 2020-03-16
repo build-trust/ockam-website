@@ -22,7 +22,6 @@ const CloudSdkSection = () => {
       image={cloudSdkGraphics}
       mobileImage={cloudSdkMobileGraphics}
       TitleComponent={CloudHeader}
-      environmentTitle="Cloud Environment"
     >
       <Text>
         Application developers rely on lots of open-core cloud services as part of their stack. Datastores, stream processing engines, and Identity and Access Management (IAM) services are common examples. However, application workloads are not limited to the secure confines of the data center anymore; Builders want to connect cloud

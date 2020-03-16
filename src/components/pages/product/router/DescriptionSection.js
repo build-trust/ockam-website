@@ -76,7 +76,6 @@ const DescriptionSection = () => {
     <RouterSection>
       <AnimateOnScroll transformY animateOnce>
         <Container>
-
           <DescriptionBox>
             <Heading as="h2">Content of Ockam Router</Heading>
             <Text>Ockam Router includes:</Text>

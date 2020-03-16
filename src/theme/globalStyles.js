@@ -1,18 +1,6 @@
 import { css } from '@emotion/core';
 
-import PTMonoRegularWoff from '../fonts/PTMono-Regular.woff';
-import PTMonoRegularWoff2 from '../fonts/PTMono-Regular.woff2';
-
 const globalStyles = css`
-
-  @font-face {
-      font-family: 'PT Mono';
-      src: url(${PTMonoRegularWoff2}) format('woff2'),
-          url(${PTMonoRegularWoff}) format('woff');
-      font-weight: normal;
-      font-style: normal;
-  }
-
   html {
     font-size: 62.5%;
   }
