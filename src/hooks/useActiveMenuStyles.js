@@ -17,10 +17,7 @@ const useActiveMenuStyles = () => {
             color: theme.colors.menuTextActive,
             fontWeight: theme.fontWeights.heading,
           }
-        : {
-            color: theme.colors.menuText,
-            fontWeight: theme.fontWeights.body,
-          };
+        : {};
     },
     [location, theme]
   );

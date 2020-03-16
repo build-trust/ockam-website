@@ -126,7 +126,7 @@ const MenuItems = ({ isCollapsedHeader, onClickItem }) => {
       </Link>
       <Button
         variant="primary"
-        size={isCollapsedHeader ? 'xSmall' : 'small'}
+        size={isCollapsedHeader ? 'small' : 'default'}
         ml={{
           _: 0,
           lg: 3,

@@ -39,9 +39,7 @@ PostShort.propTypes = {
     description: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
-    authorAvatar: PropTypes.shape({
-      src: PropTypes.string.isRequired,
-    }),
+    authorAvatar: PropTypes.string,
   }).isRequired,
 };
 

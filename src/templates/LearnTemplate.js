@@ -120,7 +120,13 @@ LearnTemplate.propTypes = {
       frontmatter: PropTypes.shape({
         metaTitle: PropTypes.string,
         metaDescription: PropTypes.string,
-        metaImage: PropTypes.string,
+        metaImage: PropTypes.shape({
+          childImageSharp: PropTypes.shape({
+            fixed: PropTypes.shape({
+              src: PropTypes.string,
+            }),
+          }),
+        }),
         date: PropTypes.string,
         author: PropTypes.string,
         authorAvatar: PropTypes.shape({

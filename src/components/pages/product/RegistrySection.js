@@ -32,7 +32,7 @@ const RegistrySection = () => {
             cloud service that stores Decentralized Identifiers (DIDs), verified
             credentials, and metadata for your devices.
           </Text>
-          <Button textAlign="center" as={Link} size="small" width={{ _: "100%", lg: 'auto'}} variant='white' mt={3} to="product/registry">Learn more about the Ockam Registry</Button>
+          <Button textAlign="center" as={Link} width={{ _: "100%", lg: 'auto'}} variant='white' mt={3} to="product/registry">Learn more about the Ockam Registry</Button>
         </DefaultGridSection>
       </Container>
     </AnimateOnScroll>

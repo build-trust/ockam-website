@@ -37,6 +37,11 @@ const Link = styled(BaseLink)`
   ${color};
   ${typography};
   ${layout};
+  transition: all 150ms ease-in-out;
+  color: ${props => props.theme.colors.link.default};
+  :hover {
+    color: ${props => props.theme.colors.link.hover};
+  }
 `;
 
 BaseLink.propTypes = {

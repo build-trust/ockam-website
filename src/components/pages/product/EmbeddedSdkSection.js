@@ -24,7 +24,7 @@ const EmbeddedSdkSection = () => {
       <Text>
         If you are a manufacturer of chipsets, boards, or complete IoT devices, the Ockam Embedded SDK is also for you. You’ve built cryptographic capabilities into your silicon, Ockam’s SDK makes it easy for your customers to use it securely. Simply include the Ockam Embedded SDK along with your instruction set to simplify the developer experience for your customers.
       </Text>
-      <Button textAlign="center" as={Link} size="small" variant='white' mt={3} to="product/embedded-sdk">
+      <Button textAlign="center" as={Link} variant='white' mt={3} to="product/embedded-sdk">
         Learn more about the Embedded SDK
       </Button>
     </StickySection>

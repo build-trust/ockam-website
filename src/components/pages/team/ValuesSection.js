@@ -124,7 +124,6 @@ const ValuesSection = () => {
               as={Link}
               to="/learn/blog/values_and_virtues_on_the_Ockam_Team"
               variant="primary"
-              size="small"
             >
               Read more
             </Button>

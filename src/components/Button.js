@@ -1,6 +1,36 @@
 import styled from '@emotion/styled';
 import { space, color, typography, border, layout, variant } from 'styled-system';
 
+const statesForButtonVariant = {
+  'primary': (theme) => `
+      &:hover {
+      box-shadow: 0 12px 24px -10px ${theme.colors.button.primaryShadow};
+      color: ${theme.colors.white};
+    }
+    &:focus {
+      border: 1px solid ${theme.colors.button.primaryActive};
+      box-shadow: 0 0 4px 1px ${theme.colors.primary};
+    }`,
+  'white': (theme) => `
+    &:active {
+      background-color: ${theme.colors.button.whiteActiveBackground};
+    }
+    &:hover {
+      color: ${theme.colors.dark};
+    }
+  `,
+  'secondary': (theme) => `
+  &:hover {
+    border: 1px solid ${theme.colors.button.secondaryHover};
+    color: ${theme.colors.button.secondaryText};
+  }
+  &:active {
+    border: 1px solid ${theme.colors.button.secondaryActive}
+  }
+  `,
+
+};
+
 const Button = styled('button')(
   props => ({
     padding: '1.4rem 2.5rem',
@@ -26,9 +56,10 @@ const Button = styled('button')(
         color: 'white',
         bg: 'primary',
       },
-      bleakPrimary: {
-        color: 'primary',
-        bg: 'bleakPrimary',
+      secondary: {
+        color: 'button.secondaryText',
+        bg: 'secondary',
+        border: "1px solid transparent",
       },
     },
   }),
@@ -36,16 +67,11 @@ const Button = styled('button')(
     prop: 'size',
     variants: {
       default: {
-        fontSize: 3,
-        padding: '1.5rem 2.4rem',
+        fontSize: 2,
+        padding: '1.2rem 2.4rem',
         fontWeight: 'button',
       },
       small: {
-        fontSize: 2,
-        padding: '1rem 2.4rem',
-        fontWeight: 'button',
-      },
-      xSmall: {
         fontSize: 1,
         padding: '0.9rem 1.5rem',
         fontWeight: 'buttonSmall',
@@ -80,4 +106,10 @@ Button.defaultProps = {
   width: 'auto',
 };
 
-export default Button;
+const defaultButton = styled(Button)`
+  transition: all 150ms ease-in-out;
+  ${props => props.variant && statesForButtonVariant[props.variant](props.theme)};
+
+`;
+
+export default defaultButton;

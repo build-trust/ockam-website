@@ -14,7 +14,6 @@ import ContactModal from "../modals/ContactModal";
 import PageSection from './pages/PageSection';
 import Link from './Link';
 import Caption from './Caption';
-import Text from './Text';
 import Icon from './Icon';
 
 
@@ -58,7 +57,7 @@ const MenuContainer = styled.div`
   `};
 `;
 
-const MenuLink = styled(Text)`
+const MenuLink = styled(Link)`
   padding-left: 2rem;
   font-size: ${props => props.theme.fontSizes.bodySmall};
   cursor: pointer;
