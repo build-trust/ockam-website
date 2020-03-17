@@ -11,6 +11,7 @@ import Hr from './Hr';
 import List from './List';
 import ListOrdered from './ListOrdered';
 import LinkedImage from './LinkedImage';
+import Table from './Table';
 
 const isChildrenString = props =>
   props && props.children && typeof props.children === 'string';
@@ -44,7 +45,7 @@ export default {
   img: props => <LinkedImage {...props} />,
   // TODO add `blockquote`
   // TODO add `li`
-  // TODO add `table`
+  table: props => <Table {...props} mb={4} />,
   blockquote: props => <Blockquote {...props} />,
   hr: props => <Hr {...props} />,
 };

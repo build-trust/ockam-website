@@ -138,6 +138,9 @@ const custom = {
   code: {
     backgroundColor: colors.accentBackground,
   },
+  table: {
+    accent: colors.accentBackground,
+  },
 };
 
 const animations = {

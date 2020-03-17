@@ -80,6 +80,10 @@ const lightTheme = {
       ...defaultTheme.custom.code,
       backgroundColor: '#F5F7F9',
     },
+    table: {
+      ...defaultTheme.custom.code,
+      accentColor: '#F5F7F9',
+    },
   },
 };
 
