@@ -102,41 +102,6 @@ const ValuesSection = () => {
           </AnimateOnScroll>
         </Title>
         <DescriptionBox>
-<<<<<<< HEAD
-          <ValuesContainer>
-            <ValuesListItem>
-              <Text mb={0} color="white">
-                Simplicity
-              </Text>
-            </ValuesListItem>
-            <ValuesListItem>
-              <Text mb={0} color="white">
-                High Performance Team
-              </Text>
-            </ValuesListItem>
-            <ValuesListItem>
-              <Text mb={0} color="white">
-                Builders Love Their Tools
-              </Text>
-            </ValuesListItem>
-          </ValuesContainer>
-          <Text>
-            Our Values are what we believe. Our Virtues are what we do. What we
-            do is who we are.
-          </Text>
-          <Text mb={4}>
-            Ockam is a distributed team and we have a remote-first culture.
-          </Text>
-          <ButtonsContainer>
-            <Button
-              as={Link}
-              to="/learn/blog/values_and_virtues_on_the_Ockam_Team"
-              variant="primary"
-            >
-              Read more
-            </Button>
-          </ButtonsContainer>
-=======
           <AnimateOnScroll>
             <ValuesContainer>
               <ValuesListItem>
@@ -167,13 +132,11 @@ const ValuesSection = () => {
                 as={Link}
                 to="/learn/blog/values_and_virtues_on_the_Ockam_Team"
                 variant="primary"
-                size="small"
               >
                 Read more
               </Button>
             </ButtonsContainer>
           </AnimateOnScroll>
->>>>>>> feat: Add animations for sections/elements on show/scroll down
         </DescriptionBox>
         <QuatationBoxWrapper>
           <AnimateOnScroll slideIn='right'>
