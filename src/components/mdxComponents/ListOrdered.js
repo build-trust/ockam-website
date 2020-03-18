@@ -1,1 +1,3 @@
-export default from '../ListOrdered';
+import ListOrdered from '../ListOrdered';
+
+export default ListOrdered;

@@ -1,5 +1,6 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const path = require("path");
+
 const { startCase } = require("lodash");
 
 const getDependedRepos = require('./scripts/get-depended-repos');
@@ -71,12 +72,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
       alias: { $components: path.resolve(__dirname, "src/components") },
     },
-  });
-};
-
-exports.onCreateBabelConfig = ({ actions }) => {
-  actions.setBabelPlugin({
-    name: "@babel/plugin-proposal-export-default-from",
   });
 };
 

@@ -1,1 +1,3 @@
-export default from '../Blockqute';
+import Blockqute from '../Blockqute';
+
+export default Blockqute;

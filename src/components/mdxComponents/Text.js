@@ -1,1 +1,3 @@
-export default from '../Text';
+import Text from '../Text';
+
+export default Text;

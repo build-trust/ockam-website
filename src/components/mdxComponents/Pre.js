@@ -1,1 +1,3 @@
-export default from '../Pre';
+import Pre from '../Pre';
+
+export default Pre;
