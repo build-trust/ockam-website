@@ -2,7 +2,7 @@
 
 This repository contains all of the content, code and build tools for [Ockam.io](https://www.ockam.io/).
 
-Ockam website is built with a static site generator that is based on [gatsby-gitbook-starter](https://github.com/hasura/gatsby-gitbook-starter). Gatsby builds websites powered by the [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/), a modern architecture that uses JavaScript, APIs and Markdown without requiring the use of a database or server-side programming language.
+Ockam website is built with a static site generator that is based on gatsby starter -> [gatsby-gitbook-starter](https://github.com/hasura/gatsby-gitbook-starter). Gatsby builds websites powered by the [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/), a modern architecture that uses JavaScript, APIs and Markdown without requiring the use of a database or server-side programming language.
 
 [Ockam.io](https://www.ockam.io/) utilizes GitHub actions, Azure Pipelines and runs on Azure CDN.
 
@@ -23,7 +23,7 @@ Ockam website is built with a static site generator that is based on [gatsby-git
 ## Generating and managing MD files
 
 ### Folder structure and urls
-Under `src/content` folder are stored all files related to generating html from md files. There is staticly one folder define in repository - `blog`, which stores files related to blog posts.
+Under `src/content` folder are stored all files related to generating html from md files. 
 
 However, the CI pipeline process mount under this directory, others repository defined in `dependencies_repos.csv`.
 So according to this  file specification ( please check  [Depended repositories](#depended-repositories) ) for entry like:
@@ -75,6 +75,32 @@ npm run clean
 npm run start
 ```
 
+## Markdown files metadata fields
+
+Below are listed described available metadata fields under a certain path of `src/content` folder:
+
+`blog`
+
+- **date** Post date, used for sorting. Format: YYYY-MM-DD [REQUIRED]
+- **title** Title of post [REQUIRED]
+- **description** Description of post show in post list and homepage [REQUIRED]
+- **author** Author of post [REQUIRED]
+- **authorAvatar** Author avatar, relative path to md file
+- **isHomepageFeatured** Set true if should be visible in homepage shortcut blog section. Only 3 post will show there.
+- **homepageFeaturedOrder** Set post order ( from 1 to 3 )
+- **metaTitle** SEO meta title
+- **metaDescription** SEO meta description
+
+`all others`
+
+- **title** Title string displayed on sidebar menu [REQUIRED]
+- **order** Integer value to ordering pages in sidebar menu three (In terms of particular branch only). 
+- **metaTitle** SEO meta title
+- **metaDescription** SEO meta description
+
+## Sidebar menu items ordering
+
+You can set order number to control sidebar item menu position. If there is no order metadata field, it would be ordered by slug(filename) by default
 
 ## Depended repositories
 All depended repositories are placed in in `dependencies_repos.csv` file. Each
@@ -96,8 +122,6 @@ Example repo definition:
 ```
 masterborn;ockam-sample-documentation;4f3789304ad3a4421fc772cd59d95b71af98d4d9;/;documentation
 ```
-
-
 
 ## 🧐 What's inside?
 
