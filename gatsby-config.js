@@ -107,6 +107,7 @@ module.exports = {
     twitter: config.general.twitter,
     email: config.general.email,
     description: config.siteMetadata.description,
+    title: config.siteMetadata.title,
     siteUrl: config.gatsby.siteUrl,
     env: config.env,
   },
