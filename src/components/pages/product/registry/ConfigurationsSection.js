@@ -7,6 +7,7 @@ import PageSection from "../../PageSection";
 import { media } from '../../../../utils/emotion';
 import Heading from "../../../Heading";
 import AnimateOnScroll from "../../../AnimateOnScroll";
+import Badge from "../../../Badge";
 
 const StyledPageSection = styled(PageSection)`
   background-color: ${props => darken(0.02, props.theme.colors.background)};
@@ -35,15 +36,6 @@ const ConfigurationItem = styled('div')`
   }
 `;
 
-const ComingSoonBadge = styled('div')`
-  background-color: ${props => props.theme.colors.accentBackground};
-  font-size: ${props => props.theme.fontSizes.caption};
-  color: ${props => props.theme.colors.caption};
-  display: inline-block;
-  padding: .5rem 1rem;
-  border-radius: ${props => props.theme.radii.badge};
-`;
-
 const ConfigurationList = styled('div')(flexbox, space);
 
 const ConfigurationsSection = () => {
@@ -61,7 +53,7 @@ const ConfigurationsSection = () => {
             <ConfigurationItem>Multi-Party / Private Registry</ConfigurationItem>
             <ConfigurationItem>
               Multi-Party / Public Registry
-              <ComingSoonBadge>Coming soon</ComingSoonBadge>
+              <Badge px={2} py={1} ml={2}>Coming soon</Badge>
             </ConfigurationItem>
           </AnimateOnScroll>
         </ConfigurationList>

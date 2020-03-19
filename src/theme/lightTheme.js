@@ -57,6 +57,14 @@ const colors = {
     separatorBorder: '#E6ECF1',
   },
   mobileMenuItemDivider: "#E6ECF1",
+  githubStarButton: {
+    icon: '#FFB900',
+  },
+  badge: {
+    defaultText: '#A2B6C7',
+    defaultBorder: '#D4DDE5',
+    defaultBackground: '#F5F7F9',
+  },
 };
 
 /* eslint-disable prefer-destructuring */

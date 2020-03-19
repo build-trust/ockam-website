@@ -28,6 +28,11 @@ const statesForButtonVariant = {
     border: 1px solid ${theme.colors.button.secondaryActive}
   }
   `,
+  'link': (theme) => `
+  &:hover {
+    color: ${theme.colors.link.hover};
+  }
+  `,
 
 };
 
@@ -60,6 +65,15 @@ const Button = styled('button')(
         color: 'button.secondaryText',
         bg: 'secondary',
         border: "1px solid transparent",
+      },
+      link: {
+        color: 'button.linkText',
+        bg: 'transparent',
+        border: 'none',
+        display: 'flex',
+        fontWeight: '500',
+        justifyContent: 'flex-start',
+        alignItems: "center",
       },
     },
   }),

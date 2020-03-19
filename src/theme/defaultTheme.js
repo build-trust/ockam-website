@@ -40,6 +40,7 @@ const colors = {
     secondaryHover: "#00BAEA",
     secondaryActive: "#04698A",
     secondaryText: "#25B8E4",
+    linkText: "#7A8895",
   },
   link: {
     default: '#A2B6C7',
@@ -59,6 +60,14 @@ const colors = {
     separatorBorder: '#162535',
   },
   mobileMenuItemDivider: "#242A31",
+  githubStarButton: {
+    icon: '#FFB900',
+  },
+  badge: {
+    defaultText: '#7A8895',
+    defaultBorder: 'transparent',
+    defaultBackground: '#162535',
+  },
 };
 
 /* eslint-disable prefer-destructuring */
