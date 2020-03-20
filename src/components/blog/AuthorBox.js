@@ -23,7 +23,7 @@ const Avatar = styled.div`
 const AuthorBox = ({ image, name }) => {
   return (
     <Container>
-      <Avatar src={image} alt="image" />
+      <Avatar src={image} />
       <Caption fontSize={1} color="text">
         {name}
       </Caption>

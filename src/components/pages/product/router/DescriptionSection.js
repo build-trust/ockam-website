@@ -10,6 +10,7 @@ import routerDiagram from '../../../../assets/product/subpage-router-diagram.svg
 import routerDiagramEdged from '../../../../assets/product/subpage-router-diagram-edged.svg';
 import routerDiagramMobile from '../../../../assets/product/subpage-router-diagram-mobile.svg';
 import AnimateOnScroll from "../../../AnimateOnScroll";
+import Image from "../../../Image";
 
 const Container = styled('div')`
   display: flex;
@@ -56,7 +57,7 @@ const DesktopImage = styled('div')`
   width: 100vw;
 `;
 
-const ImageBoxMobile = styled('img')`
+const ImageBoxMobile = styled(Image)`
   width: 100%;
   display: block;
   margin-left: auto;

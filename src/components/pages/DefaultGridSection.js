@@ -6,6 +6,7 @@ import { grid, flexbox } from 'styled-system';
 import { media } from '../../utils/emotion';
 import Heading from "../Heading";
 import AnimateOnScroll from "../AnimateOnScroll";
+import BaseImage from "../Image";
 
 import PageSection from './PageSection';
 
@@ -55,7 +56,7 @@ const Title = styled(Heading)`
   justify-content: flex-end;
 `;
 
-const Image = styled('img')`
+const Image = styled(BaseImage)`
   width: 100%;
 `;
 
@@ -98,7 +99,7 @@ const DefaultGridSection = ({
           }}
         >
           <AnimateOnScroll slideIn="down">
-            <Image alt="grid graphics" src={image} />
+            <Image src={image} />
           </AnimateOnScroll>
         </ImageContainer>
         {title && (

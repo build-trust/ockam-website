@@ -6,6 +6,7 @@ import { grid } from 'styled-system';
 import { media } from '../../../utils/emotion';
 import PageSection from '../PageSection';
 import AnimateOnScroll from "../../AnimateOnScroll";
+import BaseImage from "../../Image";
 
 const Section = styled(PageSection)`
   background: ${({ theme }) => theme.colors.background};
@@ -56,7 +57,7 @@ const HeaderSectionGrid = styled(Grid)`
   `};
 `;
 
-const Image = styled.img`
+const Image = styled(BaseImage)`
   display: none;
   ${media.desktop`
     display: inline;
@@ -65,7 +66,7 @@ const Image = styled.img`
   `};
 `;
 
-const MobileImage = styled.img`
+const MobileImage = styled(BaseImage)`
   max-width: 70%;
   ${media.desktop`
     display: none;

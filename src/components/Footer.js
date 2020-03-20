@@ -3,20 +3,17 @@ import styled from '@emotion/styled';
 import LinkedinLogo from 'emotion-icons/fa-brands/Linkedin';
 import TwitterLogo from 'emotion-icons/fa-brands/Twitter';
 import { lighten } from 'polished';
-import { useTheme } from 'emotion-theming';
 
 import { media } from '../utils/emotion';
-import ockamLogo from '../assets/ockam-logo.svg';
-import ockamLogoInvert from '../assets/ockam-logo-invert.svg';
 import useModal from "../hooks/useModal";
 import ContactModal from "../modals/ContactModal";
+import useThemeLogo from "../hooks/useThemeLogo";
 
 import PageSection from './pages/PageSection';
 import Link from './Link';
 import Caption from './Caption';
 import Icon from './Icon';
-
-
+import Image from "./Image";
 
 const FooterGrid = styled.div`
   padding-top: ${props => props.theme.space.large};
@@ -80,20 +77,19 @@ const SocialContainer = styled.div`
   justify-content: flex-end;
 `;
 
-const LogoOckam = styled.img`
+const LogoOckam = styled(Image)`
   height: 4.8rem;
 `;
 
 const Footer = () => {
-  const theme = useTheme();
+  const logo = useThemeLogo();
   const [, showContactModal] = useModal(ContactModal);
   const openContactModal = () => showContactModal();
-  const logoImage = theme.name === 'light' ? ockamLogo : ockamLogoInvert;
   return (
     <PageSection mb={3}>
       <FooterGrid>
         <LogoContainer>
-          <LogoOckam src={logoImage} alt="ockam logo" />
+          <LogoOckam src={logo} alt="Ockam logo" />
         </LogoContainer>
         <MenuContainer>
           <MenuLink onClick={openContactModal}>

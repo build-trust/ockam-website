@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useContext, useState,
+  useEffect, useContext, useState, useCallback,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -12,16 +12,16 @@ const useModal = (Component, props = {}) => {
 
   const [isActive, setIsActive] = useState(false);
   const [payload, setPayload] = useState({});
-  const hideModal = () => setIsActive(false);
+  const hideModal = useCallback(() => setIsActive(false), []);
 
-  const showModal = (modalPayload = {}) => {
+  const showModal = useCallback((modalPayload = {}) => {
     setIsActive(true);
     setPayload(modalPayload);
-  };
+  }, []);
 
-  const cleanUp = () => {
+  const cleanUp = useCallback(() => {
     context.setModal(createPortal(null, modalRoot));
-  };
+  },[modalRoot, context]);
 
   useEffect(() => {
     const keyListener = (e) => {
@@ -29,7 +29,7 @@ const useModal = (Component, props = {}) => {
     };
     document.addEventListener('keydown', keyListener);
     return () => document.removeEventListener('keydown', keyListener);
-  });
+  }, []);
 
   useEffect(() => {
     context.setModal(createPortal(

@@ -10,6 +10,7 @@ import arrowTopLeftIcon from '../assets/homepage/arrow-top-left-icon.svg';
 import Card from './Card/Card';
 import CardBody from './Card/CardBody';
 import Heading from './Heading';
+import Image from "./Image";
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -55,7 +56,7 @@ const StyledCardBody = styled(CardBody)`
   }
 `;
 
-const ImageIcon = styled('img')`
+const ImageIcon = styled(Image)`
   max-width: 4rem;
 `;
 
@@ -107,7 +108,7 @@ GetStartedCard.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
-  ]).isRequired,
+  ]),
   to: PropTypes.string,
   onClick: PropTypes.func,
   icon: PropTypes.func.isRequired,
@@ -117,6 +118,7 @@ GetStartedCard.propTypes = {
 GetStartedCard.defaultProps = {
   to: '',
   onClick() {},
+  children: undefined,
 };
 
 export default GetStartedCard;

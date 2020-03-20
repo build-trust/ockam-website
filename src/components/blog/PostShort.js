@@ -26,7 +26,7 @@ const PostShort = ({
         </Heading>
       </PostLink>
       <Text>{description}</Text>
-      <AuthorBox image={authorAvatar} name={author} alt="author" />
+      <AuthorBox image={authorAvatar} name={author} />
       <Hr mt={5} mb={5} />
     </Container>
   );

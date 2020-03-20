@@ -5,9 +5,9 @@ import styled from '@emotion/styled';
 import { media } from '../../utils/emotion';
 import Heading from "../Heading";
 import AnimateOnScroll from "../AnimateOnScroll";
+import BaseImage from "../Image";
 
 import Content from "./Content";
-
 
 const StickySectionContent = styled(Content)`
 
@@ -59,7 +59,7 @@ const StickyContainer = styled('div')`
   position: relative;
 `;
 
-const Image = styled('img')`
+const Image = styled(BaseImage)`
   width: 100%;
   display: none;
   ${media.desktop`
@@ -67,7 +67,7 @@ const Image = styled('img')`
   `}
 `;
 
-const MobileImage = styled('img')`
+const MobileImage = styled(BaseImage)`
   width: 100%;
   max-width: 50rem;
   margin-bottom: 4rem;
@@ -88,8 +88,8 @@ const StickySection = ({ image, mobileImage, title, TitleComponent, children, or
         <StickyContainer>
           <StickyBox order={order}>
             <AnimateOnScroll slideIn="down" offsetTopViewport={300}>
-              <Image src={image} alt='sticky' />
-              <MobileImage src={mobileImage} alt='mobileImage sticky' />
+              <Image src={image} />
+              <MobileImage src={mobileImage} />
             </AnimateOnScroll>
           </StickyBox>
         </StickyContainer>

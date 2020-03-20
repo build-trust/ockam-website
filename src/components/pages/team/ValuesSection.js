@@ -12,6 +12,7 @@ import Caption from '../../Caption';
 import Link from '../../Link';
 import CheckedListItem from "../../CheckedListItem";
 import AnimateOnScroll from "../../AnimateOnScroll";
+import Image from "../../Image";
 
 const Grid = styled('div')`
   display: grid;
@@ -71,7 +72,7 @@ const ButtonsContainer = styled('div')`
   display: flex;
 `;
 
-const MattAvatar = styled('img')`
+const MattAvatar = styled(Image)`
   border-radius: 50%;
   width: 6.4rem;
   position: absolute;
@@ -141,7 +142,7 @@ const ValuesSection = () => {
         <QuatationBoxWrapper>
           <AnimateOnScroll slideIn='right'>
             <QuatationBox>
-              <MattAvatar src={mattAvatar} alt="matthew-gregory" />
+              <MattAvatar src={mattAvatar} alt="Matthew Gregory" />
               <Heading textAlign="center" as="h3" fontStyle="italic">
                 Before We Wrote The Code, We Shipped Our Values.
               </Heading>

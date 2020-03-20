@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import styled from '@emotion/styled';
-import { MDXProvider } from '@mdx-js/react';
 import PropTypes from 'prop-types';
 import { Global } from '@emotion/core';
 import { animated, useTransition } from 'react-spring';
@@ -8,7 +7,6 @@ import { animated, useTransition } from 'react-spring';
 import normalizeCss from '../theme/normalizeCss';
 import globalStyles from '../theme/globalStyles';
 import ThemeProvider from '../components/themeProvider';
-import mdxComponents from '../components/mdxComponents';
 import Header from '../components/Header';
 import Content from '../components/pages/Content';
 import useUnderViewport from '../hooks/useUnderViewport';
@@ -42,7 +40,7 @@ const StickyMenuWrapper = styled(HeaderWrapper)`
   position: fixed;
   top: 0;
   background-color: ${props => props.theme.colors.accentBackground};
-`
+`;
 
 const AnimatedStickyMenuWrapper = animated(StickyMenuWrapper);
 
@@ -53,7 +51,6 @@ const PageLayout = ({
 }) => {
   const ref = useRef();
   const [isCollapsedHeader] = useUnderViewport(ref);
-
   const transitions = useTransition(isCollapsedHeader, null, {
     from: { transform: 'translate3d(0,-80px,0)' },
     enter: { transform: 'translate3d(0,0px,0)' },
@@ -64,32 +61,30 @@ const PageLayout = ({
     <ThemeProvider themeName={themeName}>
       <LocationContextProvider location={location}>
         <ModalContextProvider>
-          <MDXProvider components={mdxComponents}>
-            <PageWrapper>
-              <Global styles={normalizeCss} />
-              <Global styles={globalStyles} />
-              <HeaderWrapper ref={ref}>
-                <TopBarContactFormMessage />
-                <Content>
-                  <Header />
-                </Content>
-              </HeaderWrapper>
-              {
-                  transitions.map(({ item, props, key }) =>
-                  item && (
-                    <AnimatedStickyMenuWrapper key={key} style={props}>
-                      <Content>
-                        <Header
-                          isCollapsedHeader
-                        />
-                      </Content>
-                    </AnimatedStickyMenuWrapper>
-                  ))
-                }
-              {children}
-              <Footer />
-            </PageWrapper>
-          </MDXProvider>
+          <PageWrapper>
+            <Global styles={normalizeCss} />
+            <Global styles={globalStyles} />
+            <HeaderWrapper ref={ref}>
+              <TopBarContactFormMessage />
+              <Content>
+                <Header />
+              </Content>
+            </HeaderWrapper>
+            {
+              transitions.map(({ item, props, key }) =>
+              item && (
+                <AnimatedStickyMenuWrapper key={key} style={props}>
+                  <Content>
+                    <Header
+                      isCollapsedHeader
+                    />
+                  </Content>
+                </AnimatedStickyMenuWrapper>
+              ))
+            }
+            {children}
+            <Footer />
+          </PageWrapper>
         </ModalContextProvider>
       </LocationContextProvider>
     </ThemeProvider>

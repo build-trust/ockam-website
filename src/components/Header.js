@@ -13,6 +13,7 @@ import SidebarButton from './SidebarButton';
 import ToggleIcon from './Collapse/ToggleIcon';
 import MobileMenu from './Menu/MobileMenu';
 import Icon from "./Icon";
+import Image from "./Image";
 
 const Container = styled.nav`
   display: flex;
@@ -35,7 +36,7 @@ const StyledLink = styled(Link)`
   `}
 `;
 
-const Logo = styled.img`
+const Logo = styled(Image)`
   height: 5.5rem;
   
   ${props =>

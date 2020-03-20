@@ -2,7 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
-const Image = styled('img')`
+import BaseImage from '../Image';
+
+const Image = styled(BaseImage)`
   width: 100%;
 `;
 const LinkedImage = ({ src, ...rest }) => {

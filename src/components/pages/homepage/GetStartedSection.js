@@ -15,7 +15,7 @@ import ContactModal from "../../../modals/ContactModal";
 import AnimateOnScroll from "../../AnimateOnScroll";
 
 
-const GesStartedGrid = styled.div`
+const GetStartedGrid = styled.div`
   display: grid;
   grid-column-gap: 0.2rem;
   grid-template-columns: 1fr;
@@ -44,12 +44,12 @@ const GetStartedSection = () => {
         <Subheading textAlign="center" mb={5}>
           Get started with ockam
         </Subheading>
-        <GesStartedGrid>
+        <GetStartedGrid>
           <GetStartedCard to={siteMetaData.ockamLibraryRepo} title={'{ockam}'} icon={githubIcon} />
           <GetStartedCard to={siteMetaData.slackChannel} title="Join Community" icon={slackIcon} />
           <GetStartedCard onClick={onShowContactModal} title="Request a demo" icon={sendIcon} />
           <GetStartedCard to={siteMetaData.twitter} title="Follow Ockam" icon={twitterIcon} />
-        </GesStartedGrid>
+        </GetStartedGrid>
       </AnimateOnScroll>
     </PageSection>
   );

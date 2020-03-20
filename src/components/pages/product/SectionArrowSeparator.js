@@ -5,6 +5,8 @@ import arrows from '../../../assets/product/arrows.svg';
 import Content from "../Content";
 import { media } from '../../../utils/emotion';
 import AnimateOnScroll from "../../AnimateOnScroll";
+import BaseImage from "../../Image";
+
 
 const Container = styled(Content)`
   width: 100%;
@@ -17,7 +19,7 @@ const Container = styled(Content)`
   
 `;
 
-const Image = styled('img')`
+const Image = styled(BaseImage)`
   margin-left: auto;
   margin-right: auto;
   display: none;

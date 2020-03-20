@@ -5,6 +5,7 @@ import {grid} from "styled-system";
 
 import { media } from '../../utils/emotion';
 import AnimateOnScroll from "../AnimateOnScroll";
+import BaseImage from '../Image';
 
 import PageSection from './PageSection';
 
@@ -71,7 +72,7 @@ const HeaderSectionGrid = styled(Grid)`
   `};
 `;
 
-const Image = styled.img`
+const Image = styled(BaseImage)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -98,27 +99,29 @@ const HeaderGridSection = ({
   mobileImageOpacity,
   gridXlProportions,
   children,
-}) => (
-  <Section mobileImageOpacity={mobileImageOpacity} image={image}>
-    <HeaderSectionGrid
-      gridTemplateColumns={{
+}) => {
+
+  return (
+    <Section mobileImageOpacity={mobileImageOpacity} image={image}>
+      <HeaderSectionGrid
+        gridTemplateColumns={{
         _: ' 1fr',
         xl: `${gridXlProportions[0]} ${gridXlProportions[1]}`,
       }}
-    >
-      <LeftBox>
-        <AnimateOnScroll slideIn='left'>
-          {children}
-        </AnimateOnScroll>
-      </LeftBox>
-      <ImageContainer>
-        <AnimateOnScroll slideIn='right'>
-          <Image src={image} alignImageRight={alignImageRight} />
-        </AnimateOnScroll>
-      </ImageContainer>
-    </HeaderSectionGrid>
-  </Section>
-);
+      >
+        <LeftBox>
+          <AnimateOnScroll slideIn='left'>
+            {children}
+          </AnimateOnScroll>
+        </LeftBox>
+        <ImageContainer>
+          <AnimateOnScroll slideIn='right'>
+            <Image src={image} alignImageRight={alignImageRight} />
+          </AnimateOnScroll>
+        </ImageContainer>
+      </HeaderSectionGrid>
+    </Section>
+)};
 
 HeaderGridSection.propTypes = {
   mobileImageOpacity: PropTypes.number,

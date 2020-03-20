@@ -52,27 +52,30 @@ const HeaderWrapper = styled.div`
 `;
 
 const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location }) => {
+
   return (
     <ThemeProvider themeName="light">
       <LocationContextProvider location={location}>
         <ModalContextProvider>
-          <MDXProvider components={mdxComponents}>
-            <PageWrapper>
-              <Global styles={normalizeCss} />
-              <Global styles={globalStyles} />
-              <FocusLock disabled={!isOpenSidebar}>
-                <HeaderWrapper>
-                  <TopBarContactFormMessage />
-                  <Content>
-                    <Header openSidebar={() => setIsOpenSidebar(true)} />
-                  </Content>
-                </HeaderWrapper>
+          <PageWrapper>
+            <Global styles={normalizeCss} />
+            <Global styles={globalStyles} />
+            <FocusLock disabled={!isOpenSidebar}>
+              <HeaderWrapper>
+                <TopBarContactFormMessage />
                 <Content>
-                  <Wrapper>{children}</Wrapper>
+                  <Header openSidebar={() => setIsOpenSidebar(true)} />
                 </Content>
-              </FocusLock>
-            </PageWrapper>
-          </MDXProvider>
+              </HeaderWrapper>
+              <Content>
+                <Wrapper>
+                  <MDXProvider components={mdxComponents}>
+                    {children}
+                  </MDXProvider>
+                </Wrapper>
+              </Content>
+            </FocusLock>
+          </PageWrapper>
         </ModalContextProvider>
       </LocationContextProvider>
     </ThemeProvider>
