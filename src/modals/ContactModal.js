@@ -27,8 +27,8 @@ const ContactModal = ({ isActive, hide }) => {
   );
   return (
     <Modal hide={hide} isActive={isActive}>
-      <ModalTitle>Let's contact us</ModalTitle>
-      <Text mb={4}>Let us know how we can help you.</Text>
+      <ModalTitle>Connect with the Ockam Team</ModalTitle>
+      <Text mb={4}>Let us know how we can help you!</Text>
       <ContactForm
         ref={contactFormRef}
         pending={pending}
