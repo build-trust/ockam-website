@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { animated, useTransition } from 'react-spring';
 import styled from '@emotion/styled';
-import { space } from 'styled-system';
+import { space, flex } from 'styled-system';
 
 import Icon from '../Icon';
 import { ReactComponent as ChevronRightIcon } from '../../assets/chevron-right-icon.svg';
@@ -13,7 +13,8 @@ const IconContainer = styled('div')(
     position: 'relative',
     cursor: 'pointer',
   },
-  space
+  space,
+  flex
 );
 const AnimatedIcon = styled(animated.div)`
   display: flex;

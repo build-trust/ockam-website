@@ -8,6 +8,7 @@ import BlogTemplate from './BlogTemplate';
 const Index = ({ children, pageContext, location, ...rest }) => {
   const isDocPage = pageContext.pageType === 'doc';
   const isBlogPage = pageContext.pageType === 'blog';
+
   if (isBlogPage) {
     return (
       <BlogTemplate location={location} {...rest}>
@@ -17,7 +18,7 @@ const Index = ({ children, pageContext, location, ...rest }) => {
   }
   if (isDocPage) {
     return (
-      <LearnTemplate location={location} dependedRepos={pageContext.dependedRepos} {...rest}>
+      <LearnTemplate location={location} algoliaIndexes={pageContext.algoliaIndexes.learn} dependedRepos={pageContext.dependedRepos} {...rest}>
         {children}
       </LearnTemplate>
     );
@@ -35,8 +36,13 @@ Index.propTypes = {
   pageContext: PropTypes.shape({
     pageType: PropTypes.oneOf(['doc', 'page', 'blog']),
     dependedRepos: PropTypes.arrayOf(PropTypes.shape({})),
+    algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
+      learn: PropTypes.arrayOf(PropTypes.string),
+    })),
   }).isRequired,
   location: PropTypes.shape({}).isRequired,
+
 };
+
 
 export default Index;

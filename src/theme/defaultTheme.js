@@ -46,6 +46,15 @@ const colors = {
     hover: '#D4DDE5',
     active: '#64727F',
   },
+  search: {
+    resultBoxBorder: '#162535',
+    resultBoxShadow: 'rgba(0,0,0,0.2)',
+    resultItemHover: '#0A1A2B',
+    resultText: '#A2B6C7',
+    resultsCountText: '#D4DDE5',
+    resultsDividerColor: "#F5F7F9",
+    caption: '#A2B6C7',
+  },
 };
 
 /* eslint-disable prefer-destructuring */

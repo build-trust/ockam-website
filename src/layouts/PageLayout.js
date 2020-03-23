@@ -7,7 +7,7 @@ import { animated, useTransition } from 'react-spring';
 import normalizeCss from '../theme/normalizeCss';
 import globalStyles from '../theme/globalStyles';
 import ThemeProvider from '../components/themeProvider';
-import Header from '../components/Header';
+import Header from '../components/header/Header';
 import Content from '../components/pages/Content';
 import useUnderViewport from '../hooks/useUnderViewport';
 import Footer from '../components/Footer';
@@ -45,12 +45,13 @@ const StickyMenuWrapper = styled(HeaderWrapper)`
 const AnimatedStickyMenuWrapper = animated(StickyMenuWrapper);
 
 const PageLayout = ({
-  children,
-  themeName,
-  location,
-}) => {
+                      children,
+                      themeName,
+                      location,
+                    }) => {
   const ref = useRef();
   const [isCollapsedHeader] = useUnderViewport(ref);
+
   const transitions = useTransition(isCollapsedHeader, null, {
     from: { transform: 'translate3d(0,-80px,0)' },
     enter: { transform: 'translate3d(0,0px,0)' },
@@ -72,15 +73,15 @@ const PageLayout = ({
             </HeaderWrapper>
             {
               transitions.map(({ item, props, key }) =>
-              item && (
-                <AnimatedStickyMenuWrapper key={key} style={props}>
-                  <Content>
-                    <Header
-                      isCollapsedHeader
-                    />
-                  </Content>
-                </AnimatedStickyMenuWrapper>
-              ))
+                item && (
+                  <AnimatedStickyMenuWrapper key={key} style={props}>
+                    <Content>
+                      <Header
+                        isCollapsedHeader
+                      />
+                    </Content>
+                  </AnimatedStickyMenuWrapper>
+                ))
             }
             {children}
             <Footer />

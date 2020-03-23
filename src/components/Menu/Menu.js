@@ -16,19 +16,21 @@ const Container = styled.div`
   `}
 `;
 
-const Menu = ({ isCollapsedHeader, ...rest }) => {
+const Menu = ({ isCollapsedHeader, contactAsButton, ...rest }) => {
   return (
     <Container {...rest}>
-      <MenuItems isCollapsedHeader={isCollapsedHeader} />
+      <MenuItems isCollapsedHeader={isCollapsedHeader} contactAsButton={contactAsButton} />
     </Container>
 )};
 
 Menu.propTypes = {
   isCollapsedHeader: PropTypes.bool,
+  contactAsButton: PropTypes.bool,
 };
 
 Menu.defaultProps = {
   isCollapsedHeader: false,
+  contactAsButton: true,
 };
 
 export default Menu;

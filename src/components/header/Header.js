@@ -4,28 +4,15 @@ import PropTypes from 'prop-types';
 import MenuIcon from 'emotion-icons/feather/Menu';
 import CrossIcon from 'emotion-icons/feather/X';
 
-import { media } from '../utils/emotion';
-import useThemeLogo from '../hooks/useThemeLogo';
+import { media } from '../../utils/emotion';
+import Menu from '../Menu/Menu';
+import Link from '../Link';
+import ToggleIcon from '../Collapse/ToggleIcon';
+import MobileMenu from '../Menu/MobileMenu';
+import Icon from "../Icon";
+import Logo from "../Logo";
 
-import Menu from './Menu/Menu';
-import Link from './Link';
-import SidebarButton from './SidebarButton';
-import ToggleIcon from './Collapse/ToggleIcon';
-import MobileMenu from './Menu/MobileMenu';
-import Icon from "./Icon";
-import Image from "./Image";
-
-const Container = styled.nav`
-  display: flex;
-  max-width: 100%;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  padding: ${props => (props.isCollapsedHeader ? '0.8rem 0' : '1.5rem 0')};
-  position: relative;
-  width: inherit;
-  color: ${props => props.theme.colors.menuText};
-`;
+import Container from "./HeaderContainer";
 
 const StyledLink = styled(Link)`
   margin-left: auto;
@@ -36,15 +23,6 @@ const StyledLink = styled(Link)`
   `}
 `;
 
-const Logo = styled(Image)`
-  height: 5.5rem;
-  
-  ${props =>
-    props.isCollapsedHeader &&
-    `
-    height: 3rem;
-  `}
-`;
 
 const ToggleMenuButton = styled(ToggleIcon)`
   color: ${({ theme }) => theme.colors.icons};
@@ -59,20 +37,13 @@ const ToggleMenuButton = styled(ToggleIcon)`
 const BurgerIcon = () => <Icon icon={MenuIcon} size={28} />;
 const CloseIcon = () => <Icon icon={CrossIcon} size={28} />;
 
-
-const Header = ({ openSidebar, isCollapsedHeader }) => {
-  const logo = useThemeLogo();
+const Header = ({ isCollapsedHeader }) => {
   const [isVisibleMobileMenu, setIsVisibleMenu] = useState(false);
   const toggleMobileMenu = () => setIsVisibleMenu(state => !state);
   return (
     <Container isCollapsedHeader={isCollapsedHeader}>
-      {openSidebar && <SidebarButton onClick={openSidebar} />}
       <StyledLink to="/">
-        <Logo
-          src={logo}
-          alt="Ockam logo"
-          isCollapsedHeader={isCollapsedHeader}
-        />
+        <Logo height={isCollapsedHeader ? '3rem' : undefined} />
       </StyledLink>
       <ToggleMenuButton
         CollapsedIcon={BurgerIcon}
@@ -88,7 +59,6 @@ const Header = ({ openSidebar, isCollapsedHeader }) => {
         <MobileMenu
           onClickItem={toggleMobileMenu}
           isCollapsedHeader={isCollapsedHeader}
-
         />
 )}
       </>
@@ -97,7 +67,6 @@ const Header = ({ openSidebar, isCollapsedHeader }) => {
 };
 
 Header.propTypes = {
-  openSidebar: PropTypes.func.isRequired,
   isCollapsedHeader: PropTypes.bool,
 };
 Header.defaultProps = {

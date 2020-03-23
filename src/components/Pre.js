@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
-import { fontFamily, space, color } from 'styled-system';
+import { fontFamily, space, color, layout } from 'styled-system';
 
 const Pre = styled('pre')(
   {
-    overflow: 'auto',
+    overflow: 'scroll',
+
   },
   fontFamily,
   space,
-  color
+  color,
+  layout
 );
 
 Pre.displayName = 'Pre';

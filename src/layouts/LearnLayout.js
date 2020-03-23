@@ -11,11 +11,11 @@ import normalizeCss from '../theme/normalizeCss';
 import globalStyles from '../theme/globalStyles';
 import ThemeProvider from '../components/themeProvider';
 import mdxComponents from '../components/mdxComponents';
-import Header from '../components/Header';
 import BaseContent from '../components/Content';
 import {ModalContextProvider} from "../contexts/ModalContext";
 import {LocationContextProvider} from "../contexts/LocationContext";
 import TopBarContactFormMessage from "../components/TopBarContactFormMessage/TopBarContactFormMessage";
+import LearnHeader from "../components/header/LearnHeader";
 
 const PageWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
@@ -43,15 +43,15 @@ const Content = styled(BaseContent)`
 
 const HeaderWrapper = styled.div`
   box-shadow: ${({ theme }) =>
-    `0 1px 0 0 ${theme.colors.accentBackground}, 0 3px 8px 0 ${rgba(
-      theme.colors.accentBackground,
-      0.6
-    )}`};
+  `0 1px 0 0 ${theme.colors.accentBackground}, 0 3px 8px 0 ${rgba(
+    theme.colors.accentBackground,
+    0.6
+  )}`};
   z-index: 2;
   position: relative;
 `;
 
-const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location }) => {
+const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location, algoliaIndexes }) => {
 
   return (
     <ThemeProvider themeName="light">
@@ -64,7 +64,7 @@ const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location }) =>
               <HeaderWrapper>
                 <TopBarContactFormMessage />
                 <Content>
-                  <Header openSidebar={() => setIsOpenSidebar(true)} />
+                  <LearnHeader algoliaIndexes={algoliaIndexes} openSidebar={() => setIsOpenSidebar(true)} />
                 </Content>
               </HeaderWrapper>
               <Content>
@@ -90,6 +90,13 @@ LearnLayout.propTypes = {
   location: PropTypes.shape({}).isRequired,
   isOpenSidebar: PropTypes.bool.isRequired,
   setIsOpenSidebar: PropTypes.func.isRequired,
+  algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
+    learn: PropTypes.arrayOf(PropTypes.string),
+  })),
+};
+
+LearnLayout.defaultProps = {
+  algoliaIndexes: [],
 };
 
 export default LearnLayout;

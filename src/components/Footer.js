@@ -7,13 +7,14 @@ import { lighten } from 'polished';
 import { media } from '../utils/emotion';
 import useModal from "../hooks/useModal";
 import ContactModal from "../modals/ContactModal";
-import useThemeLogo from "../hooks/useThemeLogo";
 
 import PageSection from './pages/PageSection';
 import Link from './Link';
 import Caption from './Caption';
 import Icon from './Icon';
-import Image from "./Image";
+import Logo from "./Logo";
+
+
 
 const FooterGrid = styled.div`
   padding-top: ${props => props.theme.space.large};
@@ -77,19 +78,15 @@ const SocialContainer = styled.div`
   justify-content: flex-end;
 `;
 
-const LogoOckam = styled(Image)`
-  height: 4.8rem;
-`;
 
 const Footer = () => {
-  const logo = useThemeLogo();
   const [, showContactModal] = useModal(ContactModal);
   const openContactModal = () => showContactModal();
   return (
     <PageSection mb={3}>
       <FooterGrid>
         <LogoContainer>
-          <LogoOckam src={logo} alt="Ockam logo" />
+          <Logo height="4.8rem" alt="Ockam logo"/>
         </LogoContainer>
         <MenuContainer>
           <MenuLink onClick={openContactModal}>

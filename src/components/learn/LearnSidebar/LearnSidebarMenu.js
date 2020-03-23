@@ -7,7 +7,7 @@ import getRootSlugFromPathname from '../../../utils/getRootSlugFromPathname';
 import SidebarMenuContainer from '../../Sidebar/SidebarMenuContainer';
 import isMatchingPath from "../../../utils/isMatchedPath";
 
-import DocsSidebarMenuNode from './DocsSidebarMenuNode';
+import LearnSidebarMenuNode from './LearnSidebarMenuNode';
 
 const getNestedNodesRecursively = (node, initial = []) => {
   if (!node.nodes || node.nodes.length === 0) return null;
@@ -22,7 +22,7 @@ const getNestedNodesRecursively = (node, initial = []) => {
   return [...currentlyHidden, ...results];
 };
 
-const DocsSidebarMenu = ({ location }) => {
+const LearnSidebarMenu = ({ location }) => {
   const rootSlug = getRootSlugFromPathname(location.pathname);
   const { tree } = useAllMdxAsTree(rootSlug);
   const [collapsed, setCollapsed] = useState(() => {
@@ -46,7 +46,7 @@ const DocsSidebarMenu = ({ location }) => {
 
   return (
     <SidebarMenuContainer>
-      <DocsSidebarMenuNode
+      <LearnSidebarMenuNode
         setCollapsed={toggle}
         location={location}
         collapsed={collapsed}
@@ -57,10 +57,10 @@ const DocsSidebarMenu = ({ location }) => {
   );
 };
 
-DocsSidebarMenu.propTypes = {
+LearnSidebarMenu.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default DocsSidebarMenu;
+export default LearnSidebarMenu;

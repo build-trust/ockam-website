@@ -8,6 +8,9 @@ const config = {
 	  "STAGE": process.env.GATSBY_STAGE || 'LOCAL',
     "RECAPTCHA_SITEKEY": process.env.GATSBY_GOOGLE_RECAPTCHA_SITEKEY || "6LfIDtwUAAAAAIt2vgTj7LTIJ9tqwlNKV4fZecbK",
     "ROOT_URL": process.env.GATSBY_ROOT_URL || "http://localhost:3000",
+    "ALGOLIA_APP_ID": process.env.GATSBY_ALGOLIA_APP_ID || "OOQRUIVPQB",
+    "ALGOLIA_ADMIN_API_KEY": process.env.GATSBY_ALGOLIA_ADMIN_API_KEY,
+    "ALGOLIA_SEARCH_API_KEY": process.env.GATSBY_ALGOLIA_SEARCH_API_KEY || "3476e2098d0504451ee0434297dd3b65",
   },
   "general": {
 	  "email": "hello@ockam.io",

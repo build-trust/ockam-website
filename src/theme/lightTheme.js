@@ -13,6 +13,9 @@ const colors = {
   menuTextActive: '#242A31',
   code: '#3C454E',
   primary: '#52c7ea',
+  accent: '#EC432D',
+  accentHover: '#FF2D11',
+  accentActive: '#BF3B2C',
   secondary: '#e9f7fc',
   caption: '#7A8895',
   white: '#fff',
@@ -34,11 +37,22 @@ const colors = {
     secondaryHover: "#00BAEA",
     secondaryActive: "#9DDFF2",
     secondaryText: "#25B8E4",
+
   },
   link: {
     default: '#7A8895',
     hover: '#242A31',
     active: '#3C454E',
+  },
+  search: {
+    resultBoxBorder: '#E6ECF1',
+    resultBoxShadow: 'rgba(116,129,141,0.1)',
+    resultItemHover: '#F5F7F9',
+    resultText: '#A2B6C7',
+    resultsCountText: '#D4DDE5',
+    resultsDividerColor: "#F5F7F9",
+    caption: '#A2B6C7',
+
   },
 };
 

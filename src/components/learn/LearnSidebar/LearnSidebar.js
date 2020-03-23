@@ -6,7 +6,7 @@ import SlackIcon from 'emotion-icons/fa-brands/SlackHash';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import Scrollbar from 'react-scrollbars-custom';
+
 
 import { media } from '../../../utils/emotion';
 import Icon from '../../Icon';
@@ -16,8 +16,9 @@ import Link from '../../Link';
 import SidebarCrossIcon from '../../Sidebar/SidebarCrossIcon';
 import useModal from "../../../hooks/useModal";
 import ContactModal from "../../../modals/ContactModal";
+import Scrollbar from "../../Scrollbar";
 
-import DocsSidebarMenu from './DocsSidebarMenu';
+import LearnSidebarMenu from './LearnSidebarMenu';
 
 const IconsContainer = styled.div`
   padding: 2.2rem 1.5rem;
@@ -32,27 +33,17 @@ const IconsContainer = styled.div`
 `;
 
 const StyledSidebar = styled(Sidebar)`
-  min-width: 30rem;
+  width: 100%;
+  min-width: 100%;
   z-index: 2;
   ${media.desktop`
       z-index: 1;
   `};
   border-right: 1px solid ${({ theme }) => theme.colors.accentBackground};
-
-  .ScrollbarsCustom-TrackY {
-    top: 0 !important;
-    background-color: ${({ theme }) =>
-      theme.custom.sidebar.customScrollTruckColor} !important;
-    height: 100% !important;
-    width: 4px !important;
-  }
-  .ScrollbarsCustom-ThumbY {
-    background-color: ${({ theme }) =>
-      theme.custom.sidebar.customScrollThumbColor} !important;
-  }
 `;
 
 const ContentWrapper = styled.div`
+  padding-right: 1rem;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -72,7 +63,7 @@ const setHeightBasedOnOffset = ref => () => {
   ref.current.style.height = `calc(100vh - ${viewportOffset.top}px)`;
 };
 
-const DocsSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
+const LearnSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
   useScrollPosition(setHeightBasedOnOffset(ref), [ref]);
   const [, showContactModal] = useModal(ContactModal);
   useEffect(setHeightBasedOnOffset(ref), [ref]);
@@ -90,7 +81,7 @@ const DocsSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
       <Scrollbar style={{ position: '' }}>
         <ContentWrapper>
           <SidebarCrossIcon onClick={onClose} />
-          <DocsSidebarMenu location={location} />
+          <LearnSidebarMenu location={location} />
           <IconsContainer>
             <Link to={siteMetaData.ockamLibraryRepo}>
               <Icon size={28} icon={GithubIcon} />
@@ -108,15 +99,15 @@ const DocsSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
   );
 });
 
-DocsSidebar.propTypes = {
+LearnSidebar.propTypes = {
   location: PropTypes.shape({}).isRequired,
   menuId: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func,
 };
 
-DocsSidebar.defaultProps = {
+LearnSidebar.defaultProps = {
   onClose() {},
 };
 
-export default DocsSidebar;
+export default LearnSidebar;

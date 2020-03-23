@@ -13,6 +13,7 @@ const Wrapper = styled(animated.div)`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  grid-column: 1 / 4;
 
   ${media.desktop`
     display: none;

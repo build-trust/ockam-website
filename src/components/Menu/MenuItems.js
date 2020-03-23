@@ -40,11 +40,50 @@ const productOptions = [
   },
 ];
 
+const ContactButton = ({ contactAsButton, isCollapsedHeader, onClick, linkFontSize }) => {
+  if(contactAsButton) return (
+    <Button
+      variant="primary"
+      size={isCollapsedHeader ? 'small' : 'default'}
+      ml={{
+        _: 0,
+        lg: 3,
+      }}
+      onClick={onClick}
+    >
+      Contact us
+    </Button>
+  );
+  return (
+    <Link
+      fontSize={linkFontSize}
+      onClick={onClick}
+      title="Contact us"
+      padding={{
+        _: 2,
+        lg: 3,
+      }}
+    >
+      Contact us
+    </Link>
+  );
+};
+
+ContactButton.propTypes = {
+  contactAsButton: PropTypes.bool.isRequired,
+  isCollapsedHeader: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
+  linkFontSize: PropTypes.number.isRequired,
+};
+
+ContactButton.defaultProps = {
+  isCollapsedHeader: false,
+};
+
 const mapNodesToMenuOptions = nodes =>
   nodes.map(node => ({ label: capitalize(node.name), to: node.url }));
 
-
-const MenuItems = ({ isCollapsedHeader, onClickItem }) => {
+const MenuItems = ({ isCollapsedHeader, onClickItem, contactAsButton }) => {
   const { getActiveStyleForPathname } = useActiveMenuStyles();
   const [, showContactModal] = useModal(ContactModal);
   const { tree } = useAllMdxAsTree();
@@ -74,6 +113,10 @@ const MenuItems = ({ isCollapsedHeader, onClickItem }) => {
           padding={{
             _: 2,
             lg: 3,
+          }}
+          pl={{
+            _: 2,
+            lg: 0,
           }}
         >
           Product
@@ -124,17 +167,12 @@ const MenuItems = ({ isCollapsedHeader, onClickItem }) => {
           />
         </Link>
       </DropdownMenu>
-      <Button
-        variant="primary"
-        size={isCollapsedHeader ? 'small' : 'default'}
-        ml={{
-          _: 0,
-          lg: 3,
-        }}
+      <ContactButton
+        contactAsButton={contactAsButton}
+        isCollapsedHeader={isCollapsedHeader}
         onClick={showContactModal}
-      >
-        Contact us
-      </Button>
+        linkFontSize={LinkFontSize}
+      />
     </>
   );
 };
@@ -142,10 +180,12 @@ const MenuItems = ({ isCollapsedHeader, onClickItem }) => {
 MenuItems.propTypes = {
   isCollapsedHeader: PropTypes.bool,
   onClickItem: PropTypes.func,
+  contactAsButton: PropTypes.bool,
 };
 
 MenuItems.defaultProps = {
   isCollapsedHeader: false,
+  contactAsButton: true,
   onClickItem() {},
 };
 

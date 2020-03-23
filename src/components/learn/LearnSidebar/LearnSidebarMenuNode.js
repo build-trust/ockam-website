@@ -30,7 +30,7 @@ const ButtonChevron = styled.button`
 `;
 
 // eslint-disable-next-line complexity
-const DocsSidebarMenuNode = ({
+const LearnSidebarMenuNode = ({
   setCollapsed,
   collapsed,
   url,
@@ -81,7 +81,7 @@ const DocsSidebarMenuNode = ({
       {!isCollapsed && hasChildren ? (
         <NodeList deepLevel={deepLevel}>
           {nodes.map(item => (
-            <DocsSidebarMenuNode
+            <LearnSidebarMenuNode
               location={location}
               key={item.url}
               setCollapsed={setCollapsed}
@@ -99,7 +99,7 @@ const DocsSidebarMenuNode = ({
   );
 };
 
-DocsSidebarMenuNode.propTypes = {
+LearnSidebarMenuNode.propTypes = {
   nodes: PropTypes.arrayOf(
     PropTypes.shape({
       url: PropTypes.string,
@@ -116,10 +116,10 @@ DocsSidebarMenuNode.propTypes = {
   }).isRequired,
 };
 
-DocsSidebarMenuNode.defaultProps = {
+LearnSidebarMenuNode.defaultProps = {
   url: '',
   title: '',
   name: '',
 };
 
-export default DocsSidebarMenuNode;
+export default LearnSidebarMenuNode;

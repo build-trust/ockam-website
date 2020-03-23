@@ -1,9 +1,10 @@
-const { createFilePath } = require(`gatsby-source-filesystem`);
 const path = require("path");
 
+const { createFilePath } = require(`gatsby-source-filesystem`);
 const { startCase } = require("lodash");
 
 const getDependedRepos = require('./scripts/get-depended-repos');
+const learnIndices = require('./scripts/get-algolia-learn-indices');
 
 const isNodeBlogPage = (node) => node.fields.slug && node.fields.slug.split("/")[1] === 'blog';
 
@@ -20,11 +21,9 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             fields {
               id
-            }
-            tableOfContents
-            fields {
               slug
             }
+            tableOfContents
           }
         }
       }
@@ -50,20 +49,19 @@ exports.createPages = async ({ graphql, actions }) => {
 };
 
 exports.onCreatePage = ({ page, actions }) => {
-  const { createPage, deletePage } = actions;
-    const isBlog = page.path && page.path.split("/")[1] === 'blog';
-    if(isBlog) {
-      deletePage(page);
-      createPage({
-        ...page,
-        context: {
-          ...page.context,
-          pageType: `blog`,
-        },
-      });
-    } else {
-      createPage(page);
-    }
+  const { createPage } = actions;
+    const isRootBlog = page.path && page.path.split("/")[1] === 'blog';
+    const algoliaIndexes = {
+      learn: learnIndices,
+    };
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        algoliaIndexes,
+        ...(isRootBlog && { pageType: `blog`}),
+      },
+    });
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {

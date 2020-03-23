@@ -1,5 +1,6 @@
 require("dotenv").config();
 const config = require("./config");
+const queries = require('./scripts/get-algolia-queries');
 
 const plugins = [
   'gatsby-plugin-sitemap',
@@ -95,6 +96,16 @@ const plugins = [
     },
   },
 ];
+
+plugins.push({
+  resolve: `gatsby-plugin-algolia`,
+  options: {
+    appId: config.env.ALGOLIA_APP_ID,
+    apiKey: config.env.ALGOLIA_ADMIN_API_KEY,
+    queries,
+    chunkSize: 10000, // default: 1000
+  },
+});
 
 module.exports = {
   pathPrefix: config.gatsby.pathPrefix,

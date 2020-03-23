@@ -9,21 +9,31 @@ import SEO from '../components/SEO';
 import getRootSlugFromPathname from '../utils/getRootSlugFromPathname';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { media } from '../utils/emotion';
-import DocsSidebar from '../components/docs/DocsSidebar/DocsSidebar';
+import LearnSidebar from '../components/learn/LearnSidebar/LearnSidebar';
 import LearnLayout from '../layouts/LearnLayout';
 import defaultAvatar from '../assets/default_avatar.png';
 import LearnPost from '../components/blog/LearnPost';
 import EditOnGithubLink from "../components/EditOnGithubLink";
+import LearnGridLayout from "../components/LearnGridLayout";
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   margin: 4rem 0;
+  min-width: 0;
   ${media.desktop`
-      padding-left: 8rem;
+      padding: 0 4rem;
+  `}
+  ${media.ultraWide`
+      padding: 0 8rem;
   `}
 `;
+
+const ContentLearnContainer = styled(LearnGridLayout)`
+  align-items: flex-start;
+  grid-template-columns: 1fr;
+`
 
 export default function LearnTemplate(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +43,7 @@ export default function LearnTemplate(props) {
     data: { mdx },
     location,
     dependedRepos,
+    algoliaIndexes,
   } = props;
   const {
     frontmatter: { metaTitle, metaDescription, metaImage, authorAvatar, author, date },
@@ -68,40 +79,46 @@ export default function LearnTemplate(props) {
       location={location}
       isOpenSidebar={isOpen}
       setIsOpenSidebar={setIsOpen}
+      algoliaIndexes={algoliaIndexes}
     >
-      <DocsSidebar
-        location={location}
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        menuId={menuId}
-        ref={ref}
-      />
-      <Content>
-        <SEO
-          title={seoTitle}
-          image={seoImage}
-          description={seoDescription}
-          slug={slug}
+      <ContentLearnContainer>
+        <LearnSidebar
+          location={location}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          menuId={menuId}
+          ref={ref}
         />
-        {isPostPath ? (
-          <LearnPost
-            body={body}
-            title={title}
-            authorAvatar={imageAvatar}
-            author={author}
-            date={date}
-            location={location}
+        <Content>
+          <SEO
+            title={seoTitle}
+            image={seoImage}
+            description={seoDescription}
+            slug={slug}
           />
-        ) : (
-          <div>
-            <MDXRenderer>{body}</MDXRenderer>
-            {!isBlogRoot && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
-          </div>
-        )}
-        {!isRoot && !isBlogRoot && (
-          <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
-        )}
-      </Content>
+          {isPostPath ? (
+            <LearnPost
+              body={body}
+              title={title}
+              authorAvatar={imageAvatar}
+              author={author}
+              date={date}
+              location={location}
+            />
+          ) : (
+            <div>
+              <MDXRenderer>{body}</MDXRenderer>
+              {!isBlogRoot && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
+            </div>
+          )}
+          {!isRoot && !isBlogRoot && (
+            <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
+          )}
+        </Content>
+        <div>
+          Table of content
+        </div>
+      </ContentLearnContainer>
     </LearnLayout>
   );
 }
@@ -148,6 +165,9 @@ LearnTemplate.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+  algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
+    learn: PropTypes.arrayOf(PropTypes.string),
+  })),
 };
 
 LearnTemplate.defaultProps = {
@@ -159,6 +179,7 @@ LearnTemplate.defaultProps = {
     },
   },
   dependedRepos: [],
+  algoliaIndexes: [],
 };
 
 export const pageQuery = graphql`
