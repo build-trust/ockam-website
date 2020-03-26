@@ -18,7 +18,11 @@ const Team = () => {
 
   return (
     <>
-      <SEO title="Ockam | Team" />
+      <SEO
+        title="Ockam | Team"
+        description="Builders are the ones that change the world. Ockam builds open source tools that empower any
+        developer, of any skill level, to build trustful connected ecosystems."
+      />
       <HeaderSection />
       <ValuesSection />
       <JoinTeam jobs={jobs} updatedJobs={updatedJobs} />
