@@ -85,6 +85,19 @@ const MenuItems = ({ isCollapsedHeader, onClickItem }) => {
           />
         </Link>
       </DropdownMenu>
+      <Link
+        fontSize={LinkFontSize}
+        onClick={onClickItem}
+        title="Team"
+        style={getActiveStyleForPathname('/team')}
+        padding={{
+          _: 2,
+          lg: 3,
+        }}
+        to="/team"
+      >
+        Team
+      </Link>
       <DropdownMenu
         onClickItem={onClickItem}
         isCollapsedHeader={isCollapsedHeader}
@@ -111,19 +124,6 @@ const MenuItems = ({ isCollapsedHeader, onClickItem }) => {
           />
         </Link>
       </DropdownMenu>
-      <Link
-        fontSize={LinkFontSize}
-        onClick={onClickItem}
-        title="Team"
-        style={getActiveStyleForPathname('/team')}
-        padding={{
-          _: 2,
-          lg: 3,
-        }}
-        to="/team"
-      >
-        Team
-      </Link>
       <Button
         variant="primary"
         size={isCollapsedHeader ? 'small' : 'default'}
