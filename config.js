@@ -24,9 +24,6 @@ const config = {
   "api": {
 	  "leverUrl": "https://api.lever.co/v0",
   },
-	"sidebar": {
-		"isDefaultExpand": false,
-	},
 	"siteMetadata": {
 		"title": "Ockam",
 		"description": "Ockam is a Tool Company. Ockam's open source developer tools make it simple to send trustful end-to-end encrypted messages between connected devices and cloud services.",

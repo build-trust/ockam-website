@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import OpenIcon from 'emotion-icons/octicons/ChevronDown';
 import CloseIcon from 'emotion-icons/octicons/ChevronRight';
+import dropRight from 'lodash/dropRight';
+import isArray from 'lodash/isArray';
 
-import config from '../../../../config';
 import Icon from '../../Icon';
 import SidebarMenuItem from '../../Sidebar/SidebarMenuItem';
 import capitalize from '../../../utils/capitalize';
@@ -18,7 +19,7 @@ const NodeLink = styled(SidebarMenuItem)`
 const NodeList = styled.ul`
   border-left: 1px solid
     ${props =>
-      (props.deepLevel >= 0 ? props.theme.colors.accentBackground : 'inherit')};
+  (props.deepLevel >= 0 ? props.theme.colors.accentBackground : 'inherit')};
   margin-left: ${props => (props.deepLevel >= 0 ? '1.4rem' : '0')};
   padding-left: 0;
 `;
@@ -31,8 +32,6 @@ const ButtonChevron = styled.button`
 
 // eslint-disable-next-line complexity
 const LearnSidebarMenuNode = ({
-  setCollapsed,
-  collapsed,
   url,
   title,
   name,
@@ -40,35 +39,36 @@ const LearnSidebarMenuNode = ({
   deepLevel,
   location,
 }) => {
-  const isCollapsed = collapsed[url];
-  const collapse = () => {
-    setCollapsed(url);
-  };
-  const hasChildren = nodes.length !== 0;
-  const trimmedUrl = removeStartEndSlugSlash(url);
+
+  const hasChildren = isArray(nodes) && nodes.length !== 0;
+
+  // This `artificiallyUrl` is needed cause nodes without root file (index.md or README.md), generates same
+  // url as first child
+  const isRootWithSameUrl = hasChildren && url === nodes[0].url;
+  const artificiallyUrl = isRootWithSameUrl ? dropRight(url.split("/"), 2).join("/") : false;
+  const isActive = location && location.pathname.match(artificiallyUrl || url);
+
+  const trimmedUrl = removeStartEndSlugSlash(artificiallyUrl || url);
   const trimmedPathname = removeStartEndSlugSlash(location.pathname);
-  const isActive =
-    location &&
-    (trimmedPathname === trimmedUrl ||
-      trimmedPathname === config.gatsby.pathPrefix + trimmedUrl);
-  const isActivePath = location && trimmedPathname.match(trimmedUrl);
+
+  const isSelected = location &&  trimmedPathname === trimmedUrl;
 
   const isDirectoryNode = nodes && nodes[0] ? nodes[0].url === url : false;
   const directoryTitle = capitalize(name);
+
   return (
     <div>
       {title && (
         <NodeLink
           deepLevel={deepLevel}
-          isActive={isActive ? '1' : undefined}
-          isActivePath={isActivePath ? '1' : undefined}
-          onClick={collapse}
+          isSelected={isSelected ? '1' : undefined}
+          isActivePath={isActive ? '1' : undefined}
           to={url}
         >
           {isDirectoryNode ? directoryTitle : title}
           {hasChildren && (
-            <ButtonChevron type="button" onClick={collapse}>
-              {!isCollapsed ? (
+            <ButtonChevron type="button">
+              {isActive ? (
                 <Icon icon={OpenIcon} size={16} />
               ) : (
                 <Icon icon={CloseIcon} size={16} />
@@ -78,14 +78,12 @@ const LearnSidebarMenuNode = ({
         </NodeLink>
       )}
 
-      {!isCollapsed && hasChildren ? (
+      {isActive && hasChildren ? (
         <NodeList deepLevel={deepLevel}>
           {nodes.map(item => (
             <LearnSidebarMenuNode
               location={location}
               key={item.url}
-              setCollapsed={setCollapsed}
-              collapsed={collapsed}
               title={item.title}
               name={item.name}
               url={item.url}
@@ -106,11 +104,9 @@ LearnSidebarMenuNode.propTypes = {
     })
   ).isRequired,
   title: PropTypes.string,
-  collapsed: PropTypes.shape({}).isRequired,
   deepLevel: PropTypes.number.isRequired,
   url: PropTypes.string,
   name: PropTypes.string,
-  setCollapsed: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
