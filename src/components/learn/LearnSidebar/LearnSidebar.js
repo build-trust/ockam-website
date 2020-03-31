@@ -33,11 +33,12 @@ const IconsContainer = styled.div`
 `;
 
 const StyledSidebar = styled(Sidebar)`
-  width: 100%;
-  min-width: 100%;
+
   z-index: 2;
   ${media.desktop`
-      z-index: 1;
+    width: 100%;
+    min-width: 100%;
+    z-index: 1;
   `};
   border-right: 1px solid ${({ theme }) => theme.colors.accentBackground};
 `;

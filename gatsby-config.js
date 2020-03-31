@@ -2,6 +2,7 @@ require("dotenv").config();
 const config = require("./config");
 const queries = require('./scripts/get-algolia-queries');
 
+const isProductionStage = config.env.stage === 'PRODUCTION';
 const plugins = [
   'gatsby-plugin-sitemap',
   'gatsby-plugin-sharp',
@@ -97,7 +98,7 @@ const plugins = [
   },
 ];
 
-plugins.push({
+if(isProductionStage) plugins.push({
   resolve: `gatsby-plugin-algolia`,
   options: {
     appId: config.env.ALGOLIA_APP_ID,

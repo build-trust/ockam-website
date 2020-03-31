@@ -3,6 +3,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { media } from '../../utils/emotion';
+import Icon from "../Icon";
+import Caption from "../Caption";
 
 const ShareButtonStyled = styled('div')`
   margin-right: 2rem;
@@ -14,9 +16,9 @@ const ShareButtonStyled = styled('div')`
   `}
 `;
 
-const ShareButton = ({ button: Button, url, children, ...rest }) => (
+const ShareButton = ({ button: ButtonComponent, url, icon: IconComponent, children, ...rest }) => (
   <ShareButtonStyled>
-    <Button
+    <ButtonComponent
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -25,13 +27,21 @@ const ShareButton = ({ button: Button, url, children, ...rest }) => (
       url={url}
       {...rest}
     >
-      {children}
-    </Button>
+      <Icon icon={IconComponent} />
+      <Caption fontSize={1} ml={2} fontWeight={2}>
+        {children}
+      </Caption>
+    </ButtonComponent>
   </ShareButtonStyled>
 );
 
 ShareButton.propTypes = {
   button: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.elementType,
+  ]).isRequired,
+  icon: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
     PropTypes.elementType,

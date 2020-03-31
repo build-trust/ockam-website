@@ -7,13 +7,11 @@ import useSiteMetadata from "../hooks/useSiteMetadata";
 
 import Icon from "./Icon";
 import Link from "./Link";
-import Button from "./Button";
 
 const Container = styled('div')`
-  padding: 3.5rem 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 `;
 
 const findRepoByFilePath = (filePath, infos) => {
@@ -22,6 +20,12 @@ const findRepoByFilePath = (filePath, infos) => {
     return reg.test(filePath);
   })
 };
+
+const GithubLink = styled(Link)`
+  font-weight: 500;
+  display: flex;
+  justify-content: center;  
+`
 
 const generateDependedGithubUrl = (repo, filePath) => {
   const slugPathLength = repo.slug.split('/').length;
@@ -36,10 +40,10 @@ const EditOnGithubLink = ({ filePath, dependedRepos}) => {
 
   return (
     <Container>
-      <Button as={Link} variant="secondary" to={githubUrl} target="_blank">
-        <Icon mr={2} size={20} color="primary" icon={GithubIcon} />
+      <GithubLink as={Link} to={githubUrl} target="_blank">
+        <Icon mr={2} size={20} icon={GithubIcon} />
         Edit this page
-      </Button>
+      </GithubLink>
     </Container>
   );
 };

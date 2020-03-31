@@ -3,7 +3,7 @@ import { fontFamily, space, color, layout } from 'styled-system';
 
 const Pre = styled('pre')(
   {
-    overflow: 'scroll',
+    overflow: 'auto',
 
   },
   fontFamily,

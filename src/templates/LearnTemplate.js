@@ -15,15 +15,18 @@ import defaultAvatar from '../assets/default_avatar.png';
 import LearnPost from '../components/blog/LearnPost';
 import EditOnGithubLink from "../components/EditOnGithubLink";
 import LearnGridLayout from "../components/LearnGridLayout";
+import TableOfContent from "../components/learn/TableOfContent/TableOfContent";
+import SocialBox from "../components/SocialBox";
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 4rem 0;
+  margin-top: 4rem;
   min-width: 0;
   ${media.desktop`
       padding: 0 4rem;
+      margin-bottom: 4rem;
   `}
   ${media.ultraWide`
       padding: 0 8rem;
@@ -33,7 +36,17 @@ const Content = styled.div`
 const ContentLearnContainer = styled(LearnGridLayout)`
   align-items: flex-start;
   grid-template-columns: 1fr;
-`
+   margin-bottom: 4rem;
+  ${media.desktop`
+    margin-bottom: 0;
+  `}
+`;
+
+const RightSidebar = styled('div')`
+  margin-top: 4rem;
+  position: sticky;
+  top: 1rem;
+`;
 
 export default function LearnTemplate(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +64,7 @@ export default function LearnTemplate(props) {
     parent: { relativePath },
     fields: { slug, title, id },
     body,
+    tableOfContents,
   } = mdx;
 
   const currentNode = {
@@ -73,6 +87,7 @@ export default function LearnTemplate(props) {
     : defaultAvatar;
 
   useOnClickOutside(ref, () => setIsOpen(false));
+  const activeHash = location.hash;
 
   return (
     <LearnLayout
@@ -103,21 +118,23 @@ export default function LearnTemplate(props) {
               authorAvatar={imageAvatar}
               author={author}
               date={date}
-              location={location}
+
             />
           ) : (
             <div>
               <MDXRenderer>{body}</MDXRenderer>
-              {!isBlogRoot && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
+
             </div>
           )}
           {!isRoot && !isBlogRoot && (
             <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
           )}
         </Content>
-        <div>
-          Table of content
-        </div>
+        <RightSidebar>
+          <TableOfContent items={tableOfContents.items} activeHash={activeHash} />
+          {!isBlogRoot && !isPostPath && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
+          {isPostPath && <SocialBox />}
+        </RightSidebar>
       </ContentLearnContainer>
     </LearnLayout>
   );
@@ -154,6 +171,9 @@ LearnTemplate.propTypes = {
           }),
         }),
       }),
+      tableOfContents: PropTypes.shape({
+        items: PropTypes.arrayOf(PropTypes.shape({})),
+      }),
       excerpt: PropTypes.string,
       body: PropTypes.string,
     }),
@@ -164,6 +184,7 @@ LearnTemplate.propTypes = {
   })),
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
+    hash: PropTypes.string.isRequired,
   }).isRequired,
   algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
     learn: PropTypes.arrayOf(PropTypes.string),
@@ -176,6 +197,7 @@ LearnTemplate.defaultProps = {
       fields: {},
       frontmatter: {},
       body: '',
+      tableOfContents: {},
     },
   },
   dependedRepos: [],
@@ -214,7 +236,7 @@ export const pageQuery = graphql`
         }
       }
       body
-      tableOfContents
+      tableOfContents(maxDepth: 3)
       parent {
         ... on File {
           relativePath

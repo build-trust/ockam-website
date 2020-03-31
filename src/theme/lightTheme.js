@@ -52,7 +52,9 @@ const colors = {
     resultsCountText: '#D4DDE5',
     resultsDividerColor: "#F5F7F9",
     caption: '#A2B6C7',
-
+  },
+  tableOfContent: {
+    separatorBorder: '#E6ECF1',
   },
 };
 

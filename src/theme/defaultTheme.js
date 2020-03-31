@@ -55,6 +55,9 @@ const colors = {
     resultsDividerColor: "#F5F7F9",
     caption: '#A2B6C7',
   },
+  tableOfContent: {
+    separatorBorder: '#162535',
+  },
 };
 
 /* eslint-disable prefer-destructuring */

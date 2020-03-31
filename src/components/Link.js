@@ -41,6 +41,9 @@ const Link = styled(BaseLink)`
   color: ${props => props.theme.colors.link.default};
   :hover {
     color: ${props => props.theme.colors.link.hover};
+    svg {
+      color: ${props => props.theme.colors.link.hover};
+    }
   }
 `;
 
