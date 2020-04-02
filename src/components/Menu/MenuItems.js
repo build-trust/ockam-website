@@ -128,19 +128,21 @@ const MenuItems = ({ isCollapsedHeader, onClickItem, contactAsButton }) => {
           />
         </Link>
       </DropdownMenu>
-      <Link
-        fontSize={LinkFontSize}
-        onClick={onClickItem}
-        title="Team"
-        style={getActiveStyleForPathname('/team')}
-        padding={{
-          _: 2,
-          lg: 3,
-        }}
-        to="/team"
-      >
-        Team
-      </Link>
+      <div>
+        <Link
+          fontSize={LinkFontSize}
+          onClick={onClickItem}
+          title="Team"
+          style={getActiveStyleForPathname('/team')}
+          padding={{
+            _: 2,
+            lg: 3,
+          }}
+          to="/team"
+        >
+          Team
+        </Link>
+      </div>
       <DropdownMenu
         onClickItem={onClickItem}
         isCollapsedHeader={isCollapsedHeader}
@@ -167,12 +169,14 @@ const MenuItems = ({ isCollapsedHeader, onClickItem, contactAsButton }) => {
           />
         </Link>
       </DropdownMenu>
-      <ContactButton
-        contactAsButton={contactAsButton}
-        isCollapsedHeader={isCollapsedHeader}
-        onClick={showContactModal}
-        linkFontSize={LinkFontSize}
-      />
+      <div>
+        <ContactButton
+          contactAsButton={contactAsButton}
+          isCollapsedHeader={isCollapsedHeader}
+          onClick={showContactModal}
+          linkFontSize={LinkFontSize}
+        />
+      </div>
     </>
   );
 };
