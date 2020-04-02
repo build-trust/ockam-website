@@ -54,7 +54,7 @@ const ContentWrapper = styled.div`
   justify-content: space-between;
   padding-top: 6rem;
   ${media.desktop`
-      padding-top: 3rem;
+      padding-top: 2.3rem;
   `};
 `;
 

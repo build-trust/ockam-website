@@ -2,7 +2,7 @@ const crypto = require('crypto');
 
 const trim = require('lodash/trim');
 
-const excludedChildTypes = ['export'];
+const excludedChildTypes = ['export', 'import'];
 
 const matchExcludedType = type => excludedChildTypes.some(excluded => excluded === type);
 
@@ -13,7 +13,6 @@ const mergeNestedChildrenMdxAst = (child) => {
   }
   return child.children.reduce((acc, item) => `${acc}${mergeNestedChildrenMdxAst(item)} `,'')
 };
-
 
 const parseMdxAst = (mdxAST) => {
   return mdxAST.children.reduce((acc, child) => {
@@ -37,15 +36,7 @@ const mapMdxNodeToAlgoliaRecords = ({mdxAST, excerpt, objectID, title, ...node})
     ...node,
     ...chunk,
   }));
-  const rootRecord = {
-    objectID,
-    title,
-    text: excerpt,
-    ...node,
-    type: 'root',
-
-  };
-  return [rootRecord, ...records];
+  return [...records];
 };
 
 module.exports = mapMdxNodeToAlgoliaRecords;

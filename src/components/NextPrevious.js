@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import ArrowLeft from 'emotion-icons/ion-md/ArrowBack';
 import ArrowRight from 'emotion-icons/ion-md/ArrowForward';
-import { space, typography } from 'styled-system';
+import { space, typography, flexbox } from 'styled-system';
 import { rgba } from 'polished';
 
 import usePrevNextNavigate from '../hooks/usePrevNextNavigate';
@@ -69,7 +69,7 @@ const NavigationButtonNext = styled(NavigationButton)`
   margin-left: 1rem;
 `;
 
-const Content = styled('div')(space, typography);
+const Content = styled('div')(space, typography, flexbox);
 
 const NextPrevious = ({ currentNode, rootSlug }) => {
   const { isFirst, isLast, nextNode, prevNode } = usePrevNextNavigate({
@@ -82,7 +82,7 @@ const NextPrevious = ({ currentNode, rootSlug }) => {
       {!isFirst ? (
         <NavigationButtonPrev to={prevNode.url}>
           <StyledIcon icon={ArrowLeft} size={16} ml={3} />
-          <Content ml="auto" mr={3} py={3} textAlign="right">
+          <Content ml="auto" mr={3} py={3} textAlign="right" flex={1}>
             <Caption mb={1} display="block">
               Previous
             </Caption>
@@ -92,13 +92,13 @@ const NextPrevious = ({ currentNode, rootSlug }) => {
       ) : null}
       {!isLast ? (
         <NavigationButtonNext to={nextNode.url}>
-          <Content ml={3} mr="auto" py={3} textAlign="left">
+          <Content ml={3} mr="auto" py={3} textAlign="left" flex={1}>
             <Caption mb={1} display="block">
               Next
             </Caption>
             <Title>{nextNode.title}</Title>
           </Content>
-          <StyledIcon icon={ArrowRight} size={16} mr={3} />
+          <StyledIcon icon={ArrowRight} size={16} mr={3}  />
         </NavigationButtonNext>
       ) : null}
     </Container>

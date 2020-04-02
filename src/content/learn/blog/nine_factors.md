@@ -27,7 +27,7 @@ IoT systems should rely on an immutable and unique cryptographic identity that h
 
 Ockam Network solves this by utilizing the universal did:ockam identity scheme that enables best practices around key management. Regardless of the signature cryptography capability of the device on the network, a device can generate a did:ockam that can be reconciled by any other device with a simple verification to the Ockam Registry. Every message in the Ockam Network must be cryptographically signed. This guarantees that every bit of data that moves through the Ockam Network can be trusted and any device can be certain of ‘who sent what data’.
 
-### Factor IV. IoT Interacts With The Real World — There’s No Going Back.
+### Factor IV. IoT Interacts With The Real World - There’s No Going Back.
 
 IoT systems require fast finality in a state machine and require consistent data everywhere in the network. By comparison, many general purpose or financially tuned blockchain networks, are OK with temporary forks (aka data partitions) because the digital world can be corrected upon group consensus as time passes. Unfortunately in the case of IoT, finality affects real world outcomes. Consider the case of a remote controlled floodgate. If an actuator on a floodgate gets a command to open the gate, water will rush down the hill. However, after a couple of minutes if the actuator learns that it was connected to a partition of the network that had bad data, it can’t go back and put the water back where it’s supposed to be.
 

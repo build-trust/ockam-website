@@ -27,7 +27,7 @@ const hasNestedStringChildren = props =>
 
 const generateIdFromName = (name) => {
   if(!isString(name)) return null;
-  return name.replace(/\s+/g, '-').replace(/[/!@#$%^&*()\\]/g,'').toLowerCase();
+  return name.replace(/\s+/g, '-').replace(/[/!@#$%":^.,?—+|‘’&*()\\]/g,'').toLowerCase();
 };
 
 const mapIconSize = {

@@ -37,14 +37,18 @@ const List = styled(BaseList)`
 
 const isEmptyTableOfContent = (items) => {
   if(!items || items.length === 0) return true;
+  if(items.length > 1) return false;
   return !items.some(lvl1 => lvl1.items && lvl1.items.length > 0)
 };
+
+const isStartFromFirstLevel = (items) => items.length > 1;
 
 const Item = ({item, level, isActive}) => (
   <TableOfContentItem level={level} isActive={isActive}>
     <a href={item.url}>{item.title}</a>
   </TableOfContentItem>
 );
+
 
 Item.propTypes = {
   item: PropTypes.shape({
@@ -57,7 +61,7 @@ Item.propTypes = {
 
 const TableOfContent = ({ items, activeHash }) => {
   if(isEmptyTableOfContent(items)) return null;
-  const itemsWithoutRoot = items[0].items;
+  const itemsWithoutRoot = isStartFromFirstLevel(items) ? items : items[0].items;
   return (
     <StickyContainer>
       <Heading fontSize="caption" fontFamily="special" as="h6">On this page</Heading>

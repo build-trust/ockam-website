@@ -31,6 +31,12 @@ const Content = styled.div`
   ${media.ultraWide`
       padding: 0 8rem;
   `}
+  h1 {
+    :first-child {
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+  }
 `;
 
 const ContentLearnContainer = styled(LearnGridLayout)`
@@ -121,10 +127,7 @@ export default function LearnTemplate(props) {
 
             />
           ) : (
-            <div>
-              <MDXRenderer>{body}</MDXRenderer>
-
-            </div>
+            <MDXRenderer>{body}</MDXRenderer>
           )}
           {!isRoot && !isBlogRoot && (
             <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
