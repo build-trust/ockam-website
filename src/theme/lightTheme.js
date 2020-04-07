@@ -56,6 +56,7 @@ const colors = {
   tableOfContent: {
     separatorBorder: '#E6ECF1',
   },
+  mobileMenuItemDivider: "#E6ECF1",
 };
 
 /* eslint-disable prefer-destructuring */

@@ -1,41 +1,68 @@
-import React  from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { a, animated } from 'react-spring'
+import { animated, useTransition } from 'react-spring'
 
 import { media } from '../../utils/emotion';
+import isBrowser from "../../utils/isBrowser";
 
 import MenuItems from "./MenuItems";
 
 const Wrapper = styled(animated.div)`
   display: flex;
-  overflow: hidden;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  overflow: auto;
   grid-column: 1 / 4;
-
+  left: 0;
   ${media.desktop`
     display: none;
   `}
+    
+  a {
+    width: 100%;
+    text-align: left;
+    padding: 2rem 0;
+  }
 `;
 
-const Content = styled(a.div)`
+const Container = styled('div')`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
+  > a {
+    border-bottom: 1px solid ${props => props.theme.colors.mobileMenuItemDivider};
+    z-index: 10;
+    ${media.desktop`
+      border-bottom: none;
+    `}
+  }
 `;
 
-const MobileMenu = ({ isCollapsedHeader, onClickItem, ...rest }) => {
+const MobileMenu = ({ isCollapsedHeader, isVisible, onClickItem, ...rest }) => {
+  const clientHeight = isBrowser ? document.documentElement.clientHeight : 0;
+  const vh = Math.max(clientHeight);
+  const viewHeight = vh - (isCollapsedHeader ? 49 : 88);
+  const transition = useTransition(isVisible, null, {
+    from: {  opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0 },
+    enter: { opacity: 1,  height: viewHeight, paddingTop: 40, paddingBottom: 20 },
+    leave: { opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0},
+    config: {
+      precision: 0.05,
+    },
+  });
 
-  return (
-    <Wrapper {...rest}>
-      <Content>
-        <MenuItems isCollapsedHeader={isCollapsedHeader} onClickItem={onClickItem}  />
-      </Content>
-    </Wrapper>
-  )};
+  return transition.map(({ item, key, props}) => (
+    item && (
+      <Wrapper key={key} isVisible={isVisible} isCollapsedHeader={isCollapsedHeader} {...rest} style={props}>
+        <Container>
+          <MenuItems isCollapsedHeader={isCollapsedHeader} onClickItem={onClickItem} contactAsButton={false}  />
+        </Container>
+      </Wrapper>
+    )
+  ));
+};
 
 MobileMenu.propTypes = {
   isCollapsedHeader: PropTypes.bool,

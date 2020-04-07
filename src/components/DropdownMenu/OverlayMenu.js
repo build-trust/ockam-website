@@ -15,7 +15,6 @@ const OverlayMenuPanel = styled(OverlayPanel)`
     ${props => darken(0.03, props.theme.colors.accentBackground)};
   box-shadow: ${({ theme }) =>
     `0 3px 8px 0 ${theme.colors.dropdownMenuShadow}`};
-  margin-top: 1rem;
   padding: 1rem 0;
   margin-bottom: 0;
   align-items: flex-start;
