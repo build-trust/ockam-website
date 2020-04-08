@@ -76,7 +76,7 @@ const MobileImage = styled(BaseImage)`
   `}
 `
 
-const Title = styled(Heading)`
+const TitleWrapper = styled('div')`
    grid-area: title;
 `
 
@@ -94,11 +94,13 @@ const StickySection = ({ image, mobileImage, title, TitleComponent, children, or
           </StickyBox>
         </StickyContainer>
         {title && (
-          <Title as="h2" textAlign={{ _: "center", lg: 'left'}}>
-            {title}
-          </Title>
+          <TitleWrapper>
+            <Heading linked as="h2" textAlign={{ _: "center", lg: 'left'}}>
+              {title}
+            </Heading>
+          </TitleWrapper>
         )}
-        {TitleComponent && <Title as="div"><TitleComponent /></Title>}
+        {TitleComponent && <TitleWrapper as="div"><TitleComponent /></TitleWrapper>}
         <TextBox order={order}>
           {children}
         </TextBox>

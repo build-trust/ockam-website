@@ -55,12 +55,13 @@ const Header = ({ isCollapsedHeader }) => {
         <Menu
           isCollapsedHeader={isCollapsedHeader}
         />
-        {isVisibleMobileMenu && (
+
         <MobileMenu
           onClickItem={toggleMobileMenu}
+          isVisible={isVisibleMobileMenu}
           isCollapsedHeader={isCollapsedHeader}
         />
-)}
+
       </>
     </Container>
   );

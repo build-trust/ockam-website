@@ -7,6 +7,7 @@ import useSiteMetadata from "../hooks/useSiteMetadata";
 
 import Icon from "./Icon";
 import Link from "./Link";
+import Button from "./Button";
 
 const Container = styled('div')`
   display: flex;
@@ -21,11 +22,10 @@ const findRepoByFilePath = (filePath, infos) => {
   })
 };
 
-const GithubLink = styled(Link)`
-  font-weight: 500;
-  display: flex;
-  justify-content: center;  
-`
+const GithubLink = styled(Button)`
+  padding-right: 0;
+  padding-left: 0;
+`;
 
 const generateDependedGithubUrl = (repo, filePath) => {
   const slugPathLength = repo.slug.split('/').length;
@@ -40,7 +40,7 @@ const EditOnGithubLink = ({ filePath, dependedRepos}) => {
 
   return (
     <Container>
-      <GithubLink as={Link} to={githubUrl} target="_blank">
+      <GithubLink variant="link" as={Link} to={githubUrl} target="_blank">
         <Icon mr={2} size={20} icon={GithubIcon} />
         Edit this page
       </GithubLink>

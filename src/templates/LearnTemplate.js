@@ -17,6 +17,7 @@ import EditOnGithubLink from "../components/EditOnGithubLink";
 import LearnGridLayout from "../components/LearnGridLayout";
 import TableOfContent from "../components/learn/TableOfContent/TableOfContent";
 import SocialBox from "../components/SocialBox";
+import StarGithubRepo from "../components/StarGithubRepo";
 
 const Content = styled.div`
   display: flex;
@@ -86,8 +87,9 @@ export default function LearnTemplate(props) {
   const rootSlug = getRootSlugFromPathname(location.pathname);
   const isRoot = currentNode.slug === '/';
   const menuId = 'main-menu';
-  const isPostPath = currentNode.slug.match(/^\/learn\/blog\/.+$/);
+  const isBlogPostPath = currentNode.slug.match(/^\/learn\/blog\/.+$/);
   const isBlogRoot = currentNode.slug.match(/^\/learn\/blog\/$/);
+  const isBlogPath = isBlogPostPath || isBlogRoot;
   const imageAvatar = authorAvatar
     ? authorAvatar.childImageSharp.fixed.src
     : defaultAvatar;
@@ -117,7 +119,7 @@ export default function LearnTemplate(props) {
             description={seoDescription}
             slug={slug}
           />
-          {isPostPath ? (
+          {isBlogPostPath ? (
             <LearnPost
               body={body}
               title={title}
@@ -135,8 +137,9 @@ export default function LearnTemplate(props) {
         </Content>
         <RightSidebar>
           <TableOfContent items={tableOfContents.items} activeHash={activeHash} />
-          {!isBlogRoot && !isPostPath && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
-          {isPostPath && <SocialBox />}
+          {!isBlogPath && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
+          {!isBlogPath && <StarGithubRepo />}
+          {isBlogPostPath && <SocialBox />}
         </RightSidebar>
       </ContentLearnContainer>
     </LearnLayout>

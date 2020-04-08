@@ -1,11 +1,5 @@
 import fetch from 'cross-fetch';
 
-import config from '../../config';
-
-const {
-  api: { leverUrl },
-} = config;
-
 const toJson = resp => {
   const json = resp.json();
   return resp.ok
@@ -15,7 +9,7 @@ const toJson = resp => {
       });
 };
 
-const apiFetch = (endpoint, { method = 'GET' } = {}) =>
-  fetch(`${leverUrl}/${endpoint}`, { method }).then(toJson);
+const apiFetch = (host, endpoint, { method = 'GET' } = {}) =>
+  fetch(`${host}/${endpoint}`, { method }).then(toJson);
 
 export default apiFetch;

@@ -1,9 +1,4 @@
-import React, {useState} from 'react';
-import isString from 'lodash/isString';
-import styled from "@emotion/styled";
-import LinkIcon from 'emotion-icons/ion-ios/Link';
-
-import Icon from "../Icon";
+import React from 'react';
 
 import Heading from './Heading';
 import Text from './Text';
@@ -18,51 +13,7 @@ import ListOrdered from './ListOrdered';
 import LinkedImage from './LinkedImage';
 import Table from './Table';
 
-// @todo Split to separate files and refactor
-
-const isChildrenString = props =>
-  props && props.children && typeof props.children === 'string';
-const hasNestedStringChildren = props =>
-  typeof props.children === 'object' && isChildrenString(props.children.props);
-
-const generateIdFromName = (name) => {
-  if(!isString(name)) return null;
-  return name.replace(/\s+/g, '-').replace(/[/!@#$%":^.,?—+|‘’&*()\\]/g,'').toLowerCase();
-};
-
-const mapIconSize = {
-  'h1': 24,
-  'h2': 22,
-  'h3': 20,
-  'h4': 18,
-  'h5': 16,
-  'h6': 14,
-};
-
-const AnchorIcon = styled(Icon)`
-  :hover {
-  color: ${props => props.theme.colors.primary};
-  }
-`;
-
-const generateHeading = size => props => {
-  const [focus, setfocus] = useState(false);
-  const onSetFocus = value => () => setfocus(value);
-  let id;
-  if (isChildrenString(props)) {
-    id = generateIdFromName(props.children)
-  } else if (hasNestedStringChildren(props)) {
-    id = generateIdFromName(props.children.props.children)
-  }
-  return (
-    <Heading onMouse id={id} {...props} as={size} onMouseEnter={onSetFocus(true)} onMouseLeave={onSetFocus(false)}>
-      {props.children}
-      <a href={`#${id}`}>
-        <AnchorIcon ml={1} icon={LinkIcon} size={mapIconSize[size]} display={focus ? 'inline' : 'none'} />
-      </a>
-    </Heading>
-  );
-};
+const generateHeading = size => props => <Heading {...props} as={size} linked>{props.children}</Heading>;
 
 export default {
   h1: generateHeading('h1'),

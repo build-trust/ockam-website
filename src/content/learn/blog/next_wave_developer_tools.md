@@ -2,6 +2,7 @@
 title: "The Next Wave In Developer Tools Will Be The Catalyst That Enables The Internet Of Things."
 date: 2019-04-15
 description: "The Next Wave In Developer Tools Will Be The Catalyst That Enables The Internet Of Things."
+metaTitle: "Developers, just like all builders, love their tools! In this blog we will look to the past to learn how developer tools will transform security and threats in IoT"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---

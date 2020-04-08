@@ -2,7 +2,7 @@
 title: "Introduction to building Trust Architectures"
 date: 2019-02-15
 description: "Introduction to building Trust Architectures"
-metaTitle: "Introduction to building Trust Architectures with DID:Ockam"
+metaTitle: "What is a Trust Architecture and how service oriented systems help us think about trust in software development?"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---

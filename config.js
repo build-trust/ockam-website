@@ -24,6 +24,7 @@ const config = {
   },
   "api": {
 	  "leverUrl": "https://api.lever.co/v0",
+    "githubUrl": "https://api.github.com",
   },
 	"siteMetadata": {
 		"title": "Ockam",

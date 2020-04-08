@@ -2,6 +2,7 @@
 title: "What's the story behind the Ockam name?"
 date: 2017-11-15
 description: "What's behind the Ockam name?"
+metaTitle: "In this blog Matthew Gregory discusses how his experiences in sailing inspired him to name Ockam as a tribute to one of his mentors."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---

@@ -73,11 +73,10 @@ const LearnHeader = ({ openSidebar, algoliaIndexes }) => {
 
       <>
         <LearnMenu contactAsButton={false} />
-        {isVisibleMobileMenu && (
-          <MobileMenu
-            onClickItem={toggleMobileMenu}
-          />
-        )}
+        <MobileMenu
+          isVisible={isVisibleMobileMenu}
+          onClickItem={toggleMobileMenu}
+        />
       </>
       <SearchContainer>
         <Search indices={algoliaIndexes} />

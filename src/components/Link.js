@@ -3,7 +3,7 @@ import { Link as GatsbyLink } from 'gatsby';
 import isAbsoluteUrl from 'is-absolute-url';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { space, color, typography, layout } from 'styled-system';
+import { space, color, typography, layout, flexbox, position } from 'styled-system';
 
 const ActionLink = styled('a')`
   cursor: pointer;
@@ -37,6 +37,8 @@ const Link = styled(BaseLink)`
   ${color};
   ${typography};
   ${layout};
+  ${flexbox}
+  ${position}
   transition: all 150ms ease-in-out;
   color: ${props => props.theme.colors.link.default};
   :hover {

@@ -3,8 +3,8 @@ import config from '../../config';
 import apiFetch from './apiFetch';
 
 const {
-  api: { leverUrl },
+  api: { githubUrl },
 } = config;
 
 // eslint-disable-next-line import/prefer-default-export
-export const getOckamJobs = () => apiFetch(leverUrl,'postings/ockam?mode=json');
+export const getRepoInfo = (username, reponame) => apiFetch(githubUrl,`repos/${username}/${reponame}`);

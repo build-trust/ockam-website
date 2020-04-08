@@ -14,11 +14,11 @@ const JoinTeam = ({ jobs, updatedJobs }) => {
   const items = updatedJobs.length > 0 ? updatedJobs : jobs;
   return (
     <PageSection>
-      <Heading as="h2" textAlign="center" mb={5}>
-        <AnimateOnScroll>
+      <AnimateOnScroll>
+        <Heading linked as="h2" textAlign="center" mb={5}>
           Join The Team
-        </AnimateOnScroll>
-      </Heading>
+        </Heading>
+      </AnimateOnScroll>
       {items.map((job, index) => (
         <AnimateOnScroll slideIn='down' delay={100 * index}>
           <Collapse key={job.createdAt.toString() + job.id} title={job.text}>

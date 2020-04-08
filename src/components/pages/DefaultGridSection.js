@@ -49,7 +49,7 @@ const ImageContainer = styled('div')(
   flexbox
 );
 
-const Title = styled(Heading)`
+const TitleWrapper = styled('div')`
   grid-area: title;
   display: flex;
   flex-direction: column;
@@ -103,14 +103,15 @@ const DefaultGridSection = ({
           </AnimateOnScroll>
         </ImageContainer>
         {title && (
-          <Title as="h2" textAlign={{ _: "center", lg: 'left'}}>
+          <TitleWrapper>
             <AnimateOnScroll>
-              {title}
+              <Heading linked as="h2" textAlign={{ _: "center", lg: 'left'}}>
+                {title}
+              </Heading>
             </AnimateOnScroll>
-          </Title>
+          </TitleWrapper>
         )}
-        {TitleComponent && <Title as="div"><AnimateOnScroll><TitleComponent /></AnimateOnScroll></Title>}
-
+        {TitleComponent && <TitleWrapper as="div"><AnimateOnScroll><TitleComponent /></AnimateOnScroll></TitleWrapper>}
         <Content>
           <AnimateOnScroll>
             {children}
