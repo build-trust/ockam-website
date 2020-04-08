@@ -2,6 +2,7 @@
 title: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
 date: 2019-04-15
 description: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
+metaTitle: "IoT and distributed systems are all unique. They are complicated. Let's look at what makes them the same."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---

@@ -2,6 +2,7 @@
 title: "Values and Virtues of The Ockam Team"
 date: 2020-01-15
 description: "“Values are what you believe, Virtues are what you do.” "
+metaTitle: "Ockam is a value driven high performance team. We are fully distributed and are remote-first. This blog is our guidebook for how we run the Ockam Team"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
@@ -30,7 +31,7 @@ I also recommend the following books for a deeper understanding of our culture a
 CEO at Ockam
 
 
-## Ockam’s Values - "What We Believe"
+## Ockam’s Values are "What We Believe"
 
 #### Simplicity
 
@@ -52,7 +53,7 @@ Ockam is a tools company. Our tools are used to build, or are built directly int
 
 Builders enable new technical ecosystems to exist. We believe that builders should have meticulously designed, simple, and useful tools with elegant user experiences.
 
-## Ockam’s Virtues - "What We Do"
+## Ockam’s Virtues are "What We Do"
 
 #### We start with Trust
 

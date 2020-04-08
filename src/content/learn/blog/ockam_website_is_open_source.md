@@ -1,7 +1,7 @@
 ---
-title: "Even Ockam.io is open source!"
-date: 2019-02-15
-description: "All of the source code for Ockam.io is OSS. This is how we built it..."
+title: "Ockam.io is open source!"
+date: 2020-04-09
+description: "All of the source code and build tools for Ockam.io is OSS. This is how we built it..."
 metaTitle: "To build ockam.io as open source we used Azure Pipelines, a CDN, JAMstack, GitHub and a bunch of other awesome tools. This is how we did it."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png

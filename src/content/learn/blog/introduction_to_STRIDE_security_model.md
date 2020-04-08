@@ -2,6 +2,7 @@
 title: "A Beginners Guide to the STRIDE Security Threat Model"
 date: 2020-01-02
 description: "A Beginners Guide to the STRIDE Security Threat Model"
+metaTitle: "This blog outlines how to think about security and threats in your distributed application"
 author: "Mrinal Wadhwa"
 ---
 

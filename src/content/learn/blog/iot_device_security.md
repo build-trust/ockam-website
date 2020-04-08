@@ -2,6 +2,7 @@
 title: "IOT Device Security is Not One-and-Done"
 date: 2020-03-03
 description: "When it comes to device security think of technology stacks, not platforms."
+metaTitle: "Every layer of your application needs to be secure. At Ockam we suggest that developers think in stacks. Here's how..."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---

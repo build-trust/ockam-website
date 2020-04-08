@@ -2,6 +2,7 @@
 title: "Open Source is the Internet’s Most Important Integrator"
 date: 2020-03-19
 description: "Ockam is open-source-as-an-integrator. Ockam tools create interfaces between hardware at the edge and cloud services to enable a trust across a distributed application."
+metaTitle: "We love open source software tools. If you have to integrate software systems, look to the open source community to solve your IoT worries."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---
@@ -12,7 +13,7 @@ The modern software developer owes their simplified experience to open source gi
 
 Proprietary software also sees benefits of open source. In addition to using open source, it can build upon open source interfaces to allow it to work with other tools. Not only that, but open source software’s transparency ensures security and reliability. Certainly [we love open source](https://www.ockam.io/learn/blog/why_we_love_open_source/) at Ockam. As you’ll see in this post, its status as the most important integrator is a big reason why.
 
-## Open Source Became the De Facto Standard
+## How Open Source Became the De Facto Standard
 In theory, open source software is widely used by the community because it is built with the community’s needs in mind. But how does that work out in practice? The theory holds, as open source software has become the de facto standard for many fields.
 
 A clear example of this phenomenon can be seen with web servers. As open source software has a clear majority of the market share for in-use web servers, it would not be far-fetched to say the internet itself depends on open source. The [most popular web server](https://w3techs.com/technologies/overview/web_server) is the Apache HTTP Server, more commonly referred to as Apache, which serves around 40% of all websites. Apache is an open source web server software that was released over 25 years ago. That’s 25 years of development and maintenance by the community itself, ensuring it has the reliability people desire in the number one web server.
@@ -30,7 +31,7 @@ Let’s say you’re a developer trying to connect two tools. You make the trans
 
 With the proliferation of devices, apps, and web APIs, there are an incredible amount of tools that are integrated with each other. Without open source interfaces widely available to encourage their integration, they would be much less connected than they are now.
 
-## Connect Systems Without Building Every Integration
+## You Can Connect Systems Without Building Every Integration
 With so many tools available, no developer can possibly build every possible integration. Translation layers solve this problem. That’s why we chose to build Ockam to support this need. Specifically, the open source projects of Ockam address many of the needs for translation layers between devices and cloud services.
 
 Ockam provides software development kits and hosted cloud services to securely connect your devices to popular cloud servers like Amazon Web Services, Microsoft Azure, and Google Cloud. Our tools are open source, encouraging both community introspection and contribution. Building upon open source’s natural role as an integrator, we’ve focused on a thin—but important—layer of the stack.

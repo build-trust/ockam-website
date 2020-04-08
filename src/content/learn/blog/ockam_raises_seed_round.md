@@ -2,6 +2,7 @@
 title: "Ockam Raised Seed Funds to Empower The Builders Of A Seamless Connected Future."
 date: 2019-10-15
 description: "Ockam secures $4.9 million in seed funding from Future Ventures, Core Venture Group, Okta Ventures and others."
+metaTitle: "Okta, Core Ventures Group and Future Ventures team up to fund Ockam's quest to build beautiful tools for developers."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
