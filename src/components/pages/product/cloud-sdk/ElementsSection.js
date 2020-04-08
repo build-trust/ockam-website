@@ -38,9 +38,11 @@ const features = [
 const ElementsSection = () => {
   return (
     <PageSection>
-      <Heading as="h2" mb={5} textAlign="center">
-        <AnimateOnScroll>Elements of the Ockam Cloud SDK</AnimateOnScroll>
-      </Heading>
+      <AnimateOnScroll>
+        <Heading linked as="h2" mb={5} textAlign="center">
+          Elements of the Ockam Cloud SDK
+        </Heading>
+      </AnimateOnScroll>
       <FeaturesCardGrid features={features} />
     </PageSection>
   );

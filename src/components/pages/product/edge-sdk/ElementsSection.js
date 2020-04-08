@@ -33,7 +33,7 @@ const ElementsSection = () => {
   return (
     <PageSection>
       <AnimateOnScroll slideIn="down" animateOnce>
-        <Heading as="h2" mb={5} textAlign="center">
+        <Heading linked as="h2" mb={5} textAlign="center">
           {' '}
           Elements of the Ockam Edge SDK
         </Heading>

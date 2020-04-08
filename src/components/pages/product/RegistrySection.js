@@ -17,7 +17,7 @@ const Container = styled('div')`
 const RegistryTitle = () => (
   <>
     <Subheading textAlign={{ _: "center", lg: "left"}}>OCKAM HOSTED CLOUD SERVICES</Subheading>
-    <Heading textAlign={{ _: "center", lg: "left"}} as="h2">Ockam Registry</Heading>
+    <Heading linked textAlign={{ _: "center", lg: "left"}} as="h2">Ockam Registry</Heading>
   </>
 );
 
