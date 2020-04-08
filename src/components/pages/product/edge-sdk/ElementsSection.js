@@ -34,7 +34,6 @@ const ElementsSection = () => {
     <PageSection>
       <AnimateOnScroll slideIn="down" animateOnce>
         <Heading linked as="h2" mb={5} textAlign="center">
-          {' '}
           Elements of the Ockam Edge SDK
         </Heading>
         <FeaturesCardGrid features={features} />

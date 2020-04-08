@@ -35,6 +35,7 @@ const NavigationButton = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
+  align-self: stretch;
   flex: 1;
   border: 1px solid ${({ theme }) => theme.colors.accentBackground};
   border-radius: 4px;

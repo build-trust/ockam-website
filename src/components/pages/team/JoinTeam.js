@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from "@emotion/styled";
 
 import PageSection from '../PageSection';
 import Collapse from '../../Collapse/Collapse';
@@ -10,18 +11,23 @@ import Heading from '../../Heading';
 import List from '../../List';
 import AnimateOnScroll from "../../AnimateOnScroll";
 
+const AnchorPointer = styled('div')`
+  padding-bottom: 8rem;
+`;
+
 const JoinTeam = ({ jobs, updatedJobs }) => {
   const items = updatedJobs.length > 0 ? updatedJobs : jobs;
   return (
     <PageSection>
+      <AnchorPointer id="open-roles" />
       <AnimateOnScroll>
         <Heading linked as="h2" textAlign="center" mb={5}>
           Join The Team
         </Heading>
       </AnimateOnScroll>
       {items.map((job, index) => (
-        <AnimateOnScroll slideIn='down' delay={100 * index}>
-          <Collapse key={job.createdAt.toString() + job.id} title={job.text}>
+        <AnimateOnScroll key={job.createdAt.toString() + job.id} slideIn='down' delay={100 * index}>
+          <Collapse title={job.text}>
             <Text dangerouslySetInnerHTML={{ __html: job.description }} mb={4} />
             {job.lists.map(item => (
               <div key={item.text}>

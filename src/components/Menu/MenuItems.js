@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Link from '../Link';
 import useModal from '../../hooks/useModal';
 import ContactModal from '../../modals/ContactModal';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import useAllMdxAsTree from '../../hooks/useAllMdxAsTree';
 import capitalize from '../../utils/capitalize';
-import useActiveMenuStyles from '../../hooks/useActiveMenuStyles';
 
 import ContactButton from "./ContactButton";
 import DropdownLink from "./DropdownLink";
@@ -40,12 +38,24 @@ const productOptions = [
   },
 ];
 
+const teamOptions = [
+  {
+    label: 'Overview',
+    to: 'team',
+    isRoot: true,
+  },
+  {
+    label: 'Open Roles',
+    to: 'team#open-roles',
+    isRoot: true,
+  },
+];
+
 
 const mapNodesToMenuOptions = nodes =>
   nodes.map(node => ({ label: capitalize(node.name), to: node.url }));
 
 const MenuItems = ({ isCollapsedHeader, onClickItem, contactAsButton }) => {
-  const { getActiveStyleForPathname } = useActiveMenuStyles();
   const [, showContactModal] = useModal(ContactModal);
   const { tree } = useAllMdxAsTree();
   const LinkFontSize = isCollapsedHeader ? 1 : 2;
@@ -67,16 +77,14 @@ const MenuItems = ({ isCollapsedHeader, onClickItem, contactAsButton }) => {
       >
         <DropdownLink fontSize={LinkFontSize} to="/product" label="Product" />
       </DropdownMenu>
-      <Link
-        fontSize={LinkFontSize}
-        onClick={onClickItem}
-        title="Team"
-        style={getActiveStyleForPathname('/team')}
-        padding={{ _: 2, lg: 3 }}
-        to="/team"
+      <DropdownMenu
+        onClickItem={onClickItem}
+        isCollapsedHeader={isCollapsedHeader}
+        options={teamOptions}
+        triggerEvent="mouseover"
       >
-        Team
-      </Link>
+        <DropdownLink fontSize={LinkFontSize} to="/team" label="Team" />
+      </DropdownMenu>
       <DropdownMenu
         onClickItem={onClickItem}
         isCollapsedHeader={isCollapsedHeader}

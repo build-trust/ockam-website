@@ -39,7 +39,11 @@ DropdownLink.propTypes = {
   to: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   fontSize: PropTypes.number.isRequired,
-  isDropdownVisible: PropTypes.bool.isRequired,
+  isDropdownVisible: PropTypes.bool,
+};
+
+DropdownLink.defaultProps = {
+  isDropdownVisible: false,
 };
 
 export default DropdownLink;

@@ -52,7 +52,7 @@ const ContentLearnContainer = styled(LearnGridLayout)`
 const RightSidebar = styled('div')`
   margin-top: 4rem;
   position: sticky;
-  top: 1rem;
+  top: 4rem;
 `;
 
 export default function LearnTemplate(props) {

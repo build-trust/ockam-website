@@ -91,7 +91,7 @@ ValuesListItem.propTypes = {
 
 const ValuesSection = () => {
   return (
-    <PageSection>
+    <PageSection mb="10rem" overflow="hidden">
       <Grid>
         <Title
           as="h2"
