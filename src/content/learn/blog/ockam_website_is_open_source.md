@@ -11,14 +11,14 @@ homepageFeaturedOrder: 3
 
 Modern web development involves building on the excellent work of others. Between open source frameworks and cloud tools, you can get a big boost in your projects. Indeed, that’s one of the reasons [why we love open source](https://www.ockam.io/learn/blog/why_we_love_open_source) and why we are building Ockam as an open source centric company.
 
-When set out to build a new version of our company website, we naturally gravitated to open source tools to get it done. This site is rendered with React and GraphQL. All the content is stored as Markdown in GitHub and static files generated with Gatsby. Azure Pipelines deploy a new version every time there’s an update to our site’s code. And that repo is public—open source, even—so you can learn from, and build upon our experience for your own projects.
+When set out to build a new version of our company website, we naturally gravitated to open source tools to get it done. This site is built with React and Gatsby. All major content is stored as Markdown in GitHub and generated as static content by Gatsby. Azure Pipelines deploy a new version every time there’s an update to our site’s code. And that repo is public—open source, even—so you can learn from, and build upon our experience for your own projects.
 
 We’ll walk through how we built our new site in this post:
 
 ## The Ockam.io Open Source Stack
-Ockam doesn't need to reinvent the wheel. The oldest websites on the internet were static HTML files without the fancy functionality that has been added to the modern browsing experience. Now with serverless pulic cloud technologies, these old ideas are the newest iteration of distributing content. Simple, modern tools - used in creative ways - allow developers to design and build with elegant simplicity.
+Ockam doesn't need to reinvent the wheel. The oldest websites on the internet were static HTML files without the fancy functionality that has been added to the modern browsing experience. Now with serverless public cloud technologies, these old ideas are the newest iteration of distributing content. Simple, modern tools - used in creative ways - allow developers to design and build with elegant simplicity.
 
-Simplicity is one of our founding values, reflected in our own namesake, Ockam. Similarly to the principle of Occam’s Razor, we believe that more complexity doesn’t always mean better products. This is reflected in how we built our website using the JAMStack - classic tools reinvented for a modern product.
+Simplicity is one of our founding values, reflected in our own namesake, Ockam. Similarly to the principle of Occam’s Razor, we believe that more complexity doesn’t always mean better products. This is reflected in how we built our JAMStack website using Gatsby - classic approach reinvented for a modern product.
 
 ### What is the JAMStack?
 The JAMStack is a new way of building websites using established web development tools combined with modern architectural practices. JAM stands for the three main concepts used in this process: **J**avaScript, **A**PIs, and **M**arkup. With the JAMStack, developers design component templates, generate content and website actions, and then build and bundle the website into HTML pages with a static site generator. We use [Gatsby](https://www.gatsbyjs.org) with Ockam.io.
@@ -30,10 +30,12 @@ Finally, the website is served as an inherently static HTML (Markup) file. With 
 ### Why We Chose JAMStack
 There are two primary advantages for the ockam.io site to use JAMStack:
 
-1. No need for a database or complex backends
+1. Generating content is simple because source is written in markdown and stored in GitHub.
 2. Building and hosting are decoupled
 
-These provide additional benefits, including page speed, automatic change tracking, and focus for our team. When a user requests a webpage, the file has already been built and is served from a Content Delivery Network (CDN) for a fast and streamlined user experience. Because we only serve static views to users, there is no software layer or database to attack.
+Because Ockam is an open source code base utilizing the same workflows as the rest of our code base means that anyone can submit a pull request to add a blog post, fix a broken external link, or add documentation and code examples.
+
+The JAMStack architecture provides several benefits, including page speed and automatic change tracking. Also, when a user requests a webpage, the html file has already been built and is served from Azure's Content Delivery Network (CDN). This is how we achieve a fast and streamlined user experience. Finally, because we serve static pages to users, there is no software layer or database to attack.
 
 As we update our site, the changes are tracked with Git and hosted on GitHub. [The git repository](https://github.com/ockam-network/website) contains every line of code for our entire website (did we mention it's open-source?). It is continuously rebuilt and deployed to the cloud with each change.
 
