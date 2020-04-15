@@ -12,8 +12,16 @@ const LearnGridLayout = styled('div')`
     grid-template-columns: minmax(22rem, 4fr) 10fr 3fr;
   `}
   ${media.ultraWide`
-    grid-template-columns: minmax(25rem, 4fr) 10fr 3fr;
+    grid-template-columns: minmax(25rem, 3fr) 10fr 3fr;
   `}
+  ${media.xUltraWide`
+    grid-template-columns: 30rem auto 25rem;
+    max-width: 198rem;
+    margin-left: auto;
+    margin-right: auto;
+  `}
+
+
 `;
 
 export default LearnGridLayout;

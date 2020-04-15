@@ -35,12 +35,6 @@ const Wrapper = styled('div')`
   `}
 `;
 
-const Content = styled(BaseContent)`
-  ${media.desktop`
-      max-width: 140rem;
-  `}
-`;
-
 const HeaderWrapper = styled.div`
   box-shadow: ${({ theme }) =>
   `0 1px 0 0 ${theme.colors.accentBackground}, 0 3px 8px 0 ${rgba(
@@ -63,17 +57,17 @@ const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location, algo
             <FocusLock disabled={!isOpenSidebar}>
               <HeaderWrapper>
                 <TopBarContactFormMessage />
-                <Content>
+                <BaseContent>
                   <LearnHeader algoliaIndexes={algoliaIndexes} openSidebar={() => setIsOpenSidebar(true)} />
-                </Content>
+                </BaseContent>
               </HeaderWrapper>
-              <Content>
+              <BaseContent>
                 <Wrapper>
                   <MDXProvider components={mdxComponents}>
                     {children}
                   </MDXProvider>
                 </Wrapper>
-              </Content>
+              </BaseContent>
             </FocusLock>
           </PageWrapper>
         </ModalContextProvider>

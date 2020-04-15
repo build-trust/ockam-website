@@ -32,6 +32,11 @@ const Content = styled.div`
   ${media.ultraWide`
       padding: 0 8rem;
   `}
+  ${media.xUltraWide`
+      max-width: 105rem;
+      margin-left: auto;
+      margin-right: auto;
+  `}
   h1 {
     :first-child {
       line-height: 1;

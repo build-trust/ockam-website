@@ -5,6 +5,8 @@ export const BREAKPOINTS = {
   tablet: 720,
   desktop: 960,
   ultraWide: 1140,
+  xUltraWide: 1580,
+  fourK: 1960,
 };
 
 export const matchBreakpoint = breakpoint => {

@@ -27,7 +27,7 @@ Below, each set of building blocks will have the following sections:
 Ockam Vault uses a configuration header file to signal to Vault whether a building block is located in a host-based software library or an external secure element. In some cases cryptographic hardware may not support all of the necessary building blocks required by Vault so the use of a software library is needed along with the external secure element. The configuration file allows the developer to specify where each set of functions can be found and since this is done at compile time, any issues with missing functions are detected immediately.
 
 ### Sample Config File - ATECC608A
-```
+```c
 #define OCKAM_VAULT_CFG_INIT               OCKAM_VAULT_TPM_MICROCHIP_ATECC608A
 #define OCKAM_VAULT_CFG_RAND               OCKAM_VAULT_TPM_MICROCHIP_ATECC608A
 #define OCKAM_VAULT_CFG_KEY_ECDH           OCKAM_VAULT_TPM_MICROCHIP_ATECC608A
@@ -54,7 +54,7 @@ After the new platform is added to the define file, a config header file can be 
 The first Vault function called at runtime must always be the initialization function. This call is responsible for initializing any secure element/TPM and/or host-based software library. Void pointers are passed in rather than specific structures because the initialization for each Vault is slightly different. The first step any Vault should take is to cast the void pointer into the expected initialization structure. Once Vault has the data in the correct format it can begin the initialization process.
 
 ### Function
-```
+```c
 OCKAM_ERR ockam_vault_xxx_init(void *p_arg);
 ```
 
@@ -76,7 +76,7 @@ In a new Vault implementation, the most important task accomplished by the init 
 The Ockam Vault random function provides arguments that allow the caller to specify a buffer for the random number and the size of the buffer. On some platforms there may be a fixed size random number that is returned and others may have the flexibility to return any size random number.
 
 ### Function
-```
+```c
 OCKAM_ERR ockam_vault_xxx_random(uint8_t *p_rand_num, uint32_t rand_num_size);
 ```
 
@@ -100,7 +100,7 @@ The following group of functions are all tied together due to their need to supp
 The public key retrieval and ECDH functions are always required for this building block, but it is possible to implement the building block with only private key generation or private key writes. It is **highly** recommended to always have private key generation as that is always preferable to passing around private key values via the write command.
 
 ### Functions
-```
+```c
 OCKAM_ERR ockam_vault_xxx_key_gen(OCKAM_VAULT_KEY_e key_type);
 
 OCKAM_ERR ockam_vault_xxx_key_get_pub(OCKAM_VAULT_KEY_e key_type,
@@ -135,7 +135,7 @@ As mentioned in the overview section, a Vault implementation for this building b
 Some Ockam protocols uses SHA-256 hashing to ensure both parties are communicating securely and in the expected order. Vault provides a simple SHA-256 hashing function for the protocols to use.
 
 ### Function
-```
+```c
 OCKAM_ERR ockam_vault_xxx_sha256(uint8_t *p_msg, uint16_t msg_size,
                                  uint8_t *p_digest, uint8_t digest_size);
 ```
@@ -156,7 +156,7 @@ A new Ockam Vault implementation must offer a SHA-256 hashing function that can 
 After a shared secret from the ECDH operation has been generated, the shared secret is run through the HMAC-based Extract-and-Expand Key Derivation Function (HKDF). Vault must implement a HKDF function following the standard set in [RFC 5869](https://tools.ietf.org/html/rfc5869).
 
 ### Function
-```
+```c
 OCKAM_ERR ockam_vault_xxx_hkdf(uint8_t *p_salt, uint32_t salt_size,
                                uint8_t *p_ikm, uint32_t ikm_size,
                                uint8_t *p_info, uint32_t info_size,
@@ -180,7 +180,7 @@ Depending on the platform chosen for a new implementation of Vault, the level of
 From the output of the HKDF operation, a secure key has now been established. The secure key is used for AES-GCM-128 to encrypt and decrypt data shared between the two parties who have established their secure channel. At this time only AES-GCM-128 is supported in the protocols due to the limited support of AES-GCM in hardware.
 
 ### Functions
-```
+```c
 OCKAM_ERR ockam_vault_xxx_aes_gcm_encrypt(uint8_t *p_key, uint32_t key_size,
                                           uint8_t *p_iv, uint32_t iv_size,
                                           uint8_t *p_aad, uint32_t aad_size,

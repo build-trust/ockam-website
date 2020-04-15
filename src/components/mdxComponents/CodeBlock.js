@@ -1,19 +1,35 @@
 import * as React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import darkTheme from 'prism-react-renderer/themes/dracula';
-import lightTheme from 'prism-react-renderer/themes/github';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { useTheme } from 'emotion-theming';
+
+import darkTheme from '../../theme/prismTheme';
 
 import Pre from './Pre';
+
+const LineNumber = styled('span')`
+  display: inline-block;
+  width: 3em;
+  user-select: none;
+  opacity: 0.3;
+  text-align: center;
+  position: relative;
+`
 
 const CodeBlockContainer = styled('div')`
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
   .prism-code {
-    border-radius: ${props => props.theme.radii.default};
+    border-radius: ${props => props.theme.radii[1]};
   }
+  font-size: 1.3rem;
+  ${props => props.hasLineNumbers && `
+    .token-line {
+      margin-left: -1.6rem;
+      margin-right: -1.6rem;
+      padding-right: 1.6rem;
+    }
+  `}
 `;
 
 /** Removes the last token from a code example if it's empty. */
@@ -30,19 +46,19 @@ function cleanTokens(tokens) {
 }
 
 /* eslint-disable */
-const CodeBlock = ({ children: code, className }) => {
-  const theme = useTheme();
+const CodeBlock = ({ children: code, className, noLineNumbers = false, }) => {
   const lang = className && className.split('-')[1];
+  const hasLineNumbers = !noLineNumbers && lang !== `noLineNumbers`;
   return (
-    <CodeBlockContainer>
+    <CodeBlockContainer hasLineNumbers={hasLineNumbers}>
       <Highlight
         {...defaultProps}
         code={code}
         language={lang || 'go'}
-        theme={theme === 'dark' ? darkTheme : lightTheme}
+        theme={darkTheme}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <Pre className={className} style={style} p={3}>
+          <Pre className={className} style={style} p={3} data-linenumber={true}>
             {cleanTokens(tokens).map((line, i) => {
               let lineClass = {};
               let isDiff = false;
@@ -87,6 +103,7 @@ const CodeBlock = ({ children: code, className }) => {
               let splitToken;
               return (
                 <div {...lineProps}>
+                  {hasLineNumbers && <LineNumber>{i + 1}</LineNumber>}
                   {line.map((token, key) => {
                     if (isDiff) {
                       if (
@@ -123,7 +140,7 @@ const CodeBlock = ({ children: code, className }) => {
                         );
                       }
                     }
-                    return <span {...getTokenProps({ token, key })} />;
+                    return  <span {...getTokenProps({ token, key })} />
                   })}
                 </div>
               );
