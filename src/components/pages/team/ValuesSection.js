@@ -122,8 +122,11 @@ const ValuesSection = () => {
               </ValuesListItem>
             </ValuesContainer>
             <Text>
-              Our Values are what we believe. Our Virtues are what we do. What we
-              do is who we are.
+              Our Values are what we believe.
+              <br />
+              Our Virtues are what we do.
+              <br />
+              What we do is who we are.
             </Text>
             <Text mb={4}>
               Ockam is a distributed team and we have a remote-first culture.
