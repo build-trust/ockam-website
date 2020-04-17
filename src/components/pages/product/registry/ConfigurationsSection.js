@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "@emotion/styled";
-import {darken} from "polished";
 import { flexbox, space } from 'styled-system'
 
 import PageSection from "../../PageSection";
@@ -10,7 +9,6 @@ import AnimateOnScroll from "../../../AnimateOnScroll";
 import Badge from "../../../Badge";
 
 const StyledPageSection = styled(PageSection)`
-  background-color: ${props => darken(0.02, props.theme.colors.background)};
   padding: 11rem 0;
 `;
 
@@ -40,7 +38,7 @@ const ConfigurationList = styled('div')(flexbox, space);
 
 const ConfigurationsSection = () => {
   return (
-    <StyledPageSection>
+    <StyledPageSection darkenBg>
       <Container>
         <Heading textAlign={{ _: 'center', lg: 'left'}} flex={7} as="h2">
           <AnimateOnScroll slideIn="left">

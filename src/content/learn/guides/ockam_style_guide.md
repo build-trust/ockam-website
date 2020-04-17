@@ -7,7 +7,7 @@ order: 3
 This guide will help you match colors, fonts, icons and styles that we use on this site and around the internet.
 
 ## Colors
-| Name  | Hex   | Preview   | 
+| Name  | Hex   | Preview   |
 |---|---|---|
 | Deep blue background | #0A1A2B   | <div style="width: 15px; height: 15px; background-color: #0A1A2B"></div>  |
 | Deep blue accent background  | #162535   | <div style="width: 15px; height: 15px; background-color: #162535"></div>  |
@@ -26,7 +26,7 @@ Headings: **IBM Plex Sans Medium**
 
 ### Header 3 (28px)
 
-#### Header 4 (25x)  
+#### Header 4 (25x)
 
 Text: IBM Plex Sans Regular
 

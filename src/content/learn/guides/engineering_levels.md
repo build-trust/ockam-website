@@ -1,6 +1,7 @@
 ---
 title: Guide to Roles at Ockam by Level
 order: 4
+fullWidth: true
 ---
 
 ## Engineering - Individual contributors

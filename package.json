@@ -72,6 +72,7 @@
     "react-share": "4.1.0",
     "react-spring": "8.0.27",
     "resize-observer": "1.0.0",
+    "slugify": "1.4.0",
     "styled-system": "5.1.5",
     "use-is-in-viewport": "1.0.7",
     "validate.js": "0.13.1"
