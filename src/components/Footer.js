@@ -3,10 +3,12 @@ import styled from '@emotion/styled';
 import LinkedinLogo from 'emotion-icons/fa-brands/Linkedin';
 import TwitterLogo from 'emotion-icons/fa-brands/Twitter';
 import { lighten } from 'polished';
+import GithubIcon from "emotion-icons/simpleIcons/GitHub";
 
 import { media } from '../utils/emotion';
 import useModal from "../hooks/useModal";
 import ContactModal from "../modals/ContactModal";
+import useSiteMetadata from "../hooks/useSiteMetadata";
 
 import PageSection from './pages/PageSection';
 import Link from './Link';
@@ -30,7 +32,7 @@ const FooterGrid = styled.div`
     'copyright copyright social-icons';
   ${media.tablet`
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
+    grid-template-areas:
     "logo menu"
     "copyright social-icons";
   `};
@@ -81,12 +83,13 @@ const SocialContainer = styled.div`
 
 const Footer = () => {
   const [, showContactModal] = useModal(ContactModal);
+  const siteMetaData = useSiteMetadata();
   const openContactModal = () => showContactModal();
   return (
     <PageSection mb={3}>
       <FooterGrid>
         <LogoContainer>
-          <Logo height="4.8rem" alt="Ockam logo"/>
+          <Logo height="4.8rem" alt="Ockam logo" />
         </LogoContainer>
         <MenuContainer>
           <MenuLink onClick={openContactModal}>
@@ -100,11 +103,14 @@ const Footer = () => {
           <Caption>© 2017-2020 Ockam.io. All rights reserved.</Caption>
         </CopyrightContainer>
         <SocialContainer>
+          <Link to={siteMetaData.ockamLibraryRepo}>
+            <Icon icon={GithubIcon} />
+          </Link>
           <Link to="https://www.linkedin.com/company/ockam.io/">
-            <Icon icon={LinkedinLogo} color="caption" />
+            <Icon ml={3} icon={LinkedinLogo} />
           </Link>
           <Link to="https://twitter.com/ockam_io">
-            <Icon ml={3} icon={TwitterLogo} color="caption" />
+            <Icon ml={3} icon={TwitterLogo} />
           </Link>
         </SocialContainer>
       </FooterGrid>
