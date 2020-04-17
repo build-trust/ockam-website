@@ -8,6 +8,7 @@ import BlogTemplate from './BlogTemplate';
 const Index = ({ children, pageContext, location, ...rest }) => {
   const isDocPage = pageContext.pageType === 'doc';
   const isBlogPage = pageContext.pageType === 'blog';
+  const isJobPage = pageContext.pageType === 'job';
 
   if (isBlogPage) {
     return (
@@ -21,6 +22,14 @@ const Index = ({ children, pageContext, location, ...rest }) => {
       <LearnTemplate location={location} algoliaIndexes={pageContext.algoliaIndexes.learn} dependedRepos={pageContext.dependedRepos} {...rest}>
         {children}
       </LearnTemplate>
+    );
+  }
+
+  if (isJobPage) {
+    return (
+      <PageTemplate location={location} {...rest}>
+        {React.cloneElement(children, { job: pageContext.job})}
+      </PageTemplate>
     );
   }
 
@@ -39,6 +48,7 @@ Index.propTypes = {
     algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
       learn: PropTypes.arrayOf(PropTypes.string),
     })),
+    job: PropTypes.shape({}),
   }).isRequired,
   location: PropTypes.shape({}).isRequired,
 

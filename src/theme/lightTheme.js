@@ -37,6 +37,7 @@ const colors = {
     secondaryHover: "#00BAEA",
     secondaryActive: "#9DDFF2",
     secondaryText: "#25B8E4",
+    linkText: "#7A8895",
 
   },
   link: {

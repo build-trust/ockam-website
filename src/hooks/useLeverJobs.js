@@ -1,5 +1,9 @@
 import { useStaticQuery, graphql } from 'gatsby';
 
+const mapAEdgesToCollection = edges => {
+  return edges.map(item => item.node);
+};
+
 const useLeverJobs = () => {
   const data = useStaticQuery(graphql`
     query allLeverJobs {
@@ -7,6 +11,9 @@ const useLeverJobs = () => {
         edges {
           node {
             id
+            fields {
+              slug
+            }
             lever_id
             createdAt
             text
@@ -31,7 +38,8 @@ const useLeverJobs = () => {
     }
   `);
 
-  return data;
+  return mapAEdgesToCollection(data.allLever.edges);
+
 };
 
 export default useLeverJobs;

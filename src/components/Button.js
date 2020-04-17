@@ -38,7 +38,6 @@ const statesForButtonVariant = {
 
 const Button = styled('button')(
   props => ({
-    padding: '1.4rem 2.5rem',
     borderRadius: props.theme.radii.button,
     fontSize: props.theme.fontSizes.body,
     fontWeight: props.theme.fontWeights.button,

@@ -40,7 +40,7 @@ const colors = {
     secondaryHover: "#00BAEA",
     secondaryActive: "#04698A",
     secondaryText: "#25B8E4",
-    linkText: "#7A8895",
+    linkText: "#C5CBDC",
   },
   link: {
     default: '#A2B6C7',

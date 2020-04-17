@@ -23,7 +23,6 @@ const config = {
     "tableOfContentDeep": 1,
   },
   "api": {
-	  "leverUrl": "https://api.lever.co/v0",
     "githubUrl": "https://api.github.com",
   },
 	"siteMetadata": {

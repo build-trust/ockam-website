@@ -2,50 +2,25 @@ const path = require("path");
 
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const { startCase } = require("lodash");
+const slugify = require('slugify')
 
-const getDependedRepos = require('./scripts/get-depended-repos');
+const getMarkdownPages = require('./scripts/get-markdown-pages');
+const getLeverPages = require('./scripts/get-lever-pages');
 const learnIndices = require('./scripts/get-algolia-learn-indices');
-
-const isNodeBlogPage = (node) => node.fields.slug && node.fields.slug.split("/")[1] === 'blog';
 
 const mapReadmeSlug = (slug) => {
   return slug.replace(/\/readme/gi, '')
 };
 
+
+
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const results =  await graphql(`
-    {
-      allMdx {
-        edges {
-          node {
-            fields {
-              id
-              slug
-            }
-            tableOfContents
-          }
-        }
-      }
-    }
-  `);
-  if (results.errors) {
-    console.log(results.errors); // eslint-disable-line no-console
-  }
-  const dependedRepos = await getDependedRepos();
-  results.data.allMdx.edges.forEach(({ node }) => {
-    const isBlog = isNodeBlogPage(node);
-    const page = {
-      path: node.fields.slug ? node.fields.slug : "/",
-      component: isBlog ? path.resolve("./src/templates/BlogTemplate.js") : path.resolve("./src/templates/LearnTemplate.js"),
-      context: {
-        id: node.fields.id,
-        pageType: isBlog ? 'blog' : 'doc',
-        dependedRepos,
-      },
-    };
-    createPage(page);
-  });
+  const mdxPages = await getMarkdownPages(graphql)
+  const leverPages = await getLeverPages(graphql)
+  mdxPages.forEach(mdxPage => createPage(mdxPage));
+  leverPages.forEach(leverPage => createPage(leverPage));
 };
 
 exports.onCreatePage = ({ page, actions }) => {
@@ -75,6 +50,14 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
+
+  if (node.internal.type === `lever`) {
+    createNodeField({
+      name: `slug`,
+      node,
+      value: slugify(node.text),
+    });
+  }
 
   if (node.internal.type === `Mdx`) {
     const parent = getNode(node.parent);

@@ -23,7 +23,7 @@ Ockam website is built with a static site generator that is based on gatsby star
 ## Generating and managing MD files
 
 ### Folder structure and urls
-Under `src/content` folder are stored all files related to generating html from md files. 
+Under `src/content` folder are stored all files related to generating html from md files.
 
 However, the CI pipeline process mount under this directory, others repository defined in `dependencies_repos.csv`.
 So according to this  file specification ( please check  [Depended repositories](#depended-repositories) ) for entry like:
@@ -94,7 +94,7 @@ Below are listed described available metadata fields under a certain path of `sr
 `all others`
 
 - **title** Title string displayed on sidebar menu [REQUIRED]
-- **order** Integer value to ordering pages in sidebar menu three (In terms of particular branch only). 
+- **order** Integer value to ordering pages in sidebar menu three (In terms of particular branch only).
 - **metaTitle** SEO meta title
 - **metaDescription** SEO meta description
 
