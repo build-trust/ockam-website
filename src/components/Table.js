@@ -19,6 +19,7 @@ const BaseTable = styled('table')`
   }
   
   th {
+    vertical-align: middle;
     font-weight: ${props => props.theme.fontWeights[3]};
     text-align: left;
     background-color: ${props => props.theme.custom.table.accentColor};

@@ -12,6 +12,7 @@ import List from './List';
 import ListOrdered from './ListOrdered';
 import LinkedImage from './LinkedImage';
 import Table from './Table';
+import Strong from './Strong';
 
 const generateHeading = size => props => <Heading {...props} as={size} linked>{props.children}</Heading>;
 
@@ -22,9 +23,10 @@ export default {
   h4: generateHeading('h4'),
   h5: generateHeading('h5'),
   h6: generateHeading('h6'),
-  p: props => <Text {...props} mt={3} mb={4} />,
+  p: props => <Text {...props} mt={3} mb={3} />,
   pre: Pre,
   code: CodeBlock,
+  strong: Strong,
   inlineCode: props => <Code {...props} />,
   a: props => <AnchorTag {...props} />,
   ul: props => <List {...props} />,
