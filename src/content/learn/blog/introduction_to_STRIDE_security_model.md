@@ -2,7 +2,7 @@
 title: "A Beginners Guide to the STRIDE Security Threat Model"
 date: 2020-01-02
 description: "A Beginners Guide to the STRIDE Security Threat Model"
-metaTitle: "This blog outlines how to think about security and threats in your distributed application"
+metaTitle: "How to think about security and threats in your distributed application"
 author: "Mrinal Wadhwa"
 ---
 
@@ -19,7 +19,7 @@ One common threat modeling approach is the STRIDE framework, which has six areas
 
 Authored in 1999 by two Microsoft security researchers, STRIDE remains a useful approach to surface potential issues. In this post, we’ll cover each of the six areas of STRIDE you can use to proactively limit threats as you build your systems.
 
-### Spoofing:
+## Spoofing:
 When you provide access to your systems or data, you need to authenticate every request. The security of your systems depends upon trust in the other party’s identity. A threat to this trust is spoofing — when someone claims to be a person or system they are not.
 
 There are many types of spoofing, from the teenager’s fake ID to more serious infiltration of technology systems. A major area of concern is network security, as much of our connected devices are dependent upon trusting the identity of other devices. In these systems, passwords, keys, tokens, and signatures are among the methods used to authenticate requests. The level of vulnerability varies based on the method.
@@ -32,7 +32,7 @@ For example, here are some common authentication methods for systems and what wo
 
 These are just a few common examples of spoofing. The important thing to consider is what mechanism you’re using to communicate identity and how you know the identity can be trusted. Look to common methods and conventions, such as open source libraries, to ensure your systems are secure and not vulnerable to spoofing attacks.
 
-### Tampering:
+## Tampering:
 
 Even if you feel confident in your authentication security, trust must extend to all systems you touch. When you retrieve data from a system, for example, you should feel confident that it’s reliable. Data is especially susceptible to threats of tampering, but physical machines or hardware may also be vulnerable.
 
