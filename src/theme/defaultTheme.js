@@ -131,6 +131,7 @@ const breakpoints = [
   `${BREAKPOINTS.tablet}px`,
   `${BREAKPOINTS.desktop}px`,
   `${BREAKPOINTS.ultraWide}px`,
+  `${BREAKPOINTS.xUltraWide}px`,
 ];
 breakpoints.sm = breakpoints[0];
 breakpoints.md = breakpoints[1];
@@ -140,6 +141,7 @@ breakpoints.phone = breakpoints[0];
 breakpoints.tablet = breakpoints[1];
 breakpoints.desktop = breakpoints[2];
 breakpoints.ultraWide = breakpoints[3];
+breakpoints.xUltraWide = breakpoints[4];
 
 /* eslint-enable prefer-destructuring */
 

@@ -97,6 +97,7 @@ Below are listed described available metadata fields under a certain path of `sr
 - **order** Integer value to ordering pages in sidebar menu three (In terms of particular branch only).
 - **metaTitle** SEO meta title
 - **metaDescription** SEO meta description
+- **wideContent** if set to `true`, makes content column in full width
 
 ## Sidebar menu items ordering
 

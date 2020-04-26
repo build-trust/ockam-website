@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { layout } from 'styled-system';
 
 import NextPrevious from '../components/NextPrevious';
 import SEO from '../components/SEO';
@@ -33,16 +34,17 @@ const Content = styled.div`
       padding: 0 8rem;
   `}
   ${media.xUltraWide`
-      max-width: 105rem;
       margin-left: auto;
       margin-right: auto;
-  `}
+  `};
+  
   h1 {
     :first-child {
       line-height: 1;
       margin-bottom: 2rem;
     }
   }
+  ${layout};
 `;
 
 const ContentLearnContainer = styled(LearnGridLayout)`
@@ -71,7 +73,7 @@ export default function LearnTemplate(props) {
     algoliaIndexes,
   } = props;
   const {
-    frontmatter: { metaTitle, metaDescription, metaImage, authorAvatar, author, date },
+    frontmatter: { metaTitle, metaDescription, metaImage, authorAvatar, author, date, wideContent },
     excerpt,
     parent: { relativePath },
     fields: { slug, title, id },
@@ -101,7 +103,6 @@ export default function LearnTemplate(props) {
 
   useOnClickOutside(ref, () => setIsOpen(false));
   const activeHash = location.hash;
-
   return (
     <LearnLayout
       location={location}
@@ -117,7 +118,7 @@ export default function LearnTemplate(props) {
           menuId={menuId}
           ref={ref}
         />
-        <Content>
+        <Content maxWidth={{ xUltraWide: !wideContent ? '105rem' : 'initial'}}>
           <SEO
             title={seoTitle}
             image={seoImage}
@@ -165,6 +166,7 @@ LearnTemplate.propTypes = {
       frontmatter: PropTypes.shape({
         metaTitle: PropTypes.string,
         metaDescription: PropTypes.string,
+        wideContent: PropTypes.bool,
         metaImage: PropTypes.shape({
           childImageSharp: PropTypes.shape({
             fixed: PropTypes.shape({
@@ -234,6 +236,7 @@ export const pageQuery = graphql`
             }
           }
         }
+        wideContent
         description
         date(fromNow: true)
         author
