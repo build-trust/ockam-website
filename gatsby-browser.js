@@ -8,7 +8,8 @@ function scrollToAnchor(location) {
     const item = document.querySelector(`${location.hash}`);
     if(!item) return;
     const rect = item.getBoundingClientRect();
-    const offsetTop = rect.top - item.offsetHeight - (!isLearnPath(location.pathname) ? 55 : 0);
+    const topOffset = rect.top + window.scrollY;
+    const offsetTop = topOffset - item.offsetHeight - (!isLearnPath(location.pathname) ? 70 : 0);
     window.scrollTo({
       top: offsetTop,
       behavior: "smooth",

@@ -1,25 +1,20 @@
 import styled from '@emotion/styled';
 import { space, color, typography, layout, flexbox } from 'styled-system';
-import React, { useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import LinkIcon from 'emotion-icons/ion-ios/Link';
 import isString from 'lodash/isString';
 import isObject from 'lodash/isObject';
 import PropTypes from 'prop-types';
+import GithubSlugger  from 'github-slugger'
 
 import Icon from './Icon';
+
+const slugger = new GithubSlugger()
 
 const isChildrenString = props =>
   props && props.children && isString(props.children);
 const hasNestedStringChildren = props =>
   isObject(props.children) && isChildrenString(props.children.props);
-
-const generateIdFromName = name => {
-  if (!isString(name)) return null;
-  return name
-    .replace(/\s+/g, '-')
-    .replace(/[/!@#$%":^.,?—+|‘’&*()\\]/g, '')
-    .toLowerCase();
-};
 
 const BaseHeading = styled('h1')(
   props => ({
@@ -65,27 +60,30 @@ const mapIconSize = {
 const Heading = props => {
   const [focus, setfocus] = useState(false);
   const onSetFocus = value => () => setfocus(value);
-
+  const slug = useMemo(() => {
+    if (isChildrenString(props)) {
+      return slugger.slug(props.children);
+    }
+    if (hasNestedStringChildren(props)) {
+      return slugger.slug(props.children.props.children);
+    }
+    return false;
+  }, [props.children])
   const { linked, ...rest } = props;
 
   if (!linked) return <BaseHeading {...props} />;
-  let id;
-  if (isChildrenString(props)) {
-    id = generateIdFromName(props.children);
-  } else if (hasNestedStringChildren(props)) {
-    id = generateIdFromName(props.children.props.children);
-  }
-  if(!id) return <BaseHeading {...props} />;
+
+  if(!slug) return <BaseHeading {...props} />;
 
   return (
     <BaseHeading
-      id={id}
+      id={slug}
       {...rest}
       onMouseEnter={onSetFocus(true)}
       onMouseLeave={onSetFocus(false)}
     >
       {props.children}
-      <a href={`#${id}`}>
+      <a href={`#${slug}`}>
         <AnchorIcon
           ml={1}
           icon={LinkIcon}
