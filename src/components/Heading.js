@@ -1,20 +1,11 @@
 import styled from '@emotion/styled';
 import { space, color, typography, layout, flexbox } from 'styled-system';
-import React, {useMemo, useState} from 'react';
+import React, { useState } from 'react';
 import LinkIcon from 'emotion-icons/ion-ios/Link';
-import isString from 'lodash/isString';
-import isObject from 'lodash/isObject';
 import PropTypes from 'prop-types';
-import GithubSlugger  from 'github-slugger'
 
 import Icon from './Icon';
 
-const slugger = new GithubSlugger()
-
-const isChildrenString = props =>
-  props && props.children && isString(props.children);
-const hasNestedStringChildren = props =>
-  isObject(props.children) && isChildrenString(props.children.props);
 
 const BaseHeading = styled('h1')(
   props => ({
@@ -58,32 +49,24 @@ const mapIconSize = {
 };
 
 const Heading = props => {
-  const [focus, setfocus] = useState(false);
-  const onSetFocus = value => () => setfocus(value);
-  const slug = useMemo(() => {
-    if (isChildrenString(props)) {
-      return slugger.slug(props.children);
-    }
-    if (hasNestedStringChildren(props)) {
-      return slugger.slug(props.children.props.children);
-    }
-    return false;
-  }, [props.children])
+  const { id, children } = props;
+  const [focus, setFocus] = useState(false);
+  const onSetFocus = value => () => setFocus(value);
   const { linked, ...rest } = props;
 
   if (!linked) return <BaseHeading {...props} />;
 
-  if(!slug) return <BaseHeading {...props} />;
+  if(!id) return <BaseHeading {...props} />;
 
   return (
     <BaseHeading
-      id={slug}
+      id={id}
       {...rest}
       onMouseEnter={onSetFocus(true)}
       onMouseLeave={onSetFocus(false)}
     >
-      {props.children}
-      <a href={`#${slug}`}>
+      {children}
+      <a href={`#${id}`}>
         <AnchorIcon
           ml={1}
           icon={LinkIcon}
@@ -96,6 +79,7 @@ const Heading = props => {
 };
 
 Heading.propTypes = {
+  id: PropTypes.string,
   linked: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.node,
@@ -105,6 +89,7 @@ Heading.propTypes = {
 };
 
 Heading.defaultProps = {
+  id: '',
   linked: false,
 };
 
