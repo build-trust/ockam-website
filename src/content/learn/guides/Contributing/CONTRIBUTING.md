@@ -95,22 +95,26 @@ The header includes a type, a scope and a subject:
 * `<subject>` is _required_, must not be longer that 100 characters
 * `<type>` is _required_, must be in lower case, and have one of the below values.
 
-  *build:* changes that affect our build system or external dependencies
+   `build:` changes that affect our build system or external dependencies
 
-  *chore:* some minor change that doesn't fall in any of the other types
+   `chore:` some minor change that doesn't fall in any of the other types
 
-  *ci:* changes to our continuous integration configuration files
+   `ci:` changes to our continuous integration configuration files
 
-  *docs:* a documentation only change
+   `docs:` a documentation only change
 
-  *feat:* a new feature
+   `feat:` a new feature
 
-  *content:* updates or additions to Ockam.io/learn
+   `content:` updates or additions to Ockam.io/learn
 
 * `<scope>` is optional, when used it must be in lower case and have one of the below values: 'c', 'elixir', 'go', 'javascript', 'rust', 'swift'
 * `<subject>` is _required_, must be lower case and not end in period. Also be sure to describe your changes in the imperative-mood
 * `<body>` is optional, must be max 100 chars wide, must have a blank line before it. Be sure to describe your changes in the imperative-mood
 * `<footer>` is optional, must not be longer that 100 characters
+
+*Ockam requires that all commits are signed by your PGP key.*
+If signing git commits is new to you, we recommend that you use Krypton.
+Instructions for signing git commits with Krypton can be found [here][sign]
 
 ## <a name="submit-pr"></a> Pull Request Submission Guidelines
 Before you submit your pull request consider the following guidelines:
