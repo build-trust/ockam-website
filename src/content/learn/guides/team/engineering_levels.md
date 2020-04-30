@@ -1,11 +1,7 @@
 ---
 title: Guide to Roles at Ockam by Level
-<<<<<<< HEAD:src/content/learn/guides/engineering_levels.md
 order: 4
 wideContent: true
-=======
-order: 1
->>>>>>> content: restructure guides:src/content/learn/guides/team/engineering_levels.md
 ---
 
 # Guide to Roles at Ockam by Level
