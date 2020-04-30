@@ -54,7 +54,7 @@
     "gatsby-source-lever": "2.1.28",
     "gatsby-transformer-remark": "2.6.59",
     "gatsby-transformer-sharp": "2.3.19",
-    "graphql": "14.6.0",
+    "graphql": "^14.6.0",
     "is-absolute-url": "3.0.3",
     "lodash": "4.17.15",
     "neat-csv": "5.2.0",
@@ -75,6 +75,7 @@
     "resize-observer": "1.0.0",
     "slugify": "1.4.0",
     "styled-system": "5.1.5",
+    "typescript": "^3.8.3",
     "use-is-in-viewport": "1.0.7",
     "validate.js": "0.13.1"
   },
