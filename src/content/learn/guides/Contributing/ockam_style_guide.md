@@ -26,11 +26,11 @@ Headings: **IBM Plex Sans Medium**
 
 ### Header 3 (28px)
 
-#### Header 4 (25x)
+#### Header 4 (25x)  
 
 Text: IBM Plex Sans Regular
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus eros. Fusce varius ligula at arcu condimentum, ut finibus sem viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam sed elit ac nisl aliquam feugiat.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus eros. Fusce varius ligula at arcu condimentum, ut finibus sem viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
 
 ## Logos and Graphics
 
