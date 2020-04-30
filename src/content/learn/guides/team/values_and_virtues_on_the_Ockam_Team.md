@@ -5,8 +5,6 @@ description: "“Values are what you believe, Virtues are what you do.” "
 metaTitle: "Ockam is a value driven high performance team. We are fully distributed and are remote-first. This blog is our guidebook for how we run the Ockam Team"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
-isHomepageFeatured: true
-homepageFeaturedOrder: 1
 ---
 
 # “What We Do Is Who We Are.”
@@ -31,13 +29,13 @@ I also recommend the following books for a deeper understanding of our culture a
 CEO at Ockam
 
 
-## Ockam’s Values are "What We Believe"
+# Ockam’s Values are "What We Believe"
 
-#### Simplicity
+## Simplicity
 
 The creation of simple solutions out of complex problems is the basis for our namesake, Ockam. Every idea, product, and procedure at Ockam should be governed by the principles in Ockham’s Razor. Simplifying is a difficult and iterative journey.
 
-#### The High Performance Team
+## The High Performance Team
 
 We simply call it “The Team”. Ockam has the ethos of a high performance, world-class sports team.
 
@@ -47,15 +45,15 @@ High Performance teams have the grit to do the hard things. We dream audacious g
 
 Our Team includes every Ockam customer, partner, employee, supplier, investor, advisor -- and, of course, open source developer.
 
-#### Builders love their tools
+## Builders love their tools
 
 Ockam is a tools company. Our tools are used to build, or are built directly into, others’ products.
 
 Builders enable new technical ecosystems to exist. We believe that builders should have meticulously designed, simple, and useful tools with elegant user experiences.
 
-## Ockam’s Virtues are "What We Do"
+# Ockam’s Virtues are "What We Do"
 
-#### We start with Trust
+## We start with Trust
 
 Some teams use a model where trust is earned over time based upon past performance. The Ockam Team does not do this. When people join The Ockam Team they should assume that they are completely trusted by everyone on The Team to be their best-self from Day 1.
 
@@ -78,7 +76,7 @@ We use another well known framework at Ockam. It comes from Amazon’s playbook:
 
 Ockam has also adopted a culture of ‘Disagree and Commit’. Ockam moves fast, and relies on Trust. This means that we disagree and commit on decisions all the time. This also means that Ockam’s culture is not consensus driven culture. We have far too many decisions to make. This is why Responsibility for an Objective also comes with the trust and empowerment to make decisions.
 
-#### We strive to understand ‘why?’
+## We strive to understand ‘why?’
 
 As a team, and as individuals, we embrace a growth mindset. We are curious learners and strive to understand 'why?'. When a customer engages with our products, it’s important to know why. When we disagree with a teammate we stop to ask them ‘why?’, before we give our rebuttal.
 
@@ -94,7 +92,7 @@ Finally, we add process to our projects. We define ‘how?’. We assign roles w
 
 Understanding ‘Why?’ aligns the entire team to prioritize, make fast decisions, and to align all of our efforts to all pull in the same direction.
 
-#### We win by doing
+## We win by doing
 
 Ockam is a team of doers, builders, shippers, and finishers. We celebrate things that are complete. Ideas are the easy part. We win by turning ideas into action.
 
@@ -106,41 +104,41 @@ Learning from losses is a virtue at Ockam because a team with a virtue of doing 
 
 Ockam’s vision is audacious and it’s difficult to build what we are building. Our action-oriented culture is susceptible to ‘The Law of Triviality’ otherwise known as ‘Bike-shedding’. Bike-shedding occurs when a team spends the majority of its time on real, but relatively minor easy-to-grasp issues while neglecting far more important and far more difficult and complex tasks. The combination of doing plus bike-shedding is deadly, because it efficiently and effectively destroys our most valuable asset: time.
 
-#### We preserve and cherish time
+## We preserve and cherish time
 
 Time is the most valuable asset that we have. It’s the only thing that we can’t recreate once it has been spent. This is why we put so much effort into preserving every second of time available to us.
 
 Ockam’s OKRs are generated for far-term and near-term units of time. Instead of thinking of time in years, quarters, and months we define time in the following units:
 
-###### Vision
+### Vision
 
 The vision and mission at Ockam is well defined and we do not anticipate changes. We are aiming for a point that is 10 years into the future. We would consider a coarse adjustment to our Vision and Mission to be a major pivot.
 
 We think of our vision and our mission as inputs to our planning, not the output. We start with our destination in mind before we break down time, objectives and results into manageable steps.
 
-###### Horizons
+### Horizons
 
 Horizons reach as far as we can reasonably see into the future; about 15-20 months. Because Ockam is a venture-backed, deep-tech company our horizons roughly align with projected funding cycles.
 
-###### Campaign
+### Campaign
 
 We break Horizon objectives down into 2 or 3 segments. We call these segments Campaigns. During a Campaign we aim to solve one major theme that changes the state of Ockam as a business. When we close one Campaign and move to the next, it should feel like The Team is stepping up into a new level, and that individuals are moving onto newly defined roles on The Team.
 
-###### Race
+### Race
 
 Races are subsets of a Campaign. We break Campaigns down into more manageable objectives. This helps to focus The Team into a specific unifying effort, like acquiring a new type of customer, or launching a major feature. All races have a starting line and a finish line. The last push in any race usually hurts a little bit as we 'do what it takes' to get to the finish. Because we define races and their finish lines we know that there will be an opportunity to catch our breath before the next race begins.
 
-###### Pace Check
+### Pace Check
 
 Just like a world class marathon runner, we break down our Races into well defined chunks to monitor our pace. We do Pace Checks every 2 weeks. Every other Tuesday we gather The Team to show demos, raise major blockers, and to plan the next two weeks of our Race.
 
 Many teams call their two-week segments ‘Sprints’. We don’t like to pretend that we can maintain a cadence of never-ending sprints. Building great tools and beautiful products is a marathon not a sprint. Our Races are endurance events that require effective pacing.
 
-###### Maker Day
+### Maker Day
 
 Finally, but perhaps most importantly, we have ‘Maker Day’ every Thursday. This is a day of uninterrupted doing, completely free of meetings or interruptions of any kind. The entire Ockam Team, everybody, participates. This is one of the best practices out of the early days at Heroku, and we are carrying the torch on at Ockam.
 
-#### Build a remote-first team
+## Build a remote-first team
 
 We are building a high-performance team with world-class individuals. Therefore it makes sense for the primary-key in selecting teammates be ‘people’, and not their ‘geography’.
 
@@ -148,27 +146,27 @@ Remote-first means something specific at Ockam. Culturally and operationally we 
 
 As a remote-first team everyone can optimize their own work environment so they can be their best-self. Because everyone is free to create a work environment that best suits their style, the Ockam Team is more inclusive to a wider distribution of diverse teammates from unique backgrounds. Diversity and inclusion drive the culture of Ockam’s high performance team. When coupled with our use of RACI, our growth mindset, and because we are not consensus driven, outlier opinions from unique world-class contributors keep The Team and our products highly innovative.
 
-#### Empower builders through open source
+## Empower builders through open source
 
 Builders need great tools to build great products. When builders win, so does the entire Ockam Team.
 
 We started with the end in mind, that’s why we built Ockam’s tools in the open source ecosystem from the beginning. Open source speeds product innovation, drives adoption, improves security, and enables integrations. Together these four elements put the very best tools into builders hands.
 
-###### Speed innovation
+### Speed innovation
 
 Because Ockam is open source, ideas and roadmaps are not limited to the financial, time, and creative constraints of Ockam employees. Anyone can contribute to Ockam’s codebase without friction. A junior developer could build their open source reputation by adding a test, documentation, or code example. An experienced hacker could refactor Ockam into another language. A corporate product team could create a complex feature.
 
 Because open source makes code transparent, accessible, and free everyone is able to use the Ockam code base to innovate in new ways.
 
-###### Drives adoption
+### Drives adoption
 
 Open source software is highly available. Anyone can access Ockam’s code, anywhere, anytime. Ockam open source code becomes more durable and valuable the more it is used by the community. This makes the tools more innovative, which kicks off a virtuous cycle that ultimately democratizes access to complicated security protocols for millions of developers.
 
-###### Improves security
+### Improves security
 
 We believe security solutions can not be a black-box. The more engineers that look at a piece of code, and the more times it is deployed, the more secure it becomes. Security teams can inspect and audit the Ockam codebase for their specific application. If vulnerabilities are discovered that team is empowered to make changes that benefit the entire community. Again, the virtuous cycle of open sourced security improvements give every builder better tools.
 
-###### Enables integrations
+### Enables integrations
 
 Connected devices have an n-squared problem that blocks interoperability. With billions of combinations of possible connection configurations it’s impossible to implement all of the possibilities. Product managers at chip makers, device OEMs, network and cloud service providers need to integrate with each other.
 

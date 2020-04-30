@@ -20,14 +20,14 @@ Ockam doesn't need to reinvent the wheel. The oldest websites on the internet we
 
 Simplicity is one of our founding values, reflected in our own namesake, Ockam. Similarly to the principle of Occam’s Razor, we believe that more complexity doesn’t always mean better products. This is reflected in how we built our JAMStack website using Gatsby - classic approach reinvented for a modern product.
 
-### What is the JAMStack?
+## What is the JAMStack?
 The JAMStack is a new way of building websites using established web development tools combined with modern architectural practices. JAM stands for the three main concepts used in this process: **J**avaScript, **A**PIs, and **M**arkup. With the JAMStack, developers design component templates, generate content and website actions, and then build and bundle the website into HTML pages with a static site generator. We use [Gatsby](https://www.gatsbyjs.org) with Ockam.io.
 
 With the JAMStack, dynamic content and functionality runs in the client's browser for a performant user experience. APIs are used to abstract out server-side functionality. Traditional websites rely on a back-end server which can be functionally replaced with serverless API calls from within the client browser. Gatsby even provides a [GraphQL endpoint](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql) to query your data. But the 'back-end' of our static website could be anything we want it to be with different API calls.
 
 Finally, the website is served as an inherently static HTML (Markup) file. With a static site generator, this can be created from a source written in a format such as Markdown, which is what we used. Markdown is a straightforward markup language as it uses plain-text-formatted syntax for easier internet writing.
 
-### Why We Chose JAMStack
+## Why We Chose JAMStack
 There are two primary advantages for the ockam.io site to use JAMStack:
 
 1. Generating content is simple because source is written in markdown and stored in GitHub.
@@ -46,14 +46,14 @@ I spent over five years working in cloud hosting services, most recently as an '
 
 I suppose that the apple doesn't fall so far from the tree?
 
-### Azure Pipelines
+## Azure Pipelines
 In order to build our website automatically, we need continuous integration and delivery (CI/CD). Azure Pipelines offers container support and the workflows we needed to orchestrate the build.
 
 The integration with GitHub ensures anything we put in our website repo is available to the cloud. Whenever changes to the master branch are detected, Gatsby is invoked to generate the HTML files of our website. Docker instances running Node allocate the necessary resources and build tools to Gatsby in multiple containers to quickly regenerate the website and send it down the pipeline.
 
 Pipelines not only builds our website, but also quickly deploys the new site where it needs to be. In our case, that’s Azure CDN.
 
-### Azure CDN
+## Azure CDN
 A static site is already likely to load quickly. When that’s paired with a CDN, we can decrease the latency across a worldwide network. By distributing and caching our website files at locations across the globe, there is always a server nearby to quickly deliver any page to any person as quickly as possible. Azure's CDN has over 130 point-of-presence (POPs) locations across 80 metro regions worldwide. Geo-filters direct traffic to local servers for the fastest experience.
 
 ## Layer on External Services, Like Algolia and Lever

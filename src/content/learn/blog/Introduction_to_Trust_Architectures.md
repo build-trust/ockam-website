@@ -8,14 +8,14 @@ authorAvatar: ./assets/matthew_gregory-1.png
 ---
 In this week’s post we introduce Trust Architectures for connected devices. A reoccurring theme in the Ockam Blog is our position that there is a lot to learn about the future for connected devices by looking back through the history of cloud-native development.
 
-### Why service-oriented systems rule cloud development
+## Why service-oriented systems rule cloud development
 Over the past decade, cloud-native developers have embraced service-oriented design for their applications as ‘the rule’. APIs and micro-services are the most talked about implementations of these principles.
 
 As a quick review of service-oriented design, most narratives focus on highly flexible code functionality that is broken down into small components. Those components make their functionalities discoverable and interoperable to other parts of the system as-a-service. Such an architecture allows these micro-services to be reused in the future via simple program interfaces (APIs). Without such decomposition, scaling applications and adding new functionality to hard-coded applications with a monolithic architectures becomes difficult, or even impossible. For example; an analytics micro-service could be scaled-up with on-demand cloud hardware independently of the user sign-in service. Or, a new feature could access that analytics service without any changes to the existing service. This is how modern cloud-native apps are able to adapt so quickly.
 
 Open source tools, cloud infrastructure, and a community of knowledge sharing have moved best practices forward for building modern application systems with service architectures.
 
-### Applications have moved into hardware at the edge, creating new challenges.
+## Applications have moved into hardware at the edge, creating new challenges.
 
 Modern connected devices utilize standard APIs to communicate with supporting infrastructure, and the ones that don’t, should. However, the nature of connected devices at the edge leaves much to be desired in connected device architectures; IoT devices tend to be designed from the inside out, have a monolithic code base, and are optimized for communicating with their manufacturer’s back-end web app.
 
@@ -23,7 +23,7 @@ Most connected devices are in physically insecure locations, scattered around th
 
 There is also an n-squared complexity with connected device integration as larger fleets of devices are installed in the field. For vast networks of interoperable systems to work together, they need more horsepower than service-oriented designs provide on their own.
 
-### Connecting devices requires a Trust Architecture.
+## Connecting devices requires a Trust Architecture.
 
 Service-oriented systems are built for availability, interconnection, and scalability. Application micro-services, cloud infrastructure, and security tools enable service-oriented systems to be adopted as a best practice for all developers and for all modern applications.
 

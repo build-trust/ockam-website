@@ -1,8 +1,16 @@
 ---
 title: Guide to Roles at Ockam by Level
+<<<<<<< HEAD:src/content/learn/guides/engineering_levels.md
 order: 4
 wideContent: true
+=======
+order: 1
+>>>>>>> content: restructure guides:src/content/learn/guides/team/engineering_levels.md
 ---
+
+# Guide to Roles at Ockam by Level
+
+At Ockam we value our High Performance Team. It is the responsibility of The Team to provide an environment where every individual is empowered to be world-class in their role and to enable individuals to achieve more than they could dream possible for themselves. This level guide helps us to align expectations and to create a framework where we have a common language to describe growth paths.
 
 ## Engineering - Individual contributors
 
@@ -255,11 +263,11 @@ wideContent: true
 
 
 **Note:**
-<ul>
-<li> It is assumed that an engineer at a high level would still focus on all of the attributes associated with levels that they’ve already surpassed in their career.  For example, even though "Learning" is a Level 1 | 2 focus, everyone should be on a virtuous learning cycle, even at Level 8.</li>
 
-<li> The converse is  also true. A lower level engineer is likely to check several boxes at levels 1 or 2 above their current level. This is particularly true on our small team. Everyone should have stretch tasks as part of their role.</li>
-</ul>
+ It is assumed that an engineer at a high level would still focus on all of the attributes associated with levels that they’ve already surpassed in their career.  For example, even though "Learning" is a Level 1 | 2 focus, everyone should be on a virtuous learning cycle, even at Level 8.</li>
+
+ The converse is  also true. A lower level engineer is likely to check several boxes at levels 1 or 2 above their current level. This is particularly true on our small team. Everyone should have stretch tasks as part of their role.</li>
+
 
 ## Anti - Patterns:
 
@@ -271,7 +279,7 @@ wideContent: true
 
 **Levels 6-8:** Over-emphasis on scaling or high availability far beyond business needs. Spends too much time chasing the newest "shiny" technology simply to satisfy ego. Doesn’t collaborate or ask questions. Condescending. Has a “pet” agenda. Pisses off senior leadership.
 
-### References:
+## References:
 
 * [Holloway Guides](https://www.holloway.com/g/technical-recruiting-hiring/sections/setting-levels-and-titles)
 * [Sequoia Capital](https://www.sequoiacap.com/)

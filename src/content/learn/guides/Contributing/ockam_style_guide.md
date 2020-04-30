@@ -9,12 +9,12 @@ This guide will help you match colors, fonts, icons and styles that we use on th
 ## Colors
 | Name  | Hex   | Preview   |
 |---|---|---|
-| Deep blue background | #0A1A2B   | <div style="width: 15px; height: 15px; background-color: #0A1A2B"></div>  |
-| Deep blue accent background  | #162535   | <div style="width: 15px; height: 15px; background-color: #162535"></div>  |
-| Primary blue  | #52c7ea   | <div style="width: 15px; height: 15px; background-color: #52c7ea"></div>  |
-| Accent red  | #EC432D | <div style="width: 15px; height: 15px; background-color: #EC432D"></div> |
-| Caption and icon grey  | #7A8895 | <div style="width: 15px; height: 15px; background-color: #7A8895"></div> |
-| Dark grey  | #242A31 | <div style="width: 15px; height: 15px; background-color: #242A31"></div> |
+| Ockam Deep Blue | #0A1A2B   | <div style="width: 15px; height: 15px; background-color: #0A1A2B"></div>  |
+| Deep Blue Accent  | #162535   | <div style="width: 15px; height: 15px; background-color: #162535"></div>  |
+| Ockam Blue  | #52c7ea   | <div style="width: 15px; height: 15px; background-color: #52c7ea"></div>  |
+| Ockam Orange  | #EC432D | <div style="width: 15px; height: 15px; background-color: #EC432D"></div> |
+| Caption and Icon Grey  | #7A8895 | <div style="width: 15px; height: 15px; background-color: #7A8895"></div> |
+| Dark Grey  | #242A31 | <div style="width: 15px; height: 15px; background-color: #242A31"></div> |
 
 ## Font Styles
 
@@ -39,7 +39,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 
 ![Ockam logo light background](./assets/logo/logo_white_background_preview.svg)
 
-![Ockam logo dark  caption background](./assets/logo/logo_caption_dark_background_preview.svg)
+![Ockam logo dark caption background](./assets/logo/logo_caption_dark_background_preview.svg)
 
 ![Ockam logo light caption background](./assets/logo/logo_caption_white_background_preview.svg)
 
@@ -50,9 +50,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 
 ## Stickers
 
-![Ockam stciker dark background](./assets/stickers/sticker_dark_background.svg)
+![Ockam sticker dark background](./assets/stickers/sticker_dark_background.svg)
 
-![Ockam stciker bordered dark background](./assets/stickers/sticker_bordered_dark_backround.svg)
+![Ockam sticker bordered dark background](./assets/stickers/sticker_bordered_dark_backround.svg)
 
 ## Twitter
 

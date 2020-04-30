@@ -14,7 +14,7 @@ This is because ‘Platform’ is a loaded word, if not a confusing one, when ta
 
 I want to set context for how industries mature to really understand what the IoT Developers’ future looks like, what tools are needed, what a ‘platform’ is, and how Ockam's tools fit into this landscape. Then, I’ll map the industry maturation cycle to what I’ve experienced in the software development industry, and finally set the stage for where IoT is going and discuss how Ockam fits into the upcoming IoT developer tool stack.
 
-### An Introduction Into How Industries Mature Through Vision, Specialization, Consolidation Phases.
+## An Introduction Into How Industries Mature Through Vision, Specialization, Consolidation Phases.
 
 When a industry or product cycle is brand new, the company that is first-to-market must be vertically integrated. This means that the firm must design, test, build, market and sell their product; They do it all. Because they are the only company that has a vision for a new industry or product they must be fully self-sufficient to bring the product to market. If they are successful and find product market fit, then the product takes flight and a new industry is born.
 
@@ -24,7 +24,7 @@ For example, imagine trying to build the first cars in the early 1900s. A auto s
 
 There is a third phase, consolidation, that occurs when an industry matures and innovation flattens. In order to continue to drive value the major players in the industry adopt a vertical integration strategy, focus on operational efficiencies, and consume the horizontally organized suppliers through direct competition or acquisition. We can pass over this phase for the purpose of this blog post since developer tooling is still in the early, high growth, horizontal organizing phase.
 
-### Application Innovation Breakthroughs Happen When Developer Tool Stacks Emerge.
+## Application Innovation Breakthroughs Happen When Developer Tool Stacks Emerge.
 
 The cloud software industry is in the horizontally organized, specialty phase. However we typically refer to the horizontal layers as components in a ‘stack’. In the 2000’s the cloud software development industry was accelerated by the LAMP stack. This stack of Operating system (Linux), Web Server (Apache), Database (MySQL, etc), and Programing Language (PHP, etc) became the basis that unlocked innovation for most born-in-the-cloud applications that thrive today. Instead of needing to create an entire platform to build a modern app, a product engineer could use the tools in the LAMP stack as a baseline to build upon.
 
@@ -44,7 +44,7 @@ What’s equally as interesting is that each of the layers in these stacks conta
 
 Not only do the IoT stacks need to be created and defined, but so do the companies that make up the specialized developer tools in those stacks. I am certain that over the next several years, dozens of newly formed companies, OSS code bases, and industry standards will emerge as developer toolchains are built for IoT. There is certainly an abundance of untapped demand, given the problems that all developers have working with IoT.
 
-Where Is IoT In The Maturation Cycle?
+## Where Is IoT In The Maturation Cycle?
 It’s just getting started…
 
 Existing products that are classified as “IoT + Platform” are the first entrants in the market. At best, they are akin to the very first automobiles. These IoT ‘platforms’ solve incomplete and highly generalized problems. No single solution solves the full-stack IoT developer problem. We need specialty new market entrants to build the horizontally organized tools that will eventually be grouped into reference stacks.

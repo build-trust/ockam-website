@@ -21,7 +21,7 @@ This post covers those five benefits of open source software:
 
 These areas have both business and technical implications, which all lead to creating better software.
 
-### Open source brings reliability
+## Open source brings reliability
 There’s a reason that most of the Internet runs on open source. From Linux to WordPress to most frameworks and utilities, they’re powered by open software. The level of usage encourages contributions, which encourages further usage. It’s the virtuous cycle of open source to which we all contribute and from which we all benefit.
 
 Reliability is one of the important benefits created by the contribution/usage cycle. As a follow up to this article I recommend that you look up Peter Levine’s [presentation and blog post](https://a16z.com/2019/10/04/commercializing-open-source/) where he describes the cycle related to open source based business models. As a first step to business success in open source, Levine cites project-community fit, where a group of developers actively contribute.
@@ -30,7 +30,7 @@ As more developers rely upon an open source project, the more likely they’ll b
 
 ![The Ockam ecosystem](./assets/open_source_ecosystem.png)
 
-### Open source increases adoption
+## Open source increases adoption
 Greater reliability and usage certainly encourage adoption of open sourced code, as well. It’s not simply a matter of developers choosing what’s most popular. The availability of open source itself helps drive adoption and makes it the prudent choice.
 
 Developers want to be able to try software they’ll rely upon and, if possible, see how it works. Open source checks both of those boxes in a big way. By its very nature, open source is available—at both tire-kicking and code-digging levels.
@@ -39,7 +39,7 @@ For example, [Ockam’s open source projects](https://github.com/ockam-network/)
 
 Further, access to open source goes beyond any single company’s support. Developers want to adopt software they know they’ll be able to use regardless of one company’s internal decisions. Open source shines against proprietary software because it’s available now and will continue to be in the future.
 
-### Open source creates a virtuous cycle for security.
+## Open source creates a virtuous cycle for security.
 Another area that proprietary software is deficient compared to open source is security. There’s a myth that the reverse is true, but a black box is a poor home for any security solution. Closed source software cannot be rigorously inspected, so there’s no way to know the full extent of its vulnerabilities.
 
 Of course, being open source itself does not make software more secure. It’s the eyes of many engineers, with a vested interest in its invulnerability, that makes dependable open source security.
@@ -48,7 +48,7 @@ When issues are discovered in open source, a developer may flag it publicly. The
 
 The virtuous cycle compounds the security of open source software, and everyone ends up with better tools.
 
-### Open source unbinds interoperability
+## Open source unbinds interoperability
 
 Community contributions and usage also encourage integrations between open source and other projects. The most used open source software become de facto standards, but even nascent projects benefit from interoperability.
 
@@ -58,7 +58,7 @@ When you look specifically at connected devices, interoperability is a big probl
 
 Yet, chip makers, device OEMs, network and cloud service providers need to integrate with each other. Open source interfaces, such as Ockam's, provide the community with much more interoperability than re-creating each combination anew.
 
-### Open Source Helps You Move Faster
+## Open Source Helps You Move Faster
 
 The virtuous cycle of open source has many benefits. When put together, they provide developers and their employers with increased velocity. It takes time to build reliable and secure software from scratch. Yet, open source allows the entire community to gain from the efforts of many.
 
