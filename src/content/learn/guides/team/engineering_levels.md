@@ -260,9 +260,9 @@ At Ockam we value our High Performance Team. It is the responsibility of The Tea
 
 **Note:**
 
- It is assumed that an engineer at a high level would still focus on all of the attributes associated with levels that they’ve already surpassed in their career.  For example, even though "Learning" is a Level 1 | 2 focus, everyone should be on a virtuous learning cycle, even at Level 8.</li>
+ It is assumed that an engineer at a high level would still focus on all of the attributes associated with levels that they’ve already surpassed in their career.  For example, even though "Learning" is a Level 1 | 2 focus, everyone should be on a virtuous learning cycle, even at Level 8.
 
- The converse is  also true. A lower level engineer is likely to check several boxes at levels 1 or 2 above their current level. This is particularly true on our small team. Everyone should have stretch tasks as part of their role.</li>
+ The converse is  also true. A lower level engineer is likely to check several boxes at levels 1 or 2 above their current level. This is particularly true on our small team. Everyone should have stretch tasks as part of their role.
 
 
 ## Anti - Patterns:
