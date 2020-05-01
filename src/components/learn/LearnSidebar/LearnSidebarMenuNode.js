@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import OpenIcon from 'emotion-icons/octicons/ChevronDown';
 import CloseIcon from 'emotion-icons/octicons/ChevronRight';
-import dropRight from 'lodash/dropRight';
 import isArray from 'lodash/isArray';
 
 import Icon from '../../Icon';
@@ -30,6 +29,10 @@ const ButtonChevron = styled.button`
   margin-left: auto;
 `;
 
+const getArtificiallyUrl = (url, deepLevel) => {
+ return url.split("/").slice(1, deepLevel + 3).join("/")
+}
+
 // eslint-disable-next-line complexity
 const LearnSidebarMenuNode = ({
   url,
@@ -45,7 +48,7 @@ const LearnSidebarMenuNode = ({
   // This `artificiallyUrl` is needed cause nodes without root file (index.md or README.md), generates same
   // url as first child
   const isRootWithSameUrl = hasChildren && url === nodes[0].url;
-  const artificiallyUrl = isRootWithSameUrl ? dropRight(url.split("/"), 2).join("/") : false;
+  const artificiallyUrl = isRootWithSameUrl ? getArtificiallyUrl(url, deepLevel) : false;
   const isActive = location && location.pathname.match(artificiallyUrl || url);
 
   const trimmedUrl = removeStartEndSlugSlash(artificiallyUrl || url);

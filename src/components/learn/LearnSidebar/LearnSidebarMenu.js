@@ -10,7 +10,6 @@ import LearnSidebarMenuNode from './LearnSidebarMenuNode';
 const LearnSidebarMenu = ({ location }) => {
   const rootSlug = getRootSlugFromPathname(location.pathname);
   const { tree } = useAllMdxAsTree(rootSlug);
-
   const nodes = tree.length === 1 ? tree[0].nodes : tree;
 
 

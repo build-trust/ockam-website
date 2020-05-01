@@ -35,21 +35,14 @@ const generateTree = nodes => {
 
 const sortBySlugLength = nodes => sortBy(nodes, item => item.slugs.length);
 
-const findLowestNodeLevel = (nodes, rootSlug) =>
-  nodes.reduce(
-    (acc, node) =>
-      (node.url !== `/${rootSlug}/` && (node.slugs.length < acc || !acc)
-        ? node.slugs.length
-        : acc),
-    null
-  );
-
-const addDeepLevelToNode = (nodes, rootSlug) => {
-  const lowestNodeLevel = findLowestNodeLevel(nodes, rootSlug);
-  return nodes.map(node => ({
-    ...node,
-    deepLevel: node.slugs.length - lowestNodeLevel,
-  }));
+const addDeepLevelRecursively  = (tree, level) => {
+  return tree.map(item => {
+    const updatedItem = { ...item, deepLevel: level};
+    if(item.nodes.length > 0) {
+      updatedItem.nodes = addDeepLevelRecursively(item.nodes, level + 1);
+    }
+    return updatedItem;
+  })
 };
 
 const useAllMdxAsTree = rootSlug => {
@@ -59,9 +52,8 @@ const useAllMdxAsTree = rootSlug => {
       ? filterByRootSlug(allMdx.edges, rootSlug)
       : allMdx.edges;
     const nodes = sortBySlugLength(createNodesFromEdges(edges));
-    const nodesWithLevel = addDeepLevelToNode(nodes, rootSlug);
     return {
-      tree: generateTree(nodesWithLevel),
+      tree: addDeepLevelRecursively(generateTree(nodes),-1),
     };
   }, [allMdx.edges, rootSlug]);
 };
