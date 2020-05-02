@@ -1,8 +1,8 @@
 ---
-title: Ockam style guide
-order: 3
+title: Graphics
+order: 2
 ---
-# Welcome to the Ockam style guide.
+# Ockam graphics style guide.
 
 This guide will help you match colors, fonts, icons and styles that we use on this site and around the internet.
 
@@ -30,7 +30,7 @@ Headings: **IBM Plex Sans Medium**
 
 Text: IBM Plex Sans Regular
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus eros. Fusce varius ligula at arcu condimentum, ut finibus sem viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus eros. Fusce varius ligula at arcu condimentum, ut finibus sem viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 
 ## Logos and Graphics
 

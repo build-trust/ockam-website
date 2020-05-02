@@ -1,12 +1,12 @@
 ---
-title: Guide to Roles at Ockam by Level
-order: 4
+title: Engineering Roles at Ockam
+order: 2
 wideContent: true
 ---
 
 # Guide to Roles at Ockam by Level
 
-At Ockam we value our High Performance Team. It is the responsibility of The Team to provide an environment where every individual is empowered to be world-class in their role and to enable individuals to achieve more than they could dream possible for themselves. This level guide helps us to align expectations and to create a framework where we have a common language to describe growth paths.
+At Ockam we [value our High Performance Team](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/). It is the responsibility of The Team to provide an environment where every individual is empowered to be world-class in their role and to enable individuals to achieve more than they could dream possible for themselves. This level guide helps us to align expectations and to create a framework where we have a common language to describe growth paths.
 
 ## Engineering - Individual contributors
 
@@ -265,7 +265,7 @@ At Ockam we value our High Performance Team. It is the responsibility of The Tea
  The converse is  also true. A lower level engineer is likely to check several boxes at levels 1 or 2 above their current level. This is particularly true on our small team. Everyone should have stretch tasks as part of their role.
 
 
-## Anti - Patterns:
+## Anti-Patterns:
 
 **Levels 1-2:** Poor code quality. Not self-motivated; needs someone to tell them what to do next. Constantly veers into the weeds. More inclined to blame-complain than roll up sleeves. General helplessness. Disregards team process.
 
