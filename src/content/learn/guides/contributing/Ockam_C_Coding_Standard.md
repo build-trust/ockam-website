@@ -22,16 +22,16 @@ This will also make functions and data objects more distinguishable.
 Structs are often nouns. By making function names verbs and following other naming
 conventions programs can be read more naturally.
 * Suffixes are sometimes useful:
-	* max ​ - to mean the maximum value something can have.
-	* count ​ - the current count of a running count variable.
-	* key ​ - key value.
+  * max ​ - to mean the maximum value something can have.
+  * count ​ - the current count of a running count variable.
+  * key ​ - key value.
 * For example: retry_max to mean the maximum number of retries, retry_cnt to mean the
 current retry count.
 * Prefixes are sometimes useful:
-	* is ​ - to ask a question about something. Whenever someone sees ​ Is ​ they will
+  * is ​ - to ask a question about something. Whenever someone sees ​ Is ​ they will
 know it's a question.
-	* get ​ - get a value.
-	* set ​ - set a value.
+  * get ​ - get a value.
+  * set ​ - set a value.
 * For example: is_hit_retry_limit.
 
 ### Variable Naming & Declarations
@@ -48,9 +48,9 @@ know it's a question.
 #### Examples:
 
 ```c
-char*g_p_remote_host_dns_name = “www.ockam.io”;
-int* p_bytes_received = NULL;
-int buffer_size = MAX_BUFFER_SIZE;
+char* g_p_remote_host_dns_name = “www.ockam.io”;
+int*  p_bytes_received = NULL;
+int   buffer_size = MAX_BUFFER_SIZE;
 ```
 
 ### Include Units in Names
@@ -82,13 +82,13 @@ be ``sc_''.
 
 ```c
 struct foo {
-struct foo *next; /* List of active foo */
-struct mumble amumble; /* Comment for mumble */
-int bar;
-unsigned int baz:1, /* Bitfield */
-fuz:5,
-zap:2;
-uint8_t flag;
+  struct foo *next; /* List of active foo */
+  struct mumble amumble; /* Comment for mumble */
+  int bar;
+  unsigned int baz:1, /* Bitfield */
+  fuz:5,
+  zap:2;
+  uint8_t flag;
 };
 struct foo *foohead; /* Head of global foo list */
 ```
@@ -101,7 +101,7 @@ Place the * with the type, and declare only one variable per line
 
 ```c
 char* p_name= NULL;
-char address[80];
+char  address[80];
 ```
 
 ### Global Constants
@@ -143,8 +143,8 @@ Some subtle errors can occur when macro names and enum labels use the same name.
 #define MACRO(v, w, x, y)
 
 do {
-v = (x) + (y);
-w = (y) + 2;
+  v = (x) + (y);
+  w = (y) + 2;
 } while (0);
 ```
 
@@ -158,9 +158,9 @@ This is the standard rule for enum labels. No comma on the last element.
 
 ```c
 enum PinStateType {
-PIN_STATE_UNINITIALIZED,,
-PIN_OFF,
-PIN_ON
+  PIN_STATE_UNINITIALIZED,,
+  PIN_OFF,
+  PIN_ON
 };
 ```
 
@@ -183,10 +183,10 @@ Of the three major brace placement strategies one is recommended:
 
 ```c
 if (condition) {
-while (condition) {
-...
-}
-...
+  while (condition) {
+    ...
+  }
+  ...
 }
 ```
 
@@ -201,7 +201,7 @@ braces. For example:
 
 ```c
 if (1 == somevalue) {
-somevalue = 2;
+  somevalue = 2;
 }
 ```
 
@@ -227,10 +227,10 @@ have to find the begin brace to know what is going on.
 
 ```c
 while(1) {
-if (valid) {
-} /* if valid */
-else {
-} /* not valid */
+  if (valid) {
+  } /* if valid */
+  else {
+  } /* not valid */
 } /* end forever */
 ```
 
@@ -256,8 +256,7 @@ reading code.
 if (condition) {
 }
 while (condition) {
-###### }
-
+}
 strcpy(s, s1);
 return 1;
 ```
@@ -321,22 +320,22 @@ reached, yet is reached.
 ```c
 switch (...)
 {
-case 1:
-{
-...
-/* comments */
-}
-case 2:
-{
-int v;
-...
-break;
-}
-case 3:
-{
-...
-}
-default:
+  case 1:
+  {
+    ...
+    /* comments */
+    }
+  case 2:
+  {
+    int v;
+    ...
+    break;
+  }
+  case 3:
+  {
+    ...
+  }
+  default:
 }
 ```
 
@@ -350,12 +349,12 @@ cleanup in that block.
 
 ```c
 for (...) {
-while (...) {
-...
-if (disaster) {
-goto exit_block;
-}
-}
+  while (...) {
+    ...
+    if (disaster) {
+      goto exit_block;
+    }
+  }
 }
 ...
 exit:
@@ -375,16 +374,16 @@ Consider the following example where both problems occur:
 
 ```c
 while (TRUE) {
-...
-/* A lot of code */
-...
-if (/* some condition */) {
-continue;
-}
-...
-/* A lot of code */
-...
-if ( i++ > STOP_VALUE) break;
+  ...
+  /* A lot of code */
+  ...
+  if (/* some condition */) {
+    continue;
+  }
+  ...
+  /* A lot of code */
+  ...
+  if ( i++ > STOP_VALUE) break;
 }
 ```
 
@@ -427,7 +426,7 @@ Related to this is always define one variable per line:
 **Do:**
 
 ```c
-int count = 0;
+int  count = 0;
 int* p_bytes_received = NULL;
 ```
 
@@ -491,7 +490,7 @@ efficiency:
 
 ```c
 inline int max(int x, int y) {
-return (x > y? x : y);
+  return (x > y? x : y);
 }
 ```
 
@@ -569,7 +568,11 @@ Do not default the test for non-zero, i.e.
 
 ```c
 if (FAIL != f())
+```
+
 is better than
+
+```c
 if (f())
 ```
 
@@ -584,7 +587,7 @@ method:
 ```c
 inline bool string_equal(char* a, char* b)
 {
-(strcmp(a, b) == 0)? return true : return false;
+  (strcmp(a, b) == 0)? return true : return false;
 }
 ```
 
@@ -603,7 +606,7 @@ no better way to accomplish the results without making the code bulkier and less
 
 ```c
 while (EOF != (c = getchar())) {
-...process the character
+  ...process the character
 }
 ```
 
@@ -829,11 +832,11 @@ The easiest way to do this is with an #if 0 block:
 void
 example()
 {
-great looking code
-#if 0
-lots of code
-#endif
-more code
+  great looking code
+  #if 0
+    lots of code
+  #endif
+  more code
 }
 ```
 
@@ -899,7 +902,7 @@ design choice. For example:
 #define PRESIDENT_WENT_CRAZY (22)
 const int WE_GOOFED= 19;
 enum {
-THEY_DIDNT_PAY= 16
+  THEY_DIDNT_PAY= 16
 };
 if (PRESIDENT_WENT_CRAZY == foo) { start_thermo_nuclear_war(); }
 else if (WE_GOOFED == foo) { refund_lotso_money(); }
