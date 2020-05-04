@@ -929,3 +929,4 @@ everywhere.
 **Adapted from** ​ **[http://www.possibility.com/Cpp/CppCodingStandard.html](http://www.possibility.com/Cpp/CppCodingStandard.html)** ​ **and NetBSD's
 style guidelines**
 
+
