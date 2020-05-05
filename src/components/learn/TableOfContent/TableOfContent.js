@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from "@emotion/styled";
+import isArray from 'lodash/isArray';
 
-import config from '../../../../config';
 import BaseHeading from "../../Heading";
 import BaseList from '../../List';
 import { media } from '../../../utils/emotion';
+import useActiveHashInViewport from "../../../hooks/useActiveHashInViewport";
 
 import TableOfContentItem from "./TableOfContentItem";
 
@@ -41,7 +42,7 @@ const isEmptyTableOfContent = (items) => {
   return !items.some(lvl1 => lvl1.items && lvl1.items.length > 0)
 };
 
-const isStartFromFirstLevel = (items) => items.length > 1;
+const isStartFromFirstLevel = (items) => isArray(items) && items.length > 1;
 
 const Item = ({item, level, isActive}) => (
   <TableOfContentItem level={level} isActive={isActive}>
@@ -59,9 +60,26 @@ Item.propTypes = {
   isActive: PropTypes.bool.isRequired,
 };
 
-const TableOfContent = ({ items, activeHash }) => {
-  if(isEmptyTableOfContent(items)) return null;
+const getHashesFromItems = (items) => {
+  if(!isArray(items)) return [];
+  return items.reduce((acc, lvl1Item) => {
+    acc.push(lvl1Item.url);
+    if(lvl1Item.items) {
+      lvl1Item.items.forEach(lvl2Item => {
+        acc.push(lvl2Item.url);
+      })
+    }
+    return acc;
+  }, [])
+}
+
+const TableOfContent = ({ items }) => {
   const itemsWithoutRoot = isStartFromFirstLevel(items) ? items : items[0].items;
+  const hashes = itemsWithoutRoot ? getHashesFromItems(itemsWithoutRoot) : [];
+  const activeHash = useActiveHashInViewport(hashes);
+
+  if(isEmptyTableOfContent(items)) return null;
+
   return (
     <StickyContainer>
       <Heading fontSize="caption" fontFamily="special" as="h6">On this page</Heading>
@@ -69,7 +87,7 @@ const TableOfContent = ({ items, activeHash }) => {
         {itemsWithoutRoot.map(lvl1Item => (
           <>
             <Item item={lvl1Item} level={1} isActive={activeHash === lvl1Item.url} />
-            {config.tableOfContentDeep > 1 && lvl1Item.items && lvl1Item.items.map(lvl2Item => (
+            {lvl1Item.items && lvl1Item.items.map(lvl2Item => (
               <Item item={lvl2Item} level={2} isActive={activeHash === lvl2Item.url} />
             ))}
           </>
@@ -88,12 +106,11 @@ TableOfContent.propTypes = {
       title: PropTypes.string,
     })),
   })),
-  activeHash: PropTypes.string,
 };
 
 TableOfContent.defaultProps = {
   items: [],
-  activeHash: '',
+
 };
 
 export default TableOfContent;

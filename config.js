@@ -20,7 +20,6 @@ const config = {
     "githubProductionPath": "tree/master",
     "slackChannel": "https://join.slack.com/t/ockam-community/shared_invite/enQtNDk5Nzk2NDA2NDcxLWQ0MjcyZWZjOWVlNGE5M2M3YjBkMjFkODZmODIwZWJmOTY3MThjNmU0ODc0ZDk4MjBjOGZmZDIzY2FhYTY4YTg",
     "twitter": "https://twitter.com/Ockam_io",
-    "tableOfContentDeep": 1,
   },
   "api": {
     "githubUrl": "https://api.github.com",

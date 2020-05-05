@@ -24,7 +24,7 @@ Headings: **IBM Plex Sans Medium**
 
 <h2>Heading 2  (32px)</h2>
 
-### Header 3 (28px)
+<h3>Header 3 (28px)</h3>
 
 #### Header 4 (25x)  
 

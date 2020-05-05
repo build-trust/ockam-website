@@ -102,7 +102,6 @@ export default function LearnTemplate(props) {
     : defaultAvatar;
 
   useOnClickOutside(ref, () => setIsOpen(false));
-  const activeHash = location.hash;
   return (
     <LearnLayout
       location={location}
@@ -142,7 +141,7 @@ export default function LearnTemplate(props) {
           )}
         </Content>
         <RightSidebar>
-          <TableOfContent items={tableOfContents.items} activeHash={activeHash} />
+          <TableOfContent items={tableOfContents.items} />
           {!isBlogPath && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
           {!isBlogPath && <StarGithubRepo />}
           {isBlogPostPath && <SocialBox />}
