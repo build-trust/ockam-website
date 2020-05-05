@@ -78,4 +78,4 @@ https://www.contributor-covenant.org/faq
 ## Ockam's Values and Virtues
 
 Ockam is a values based team. You can read more about our values and virtues at
-https://www.ockam.io/learn/blog/values_and_virtues_on_the_Ockam_Team/
+https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/
