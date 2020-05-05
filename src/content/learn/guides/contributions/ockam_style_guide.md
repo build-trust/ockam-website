@@ -1,8 +1,8 @@
 ---
 title: Graphics
-order: 2
+order: 3
 ---
-# Ockam graphics style guide.
+# Ockam graphics style guide
 
 This guide will help you match colors, fonts, icons and styles that we use on this site and around the internet.
 

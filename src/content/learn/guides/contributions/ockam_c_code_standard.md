@@ -1,4 +1,10 @@
-# C ​ Coding Standard
+---
+title: C Library Style
+order: 2
+---
+# C ​Library Coding Standard
+
+This guide will help us keep the style in our C Library consistent.
 
 ## Names
 
@@ -45,8 +51,6 @@ know it's a question.
 * g_ takes precedence over p_
 * Variables should always be initialized
 
-#### Examples:
-
 ```c
 char* g_p_remote_host_dns_name = “www.ockam.io”;
 int*  p_bytes_received = NULL;
@@ -56,7 +60,7 @@ int   buffer_size = MAX_BUFFER_SIZE;
 ### Include Units in Names
 
 If a variable represents time, weight, or some other unit then include the unit in the name so
-developers can more easily spot problems. For example:
+developers can more easily spot problems.
 
 ```c
 uint32 timeout_msecs;
@@ -78,8 +82,6 @@ declarations and should be "extern" if they are declared in a header file. It ma
 to use a meaningful prefix for each member name. E.g, for ``struct softc'' the prefix could
 be ``sc_''.
 
-#### Example
-
 ```c
 struct foo {
     struct foo *next; /* List of active foo */
@@ -97,8 +99,6 @@ struct foo *foohead; /* Head of global foo list */
 
 Place the * with the type, and declare only one variable per line
 
-#### Example
-
 ```c
 char* p_name= NULL;
 char  address[80];
@@ -106,14 +106,12 @@ char  address[80];
 
 ### Global Constants
 
-* Global constants should be all caps with '_' separators.
+Global constants should be all caps with '_' separators.
 
-#### Justification
+**Justification**
 
 It's tradition for global constants to named this way. You must be careful to not conflict with
 other global ​ _#define_ ​s and enum labels.
-
-#### Example
 
 ```c
 const int A_GLOBAL_CONSTANT= 5;
@@ -121,7 +119,7 @@ const int A_GLOBAL_CONSTANT= 5;
 
 ### #define and Macro Names
 
-* Put #defines and macros in all upper using '_' separators. Macros are capitalized,
+Put #defines and macros in all upper using '_' separators. Macros are capitalized,
 parenthesized, and should avoid side-effects. Spacing before and after the macro name
 may be any whitespace, though use of TABs should be consistent through a file. If they
 are an inline expansion of a function, the function is defined all in lowercase, the macro
@@ -129,13 +127,11 @@ has the same name all in uppercase. If the macro is an expression, wrap the expr
 in parenthesis. If the macro is more than a single statement, use ``do { ... } while (0)'', so
 that a trailing semicolon works. Right-justify the backslashes; it makes it easier to read.
 
-#### Justification
+**Justification**
 
 This makes it very clear that the value is not alterable and in the case of macros, makes it clear
 that you are using a construct that requires care.
 Some subtle errors can occur when macro names and enum labels use the same name.
-
-#### Example
 
 ```c
 #define MAX(a,b) blah
@@ -154,8 +150,6 @@ do {
 
 This is the standard rule for enum labels. No comma on the last element.
 
-**Example**
-
 ```c
 enum PinStateType {
     PIN_STATE_UNINITIALIZED,,
@@ -168,8 +162,6 @@ enum PinStateType {
 
 It's often useful to be able to say an enum is not in any of its ​ _valid_ ​ states. Make a label for an
 uninitialized or error state. Make it the first label if possible.
-
-##### Example
 
 ```c
 enum { STATE_ERR, STATE_OPEN, STATE_RUNNING, STATE_DYING};
@@ -197,7 +189,7 @@ All if, while and do statements must either have braces or be on a single line.
 #### Always Uses Braces Form
 
 All if, while and do statements require braces even if there is only a single statement within the
-braces. For example:
+braces.
 
 ```c
 if (1 == somevalue) {
@@ -216,7 +208,7 @@ forget. It provides a more consistent look. This doesn't affect execution speed.
 if (1 == somevalue) somevalue = 2;
 ```
 
-##### Justification
+**Justification**
 
 It provides safety when adding new lines while maintaining a compact readable form.
 
@@ -245,12 +237,9 @@ reading code.
 * Do put parens next to function names.
 * Do not use parens in return statements when it's not necessary.
 
-#### Justification
+**Justification**
 
-* Keywords are not functions. By putting parens next to keywords keywords and function
-  names are made to look alike.
-
-#### Example
+Keywords are not functions. By putting parens next to keywords keywords and function names are made to look alike.
 
 ```c
 if (condition) {
@@ -264,7 +253,7 @@ return 1;
 
 ### A Line Should Not Exceed 120 Characters
 
-* Lines should not exceed 120 characters.
+Lines should not exceed 120 characters.
 
 ### If Then Else Formatting
 
@@ -316,8 +305,6 @@ reached, yet is reached.
 * If you need to create variables put all the code in a block.
 * Prefer putting all code in blocks
 
-#### Example
-
 ```c
 switch (...)
 {
@@ -340,7 +327,7 @@ switch (...)
 }
 ```
 
-### Use of goto,continue,break and ?:
+### Use of goto, continue, break and ?:
 
 #### Goto
 
@@ -388,8 +375,9 @@ while (TRUE) {
 }
 ```
 
-Note: "A lot of code" is necessary in order that the problem cannot be caught easily by the
+"A lot of code" is necessary in order that the problem cannot be caught easily by the
 programmer.
+
 From the above example, a further rule may be given: Mixing continue with break in the same
 loop is a sure way to disaster.
 
@@ -402,8 +390,6 @@ couple of clarity rules to follow:
 * Put the action for the then and else statement on a separate line unless it can be clearly
 put on one line.
 
-#### Example
-
 ```c
 (condition)? funct1() : func2();
 or
@@ -415,10 +401,11 @@ or
 ### One Statement Per Line
 
 There should be only one statement per line unless the statements are very closely related.
-The reasons are:
 
-1. The code is easier to read. Use some white space too. Nothing better than to read code
-   that is one line after another with no white space or comments.
+**Justification**
+
+The code is easier to read. Use some white space too. Nothing better than to read code
+that is one line after another with no white space or comments.
 
 #### One Variable Per Line
 
@@ -437,10 +424,11 @@ int* p_bytes_received = NULL;
 int *p_bytes_received, count;
 ```
 
-The reasons are:
-1. Documentation can be added for the variable on the line.
-2. It's clear that the variables are initialized.
-3. Declarations are clear which reduces the probability of declaring a pointer when you
+**Justification**
+
+* Documentation can be added for the variable on the line.
+* It's clear that the variables are initialized.
+* Declarations are clear which reduces the probability of declaring a pointer when you
    meant to declare just a char.
 
 ### To Use Enums or Not to Use Enums
@@ -460,8 +448,8 @@ error prone as you could cast a value not in the enum.
 ### Use Header File Guards
 
 Include files should protect against multiple inclusion through the use of macros that "guard" the
-files. Note that for C++ compatibility and interoperatibility reasons, do ​ **not** ​ use underscores '_' as
-the first or last character of a header guard (see below)
+files. Note that for C++ compatibility and interoperability reasons, do ​ **not** ​ use underscores '_' as
+the first or last character of a header guard.
 
 ```c
 #ifndef sys_socket_h
@@ -478,10 +466,10 @@ unless there’s a remarkably compelling reason to do so.
 
 ### Prefer Inline Functions
 
-In C, macros are not needed for code efficiency. Use inlines. Whie macros for small functions
+In C, macros are not needed for code efficiency. Use inlines. While macros for small functions
 aren’t a travesty, inline functions should be preferred.
 
-#### Example
+
 ```c
 #define MAX(x,y) (((x) > (y)? (x) : (y)) // Get the maximum
 ```
@@ -500,8 +488,6 @@ inline int max(int x, int y) {
 Macros should be used with caution because of the potential for error when invoked with an
 expression that has side effects.
 
-#### Example
-
 ```c
 MAX(f(x),z++);
 ```
@@ -509,9 +495,7 @@ MAX(f(x),z++);
 ### Always Wrap the Expression in Parenthesis
 
 When putting expressions in macros always wrap the expression in parenthesis to avoid
-potential communitive operation abiguity.
-
-#### Example
+potential communitive operation ambiguity.
 
 ```c
 #define ADD(x,y) x + y
@@ -527,24 +511,24 @@ must be written as
 
 Like global variables macros can conflict with macros from other packages.
 
-1. Prepend macro names with package names.
-2. Avoid simple and common names like MAX and MIN.
+* Prepend macro names with package names.
+* Avoid simple and common names like MAX and MIN.
 
 ## Initialize all Variables
 
-* You shall always initialize variables. Always. Every time. gcc with the flag -W may catch
+You shall always initialize variables. Always. Every time. gcc with the flag -W may catch
 operations on uninitialized variables, but it may also not.
 
-### Justification
+**Justification**
 
-* More problems than you can believe are eventually traced back to a pointer or variable
+More problems than you can believe are eventually traced back to a pointer or variable
 left uninitialized.
 
 ## Short Functions
 
-* Functions should limit themselves to a page or two of code.
+Functions should limit themselves to a page or two of code.
 
-#### Justification
+**Justification**
 
 * The idea is that the each method represents a technique for achieving a single objective.
 * Most arguments of inefficiency turn out to be false in the long run.
@@ -577,7 +561,7 @@ is better than
 if (f())
 ```
 
-even though FAIL may have the value 0 which C considers to be false. An explicit test will help
+Even though FAIL may have the value 0 which C considers to be false. An explicit test will help
 you out later when somebody decides that a failure return should be -1 instead of 0. Explicit
 comparison should be used even if the comparison value will never change; e.g., ​ **if (!(bufsize %
 sizeof(int)))** ​ should be written instead as ​ **if ((bufsize % sizeof(int)) == 0)** ​ to reflect the numeric
@@ -594,6 +578,7 @@ inline bool string_equal(char* a, char* b)
 
 Note, this is just an example, you should really use the standard library string type for doing the
 comparison.
+
 The non-zero test is often defaulted for predicates and other functions or expressions which
 meet the following restrictions:
 * Returns 0 for false, nothing else.
@@ -652,6 +637,7 @@ most useful information.
 ### Use Headers
 
 Use ​Doxygen​.
+
 These headers are structured in such a way as they can be parsed and extracted. They are not
 useless like normal headers. So take time to fill them out. If you do it right once no more
 documentation may be necessary.
@@ -672,21 +658,29 @@ a report so people can make a special effort where needed.
 
 * @author:
 specifies the author of the module
+
 * @version:
 specifies the version of the module
+
 * @param:
 specifies a parameter into a function
+
 * @return:
 specifies what a function returns
+
 * @deprecated:
 says that a function is not to be used anymore
+
 * @see:
 creates a link in the documentation to the file/function/variable to consult to get a better
 understanding on what the current block of code does.
+
 * @todo:
 what remains to be done
+
 * @bug:
 report a bug found in the piece of code
+
 
 #### Gotcha Formatting
 
@@ -732,7 +726,8 @@ interfaces. When a layer uses a non-adjacent layer then a layering violation has
 A layering violation simply means we have dependency between layers that is not controlled by
 a well defined interface. When one of the layers changes code could break. We don't want code
 to break so we want layers to work only with other adjacent layers.
-Somemimes we need to jump layers for performance reasons. This is fine, but we should know
+
+Sometimes we need to jump layers for performance reasons. This is fine, but we should know
 we are doing it and document appropriately.
 
 ## Miscellaneous
@@ -740,15 +735,18 @@ we are doing it and document appropriately.
 ### General advice
 
 This section contains some miscellaneous do's and don'ts.
+
 * Don't use floating-point variables where discrete values are needed. Using a float for a
 loop counter is a great way to shoot yourself in the foot. Always test floating-point
 numbers as <= or >=, never use an exact comparison (== or !=).
+
 * Compilers have bugs. Common trouble spots include structure assignment and bit fields.
 You cannot generally predict which bugs a compiler has. You could write a program that
 avoids all constructs that are known broken on all compilers. You won't be able to write
 anything useful, you might still encounter bugs, and the compiler might get fixed in the
 meanwhile. Thus, you should write ``around'' compiler bugs only when you are forced to
 use a particular buggy compiler.
+
 * Do not rely on automatic beautifiers. The main person who benefits from good program
 style is the programmer him/herself, and especially in the early design of handwritten
 algorithms or pseudo-code. Automatic beautifiers can only be applied to complete,
@@ -761,7 +759,8 @@ to be careful programmers instead of relying on a beautifier to make their code 
 Finally, since beautifiers are non-trivial programs that must parse the source, a
 sophisticated beautifier is not worth the benefits gained by such a program. Beautifiers
 are best for gross formatting of machine-generated code.
-Accidental omission of the second ``='' of the logical compare is a problem. The following is
+
+* Accidental omission of the second ``='' of the logical compare is a problem. The following is
 confusing and prone to error.
 
 ```c
@@ -843,6 +842,7 @@ example()
 
 You can't use ​ **/**/** ​ style comments because comments can't contain comments and surely a
 large block of your code will contain a comment, won't it?
+
 Don't use #ifdef as someone can unknowingly trigger ifdefs from the compiler command line. #if
 0 is that even day later you or anyone else has know idea why this code is commented out. Is it
 because a feature has been dropped? Is it because it was buggy? It didn't compile? Can it be
@@ -875,12 +875,9 @@ Do not put data definitions in header files. for example:
 int x = 0;
 ```
 
-1. It's bad magic to have space consuming code silently inserted through the innocent use
-   of header files.
-2. It's not common practice to define variables in the header file so it will not occur to
-   developers to look for this when there are problems.
-3. Consider defining the variable once in a .c file and use an extern statement to reference
-   it.
+* It's bad magic to have space consuming code silently inserted through the innocent use of header files.
+* It's not common practice to define variables in the header file so it will not occur to developers to look for this when there are problems.
+* Consider defining the variable once in a .c file and use an extern statement to reference it.
 
 ### No Magic Numbers
 
@@ -922,7 +919,9 @@ downside of allocating memory. Only you know if this matters for your applicatio
 * Check every system call for an error return, unless you know you wish to ignore errors.
 For example, ​ printf ​ returns an error code but rarely would you check for its return code.
 In which case you can cast the return to ​ (void) ​ if you really care.
+
 * Include the system error text for every system error message.
+
 * Check every call to malloc or realloc unless you know your versions of these calls do the
 right thing. You might want to have your own wrapper for these calls, including new, so
 you can do the right thing always and developers don't have to make memory checks
@@ -930,6 +929,4 @@ everywhere.
 
 ## References
 
-**Adapted from** ​ **[http://www.possibility.com/Cpp/CppCodingStandard.html](http://www.possibility.com/Cpp/CppCodingStandard.html)** ​ **and NetBSD's
-style guidelines**
-
+Adapted from [http://www.possibility.com/Cpp/CppCodingStandard.html](http://www.possibility.com/Cpp/CppCodingStandard.html) and NetBSD's style guidelines
