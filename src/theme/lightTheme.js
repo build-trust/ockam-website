@@ -13,6 +13,7 @@ const colors = {
   menuTextActive: '#242A31',
   code: '#3C454E',
   primary: '#52c7ea',
+  dirtyPrimary: '#70ccea',
   accent: '#EC432D',
   accentHover: '#FF2D11',
   accentActive: '#BF3B2C',

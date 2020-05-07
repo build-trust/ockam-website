@@ -122,6 +122,7 @@ module.exports = {
     slackChannel: config.general.slackChannel,
     twitter: config.general.twitter,
     email: config.general.email,
+    algoliaHitsPerPage: config.general.algoliaHitsPerPage,
     description: config.siteMetadata.description,
     title: config.siteMetadata.title,
     siteUrl: config.gatsby.siteUrl,

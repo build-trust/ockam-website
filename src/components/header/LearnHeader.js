@@ -87,9 +87,7 @@ const LearnHeader = ({ openSidebar, algoliaIndexes }) => {
 
 LearnHeader.propTypes = {
   openSidebar: PropTypes.func.isRequired,
-  algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
-    learn: PropTypes.arrayOf(PropTypes.string),
-  })),
+  algoliaIndexes: PropTypes.arrayOf(PropTypes.string),
 };
 LearnHeader.defaultProps = {
   algoliaIndexes: [],

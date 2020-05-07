@@ -13,6 +13,7 @@ const useSiteMetadata = () => {
           ockamWebsiteRepo
           markdownPath
           githubProductionPath
+          algoliaHitsPerPage
           env {
             STAGE
             RECAPTCHA_SITEKEY

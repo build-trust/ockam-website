@@ -84,9 +84,7 @@ LearnLayout.propTypes = {
   location: PropTypes.shape({}).isRequired,
   isOpenSidebar: PropTypes.bool.isRequired,
   setIsOpenSidebar: PropTypes.func.isRequired,
-  algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
-    learn: PropTypes.arrayOf(PropTypes.string),
-  })),
+  algoliaIndexes: PropTypes.arrayOf(PropTypes.string),
 };
 
 LearnLayout.defaultProps = {

@@ -45,9 +45,9 @@ Index.propTypes = {
   pageContext: PropTypes.shape({
     pageType: PropTypes.oneOf(['doc', 'page', 'blog']),
     dependedRepos: PropTypes.arrayOf(PropTypes.shape({})),
-    algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
+    algoliaIndexes: PropTypes.shape({
       learn: PropTypes.arrayOf(PropTypes.string),
-    })),
+    }),
     job: PropTypes.shape({}),
   }).isRequired,
   location: PropTypes.shape({}).isRequired,

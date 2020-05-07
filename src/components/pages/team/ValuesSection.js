@@ -133,9 +133,9 @@ const ValuesSection = () => {
             </Text>
             <ButtonsContainer>
               <Button
-                as={Link}
                 to="/learn/guides/team/values_and_virtues_on_the_Ockam_Team"
                 variant="primary"
+                as={Link}
               >
                 Read more
               </Button>

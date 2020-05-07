@@ -2,6 +2,7 @@ import React, {useState, useRef, useMemo, useCallback} from "react";
 import {
   InstantSearch,
   Index,
+  Configure,
   } from "react-instantsearch-dom"
 import algoliasearch from "algoliasearch/lite"
 import PropTypes from 'prop-types';
@@ -9,6 +10,7 @@ import PropTypes from 'prop-types';
 import config from '../../../config';
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import Scrollbar from "../Scrollbar";
+import useSiteMetadata from "../../hooks/useSiteMetadata";
 
 import Input from "./Input"
 import Results from "./Results";
@@ -19,8 +21,10 @@ import HitsWrapper from "./HitsWrapper";
 import PoweredBy from "./PoweredBy";
 
 
+
 export default function Search({ indices }) {
   const ref = useRef();
+  const { algoliaHitsPerPage } = useSiteMetadata();
   const [query, setQuery] = useState();
   const [focus, setFocus] = useState(false);
 
@@ -41,6 +45,7 @@ export default function Search({ indices }) {
         indexName={indices[0]}
         onSearchStateChange={({ query: newQuery }) => setQuery(newQuery)}
       >
+        <Configure hitsPerPage={algoliaHitsPerPage} />
         <Input onFocus={() => setFocus(true)} {...{ focus }} />
         {query && query.length && focus && (
         <HitsWrapper show={focus}>

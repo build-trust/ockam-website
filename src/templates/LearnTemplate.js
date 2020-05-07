@@ -206,9 +206,7 @@ LearnTemplate.propTypes = {
     pathname: PropTypes.string.isRequired,
     hash: PropTypes.string.isRequired,
   }).isRequired,
-  algoliaIndexes: PropTypes.arrayOf(PropTypes.shape({
-    learn: PropTypes.arrayOf(PropTypes.string),
-  })),
+  algoliaIndexes: PropTypes.arrayOf(PropTypes.string),
 };
 
 LearnTemplate.defaultProps = {

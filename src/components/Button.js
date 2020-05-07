@@ -33,7 +33,17 @@ const statesForButtonVariant = {
     color: ${theme.colors.link.hover};
   }
   `,
+};
 
+const statesForButtonOutline = {
+  'primary': (theme) => `
+      &:hover {
+      box-shadow: 0 12px 24px -10px ${theme.colors.button.primaryShadow};
+    }
+    &:focus {
+      border: 1px solid ${theme.colors.button.primaryActive};
+      box-shadow: 0 0 4px 1px ${theme.colors.primary};
+    }`,
 };
 
 const Button = styled('button')(
@@ -114,7 +124,6 @@ const Button = styled('button')(
 );
 
 Button.defaultProps = {
-  variant: 'primary',
   size: 'default',
   width: 'auto',
 };
@@ -122,6 +131,7 @@ Button.defaultProps = {
 const defaultButton = styled(Button)`
   transition: all 150ms ease-in-out;
   ${props => props.variant && statesForButtonVariant[props.variant](props.theme)};
+  ${props => props.outline && statesForButtonOutline[props.outline](props.theme)};
 
 `;
 
