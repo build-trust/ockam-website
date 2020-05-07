@@ -5,7 +5,7 @@ const remarkSlug = require('remark-slug');
 const config = require("./config");
 const queries = require('./scripts/get-algolia-queries');
 
-const isProductionStage = config.env.stage === 'PRODUCTION';
+const isProductionStage = config.env.STAGE === 'PRODUCTION';
 const plugins = [
   'gatsby-plugin-sitemap',
   'gatsby-plugin-sharp',

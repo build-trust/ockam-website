@@ -62,6 +62,12 @@ const RightSidebar = styled('div')`
   top: 4rem;
 `;
 
+const checkIsEmptyTableOfContent = (items) => {
+  if(!items || items.length === 0) return true;
+  if(items.length > 1) return false;
+  return !items.some(lvl1 => lvl1.items && lvl1.items.length > 0)
+};
+
 export default function LearnTemplate(props) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
@@ -101,7 +107,9 @@ export default function LearnTemplate(props) {
     ? authorAvatar.childImageSharp.fixed.src
     : defaultAvatar;
 
-  useOnClickOutside(ref, () => setIsOpen(false));
+  const isEmptyTableOfContent = checkIsEmptyTableOfContent(tableOfContents.items)
+
+    useOnClickOutside(ref, () => setIsOpen(false));
   return (
     <LearnLayout
       location={location}
@@ -141,7 +149,7 @@ export default function LearnTemplate(props) {
           )}
         </Content>
         <RightSidebar>
-          <TableOfContent items={tableOfContents.items} />
+          {!isEmptyTableOfContent && <TableOfContent items={tableOfContents.items} />}
           {!isBlogPath && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
           {!isBlogPath && <StarGithubRepo />}
           {isBlogPostPath && <SocialBox />}

@@ -36,12 +36,6 @@ const List = styled(BaseList)`
   }
 `;
 
-const isEmptyTableOfContent = (items) => {
-  if(!items || items.length === 0) return true;
-  if(items.length > 1) return false;
-  return !items.some(lvl1 => lvl1.items && lvl1.items.length > 0)
-};
-
 const isStartFromFirstLevel = (items) => isArray(items) && items.length > 1;
 
 const Item = ({item, level, isActive}) => (
@@ -77,8 +71,6 @@ const TableOfContent = ({ items }) => {
   const itemsWithoutRoot = isStartFromFirstLevel(items) ? items : items[0].items;
   const hashes = itemsWithoutRoot ? getHashesFromItems(itemsWithoutRoot) : [];
   const activeHash = useActiveHashInViewport(hashes);
-
-  if(isEmptyTableOfContent(items)) return null;
 
   return (
     <StickyContainer>
