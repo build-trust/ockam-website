@@ -7,7 +7,6 @@ import Icon from "../Icon";
 import Caption from "../Caption";
 
 const ShareButtonStyled = styled('div')`
-  margin-right: 2rem;
   display: inline-block;
   ${media.desktop`
     display: block;

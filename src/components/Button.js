@@ -132,6 +132,9 @@ const defaultButton = styled(Button)`
   transition: all 150ms ease-in-out;
   ${props => props.variant && statesForButtonVariant[props.variant](props.theme)};
   ${props => props.outline && statesForButtonOutline[props.outline](props.theme)};
+  svg {
+    flex-shrink: 0;
+  }
 
 `;
 

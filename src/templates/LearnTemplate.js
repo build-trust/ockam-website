@@ -14,11 +14,8 @@ import LearnSidebar from '../components/learn/LearnSidebar/LearnSidebar';
 import LearnLayout from '../layouts/LearnLayout';
 import defaultAvatar from '../assets/default_avatar.png';
 import LearnPost from '../components/blog/LearnPost';
-import EditOnGithubLink from "../components/EditOnGithubLink";
 import LearnGridLayout from "../components/LearnGridLayout";
-import TableOfContent from "../components/learn/TableOfContent/TableOfContent";
-import SocialBox from "../components/SocialBox";
-import StarGithubRepo from "../components/StarGithubRepo";
+import RightSidebar from "../components/learn/RightSidebar/RightSidebar";
 
 const Content = styled.div`
   display: flex;
@@ -56,17 +53,6 @@ const ContentLearnContainer = styled(LearnGridLayout)`
   `}
 `;
 
-const RightSidebar = styled('div')`
-  margin-top: 4rem;
-  position: sticky;
-  top: 4rem;
-`;
-
-const checkIsEmptyTableOfContent = (items) => {
-  if(!items || items.length === 0) return true;
-  if(items.length > 1) return false;
-  return !items.some(lvl1 => lvl1.items && lvl1.items.length > 0)
-};
 
 export default function LearnTemplate(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -102,12 +88,11 @@ export default function LearnTemplate(props) {
   const menuId = 'main-menu';
   const isBlogPostPath = currentNode.slug.match(/^\/learn\/blog\/.+$/);
   const isBlogRoot = currentNode.slug.match(/^\/learn\/blog\/$/);
-  const isBlogPath = isBlogPostPath || isBlogRoot;
   const imageAvatar = authorAvatar
     ? authorAvatar.childImageSharp.fixed.src
     : defaultAvatar;
 
-  const isEmptyTableOfContent = checkIsEmptyTableOfContent(tableOfContents.items)
+
 
     useOnClickOutside(ref, () => setIsOpen(false));
   return (
@@ -148,12 +133,7 @@ export default function LearnTemplate(props) {
             <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
           )}
         </Content>
-        <RightSidebar>
-          {!isEmptyTableOfContent && <TableOfContent items={tableOfContents.items} />}
-          {!isBlogPath && <EditOnGithubLink filePath={relativePath} dependedRepos={dependedRepos} />}
-          {!isBlogPath && <StarGithubRepo />}
-          {isBlogPostPath && <SocialBox />}
-        </RightSidebar>
+        <RightSidebar dependedRepos={dependedRepos} tableOfContents={tableOfContents} relativePath={relativePath} />
       </ContentLearnContainer>
     </LearnLayout>
   );

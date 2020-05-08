@@ -4,6 +4,8 @@ import ReactScrollbar from 'react-scrollbars-custom';
 import PropTypes from "prop-types";
 
 const Container = styled('div')`
+  position: relative;
+  height: 100%;
   .ScrollbarsCustom-Content {
     position: relative;
   }

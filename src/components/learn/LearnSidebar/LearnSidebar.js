@@ -1,12 +1,10 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import GithubIcon from 'emotion-icons/simpleIcons/GitHub';
 import SendPlaneIcon from 'emotion-icons/ion-ios/Send';
 import SlackIcon from 'emotion-icons/fa-brands/SlackHash';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-
 
 import { media } from '../../../utils/emotion';
 import Icon from '../../Icon';
@@ -17,6 +15,7 @@ import SidebarCrossIcon from '../../Sidebar/SidebarCrossIcon';
 import useModal from "../../../hooks/useModal";
 import ContactModal from "../../../modals/ContactModal";
 import Scrollbar from "../../Scrollbar";
+import useSetFullHeightReducedByTopOffset from "../../../hooks/useSetFullHeightReducedByTopOffset";
 
 import LearnSidebarMenu from './LearnSidebarMenu';
 
@@ -30,24 +29,25 @@ const IconsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  box-shadow: 0px -10px 29px -15px ${( {theme}) => theme.colors.accentBackground};
 `;
 
 const StyledSidebar = styled(Sidebar)`
-
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto min-content;
   z-index: 2;
   ${media.desktop`
     width: 100%;
     min-width: 100%;
     z-index: 1;
+
   `};
   border-right: 1px solid ${({ theme }) => theme.colors.accentBackground};
 `;
 
 const ContentWrapper = styled.div`
   padding-right: 1rem;
-  position: absolute;
-  top: 0;
-  bottom: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -58,16 +58,9 @@ const ContentWrapper = styled.div`
   `};
 `;
 
-const setHeightBasedOnOffset = ref => () => {
-  const viewportOffset = ref.current.getBoundingClientRect();
-  // eslint-disable-next-line no-param-reassign
-  ref.current.style.height = `calc(100vh - ${viewportOffset.top}px)`;
-};
-
 const LearnSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
-  useScrollPosition(setHeightBasedOnOffset(ref), [ref]);
+  useSetFullHeightReducedByTopOffset(ref)
   const [, showContactModal] = useModal(ContactModal);
-  useEffect(setHeightBasedOnOffset(ref), [ref]);
   const siteMetaData = useSiteMetadata();
 
   return (
@@ -79,23 +72,24 @@ const LearnSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => 
       ref={ref}
       showCloseIcon={false}
     >
+
       <Scrollbar style={{ position: '' }}>
         <ContentWrapper>
           <SidebarCrossIcon onClick={onClose} />
           <LearnSidebarMenu location={location} />
-          <IconsContainer>
-            <Link to={siteMetaData.ockamLibraryRepo}>
-              <Icon size={28} icon={GithubIcon} />
-            </Link>
-            <Link onClick={() => showContactModal()}>
-              <Icon size={28} icon={SendPlaneIcon} />
-            </Link>
-            <Link to={siteMetaData.slackChannel}>
-              <Icon size={28} icon={SlackIcon} />
-            </Link>
-          </IconsContainer>
         </ContentWrapper>
       </Scrollbar>
+      <IconsContainer>
+        <Link to={siteMetaData.ockamLibraryRepo}>
+          <Icon size={28} icon={GithubIcon} />
+        </Link>
+        <Link onClick={() => showContactModal()}>
+          <Icon size={28} icon={SendPlaneIcon} />
+        </Link>
+        <Link to={siteMetaData.slackChannel}>
+          <Icon size={28} icon={SlackIcon} />
+        </Link>
+      </IconsContainer>
     </StyledSidebar>
   );
 });

@@ -22,9 +22,7 @@ const Container = styled('aside')`
   border-radius: ${props => props.theme.radii.default};
   transform: ${({ isOpen }) =>
     (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
-  padding-top: 6rem;
   ${media.desktop`
-     display: flex;
      position: sticky;
      transform: initial;
   `};
