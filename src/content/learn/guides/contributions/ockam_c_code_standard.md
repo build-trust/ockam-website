@@ -69,7 +69,7 @@ uint32 my_weight_lbs;
 
 ### Structure Names
 
-* Use underbars ('_') to separate name components
+* Use underbars ('_') to separate name components.
 * When declaring variables in structures, declare them organized by use in a manner to
 attempt to minimize memory wastage because of compiler alignment issues, then by
 size, and then by alphabetical order. E.g, don't use ``int a; char *b; int c; char *d''; use
@@ -169,7 +169,9 @@ enum { STATE_ERR, STATE_OPEN, STATE_RUNNING, STATE_DYING};
 
 ## Formatting
 
-### Brace Placement
+### Braces
+
+**Placement**
 
 Of the three major brace placement strategies one is recommended:
 
@@ -182,11 +184,11 @@ if (condition) {
 }
 ```
 
-### When Braces are Needed
+**When Braces are Needed**
 
 All if, while and do statements must either have braces or be on a single line.
 
-#### Always Uses Braces Form
+**Always Uses Braces Form**
 
 All if, while and do statements require braces even if there is only a single statement within the
 braces.
@@ -202,7 +204,7 @@ if (1 == somevalue) {
 It ensures that when someone adds a line of code later there are already braces and they don't
 forget. It provides a more consistent look. This doesn't affect execution speed. It's easy to do.
 
-#### One Line Form
+**One Line Form**
 
 ```c
 if (1 == somevalue) somevalue = 2;
@@ -212,7 +214,7 @@ if (1 == somevalue) somevalue = 2;
 
 It provides safety when adding new lines while maintaining a compact readable form.
 
-### Add Comments to Closing Braces
+**Add Comments to Closing Braces**
 
 Adding a comment to closing braces can help when you are reading code because you don't
 have to find the begin brace to know what is going on.
@@ -459,12 +461,12 @@ the first or last character of a header guard.
 
 ## Macros
 
-### Mostly Don’t Use Them
+**Mostly Don’t Use Them**
 
 Macros can cause readability problems and can be difficult to debug. Avoid using macros
 unless there’s a remarkably compelling reason to do so.
 
-### Prefer Inline Functions
+**Prefer Inline Functions**
 
 In C, macros are not needed for code efficiency. Use inlines. While macros for small functions
 aren’t a travesty, inline functions should be preferred.
@@ -483,7 +485,7 @@ inline int max(int x, int y) {
 }
 ```
 
-### Be Careful of Side Effects
+**Be Careful of Side Effects**
 
 Macros should be used with caution because of the potential for error when invoked with an
 expression that has side effects.
@@ -492,7 +494,7 @@ expression that has side effects.
 MAX(f(x),z++);
 ```
 
-### Always Wrap the Expression in Parenthesis
+**Always Wrap the Expression in Parenthesis**
 
 When putting expressions in macros always wrap the expression in parenthesis to avoid
 potential communitive operation ambiguity.
@@ -507,7 +509,7 @@ must be written as
 #define ADD(x,y) ((x) + (y))
 ```
 
-### Make Macro Names Unique
+**Make Macro Names Unique**
 
 Like global variables macros can conflict with macros from other packages.
 
@@ -620,7 +622,7 @@ increase as the human memory of what's going on in the latter piece of code begi
 
 ## Documentation
 
-### Comments Should Tell a Story
+**Comments Should Tell a Story**
 
 Consider your comments a story describing the system. Expect your comments to be extracted
 by a robot and formed into a man page. Class comments are one part of the story, method
@@ -628,13 +630,13 @@ signature comments are another part of the story, method arguments another part,
 implementation yet another part. All these parts should weave together and inform someone
 else at another point of time just exactly what you did and why.
 
-### Document Decisions
+**Document Decisions**
 
 Comments should document decisions. At every point where you had a choice of what to do
 place a comment describing which choice you made and why. Archeologists will find this the
 most useful information.
 
-### Use Headers
+**Use Headers**
 
 Use ​Doxygen​.
 
@@ -642,19 +644,19 @@ These headers are structured in such a way as they can be parsed and extracted. 
 useless like normal headers. So take time to fill them out. If you do it right once no more
 documentation may be necessary.
 
-### Comment Layout
+**Comment Layout**
 
 Each part of the project has a specific comment layout. ​Doxygen​ has the recommended format
 for the comment layouts.
 
-### Make Gotchas Explicit
+**Make Gotchas Explicit**
 
 Explicitly comment variables changed out of the normal control flow or other code likely to break
 during maintenance. Embedded keywords are used to point out issues and potential problems.
 Consider a robot will parse your comments looking for keywords, stripping them out, and making
 a report so people can make a special effort where needed.
 
-#### Gotcha Keywords
+**Gotcha Keywords**
 
 * @author:
 specifies the author of the module
@@ -682,7 +684,7 @@ what remains to be done
 report a bug found in the piece of code
 
 
-#### Gotcha Formatting
+**Gotcha Formatting**
 
 * Make the gotcha keyword the first symbol in the comment.
 * Comments may consist of multiple lines, but the first line should be a self-containing,
@@ -693,13 +695,13 @@ and by whom it was added. Often gotchas stick around longer than they should.
 Embedding date information allows other programmer to make this decision. Embedding
 who information lets us know who to ask.
 
-### Commenting function declarations
+**Commenting function declarations**
 
 Functions headers should be in the file where they are declared. This means that most likely the
 functions will have a header in the .h file. However, functions like main() with no explicit
 prototype declaration in the .h file, should have a header in the .c file.
 
-### Include Statement Documentation
+**Include Statement Documentation**
 
 Include statements should be documented, telling the user why a particular file was included.
 
