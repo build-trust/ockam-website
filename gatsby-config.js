@@ -119,7 +119,7 @@ module.exports = {
     ockamWebsiteRepo: config.general.ockamWebsiteRepo,
     markdownPath: config.general.markdownPath,
     githubProductionPath: config.general.githubProductionPath,
-    slackChannel: config.general.slackChannel,
+    communityChannel: config.general.communityChannel,
     twitter: config.general.twitter,
     email: config.general.email,
     algoliaHitsPerPage: config.general.algoliaHitsPerPage,

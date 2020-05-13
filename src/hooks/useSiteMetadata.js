@@ -5,7 +5,7 @@ const useSiteMetadata = () => {
     query siteMetadataQuery {
       site {
         siteMetadata {
-          slackChannel
+          communityChannel
           twitter
           ockamLibraryRepo
           title
