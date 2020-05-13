@@ -12,7 +12,7 @@ Help us keep Ockam open and inclusive. Please read and follow our [Code of Condu
 
 ## Support
 
-Do not open issues for general support questions. We want to keep GitHub issues for bug reports and feature requests. You've got much better chances of getting your question answered on dedicated support platforms, the best being the [Ockam Community on Slack][slack].
+Do not open issues for general support questions. We want to keep GitHub issues for bug reports and feature requests. You've got much better chances of getting your question answered on dedicated support platforms, the best being the [Ockam Community Discussion][discuss].
 
 As general hygiene, we will close all issues that are requests for general support and redirect people to the section you are reading right now.
 
@@ -108,7 +108,7 @@ Before you submit your pull request consider the following guidelines:
 * In GitHub, send a pull request to `ockam:develop`.
 * The Ockam Contributor License Agreement tool will check to see if you've signed our CLA. If you have not yet done so, the PR will be blocked. The fix is easy. Simply click the link in the PR 'Conversation' user experience on github.com and follow the signing steps. Be sure to read the CLA during the process.
 * Look at the 'Checks' user experience on github.com. We trigger a process to check that your code follows the guidelines set out in this contributor guide.
-* If you find that our CI has failed, look into the logs on Azure Pipelines to find out if your changes caused test failures, the commit message was malformed, etc. If you find that the tests failed or times out for unrelated reasons, you should reach out to an Ockam team member in the [Ockam Community on Slack][slack] so that the build can be restarted.
+* If you find that our CI has failed, look into the logs on Azure Pipelines to find out if your changes caused test failures, the commit message was malformed, etc. If you find that the tests failed or times out for unrelated reasons, you should reach out to an Ockam team member in the [Ockam Community][discuss] so that the build can be restarted.
 * If we suggest changes, then:
 
   ** Make the required updates.
@@ -126,19 +126,20 @@ When you submit a Pull Request, a bot will ask you to sign our CLA if you haven'
 
  It's a quick process, we promise!
 
-* For individuals we will soon have a simple click-through form that can be completed at any time. For the time being, you can [send us an email][individual-cla] and we will have you execute the form via a Docusign
+ [You can find Ockam's CLA here.][cla]
+
 * If you work for a Corporation and your commits are part of a corporate backed project, please [reach out to the Ockam Team via email][corporate-cla] so we can send your legal department our corporate CLA via Docusign.
 
 ## References
 Thank you to the AngularJS community, this contributor guide was inspired by your format and content.
 
-[coc]: https://github.com/ockam-network/ockam/blob/master/CODE_OF_CONDUCT.md
+[coc]: https://www.ockam.io/learn/guides/team/conduct.md
 [learn]: https://ockam.io/learn
 [corporate-cla]: mailto:dev@ockam.io
-[individual-cla]: mailto:dev@ockam.io
+[cla]: https://www.ockam.io/learn/guides/contributions/cla/
 [github-issues]: https://github.com/ockam-network/ockam/issues
 [github-new-issue]: https://github.com/ockam-network/ockam/issues/new
 [github-pulls]: https://github.com/ockam-network/ockam/pulls
 [github]: https://github.com/ockam-network
 [sign]:https://krypt.co/docs/start/code-signing.html
-[slack]: https://join.slack.com/t/ockam-community/shared_invite/zt-6dlpvjd3-1Ccu_J7kqTx7DSHYb4IOvw
+[discuss]: https://github.com/ockam-network/ockam/discussions
