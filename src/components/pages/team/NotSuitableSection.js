@@ -7,10 +7,10 @@ import Text from "../../Text";
 import Button from "../../Button";
 import Link from "../../Link";
 import Icon from "../../Icon";
-import {ReactComponent as SlackLogo} from "../../../assets/slack-logo.svg";
+import { ReactComponent as CommunityChannel } from "../../../assets/community-blue-icon.svg";
 import PageSection from "../PageSection";
 import ockamLogoMark from "../../../assets/ockam-logo-mark.svg";
-import {media} from "../../../utils/emotion";
+import { media } from "../../../utils/emotion";
 import useSiteMetadata from "../../../hooks/useSiteMetadata";
 
 const Section = styled(PageSection)`
@@ -59,7 +59,7 @@ const ButtonsContainer = styled('div')`
 
 
 const NotSuitableSection = () => {
-  const { ockamLibraryRepo, slackChannel  } = useSiteMetadata();
+  const { ockamLibraryRepo, communityChannel  } = useSiteMetadata();
   return (
     <Section darkBg py={5}>
       <NotSuitableContainer>
@@ -72,8 +72,8 @@ const NotSuitableSection = () => {
         <AnimateOnScroll slideIn="down" delay={250}>
           <ButtonsContainer>
             <Button variant="primary" as={Link} mb={{ _: 3, sm: 0 }} to={ockamLibraryRepo}>Start building</Button>
-            <Button outline="primary" as={Link} to={slackChannel} ml={{sm: 3}}>
-              <Icon verticalAlign="text-bottom" icon={SlackLogo} mr={2} size={20} />
+            <Button outline="primary" as={Link} to={communityChannel} ml={{sm: 3}}>
+              <Icon verticalAlign="text-bottom" icon={CommunityChannel} mr={2} size={20} />
               Join Community
             </Button>
           </ButtonsContainer>

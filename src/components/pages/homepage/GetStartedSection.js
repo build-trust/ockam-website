@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import githubIcon from '../../../assets/homepage/github-icon.svg';
-import slackIcon from '../../../assets/homepage/slack-icon.svg';
+import communityIcon from '../../../assets/community-blue-icon.svg';
 import sendIcon from '../../../assets/homepage/send-icon.svg';
 import twitterIcon from '../../../assets/homepage/twitter-icon.svg';
 import { media } from '../../../utils/emotion';
@@ -34,7 +34,7 @@ const GetStartedGrid = styled.div`
 `;
 
 const GetStartedSection = () => {
-  const siteMetaData = useSiteMetadata();
+  const { ockamLibraryRepo, communityChannel, twitter } = useSiteMetadata();
   const [, showContactModal] = useModal(ContactModal);
   const onShowContactModal = () => showContactModal();
 
@@ -45,10 +45,10 @@ const GetStartedSection = () => {
           Get started with ockam
         </Subheading>
         <GetStartedGrid>
-          <GetStartedCard to={siteMetaData.ockamLibraryRepo} title={'{ockam}'} icon={githubIcon} />
-          <GetStartedCard to={siteMetaData.slackChannel} title="Join Community" icon={slackIcon} />
+          <GetStartedCard to={ockamLibraryRepo} title={'{ockam}'} icon={githubIcon} />
+          <GetStartedCard to={communityChannel} title="Join Community" icon={communityIcon} />
           <GetStartedCard onClick={onShowContactModal} title="Request a demo" icon={sendIcon} />
-          <GetStartedCard to={siteMetaData.twitter} title="Follow Ockam" icon={twitterIcon} />
+          <GetStartedCard to={twitter} title="Follow Ockam" icon={twitterIcon} />
         </GetStartedGrid>
       </AnimateOnScroll>
     </PageSection>

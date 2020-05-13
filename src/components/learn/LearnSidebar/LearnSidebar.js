@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import GithubIcon from 'emotion-icons/simpleIcons/GitHub';
 import SendPlaneIcon from 'emotion-icons/ion-ios/Send';
-import SlackIcon from 'emotion-icons/fa-brands/SlackHash';
+import CommunityIcon from 'emotion-icons/ion-md/Chatboxes';
 import PropTypes from 'prop-types';
 import { lighten } from 'polished';
 
@@ -86,8 +86,8 @@ const LearnSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => 
         <Link onClick={() => showContactModal()}>
           <Icon size={28} icon={SendPlaneIcon} />
         </Link>
-        <Link to={siteMetaData.slackChannel}>
-          <Icon size={28} icon={SlackIcon} />
+        <Link to={siteMetaData.communityChannel}>
+          <Icon size={28} icon={CommunityIcon} />
         </Link>
       </IconsContainer>
     </StyledSidebar>
