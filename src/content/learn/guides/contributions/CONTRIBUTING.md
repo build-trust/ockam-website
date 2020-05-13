@@ -133,7 +133,7 @@ When you submit a Pull Request, a bot will ask you to sign our CLA if you haven'
 ## References
 Thank you to the AngularJS community, this contributor guide was inspired by your format and content.
 
-[coc]: https://www.ockam.io/learn/guides/team/conduct.md
+[coc]: https://www.ockam.io/learn/guides/team/conduct
 [learn]: https://ockam.io/learn
 [corporate-cla]: mailto:dev@ockam.io
 [cla]: https://www.ockam.io/learn/guides/contributions/cla/
