@@ -1,6 +1,6 @@
 ---
 title: Engineering Roles at Ockam
-order: 2
+order: 3
 wideContent: true
 ---
 
@@ -262,7 +262,7 @@ At Ockam we [value our High Performance Team](https://www.ockam.io/learn/guides/
 <table>
   <tr>
     <th> </th>
-    <th>Program Manager </th>
+    <th>Manager </th>
     <th>Director </th>
     <th>CTO </th>
   </tr>

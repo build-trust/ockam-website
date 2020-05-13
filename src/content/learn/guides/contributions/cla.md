@@ -43,18 +43,28 @@ You agree to notify Ockam of any facts or circumstances of which You become awar
 
 For purposes of clarity, You agree that Ockam may change the license(s) applicable to the open source project(s) to which Your Contributions relate at Ockam’s sole discretion, including without limitation by re-licensing the project(s) and Your Contributions under any other open source or “free” software license, or a commercial or proprietary license of Ockam’s choosing.
 
-Your Full Name: 	
+Your Full Name:
+
 Mailing Address:
+
 Country:		
-Phone:			
+
+Phone:
+
 Email:
+
 GitHub Handle:		
+
 Your Signature:		
+
 Date:			
 
 *This Ockam Contributor License Agreement (Individuals) is derived from the Apache Software Foundation’s Individual Contributor License Agreement v2.0. Ockam’s substantive changes from that are agreement are as follows:
+
 1.	Identifying Ockam and our project as the recipients of Your Contributions and associated changes in introductory language and signature blocks;
+
 2.	Clarifying that You must disclose both third-party and Your own license or intellectual property restrictions associated with Your Contributions; and
+
 3.	Clarifying that we may change the license(s) applicable to the projects to which Your Contributions relate at our discretion, including without limitation by re-licensing the project (and, in turn, Your Contributions) under any other open source or “free” software license or a commercial or proprietary license of our choosing.*
 
 
@@ -91,21 +101,34 @@ You agree to notify Ockam of any facts or circumstances of which You become awar
 For purposes of clarity, You agree that Ockam may change the license(s) applicable to the open source project(s) to which Your Contributions relate at Ockam’s sole discretion, including without limitation by re-licensing the project(s) and Your Contributions under any other open source or “free” software license, or a commercial or proprietary license of Ockam’s choosing.
 
 Company Information:
+
 Company Name:
+
 Mailing Address:
+
 Country:
+
 Signatory Information:
 
+
 Signature:
+
 Name:		
-Title:		
+
+Title:
+
 Phone:		
+
 Email:		
+
 Date:		
 
 *This Ockam Contributor License Agreement (Corporations) is derived from the Apache Software Foundation’s Corporate Contributor License Agreement v2.0. Ockam’s substantive changes from that are agreement are as follows:
+
 1.	Identifying Ockam and our project as the recipients of Your Contributions and associated changes in introductory language and signature blocks;
+
 2.	Clarifying that You must disclose both third-party and Your own license or intellectual property restrictions associated with Your Contributions; and
+
 3.	Clarifying that we may change the license(s) applicable to the projects to which Your Contributions relate at our discretion, including without limitation by re-licensing the project (and, in turn, Your Contributions) under any other open source or “free” software license or a commercial or proprietary license of our choosing.*
 
 Schedule A:
