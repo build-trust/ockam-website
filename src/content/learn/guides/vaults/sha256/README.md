@@ -1,25 +1,31 @@
 ---
-order: 2
-title: Generate Random Bytes
+order: 3
+title: SHA-256
 ---
 
-## Generate random bytes
+## SHA-256
 
 Once we have an [initialized vault handle](../setup) of type `ockam_vault_t`, we can
 call any of the functions from `ockam/vault.h` using this handle.
 
-One such function is `ockam_vault_random_bytes_generate` which fills a buffer with
-random bytes. It accepts a handle to an initialized vault, a pointer to the start of
-a buffer and the size of the buffer.
+The vault function `ockam_vault_sha256` calculates a SHA-256 hash on input data. It
+takes an input buffer and the length of the input buffer and returns a 32-byte SHA-256 digest.
 
 ```c
-const size_t random_bytes_length               = 64;
-uint8_t      random_bytes[random_bytes_length] = { 0 };
+char*  input        = "hello world";
+size_t input_length = strlen(input);
 
-error = ockam_vault_random_bytes_generate(&vault,
-                                          &random_bytes[0],
-                                          random_bytes_length);
-if (error) goto exit;
+const size_t digest_size         = OCKAM_VAULT_SHA256_DIGEST_LENGTH;
+uint8_t      digest[digest_size] = { 0 };
+size_t       digest_length;
+
+error = ockam_vault_sha256(&vault,
+                           &input[0],
+                           input_length,
+                           &digest[0],
+                           digest_size,
+                           &digest_length);
+if (error != OCKAM_ERROR_NONE) { goto exit; }
 ```
 
 If the function succeeds the return value is `OCKAM_ERROR_NONE`.
@@ -28,7 +34,6 @@ If the function succeeds the return value is `OCKAM_ERROR_NONE`.
 ## Complete Example
 
 ```c
-
 #include "ockam/error.h"
 
 #include "ockam/memory.h"
@@ -41,6 +46,7 @@ If the function succeeds the return value is `OCKAM_ERROR_NONE`.
 #include "ockam/vault/default.h"
 
 #include <stdio.h>
+#include <string.h>
 
 int main(void)
 {
@@ -65,18 +71,25 @@ int main(void)
   error = ockam_vault_default_init(&vault, &vault_attributes);
   if (error != OCKAM_ERROR_NONE) { goto exit; }
 
-  /* Fill the random bytes buffer with 64 bytes of random data */
+  /* Compute the SHA-256 hash of the input string */
 
-  const size_t random_bytes_length               = 64;
-  uint8_t      random_bytes[random_bytes_length] = { 0 };
+  char*  input        = "hello world";
+  size_t input_length = strlen(input);
 
-  error = ockam_vault_random_bytes_generate(&vault,
-                                            &random_bytes[0],
-                                            random_bytes_length);
+  const size_t digest_size         = OCKAM_VAULT_SHA256_DIGEST_LENGTH;
+  uint8_t      digest[digest_size] = { 0 };
+  size_t       digest_length;
+
+  error = ockam_vault_sha256(&vault,
+                             &input[0],
+                             input_length,
+                             &digest[0],
+                             digest_size,
+                             &digest_length);
   if (error != OCKAM_ERROR_NONE) { goto exit; }
 
   int i;
-  for (i = 0; i < random_bytes_length; i++) { printf("%02x", random_bytes[i]); }
+  for (i = 0; i < digest_size; i++) { printf("%02x", digest[i]); }
   printf("\n");
 
 exit:
@@ -91,4 +104,5 @@ exit:
   if (error != OCKAM_ERROR_NONE) { exit_code = -1; }
   return exit_code;
 }
+
 ```
