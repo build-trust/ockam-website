@@ -4,7 +4,7 @@ import HeaderTextSection from '../../HeaderTextSection';
 import Heading from '../../../Heading';
 import Text from '../../../Text';
 import SlideDownAnchor from '../../../SlideDownAnchor';
-import AnimateOnScroll from "../../../AnimateOnScroll";
+import AnimateOnScroll from '../../../AnimateOnScroll';
 
 const HeroSection = () => {
   return (

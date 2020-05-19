@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const ModalWrapper = styled.div`
   display: flex;
-  overflow-y:auto;
+  overflow-y: auto;
   align-items: flex-start;
   justify-content: center;
   position: fixed;

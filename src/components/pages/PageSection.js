@@ -2,14 +2,16 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { space, color, layout } from 'styled-system';
 import PropTypes from 'prop-types';
-import { darken } from "polished";
+import { darken } from 'polished';
 
 import Content from './Content';
 
-const Wrapper = styled('div')(props =>
-  ({
+const Wrapper = styled('div')(
+  props => ({
     marginBottom: '18rem',
-    backgroundColor: props.darkBg ? darken(0.02, props.theme.colors.background) : props.theme.colors.background,
+    backgroundColor: props.darkBg
+      ? darken(0.02, props.theme.colors.background)
+      : props.theme.colors.background,
   }),
   space,
   color,
@@ -32,6 +34,6 @@ PageSection.propTypes = {
 
 PageSection.defaultProps = {
   darkBg: false,
-}
+};
 
 export default PageSection;

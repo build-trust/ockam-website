@@ -10,7 +10,7 @@ import arrowTopLeftIcon from '../assets/homepage/arrow-top-left-icon.svg';
 import Card from './Card/Card';
 import CardBody from './Card/CardBody';
 import Heading from './Heading';
-import Image from "./Image";
+import Image from './Image';
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -94,12 +94,7 @@ const GetStartedCard = ({ children, icon, title, to, onClick }) => {
           </StyledHeading>
         </StyledCardBody>
       </StyledCard>
-      {children ? (
-        <CardContent>
-          {' '}
-          {children}
-        </CardContent>
-) : null}
+      {children ? <CardContent>{children}</CardContent> : null}
     </Wrapper>
   );
 };

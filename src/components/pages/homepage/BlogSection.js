@@ -14,8 +14,8 @@ import { media } from '../../../utils/emotion';
 import Link from '../../Link';
 import Caption from '../../Caption';
 import useHomepageBlogPosts from '../../../hooks/useHomepageBlogPosts';
-import Text from "../../Text";
-import AnimateOnScroll from "../../AnimateOnScroll";
+import Text from '../../Text';
+import AnimateOnScroll from '../../AnimateOnScroll';
 
 const BlogGrid = styled.div`
   display: grid;
@@ -133,23 +133,24 @@ const BlogSection = () => {
     <PageSection>
       <AnimateOnScroll>
         <BlogGrid>
-          <StyledHeading as="h2">
-              From Our Blog
-          </StyledHeading>
+          <StyledHeading as="h2">From Our Blog</StyledHeading>
           <ButtonContainer>
             <Button ml="auto" to="/learn/blog" as={Link}>
               Read more articles
             </Button>
           </ButtonContainer>
           {newestPosts.map((post, index) => (
-            <BlogCard key={post.slug} as={Link} to={post.slug} gridArea={`post${index + 1}`}>
+            <BlogCard
+              key={post.slug}
+              as={Link}
+              to={post.slug}
+              gridArea={`post${index + 1}`}
+            >
               <PostType mb={2}>{post.description}</PostType>
               <Heading mb={4} lineHeight="small" as="h5">
                 {post.title}
               </Heading>
-              <Text color="primary">
-                Read article
-              </Text>
+              <Text color="primary">Read article</Text>
             </BlogCard>
           ))}
         </BlogGrid>

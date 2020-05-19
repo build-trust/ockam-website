@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import {lighten} from "polished";
+import styled from '@emotion/styled';
+import { lighten } from 'polished';
 
 export const HitsWrapper = styled.div`
   display: ${props => (props.show ? `grid` : `none`)};
@@ -12,16 +12,15 @@ export const HitsWrapper = styled.div`
   width: 100%;
   border: 1px solid ${props => props.theme.colors.search.resultBoxBorder};
   box-shadow: 0 3px 8px 0 ${props => props.theme.colors.search.resultBoxShadow};
-  
+
   background: white;
   border-radius: ${props => props.theme.radii.default};
   .ais-Hits-item {
-    border:0;
+    border: 0;
     margin: 0;
     padding: 0;
   }
   .ais-Highlight {
-
   }
   ul {
     list-style: none;
@@ -31,8 +30,7 @@ export const HitsWrapper = styled.div`
   mark {
     color: ${props => props.theme.colors.accent};
     background: ${props => lighten(0.4, props.theme.colors.accent)};
-    border-radius:  ${props => props.theme.radii.default};
-  
+    border-radius: ${props => props.theme.radii.default};
   }
 
   h3 {

@@ -12,14 +12,9 @@ const LearnSidebarMenu = ({ location }) => {
   const { tree } = useAllMdxAsTree(rootSlug);
   const nodes = tree.length === 1 ? tree[0].nodes : tree;
 
-
   return (
     <SidebarMenuContainer>
-      <LearnSidebarMenuNode
-        location={location}
-        nodes={nodes}
-        deepLevel={-1}
-      />
+      <LearnSidebarMenuNode location={location} nodes={nodes} deepLevel={-1} />
     </SidebarMenuContainer>
   );
 };

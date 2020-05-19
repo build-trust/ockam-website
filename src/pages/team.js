@@ -6,8 +6,6 @@ import JoinTeam from '../components/pages/team/JoinTeam';
 import useLeverJobs from '../hooks/useLeverJobs';
 import SEO from '../components/SEO';
 
-
-
 const Team = () => {
   const jobs = useLeverJobs();
   return (

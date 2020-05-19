@@ -7,7 +7,7 @@ import TextField from '../components/forms/TextField';
 import TextAreaField from '../components/forms/TextAreaField';
 import { media } from '../utils/emotion';
 import RecaptchaField from '../components/forms/RecaptchaField';
-import useSiteMetadata from "../hooks/useSiteMetadata";
+import useSiteMetadata from '../hooks/useSiteMetadata';
 
 const StyledForm = styled(Form)`
   grid-template-areas:
@@ -32,7 +32,9 @@ const StyledForm = styled(Form)`
 
 const ContactForm = forwardRef(
   ({ values, errors, onChange, pending, onSubmit, setRef }, ref) => {
-    const { env: { STAGE, ROOT_URL } } = useSiteMetadata();
+    const {
+      env: { STAGE, ROOT_URL },
+    } = useSiteMetadata();
     const isLocalStage = STAGE === 'LOCAL';
     const returnUrl = `${ROOT_URL}?contactFormStatus=success`;
     return (
@@ -128,11 +130,7 @@ const ContactForm = forwardRef(
           setRef={setRef}
         />
         <input type="hidden" name="oid" value="00D4T000000FcUg" />
-        <input
-          type="hidden"
-          name="retURL"
-          value={returnUrl}
-        />
+        <input type="hidden" name="retURL" value={returnUrl} />
         {isLocalStage && <input type="hidden" name="debug" value="1" />}
         <RecaptchaField
           onChange={onChange}

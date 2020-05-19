@@ -9,10 +9,10 @@ import Menu from '../Menu/Menu';
 import Link from '../Link';
 import ToggleIcon from '../Collapse/ToggleIcon';
 import MobileMenu from '../Menu/MobileMenu';
-import Icon from "../Icon";
-import Logo from "../Logo";
+import Icon from '../Icon';
+import Logo from '../Logo';
 
-import Container from "./HeaderContainer";
+import Container from './HeaderContainer';
 
 const StyledLink = styled(Link)`
   margin-left: auto;
@@ -22,7 +22,6 @@ const StyledLink = styled(Link)`
     margin-right: initial;
   `}
 `;
-
 
 const ToggleMenuButton = styled(ToggleIcon)`
   color: ${({ theme }) => theme.colors.icons};
@@ -52,16 +51,13 @@ const Header = ({ isCollapsedHeader }) => {
         onClick={toggleMobileMenu}
       />
       <>
-        <Menu
-          isCollapsedHeader={isCollapsedHeader}
-        />
+        <Menu isCollapsedHeader={isCollapsedHeader} />
 
         <MobileMenu
           onClickItem={toggleMobileMenu}
           isVisible={isVisibleMobileMenu}
           isCollapsedHeader={isCollapsedHeader}
         />
-
       </>
     </Container>
   );

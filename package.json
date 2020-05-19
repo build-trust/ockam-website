@@ -18,6 +18,11 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "clean": "gatsby clean"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "dependencies": {
     "@emotion/core": "10.0.28",
     "@emotion/is-prop-valid": "0.8.8",
@@ -88,6 +93,8 @@
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "2.5.0",
     "gatsby-plugin-remove-trailing-slashes": "2.1.24",
-    "prettier": "1.19.1"
+    "husky": "^4.2.5",
+    "prettier": "1.19.1",
+    "pretty-quick": "^2.0.1"
   }
 }

@@ -3,8 +3,7 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 import PropTypes from 'prop-types';
 
-import useOnEventOutside from "../hooks/useOnEventOutside";
-
+import useOnEventOutside from '../hooks/useOnEventOutside';
 
 const fadeIn = keyframes`
   from {
@@ -43,26 +42,25 @@ const PanelContent = styled.div`
   transition: visibility 0.2s linear;
 `;
 
-const OverlayPanel = ({
-  panelAction,
-  children,
-  triggerEvent,
-  ...rest
-}) => {
+const OverlayPanel = ({ panelAction, children, triggerEvent, ...rest }) => {
   const [isActive, setIsActive] = useState(false);
   const panelRef = useRef(null);
   const actionRef = useRef(null);
-  useOnEventOutside([actionRef, panelRef], () => setIsActive(false), triggerEvent);
+  useOnEventOutside(
+    [actionRef, panelRef],
+    () => setIsActive(false),
+    triggerEvent
+  );
   const showPanel = () => setIsActive(true);
   const hidePanel = () => setIsActive(false);
 
   return (
     <div>
       {panelAction(showPanel, hidePanel, actionRef)}
-      { isActive && (
+      {isActive && (
         <PanelContainer ref={panelRef}>
           <PanelContent isActive={isActive} {...rest}>
-            { children }
+            {children}
           </PanelContent>
         </PanelContainer>
       )}

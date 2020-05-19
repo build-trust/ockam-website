@@ -3,7 +3,7 @@ import React from 'react';
 import SEO from '../../components/SEO';
 import HeroSection from '../../components/pages/product/router/HeroSection';
 import DescriptionSection from '../../components/pages/product/router/DescriptionSection';
-import GetStartedSection from "../../components/pages/homepage/GetStartedSection";
+import GetStartedSection from '../../components/pages/homepage/GetStartedSection';
 
 const seo = {
   title: 'Ockam | Product | Router',

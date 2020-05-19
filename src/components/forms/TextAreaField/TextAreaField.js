@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 import FieldContainer from '../FieldContainer';
 import Input from '../Input';
 import LabelAsterisk from '../LabelAsterisk';
 import FieldErrorMessages from '../FieldErrorMessages';
-import Text from "../../Text";
+import Text from '../../Text';
 
 export const TextArea = styled(Input)`
   height: 10rem;
@@ -30,7 +30,7 @@ const TextAreaField = ({
   gridArea,
   ...rest
 }) => {
-  const onChangeHandler = (e) => {
+  const onChangeHandler = e => {
     onChange({ [name]: e.target.value });
   };
 
@@ -62,10 +62,7 @@ const TextAreaField = ({
 TextAreaField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   tabIndex: PropTypes.string,
   errors: PropTypes.arrayOf(PropTypes.string),

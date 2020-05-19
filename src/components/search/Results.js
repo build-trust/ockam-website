@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { connectStateResults } from "react-instantsearch-dom"
+import { connectStateResults } from 'react-instantsearch-dom';
 
 const NoResultContainer = styled('div')`
   padding: 1rem 3rem 2rem 3rem;
@@ -10,16 +10,14 @@ const NoResultContainer = styled('div')`
 `;
 
 const Results = ({ searchState: state, searchResults: res, children }) => {
-  if(res && res.nbHits > 0) return children;
+  if (res && res.nbHits > 0) return children;
   return (
     <NoResultContainer>
-      No results for
-      &quot;
+      No results for &quot;
       {state.query}
-      &quot;
-      :(
+      &quot; :(
     </NoResultContainer>
-  )
+  );
 };
 
 Results.propTypes = {
@@ -34,6 +32,5 @@ Results.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
 };
-
 
 export default connectStateResults(Results);

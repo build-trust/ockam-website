@@ -35,14 +35,14 @@ const generateTree = nodes => {
 
 const sortBySlugLength = nodes => sortBy(nodes, item => item.slugs.length);
 
-const addDeepLevelRecursively  = (tree, level) => {
+const addDeepLevelRecursively = (tree, level) => {
   return tree.map(item => {
-    const updatedItem = { ...item, deepLevel: level};
-    if(item.nodes.length > 0) {
+    const updatedItem = { ...item, deepLevel: level };
+    if (item.nodes.length > 0) {
       updatedItem.nodes = addDeepLevelRecursively(item.nodes, level + 1);
     }
     return updatedItem;
-  })
+  });
 };
 
 const useAllMdxAsTree = rootSlug => {
@@ -53,7 +53,7 @@ const useAllMdxAsTree = rootSlug => {
       : allMdx.edges;
     const nodes = sortBySlugLength(createNodesFromEdges(edges));
     return {
-      tree: addDeepLevelRecursively(generateTree(nodes),-1),
+      tree: addDeepLevelRecursively(generateTree(nodes), -1),
     };
   }, [allMdx.edges, rootSlug]);
 };

@@ -5,7 +5,7 @@ import FieldContainer from '../FieldContainer';
 import Input from '../Input';
 import LabelAsterisk from '../LabelAsterisk';
 import FieldErrorMessages from '../FieldErrorMessages';
-import Text from "../../Text";
+import Text from '../../Text';
 
 const TextField = ({
   name,
@@ -21,12 +21,15 @@ const TextField = ({
   setRef,
   ...rest
 }) => {
-  const onChangeHandler = (e) => {
+  const onChangeHandler = e => {
     onChange({ [name]: e.target.value });
   };
 
   return (
-    <FieldContainer className={className} ref={setRef ? setRef(name) : undefined}>
+    <FieldContainer
+      className={className}
+      ref={setRef ? setRef(name) : undefined}
+    >
       <Text mb={1} fontSize="small">
         {label}
         {required && <LabelAsterisk />}
@@ -50,10 +53,7 @@ TextField.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   tabIndex: PropTypes.string,
   errors: PropTypes.arrayOf(PropTypes.string),

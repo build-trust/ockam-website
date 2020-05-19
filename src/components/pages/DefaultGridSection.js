@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { grid, flexbox } from 'styled-system';
 
 import { media } from '../../utils/emotion';
-import Heading from "../Heading";
-import AnimateOnScroll from "../AnimateOnScroll";
-import BaseImage from "../Image";
+import Heading from '../Heading';
+import AnimateOnScroll from '../AnimateOnScroll';
+import BaseImage from '../Image';
 
 import PageSection from './PageSection';
 
@@ -16,15 +16,15 @@ const GridSection = styled(Grid)`
   display: grid;
   grid-row-gap: 2rem;
   grid-template-rows: ${props => {
-  switch(props.contentAlign) {
-    case "top":
-      return "max-content auto";
-    case "center":
-      return "auto auto";
-    default:
-      return "auto auto";
-  }}
-  };
+    switch (props.contentAlign) {
+      case 'top':
+        return 'max-content auto';
+      case 'center':
+        return 'auto auto';
+      default:
+        return 'auto auto';
+    }
+  }};
   ${media.desktop`
     grid-column-gap: 9rem;
     grid-row-gap: 0;
@@ -105,17 +105,21 @@ const DefaultGridSection = ({
         {title && (
           <TitleWrapper>
             <AnimateOnScroll>
-              <Heading linked as="h2" textAlign={{ _: "center", lg: 'left'}}>
+              <Heading linked as="h2" textAlign={{ _: 'center', lg: 'left' }}>
                 {title}
               </Heading>
             </AnimateOnScroll>
           </TitleWrapper>
         )}
-        {TitleComponent && <TitleWrapper as="div"><AnimateOnScroll><TitleComponent /></AnimateOnScroll></TitleWrapper>}
+        {TitleComponent && (
+          <TitleWrapper as="div">
+            <AnimateOnScroll>
+              <TitleComponent />
+            </AnimateOnScroll>
+          </TitleWrapper>
+        )}
         <Content>
-          <AnimateOnScroll>
-            {children}
-          </AnimateOnScroll>
+          <AnimateOnScroll>{children}</AnimateOnScroll>
         </Content>
       </GridSection>
     </PageSection>
@@ -134,7 +138,7 @@ DefaultGridSection.propTypes = {
   gridLgProportions: PropTypes.arrayOf(PropTypes.string),
   isStickyImage: PropTypes.bool,
   id: PropTypes.string,
-  contentAlign: PropTypes.oneOf(["top", "center"]),
+  contentAlign: PropTypes.oneOf(['top', 'center']),
 };
 
 DefaultGridSection.defaultProps = {

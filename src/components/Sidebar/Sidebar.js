@@ -21,7 +21,7 @@ const Container = styled('aside')`
   background-color: ${props => props.theme.custom.sidebar.backgroundColor};
   border-radius: ${props => props.theme.radii.default};
   transform: ${({ isOpen }) =>
-    (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
+    isOpen ? 'translateX(0)' : 'translateX(-100%)'};
   ${media.desktop`
      position: sticky;
      transform: initial;

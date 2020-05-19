@@ -52,9 +52,16 @@ const OverlayMenu = ({
     <OverlayMenuPanel
       triggerEvent={triggerEvent}
       panelAction={(showPanel, hidePanel, ref) =>
-        React.cloneElement(children, { ref, ...(eventMap.get(triggerEvent)(showPanel)) })}
+        React.cloneElement(children, {
+          ref,
+          ...eventMap.get(triggerEvent)(showPanel),
+        })
+      }
     >
-      <DropdownOptions isCollapsedHeader={isCollapsedHeader} options={options} />
+      <DropdownOptions
+        isCollapsedHeader={isCollapsedHeader}
+        options={options}
+      />
     </OverlayMenuPanel>
   );
 };

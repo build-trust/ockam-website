@@ -7,7 +7,7 @@ import { media } from '../../utils/emotion';
 import Icon from '../Icon';
 import Heading from '../Heading';
 import Text from '../Text';
-import AnimateOnScroll from "../AnimateOnScroll";
+import AnimateOnScroll from '../AnimateOnScroll';
 
 import FeatureCard from './FeatureCard';
 
@@ -29,9 +29,18 @@ const FeaturesCardGrid = ({ features, cardPadding }) => {
       gridTemplateColumns={['', '', '', `repeat(${features.length}, 1fr);`]}
     >
       {features.map((feature, index) => (
-        <AnimateOnScroll slideIn="left" delay={150 * index} styles={{ height: "100%" }}>
+        <AnimateOnScroll
+          slideIn="left"
+          delay={150 * index}
+          styles={{ height: '100%' }}
+        >
           <FeatureCard key={feature.title} padding={cardPadding}>
-            <Icon size={feature.iconSize || 3} color="primary" icon={feature.icon} mb={2} />
+            <Icon
+              size={feature.iconSize || 3}
+              color="primary"
+              icon={feature.icon}
+              mb={2}
+            />
             <Heading as="h6" fontSize="bodySmall">
               {feature.title}
             </Heading>

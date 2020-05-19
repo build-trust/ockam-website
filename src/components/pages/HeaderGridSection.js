@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import {grid} from "styled-system";
+import { grid } from 'styled-system';
 
 import { media } from '../../utils/emotion';
-import AnimateOnScroll from "../AnimateOnScroll";
+import AnimateOnScroll from '../AnimateOnScroll';
 import BaseImage from '../Image';
 
 import PageSection from './PageSection';
@@ -100,28 +100,26 @@ const HeaderGridSection = ({
   gridXlProportions,
   children,
 }) => {
-
   return (
     <Section mobileImageOpacity={mobileImageOpacity} image={image}>
       <HeaderSectionGrid
         gridTemplateColumns={{
-        _: ' 1fr',
-        xl: `${gridXlProportions[0]} ${gridXlProportions[1]}`,
-      }}
+          _: ' 1fr',
+          xl: `${gridXlProportions[0]} ${gridXlProportions[1]}`,
+        }}
       >
         <LeftBox>
-          <AnimateOnScroll slideIn='left'>
-            {children}
-          </AnimateOnScroll>
+          <AnimateOnScroll slideIn="left">{children}</AnimateOnScroll>
         </LeftBox>
         <ImageContainer>
-          <AnimateOnScroll slideIn='right'>
+          <AnimateOnScroll slideIn="right">
             <Image src={image} alignImageRight={alignImageRight} />
           </AnimateOnScroll>
         </ImageContainer>
       </HeaderSectionGrid>
     </Section>
-)};
+  );
+};
 
 HeaderGridSection.propTypes = {
   mobileImageOpacity: PropTypes.number,

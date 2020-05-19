@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from "@emotion/styled";
-import { flexbox, space } from 'styled-system'
+import styled from '@emotion/styled';
+import { flexbox, space } from 'styled-system';
 
-import PageSection from "../../PageSection";
+import PageSection from '../../PageSection';
 import { media } from '../../../../utils/emotion';
-import Heading from "../../../Heading";
-import AnimateOnScroll from "../../../AnimateOnScroll";
-import Badge from "../../../Badge";
+import Heading from '../../../Heading';
+import AnimateOnScroll from '../../../AnimateOnScroll';
+import Badge from '../../../Badge';
 
 const StyledPageSection = styled(PageSection)`
   padding: 11rem 0;
@@ -22,12 +22,12 @@ const Container = styled('div')`
 `;
 
 const ConfigurationItem = styled('div')`
-  color:  ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors.white};
   margin-bottom: 3.5rem;
   &:before {
-    content: "";
-    width: .7rem;
-    height: .7rem;
+    content: '';
+    width: 0.7rem;
+    height: 0.7rem;
     background-color: ${props => props.theme.colors.accent};
     display: inline-block;
     margin-right: 1rem;
@@ -40,18 +40,24 @@ const ConfigurationsSection = () => {
   return (
     <StyledPageSection darkenBg>
       <Container>
-        <Heading textAlign={{ _: 'center', lg: 'left'}} flex={7} as="h2">
+        <Heading textAlign={{ _: 'center', lg: 'left' }} flex={7} as="h2">
           <AnimateOnScroll slideIn="left">
             Ockam Registry is available in the following configurations
           </AnimateOnScroll>
         </Heading>
-        <ConfigurationList mt={{_:3, lg: 0}} flex={5}>
+        <ConfigurationList mt={{ _: 3, lg: 0 }} flex={5}>
           <AnimateOnScroll slideIn="right">
-            <ConfigurationItem>Single-Party / Private Registry</ConfigurationItem>
-            <ConfigurationItem>Multi-Party / Private Registry</ConfigurationItem>
+            <ConfigurationItem>
+              Single-Party / Private Registry
+            </ConfigurationItem>
+            <ConfigurationItem>
+              Multi-Party / Private Registry
+            </ConfigurationItem>
             <ConfigurationItem>
               Multi-Party / Public Registry
-              <Badge px={2} py={1} ml={2}>Coming soon</Badge>
+              <Badge px={2} py={1} ml={2}>
+                Coming soon
+              </Badge>
             </ConfigurationItem>
           </AnimateOnScroll>
         </ConfigurationList>
@@ -60,8 +66,6 @@ const ConfigurationsSection = () => {
   );
 };
 
-ConfigurationsSection.propTypes = {
-
-};
+ConfigurationsSection.propTypes = {};
 
 export default ConfigurationsSection;

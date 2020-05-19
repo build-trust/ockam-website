@@ -1,8 +1,8 @@
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
-import { useEffect } from "react";
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import { useEffect } from 'react';
 
 const setHeightBasedOnOffset = (ref, condition) => () => {
-  if(!condition) {
+  if (!condition) {
     ref.current.style.removeProperty('height');
     return;
   }

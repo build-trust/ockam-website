@@ -1,38 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import AnimateOnScroll from "../../AnimateOnScroll";
-import Heading from "../../Heading";
-import Button from "../../Button";
-import Link from "../../Link";
-import PageSection from "../PageSection";
-import useLeverJobs from "../../../hooks/useLeverJobs";
+import AnimateOnScroll from '../../AnimateOnScroll';
+import Heading from '../../Heading';
+import Button from '../../Button';
+import Link from '../../Link';
+import PageSection from '../PageSection';
+import useLeverJobs from '../../../hooks/useLeverJobs';
 
-import JobItem from "./JobItem";
+import JobItem from './JobItem';
 
 const CategoryJobsHeader = styled('div')`
   display: flex;
   align-items: center;
   margin-bottom: 5rem;
-`
+`;
 
 const getSameCategoryTeamJobs = (jobs, teamCategory, currentJobId) => {
   return jobs
     .filter(job => job.categories.team === teamCategory)
-    .filter(job => job.id !== currentJobId)
-}
-
+    .filter(job => job.id !== currentJobId);
+};
 
 const CategoryTeamJobsSection = ({ teamCategory, currentJobId }) => {
   const jobs = useLeverJobs();
-  const categoryJobs = getSameCategoryTeamJobs(jobs, teamCategory, currentJobId);
+  const categoryJobs = getSameCategoryTeamJobs(
+    jobs,
+    teamCategory,
+    currentJobId
+  );
   if (categoryJobs.length === 0) return null;
   return (
     <PageSection>
       <AnimateOnScroll slideIn="down">
         <CategoryJobsHeader>
-          <Heading mb={0} ml={{_: 0, lg: 4}} as="h2">See also</Heading>
+          <Heading mb={0} ml={{ _: 0, lg: 4 }} as="h2">
+            See also
+          </Heading>
           <Button as={Link} to="/team#open-roles" outline="primary" ml="auto">
             See all job offers
           </Button>

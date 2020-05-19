@@ -10,10 +10,10 @@ const Message = styled(ErrorMessage)`
   }
 `;
 
-const FieldErrorMessages = ({ errors }) => (errors.length > 0
-  ? errors.map(error => <Message key={error}>{error}</Message>)
-  : null
-);
+const FieldErrorMessages = ({ errors }) =>
+  errors.length > 0
+    ? errors.map(error => <Message key={error}>{error}</Message>)
+    : null;
 
 FieldErrorMessages.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.string),

@@ -11,9 +11,9 @@ import Header from '../components/header/Header';
 import Content from '../components/pages/Content';
 import useUnderViewport from '../hooks/useUnderViewport';
 import Footer from '../components/Footer';
-import {ModalContextProvider} from "../contexts/ModalContext";
-import {LocationContextProvider} from "../contexts/LocationContext";
-import TopBarContactFormMessage from "../components/TopBarContactFormMessage/TopBarContactFormMessage";
+import { ModalContextProvider } from '../contexts/ModalContext';
+import { LocationContextProvider } from '../contexts/LocationContext';
+import TopBarContactFormMessage from '../components/TopBarContactFormMessage/TopBarContactFormMessage';
 
 const PageWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
@@ -33,7 +33,6 @@ const HeaderWrapper = styled.div`
   position: relative;
   width: 100%;
   background-color: transparent;
-
 `;
 
 const StickyMenuWrapper = styled(HeaderWrapper)`
@@ -44,11 +43,7 @@ const StickyMenuWrapper = styled(HeaderWrapper)`
 
 const AnimatedStickyMenuWrapper = animated(StickyMenuWrapper);
 
-const PageLayout = ({
-                      children,
-                      themeName,
-                      location,
-                    }) => {
+const PageLayout = ({ children, themeName, location }) => {
   const ref = useRef();
   const [isCollapsedHeader] = useUnderViewport(ref);
 
@@ -71,18 +66,16 @@ const PageLayout = ({
                 <Header />
               </Content>
             </HeaderWrapper>
-            {
-              transitions.map(({ item, props, key }) =>
+            {transitions.map(
+              ({ item, props, key }) =>
                 item && (
                   <AnimatedStickyMenuWrapper key={key} style={props}>
                     <Content>
-                      <Header
-                        isCollapsedHeader
-                      />
+                      <Header isCollapsedHeader />
                     </Content>
                   </AnimatedStickyMenuWrapper>
-                ))
-            }
+                )
+            )}
             {children}
             <Footer />
           </PageWrapper>

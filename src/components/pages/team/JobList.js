@@ -4,9 +4,9 @@ import styled from '@emotion/styled';
 
 import AnimateOnScroll from '../../AnimateOnScroll';
 import Subheading from '../Subheading';
-import { media } from "../../../utils/emotion";
+import { media } from '../../../utils/emotion';
 
-import JobItem from "./JobItem";
+import JobItem from './JobItem';
 
 const Container = styled('div')`
   margin-bottom: 8rem;
@@ -25,11 +25,7 @@ const JobList = ({ title, jobs }) => (
       <Category>{title}</Category>
     </AnimateOnScroll>
     {jobs.map((job, index) => (
-      <AnimateOnScroll
-        key={job.id}
-        slideIn="down"
-        delay={100 * index}
-      >
+      <AnimateOnScroll key={job.id} slideIn="down" delay={100 * index}>
         <JobItem job={job} />
       </AnimateOnScroll>
     ))}
@@ -38,14 +34,16 @@ const JobList = ({ title, jobs }) => (
 
 JobList.propTypes = {
   title: PropTypes.string.isRequired,
-  jobs: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    text: PropTypes.string,
-  })),
+  jobs: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      text: PropTypes.string,
+    })
+  ),
 };
 
 JobList.defaultProps = {
   jobs: [{}],
-}
+};
 
 export default JobList;

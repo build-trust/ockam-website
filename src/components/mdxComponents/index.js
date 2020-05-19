@@ -14,7 +14,11 @@ import LinkedImage from './LinkedImage';
 import Table from './Table';
 import Strong from './Strong';
 
-const generateHeading = size => props => <Heading {...props} as={size} linked>{props.children}</Heading>;
+const generateHeading = size => props => (
+  <Heading {...props} as={size} linked>
+    {props.children}
+  </Heading>
+);
 
 export default {
   h1: generateHeading('h1'),

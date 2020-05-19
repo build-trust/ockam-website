@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 import Icon from './Icon';
 
-
 const BaseHeading = styled('h1')(
   props => ({
     fontSize: props.as
@@ -56,7 +55,7 @@ const Heading = props => {
 
   if (!linked) return <BaseHeading {...props} />;
 
-  if(!id) return <BaseHeading {...props} />;
+  if (!id) return <BaseHeading {...props} />;
 
   return (
     <BaseHeading

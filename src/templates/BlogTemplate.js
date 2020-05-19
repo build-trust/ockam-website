@@ -8,7 +8,6 @@ import PageLayout from '../layouts/PageLayout';
 import Post from '../components/blog/Post';
 import defaultAvatar from '../assets/default_avatar.png';
 
-
 const GreyWrapper = styled.div`
   position: absolute;
   top: -8rem;
@@ -48,10 +47,7 @@ export default function BlogTemplate(props) {
     : defaultAvatar;
 
   return (
-    <PageLayout
-      location={location}
-      themeName="blog"
-    >
+    <PageLayout location={location} themeName="blog">
       <SEO title={metaTitle} description={metaDescription} slug={slug} />
       <Wrapper>
         <GreyWrapper />

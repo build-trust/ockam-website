@@ -19,7 +19,12 @@ const Index = ({ children, pageContext, location, ...rest }) => {
   }
   if (isDocPage) {
     return (
-      <LearnTemplate location={location} algoliaIndexes={pageContext.algoliaIndexes.learn} dependedRepos={pageContext.dependedRepos} {...rest}>
+      <LearnTemplate
+        location={location}
+        algoliaIndexes={pageContext.algoliaIndexes.learn}
+        dependedRepos={pageContext.dependedRepos}
+        {...rest}
+      >
         {children}
       </LearnTemplate>
     );
@@ -28,7 +33,7 @@ const Index = ({ children, pageContext, location, ...rest }) => {
   if (isJobPage) {
     return (
       <PageTemplate location={location} {...rest}>
-        {React.cloneElement(children, { job: pageContext.job})}
+        {React.cloneElement(children, { job: pageContext.job })}
       </PageTemplate>
     );
   }
@@ -51,8 +56,6 @@ Index.propTypes = {
     job: PropTypes.shape({}),
   }).isRequired,
   location: PropTypes.shape({}).isRequired,
-
 };
-
 
 export default Index;

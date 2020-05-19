@@ -7,8 +7,8 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import useAllMdxAsTree from '../../hooks/useAllMdxAsTree';
 import capitalize from '../../utils/capitalize';
 
-import ContactButton from "./ContactButton";
-import DropdownLink from "./DropdownLink";
+import ContactButton from './ContactButton';
+import DropdownLink from './DropdownLink';
 
 const productOptions = [
   {
@@ -50,7 +50,6 @@ const teamOptions = [
     isRoot: true,
   },
 ];
-
 
 const mapNodesToMenuOptions = nodes =>
   nodes.map(node => ({ label: capitalize(node.name), to: node.url }));

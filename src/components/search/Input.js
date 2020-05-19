@@ -1,11 +1,11 @@
-import React from "react"
-import { connectSearchBox } from "react-instantsearch-dom"
+import React from 'react';
+import { connectSearchBox } from 'react-instantsearch-dom';
 import debounce from 'lodash/debounce';
-import SearchIcon from 'emotion-icons/material/Search'
-import styled from "@emotion/styled";
+import SearchIcon from 'emotion-icons/material/Search';
+import styled from '@emotion/styled';
 
-import Icon from "../Icon";
-import BaseInput from "../forms/Input";
+import Icon from '../Icon';
+import BaseInput from '../forms/Input';
 
 export const Input = styled(BaseInput)`
   width: 100%;
@@ -23,9 +23,8 @@ export const Form = styled.form`
   align-items: center;
 `;
 
-
 export default connectSearchBox(({ refine, ...rest }) => {
-  const debouncedOnChange = debounce((value) => refine(value), 200);
+  const debouncedOnChange = debounce(value => refine(value), 200);
   return (
     <Form>
       <Icon icon={SearchIcon} size={24} />
@@ -37,4 +36,5 @@ export default connectSearchBox(({ refine, ...rest }) => {
         {...rest}
       />
     </Form>
-)})
+  );
+});

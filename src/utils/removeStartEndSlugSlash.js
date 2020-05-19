@@ -1,5 +1,5 @@
-const removeStartEndSlugSlush = (slug) => {
-  return slug.replace(/\/$/, "").replace(/^\//, "")
+const removeStartEndSlugSlush = slug => {
+  return slug.replace(/\/$/, '').replace(/^\//, '');
 };
 
 export default removeStartEndSlugSlush;

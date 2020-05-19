@@ -6,7 +6,7 @@ import PageSection from '../PageSection';
 import Heading from '../../Heading';
 import AnimateOnScroll from '../../AnimateOnScroll';
 
-import JobList from "./JobList";
+import JobList from './JobList';
 
 const AnchorPointer = styled('div')`
   padding-bottom: 8rem;
@@ -40,16 +40,20 @@ const JoinTeam = ({ jobs }) => {
           Join The Team
         </Heading>
       </AnimateOnScroll>
-      {categorizedJobs.map((category) => <JobList title={category.name} jobs={category.jobs} />)}
+      {categorizedJobs.map(category => (
+        <JobList title={category.name} jobs={category.jobs} />
+      ))}
     </PageSection>
   );
 };
 const jobPropTypes = {
   text: PropTypes.string.isRequired,
   descriptionPlain: PropTypes.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.shape({
-    team: PropTypes.string,
-  })),
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      team: PropTypes.string,
+    })
+  ),
   list: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,

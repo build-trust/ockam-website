@@ -3,20 +3,18 @@ import styled from '@emotion/styled';
 import LinkedinLogo from 'emotion-icons/fa-brands/Linkedin';
 import TwitterLogo from 'emotion-icons/fa-brands/Twitter';
 import { lighten } from 'polished';
-import GithubIcon from "emotion-icons/simpleIcons/GitHub";
+import GithubIcon from 'emotion-icons/simpleIcons/GitHub';
 
 import { media } from '../utils/emotion';
-import useModal from "../hooks/useModal";
-import ContactModal from "../modals/ContactModal";
-import useSiteMetadata from "../hooks/useSiteMetadata";
+import useModal from '../hooks/useModal';
+import ContactModal from '../modals/ContactModal';
+import useSiteMetadata from '../hooks/useSiteMetadata';
 
 import PageSection from './pages/PageSection';
 import Link from './Link';
 import Caption from './Caption';
 import Icon from './Icon';
-import Logo from "./Logo";
-
-
+import Logo from './Logo';
 
 const FooterGrid = styled.div`
   padding-top: ${props => props.theme.space.large};
@@ -80,7 +78,6 @@ const SocialContainer = styled.div`
   justify-content: flex-end;
 `;
 
-
 const Footer = () => {
   const [, showContactModal] = useModal(ContactModal);
   const siteMetaData = useSiteMetadata();
@@ -92,12 +89,8 @@ const Footer = () => {
           <Logo height="4.8rem" alt="Ockam logo" />
         </LogoContainer>
         <MenuContainer>
-          <MenuLink onClick={openContactModal}>
-            Request Demo
-          </MenuLink>
-          <MenuLink onClick={openContactModal}>
-            Contact Sales
-          </MenuLink>
+          <MenuLink onClick={openContactModal}>Request Demo</MenuLink>
+          <MenuLink onClick={openContactModal}>Contact Sales</MenuLink>
         </MenuContainer>
         <CopyrightContainer>
           <Caption>© 2017-2020 Ockam.io. All rights reserved.</Caption>

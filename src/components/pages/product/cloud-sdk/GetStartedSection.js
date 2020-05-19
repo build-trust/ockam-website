@@ -9,16 +9,16 @@ import GetStartedCard from '../../../GetStartedCard';
 import sendIcon from '../../../../assets/homepage/send-icon.svg';
 import useSiteMetadata from '../../../../hooks/useSiteMetadata';
 import { media } from '../../../../utils/emotion';
-import IconListItem from "../../../IconLisItem";
-import {ReactComponent as CodeIcon } from '../../../../assets/core-icon.svg';
-import {ReactComponent as VaultIcon } from '../../../../assets/vault-icon.svg';
-import {ReactComponent as TransferIcon } from '../../../../assets/transfer-icon.svg';
-import {ReactComponent as DocIcon } from '../../../../assets/doc-icon.svg';
-import {ReactComponent as SupportIcon } from '../../../../assets/support-icon.svg';
-import {ReactComponent as CloudIcon } from '../../../../assets/cloud-icon.svg';
-import AnimateOnScroll from "../../../AnimateOnScroll";
-import useModal from "../../../../hooks/useModal";
-import ContactModal from "../../../../modals/ContactModal";
+import IconListItem from '../../../IconLisItem';
+import { ReactComponent as CodeIcon } from '../../../../assets/core-icon.svg';
+import { ReactComponent as VaultIcon } from '../../../../assets/vault-icon.svg';
+import { ReactComponent as TransferIcon } from '../../../../assets/transfer-icon.svg';
+import { ReactComponent as DocIcon } from '../../../../assets/doc-icon.svg';
+import { ReactComponent as SupportIcon } from '../../../../assets/support-icon.svg';
+import { ReactComponent as CloudIcon } from '../../../../assets/cloud-icon.svg';
+import AnimateOnScroll from '../../../AnimateOnScroll';
+import useModal from '../../../../hooks/useModal';
+import ContactModal from '../../../../modals/ContactModal';
 
 const GetStartedGrid = styled('div')`
   display: grid;
@@ -33,7 +33,15 @@ const GetStartedGrid = styled('div')`
   `}
 `;
 
-const GetStartedItem = ({ icon, children }) => <IconListItem fontSize="bodySmall" icon={icon} iconStyle={{ color: 'primary'}}>{children}</IconListItem>;
+const GetStartedItem = ({ icon, children }) => (
+  <IconListItem
+    fontSize="bodySmall"
+    icon={icon}
+    iconStyle={{ color: 'primary' }}
+  >
+    {children}
+  </IconListItem>
+);
 
 GetStartedItem.propTypes = {
   icon: PropTypes.func.isRequired,
@@ -65,7 +73,8 @@ const GetStartedSection = () => {
               Plugin the Transport SDK element for your cloud environment
             </GetStartedItem>
             <GetStartedItem icon={VaultIcon}>
-              Choose a Vault implimentation for your cloud provider&apos;s HSM from the open source library, or build your own
+              Choose a Vault implimentation for your cloud provider&apos;s HSM
+              from the open source library, or build your own
             </GetStartedItem>
             <GetStartedItem icon={CloudIcon}>
               Add a Cloud Service integration from the Ockam Library.
@@ -80,7 +89,8 @@ const GetStartedSection = () => {
               OEM and Enterprise SLA licenses available
             </GetStartedItem>
             <GetStartedItem icon={SupportIcon}>
-              Our team is ready to help you get started, to build, or support your Ockam Cloud SDK
+              Our team is ready to help you get started, to build, or support
+              your Ockam Cloud SDK
             </GetStartedItem>
           </GetStartedCard>
         </GetStartedGrid>

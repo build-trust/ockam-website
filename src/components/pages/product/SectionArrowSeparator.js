@@ -1,12 +1,11 @@
 import React from 'react';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 import arrows from '../../../assets/product/arrows.svg';
-import Content from "../Content";
+import Content from '../Content';
 import { media } from '../../../utils/emotion';
-import AnimateOnScroll from "../../AnimateOnScroll";
-import BaseImage from "../../Image";
-
+import AnimateOnScroll from '../../AnimateOnScroll';
+import BaseImage from '../../Image';
 
 const Container = styled(Content)`
   width: 100%;
@@ -16,14 +15,13 @@ const Container = styled(Content)`
   ${media.desktop`
     text-align:left;
   `}
-  
 `;
 
 const Image = styled(BaseImage)`
   margin-left: auto;
   margin-right: auto;
   display: none;
-   ${media.desktop`
+  ${media.desktop`
     margin-left: 22%;
     display: initial;
   `}
@@ -33,14 +31,12 @@ const SectionArrowSeparator = () => {
   return (
     <AnimateOnScroll slideIn="down" offsetTopViewport={300}>
       <Container>
-        <Image src={arrows} alt='connection arrow' />
+        <Image src={arrows} alt="connection arrow" />
       </Container>
     </AnimateOnScroll>
   );
 };
 
-SectionArrowSeparator.propTypes = {
-
-};
+SectionArrowSeparator.propTypes = {};
 
 export default SectionArrowSeparator;

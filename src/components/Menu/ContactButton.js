@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from "../Button";
-import Link from "../Link";
+import Button from '../Button';
+import Link from '../Link';
 
 const ContactButton = ({
   contactAsButton,

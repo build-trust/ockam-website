@@ -1,22 +1,22 @@
 import React from 'react';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import AnimateOnScroll from "../../AnimateOnScroll";
-import Heading from "../../Heading";
-import Text from "../../Text";
-import Button from "../../Button";
-import Link from "../../Link";
-import Icon from "../../Icon";
-import { ReactComponent as CommunityChannel } from "../../../assets/community-blue-icon.svg";
-import PageSection from "../PageSection";
-import ockamLogoMark from "../../../assets/ockam-logo-mark.svg";
-import { media } from "../../../utils/emotion";
-import useSiteMetadata from "../../../hooks/useSiteMetadata";
+import AnimateOnScroll from '../../AnimateOnScroll';
+import Heading from '../../Heading';
+import Text from '../../Text';
+import Button from '../../Button';
+import Link from '../../Link';
+import Icon from '../../Icon';
+import { ReactComponent as CommunityChannel } from '../../../assets/community-blue-icon.svg';
+import PageSection from '../PageSection';
+import ockamLogoMark from '../../../assets/ockam-logo-mark.svg';
+import { media } from '../../../utils/emotion';
+import useSiteMetadata from '../../../hooks/useSiteMetadata';
 
 const Section = styled(PageSection)`
   position: relative;
   z-index: 1;
-  
+
   &:before {
     transform-origin: center center;
     transform-style: preserve-3D;
@@ -45,7 +45,7 @@ const NotSuitableContainer = styled('div')`
     margin-left: auto;
     margin-right: auto;
   `};
-`
+`;
 
 const ButtonsContainer = styled('div')`
   display: flex;
@@ -55,25 +55,43 @@ const ButtonsContainer = styled('div')`
   ${media.phone`
     flex-direction: row;
   `};
-`
-
+`;
 
 const NotSuitableSection = () => {
-  const { ockamLibraryRepo, communityChannel  } = useSiteMetadata();
+  const { ockamLibraryRepo, communityChannel } = useSiteMetadata();
   return (
     <Section darkBg py={5}>
       <NotSuitableContainer>
         <AnimateOnScroll slideIn="down">
           <Heading as="h2">That’s not what you’re looking for?</Heading>
           <Text mb={4}>
-            Even if one of our open roles in the Ockam core team may not be a fit right now, there will always be room for you in our community. Get involved with the discussion!
+            Even if one of our open roles in the Ockam core team may not be a
+            fit right now, there will always be room for you in our community.
+            Get involved with the discussion!
           </Text>
         </AnimateOnScroll>
         <AnimateOnScroll slideIn="down" delay={250}>
           <ButtonsContainer>
-            <Button variant="primary" as={Link} mb={{ _: 3, sm: 0 }} to={ockamLibraryRepo}>Start building</Button>
-            <Button outline="primary" as={Link} to={communityChannel} ml={{sm: 3}}>
-              <Icon verticalAlign="text-bottom" icon={CommunityChannel} mr={2} size={20} />
+            <Button
+              variant="primary"
+              as={Link}
+              mb={{ _: 3, sm: 0 }}
+              to={ockamLibraryRepo}
+            >
+              Start building
+            </Button>
+            <Button
+              outline="primary"
+              as={Link}
+              to={communityChannel}
+              ml={{ sm: 3 }}
+            >
+              <Icon
+                verticalAlign="text-bottom"
+                icon={CommunityChannel}
+                mr={2}
+                size={20}
+              />
               Join Community
             </Button>
           </ButtonsContainer>
@@ -83,8 +101,6 @@ const NotSuitableSection = () => {
   );
 };
 
-NotSuitableSection.propTypes = {
-
-};
+NotSuitableSection.propTypes = {};
 
 export default NotSuitableSection;

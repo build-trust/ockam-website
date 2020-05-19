@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 
-const isRefContainTarget = (ref, event) => !ref.current || ref.current.contains(event.target)
+const isRefContainTarget = (ref, event) =>
+  !ref.current || ref.current.contains(event.target);
 
 const useOnClickOutside = (ref, handler) => {
   useEffect(() => {
     const listener = event => {
-      if(Array.isArray(ref)) {
-        const isInside =  ref.find(item => isRefContainTarget(item, event));
-        if(!isInside) handler(event);
+      if (Array.isArray(ref)) {
+        const isInside = ref.find(item => isRefContainTarget(item, event));
+        if (!isInside) handler(event);
         return;
       }
       if (isRefContainTarget(ref, event)) {
