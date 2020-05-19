@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 import cross from '../../assets/cross-icon.svg';
 
@@ -10,7 +10,7 @@ const ModalClose = styled.button`
   background-image: url(${cross});
   background-size: 100% 100%;
   background-color: transparent;
-  border:none;
+  border: none;
   width: 1.4rem;
   height: 1.4rem;
   position: absolute;

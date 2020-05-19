@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 
-const isRefContainTarget = (ref, event) => ref && (!ref.current || ref.current.contains(event.target));
+const isRefContainTarget = (ref, event) =>
+  ref && (!ref.current || ref.current.contains(event.target));
 
-const useOnEventOutside = (ref, handler, eventName = "click") => {
+const useOnEventOutside = (ref, handler, eventName = 'click') => {
   useEffect(() => {
     const listener = event => {
-      if(Array.isArray(ref)) {
-        const isInside =  ref.find(item => isRefContainTarget(item, event));
-        if(!isInside) handler(event);
+      if (Array.isArray(ref)) {
+        const isInside = ref.find(item => isRefContainTarget(item, event));
+        if (!isInside) handler(event);
         return;
       }
       if (isRefContainTarget(ref, event)) {
@@ -17,13 +18,13 @@ const useOnEventOutside = (ref, handler, eventName = "click") => {
     };
 
     document.addEventListener(eventName, listener);
-    if(eventName === "click") {
+    if (eventName === 'click') {
       document.addEventListener('touchstart', listener);
     }
 
     return () => {
       document.removeEventListener(eventName, listener);
-      if(eventName === "click") {
+      if (eventName === 'click') {
         document.removeEventListener('touchstart', listener);
       }
     };

@@ -12,10 +12,10 @@ import globalStyles from '../theme/globalStyles';
 import ThemeProvider from '../components/themeProvider';
 import mdxComponents from '../components/mdxComponents';
 import BaseContent from '../components/Content';
-import {ModalContextProvider} from "../contexts/ModalContext";
-import {LocationContextProvider} from "../contexts/LocationContext";
-import TopBarContactFormMessage from "../components/TopBarContactFormMessage/TopBarContactFormMessage";
-import LearnHeader from "../components/header/LearnHeader";
+import { ModalContextProvider } from '../contexts/ModalContext';
+import { LocationContextProvider } from '../contexts/LocationContext';
+import TopBarContactFormMessage from '../components/TopBarContactFormMessage/TopBarContactFormMessage';
+import LearnHeader from '../components/header/LearnHeader';
 
 const PageWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
@@ -37,16 +37,21 @@ const Wrapper = styled('div')`
 
 const HeaderWrapper = styled.div`
   box-shadow: ${({ theme }) =>
-  `0 1px 0 0 ${theme.colors.accentBackground}, 0 3px 8px 0 ${rgba(
-    theme.colors.accentBackground,
-    0.6
-  )}`};
+    `0 1px 0 0 ${theme.colors.accentBackground}, 0 3px 8px 0 ${rgba(
+      theme.colors.accentBackground,
+      0.6
+    )}`};
   z-index: 2;
   position: relative;
 `;
 
-const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location, algoliaIndexes }) => {
-
+const LearnLayout = ({
+  children,
+  isOpenSidebar,
+  setIsOpenSidebar,
+  location,
+  algoliaIndexes,
+}) => {
   return (
     <ThemeProvider themeName="light">
       <LocationContextProvider location={location}>
@@ -58,7 +63,10 @@ const LearnLayout = ({ children, isOpenSidebar, setIsOpenSidebar, location, algo
               <HeaderWrapper>
                 <TopBarContactFormMessage />
                 <BaseContent>
-                  <LearnHeader algoliaIndexes={algoliaIndexes} openSidebar={() => setIsOpenSidebar(true)} />
+                  <LearnHeader
+                    algoliaIndexes={algoliaIndexes}
+                    openSidebar={() => setIsOpenSidebar(true)}
+                  />
                 </BaseContent>
               </HeaderWrapper>
               <BaseContent>

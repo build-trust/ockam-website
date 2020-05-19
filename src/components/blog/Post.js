@@ -62,7 +62,7 @@ const Post = ({ title, body, date, author, authorAvatar }) => (
       </PostContent>
     </BlogContent>
   </Wrapper>
-  );
+);
 
 Post.propTypes = {
   title: PropTypes.string.isRequired,

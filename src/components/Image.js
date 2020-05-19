@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import getMemoizedAltForFilepath from "../utils/getMemoizedAltForFilepath";
+import getMemoizedAltForFilepath from '../utils/getMemoizedAltForFilepath';
 
-const Image = ({ src, alt, ...rest}) => {
+const Image = ({ src, alt, ...rest }) => {
   const imageAlt = alt || getMemoizedAltForFilepath(src);
-  return (
-    <img src={src} alt={imageAlt} {...rest} />
-  );
+  return <img src={src} alt={imageAlt} {...rest} />;
 };
 
 Image.propTypes = {
@@ -18,6 +16,5 @@ Image.propTypes = {
 Image.defaultProps = {
   alt: '',
 };
-
 
 export default Image;

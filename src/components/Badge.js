@@ -1,5 +1,12 @@
-import styled from "@emotion/styled";
-import {border, color, layout, typography, space, variant} from "styled-system";
+import styled from '@emotion/styled';
+import {
+  border,
+  color,
+  layout,
+  typography,
+  space,
+  variant,
+} from 'styled-system';
 
 const Badge = styled('span')(
   space,
@@ -10,10 +17,10 @@ const Badge = styled('span')(
   variant({
     variants: {
       default: {
-        fontSize: "caption",
-        color: "badge.defaultText",
-        backgroundColor: "badge.defaultBackground",
-        borderColor: "badge.defaultBorder",
+        fontSize: 'caption',
+        color: 'badge.defaultText',
+        backgroundColor: 'badge.defaultBackground',
+        borderColor: 'badge.defaultBorder',
       },
     },
   })
@@ -21,7 +28,7 @@ const Badge = styled('span')(
 
 Badge.defaultProps = {
   variant: 'default',
-  display: "inline-block",
+  display: 'inline-block',
   borderWidth: '1px',
   borderStyle: 'solid',
   borderRadius: 'badge',
@@ -29,6 +36,5 @@ Badge.defaultProps = {
   px: '0.5rem',
   py: '0.2rem',
 };
-
 
 export default Badge;

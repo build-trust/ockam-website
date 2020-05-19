@@ -36,7 +36,7 @@ const ToggleIcon = ({
   return (
     <IconContainer {...rest}>
       {transitions.map(({ item, key, props }) =>
-        (item ? (
+        item ? (
           <AnimatedIcon key={key} style={props}>
             <CollapsedIcon />
           </AnimatedIcon>
@@ -44,7 +44,7 @@ const ToggleIcon = ({
           <AnimatedIcon key={key} style={props}>
             <UncollapsedIcon />
           </AnimatedIcon>
-        ))
+        )
       )}
     </IconContainer>
   );

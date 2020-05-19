@@ -7,4 +7,5 @@ const {
 } = config;
 
 // eslint-disable-next-line import/prefer-default-export
-export const getRepoInfo = (username, reponame) => apiFetch(githubUrl,`repos/${username}/${reponame}`);
+export const getRepoInfo = (username, reponame) =>
+  apiFetch(githubUrl, `repos/${username}/${reponame}`);

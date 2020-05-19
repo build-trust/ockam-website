@@ -10,19 +10,14 @@ const getTopElement = (highest, current) => {
 };
 
 const useForm = (submit, options = {}) => {
-  const {
-    onError,
-    validate,
-    onSubmitResolved,
-    onSubmitRejected,
-  } = options;
+  const { onError, validate, onSubmitResolved, onSubmitRejected } = options;
   const [values, setValues] = useState({});
   const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [refMap] = useState(() => new Map());
 
-  const onChange = useCallback((newState) => {
+  const onChange = useCallback(newState => {
     if (isFunction(newState)) {
       setValues(newState);
       return;
@@ -35,28 +30,27 @@ const useForm = (submit, options = {}) => {
     return validate(values);
   }, [validate, values]);
 
-  const handleSuccess = (res) => {
+  const handleSuccess = res => {
     setPending(false);
     if (onSubmitResolved) onSubmitResolved(res);
   };
 
   const setRef = name => ref => ref && refMap.set(name, ref);
 
-  const handleError = (err) => {
+  const handleError = err => {
     if (onError) setErrors(onError(err));
     setPending(false);
     if (onSubmitRejected) onSubmitRejected(err);
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async e => {
     if (e) e.preventDefault();
     setIsSubmitted(true);
     const formErrors = getFormErrors();
     if (formErrors) {
       setErrors(formErrors);
       // scroll to error field if form is submitted
-      const errorElements = Object
-        .keys(formErrors)
+      const errorElements = Object.keys(formErrors)
         .map(getElementsByKey(refMap))
         .filter(item => item !== undefined);
       const topElement = errorElements.reduce(getTopElement, null);

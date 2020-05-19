@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
-import Algolia from "emotion-icons/fa-brands/Algolia";
-import React from "react";
+import styled from '@emotion/styled';
+import Algolia from 'emotion-icons/fa-brands/Algolia';
+import React from 'react';
 
-import Icon from "../Icon";
+import Icon from '../Icon';
 
 const Container = styled('div')`
   font-size: 1.2rem;
@@ -16,9 +16,7 @@ const PoweredBy = () => (
     Powered by
     {` `}
     <a href="https://algolia.com">
-      <Icon icon={Algolia} size="1em" />
-      {' '}
-      Algolia
+      <Icon icon={Algolia} size="1em" /> Algolia
     </a>
   </Container>
 );

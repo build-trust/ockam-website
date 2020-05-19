@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 import ReactScrollbar from 'react-scrollbars-custom';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const Container = styled('div')`
   position: relative;
@@ -16,17 +16,17 @@ const Container = styled('div')`
   .ScrollbarsCustom-TrackY {
     top: 0 !important;
     background-color: ${({ theme }) =>
-   theme.custom.sidebar.customScrollTruckColor} !important;
+      theme.custom.sidebar.customScrollTruckColor} !important;
     height: 100% !important;
     width: 4px !important;
   }
   .ScrollbarsCustom-ThumbY {
     background-color: ${({ theme }) =>
-  theme.custom.sidebar.customScrollThumbColor} !important;
+      theme.custom.sidebar.customScrollThumbColor} !important;
   }
 `;
 
-const Scrollbar = ({ children, ...rest}) => {
+const Scrollbar = ({ children, ...rest }) => {
   return (
     <Container>
       <ReactScrollbar style={{ width: '100%', height: '100%' }} {...rest}>

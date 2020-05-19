@@ -13,7 +13,6 @@
 module.exports = {
   // More about these rules https://commitlint.js.org/#/reference-rules
   rules: {
-
     // <type>(<scope>): <subject> must not be longer that 100 characters
     'header-max-length': [2, 'always', 100],
 
@@ -56,8 +55,8 @@ module.exports = {
         'test',
 
         // content:
-        'content'
-      ]
+        'content',
+      ],
     ],
 
     // subject is required, must be lower case and not end in period
@@ -78,5 +77,5 @@ module.exports = {
     // footer is optional, must be max 100 chars wide, must have a blank line before it
     'footer-leading-blank': [2, 'always'],
     'footer-max-line-length': [2, 'always', 100],
-  }
+  },
 };

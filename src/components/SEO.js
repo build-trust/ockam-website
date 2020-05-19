@@ -6,14 +6,19 @@ import appleTouchIcon from '../assets/apple-touch-icon.png';
 import favicon32 from '../assets/favicon-32x32.png';
 import favicon16 from '../assets/favicon-16x16.png';
 import config from '../../config';
-import useDefaultOgImage from "../hooks/useDefaultOgImage";
-import useSiteMetadata from "../hooks/useSiteMetadata";
+import useDefaultOgImage from '../hooks/useDefaultOgImage';
+import useSiteMetadata from '../hooks/useSiteMetadata';
 
-const getSrcFromGraphqlImage = image => image && image.childImageSharp && image.childImageSharp.fixed.src;
+const getSrcFromGraphqlImage = image =>
+  image && image.childImageSharp && image.childImageSharp.fixed.src;
 
 const SEO = ({ title, description, image, slug }) => {
   const defaultOgImage = useDefaultOgImage();
-  const { env: { ROOT_URL }, title: defaultTitle, description: defaultDescription} = useSiteMetadata();
+  const {
+    env: { ROOT_URL },
+    title: defaultTitle,
+    description: defaultDescription,
+  } = useSiteMetadata();
   const metaImage = image || getSrcFromGraphqlImage(defaultOgImage);
   const metaImageUrl = ROOT_URL + metaImage;
   const metaTitle = title || defaultTitle;
@@ -25,7 +30,6 @@ const SEO = ({ title, description, image, slug }) => {
       ? ROOT_URL + config.gatsby.pathPrefix
       : ROOT_URL;
   canonicalUrl += slug;
-
 
   return (
     <Helmet>

@@ -7,7 +7,12 @@ import IconListItem from './IconLisItem';
 
 const CheckedListItem = ({ children, containerStyle, ...rest }) => {
   return (
-    <IconListItem icon={CircleCheck} containerStyle={containerStyle} iconStyle={{ marginTop: 1}} {...rest}>
+    <IconListItem
+      icon={CircleCheck}
+      containerStyle={containerStyle}
+      iconStyle={{ marginTop: 1 }}
+      {...rest}
+    >
       {children}
     </IconListItem>
   );

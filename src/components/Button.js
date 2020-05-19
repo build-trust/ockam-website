@@ -1,8 +1,15 @@
 import styled from '@emotion/styled';
-import { space, color, typography, border, layout, variant } from 'styled-system';
+import {
+  space,
+  color,
+  typography,
+  border,
+  layout,
+  variant,
+} from 'styled-system';
 
 const statesForButtonVariant = {
-  'primary': (theme) => `
+  primary: theme => `
       &:hover {
       box-shadow: 0 12px 24px -10px ${theme.colors.button.primaryShadow};
       color: ${theme.colors.white};
@@ -11,7 +18,7 @@ const statesForButtonVariant = {
       border: 1px solid ${theme.colors.button.primaryActive};
       box-shadow: 0 0 4px 1px ${theme.colors.primary};
     }`,
-  'white': (theme) => `
+  white: theme => `
     &:active {
       background-color: ${theme.colors.button.whiteActiveBackground};
     }
@@ -19,7 +26,7 @@ const statesForButtonVariant = {
       color: ${theme.colors.dark};
     }
   `,
-  'secondary': (theme) => `
+  secondary: theme => `
   &:hover {
     border: 1px solid ${theme.colors.button.secondaryHover};
     color: ${theme.colors.button.secondaryText};
@@ -28,7 +35,7 @@ const statesForButtonVariant = {
     border: 1px solid ${theme.colors.button.secondaryActive}
   }
   `,
-  'link': (theme) => `
+  link: theme => `
   &:hover {
     color: ${theme.colors.link.hover};
   }
@@ -36,7 +43,7 @@ const statesForButtonVariant = {
 };
 
 const statesForButtonOutline = {
-  'primary': (theme) => `
+  primary: theme => `
       &:hover {
       box-shadow: 0 12px 24px -10px ${theme.colors.button.primaryShadow};
     }
@@ -73,7 +80,7 @@ const Button = styled('button')(
       secondary: {
         color: 'button.secondaryText',
         bg: 'secondary',
-        border: "1px solid transparent",
+        border: '1px solid transparent',
       },
       link: {
         color: 'button.linkText',
@@ -82,7 +89,7 @@ const Button = styled('button')(
         display: 'flex',
         fontWeight: '500',
         justifyContent: 'flex-start',
-        alignItems: "center",
+        alignItems: 'center',
       },
     },
   }),
@@ -120,7 +127,6 @@ const Button = styled('button')(
       },
     },
   })
-
 );
 
 Button.defaultProps = {
@@ -130,12 +136,13 @@ Button.defaultProps = {
 
 const defaultButton = styled(Button)`
   transition: all 150ms ease-in-out;
-  ${props => props.variant && statesForButtonVariant[props.variant](props.theme)};
-  ${props => props.outline && statesForButtonOutline[props.outline](props.theme)};
+  ${props =>
+    props.variant && statesForButtonVariant[props.variant](props.theme)};
+  ${props =>
+    props.outline && statesForButtonOutline[props.outline](props.theme)};
   svg {
     flex-shrink: 0;
   }
-
 `;
 
 export default defaultButton;

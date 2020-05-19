@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const ModalDescription = styled.div`
   color: ${props => props.theme.colors.doveGray};

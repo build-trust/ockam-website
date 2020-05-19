@@ -5,8 +5,8 @@ import { grid } from 'styled-system';
 
 import { media } from '../../../utils/emotion';
 import PageSection from '../PageSection';
-import AnimateOnScroll from "../../AnimateOnScroll";
-import BaseImage from "../../Image";
+import AnimateOnScroll from '../../AnimateOnScroll';
+import BaseImage from '../../Image';
 
 const Section = styled(PageSection)`
   background: ${({ theme }) => theme.colors.background};
@@ -40,8 +40,8 @@ const HeaderSectionGrid = styled(Grid)`
   display: grid;
   width: 100%;
   grid-template-areas:
-  'left-box'
-  'image';
+    'left-box'
+    'image';
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   ${media.tablet`
@@ -71,7 +71,7 @@ const MobileImage = styled(BaseImage)`
   ${media.desktop`
     display: none;
   `};
-`
+`;
 
 const ImageContainer = styled.div`
   grid-area: image;
@@ -101,9 +101,7 @@ const HeaderProductGrid = ({
       }}
     >
       <LeftBox>
-        <AnimateOnScroll slideIn="left">
-          {children}
-        </AnimateOnScroll>
+        <AnimateOnScroll slideIn="left">{children}</AnimateOnScroll>
       </LeftBox>
       <ImageContainer>
         <AnimateOnScroll slideIn="right">

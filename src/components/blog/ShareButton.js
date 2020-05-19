@@ -3,8 +3,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { media } from '../../utils/emotion';
-import Icon from "../Icon";
-import Caption from "../Caption";
+import Icon from '../Icon';
+import Caption from '../Caption';
 
 const ShareButtonStyled = styled('div')`
   display: inline-block;
@@ -15,7 +15,13 @@ const ShareButtonStyled = styled('div')`
   `}
 `;
 
-const ShareButton = ({ button: ButtonComponent, url, icon: IconComponent, children, ...rest }) => (
+const ShareButton = ({
+  button: ButtonComponent,
+  url,
+  icon: IconComponent,
+  children,
+  ...rest
+}) => (
   <ShareButtonStyled>
     <ButtonComponent
       style={{

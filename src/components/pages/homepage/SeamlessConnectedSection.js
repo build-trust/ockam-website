@@ -6,7 +6,11 @@ import DefaultGridSection from '../DefaultGridSection';
 
 const SeamlessConnectedSection = () => {
   return (
-    <DefaultGridSection image={seamlessImage} direction="imageOnLeft" title="Ockam Believes In A Connected Future">
+    <DefaultGridSection
+      image={seamlessImage}
+      direction="imageOnLeft"
+      title="Ockam Believes In A Connected Future"
+    >
       <Text>
         It is inevitable that data and computing power will become evermore
         distributed and a part of our everyday lives. Consumer, enterprise, and

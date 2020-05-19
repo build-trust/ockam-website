@@ -28,19 +28,19 @@ const colors = {
   inputPlaceholder: '#3E4D5B',
   modalBackground: 'rgba(3,13,24,0.8)',
   modalShadow: 'rgba(0,0,0,0.8)',
-  negative: "#EC432D",
-  dropdownMenuBackground: "#162535",
-  dropdownMenuItemHover: "#0A1A2B",
-  dropdownMenuBorder: "transparent",
-  dropdownMenuShadow: "rgba(0,0,0,0.2)",
+  negative: '#EC432D',
+  dropdownMenuBackground: '#162535',
+  dropdownMenuItemHover: '#0A1A2B',
+  dropdownMenuBorder: 'transparent',
+  dropdownMenuShadow: 'rgba(0,0,0,0.2)',
   button: {
-    primaryShadow: "rgba(82,199,234,0.4)",
-    primaryActive: "#0A1A2B",
-    whiteActiveBackground: "#E6E8EA",
-    secondaryHover: "#00BAEA",
-    secondaryActive: "#04698A",
-    secondaryText: "#25B8E4",
-    linkText: "#C5CBDC",
+    primaryShadow: 'rgba(82,199,234,0.4)',
+    primaryActive: '#0A1A2B',
+    whiteActiveBackground: '#E6E8EA',
+    secondaryHover: '#00BAEA',
+    secondaryActive: '#04698A',
+    secondaryText: '#25B8E4',
+    linkText: '#C5CBDC',
   },
   link: {
     default: '#A2B6C7',
@@ -53,13 +53,13 @@ const colors = {
     resultItemHover: '#0A1A2B',
     resultText: '#A2B6C7',
     resultsCountText: '#D4DDE5',
-    resultsDividerColor: "#F5F7F9",
+    resultsDividerColor: '#F5F7F9',
     caption: '#A2B6C7',
   },
   tableOfContent: {
     separatorBorder: '#162535',
   },
-  mobileMenuItemDivider: "#242A31",
+  mobileMenuItemDivider: '#242A31',
   githubStarButton: {
     icon: '#FFB900',
   },
@@ -168,7 +168,7 @@ const custom = {
 };
 
 const animations = {
-  productSections: "ease-in-out",
+  productSections: 'ease-in-out',
 };
 
 const defaultTheme = {

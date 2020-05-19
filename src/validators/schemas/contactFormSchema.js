@@ -25,7 +25,7 @@ const contactFormSchema = {
   },
   recaptcha: {
     presence: {
-      message: "^Recaptcha is required",
+      message: '^Recaptcha is required',
     },
   },
 };

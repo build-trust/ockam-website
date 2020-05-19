@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from "@emotion/styled";
-import GithubIcon from "emotion-icons/simpleIcons/GitHub";
+import styled from '@emotion/styled';
+import GithubIcon from 'emotion-icons/simpleIcons/GitHub';
 
-import useSiteMetadata from "../hooks/useSiteMetadata";
+import useSiteMetadata from '../hooks/useSiteMetadata';
 
-import Icon from "./Icon";
-import Link from "./Link";
-import Button from "./Button";
+import Icon from './Icon';
+import Link from './Link';
+import Button from './Button';
 
 const Container = styled('div')`
   display: flex;
@@ -19,7 +19,7 @@ const findRepoByFilePath = (filePath, infos) => {
   return infos.find(item => {
     const reg = new RegExp(item.slug);
     return reg.test(filePath);
-  })
+  });
 };
 
 const GithubLink = styled(Button)`
@@ -29,14 +29,23 @@ const GithubLink = styled(Button)`
 
 const generateDependedGithubUrl = (repo, filePath) => {
   const slugPathLength = repo.slug.split('/').length;
-  const githubFilePath = filePath.split("/").slice(slugPathLength).join("/");
+  const githubFilePath = filePath
+    .split('/')
+    .slice(slugPathLength)
+    .join('/');
   return `${repo.githubUrl}/${githubFilePath}`;
 };
 
-const EditOnGithubLink = ({ filePath, dependedRepos}) => {
-  const {ockamWebsiteRepo, markdownPath, githubProductionPath} = useSiteMetadata();
+const EditOnGithubLink = ({ filePath, dependedRepos }) => {
+  const {
+    ockamWebsiteRepo,
+    markdownPath,
+    githubProductionPath,
+  } = useSiteMetadata();
   const repo = findRepoByFilePath(filePath, dependedRepos);
-  const githubUrl = repo ? generateDependedGithubUrl(repo, filePath) : `${ockamWebsiteRepo}/${githubProductionPath}/${markdownPath}/${filePath}`;
+  const githubUrl = repo
+    ? generateDependedGithubUrl(repo, filePath)
+    : `${ockamWebsiteRepo}/${githubProductionPath}/${markdownPath}/${filePath}`;
 
   return (
     <Container>
@@ -50,10 +59,12 @@ const EditOnGithubLink = ({ filePath, dependedRepos}) => {
 
 EditOnGithubLink.propTypes = {
   filePath: PropTypes.string.isRequired,
-  dependedRepos: PropTypes.arrayOf(PropTypes.shape({
-    githubUrl: PropTypes.string,
-    slug: PropTypes.string,
-  })),
+  dependedRepos: PropTypes.arrayOf(
+    PropTypes.shape({
+      githubUrl: PropTypes.string,
+      slug: PropTypes.string,
+    })
+  ),
 };
 
 EditOnGithubLink.defaultProps = {

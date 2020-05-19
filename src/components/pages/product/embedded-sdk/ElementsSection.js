@@ -6,7 +6,7 @@ import FeaturesCardGrid from '../../FeaturesCardGrid';
 import { ReactComponent as CodeIcon } from '../../../../assets/core-icon.svg';
 import { ReactComponent as VaultIcon } from '../../../../assets/vault-icon.svg';
 import { ReactComponent as TransferIcon } from '../../../../assets/transfer-icon.svg';
-import AnimateOnScroll from "../../../AnimateOnScroll";
+import AnimateOnScroll from '../../../AnimateOnScroll';
 
 const features = [
   {

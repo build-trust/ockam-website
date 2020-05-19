@@ -9,8 +9,8 @@ import { media } from '../../../../utils/emotion';
 import routerDiagram from '../../../../assets/product/subpage-router-diagram.svg';
 import routerDiagramEdged from '../../../../assets/product/subpage-router-diagram-edged.svg';
 import routerDiagramMobile from '../../../../assets/product/subpage-router-diagram-mobile.svg';
-import AnimateOnScroll from "../../../AnimateOnScroll";
-import Image from "../../../Image";
+import AnimateOnScroll from '../../../AnimateOnScroll';
+import Image from '../../../Image';
 
 const Container = styled('div')`
   display: flex;
@@ -31,7 +31,7 @@ const DescriptionBox = styled('div')`
 `;
 
 const ImageBox = styled('div')`
-  display:none;
+  display: none;
   position: relative;
 
   ${media.desktop`
@@ -44,7 +44,6 @@ const ImageBox = styled('div')`
   ${media.ultraWide`
     height: 567px;
   `};
- 
 `;
 
 const DesktopImage = styled('div')`
@@ -78,7 +77,9 @@ const DescriptionSection = () => {
       <AnimateOnScroll transformY animateOnce>
         <Container>
           <DescriptionBox>
-            <Heading linked as="h2">Content of Ockam Router</Heading>
+            <Heading linked as="h2">
+              Content of Ockam Router
+            </Heading>
             <Text>Ockam Router includes:</Text>
             <CheckedListItem>
               Ockam Router Service
@@ -87,8 +88,8 @@ const DescriptionSection = () => {
             <CheckedListItem>
               Ockam Cloud SDK
               <Text color="caption">
-                allows other services and environments to securely connect with an
-                Ockam Router.
+                allows other services and environments to securely connect with
+                an Ockam Router.
               </Text>
             </CheckedListItem>
             <CheckedListItem>

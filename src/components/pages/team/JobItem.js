@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ArrowForward from "emotion-icons/ion-md/ArrowForward";
-import styled from "@emotion/styled";
+import ArrowForward from 'emotion-icons/ion-md/ArrowForward';
+import styled from '@emotion/styled';
 
-import Heading from "../../Heading";
-import Icon from "../../Icon";
-import Link from "../../Link";
-import { media } from "../../../utils/emotion";
-
+import Heading from '../../Heading';
+import Icon from '../../Icon';
+import Link from '../../Link';
+import { media } from '../../../utils/emotion';
 
 const Container = styled(Link)`
   padding-top: 2.4rem;
@@ -48,6 +47,6 @@ JobItem.defaultProps = {
   job: {
     fields: {},
   },
-}
+};
 
 export default JobItem;

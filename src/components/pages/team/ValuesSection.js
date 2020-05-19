@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 import PageSection from '../PageSection';
 import { media } from '../../../utils/emotion';
@@ -10,9 +10,9 @@ import mattAvatar from '../../../assets/matthew-gregory.jpg';
 import Button from '../../Button';
 import Caption from '../../Caption';
 import Link from '../../Link';
-import CheckedListItem from "../../CheckedListItem";
-import AnimateOnScroll from "../../AnimateOnScroll";
-import Image from "../../Image";
+import CheckedListItem from '../../CheckedListItem';
+import AnimateOnScroll from '../../AnimateOnScroll';
+import Image from '../../Image';
 
 const Grid = styled('div')`
   display: grid;
@@ -44,7 +44,6 @@ const QuatationBoxWrapper = styled('div')`
 `;
 
 const QuatationBox = styled('div')`
-
   border: 2px solid ${props => props.theme.colors.accentBackground};
   border-radius: ${props => props.theme.radii.default};
   display: flex;
@@ -80,7 +79,11 @@ const MattAvatar = styled(Image)`
   transform: translateY(-50%);
 `;
 
-const ValuesListItem = ({ children }) => <CheckedListItem containerStyle={{ marginBottom: 0}}>{ children }</CheckedListItem>;
+const ValuesListItem = ({ children }) => (
+  <CheckedListItem containerStyle={{ marginBottom: 0 }}>
+    {children}
+  </CheckedListItem>
+);
 
 ValuesListItem.propTypes = {
   children: PropTypes.oneOfType([
@@ -98,9 +101,7 @@ const ValuesSection = () => {
           mb={{ _: 5, lg: 4 }}
           textAlign={{ _: 'center', lg: 'left' }}
         >
-          <AnimateOnScroll>
-            Ockam Values
-          </AnimateOnScroll>
+          <AnimateOnScroll>Ockam Values</AnimateOnScroll>
         </Title>
         <DescriptionBox>
           <AnimateOnScroll>
@@ -143,7 +144,7 @@ const ValuesSection = () => {
           </AnimateOnScroll>
         </DescriptionBox>
         <QuatationBoxWrapper>
-          <AnimateOnScroll slideIn='right'>
+          <AnimateOnScroll slideIn="right">
             <QuatationBox>
               <MattAvatar src={mattAvatar} alt="Matthew Gregory" />
               <Heading textAlign="center" as="h3" fontStyle="italic">
@@ -153,7 +154,6 @@ const ValuesSection = () => {
             </QuatationBox>
           </AnimateOnScroll>
         </QuatationBoxWrapper>
-
       </Grid>
     </PageSection>
   );

@@ -10,10 +10,10 @@ import Link from '../Link';
 import SidebarButton from '../SidebarButton';
 import ToggleIcon from '../Collapse/ToggleIcon';
 import MobileMenu from '../Menu/MobileMenu';
-import Icon from "../Icon";
-import Search from "../search";
-import Logo from "../Logo";
-import LearnGridLayout from "../LearnGridLayout";
+import Icon from '../Icon';
+import Search from '../search';
+import Logo from '../Logo';
+import LearnGridLayout from '../LearnGridLayout';
 
 const StyledLink = styled(Link)`
   margin-left: auto;

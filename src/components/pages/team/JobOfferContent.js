@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import Heading from "../../Heading";
-import Text from "../../Text";
-import Button from "../../Button";
-import Link from "../../Link";
-import List from "../../List";
-import checkIcon from "../../../assets/check-circle-icon.svg";
+import Heading from '../../Heading';
+import Text from '../../Text';
+import Button from '../../Button';
+import Link from '../../Link';
+import List from '../../List';
+import checkIcon from '../../../assets/check-circle-icon.svg';
 
 const StyledList = styled(List)`
   list-style-type: none;
@@ -17,7 +17,7 @@ const StyledList = styled(List)`
     font-size: ${props => props.theme.fontSizes.body};
     padding-left: 4rem;
     margin-bottom: ${props => props.theme.space.medium};
-    
+
     :before {
       content: '';
       width: 2.1rem;
@@ -33,8 +33,8 @@ const StyledList = styled(List)`
 `;
 
 const ListContainer = styled('div')`
-  margin-bottom: 5rem;  
-`
+  margin-bottom: 5rem;
+`;
 
 const JobOfferContent = ({ job }) => {
   return (
@@ -43,7 +43,9 @@ const JobOfferContent = ({ job }) => {
       <Text mb={4} dangerouslySetInnerHTML={{ __html: job.descriptionPlain }} />
       {job.lists.map(item => (
         <ListContainer key={item.text}>
-          <Heading mb={4} as="h2">{item.text}</Heading>
+          <Heading mb={4} as="h2">
+            {item.text}
+          </Heading>
           <StyledList dangerouslySetInnerHTML={{ __html: item.content }} />
         </ListContainer>
       ))}
@@ -81,6 +83,6 @@ JobOfferContent.propTypes = {
 
 JobOfferContent.defaultProps = {
   job: {},
-}
+};
 
 export default JobOfferContent;

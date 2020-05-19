@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 import { space } from 'styled-system';
 
-import Link from "./Link";
+import Link from './Link';
 
 const BaseLink = styled(Link)(space);
 const LinkAccent = styled(BaseLink)`

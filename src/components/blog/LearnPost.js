@@ -14,7 +14,6 @@ const PostHeader = styled('div')`
 
 const PostContent = styled('div')`
   display: grid;
-
 `;
 
 const PostBody = styled('div')`
@@ -46,7 +45,6 @@ LearnPost.propTypes = {
   date: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   authorAvatar: PropTypes.string.isRequired,
-
 };
 
 export default LearnPost;

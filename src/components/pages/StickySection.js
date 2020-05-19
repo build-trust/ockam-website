@@ -3,21 +3,20 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import { media } from '../../utils/emotion';
-import Heading from "../Heading";
-import AnimateOnScroll from "../AnimateOnScroll";
-import BaseImage from "../Image";
+import Heading from '../Heading';
+import AnimateOnScroll from '../AnimateOnScroll';
+import BaseImage from '../Image';
 
-import Content from "./Content";
+import Content from './Content';
 
 const StickySectionContent = styled(Content)`
-
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas: 
-    "title"
-    "image"
-    "content";
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'title'
+    'image'
+    'content';
   ${media.desktop`   
       grid-template-columns: 7fr 4fr;
       grid-template-rows: 1fr;
@@ -26,17 +25,15 @@ const StickySectionContent = styled(Content)`
       "image title"
       "image content";
   `}
-
 `;
 
 const StickyBox = styled('div')`
-
   text-align: center;
   ${media.desktop`
     position: sticky;
     top: 8rem;
   `}
-`
+`;
 
 const TextBox = styled('div')`
   grid-area: content;
@@ -74,14 +71,20 @@ const MobileImage = styled(BaseImage)`
   ${media.desktop`
     display: none;
   `}
-`
+`;
 
 const TitleWrapper = styled('div')`
-   grid-area: title;
-`
+  grid-area: title;
+`;
 
-const StickySection = ({ image, mobileImage, title, TitleComponent, children, order }) => {
-
+const StickySection = ({
+  image,
+  mobileImage,
+  title,
+  TitleComponent,
+  children,
+  order,
+}) => {
   return (
     <AnimateOnScroll>
       <StickySectionContent>
@@ -95,15 +98,17 @@ const StickySection = ({ image, mobileImage, title, TitleComponent, children, or
         </StickyContainer>
         {title && (
           <TitleWrapper>
-            <Heading linked as="h2" textAlign={{ _: "center", lg: 'left'}}>
+            <Heading linked as="h2" textAlign={{ _: 'center', lg: 'left' }}>
               {title}
             </Heading>
           </TitleWrapper>
         )}
-        {TitleComponent && <TitleWrapper as="div"><TitleComponent /></TitleWrapper>}
-        <TextBox order={order}>
-          {children}
-        </TextBox>
+        {TitleComponent && (
+          <TitleWrapper as="div">
+            <TitleComponent />
+          </TitleWrapper>
+        )}
+        <TextBox order={order}>{children}</TextBox>
       </StickySectionContent>
     </AnimateOnScroll>
   );

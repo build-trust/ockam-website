@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import LocationContext from "../contexts/LocationContext";
+import LocationContext from '../contexts/LocationContext';
 
 const useLocation = () => {
   return useContext(LocationContext);

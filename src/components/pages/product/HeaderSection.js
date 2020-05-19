@@ -6,15 +6,15 @@ import Heading from '../../Heading';
 import heroProductGraphics from '../../../assets/product/hero-product.svg';
 import heroProductMobileGraphics from '../../../assets/product/hero-product-mobile.svg';
 import { media } from '../../../utils/emotion';
-import { ReactComponent as ChipIcon} from '../../../assets/chip-icon.svg';
-import { ReactComponent as LinuxIcon} from '../../../assets/linux-icon.svg';
-import { ReactComponent as CloudIcon} from '../../../assets/cloud-icon.svg';
-import { ReactComponent as RouterIcon} from '../../../assets/router-icon.svg';
-import { ReactComponent as ListIcon} from '../../../assets/list-icon.svg';
-import { ReactComponent as HandsIcon} from '../../../assets/hands-icon.svg';
-import { ReactComponent as SupportIcon} from '../../../assets/support-icon.svg';
+import { ReactComponent as ChipIcon } from '../../../assets/chip-icon.svg';
+import { ReactComponent as LinuxIcon } from '../../../assets/linux-icon.svg';
+import { ReactComponent as CloudIcon } from '../../../assets/cloud-icon.svg';
+import { ReactComponent as RouterIcon } from '../../../assets/router-icon.svg';
+import { ReactComponent as ListIcon } from '../../../assets/list-icon.svg';
+import { ReactComponent as HandsIcon } from '../../../assets/hands-icon.svg';
+import { ReactComponent as SupportIcon } from '../../../assets/support-icon.svg';
 import IconListItem from '../../IconLisItem';
-import Subheading from "../Subheading";
+import Subheading from '../Subheading';
 
 import HeaderProductGrid from './HeaderProductGrid';
 
@@ -51,16 +51,22 @@ const HeaderSection = () => {
       </HeroHeading>
 
       <div>
-        <Text textAlign={{ desktop: 'left'}} fontWeight='bold'>Software Development Kits</Text>
+        <Text textAlign={{ desktop: 'left' }} fontWeight="bold">
+          Software Development Kits
+        </Text>
         <IconListItem icon={CloudIcon}>Cloud Servers</IconListItem>
         <IconListItem icon={LinuxIcon}> Linux Boxes at the Edge</IconListItem>
         <IconListItem icon={ChipIcon}>Embedded and IoT Devices</IconListItem>
 
-        <Text textAlign={{ desktop: 'left'}} mt={4} fontWeight='bold'>Hosted Cloud Services</Text>
+        <Text textAlign={{ desktop: 'left' }} mt={4} fontWeight="bold">
+          Hosted Cloud Services
+        </Text>
         <IconListItem icon={RouterIcon}>Ockam Router</IconListItem>
         <IconListItem icon={ListIcon}> Ockam Registry</IconListItem>
 
-        <Text textAlign={{ desktop: 'left'}} mt={4} fontWeight='bold'>Professional Services</Text>
+        <Text textAlign={{ desktop: 'left' }} mt={4} fontWeight="bold">
+          Professional Services
+        </Text>
         <IconListItem icon={HandsIcon}>Enterprise Support</IconListItem>
         <IconListItem icon={SupportIcon}>Custom Services</IconListItem>
       </div>

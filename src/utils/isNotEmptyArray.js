@@ -1,5 +1,5 @@
-import isArray from "lodash/isArray";
+import isArray from 'lodash/isArray';
 
-const isNotEmptyArray = (arr) => arr.length === 0 || !isArray(arr);
+const isNotEmptyArray = arr => arr.length === 0 || !isArray(arr);
 
 export default isNotEmptyArray;

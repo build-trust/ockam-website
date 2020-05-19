@@ -99,7 +99,7 @@ const NextPrevious = ({ currentNode, rootSlug }) => {
             </Caption>
             <Title>{nextNode.title}</Title>
           </Content>
-          <StyledIcon icon={ArrowRight} size={16} mr={3}  />
+          <StyledIcon icon={ArrowRight} size={16} mr={3} />
         </NavigationButtonNext>
       ) : null}
     </Container>

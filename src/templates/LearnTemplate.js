@@ -14,8 +14,8 @@ import LearnSidebar from '../components/learn/LearnSidebar/LearnSidebar';
 import LearnLayout from '../layouts/LearnLayout';
 import defaultAvatar from '../assets/default_avatar.png';
 import LearnPost from '../components/blog/LearnPost';
-import LearnGridLayout from "../components/LearnGridLayout";
-import RightSidebar from "../components/learn/RightSidebar/RightSidebar";
+import LearnGridLayout from '../components/LearnGridLayout';
+import RightSidebar from '../components/learn/RightSidebar/RightSidebar';
 
 const Content = styled.div`
   display: flex;
@@ -47,12 +47,11 @@ const Content = styled.div`
 const ContentLearnContainer = styled(LearnGridLayout)`
   align-items: flex-start;
   grid-template-columns: 1fr;
-   margin-bottom: 4rem;
+  margin-bottom: 4rem;
   ${media.desktop`
     margin-bottom: 0;
   `}
 `;
-
 
 export default function LearnTemplate(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +64,15 @@ export default function LearnTemplate(props) {
     algoliaIndexes,
   } = props;
   const {
-    frontmatter: { metaTitle, metaDescription, metaImage, authorAvatar, author, date, wideContent },
+    frontmatter: {
+      metaTitle,
+      metaDescription,
+      metaImage,
+      authorAvatar,
+      author,
+      date,
+      wideContent,
+    },
     excerpt,
     parent: { relativePath },
     fields: { slug, title, id },
@@ -81,7 +88,10 @@ export default function LearnTemplate(props) {
 
   const seoTitle = metaTitle || title || 'Ockam | Learn';
   const seoDescription = metaDescription || excerpt;
-  const seoImage = metaImage && metaImage.childImageSharp && metaImage.childImageSharp.fixed.src;
+  const seoImage =
+    metaImage &&
+    metaImage.childImageSharp &&
+    metaImage.childImageSharp.fixed.src;
 
   const rootSlug = getRootSlugFromPathname(location.pathname);
   const isRoot = currentNode.slug === '/';
@@ -92,9 +102,7 @@ export default function LearnTemplate(props) {
     ? authorAvatar.childImageSharp.fixed.src
     : defaultAvatar;
 
-
-
-    useOnClickOutside(ref, () => setIsOpen(false));
+  useOnClickOutside(ref, () => setIsOpen(false));
   return (
     <LearnLayout
       location={location}
@@ -110,7 +118,7 @@ export default function LearnTemplate(props) {
           menuId={menuId}
           ref={ref}
         />
-        <Content maxWidth={{ xUltraWide: !wideContent ? '105rem' : 'initial'}}>
+        <Content maxWidth={{ xUltraWide: !wideContent ? '105rem' : 'initial' }}>
           <SEO
             title={seoTitle}
             image={seoImage}
@@ -124,7 +132,6 @@ export default function LearnTemplate(props) {
               authorAvatar={imageAvatar}
               author={author}
               date={date}
-
             />
           ) : (
             <MDXRenderer>{body}</MDXRenderer>
@@ -133,7 +140,11 @@ export default function LearnTemplate(props) {
             <NextPrevious rootSlug={rootSlug} currentNode={currentNode} />
           )}
         </Content>
-        <RightSidebar dependedRepos={dependedRepos} tableOfContents={tableOfContents} relativePath={relativePath} />
+        <RightSidebar
+          dependedRepos={dependedRepos}
+          tableOfContents={tableOfContents}
+          relativePath={relativePath}
+        />
       </ContentLearnContainer>
     </LearnLayout>
   );
@@ -178,10 +189,12 @@ LearnTemplate.propTypes = {
       body: PropTypes.string,
     }),
   }),
-  dependedRepos: PropTypes.arrayOf(PropTypes.shape({
-    githubUrl: PropTypes.string,
-    slug: PropTypes.string,
-  })),
+  dependedRepos: PropTypes.arrayOf(
+    PropTypes.shape({
+      githubUrl: PropTypes.string,
+      slug: PropTypes.string,
+    })
+  ),
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
     hash: PropTypes.string.isRequired,

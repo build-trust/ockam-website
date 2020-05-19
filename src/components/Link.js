@@ -3,7 +3,14 @@ import { Link as GatsbyLink } from 'gatsby';
 import isAbsoluteUrl from 'is-absolute-url';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { space, color, typography, layout, flexbox, position } from 'styled-system';
+import {
+  space,
+  color,
+  typography,
+  layout,
+  flexbox,
+  position,
+} from 'styled-system';
 
 const ActionLink = styled('a')`
   cursor: pointer;
@@ -18,12 +25,12 @@ const BaseLink = forwardRef(({ to, children, ...rest }, ref) => {
       </a>
     );
   }
-  if(!to) {
+  if (!to) {
     return (
       <ActionLink ref={ref} {...rest}>
         {children}
       </ActionLink>
-    )
+    );
   }
   return (
     <GatsbyLink ref={ref} to={to} {...rest}>

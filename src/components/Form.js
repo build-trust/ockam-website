@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { space, layout, grid } from 'styled-system'
+import styled from '@emotion/styled';
+import { space, layout, grid } from 'styled-system';
 
-const Form = styled('form')(space, layout, grid );
+const Form = styled('form')(space, layout, grid);
 
 Form.defaultProps = {
   width: '100%',

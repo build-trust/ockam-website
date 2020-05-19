@@ -39,7 +39,6 @@ const useLeverJobs = () => {
   `);
 
   return mapAEdgesToCollection(data.allLever.edges);
-
 };
 
 export default useLeverJobs;

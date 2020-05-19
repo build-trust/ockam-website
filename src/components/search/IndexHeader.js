@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import capitalize from "../../utils/capitalize";
+import capitalize from '../../utils/capitalize';
 
-import Stats from "./Stats";
+import Stats from './Stats';
 
 const Header = styled('header')`
   display: flex;
@@ -12,7 +12,8 @@ const Header = styled('header')`
   justify-content: space-between;
   margin-bottom: 0.3em;
   padding: 1.5rem 3rem 0 3rem;
-  border-top: 1px solid ${props => props.theme.colors.search.resultsDividerColor};
+  border-top: 1px solid
+    ${props => props.theme.colors.search.resultsDividerColor};
   &:first-of-type {
     border-top: none;
   }

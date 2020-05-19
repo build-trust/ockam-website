@@ -14,7 +14,7 @@ const LineNumber = styled('span')`
   opacity: 0.3;
   text-align: center;
   position: relative;
-`
+`;
 
 const CodeBlockContainer = styled('div')`
   margin-top: 0.5rem;
@@ -23,7 +23,9 @@ const CodeBlockContainer = styled('div')`
     border-radius: ${props => props.theme.radii[1]};
   }
   font-size: 1.3rem;
-  ${props => props.hasLineNumbers && `
+  ${props =>
+    props.hasLineNumbers &&
+    `
     .token-line {
       margin-left: -1.6rem;
       margin-right: -1.6rem;
@@ -46,7 +48,7 @@ function cleanTokens(tokens) {
 }
 
 /* eslint-disable */
-const CodeBlock = ({ children: code, className, noLineNumbers = false, }) => {
+const CodeBlock = ({ children: code, className, noLineNumbers = false }) => {
   const lang = className && className.split('-')[1];
   const hasLineNumbers = !noLineNumbers && lang !== `noLineNumbers`;
   return (
@@ -140,7 +142,7 @@ const CodeBlock = ({ children: code, className, noLineNumbers = false, }) => {
                         );
                       }
                     }
-                    return  <span {...getTokenProps({ token, key })} />
+                    return <span {...getTokenProps({ token, key })} />;
                   })}
                 </div>
               );

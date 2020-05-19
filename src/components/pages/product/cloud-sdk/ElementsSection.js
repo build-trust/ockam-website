@@ -7,7 +7,7 @@ import { ReactComponent as CodeIcon } from '../../../../assets/core-icon.svg';
 import { ReactComponent as VaultIcon } from '../../../../assets/vault-icon.svg';
 import { ReactComponent as TransferIcon } from '../../../../assets/transfer-icon.svg';
 import { ReactComponent as CloudIcon } from '../../../../assets/cloud-icon.svg';
-import AnimateOnScroll from "../../../AnimateOnScroll";
+import AnimateOnScroll from '../../../AnimateOnScroll';
 
 const features = [
   {
@@ -19,7 +19,8 @@ const features = [
   {
     title: 'Service interface',
     icon: CloudIcon,
-    description: 'Service Interfaces in the Ockam Library are adaptors that allow Cloud Service APIs to authenitcate with, and send messages to, the rest of a connected ecosystem.',
+    description:
+      'Service Interfaces in the Ockam Library are adaptors that allow Cloud Service APIs to authenitcate with, and send messages to, the rest of a connected ecosystem.',
   },
   {
     title: 'Vault',

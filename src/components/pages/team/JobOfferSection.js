@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ChevronLeft from "emotion-icons/feather/ChevronLeft";
-import styled from "@emotion/styled";
+import ChevronLeft from 'emotion-icons/feather/ChevronLeft';
+import styled from '@emotion/styled';
 
-import Icon from "../../Icon";
-import Link from "../../Link";
-import AnimateOnScroll from "../../AnimateOnScroll";
-import {media} from "../../../utils/emotion";
-import PageSection from "../PageSection";
-import Button from "../../Button";
+import Icon from '../../Icon';
+import Link from '../../Link';
+import AnimateOnScroll from '../../AnimateOnScroll';
+import { media } from '../../../utils/emotion';
+import PageSection from '../PageSection';
+import Button from '../../Button';
 
-import JobOfferContent from "./JobOfferContent";
+import JobOfferContent from './JobOfferContent';
 
 const Container = styled('div')`
   ${media.ultraWide`
     width: 65%
   `}
-`
+`;
 
 const JobPageSection = styled(PageSection)`
   margin-top: 10rem;
-`
+`;
 
 const BackButton = styled(Button)`
   padding-right: 0;
@@ -28,7 +28,7 @@ const BackButton = styled(Button)`
   display: inline-block;
   margin-bottom: 3rem;
   font-weight: 400;
-`
+`;
 
 const JobOfferSection = ({ job }) => {
   return (
@@ -74,6 +74,6 @@ JobOfferSection.defaultProps = {
     fields: {},
     lists: {},
   },
-}
+};
 
 export default JobOfferSection;

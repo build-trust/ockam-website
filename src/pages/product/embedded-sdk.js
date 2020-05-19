@@ -23,5 +23,4 @@ const EmbeddedSdk = () => {
   );
 };
 
-
 export default EmbeddedSdk;

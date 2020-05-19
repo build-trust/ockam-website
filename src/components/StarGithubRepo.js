@@ -1,20 +1,25 @@
 import React from 'react';
 import StartIcon from 'emotion-icons/ion-ios/Star';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 import { layout, space, flexbox } from 'styled-system';
 
-import useGithubRepoDetails from "../hooks/useGithubRepoDetails";
+import useGithubRepoDetails from '../hooks/useGithubRepoDetails';
 
-import Icon from "./Icon";
-import Link from "./Link";
-import Button from "./Button";
-import Badge from "./Badge";
+import Icon from './Icon';
+import Link from './Link';
+import Button from './Button';
+import Badge from './Badge';
 
-const Container = styled('div')({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-start",
-}, flexbox, space, layout )
+const Container = styled('div')(
+  {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  flexbox,
+  space,
+  layout
+);
 
 const GithubStarLink = styled(Button)`
   padding-left: 0;
@@ -24,12 +29,12 @@ const GithubStarLink = styled(Button)`
   overflow: hidden;
   :hover {
     svg {
-    color: ${props => props.theme.colors.githubStarButton.icon};
+      color: ${props => props.theme.colors.githubStarButton.icon};
     }
-  } 
+  }
 `;
 
-const StarGithubRepo = (props) => {
+const StarGithubRepo = props => {
   const { stars, url } = useGithubRepoDetails();
   return (
     <Container {...props}>

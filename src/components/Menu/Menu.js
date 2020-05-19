@@ -1,10 +1,10 @@
-import React  from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 import { media } from '../../utils/emotion';
 
-import MenuItems from "./MenuItems";
+import MenuItems from './MenuItems';
 
 const Container = styled.div`
   width: auto;
@@ -19,9 +19,13 @@ const Container = styled.div`
 const Menu = ({ isCollapsedHeader, contactAsButton, ...rest }) => {
   return (
     <Container {...rest}>
-      <MenuItems isCollapsedHeader={isCollapsedHeader} contactAsButton={contactAsButton} />
+      <MenuItems
+        isCollapsedHeader={isCollapsedHeader}
+        contactAsButton={contactAsButton}
+      />
     </Container>
-)};
+  );
+};
 
 Menu.propTypes = {
   isCollapsedHeader: PropTypes.bool,

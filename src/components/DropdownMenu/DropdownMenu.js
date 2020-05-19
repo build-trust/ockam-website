@@ -6,14 +6,30 @@ import useMatchBreakpoint from '../../hooks/useMatchBreakpoint';
 import OverlayMenu from './OverlayMenu';
 import CollapsibleMenu from './CollapsibleMenu';
 
-const DropdownMenu = ({ options, isCollapsedHeader, onClickItem, triggerEvent, children }) => {
+const DropdownMenu = ({
+  options,
+  isCollapsedHeader,
+  onClickItem,
+  triggerEvent,
+  children,
+}) => {
   const isDesktop = useMatchBreakpoint('desktop');
   return isDesktop ? (
-    <OverlayMenu isCollapsedHeader={isCollapsedHeader} triggerEvent={triggerEvent} options={options}>
+    <OverlayMenu
+      isCollapsedHeader={isCollapsedHeader}
+      triggerEvent={triggerEvent}
+      options={options}
+    >
       {children}
     </OverlayMenu>
   ) : (
-    <CollapsibleMenu onClickItem={onClickItem} isCollapsedHeader={isCollapsedHeader} options={options}>{children}</CollapsibleMenu>
+    <CollapsibleMenu
+      onClickItem={onClickItem}
+      isCollapsedHeader={isCollapsedHeader}
+      options={options}
+    >
+      {children}
+    </CollapsibleMenu>
   );
 };
 

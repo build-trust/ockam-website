@@ -12,10 +12,10 @@ import Sidebar from '../../Sidebar';
 import useSiteMetadata from '../../../hooks/useSiteMetadata';
 import Link from '../../Link';
 import SidebarCrossIcon from '../../Sidebar/SidebarCrossIcon';
-import useModal from "../../../hooks/useModal";
-import ContactModal from "../../../modals/ContactModal";
-import Scrollbar from "../../Scrollbar";
-import useSetFullHeightReducedByTopOffset from "../../../hooks/useSetFullHeightReducedByTopOffset";
+import useModal from '../../../hooks/useModal';
+import ContactModal from '../../../modals/ContactModal';
+import Scrollbar from '../../Scrollbar';
+import useSetFullHeightReducedByTopOffset from '../../../hooks/useSetFullHeightReducedByTopOffset';
 
 import LearnSidebarMenu from './LearnSidebarMenu';
 
@@ -29,7 +29,8 @@ const IconsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  box-shadow: 0px -10px 29px -15px ${( {theme}) => theme.colors.accentBackground};
+  box-shadow: 0px -10px 29px -15px
+    ${({ theme }) => theme.colors.accentBackground};
 `;
 
 const StyledSidebar = styled(Sidebar)`
@@ -58,41 +59,42 @@ const ContentWrapper = styled.div`
   `};
 `;
 
-const LearnSidebar = forwardRef(({ location, menuId, isOpen, onClose }, ref) => {
-  useSetFullHeightReducedByTopOffset(ref)
-  const [, showContactModal] = useModal(ContactModal);
-  const siteMetaData = useSiteMetadata();
+const LearnSidebar = forwardRef(
+  ({ location, menuId, isOpen, onClose }, ref) => {
+    useSetFullHeightReducedByTopOffset(ref);
+    const [, showContactModal] = useModal(ContactModal);
+    const siteMetaData = useSiteMetadata();
 
-  return (
-    <StyledSidebar
-      menuId={menuId}
-      location={location}
-      isOpen={isOpen}
-      onClose={onClose}
-      ref={ref}
-      showCloseIcon={false}
-    >
-
-      <Scrollbar style={{ position: '' }}>
-        <ContentWrapper>
-          <SidebarCrossIcon onClick={onClose} />
-          <LearnSidebarMenu location={location} />
-        </ContentWrapper>
-      </Scrollbar>
-      <IconsContainer>
-        <Link to={siteMetaData.ockamLibraryRepo}>
-          <Icon size={28} icon={GithubIcon} />
-        </Link>
-        <Link onClick={() => showContactModal()}>
-          <Icon size={28} icon={SendPlaneIcon} />
-        </Link>
-        <Link to={siteMetaData.communityChannel}>
-          <Icon size={28} icon={CommunityIcon} />
-        </Link>
-      </IconsContainer>
-    </StyledSidebar>
-  );
-});
+    return (
+      <StyledSidebar
+        menuId={menuId}
+        location={location}
+        isOpen={isOpen}
+        onClose={onClose}
+        ref={ref}
+        showCloseIcon={false}
+      >
+        <Scrollbar style={{ position: '' }}>
+          <ContentWrapper>
+            <SidebarCrossIcon onClick={onClose} />
+            <LearnSidebarMenu location={location} />
+          </ContentWrapper>
+        </Scrollbar>
+        <IconsContainer>
+          <Link to={siteMetaData.ockamLibraryRepo}>
+            <Icon size={28} icon={GithubIcon} />
+          </Link>
+          <Link onClick={() => showContactModal()}>
+            <Icon size={28} icon={SendPlaneIcon} />
+          </Link>
+          <Link to={siteMetaData.communityChannel}>
+            <Icon size={28} icon={CommunityIcon} />
+          </Link>
+        </IconsContainer>
+      </StyledSidebar>
+    );
+  }
+);
 
 LearnSidebar.propTypes = {
   location: PropTypes.shape({}).isRequired,

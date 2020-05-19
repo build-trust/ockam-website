@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import {media} from "../utils/emotion";
+import { media } from '../utils/emotion';
 
 const LearnGridLayout = styled('div')`
   width: 100%;

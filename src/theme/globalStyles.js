@@ -139,13 +139,13 @@ const globalStyles = css`
     outline: none;
     cursor: pointer;
   }
-  
+
   .rwd-container {
     position: relative;
     overflow: hidden;
     padding-top: 56.25%;
   }
-  
+
   .rwd-iframe {
     position: absolute;
     top: 0;
@@ -154,7 +154,6 @@ const globalStyles = css`
     height: 100%;
     border: 0;
   }
-  
 `;
 
 export default globalStyles;

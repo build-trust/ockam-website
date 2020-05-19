@@ -8,7 +8,7 @@ import isArray from 'lodash/isArray';
 import Icon from '../../Icon';
 import SidebarMenuItem from '../../Sidebar/SidebarMenuItem';
 import capitalize from '../../../utils/capitalize';
-import removeStartEndSlugSlash from "../../../utils/removeStartEndSlugSlash";
+import removeStartEndSlugSlash from '../../../utils/removeStartEndSlugSlash';
 
 const NodeLink = styled(SidebarMenuItem)`
   padding-left: 1rem;
@@ -18,7 +18,7 @@ const NodeLink = styled(SidebarMenuItem)`
 const NodeList = styled.ul`
   border-left: 1px solid
     ${props =>
-  (props.deepLevel >= 0 ? props.theme.colors.accentBackground : 'inherit')};
+      props.deepLevel >= 0 ? props.theme.colors.accentBackground : 'inherit'};
   margin-left: ${props => (props.deepLevel >= 0 ? '1.4rem' : '0')};
   padding-left: 0;
 `;
@@ -30,8 +30,11 @@ const ButtonChevron = styled.button`
 `;
 
 const getArtificiallyUrl = (url, deepLevel) => {
- return url.split("/").slice(1, deepLevel + 3).join("/")
-}
+  return url
+    .split('/')
+    .slice(1, deepLevel + 3)
+    .join('/');
+};
 
 // eslint-disable-next-line complexity
 const LearnSidebarMenuNode = ({
@@ -42,19 +45,20 @@ const LearnSidebarMenuNode = ({
   deepLevel,
   location,
 }) => {
-
   const hasChildren = isArray(nodes) && nodes.length !== 0;
 
   // This `artificiallyUrl` is needed cause nodes without root file (index.md or README.md), generates same
   // url as first child
   const isRootWithSameUrl = hasChildren && url === nodes[0].url;
-  const artificiallyUrl = isRootWithSameUrl ? getArtificiallyUrl(url, deepLevel) : false;
+  const artificiallyUrl = isRootWithSameUrl
+    ? getArtificiallyUrl(url, deepLevel)
+    : false;
   const isActive = location && location.pathname.match(artificiallyUrl || url);
 
   const trimmedUrl = removeStartEndSlugSlash(artificiallyUrl || url);
   const trimmedPathname = removeStartEndSlugSlash(location.pathname);
 
-  const isSelected = location &&  trimmedPathname === trimmedUrl;
+  const isSelected = location && trimmedPathname === trimmedUrl;
 
   const isDirectoryNode = nodes && nodes[0] ? nodes[0].url === url : false;
   const directoryTitle = capitalize(name);
