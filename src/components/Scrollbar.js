@@ -16,13 +16,13 @@ const Container = styled('div')`
   .ScrollbarsCustom-TrackY {
     top: 0 !important;
     background-color: ${({ theme }) =>
-      theme.custom.sidebar.customScrollTruckColor} !important;
+      theme.colors.sidebar.customScrollTruck} !important;
     height: 100% !important;
     width: 4px !important;
   }
   .ScrollbarsCustom-ThumbY {
     background-color: ${({ theme }) =>
-      theme.custom.sidebar.customScrollThumbColor} !important;
+      theme.colors.sidebar.customScrollThumb} !important;
   }
 `;
 

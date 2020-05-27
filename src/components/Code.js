@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const Code = styled('code')`
-  background: ${props => props.theme.custom.code.backgroundColor};
+  background: ${props => props.theme.colors.codeBlock.background};
   color: ${props => props.theme.colors.code};
   font-size: ${props => props.theme.fontSizes.caption};
   border-radius: ${props => props.theme.radii.default};

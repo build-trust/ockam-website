@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { media } from '../../utils/emotion';
-import Icon from '../Icon';
-import Caption from '../Caption';
+import { media } from '../utils/emotion';
+
+import Icon from './Icon';
+import Caption from './Caption';
 
 const ShareButtonStyled = styled('div')`
   display: inline-block;

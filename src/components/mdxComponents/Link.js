@@ -4,10 +4,10 @@ import styled from '@emotion/styled';
 import dropRight from 'lodash/dropRight';
 import isString from 'lodash/isString';
 
-import Link from '../Link';
+import BaseLink from '../Link';
 import useLocation from '../../hooks/useLocation';
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(BaseLink)`
   text-decoration: underline;
   color: ${props => props.theme.colors.primary};
 `;
@@ -23,12 +23,12 @@ const getBasePathToFolder = path => {
   return dropRight(basePath.split('/'), 2).join('/');
 };
 
-const AnchorTag = ({ children: link, href }) => {
+const Link = ({ children: link, href }) => {
   const isAnchor = isString(href) && href.charAt(0) === '#';
   const location = useLocation();
 
   if (!link) return null;
-
+  if (isAnchor) return <StyledLink href={href}>{link}</StyledLink>;
   let to = href;
   if (isRelativePath(to) && !isAnchor) {
     const toPath = to.substr(2);
@@ -38,7 +38,7 @@ const AnchorTag = ({ children: link, href }) => {
   return <StyledLink to={to}>{link}</StyledLink>;
 };
 
-AnchorTag.propTypes = {
+Link.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -46,4 +46,4 @@ AnchorTag.propTypes = {
   href: PropTypes.string.isRequired,
 };
 
-export default AnchorTag;
+export default Link;

@@ -2,9 +2,8 @@ import styled from '@emotion/styled';
 import { darken, lighten } from 'polished';
 import { size, typography, space } from 'styled-system';
 
-const borderColor = props => darken(0.05, props.theme.custom.table.accentColor);
-const evenRowColor = props =>
-  lighten(0.009, props.theme.custom.table.accentColor);
+const borderColor = props => darken(0.05, props.theme.colors.table.accent);
+const evenRowColor = props => lighten(0.009, props.theme.colors.table.accent);
 
 const BaseTable = styled('table')`
   border-radius: ${props => props.theme.radii[1]};
@@ -24,7 +23,7 @@ const BaseTable = styled('table')`
     vertical-align: middle;
     font-weight: ${props => props.theme.fontWeights[3]};
     text-align: left;
-    background-color: ${props => props.theme.custom.table.accentColor};
+    background-color: ${props => props.theme.colors.table.accent};
     border-bottom: 1px solid ${borderColor};
   }
 

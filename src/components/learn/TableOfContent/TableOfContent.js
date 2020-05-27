@@ -82,6 +82,7 @@ const TableOfContent = ({ items }) => {
         {itemsWithoutRoot.map(lvl1Item => (
           <>
             <Item
+              key={lvl1Item.url}
               item={lvl1Item}
               level={1}
               isActive={activeHash === lvl1Item.url}
@@ -89,6 +90,7 @@ const TableOfContent = ({ items }) => {
             {lvl1Item.items &&
               lvl1Item.items.map(lvl2Item => (
                 <Item
+                  key={lvl2Item.url}
                   item={lvl2Item}
                   level={2}
                   isActive={activeHash === lvl2Item.url}

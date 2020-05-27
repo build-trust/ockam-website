@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 
 import defaultTheme from '../theme/defaultTheme';
 import lightTheme from '../theme/lightTheme';
-import blogTheme from '../theme/blogTheme';
 
 const theme = {
   dark: defaultTheme,
   light: lightTheme,
-  blog: blogTheme,
 };
 
 const ThemeProvider = ({ children, themeName, themeConfig = {} }) => {
@@ -26,7 +24,7 @@ ThemeProvider.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   themeConfig: PropTypes.shape({}),
-  themeName: PropTypes.oneOf(['light', 'dark', 'blog']),
+  themeName: PropTypes.oneOf(['light', 'dark']),
 };
 
 ThemeProvider.defaultProps = {

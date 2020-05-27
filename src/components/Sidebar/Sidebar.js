@@ -18,7 +18,7 @@ const Container = styled('aside')`
   height: 100vh;
   display: block;
   transition: transform 0.3s ease-in-out;
-  background-color: ${props => props.theme.custom.sidebar.backgroundColor};
+  background-color: ${props => props.theme.colors.sidebar.background};
   border-radius: ${props => props.theme.radii.default};
   transform: ${({ isOpen }) =>
     isOpen ? 'translateX(0)' : 'translateX(-100%)'};

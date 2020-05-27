@@ -56,6 +56,8 @@ const colors = {
   },
   tableOfContent: {
     separatorBorder: '#E6ECF1',
+    item: '#7A8895',
+    itemActive: '#242A31',
   },
   mobileMenuItemDivider: '#E6ECF1',
   githubStarButton: {
@@ -65,6 +67,19 @@ const colors = {
     defaultText: '#A2B6C7',
     defaultBorder: '#D4DDE5',
     defaultBackground: '#F5F7F9',
+  },
+  sidebar: {
+    background: '#fff',
+    item: '#7A8895',
+    itemActive: '#242A31',
+    customScrollTruck: lighten(0.25, '#a4a9bf'),
+    customScrollThumb: '#a4a9bf',
+  },
+  codeBlock: {
+    background: '#E6ECF1',
+  },
+  table: {
+    accent: '#E6ECF1',
   },
 };
 
@@ -83,33 +98,6 @@ const lightTheme = {
   colors: {
     ...defaultTheme.colors,
     ...colors,
-  },
-  custom: {
-    ...defaultTheme.custom,
-    sidebar: {
-      ...defaultTheme.custom.sidebar,
-      backgroundColor: 'white',
-      itemColor: '#7A8895',
-      itemColorActive: colors.heading,
-      customScrollTruckColor: lighten(0.25, '#a4a9bf'),
-      customScrollThumbColor: '#a4a9bf',
-    },
-    button: {
-      ...defaultTheme.custom.button,
-      textColor: 'white',
-    },
-    menu: {
-      ...defaultTheme.custom.menu,
-      textColor: '#7A8895',
-    },
-    code: {
-      ...defaultTheme.custom.code,
-      backgroundColor: '#F5F7F9',
-    },
-    table: {
-      ...defaultTheme.custom.code,
-      accentColor: '#F5F7F9',
-    },
   },
 };
 

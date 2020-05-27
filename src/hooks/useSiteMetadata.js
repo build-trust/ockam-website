@@ -14,6 +14,8 @@ const useSiteMetadata = () => {
           markdownPath
           githubProductionPath
           algoliaHitsPerPage
+          starredRepoUsername
+          starredRepoName
           env {
             STAGE
             RECAPTCHA_SITEKEY

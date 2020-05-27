@@ -25,19 +25,22 @@ Ockam website is built with a static site generator that is based on gatsby star
 ## Generating and managing MD files
 
 ### Folder structure and urls
+
 Under `src/content` folder are stored all files related to generating html from md files.
 
 However, the CI pipeline process mount under this directory, others repository defined in `dependencies_repos.csv`.
-So according to this  file specification ( please check  [Depended repositories](#depended-repositories) ) for entry like:
+So according to this file specification ( please check [Depended repositories](#depended-repositories) ) for entry like:
 `https://github.com/masterborn;ockam-sample-documentation;4f3789304ad3a4421fc772cd59d95b71af98d4d9;/;documentation` 'documentation' folder would be deployed under `src/content/`.
 
 Folder structure reflects to generated url in project, so i.e:
+
 - `src/content/documentation/general/index.md` -> `example.com/documentation/general`
 - `src/content/documentation/general/subpage.md` -> `example.com/documentation/general/subpage`
 
 ### Documentation pages order in sidebar menu
 
 To order your documentation page in sidebar menu, just add `order` metadata field in metadata .md file. ie:
+
 ```markdown
 title: "Subpage 1"
 metaTitle: "This is the title tag of this page"
@@ -47,31 +50,41 @@ order: 2
 
 ### Generals markdown managing approach
 
-* All assets should be stored inside under `assets` folder, ie. `src/content/documentation/assets`.
+- All assets should be stored inside under `assets` folder, ie. `src/content/documentation/assets`.
 
 ## Using MDX
 
 Thanks to MDX you can use any react component inside md files. Do do that you have to:
+
 - import component or data right after metadata
+
 ```markdown
 ...
 metaTitle: "This is the title tag of this page"
 metaDescription: "This is the meta description"
+
 ---
+
 import SampleComponent from '../sample/SampleComponent.js'
 import json from '../sample/json.js'
 ```
+
 Component path should be relative to current file.
 
 Next, just use component like normal react element inside your md files:
+
 ```markdown
 ...
+
 ### Some markdown header
+
 <SampleComponent json={json} title="custom string" />
 ```
 
 ##### WARNING
+
 There could be some issue while creating new/removing components/data which are imported to `.md` files. If in development mode throw some error just stop server, clean gatsby cache and run it again:
+
 ```bash
 npm run clean
 npm run start
@@ -106,22 +119,25 @@ Below are listed described available metadata fields under a certain path of `sr
 You can set order number to control sidebar item menu position. If there is no order metadata field, it would be ordered by slug(filename) by default
 
 ## Depended repositories
+
 All depended repositories are placed in in `dependencies_repos.csv` file. Each
 line represent one repository.
 One line include following parts:
+
 ```
 ORGANIZATION;REPO_NAME;COMMIT;SRC_DIR;URL_PATH
 ```
 
 Where
-* `ORGANIZATION` is github organization name
-* `REPO_NAME` is the repository name inside organization
-* `COMMIT` is specific commit id in repository
-* `SRC_DIR` is path in repository where MD files are stored. Use `/` to use root repository folder
-* `URL_PATH` is where you want to have final URL (`/` is for front site; `/example` will end up with `<website>/example`)
 
+- `ORGANIZATION` is github organization name
+- `REPO_NAME` is the repository name inside organization
+- `COMMIT` is specific commit id in repository
+- `SRC_DIR` is path in repository where MD files are stored. Use `/` to use root repository folder
+- `URL_PATH` is where you want to have final URL (`/` is for front site; `/example` will end up with `<website>/example`)
 
 Example repo definition:
+
 ```
 masterborn;ockam-sample-documentation;4f3789304ad3a4421fc772cd59d95b71af98d4d9;/;documentation
 ```
@@ -154,7 +170,7 @@ A quick look at the top-level files and directories you'll see in the project.
 1. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
 1. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
 1. **`README.md`**: A text file containing useful reference information about your project.
-1. **`scripts/`**: All additional scripts. At the moment there is only `get-depended-repos.sh` responsible for pulling depended repos needed by gatsby during build process.
+1. **`scripts/`**: All additional scripts used during build process.
 1. **`src/`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
 1. **`terraform`**: Whole website infrastructure related stuff are served by [Terraform](https://www.terraform.io/).
 
@@ -162,11 +178,12 @@ A quick look at the top-level files and directories you'll see in the project.
 
 1. **Build the site for production.**
 
-    Navigate into the site’s directory and run the build command.
+   Navigate into the site’s directory and run the build command.
 
-    ```npm run build```
+   `npm run build`
+
 1. **Serve the production build locally.**
 
-    You can test the production build locally. Just run the following command to start a local HTML server.
+   You can test the production build locally. Just run the following command to start a local HTML server.
 
-    ```npm run serve```
+   `npm run serve`

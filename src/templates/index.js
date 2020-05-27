@@ -3,20 +3,11 @@ import PropTypes from 'prop-types';
 
 import PageTemplate from './PageTemplate';
 import LearnTemplate from './LearnTemplate';
-import BlogTemplate from './BlogTemplate';
 
 const Index = ({ children, pageContext, location, ...rest }) => {
   const isDocPage = pageContext.pageType === 'doc';
-  const isBlogPage = pageContext.pageType === 'blog';
   const isJobPage = pageContext.pageType === 'job';
 
-  if (isBlogPage) {
-    return (
-      <BlogTemplate location={location} {...rest}>
-        {children}
-      </BlogTemplate>
-    );
-  }
   if (isDocPage) {
     return (
       <LearnTemplate

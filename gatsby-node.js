@@ -1,49 +1,44 @@
-const path = require("path");
+const path = require('path');
 
 const { createFilePath } = require(`gatsby-source-filesystem`);
-const { startCase } = require("lodash");
-const slugify = require('slugify')
+const { startCase } = require('lodash');
+const slugify = require('slugify');
 
 const getMarkdownPages = require('./scripts/get-markdown-pages');
 const getLeverPages = require('./scripts/get-lever-pages');
 const learnIndices = require('./scripts/get-algolia-learn-indices');
 
-const mapReadmeSlug = (slug) => {
-  return slug.replace(/\/readme/gi, '')
+const mapReadmeSlug = slug => {
+  return slug.replace(/\/readme/gi, '');
 };
-
-
-
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const mdxPages = await getMarkdownPages(graphql)
-  const leverPages = await getLeverPages(graphql)
+  const mdxPages = await getMarkdownPages(graphql);
+  const leverPages = await getLeverPages(graphql);
   mdxPages.forEach(mdxPage => createPage(mdxPage));
   leverPages.forEach(leverPage => createPage(leverPage));
 };
 
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage } = actions;
-    const isRootBlog = page.path && page.path.split("/")[1] === 'blog';
-    const algoliaIndexes = {
-      learn: learnIndices,
-    };
-    createPage({
-      ...page,
-      context: {
-        ...page.context,
-        algoliaIndexes,
-        ...(isRootBlog && { pageType: `blog`}),
-      },
-    });
+  const algoliaIndexes = {
+    learn: learnIndices,
+  };
+  createPage({
+    ...page,
+    context: {
+      ...page.context,
+      algoliaIndexes,
+    },
+  });
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      modules: [path.resolve(__dirname, "src"), "node_modules"],
-      alias: { $components: path.resolve(__dirname, "src/components") },
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+      alias: { $components: path.resolve(__dirname, 'src/components') },
     },
   });
 };
@@ -69,16 +64,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     });
 
     createNodeField({
-      name: "id",
+      name: 'id',
       node,
       value: node.id,
     });
 
     createNodeField({
-      name: "title",
+      name: 'title',
       node,
       value: node.frontmatter.title || startCase(parent.name),
     });
   }
 };
-

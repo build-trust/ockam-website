@@ -13,8 +13,8 @@ const SidebarMenuItem = styled(Link)`
   width: 100%;
   color: ${props =>
     props.isSelected === '1' || props.isActivePath === '1'
-      ? props.theme.custom.sidebar.itemColorActive
-      : props.theme.custom.sidebar.itemColor};
+      ? props.theme.colors.sidebar.itemActive
+      : props.theme.colors.sidebar.item};
   font-weight: ${props =>
     props.isSelected === '1' || props.isActivePath === '1'
       ? props.theme.fontWeights.heading

@@ -11,7 +11,9 @@ const ListItem = styled('li')`
   border-color: ${props =>
     props.isActive ? props.theme.colors.primary : 'transparent'};
   color: ${props =>
-    props.isActive ? props.theme.colors.dark : props.theme.colors.caption};
+    props.isActive
+      ? props.theme.colors.tableOfContent.itemActive
+      : props.theme.colors.tableOfContent.item};
   font-weight: ${props => (props.isActive ? '500' : '400')};
   padding-left: ${props => (props.level === 2 ? '3rem' : '1.5rem')} !important;
 `;

@@ -58,6 +58,8 @@ const colors = {
   },
   tableOfContent: {
     separatorBorder: '#162535',
+    item: '#7A8895',
+    itemActive: '#fff',
   },
   mobileMenuItemDivider: '#242A31',
   githubStarButton: {
@@ -67,6 +69,19 @@ const colors = {
     defaultText: '#7A8895',
     defaultBorder: 'transparent',
     defaultBackground: '#162535',
+  },
+  sidebar: {
+    background: '#162535',
+    item: '#a4a9bf',
+    itemActive: '#fff',
+    customScrollTruck: lighten(0.15, '#162535'),
+    customScrollThumb: lighten(0.25, '#162535'),
+  },
+  codeBlock: {
+    background: '#162535',
+  },
+  table: {
+    accent: '#162535',
   },
 };
 
@@ -145,28 +160,6 @@ breakpoints.xUltraWide = breakpoints[4];
 
 /* eslint-enable prefer-destructuring */
 
-const custom = {
-  sidebar: {
-    backgroundColor: colors.accentBackground,
-    itemColor: '#a4a9bf',
-    itemColorActive: colors.heading,
-    customScrollTruckColor: lighten(0.15, colors.accentBackground),
-    customScrollThumbColor: lighten(0.25, colors.accentBackground),
-  },
-  button: {
-    textColor: colors.text,
-  },
-  menu: {
-    textColor: colors.text,
-  },
-  code: {
-    backgroundColor: colors.accentBackground,
-  },
-  table: {
-    accent: colors.accentBackground,
-  },
-};
-
 const animations = {
   productSections: 'ease-in-out',
 };
@@ -181,7 +174,6 @@ const defaultTheme = {
   radii,
   space,
   sizes,
-  custom,
   breakpoints,
   animations,
 };

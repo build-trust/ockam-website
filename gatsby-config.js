@@ -1,8 +1,8 @@
-require("dotenv").config();
+require('dotenv').config();
 
 const remarkSlug = require('remark-slug');
 
-const config = require("./config");
+const config = require('./config');
 const queries = require('./scripts/get-algolia-queries');
 
 const isProductionStage = config.env.STAGE === 'PRODUCTION';
@@ -20,7 +20,7 @@ const plugins = [
   {
     resolve: `gatsby-transformer-remark`,
     options: {
-      plugins: [ `gatsby-remark-images` ],
+      plugins: [`gatsby-remark-images`],
     },
   },
   {
@@ -28,7 +28,7 @@ const plugins = [
     options: {
       gatsbyRemarkPlugins: [
         {
-          resolve: "gatsby-remark-images",
+          resolve: 'gatsby-remark-images',
           options: {
             maxWidth: 1035,
           },
@@ -38,16 +38,16 @@ const plugins = [
         },
       ],
       remarkPlugins: [remarkSlug],
-      extensions: [".mdx", ".md"],
+      extensions: ['.mdx', '.md'],
     },
   },
   'gatsby-plugin-emotion',
   'gatsby-plugin-remove-trailing-slashes',
   'gatsby-plugin-react-helmet',
   {
-    resolve: "gatsby-source-filesystem",
+    resolve: 'gatsby-source-filesystem',
     options: {
-      name: "docs",
+      name: 'docs',
       path: `${__dirname}/src/content`,
     },
   },
@@ -72,10 +72,10 @@ const plugins = [
   {
     resolve: `gatsby-plugin-emotion`,
     options: {
-      "sourceMap": true,
-      "autoLabel": process.env.NODE_ENV !== 'production',
-      "labelFormat": "[local]",
-      "cssPropOptimization": true,
+      sourceMap: true,
+      autoLabel: process.env.NODE_ENV !== 'production',
+      labelFormat: '[local]',
+      cssPropOptimization: true,
     },
   },
   {
@@ -94,23 +94,24 @@ const plugins = [
     },
   },
   {
-    resolve: "gatsby-source-lever",
+    resolve: 'gatsby-source-lever',
     options: {
-      site: "ockam",
+      site: 'ockam',
       verboseOutput: false,
     },
   },
 ];
 
-if(isProductionStage) plugins.push({
-  resolve: `gatsby-plugin-algolia`,
-  options: {
-    appId: config.env.ALGOLIA_APP_ID,
-    apiKey: config.env.ALGOLIA_ADMIN_API_KEY,
-    queries,
-    chunkSize: 10000, // default: 1000
-  },
-});
+if (isProductionStage)
+  plugins.push({
+    resolve: `gatsby-plugin-algolia`,
+    options: {
+      appId: config.env.ALGOLIA_APP_ID,
+      apiKey: config.env.ALGOLIA_ADMIN_API_KEY,
+      queries,
+      chunkSize: 10000, // default: 1000
+    },
+  });
 
 module.exports = {
   pathPrefix: config.gatsby.pathPrefix,
@@ -127,6 +128,8 @@ module.exports = {
     title: config.siteMetadata.title,
     siteUrl: config.gatsby.siteUrl,
     env: config.env,
+    starredRepoUsername: config.general.starredRepoUsername,
+    starredRepoName: config.general.starredRepoName,
   },
   plugins,
 };

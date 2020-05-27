@@ -5,7 +5,7 @@ import Text from './Text';
 import Code from './Code';
 import CodeBlock from './CodeBlock';
 import Pre from './Pre';
-import AnchorTag from './Anchor';
+import Link from './Link';
 import Blockquote from './Blockqute';
 import Hr from './Hr';
 import List from './List';
@@ -32,7 +32,7 @@ export default {
   code: CodeBlock,
   strong: Strong,
   inlineCode: props => <Code {...props} />,
-  a: props => <AnchorTag {...props} />,
+  a: props => <Link {...props} />,
   ul: props => <List {...props} />,
   ol: props => <ListOrdered {...props} />,
   img: props => <LinkedImage {...props} />,

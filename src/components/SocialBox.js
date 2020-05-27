@@ -9,7 +9,7 @@ import styled from '@emotion/styled';
 
 import useLocation from '../hooks/useLocation';
 
-import ShareButton from './blog/ShareButton';
+import ShareButton from './ShareButton';
 
 const Container = styled('div')`
   display: flex;
