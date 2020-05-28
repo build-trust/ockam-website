@@ -2,7 +2,7 @@
 title: Versioning
 order: 4
 ---
-# Semantic Versioning 2.0.0
+# Semantic Versioning
 
 At Ockam we use the `Semantic Versioning` standard:
 
