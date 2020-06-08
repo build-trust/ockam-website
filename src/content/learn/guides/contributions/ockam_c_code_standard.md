@@ -1,6 +1,6 @@
 ---
 title: C Library Style
-order: 2
+order: 4
 ---
 # C ​Library Coding Standard
 
