@@ -1,6 +1,6 @@
 ---
 title: Graphics
-order: 3
+order: 5
 ---
 # Ockam graphics style guide
 
@@ -34,28 +34,29 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 
 ## Logos and Graphics
 
+### Open Source context
 
-![Ockam logo dark background](./assets/logo/logo_dark_background_preview.svg)
+![Ockam OSS logo dark background](./assets/logo/logo_dark_background_preview.svg)
 
-![Ockam logo light background](./assets/logo/logo_white_background_preview.svg)
+![Ockam OSS logo light background](./assets/logo/logo_white_background_preview.svg)
 
-![Ockam logo dark caption background](./assets/logo/logo_caption_dark_background_preview.svg)
+### Commercial context
 
-![Ockam logo light caption background](./assets/logo/logo_caption_white_background_preview.svg)
+![Ockam Inc logo dark background](./assets/logo/logo_caption_dark_background_preview.svg)
 
-![Ockam text dark caption background](./assets/logo/text_caption_dark_background_preview.svg)
+![Ockam Inc logo light background](./assets/logo/logo_caption_white_background_preview.svg)
 
-![Ockam text light caption background](./assets/logo/text_caption_white_background_preview.svg)
+![Ockam Inc dark background](./assets/logo/text_caption_dark_background_preview.svg)
 
+![Ockam Inc light background](./assets/logo/text_caption_white_background_preview.svg)
 
-## Stickers
+### Stickers
 
-![Ockam sticker dark background](./assets/stickers/sticker_dark_background.svg)
+![Ockam Tool Company sticker](./assets/stickers/sticker_dark_background.svg)
 
-![Ockam sticker bordered dark background](./assets/stickers/sticker_bordered_dark_backround.svg)
+![Ockam Tool Company sticker bordered](./assets/stickers/sticker_bordered_dark_backround.svg)
 
-## Twitter
-
+### Social Media Banners
 
 ![Twitter cover photo1](./assets/twitter/twitter_cover_1.png)
 

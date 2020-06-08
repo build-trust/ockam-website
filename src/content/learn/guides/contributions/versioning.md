@@ -1,12 +1,12 @@
 ---
 title: Versioning
-order: 4
+order: 3
 ---
 # Semantic Versioning
 
-At Ockam we use the `Semantic Versioning` standard:
+At Ockam we use the *Semantic Versioning* standard:
 
-##Summary
+## Summary
 
 Given a version number MAJOR.MINOR.PATCH, increment the:
 

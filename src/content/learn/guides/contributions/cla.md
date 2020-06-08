@@ -1,6 +1,6 @@
 ---
 title: CLAs
-order: 4
+order: 2
 ---
 
 # Contributor License Agreements (CLA)
