@@ -288,9 +288,9 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
            Responsibility abstraction
         </strong>
     </td>
-    <td>“Shipping Code” </td>
-    <td>“The Team” </td>
-    <td>“The Product” </td>
+    <td>“Ship the Code” </td>
+    <td>“Build the Team” </td>
+    <td>“Create the Product” </td>
   </tr>
 
   <tr>

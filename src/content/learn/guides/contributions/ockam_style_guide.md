@@ -40,9 +40,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 
 ![Ockam OSS logo light background](./assets/logo/svg/oss/logo_white_background_preview.svg)
 
-![Ockam OSS logo white transparent background](./assets/logo/svg/oss/ockam-icon-white-transparent.png)
+![Ockam OSS logo white transparent background](./assets/logo/transparent_png/oss/ockam-icon-white-transparent.png)
 
-![Ockam OSS logo dark transparent background](./assets/logo/svg/oss/ockam-icon-dark--transparent.png)
+![Ockam OSS logo dark transparent background](./assets/logo/transparent_png/oss/ockam-icon-dark--transparent.png)
 
 ### Commercial context
 
@@ -54,6 +54,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 
 ![Ockam Inc light background](./assets/logo/svg/commercial/text_caption_white_background_preview.svg)
 
+![Ockam Tool Company white transparent background](../assets/logo/transparent_png/commercial/ockam-tool_company-white-transparent.png)
+
+![Ockam Tool Company dark transparent background](../assets/logo/transparent_png/commercial/ockam-tool_company-dark-transparent.png)
 
 ### Stickers
 
