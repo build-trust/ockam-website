@@ -93,8 +93,8 @@
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "2.5.0",
     "gatsby-plugin-remove-trailing-slashes": "2.1.24",
-    "husky": "^4.2.5",
+    "husky": "4.2.5",
     "prettier": "1.19.1",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "2.0.1"
   }
 }
