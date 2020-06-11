@@ -36,19 +36,24 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 
 ### Open Source context
 
-![Ockam OSS logo dark background](./assets/logo/logo_dark_background_preview.svg)
+![Ockam OSS logo dark background](./assets/logo/svg/oss/logo_dark_background_preview.svg)
 
-![Ockam OSS logo light background](./assets/logo/logo_white_background_preview.svg)
+![Ockam OSS logo light background](./assets/logo/svg/oss/logo_white_background_preview.svg)
+
+![Ockam OSS logo white transparent background](./assets/logo/svg/oss/ockam-icon-white-transparent.png)
+
+![Ockam OSS logo dark transparent background](./assets/logo/svg/oss/ockam-icon-dark--transparent.png)
 
 ### Commercial context
 
-![Ockam Inc logo dark background](./assets/logo/logo_caption_dark_background_preview.svg)
+![Ockam Inc logo dark background](./assets/logo/svg/commercial/logo_caption_dark_background_preview.svg)
 
-![Ockam Inc logo light background](./assets/logo/logo_caption_white_background_preview.svg)
+![Ockam Inc logo light background](./assets/logo/svg/commercial/logo_caption_white_background_preview.svg)
 
-![Ockam Inc dark background](./assets/logo/text_caption_dark_background_preview.svg)
+![Ockam Inc dark background](./assets/logo/svg/commercial/text_caption_dark_background_preview.svg)
 
-![Ockam Inc light background](./assets/logo/text_caption_white_background_preview.svg)
+![Ockam Inc light background](./assets/logo/svg/commercial/text_caption_white_background_preview.svg)
+
 
 ### Stickers
 

@@ -110,7 +110,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
         <ul>
-          <li> Performs basic programming tasks.</li>
+          <b>Performs basic programming tasks:</b>
           <li> Contributes to functional specifications and participates in code reviews.</li>
           <li> Writes and executes test plans.</li>
           <li> Can accurately forecast and deliver today and tomorrow’s deliverables.</li>
@@ -118,7 +118,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
         <ul>
-          <li> Performs standard programming tasks.</li>
+          <b>Performs standard programming tasks:</b>
           <li> Contributes to functional specifications and participates in code reviews.</li>
           <li> Writes documentation and examples that ship along with their code.</li>
           <li> Writes and executes sophisticated test plans.</li>
@@ -128,7 +128,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
       <ul>
-          <li> Performs complex programming tasks.</li>
+          <b>Performs complex programming tasks:</b>
           <li> Can write functional specifications for features.</li>
           <li> Can sign off on test plans and code reviews.</li>
           <li> Participates in requirement building with architects.</li>
@@ -139,7 +139,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
       <ul>
-          <li> Performs expert programming tasks.</li>
+          <b>Performs expert programming tasks:</b>
           <li> Handles large-scale technical debt and refactoring.</li>
           <li> Shapes coding methodologies, style, DX, and best practices across wide areas of the Ockam code base.</li>
           <li> Leads code reviews and can sign-off on large features.</li>
@@ -150,7 +150,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
       <ul>
-          <li> Sets product direction and has ownership over large components.</li>
+          Sets product direction and has ownership over large components:
           <li> Thinks both strategically and tactically, keeping in mind both technical goals and company business/GTM goals.</li>
           <li> Understands trade offs of OKRs across the entire company.</li>
           <li> Contributes to and shapes company-wide Horizon scale OKRs.</li>
@@ -266,7 +266,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
 <table>
   <tr>
     <th> </th>
-    <th>Manager </th>
+    <th>Lead </th>
     <th>Director </th>
     <th>CTO </th>
   </tr>
@@ -288,9 +288,9 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
            Responsibility abstraction
         </strong>
     </td>
-    <td>“Projects” </td>
-    <td>“Teams” </td>
-    <td>“Product” </td>
+    <td>“Shipping Code” </td>
+    <td>“The Team” </td>
+    <td>“The Product” </td>
   </tr>
 
   <tr>
@@ -301,7 +301,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
       <ul>
-          <li> A senior engineer, who in addition, has very broad knowledge of the entire product, and can help with any component, or type of issues.</li>
+          <li> A senior engineer, who in addition, has very broad knowledge of the entire product, and can help with any component, or type of issue.</li>
           <li> Strong awareness of the state of the product and team at all times.</li>
       </ul>
     </td>
@@ -328,10 +328,10 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
       <ul>
-          <li> Contributes to code at a Senior Engineer level.</li>
-          <li> Prioritizes tasks and issues across projects and people.</li>
-          <li> An expert firefighter who is often called in to make things right.</li>
-          <li> Has the network and has demonstrated the ability to recruit engineers at or above their level.</li>
+          <li> Contributes to code at a Senior Engineer or Architect level ~ 70% </li>
+          <li> Prioritizes tasks and issues across projects and people ~20% </li>
+          <li> An expert firefighter who is often called in to make things right ~ 10% </li>
+          <li> Has the network and has demonstrated the ability to recruit engineers at or above their level. </li>
           <li> Helps build Race (8 weeks) OKRs.</li>
       </ul>
     </td>
@@ -341,7 +341,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
           <li> Manages large-scale technical debt and refactoring.</li>
           <li> Shapes code methodologies, style, and DX.</li>
           <li> Participates in code reviews and can sign-off on large features.</li>
-          <li> Has the ability to recruit Architects outside of their technical expertise.</li>
+          <li> Has the ability to recruit Architects (L6-7) outside of their technical expertise.</li>
           <li> Helps to build Campaign (8 months) OKRs.</li>
       </ul>
     </td>
@@ -394,7 +394,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     <td>
       <ul>
           <li> Leads projects and/or small teams.</li>
-          <li> Participates in and supports initiatives outside of main area of responsibility.</li>
+          <li> Participates in and supports build initiatives outside of main area of responsibility.</li>
       </ul>
     </td>
     <td>
