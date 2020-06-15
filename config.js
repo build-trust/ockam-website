@@ -21,7 +21,7 @@ const config = {
     ockamLibraryRepo: 'https://github.com/ockam-network/ockam',
     ockamWebsiteRepo: 'https://github.com/ockam-network/website',
     markdownPath: 'src/content',
-    githubProductionPath: 'tree/master',
+    githubProductionPath: 'tree/production',
     communityChannel: 'https://github.com/ockam-network/ockam/discussions',
     twitter: 'https://twitter.com/Ockam_io',
     algoliaHitsPerPage: 5,

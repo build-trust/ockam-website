@@ -3,9 +3,9 @@ name: Ockam-website-$(Date:yyyyMMdd).$(Rev:r)
 trigger:
   branches:
     include:
-    - master
-    - stage
-    - develop
+      - production
+      - stage
+      - develop
 
 pr: none
 
@@ -15,120 +15,119 @@ pool:
 variables:
   ACCOUNT_NAME: ockamio2$(Build.SourceBranchName)
 
-
 steps:
-- task: NodeTool@0
-  displayName: 'Install Node.js'
-  inputs:
-    versionSpec: '12.x'
+  - task: NodeTool@0
+    displayName: 'Install Node.js'
+    inputs:
+      versionSpec: '12.x'
 
-- bash: |
-    set -ex
-    ./scripts/get-depended-repos.sh
-  displayName: 'Checkout depended repositories'
+  - bash: |
+      set -ex
+      ./scripts/get-depended-repos.sh
+    displayName: 'Checkout depended repositories'
 
-- bash: |
-    set -ex
-    node ./scripts/fix-frontmatter.js
-  displayName: 'Fix frontmatter'
+  - bash: |
+      set -ex
+      node ./scripts/fix-frontmatter.js
+    displayName: 'Fix frontmatter'
 
-- bash: |
-    set -ex
-    case $(Build.SourceBranchName) in
-      master)
-        export GATSBY_ROOT_URL='https://www.ockam.io'
-        export GATSBY_STAGE='PRODUCTION'
-        ;;
-      stage)
-        export GATSBY_ROOT_URL='https://ockamio2stage.z6.web.core.windows.net'
-        export GATSBY_STAGE='STAGE'
-        ;;
-      develop)
-        export GATSBY_ROOT_URL='https://ockamio2develop.z6.web.core.windows.net'
-        export GATSBY_STAGE='DEVELOPMENT'
-        ;;
-      *)
-        export GATSBY_ROOT_URL='https://fork1ockam2default.z6.web.core.windows.net'
-        export GATSBY_STAGE='DEVELOPMENT_FORK'
-        ;;
-    esac
+  - bash: |
+      set -ex
+      case $(Build.SourceBranchName) in
+        production)
+          export GATSBY_ROOT_URL='https://www.ockam.io'
+          export GATSBY_STAGE='PRODUCTION'
+          ;;
+        stage)
+          export GATSBY_ROOT_URL='https://ockamio2stage.z6.web.core.windows.net'
+          export GATSBY_STAGE='STAGE'
+          ;;
+        develop)
+          export GATSBY_ROOT_URL='https://ockamio2develop.z6.web.core.windows.net'
+          export GATSBY_STAGE='DEVELOPMENT'
+          ;;
+        *)
+          export GATSBY_ROOT_URL='https://fork1ockam2default.z6.web.core.windows.net'
+          export GATSBY_STAGE='DEVELOPMENT_FORK'
+          ;;
+      esac
 
-    npm ci
-    npm run build
-  displayName: 'Install & build site'
-  env:
-    GATSBY_ALGOLIA_APP_ID: $(GATSBY_ALGOLIA_APP_ID)
-    GATSBY_ALGOLIA_ADMIN_API_KEY: $(GATSBY_ALGOLIA_ADMIN_API_KEY)
-    GATSBY_ALGOLIA_SEARCH_API_KEY: $(GATSBY_ALGOLIA_SEARCH_API_KEY)
-    GATSBY_GOOGLE_RECAPTCHA_SITEKEY: $(GATSBY_GOOGLE_RECAPTCHA_SITEKEY)
+      npm ci
+      npm run build
+    displayName: 'Install & build site'
+    env:
+      GATSBY_ALGOLIA_APP_ID: $(GATSBY_ALGOLIA_APP_ID)
+      GATSBY_ALGOLIA_ADMIN_API_KEY: $(GATSBY_ALGOLIA_ADMIN_API_KEY)
+      GATSBY_ALGOLIA_SEARCH_API_KEY: $(GATSBY_ALGOLIA_SEARCH_API_KEY)
+      GATSBY_GOOGLE_RECAPTCHA_SITEKEY: $(GATSBY_GOOGLE_RECAPTCHA_SITEKEY)
 
-- bash: |
-    set -ex
-    rm -f ./public/*.map
-    rm -f ./public/webpack.stats.json
-  displayName: 'Remove sourcemaps and webpack stats'
+  - bash: |
+      set -ex
+      rm -f ./public/*.map
+      rm -f ./public/webpack.stats.json
+    displayName: 'Remove sourcemaps and webpack stats'
 
-- bash: |
-    set -ex
-    case $(Build.SourceBranchName) in
-      master)
-        az storage blob delete-batch \
-          --account-name $(ACCOUNT_NAME) \
-          --account-key $(ACCOUNT_KEY_MASTER) \
-          --source $(CONTAINER)
-        az storage blob upload-batch \
-          --account-name $(ACCOUNT_NAME) \
-          --account-key $(ACCOUNT_KEY_MASTER) \
-          --source ./public/  \
-          --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
-        ;;
-      stage)
-        az storage blob delete-batch \
-          --account-name $(ACCOUNT_NAME) \
-          --account-key $(ACCOUNT_KEY_STAGE) \
-          --source $(CONTAINER)
-        az storage blob upload-batch \
-          --account-name $(ACCOUNT_NAME) \
-          --account-key $(ACCOUNT_KEY_STAGE) \
-          --source ./public/  \
-          --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
-        ;;
-      develop)
-        az storage blob delete-batch \
-          --account-name $(ACCOUNT_NAME) \
-          --account-key $(ACCOUNT_KEY_DEV) \
-          --source $(CONTAINER)
-        az storage blob upload-batch \
-          --account-name $(ACCOUNT_NAME) \
-          --account-key $(ACCOUNT_KEY_DEV) \
-          --source ./public/  \
-          --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
-        ;;
-      *)
-        az storage blob delete-batch \
-          --account-name $(INTERNAL_ACCOUNT_NAME) \
-          --account-key $(INTERNAL_ACCOUNT_KEY) \
-          --source $(CONTAINER)
-        az storage blob upload-batch \
-          --account-name $(INTERNAL_ACCOUNT_NAME) \
-          --account-key $(INTERNAL_ACCOUNT_KEY) \
-          --source ./public/  \
-          --destination "https://${INTERNAL_ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
-        ;;
-    esac
-  displayName: 'Deploy to storage'
+  - bash: |
+      set -ex
+      case $(Build.SourceBranchName) in
+        production)
+          az storage blob delete-batch \
+            --account-name $(ACCOUNT_NAME) \
+            --account-key $(ACCOUNT_KEY_MASTER) \
+            --source $(CONTAINER)
+          az storage blob upload-batch \
+            --account-name $(ACCOUNT_NAME) \
+            --account-key $(ACCOUNT_KEY_MASTER) \
+            --source ./public/  \
+            --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+          ;;
+        stage)
+          az storage blob delete-batch \
+            --account-name $(ACCOUNT_NAME) \
+            --account-key $(ACCOUNT_KEY_STAGE) \
+            --source $(CONTAINER)
+          az storage blob upload-batch \
+            --account-name $(ACCOUNT_NAME) \
+            --account-key $(ACCOUNT_KEY_STAGE) \
+            --source ./public/  \
+            --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+          ;;
+        develop)
+          az storage blob delete-batch \
+            --account-name $(ACCOUNT_NAME) \
+            --account-key $(ACCOUNT_KEY_DEV) \
+            --source $(CONTAINER)
+          az storage blob upload-batch \
+            --account-name $(ACCOUNT_NAME) \
+            --account-key $(ACCOUNT_KEY_DEV) \
+            --source ./public/  \
+            --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+          ;;
+        *)
+          az storage blob delete-batch \
+            --account-name $(INTERNAL_ACCOUNT_NAME) \
+            --account-key $(INTERNAL_ACCOUNT_KEY) \
+            --source $(CONTAINER)
+          az storage blob upload-batch \
+            --account-name $(INTERNAL_ACCOUNT_NAME) \
+            --account-key $(INTERNAL_ACCOUNT_KEY) \
+            --source ./public/  \
+            --destination "https://${INTERNAL_ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+          ;;
+      esac
+    displayName: 'Deploy to storage'
 
-- bash: |
-    set -ex
+  - bash: |
+      set -ex
 
-    # Login as service principal
-    az login --service-principal --allow-no-subscriptions -u $(SP_USERNAME) -p $(SP_PASSWORD) --tenant $(TENANT)
+      # Login as service principal
+      az login --service-principal --allow-no-subscriptions -u $(SP_USERNAME) -p $(SP_PASSWORD) --tenant $(TENANT)
 
-    # Purge CDN
-    az cdn endpoint purge \
-      --resource-group ockam2$(Build.SourceBranchName) \
-      --name $(CDN_ENDPOINT) \
-      --profile-name $(CDN_PROFILE) \
-      --content-paths '/*'
-  condition: and( succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master') ) # only for PRODUCTION
-  displayName: "Purge CDN"
+      # Purge CDN
+      az cdn endpoint purge \
+        --resource-group ockam2$(Build.SourceBranchName) \
+        --name $(CDN_ENDPOINT) \
+        --profile-name $(CDN_PROFILE) \
+        --content-paths '/*'
+    condition: and( succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/production') ) # only for PRODUCTION
+    displayName: 'Purge CDN'
