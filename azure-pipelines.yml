@@ -125,7 +125,7 @@ steps:
 
       # Purge CDN
       az cdn endpoint purge \
-        --resource-group ockamio2master \
+        --resource-group ockam2master \
         --name $(CDN_ENDPOINT) \
         --profile-name $(CDN_PROFILE) \
         --content-paths '/*'
