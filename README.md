@@ -1,6 +1,6 @@
 ![Ockam sticker bordered dark background](https://www.ockam.io/d0cc1cc1af21f58d62921889e29dc745/sticker_bordered_dark_backround.svg)
 
-# Ockam.io Website
+# Ockam Website
 
 This repository contains all of the content, code and build tools for [Ockam.io](https://www.ockam.io/).
 
