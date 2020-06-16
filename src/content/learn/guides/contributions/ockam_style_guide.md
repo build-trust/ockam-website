@@ -2,19 +2,21 @@
 title: Graphics
 order: 5
 ---
+
 # Ockam graphics style guide
 
 This guide will help you match colors, fonts, icons and styles that we use on this site and around the internet.
 
 ## Colors
-| Name  | Hex   | Preview   |
-|---|---|---|
-| Ockam Deep Blue | #0A1A2B   | <div style="width: 15px; height: 15px; background-color: #0A1A2B"></div>  |
-| Deep Blue Accent  | #162535   | <div style="width: 15px; height: 15px; background-color: #162535"></div>  |
-| Ockam Blue  | #52c7ea   | <div style="width: 15px; height: 15px; background-color: #52c7ea"></div>  |
-| Ockam Orange  | #EC432D | <div style="width: 15px; height: 15px; background-color: #EC432D"></div> |
-| Caption and Icon Grey  | #7A8895 | <div style="width: 15px; height: 15px; background-color: #7A8895"></div> |
-| Dark Grey  | #242A31 | <div style="width: 15px; height: 15px; background-color: #242A31"></div> |
+
+| Name                  | Hex     | Preview                                                                  |
+| --------------------- | ------- | ------------------------------------------------------------------------ |
+| Ockam Deep Blue       | #0A1A2B | <div style="width: 15px; height: 15px; background-color: #0A1A2B"></div> |
+| Deep Blue Accent      | #162535 | <div style="width: 15px; height: 15px; background-color: #162535"></div> |
+| Ockam Blue            | #52c7ea | <div style="width: 15px; height: 15px; background-color: #52c7ea"></div> |
+| Ockam Orange          | #EC432D | <div style="width: 15px; height: 15px; background-color: #EC432D"></div> |
+| Caption and Icon Grey | #7A8895 | <div style="width: 15px; height: 15px; background-color: #7A8895"></div> |
+| Dark Grey             | #242A31 | <div style="width: 15px; height: 15px; background-color: #242A31"></div> |
 
 ## Font Styles
 
@@ -26,7 +28,7 @@ Headings: **IBM Plex Sans Medium**
 
 <h3>Header 3 (28px)</h3>
 
-#### Header 4 (25x)  
+#### Header 4 (25x)
 
 Text: IBM Plex Sans Regular
 
@@ -44,6 +46,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 
 ![Ockam OSS logo dark transparent background](./assets/logo/transparent_png/oss/ockam-icon-dark--transparent.png)
 
+![Ockam OSS logo dark transparent background](./assets/logo/transparent_png/oss/ockam-icon-dark--transparent.png)
+
+![Ockam OSS logo pure transparent](./assets/logo/transparent_png/oss/ockam_pure--transparent.png)
+
 ### Commercial context
 
 ![Ockam Inc logo dark background](./assets/logo/svg/commercial/logo_caption_dark_background_preview.svg)
@@ -54,9 +60,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 
 ![Ockam Inc light background](./assets/logo/svg/commercial/text_caption_white_background_preview.svg)
 
-![Ockam Tool Company white transparent background](../assets/logo/transparent_png/commercial/ockam-tool_company-white-transparent.png)
+![Ockam Tool Company white transparent background](./assets/logo/transparent_png/commercial/ockam-tool_company-white-transparent.png)
 
-![Ockam Tool Company dark transparent background](../assets/logo/transparent_png/commercial/ockam-tool_company-dark-transparent.png)
+![Ockam Tool Company dark transparent background](./assets/logo/transparent_png/commercial/ockam-tool_company-dark-transparent.png)
 
 ### Stickers
 
@@ -69,3 +75,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet metus er
 ![Twitter cover photo1](./assets/twitter/twitter_cover_1.png)
 
 ![Twitter cover photo2](./assets/twitter/twitter_cover_2.png)
+
+![Youtube_cover](./assets/youtube/youtube_background.jpg)
