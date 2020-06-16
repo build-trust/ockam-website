@@ -72,14 +72,14 @@ steps:
       case $(Build.SourceBranchName) in
         production)
           az storage blob delete-batch \
-            --account-name $(ACCOUNT_NAME) \
+            --account-name ockamio2master \
             --account-key $(ACCOUNT_KEY_MASTER) \
             --source $(CONTAINER)
           az storage blob upload-batch \
-            --account-name $(ACCOUNT_NAME) \
+            --account-name ockamio2master \
             --account-key $(ACCOUNT_KEY_MASTER) \
             --source ./public/  \
-            --destination "https://${ACCOUNT_NAME}.blob.core.windows.net/$(CONTAINER)"
+            --destination "https://ockamio2master.blob.core.windows.net/$(CONTAINER)"
           ;;
         stage)
           az storage blob delete-batch \
@@ -125,7 +125,7 @@ steps:
 
       # Purge CDN
       az cdn endpoint purge \
-        --resource-group ockam2$(Build.SourceBranchName) \
+        --resource-group ockamio2master \
         --name $(CDN_ENDPOINT) \
         --profile-name $(CDN_PROFILE) \
         --content-paths '/*'
