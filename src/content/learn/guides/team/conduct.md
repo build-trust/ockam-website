@@ -1,6 +1,6 @@
 ---
 title: Code of Conduct
-order: 2
+order: 4
 ---
 
 # Ockam Community Code of Conduct Covenant
