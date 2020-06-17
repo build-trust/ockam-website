@@ -73,17 +73,17 @@ We try to make this as friction free as possible. Please answer all of the quest
 
 We attempt to complete the entire process with a candidate within two weeks. Because Ockam is a remote first company the entire process will take place over video calls and through asynchronous collaborations in Github and email.
 
-**First round**
+### First round
 
 The hiring manager for the role will reach out to you via email and schedule a 25 minute call.
 
 The purpose of this call is to understand if and how you could fit into the team. By this point in our process we've thrown away the job description for the role you've applied for and have started to co-create a role with you. Help us with this process by giving as much relevant background about your passions as possible. If we have a hypothesis for how you could fit into a full time role we will proceed to the second round.
 
-**Second round**
+### Second round
 
-This is a 50 minute technical interview with Mrinal, Ockam's CTO. We will want to dig deep into things you've built and technologies you've used.
+This is a 50 minute technical interview with [Mrinal Wadwha](https://www.linkedin.com/in/mrinalwadhwa/), Ockam's CTO. We will want to dig deep into things you've built and technologies you've used.
 
-**OSS collaboration project**
+### OSS collaboration project
 
 If we ask you to move to this round, we have a strong thesis for your potential on The Team.
 
@@ -95,13 +95,13 @@ There are two primary goals in this exercise.
 
 This task is custom crafted for every individual, in every role, at every level. The coding aspect of the task should take only a couple hours, however we anticipate that we will spend an additional several hours with you in discussion, ideation, and collaboration.
 
-**Culture Connection**
+### Culture Connection
 
 As you wrap up your OSS collaboration exercise you will spend time discussing the Ockam culture, and our [values and virtues](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/) with our CEO, [Matthew Gregory](https://www.linkedin.com/in/matthewgregory/). We will also make our advisors and board members available to you. In this stage of our process we want to expose as much of the culture to you as possible to help you make an informed decision about the type of team you will be committing full time to.
 
-*It's reasonably possible that if you are known in the Ockam community and we both feel good about our collaboration style, it's possible to enter the candidate process at the Culture COnnection stage.*
+*It's possible that if you are known in the Ockam community, and if we align in our collaboration style, a candidate may start at the Culture Connection stage.*
 
-**Role Memo**
+### Role Memo
 
 Internally we will finalize a role that we've custom crafted for you. We collaborate on a memo that includes your level, and our thesis for how your background fits into the problems we are solving at Ockam. We will define the project you will start with so that you are set up for success from the onset.
 
