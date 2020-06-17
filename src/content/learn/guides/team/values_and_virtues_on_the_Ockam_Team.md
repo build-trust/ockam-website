@@ -1,7 +1,6 @@
 ---
 title: "Values and Virtues of The Ockam Team"
 order: 1
-date: 2020-01-15
 description: "“Values are what you believe, Virtues are what you do.” "
 metaTitle: "Ockam is a value driven high performance team. We are fully distributed and are remote-first. This blog is our guidebook for how we run the Ockam Team"
 ---
