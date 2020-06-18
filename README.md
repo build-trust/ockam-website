@@ -1,4 +1,5 @@
 ![Ockam sticker bordered dark background](https://www.ockam.io/d0cc1cc1af21f58d62921889e29dc745/sticker_bordered_dark_backround.svg)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
 # Ockam Website
 
