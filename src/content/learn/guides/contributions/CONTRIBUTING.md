@@ -27,9 +27,13 @@ If your issue appears to be a bug, and hasn't been reported, open a new issue. H
 In general, providing the following information will increase the chances of your issue being dealt with quickly:
 
 **Expected Behavior** - Is there documentation or an example that represents the discrepancy?
+
 **Actual Behavior** - Be sure to explain why this is a bug for you.
+
 **Steps to Reproduce the Problem** - Code snippets and screen shots are always helpful.
+
 **Environment** - What hardware, OS, and versions are you using?
+
 **Suggest a Fix** - if you can't fix the bug yourself, perhaps you can point to what might cause the problem (line of code or commit)
 
 Here is a great example of a well defined issue: [add link here when we have a good example]
@@ -51,6 +55,7 @@ You can request a new feature by submitting an issue to our [GitHub Repository][
 If you would like to implement a new feature then consider what kind of change it is:
 
 * **Major Changes** that you wish to contribute to the project should be discussed first in an [GitHub issue][github-issues] that clearly outlines the changes and benefits of the feature. Be sure to read our *Issue Submission Guidelines* above.
+
 * **Small Changes** can directly be crafted and submitted to the [GitHub Repository][github] as a Pull Request.
 
 Be sure to follow Ockam's language specific format.
@@ -89,6 +94,7 @@ The header includes a type, a scope and a subject:
 `<footer>` is optional, must not be longer that 100 characters.
 
 **Ockam requires that all commits are signed by your PGP key.**
+
 If signing git commits is new to you, we recommend that you use Krypton.
 Instructions for signing git commits with Krypton can be found [here][sign]
 
