@@ -48,7 +48,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     <td>“Solutions” </td>
     <td>“Problems” </td>
     <td>“Spaces” </td>
-    <td>“Executive” </td>
+    <td>“Frontiers” </td>
   </tr>
 
   <tr>
@@ -150,7 +150,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
       <ul>
-          Sets product direction and has ownership over large components:
+          <b>Sets product direction and has ownership over large components:</b>
           <li> Thinks both strategically and tactically, keeping in mind both technical goals and company business/GTM goals.</li>
           <li> Understands trade offs of OKRs across the entire company.</li>
           <li> Contributes to and shapes company-wide Horizon scale OKRs.</li>
