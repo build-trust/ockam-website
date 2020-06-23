@@ -134,6 +134,6 @@ Use [Maker Day](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the
 
 ## Off boarding
 
-The Ockam Team is excited to be a part of *your* journey. We will think of you a teammate forever. This Team was built to help you succeed, regardless if you are a some-times OSS contributor or a multi-year full-time member of our Team.
+The Ockam Team is excited to be a part of *your* journey. We will think of you as a teammate forever. This Team was built to help you succeed, regardless if you are a some-times OSS contributor or a multi-year full-time member of our Team.
 
 Thank you for being a part of it!
