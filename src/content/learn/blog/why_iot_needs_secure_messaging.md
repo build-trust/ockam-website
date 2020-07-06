@@ -2,7 +2,7 @@
 title: "Why IoT needs Secure Messaging - San Francisco IoT Meetup"
 date: 2020-02-10
 description: "Mrinal Wadhwa presented at the San Francisco IoT Meetup on why IoT needs Secure Messaging"
-metaTitle: "Secure end-to-end encryption among distributed systems is critical for a Trust Architecture." 
+metaTitle: "Secure end-to-end encryption among distributed systems is critical for a Trust Architecture."
 author: "Mrinal Wadhwa"
 ---
 
@@ -34,5 +34,4 @@ this topic on his Podcast:
 
 If you're interested in learning more about Ockam's approach to Secure Messaging, we're discussing our protocols
 and architecture openly on the [Ockam Proposals](https://github.com/ockam-network/) repository and on Ockam
-[slack](https://join.slack.com/t/ockam-community/shared_invite/enQtNDk5Nzk2NDA2NDcxLWQ0MjcyZWZjOWVlNGE5M2M3YjBkMjFkODZmODIwZWJmOTY3MThjNmU0ODc0ZDk4MjBjOGZmZDIzY2FhYTY4YTg),
-come join us.
+[Discussions](https://github.com/ockam-network/ockam/discussions), come join us.
