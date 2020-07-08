@@ -30,7 +30,6 @@ if (error != OCKAM_ERROR_NONE) { goto exit; }
 
 If the function succeeds the return value is `OCKAM_ERROR_NONE`.
 
-
 ## Complete Example
 
 ```c

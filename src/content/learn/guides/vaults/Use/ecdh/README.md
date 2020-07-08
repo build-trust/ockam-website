@@ -10,12 +10,11 @@ of the ECDH operation will be another `ockam_vault_secret_t`. This guide will wa
 secrets, retrieving the public keys for each secret, performing ECDH on each private key with the other's public
 key and retrieving the matching shared secrets from the two ECDH operations.
 
-
 ## Secret Generate
 
 To generate a private key on Curve25519, `ockam_vault_secret_t` and `ockam_vault_secret_attributes_t` structs must be declared.
 The attributes field must be populated as shown below. The length field can be set to zero as the size of a Curve25519 is fixed
-as part of Ockam Vault. 
+as part of Ockam Vault.
 
 ```c
   ockam_vault_secret_t            secret     = { 0 };
@@ -32,8 +31,7 @@ as part of Ockam Vault.
 
 The result of the `ockam_vault_secret_generate` function is a newly generated private key stored in Vault.
 
-
-## Public Key Retrieval 
+## Public Key Retrieval
 
 Once a private key has been generated, the public key can be retrieved from the private key and stored into
 a buffer passed into the function `ockam_vault_secret_publickey_get`. The size of the Curve25519 public key
@@ -58,7 +56,7 @@ error = ockam_vault_secret_publickey_get(&vault,
 To calculate the shared secret using ECDH, a private key in a vault secret and a public key is needed. The
 sample below assumes the device executing the ECDH operation has received a public key from a device its attempting
 to communicate with. The the private key secret is passed in along with the public key and the result is a new
-vault secret containing the calculated shared secret. The secret type will be set to `OCKAM_VAULT_SECRET_TYPE_BUFFER`. 
+vault secret containing the calculated shared secret. The secret type will be set to `OCKAM_VAULT_SECRET_TYPE_BUFFER`.
 
 ```c
 ockam_vault_secret_t shared_secret = { 0 };
@@ -74,10 +72,11 @@ if (error != OCKAM_ERROR_NONE) { goto exit; }
 ## Complete Example
 
 The sample below shows the following:
-* Generate two private keys.
-* Retrive the two public keys.
-* Calculate the shared secrets.
-* Retrieve the shared secrets and print out to show they match.
+
+- Generate two private keys.
+- Retrive the two public keys.
+- Calculate the shared secrets.
+- Retrieve the shared secrets and print out to show they match.
 
 ```c
 
@@ -157,8 +156,8 @@ int main(void)
   if (error != OCKAM_ERROR_NONE) { goto exit; }
   if (public_key_length != OCKAM_VAULT_CURVE25519_PUBLICKEY_LENGTH) { goto exit; }
 
-  /* 
-   * Calculate two shared secrets: initiator private/responder public and responder 
+  /*
+   * Calculate two shared secrets: initiator private/responder public and responder
    * private/initiator public.
    */
 

@@ -22,12 +22,11 @@ available in hardware.
 This guide will show how to initial a handle to the default software vault
 and use it call vault interface functions.
 
-
 ## Handle Errors
 
 All ockam functions return a value of type `ockam_error_t` define in
 `ockam/error.h`. If a function was successful this value is zero, defined as
-`OCKAM_ERROR_NONE`.  If there was error this value is a non-zero error code.
+`OCKAM_ERROR_NONE`. If there was error this value is a non-zero error code.
 
 ```c
 ockam_error_t error = OCKAM_ERROR_NONE;
@@ -116,10 +115,10 @@ if (error) goto exit;
 
 Once we're done using the vault, we must cleanup any resource held by `vault`, `random` and
 `memory` handles. Its important to not use goto exit after every deinit call as an application
-should make a best effort to free everything. 
+should make a best effort to free everything.
 
 In this example, vault is the only handle that allocated memory internally so its ok to skip checking
-the error codes from random and memory. The random and memory deinits should still be called so they 
+the error codes from random and memory. The random and memory deinits should still be called so they
 handles are cleared out appropriately.
 
 The deinits are placed below the exit label to ensure everything is cleaned up, even if an error
