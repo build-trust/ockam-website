@@ -82,11 +82,12 @@ if (error) goto exit;
 ## Complete Example
 
 This example shows the following:
-* Generate 16 bytes of random data to use for an AES key.
-* Create an ockam vault secret using the 16 bytes of random data.
-* Encrypt a payload using the AES key, additional data and nonce.
-* Decrypt the ciphertext + tag using the AES key, additional data and nonce.
-* Print out the resuling ciphertext + tag and the decrypted data.
+
+- Generate 16 bytes of random data to use for an AES key.
+- Create an ockam vault secret using the 16 bytes of random data.
+- Encrypt a payload using the AES key, additional data and nonce.
+- Decrypt the ciphertext + tag using the AES key, additional data and nonce.
+- Print out the resuling ciphertext + tag and the decrypted data.
 
 ```c
 
@@ -230,4 +231,3 @@ exit:
   return exit_code;
 }
 ```
-

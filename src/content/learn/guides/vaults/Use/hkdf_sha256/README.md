@@ -10,7 +10,7 @@ defined in [RFC 5869](https://tools.ietf.org/html/rfc5869).
 
 ## Import salt and input key material
 
-The HKDF-SHA256 operation requires a salt secret, and while not required, typically also takes in 
+The HKDF-SHA256 operation requires a salt secret, and while not required, typically also takes in
 an input key material secret. Since HKDF-SHA256 needs this data as secrets, the data must be
 loaded into a secret before the HKDF-SHA256 operation can be called. The example code below shows
 loading salt and input key material data into two secret types.
@@ -78,13 +78,13 @@ error = ockam_vault_hkdf_sha256(&vault,
 if (error != OCKAM_ERROR_NONE) { goto exit; }
 ```
 
-
 ## Complete Example
 
 The sample below shows the following:
-* Import salt and input key material into secrets
-* Run the HKDF-SHA256 to generate 2 derived outputs
-* Retrieve the derived outputs and print out the results
+
+- Import salt and input key material into secrets
+- Run the HKDF-SHA256 to generate 2 derived outputs
+- Retrieve the derived outputs and print out the results
 
 ```c
 #include "ockam/error.h"
@@ -231,4 +231,4 @@ exit:
   if (error != OCKAM_ERROR_NONE) { exit_code = -1; }
   return exit_code;
 }
-
+```
