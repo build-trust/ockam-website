@@ -95,7 +95,13 @@ Understanding ‘Why?’ aligns the entire team to prioritize, make fast decisio
 
 Ockam is a team of doers, builders, shippers, and finishers. We celebrate things that are complete. Ideas are the easy part. We win by turning ideas into action.
 
-Like many mission driven product teams, we utilize the Objective-Key Result (OKR) framework. Drawing from the Salesforce V2MOM structure, we additionally layer Ockam’s Values and Vision on top of the classic OKR structure.
+Like many mission driven product teams, we utilize the Objective-Key Result (OKR) framework. Drawing from the Salesforce V2MOM structure, we additionally layer Ockam’s Values and Vision on top of the classic OKR structure. As you will read in the [next section](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/#we-preserve-and-cherish-time), we break time into four intervals. We assign OKRs to each time interval across five categories;
+
+* Team
+* Values
+* Product
+* Engineering
+* Go-to-market
 
 Actions result in artifacts. Ockam is tooled so that all of our artifacts can be represented by a hyperlink; a proposal memo, the notes from a customer call, a product feature specification, a sales deck, sketch of a new webpage, or a pull request. After we create hyperlinks we ship them to The Team via Slack. This means that our culture of ‘shipping’ extends to everyone on the team, and not just our coders.
 
@@ -131,7 +137,7 @@ Races are subsets of a Campaign. We break Campaigns down into more manageable ob
 
 Just like a world class marathon runner, we break down our Races into well defined chunks to monitor our pace. We do Pace Checks every 2 weeks. Every other Tuesday we gather The Team to show demos, raise major blockers, and to plan the next two weeks of our Race.
 
-Many teams call their two-week segments ‘Sprints’. We don’t like to pretend that we can maintain a cadence of never-ending sprints. Building great tools and beautiful products is a marathon not a sprint. Our Races are endurance events that require effective pacing.
+Many teams call their two-week segments ‘Sprints’. We don’t like to pretend that we can maintain a cadence of never-ending sprints. Building great tools and beautiful products is a marathon not a sprint. Our Races are endurance events that require effective pacing across each Race.
 
 #### Maker Day
 
@@ -157,15 +163,15 @@ Because Ockam is open source, ideas and roadmaps are not limited to the financia
 
 Because open source makes code transparent, accessible, and free everyone is able to use the Ockam code base to innovate in new ways.
 
-#### Drives adoption
+#### Drive adoption
 
 Open source software is highly available. Anyone can access Ockam’s code, anywhere, anytime. Ockam open source code becomes more durable and valuable the more it is used by the community. This makes the tools more innovative, which kicks off a virtuous cycle that ultimately democratizes access to complicated security protocols for millions of developers.
 
-#### Improves security
+#### Improve security
 
 We believe security solutions can not be a black-box. The more engineers that look at a piece of code, and the more times it is deployed, the more secure it becomes. Security teams can inspect and audit the Ockam codebase for their specific application. If vulnerabilities are discovered that team is empowered to make changes that benefit the entire community. Again, the virtuous cycle of open sourced security improvements give every builder better tools.
 
-#### Enables integrations
+#### Enable integrations
 
 Connected devices have an n-squared problem that blocks interoperability. With billions of combinations of possible connection configurations it’s impossible to implement all of the possibilities. Product managers at chip makers, device OEMs, network and cloud service providers need to integrate with each other.
 

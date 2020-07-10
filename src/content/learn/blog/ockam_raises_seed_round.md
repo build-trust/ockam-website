@@ -36,19 +36,19 @@ The next few months will be focused on extending our Team capabilities with the 
 
 We hope you’ll join us on our journey.
 
-## About Ockam:
+# About Ockam
 
-### Ockam's Vision:
+## Ockam's Vision
 
 Ockam believes that interoperable systems of connected devices, across consumer and enterprise, will be able to interact autonomously. These systems will be secure, trustworthy, and respect user privacy.
 
-### Ockam Mission:
+## Ockam's Mission
 
 Ockam enables the builders.
 
-We empower developers build trustful IoT systems with our easy to use tools, methods, and protocols. We are building an open source ecosystem so that builders can collaborate on our vision.
+We empower developers to build trustful IoT systems with our easy to use tools, methods, and protocols. We are building an open source ecosystem so that builders can collaborate on our vision.
 
-### How We Do It:
+## How We Do It
 
 Ockam is a tool company. We make it simple to interconnect hardware at the edge with software services in the cloud.
 
