@@ -2,9 +2,21 @@
 title: Reading List
 order: 5
 ---
+# Ockam's reading list
 
 This is a curated list of reference books, articles, videos, and other
 references on tools and processes that our team uses.
+
+## Team
+
+### Culture  
+* [What you do is who you are by Ben Horowitz](https://a16z.com/book/whatyoudo/)
+* [The Score Takes Care of Itself by Bill Walsh](https://www.penguinrandomhouse.com/books/303810/the-score-takes-care-of-itself-by-bill-walsh-with-steve-jamison-and-craig-walsh/)
+* [Growth Mindset by Carol Dweck](https://www.amazon.com/Mindset-The-New-Psychology-Success/dp/1400062756)
+
+### Process
+* [Measure What Matters by John Doerr](https://www.whatmatters.com/the-book/)
+* [Inspired by Marty Cagan](https://svpg.com/inspired-how-to-create-products-customers-love/)
 
 ## Version Control
 
