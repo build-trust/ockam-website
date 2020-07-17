@@ -89,6 +89,9 @@ const Footer = () => {
           <Logo height="4.8rem" alt="Ockam logo" />
         </LogoContainer>
         <MenuContainer>
+          <MenuLink to="https://github.com/ockam-network/ockam/archive/main.zip">
+            Download
+          </MenuLink>
           <MenuLink onClick={openContactModal}>Request Demo</MenuLink>
           <MenuLink onClick={openContactModal}>Contact Sales</MenuLink>
         </MenuContainer>
