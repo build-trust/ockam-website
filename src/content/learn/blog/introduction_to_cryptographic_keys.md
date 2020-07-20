@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Cryptographic Keys"
+title: "What are Cryptographic Keys?"
 date: 2020-07-15
 description: "As so much of our information is transported via the internet, it’s important to safeguard it. Cryptographic keys make this possible."
 metaTitle: "Symmetric and asymmetric keys both play an important role in cryptography, the foundation of Internet security."
@@ -48,4 +48,4 @@ Remember, the biggest flaw of symmetric cryptography is the inability to securel
 
 This combination of cryptographic keys forms the basis for many types of encryption you’ve heard about. For example, perhaps you’re aware that companies like Apple, WhatsApp, and Signal provide end-to-end encryption for their messaging services. When you’re using end-to-end encrypted messaging, only you and the recipient can read the actual messages. And how is this encryption set up? Well, by initially using an asymmetric key pair to securely provide a symmetric key to both end-users.
 
-End-to-end encryption is most often thought of in association with messaging platforms, but that’s not the case. At Ockam we provide end-to-end encryption SDKs for IoT devices. Just like how your message is encrypted with iMessage or WhatsApp, we’re creating technology to ensure the data your IoT devices are sending are encrypted as well. 
+End-to-end encryption is most often thought of in association with messaging platforms, but that’s not the case. At Ockam we provide end-to-end encryption SDKs for IoT devices. Just like how your message is encrypted with iMessage or WhatsApp, we’re creating technology to ensure the data your IoT devices are sending are encrypted as well.
