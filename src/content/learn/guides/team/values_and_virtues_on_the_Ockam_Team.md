@@ -21,7 +21,7 @@ I read Ben Horowitz’s new book “What you do is who you are” and it crystal
 
 I decided that this framework was the simplifying structure I was looking for; To connect Ockam’s Values with the best of proven management behaviors from iconic technology companies - including Intel & Google (OKRs), Amazon (Day One / Decisions), Salesforce (V2MOM), Gitlab & Hashicorp (Remote-First), Heroku (Maker Day) - and Ockam’s own innovations to build simple tools with a high performance team.
 
-I also recommend the following books for a deeper understanding of our culture and frameworks that we use everyday at Ockam: “The Score Takes Care of Itself” by Bill Walsh, "Growth Mindset" by Carol Dweck, and “Measure What Matters” by John Doerr.
+I also recommend the following books for a deeper understanding of our culture and frameworks that we use everyday at Ockam: “The Score Takes Care of Itself” by Bill Walsh, "Growth Mindset" by Carol Dweck, and “Measure What Matters” by John Doerr. Our entire reading library of recommended books, blogs and videos can be found [here](https://www.ockam.io/learn/guides/team/reading_list/).
 
 *Matthew Gregory*
 
