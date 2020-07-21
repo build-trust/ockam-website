@@ -1,6 +1,6 @@
 ---
 title: Graphics
-order: 5
+order: 6
 ---
 
 # Ockam graphics style guide
