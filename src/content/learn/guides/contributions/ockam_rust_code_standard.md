@@ -1,6 +1,6 @@
 ---
 title: Rust Library Style
-order: 6
+order: 5
 ---
 # Rust ​Library Coding Standard
 
@@ -127,7 +127,7 @@ pub enum ErrorKind {
     #[display = "Failed to initialize"]
     Init,
     #[display = "Failed to read or write to network"]
-    NetworkError 
+    NetworkError
 }
 
 #[derive(Debug)]
@@ -139,7 +139,7 @@ pub struct Error {
 
 ## Packaging
 
-### Cargo.toml 
+### Cargo.toml
 
 Sort fields in each section alphabetically.
 Use the latest "edition" in the \[package\] section. (Right now its 2018).
@@ -447,7 +447,7 @@ specifies a parameter into a function
 * `return`:
 specifies what a function returns
 
-* `see` <link>:
+* `see` "<link>":
 creates a link in the documentation to the file/function/variable to consult to get a better
 understanding on what the current block of code does.
 
