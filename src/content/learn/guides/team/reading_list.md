@@ -18,11 +18,16 @@ references on tools and processes that our team uses.
 * [Measure What Matters by John Doerr](https://www.whatmatters.com/the-book/)
 * [Inspired by Marty Cagan](https://svpg.com/inspired-how-to-create-products-customers-love/)
 
+## Architecture
+
+### Distributed Systems
+* [Building Secure & Reliable Systems by Google](https://static.googleusercontent.com/media/landing.google.com/en//sre/static/pdf/Building_Secure_and_Reliable_Systems.pdf)
+
 ## Version Control
 
 ### Git
 * [Pro Git by Scott Chacon and Ben Straub](https://git-scm.com/book/en/v2)
-* [Missing Semester](https://missing.csail.mit.edu/2020/version-control/)
+* [The Missing Semester at MIT](https://missing.csail.mit.edu/2020/version-control/)
 * [Git in Practice by Mike McQuaid](https://manning.com/books/git-in-practice)
 
 ## Programming Languages
