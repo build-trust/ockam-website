@@ -61,7 +61,7 @@
     "gatsby-transformer-sharp": "2.5.5",
     "graphql": "14.6.0",
     "is-absolute-url": "3.0.3",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "neat-csv": "5.2.0",
     "polished": "3.6.4",
     "prism-react-renderer": "1.1.1",
