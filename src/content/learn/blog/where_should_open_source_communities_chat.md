@@ -3,14 +3,13 @@ title: 'Where Should Open Source Communities Chat?'
 date: 2020-08-04
 description: 'Open source communities can chat with GitHub Discussions, but there are other options as well.'
 metaTitle: 'Chatting with Open Source Communities.'
-author: 'Matthew Gregory'
-authorAvatar: ./assets/matthew_gregory-1.png
-isFeature: true
+author: 'Luke Russell'
+authorAvatar: ./assets/luke_russell.png
 ---
 
 Open source projects are the building blocks of the technologies developers use today. These projects are made possible because people come together to collaboratively work on them. With contributors from all over the globe, individuals must have a way to communicate with each other. Discussions are an important part of making any open source project into a community.
 
-We certainly are [fans of open source](https://www.ockam.io/learn/blog/why_we_love_open_source/) and we believe you should be too. The best way to support open source projects is to be actively involved in their communities. In this article, we'll go over what communities can provide, and the places communities can come together to push their projects forward.
+The people at Ockam are [fans of open source](https://www.ockam.io/learn/blog/why_we_love_open_source/) and you should be too. The best way to support open source projects is to be actively involved in their communities. In this article, we'll go over what communities can provide, and the places communities can come together to push their projects forward.
 
 ## The Importance of Community
 
@@ -24,7 +23,7 @@ To steward a project, you need to provide a place for your community to gather.
 
 ## Why Ockam Chose GitHub Discussions
 
-There are many ways to organize open source discussions. It makes sense to keep the conversation close to the code. For many open source projects, this means GitHub, which provides a number of collaboration tools. In particular, GitHub Discussions is the latest addition. Ockam was part of this feature’s beta testing group and we were convinced it’s the best place to focus our community’s most important conversations.
+There are many ways to organize open source discussions. It makes sense to keep the conversation close to the code. For many open source projects, this means GitHub, which provides a number of collaboration tools. In particular, GitHub Discussions is the latest addition. Ockam was part of this feature’s beta testing group and they were convinced it’s the best place to focus their community’s most important conversations.
 
 GitHub Discussions gives users within an organization the ability to chat in the same place their code lies.
 
@@ -37,7 +36,7 @@ There are other places within GitHub that still make sense for conversation. How
 - **Pull Requests**: discuss details within the code of a specific contribution
 - **Issues**: keep conversation focused on a singular problem, not a broader topic
 
-There are certainly times when open source projects have stretched the use cases of these GitHub features. That’s why we’ve chosen to use GitHub Discussions as the primary place for our community to congregate. We think it’s a good fit for many other open source communities, as well.
+There are certainly times when open source projects have stretched the use cases of these GitHub features. That’s why Ockam chose to use GitHub Discussions as the primary place for their community to congregate. It’s a good fit for many other open source communities, as well.
 
 That said, it doesn’t fit every type of conversation for every community. You might also want to look for real-time options, as well as meet your community where they are already having discussions.
 
@@ -57,4 +56,4 @@ It’s important to listen on Twitter and other public forums like StackOverflow
 
 Ultimately, real-time and social chat may be a decision left to your community. You’ll need leaders and contributors to listen for questions. You’ll want everyone engaged in the conversation and encouraging contributions.
 
-Regardless of how you communicate around your open source projects, we hope you find communities that help you work on what you’re most passionate about. If that happens to be making the internet more secure, we certainly hope you join our [open source community](https://www.ockam.io/learn/guides/team/join_us)!
+Regardless of how you communicate around your open source projects, find communities that help you work on what you’re most passionate about. If that happens to be making the internet more secure, then check out Ockam's [open source community](https://www.ockam.io/learn/guides/team/join_us)!
