@@ -39,7 +39,7 @@ Open source is exceptionally empowering - no level of involvement is to small. H
 
 As a maintainer of an open source code base, it's fantastically flattering when a stranger from internet-land gets involved. In most small to medium sized OSS projects anyone that actively participates is known to the entire team.
 
-Frankly, simply by showing up and getting involved you immediately become one of our heros!
+Frankly, simply by showing up and getting involved you immediately become one of our heroes!
 
 Getting involved with open source projects is something that you'll never regret. It's a great way to show off your skills and build a portfolio of work that is open and accessible to everyone.
 
