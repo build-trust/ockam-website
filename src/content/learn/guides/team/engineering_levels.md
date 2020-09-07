@@ -20,7 +20,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     <th> </th>
     <th>Engineer </th>
     <th>Senior Engineer </th>
-    <th>Principle Engineer </th>
+    <th>Principal Engineer </th>
     <th>Architect </th>
     <th>Senior Architect </th>
   </tr>
