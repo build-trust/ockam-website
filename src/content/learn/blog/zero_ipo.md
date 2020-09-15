@@ -1,6 +1,6 @@
 ---
 title: "Zero-to-IPO: Charting Ockam’s Route"
-date: 2020-09-13
+date: 2020-09-15
 description: "Ockam's Zero-to-IPO framework is a map for our journey."
 metaTitle: "Ockam’s Zero-to-IPO map is a key strategy input to our tactical short, medium and long-term business planning for our open source based products."
 author: "Matthew Gregory"
@@ -19,7 +19,9 @@ The time scale for our route to IPO is, as you’d expect, years long. Given tha
 
 ![Funding time scale](./assets/zero_ipo/funding.png)
 
-The cloud, edge, and open source landscape continues to evolve - which means that we need to chart our own course into the future. However, Ockam’s route to IPO also considers the various ways that other companies have run the gauntlet from Zero-to-IPO. I’ve been fortunate to have been ‘in the rooms where it happened’. Over the past 10 years I’ve directly worked with well over 100 companies that were underpinned by open source software projects. I’ve seen spectacular successes, breathtaking failures, modest acquisitions, and some companies that simply fade into the darkness. In the image below are experiences that I’ve drawn from the previous decade in the open source, cloud, and developer tool space.
+The cloud, edge, and open source landscape continues to evolve - which means that we need to chart our own course into the future. However, Ockam’s route to IPO also considers the various ways that other companies have run the gauntlet from Zero-to-IPO. I’ve been fortunate to have been ‘in the rooms where it happened’. Over the past 10 years I’ve directly worked with well over 100 companies that were underpinned by open source software projects. I’ve seen spectacular successes, breathtaking failures, modest acquisitions, and some companies that simply fade into the darkness. I'll save those stories for another time, maybe over a beer.
+
+In the image below are experiences that I’ve drawn from the previous decade in the open source, cloud, and developer tool space.
 
 ![Rooms where it happened](./assets/zero_ipo/rooms.png)
 
@@ -35,17 +37,19 @@ For example, The first product Ockam shipped was [a blog on our Values](https://
 
 ## Metrics
 
-To gauge awareness we track web page views on Ockam.io, GitHub stars, social media mentions, followers and, most importantly, applications to join our team.
+To gauge awareness we track activity including page views on ockam.io, 'contact us' webform inquiries, GitHub stars, social media mentions, followers and, most importantly, applications to join our team.
 
 # OSS Community
 
 ## Motion
 
+This is a critically important step in our progression to IPO. Building Ockam's community is a never-ending endeavor. It takes years of focus and unrelenting attention to get this step right. For example, Kafka spent it's first 5 years in this phase as an Apache project before Confluent was started.
+
 We have three code interfaces to Ockam, which means that there are three different personas in our community:
 
 **Application layer developers**
 
-Ockam’s users build systems and applications with our simple APIs, daemon downloads, and hosted cloud services.
+Ockam’s users build systems and applications with our simple APIs, OckamD binary downloads, and hosted cloud services.
 
 To simplify what’s going on at this stage, we create packages that any developer can grab in the middle of the night, on the other side of the world, and get a quick win for their demo day at work. You’ve got a job to be done, and we’ve got a simple solution for you. You can get it right now and we will measure your time to a technical-win in the scale of minutes.
 
@@ -55,17 +59,17 @@ Community partners build add-ons, connectors, and plug-ins to connect Ockam to o
 
 **Open source developers**
 
-Ockam’s open source developers are engaged in the Ockam code base’s core development. They attend our monthly community meetings, and are hands-on with our OSS codebase on GitHub. Their participation ranges from updating a typo in documentation, to building complex features.
+Ockam’s open source builders are engaged in development of Ockam's core codebase. They attend our monthly community meetings, and are hands-on with our OSS codebase on GitHub. Their participation ranges from updating a typo in documentation, to building complex features.
 
 ## Metrics
 
 We track Monthly Active Users across all three personas in our community:
 
-Daemon downloads, account signups, or SaaS service IOPS are all indicators of usage. As hinted above, time to ‘technical win’, for an individual developer is also paramount. We’ve defined time to ‘technical win’ as the time it takes to go from an individual developer’s initial discovery to a working prototype that includes Ockam features.
+Binary downloads, account signups, or SaaS service IOPS are all indicators of usage. As hinted above, time to ‘technical win’, for an individual developer is also paramount. We’ve defined time to ‘technical win’ as the time it takes to go from an individual developer’s initial discovery to a working prototype that includes Ockam features.
 
 The easiest user growth to track is the number of partner integrations. Since partners engage with us 1:1 on an integration, we are highly selective and deliberate about the partnerships that we support. Eventually the development of our technical partnerships will become programmatic. Programmatic examples from my past include the partner program for Heroku Add-ons and the Azure Marketplace partner portal.
 
-We also track the intersection of partnerships and usage. For example, the number of Ockam Daemons that run alongside Influx Telegraf, or the number of IOPS in Ockam Routers that connect to a Kafka Connector.
+We also track the intersection of partnerships and usage. For example, the number of Ockam Daemons that run alongside Influx Telegraf, or the number of IOPS in Ockam Routers that securely move packets to a Kafka Connector.
 
 Finally open source activity and engagement is transparent through the tools in GitHub. Check out [how we are doing](https://github.com/ockam-network) with stars, forks and commits.
 
@@ -161,9 +165,7 @@ What’s more interesting, at the scale of Enterprise sales, is the number of no
 
 # Summary
 
-![Motions to IPO](./assets/zero_ipo/motions.png)
-
-![Metrics that Matter](./assets/zero_ipo/metrics.png)
+![Summary](./assets/zero_ipo/summary.png)
 
 # But wait! There’s more...
 
@@ -171,7 +173,7 @@ I love maps. In a previous life I was a navigator. [True story]
 
 All maps have the same problem. They are two dimensional, and we live in a multidimensional world. This is why cartographers have invented hundreds of ‘projections’ of our word.
 
-Navigators use a projection called ‘mercator’. This projection has the benefit of making straight lines between two points. This comes at the expense of distorting scale on the north-south axis. The map I created above is a mercator projection where our journey from Zero-to-IPO is a straight line. But there are plenty of other dimensions we still need to consider to get a complete picture.
+Navigators use a projection called ‘mercator.’ This projection has the benefit of making straight lines between two points. This comes at the expense of distorting scale on the north-south axis. The map I created above is a mercator projection where our journey from Zero-to-IPO is a straight line. But there are plenty of other dimensions we still need to consider to get a complete picture.
 
 ## The ‘building’ projection
 
@@ -193,11 +195,21 @@ We continuously look to the horizon, and keep building on what we’ve already a
 
 ![Feedback Projection](./assets/zero_ipo/feedback.png)
 
+## The ‘open source’ projection
+
+To get Ockam's business model you need to understand open source ecosystems.
+
+"Open source? But how do you make money?!" I get this question a lot.
+
+For Ockam's take on open source and for why we love it, I recommend you [watch my presentation from Octane 2020](https://www.ockam.io/learn/blog/oktane_2020_the_future_of_identity/). It all comes down to partnerships.
+
+![The Ockam ecosystem](./assets/open_source_ecosystem.png)
+
 ## The ‘technology’ projection
 
 We appreciate the complexity of our underlying technology.
 
-Ockam is a deep tech company. It takes exceptional people to build Ockam’s code. It takes time to build a high performance team with exceptional people. It takes a team to build deep tech. Ockam takes time.
+Ockam is a deep tech company. It takes exceptional people to write the code that makes up Ockam's core. It takes time to build a high performance team with exceptional people. It takes a team to build deep tech. Ockam takes time.
 
 Here’s an example for how this has played out over the past 10 months; We are a 6 person team. We’ve received 1800 resumes, and we’ve conducted about 250 interviews over that time. ‘High performance team’ is one of our values, and we live it as a virtue. It’s something we can not compromise.
 
