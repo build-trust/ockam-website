@@ -185,6 +185,8 @@ Below are a couple examples for snapshots of our building in different states of
 
 ![Building Projection](./assets/zero_ipo/building.png)
 
+
+
 ## The ‘feedback’ projection
 
 We scout the waters ahead by running pilots, talking to customers and making opportunistic hires. For example, even though we are currently at the ‘OSS Community stage’ we still talk to potential enterprise scale companies about their problems. We mock up product bundles and think about distribution channels that could feed Inside Sales.
@@ -195,15 +197,19 @@ We continuously look to the horizon, and keep building on what we’ve already a
 
 ![Feedback Projection](./assets/zero_ipo/feedback.png)
 
+
+
 ## The ‘open source’ projection
 
 To get Ockam's business model you need to understand open source ecosystems.
 
 "Open source? But how do you make money?!" I get this question a lot.
 
-For Ockam's take on open source and for why we love it, I recommend you [watch my presentation from Octane 2020](https://www.ockam.io/learn/blog/oktane_2020_the_future_of_identity/). It all comes down to partnerships.
+For Ockam's take on open source and for why we love it, I recommend you [watch my presentation from Oktane 2020](https://www.ockam.io/learn/blog/oktane_2020_the_future_of_identity/). It all comes down to partnerships.
 
 ![The Ockam ecosystem](./assets/open_source_ecosystem.png)
+
+
 
 ## The ‘technology’ projection
 
