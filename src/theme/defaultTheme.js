@@ -4,6 +4,7 @@ import { BREAKPOINTS } from '../utils/rwd';
 
 const colors = {
   dark: '#242A31',
+  darken: '#091727',
   white: '#fff',
   dirtyWhite: '#D0DEFF',
   background: '#0A1A2B',
@@ -79,6 +80,7 @@ const colors = {
   },
   codeBlock: {
     background: '#162535',
+    lightBackground: '#0b2336',
   },
   table: {
     accent: '#162535',
