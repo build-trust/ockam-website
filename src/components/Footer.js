@@ -89,9 +89,6 @@ const Footer = () => {
           <Logo height="4.8rem" alt="Ockam logo" />
         </LogoContainer>
         <MenuContainer>
-          <MenuLink to="https://github.com/ockam-network/ockam/archive/main.zip">
-            Download
-          </MenuLink>
           <MenuLink onClick={openContactModal}>Request Demo</MenuLink>
           <MenuLink onClick={openContactModal}>Contact Sales</MenuLink>
         </MenuContainer>
@@ -99,9 +96,6 @@ const Footer = () => {
           <Caption>© 2017-2020 Ockam.io. All rights reserved.</Caption>
         </CopyrightContainer>
         <SocialContainer>
-          <Link to={siteMetaData.ockamLibraryRepo}>
-            <Icon icon={GithubIcon} />
-          </Link>
           <Link to="https://www.linkedin.com/company/ockam.io/">
             <Icon ml={3} icon={LinkedinLogo} />
           </Link>

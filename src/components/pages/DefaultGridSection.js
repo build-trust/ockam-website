@@ -5,6 +5,7 @@ import { grid, flexbox } from 'styled-system';
 
 import { media } from '../../utils/emotion';
 import Heading from '../Heading';
+import Subheading from './Subheading';
 import AnimateOnScroll from '../AnimateOnScroll';
 import BaseImage from '../Image';
 
@@ -45,6 +46,7 @@ const ImageContainer = styled('div')(
     maxWidth: '50rem',
     position: `relative`,
     top: 0,
+    width: '100%',
   },
   flexbox
 );
@@ -54,6 +56,10 @@ const TitleWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+`;
+
+const SubtitleWrapper = styled('div')`
+  grid-area: title-start;
 `;
 
 const Image = styled(BaseImage)`
@@ -70,6 +76,7 @@ const DefaultGridSection = ({
   title,
   TitleComponent,
   id,
+  subtitle,
 }) => {
   return (
     <PageSection id={id}>
@@ -102,6 +109,11 @@ const DefaultGridSection = ({
             <Image src={image} />
           </AnimateOnScroll>
         </ImageContainer>
+        {subtitle && (
+          <SubtitleWrapper>
+            <Subheading>{subtitle}</Subheading>
+          </SubtitleWrapper>
+        )}
         {title && (
           <TitleWrapper>
             <AnimateOnScroll>
@@ -139,11 +151,14 @@ DefaultGridSection.propTypes = {
   isStickyImage: PropTypes.bool,
   id: PropTypes.string,
   contentAlign: PropTypes.oneOf(['top', 'center']),
+  subheading: PropTypes.bool,
+  subtitle: PropTypes.string,
 };
 
 DefaultGridSection.defaultProps = {
   direction: 'imageOnLeft',
   image: '',
+  subtitle: undefined,
   title: undefined,
   TitleComponent: undefined,
   gridLgProportions: ['1fr', '1fr'],

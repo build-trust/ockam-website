@@ -135,7 +135,7 @@ const BlogSection = () => {
         <BlogGrid>
           <StyledHeading as="h2">From Our Blog</StyledHeading>
           <ButtonContainer>
-            <Button ml="auto" to="/learn/blog" as={Link}>
+            <Button ml="auto" to="/learn/blog" as={Link} variant="primary">
               Read more articles
             </Button>
           </ButtonContainer>
