@@ -199,13 +199,15 @@ We continuously look to the horizon, and keep building on what we’ve already a
 
 
 
-## The ‘open source’ projection
+## The ‘virtuous cycle' projection
 
-To get Ockam's business model you need to understand open source ecosystems.
+I love virtuous cycles. But, who doesn't?!
 
-"Open source? But how do you make money?!" I get this question a lot.
+To get Ockam's business model you need to understand the virtuous cycle open source ecosystems.
 
-For Ockam's take on open source and for why we love it, I recommend you [watch my presentation from Oktane 2020](https://www.ockam.io/learn/blog/oktane_2020_the_future_of_identity/). It all comes down to partnerships.
+"Open source? But how do you make money?!" I get this question a lot. The simple answer is that we create a virtuous cycle partnership with Ockam Inc, Ockam Open Source, and all sorts of Ockam Add-ons.
+
+For Ockam's virtuous-cycle take on open source, I recommend you [watch my presentation from Oktane 2020](https://www.ockam.io/learn/blog/oktane_2020_the_future_of_identity/).
 
 ![The Ockam ecosystem](./assets/open_source_ecosystem.png)
 
