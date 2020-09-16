@@ -21,20 +21,20 @@ const ContactButton = ({
         }}
         onClick={onClick}
       >
-        Contact us
+        Contact
       </Button>
     );
   return (
     <Link
       fontSize={linkFontSize}
       onClick={onClick}
-      title="Contact us"
+      title="Contact"
       padding={{
         _: 2,
         lg: 3,
       }}
     >
-      Contact us
+      Contact
     </Link>
   );
 };
