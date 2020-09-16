@@ -15,7 +15,6 @@ const Registry = () => {
   return (
     <>
       <SEO title={seo.title} description={seo.description} />
-      <HeroSection />
       <DescriptionSection />
       <ConfigurationsSection />
       <GetStartedSection />

@@ -12,21 +12,9 @@ import DropdownLink from './DropdownLink';
 
 const productOptions = [
   {
-    label: 'Overview',
+    label: 'Open Source',
     to: 'product',
     isRoot: true,
-  },
-  {
-    label: 'Cloud SDK',
-    to: 'product/cloud-sdk',
-  },
-  {
-    label: 'Edge SDK',
-    to: 'product/edge-sdk',
-  },
-  {
-    label: 'Embedded SDK',
-    to: 'product/embedded-sdk',
   },
   {
     label: 'Registry',

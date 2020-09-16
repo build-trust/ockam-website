@@ -10,6 +10,7 @@ import Badge from '../../../Badge';
 
 const StyledPageSection = styled(PageSection)`
   padding: 11rem 0;
+  background-color: ${({ theme }) => theme.colors.darken};
 `;
 
 const Container = styled('div')`
