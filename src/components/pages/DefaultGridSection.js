@@ -60,6 +60,7 @@ const TitleWrapper = styled('div')`
 
 const SubtitleWrapper = styled('div')`
   grid-area: title-start;
+  max-width: 60%;
 `;
 
 const Image = styled(BaseImage)`

@@ -7,7 +7,7 @@ import Text from '../../../Text';
 import CheckedListItem from '../../../CheckedListItem';
 
 const SpacingContainer = styled('div')`
-  margin-top: 6rem;
+  margin-top: 9rem;
 `;
 
 const DescriptionSection = () => {

@@ -17,7 +17,7 @@ const Container = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${media.desktop`
+  ${media.tablet`
     flex-direction: row;
   `}
 `;

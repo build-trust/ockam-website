@@ -1,7 +1,6 @@
 import React from 'react';
 
 import SEO from '../../components/SEO';
-import HeroSection from '../../components/pages/product/registry/HeroSection';
 import DescriptionSection from '../../components/pages/product/registry/DescriptionSection';
 import GetStartedSection from '../../components/pages/homepage/GetStartedSection';
 import ConfigurationsSection from '../../components/pages/product/registry/ConfigurationsSection';

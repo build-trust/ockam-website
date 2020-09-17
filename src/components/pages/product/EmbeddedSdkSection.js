@@ -4,8 +4,6 @@ import embeddedSdkGraphics from '../../../assets/product/embedded-section.svg';
 import embeddedSdkMobileGraphics from '../../../assets/product/embedded-section-mobile.svg';
 import Text from '../../Text';
 import StickySection from '../StickySection';
-import Link from '../../Link';
-import Button from '../../Button';
 
 const EmbeddedSdkSection = () => {
   return (
@@ -35,15 +33,6 @@ const EmbeddedSdkSection = () => {
         along with your instruction set to simplify the developer experience for
         your customers.
       </Text>
-      <Button
-        textAlign="center"
-        as={Link}
-        variant="white"
-        mt={3}
-        to="product/embedded-sdk"
-      >
-        Learn more about the Embedded SDK
-      </Button>
     </StickySection>
   );
 };

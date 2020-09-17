@@ -4,15 +4,19 @@ import styled from '@emotion/styled';
 import Text from '../../Text';
 import seamlessImage from '../../../assets/homepage/seamless-image.svg';
 import DefaultGridSection from '../DefaultGridSection';
+import { media } from '../../../utils/emotion';
 
 const PreTextContainer = styled('div')`
   text-align: center;
   color: ${({ theme }) => theme.colors.primary};
   font-family: monospace;
-  padding: 18px 90px;
+  padding: 1.8rem 1rem;
   background-color: ${({ theme }) => theme.colors.codeBlock.lightBackground};
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  ${media.desktop`
+    padding: 1.8rem 7rem;
+  `}
 `;
 
 const SeamlessConnectedSection = () => {
