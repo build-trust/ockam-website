@@ -1,9 +1,9 @@
 import React from 'react';
 
 import SEO from '../../components/SEO';
-import HeroSection from '../../components/pages/product/router/HeroSection';
 import DescriptionSection from '../../components/pages/product/router/DescriptionSection';
 import GetStartedSection from '../../components/pages/homepage/GetStartedSection';
+import ConfigurationsSection from '../../components/pages/product/router/ConfigurationsSection';
 
 const seo = {
   title: 'Ockam | Product | Router',
@@ -14,8 +14,8 @@ const Router = () => {
   return (
     <>
       <SEO title={seo.title} description={seo.description} />
-      <HeroSection />
       <DescriptionSection />
+      <ConfigurationsSection />
       <GetStartedSection />
     </>
   );

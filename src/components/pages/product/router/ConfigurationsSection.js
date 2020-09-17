@@ -17,7 +17,7 @@ const Container = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${media.tablet`
+  ${media.desktop`
     flex-direction: row;
   `}
 `;
@@ -41,21 +41,24 @@ const ConfigurationsSection = () => {
   return (
     <StyledPageSection darkenBg>
       <Container>
-        <Heading textAlign={{ _: 'center', lg: 'left' }} flex={7} as="h2">
+        <Heading textAlign={{ _: 'center', lg: 'left' }} flex={6} as="h2">
           <AnimateOnScroll slideIn="left">
-            Ockam Registry is available in the following configurations
+            Ockam Router is available in the following configurations
           </AnimateOnScroll>
         </Heading>
         <ConfigurationList mt={{ _: 3, lg: 0 }} flex={5}>
           <AnimateOnScroll slideIn="right">
+            <ConfigurationItem>Ockam on Github</ConfigurationItem>
             <ConfigurationItem>
-              Single-Party / Private Registry
+              Azure
+              <Badge ml={2}>Coming soon</Badge>
             </ConfigurationItem>
             <ConfigurationItem>
-              Multi-Party / Private Registry
+              AWS
+              <Badge ml={2}>Coming soon</Badge>
             </ConfigurationItem>
             <ConfigurationItem>
-              Multi-Party / Public Registry
+              Google Cloud
               <Badge ml={2}>Coming soon</Badge>
             </ConfigurationItem>
           </AnimateOnScroll>

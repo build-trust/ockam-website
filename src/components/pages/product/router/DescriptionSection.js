@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import Heading from '../../../Heading';
+import Subheading from '../../Subheading';
 import Text from '../../../Text';
 import CheckedListItem from '../../../CheckedListItem';
 import PageSection from '../../PageSection';
@@ -26,7 +27,6 @@ const DescriptionBox = styled('div')`
   flex: 1;
   ${media.desktop`
     flex: 5;
-    margin-left: 4rem;
   `}
 `;
 
@@ -71,38 +71,57 @@ const RouterSection = styled(PageSection)`
   overflow-x: hidden;
 `;
 
+const SpacingContainer = styled('div')`
+  margin-top: 9rem;
+`;
+
+const SubheadingWrapper = styled('div')`
+  max-width: 80%;
+`;
+
 const DescriptionSection = () => {
   return (
-    <RouterSection>
-      <AnimateOnScroll transformY animateOnce>
-        <Container>
-          <DescriptionBox>
-            <Heading linked as="h2">
-              Content of Ockam Router
-            </Heading>
-            <Text>Ockam Router includes:</Text>
-            <CheckedListItem>
-              Ockam Router Service
-              <Text color="caption">a cloud based routing service</Text>
-            </CheckedListItem>
-            <CheckedListItem>
-              Ockam Cloud SDK
-              <Text color="caption">
-                allows other services and environments to securely connect with
-                an Ockam Router.
+    <SpacingContainer>
+      <RouterSection>
+        <AnimateOnScroll transformY animateOnce>
+          <Container>
+            <DescriptionBox>
+              <SubheadingWrapper>
+                <Subheading>
+                  Connect your distributed system with ease.
+                </Subheading>
+              </SubheadingWrapper>
+              <Heading linked as="h2">
+                Content of Ockam Router
+              </Heading>
+              <Text>
+                Ockam Router is a service hosted in a cloud environment that
+                makes it easy to route messages between an unlimited number of
+                Ockam authenticated connections in your business.
               </Text>
-            </CheckedListItem>
-            <CheckedListItem>
-              A cloud based HSM (Hardware Security Module)
-            </CheckedListItem>
-          </DescriptionBox>
-          <ImageBox>
-            <DesktopImage />
-          </ImageBox>
-          <ImageBoxMobile src={routerDiagramMobile} />
-        </Container>
-      </AnimateOnScroll>
-    </RouterSection>
+              <CheckedListItem>
+                Ockam Router Service
+                <Text color="caption">a cloud based routing service</Text>
+              </CheckedListItem>
+              <CheckedListItem>
+                Ockam Cloud SDK
+                <Text color="caption">
+                  allows other services and environments to securely connect
+                  with an Ockam Router.
+                </Text>
+              </CheckedListItem>
+              <CheckedListItem>
+                A cloud based HSM (Hardware Security Module)
+              </CheckedListItem>
+            </DescriptionBox>
+            <ImageBox>
+              <DesktopImage />
+            </ImageBox>
+            <ImageBoxMobile src={routerDiagramMobile} />
+          </Container>
+        </AnimateOnScroll>
+      </RouterSection>
+    </SpacingContainer>
   );
 };
 
