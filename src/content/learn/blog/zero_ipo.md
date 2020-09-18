@@ -230,7 +230,7 @@ Ockam is a product company.
 
 At a high level, I think of our product roadmap in the following phases:
 
-![Ockam's product roadmap](./assets/product.png)
+![Ockam's product roadmap](./assets/zero_ipo/product.png)
 
 Content is a product. I think of the pixels on this website and in GitHub as part of our product suite. All of it is focused on educating and informing our community of builders on topics related to Ockam's vision to add trust to every device, every cloud service, everywhere.
 
