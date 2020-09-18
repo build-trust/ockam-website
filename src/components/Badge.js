@@ -34,7 +34,7 @@ Badge.defaultProps = {
   borderRadius: 'badge',
   fontWeight: '500',
   px: '2rem',
-  py: '1rem',
+  py: '0.3rem',
 };
 
 export default Badge;

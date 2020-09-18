@@ -24,6 +24,14 @@ const productOptions = [
     label: 'Router',
     to: 'product/router',
   },
+  {
+    label: 'Kafka',
+    to: 'product/kafka',
+  },
+  {
+    label: 'Influx',
+    to: 'product/influx',
+  },
 ];
 
 const teamOptions = [
