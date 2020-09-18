@@ -171,7 +171,7 @@ What’s more interesting, at the scale of Enterprise sales, is the number of no
 
 I love maps. In a previous life I was a navigator. [True story]
 
-All maps have the same problem. They are two dimensional, and we live in a multidimensional world. This is why cartographers have invented hundreds of ‘projections’ of our word.
+All maps have the same problem. They are two dimensional, and we live in a multidimensional world. This is why cartographers have invented hundreds of ‘projections’ of our world.
 
 Navigators use a projection called ‘mercator.’ This projection has the benefit of making straight lines between two points. This comes at the expense of distorting scale on the north-south axis. The map I created above is a mercator projection where our journey from Zero-to-IPO is a straight line. But there are plenty of other dimensions we still need to consider to get a complete picture.
 
@@ -222,6 +222,25 @@ Ockam is a deep tech company. It takes exceptional people to write the code that
 Here’s an example for how this has played out over the past 10 months; We are a 6 person team. We’ve received 1800 resumes, and we’ve conducted about 250 interviews over that time. ‘High performance team’ is one of our values, and we live it as a virtue. It’s something we can not compromise.
 
 Fortunately we’ve [built a team of investors](https://www.ockam.io/learn/blog/ockam_raises_seed_round/) that know how to build for a grand vision of the future by solving exceptionally complex problems with world class teams.
+
+
+## The ‘product roadmap' projection
+
+Ockam is a product company.
+
+At a high level, I think of our product roadmap in the following phases:
+
+![Ockam's product roadmap](./assets/product.png)
+
+Content is a product. I think of the pixels on this website and in GitHub as part of our product suite. All of it is focused on educating and informing our community of builders on topics related to Ockam's vision to add trust to every device, every cloud service, everywhere.
+
+We love tools, and we know that you do too. All builders do! Ockam's tools empower developers to do complex things, simply. We think of our SDKs, binaries, application interfaces, and partner integrations as part of our tool set.
+
+Ockam's services simplify deployment for your production environments. You have products to build, and you don't want to worry about deploying infrastructure. That's our job!
+
+At enterprise scale, Ockam becomes an interoperable architecture for universal trust between any device or cloud service anywhere. This is what we call the Ockam Platform.
+
+
 
 # How other frameworks map to ours
 
