@@ -32,19 +32,21 @@ const SeamlessConnectedSection = () => {
         distributed across the edge and the cloud.
       </Text>
       <Text>
-        Building distributed systems of interconnected devices have become
+        Building distributed systems of interconnected devices has become
         exceptionally difficult. Old tools, and the best of intentions, have
-        been contorted past their breaking point. To ensure data integrity,
-        security, and privacy take massive budgets and highly specialized teams
-        - which means most connected systems remain negligently vulnerable.
+        been contorted past their breaking point. It takes massive budgets and
+        highly specialized teams to ensure data integrity, security, and
+        privacy - which means most connected systems remain negligently
+        vulnerable.
       </Text>
       <Text>
-        Millions of application developers need access to simple tools. Hundreds
-        of technologies need to be integrated.
+        Millions of application developers need access to simple tools.
+      </Text>
+      <Text>
+        Hundreds of technologies need to be integrated.
       </Text>
       <PreTextContainer>
-        Our mission at Ockam is to empower developers to build connections,
-        simply.
+        Our mission is to empower developers to build connections, simply.
       </PreTextContainer>
     </DefaultGridSection>
   );

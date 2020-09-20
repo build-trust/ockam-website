@@ -54,7 +54,7 @@ const HeaderSection = () => {
         </ListItem>
         <ListItem icon={HandsIcon}>
           Establish authenticated channels between endpoints regardless of the
-          transports or route,
+          transports or network hops,
         </ListItem>
         <ListItem icon={FingerPrint}>
           Create and manage cryptographic keys, unique device identifiers, and
