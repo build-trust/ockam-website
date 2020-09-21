@@ -10,7 +10,7 @@ const Kafka = () => {
     <>
       <SEO
         title="Ockam | Kafka"
-        description="Building Connected Systems You Can Trust Is Hard. Ockam's enterprise-grade products make it easy !!!"
+        description="Building connected systems you can trust is hard. Ockam makes it easy"
       />
       <HeaderSection />
       <ConfigurationsSection />

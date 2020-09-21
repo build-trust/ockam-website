@@ -48,7 +48,7 @@ const ConfigurationsSection = () => {
         </Heading>
         <ConfigurationList mt={{ _: 3, lg: 0 }} flex={3}>
           <AnimateOnScroll slideIn="right">
-            <ConfigurationItem>Ockam on Github</ConfigurationItem>
+            <ConfigurationItem>Ockam OSS on Github</ConfigurationItem>
             <ConfigurationItem>Confluent Hub</ConfigurationItem>
             <ConfigurationItem>
               Azure

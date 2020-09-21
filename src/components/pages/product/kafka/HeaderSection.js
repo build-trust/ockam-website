@@ -125,30 +125,31 @@ const HeaderSection = () => {
         <DescriptionContainer>
           <AnimateOnScroll>
             <Subheading>
-              Ockam has partnered with Confluent to bring secure connections at
-              the edge to Kafka
+              Ockam and Confluent deliver event streams everywhere.
             </Subheading>
             <TitleWrapper>
               <Heading linked as="h2" textAlign={{ _: 'center', lg: 'left' }}>
-                Ockam - Kafka Connect
+                Kafka Add-on for Ockam
               </Heading>
             </TitleWrapper>
             <Text>
-              Your customers expect security and data privacy from your
-              products. Ockam’s developer tools enable you to:
+              There is a lot to consider when your application relies on event
+              streams in a distributed environment:
             </Text>
             <ListContainer>
               <ListItem icon={MessageIcon}>
-                Send end-to-end encrypted messages through your connected
-                system,
+                Kafka is a fantastic tool to manage real-time event streams.
+                Your applications need to be able to send secure, private, and
+                trusted event messages between each other.
               </ListItem>
               <ListItem icon={HandsIcon}>
-                Establish authenticated channels between endpoints regardless of
-                the transports or route,
+                Applications today are spread between the edge and the cloud.
+                Ockam's protocols guarantee autentication across disctributed
+                workloads that are connected to different networks.
               </ListItem>
               <ListItem icon={FingerPrint}>
-                Create and manage cryptographic keys, unique device identifiers,
-                and verifiable credentials in your connected environments.
+                Ensure security and confidentiality when you create and manage
+                cryptographic keys in your application environments with Ockam.
               </ListItem>
             </ListContainer>
           </AnimateOnScroll>
