@@ -47,6 +47,7 @@ const ImageContainer = styled('div')(
     position: `relative`,
     top: 0,
     width: '100%',
+    alignSelf: 'center',
   },
   flexbox
 );

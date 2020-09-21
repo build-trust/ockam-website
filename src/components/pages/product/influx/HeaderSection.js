@@ -129,12 +129,11 @@ const HeaderSection = () => {
             </Subheading>
             <TitleWrapper>
               <Heading linked as="h2" textAlign={{ _: 'center', lg: 'left' }}>
-                InfluxDB and Telegraf Add-ons for Ockam
+                InfluxDB and Telegraf <br />
+                Add-ons for Ockam
               </Heading>
             </TitleWrapper>
-            <Text>
-              IoT data is unique:
-            </Text>
+            <Text>IoT data is unique:</Text>
             <ListContainer>
               <ListItem icon={MessageIcon}>
                 IoT devices typically produce time series data. InfluxDB is

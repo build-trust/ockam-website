@@ -92,7 +92,7 @@ const DescriptionSection = () => {
                 </Subheading>
               </SubheadingWrapper>
               <Heading linked as="h2">
-                Content of Ockam Router
+                Ockam Router
               </Heading>
               <Text>
                 Ockam Router is a service hosted in a cloud environment that

@@ -43,7 +43,7 @@ const ConfigurationsSection = () => {
       <Container>
         <Heading textAlign={{ _: 'center', lg: 'left' }} flex={6} as="h2">
           <AnimateOnScroll slideIn="left">
-            Ockam Router is available in the following configurations
+            Ockam Router is available in the following environments
           </AnimateOnScroll>
         </Heading>
         <ConfigurationList mt={{ _: 3, lg: 0 }} flex={5}>
