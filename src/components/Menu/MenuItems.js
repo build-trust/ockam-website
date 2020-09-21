@@ -12,24 +12,24 @@ import DropdownLink from './DropdownLink';
 
 const productOptions = [
   {
-    label: 'Open Source',
+    label: 'Open Source SDKs',
     to: 'product',
     isRoot: true,
   },
   {
-    label: 'Registry',
+    label: 'Ockam Registry',
     to: 'product/registry',
   },
   {
-    label: 'Router',
+    label: 'Ockam Router',
     to: 'product/router',
   },
   {
-    label: 'Kafka',
+    label: 'Kafka Add-on',
     to: 'product/kafka',
   },
   {
-    label: 'Influx',
+    label: 'InfluxData Add-on',
     to: 'product/influx',
   },
 ];
