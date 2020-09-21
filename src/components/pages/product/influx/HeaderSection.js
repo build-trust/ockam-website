@@ -125,30 +125,30 @@ const HeaderSection = () => {
         <DescriptionContainer>
           <AnimateOnScroll>
             <Subheading>
-              Ockam has partnered with Influx Data to bring secure connections
-              at the edge to InfluxDB
+              Ockam and InfluxData solve unique challenges for IoT data.
             </Subheading>
             <TitleWrapper>
               <Heading linked as="h2" textAlign={{ _: 'center', lg: 'left' }}>
-                Ockam - Plug in for Telegraf and InfluxDB
+                InfluxDB and Telegraf Add-ons for Ockam
               </Heading>
             </TitleWrapper>
             <Text>
-              Your customers expect security and data privacy from your
-              products. Ockam’s developer tools enable you to:
+              IoT data is unique:
             </Text>
             <ListContainer>
               <ListItem icon={MessageIcon}>
-                Send end-to-end encrypted messages through your connected
-                system,
+                IoT devices typically produce time series data. InfluxDB is
+                structured and optimized to store and query time-stampted data.
               </ListItem>
               <ListItem icon={HandsIcon}>
-                Establish authenticated channels between endpoints regardless of
-                the transports or route,
+                IoT devices create streams of data. Ockam's protocols guarantee
+                autentication between each IoT device and your instance of
+                InfluxDB, regardless of where-in-the-world either sits.
               </ListItem>
               <ListItem icon={FingerPrint}>
-                Create and manage cryptographic keys, unique device identifiers,
-                and verifiable credentials in your connected environments.
+                Ensure security and confidentiality of your IoT data when you
+                create and manage cryptographic keys in your IoT devices with
+                Ockam.
               </ListItem>
             </ListContainer>
           </AnimateOnScroll>

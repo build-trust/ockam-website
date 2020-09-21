@@ -43,13 +43,13 @@ const ConfigurationsSection = () => {
       <Container>
         <Heading textAlign={{ _: 'center', lg: 'left' }} flex={5} as="h2">
           <AnimateOnScroll slideIn="left">
-            Ockam - Kafka Connector is available in the following configurations
+            The InfluxData Add-on for Ockam is available in the following configurations
           </AnimateOnScroll>
         </Heading>
         <ConfigurationList mt={{ _: 3, lg: 0 }} flex={3}>
           <AnimateOnScroll slideIn="right">
-            <ConfigurationItem>Ockam on Github</ConfigurationItem>
-            <ConfigurationItem>Influx Partner page</ConfigurationItem>
+            <ConfigurationItem>Ockam OSS on Github</ConfigurationItem>
+            <ConfigurationItem>Ready-to-go Packages</ConfigurationItem>
             <ConfigurationItem>
               Azure
               <Badge ml={2}>Coming soon</Badge>
