@@ -6,9 +6,9 @@ import GetStartedSection from '../../components/pages/homepage/GetStartedSection
 import ConfigurationsSection from '../../components/pages/product/registry/ConfigurationsSection';
 
 const seo = {
-  title: 'Ockam | Product | Registry',
+  title: 'Ockam Registry',
   description:
-    'Ockam Registry is an open source secure distributed device and service registry based on distributed identifiers [DIDs] and verifiable claims. Makes it easy to manage an unlimited number of keys and credentials and speeds trustful authenticatio',
+    'Ockam Registry is an open source secure distributed device and service registry based on distributed identifiers [DIDs] and verifiable claims.',
 };
 const Registry = () => {
   return (

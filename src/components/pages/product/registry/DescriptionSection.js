@@ -17,7 +17,7 @@ const DescriptionSection = () => {
         image={registryGraphics}
         direction="imageOnRight"
         title="Ockam Registry"
-        subtitle="Share trust with anydevice, anywhere."
+        subtitle="Share trust with any device, or any application, anywhere."
       >
         <Text>
           Ockam Registry is an open source secure distributed device and service

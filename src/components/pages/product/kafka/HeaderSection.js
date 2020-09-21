@@ -153,8 +153,8 @@ const HeaderSection = () => {
               </ListItem>
               <ListItem icon={HandsIcon}>
                 Applications today are spread between the edge and the cloud.
-                Ockam's protocols guarantee autentication across disctributed
-                workloads that are connected to different networks.
+                Ockam's protocols guarantee autentication across distributed
+                workloads that are connected across different networks.
               </ListItem>
               <ListItem icon={FingerPrint}>
                 Ensure security and confidentiality when you create and manage
