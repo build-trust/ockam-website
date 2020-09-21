@@ -65,6 +65,7 @@ const ImageBox = styled('div')`
     min-height: 20rem;
   `}
   width: 100%;
+  max-width: 114rem;
 `;
 
 const Container = styled('div')`
@@ -89,6 +90,14 @@ const TitleWrapper = styled('div')`
   flex-direction: column;
   justify-content: flex-end;
   margin-top: -1.5rem;
+`;
+
+const ImageBoxContainer = styled('div')`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 2rem;
 `;
 
 const Image = styled(BaseImage)`
@@ -161,9 +170,9 @@ const HeaderSection = () => {
           </AnimateOnScroll>
         </ImageContainer>
       </Container>
-      <Container>
+      <ImageBoxContainer>
         <ImageBox />
-      </Container>
+      </ImageBoxContainer>
     </SpacingContainer>
   );
 };
