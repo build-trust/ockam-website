@@ -16,15 +16,16 @@ const HeaderSection = () => {
       <DefaultGridSection
         image={opensourceImage}
         direction="imageOnRight"
-        title="Ockam Open Source Libraries"
-        subtitle="Share trust with anydevice, anywhere."
+        title="Ockam Open Source Tools"
+        subtitle="Build trust between any device, any service, anywhere"
       >
         <Text>
-          The Ockam Cloud SDK includes everything you need to trust the flow of
-          data from edge environments into the cloud services that your
-          applications depend upon. Developers of all skills and backgrounds can
-          now connect cloud services to the edge without specific distributed
-          systems integration skills or cryptographic security know how.
+          Our Open Source SDK includes everything you need to trust the
+          flow of data from edge environments to and from the cloud services
+          that your applications depend upon. Developers of all skills and
+          backgrounds can now connect cloud services to the edge without
+          specific distributed systems integration skills, cryptographic
+          security know how, or even network protocol expereince.
         </Text>
         <SlideDownAnchor to="#sdk" />
       </DefaultGridSection>
