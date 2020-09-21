@@ -1,6 +1,6 @@
 ---
 title: "Zero-to-IPO: Charting Ockam’s Route"
-date: 2020-09-15
+date: 2020-09-21
 description: "Ockam's Zero-to-IPO framework is a map for our journey."
 metaTitle: "Ockam’s Zero-to-IPO map is a key strategy input to our tactical short, medium and long-term business planning for our open source based products."
 author: "Matthew Gregory"

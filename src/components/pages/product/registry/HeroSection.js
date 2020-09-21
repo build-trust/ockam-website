@@ -15,7 +15,7 @@ const HeroSection = () => {
           The Ockam Registry is a hosted cloud service datastore. It stores
           Decentralized Identifiers (DIDs), verified credentials, and metadata
           for the devices in your network. An Ockam Registry is a foundational
-          component in the Trust Architecture of conected systems.
+          component in the Trust Architecture of connected systems.
         </Text>
         <SlideDownAnchor to="#content" />
       </AnimateOnScroll>

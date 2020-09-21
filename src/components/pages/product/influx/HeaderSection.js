@@ -146,11 +146,11 @@ const HeaderSection = () => {
             <ListContainer>
               <ListItem icon={MessageIcon}>
                 IoT devices typically produce time series data. InfluxDB is
-                structured and optimized to store and query time-stampted data.
+                structured and optimized to store and query time-stamped data.
               </ListItem>
               <ListItem icon={HandsIcon}>
                 IoT devices create streams of data. Ockam's protocols guarantee
-                autentication between each IoT device and your instance of
+                authentication between each IoT device and your instance of
                 InfluxDB, regardless of where-in-the-world either sits.
               </ListItem>
               <ListItem icon={FingerPrint}>

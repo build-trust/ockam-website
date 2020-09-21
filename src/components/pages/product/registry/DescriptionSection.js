@@ -23,7 +23,7 @@ const DescriptionSection = () => {
           Ockam Registry is an open source secure distributed device and service
           registry based on distributed identifiers [DIDs] and verifiable
           claims. Makes it easy to manage an unlimited number of keys and
-          credentials and speeds trustful authenticatio
+          credentials and speeds trustful authentication.
         </Text>
         <CheckedListItem>
           Ockam Registry Service
