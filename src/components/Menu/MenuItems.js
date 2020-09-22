@@ -32,6 +32,14 @@ const productOptions = [
     label: 'InfluxData Add-on',
     to: 'product/influx',
   },
+  {
+    label: 'Azure',
+    to: 'product/azure',
+  },
+  {
+    label: 'Microchip',
+    to: 'product/microchip',
+  },
 ];
 
 const teamOptions = [

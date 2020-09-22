@@ -65,7 +65,7 @@ const ImageBox = styled('div')`
     min-height: 20rem;
   `}
   width: 100%;
-  max-width: 114rem;
+  max-width: 110rem;
 `;
 
 const Container = styled('div')`
@@ -89,7 +89,6 @@ const ImageBoxContainer = styled('div')`
   justify-content: center;
   width: 100%;
   max-width: 100%;
-  padding: 0 2rem;
 `;
 
 const TitleWrapper = styled('div')`
