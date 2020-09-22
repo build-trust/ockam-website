@@ -51,9 +51,7 @@ const DescriptionSection = () => {
         </Text>
         <CheckedListItem>
           Key Generation
-          <Text color="caption">
-            Private keys are generated inside the HSM
-          </Text>
+          <Text color="caption">Private keys are generated inside the HSM</Text>
         </CheckedListItem>
         <CheckedListItem>
           Key Management
@@ -64,8 +62,9 @@ const DescriptionSection = () => {
         <CheckedListItem>
           Ease-of-Use
           <Text color="caption">
-            Ockam brings key management into your applicaiton layer.
-            We've already done the nitty-gritty of IT and OT configurations.
+            Ockam brings key management into your applicaiton layer. We've
+            already done the nitty-gritty of IT and OT configurations.
+          </Text>
         </CheckedListItem>
       </DefaultGridSection>
       <ImageBoxContainer>
