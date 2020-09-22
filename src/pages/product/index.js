@@ -18,7 +18,7 @@ const Index = () => {
     <>
       <SEO
         title="Ockam | Product"
-        description="Building connected systems you can trust is hard. Ockam's tools make it easy."
+        description="Building connected systems you can trust is hard. Ockam's Open Source  developer tools make it easy."
       />
       <HeaderSection />
       <CloudSdkSection />

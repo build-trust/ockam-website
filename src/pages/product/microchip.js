@@ -9,8 +9,8 @@ const Microchip = () => {
   return (
     <>
       <SEO
-        title="Ockam | Azure"
-        description="Building trust in time series data across distributed networks is hard. Ockam makes it easy"
+        title="Ockam | Microchip"
+        description="Building trust between hardware at the egde and services in the cloud is hard. Ockam makes it easy"
       />
       <DescriptionSection />
       <ConfigurationsSection />

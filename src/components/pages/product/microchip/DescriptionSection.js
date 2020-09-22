@@ -16,28 +16,31 @@ const DescriptionSection = () => {
       <DefaultGridSection
         image={microchip}
         direction="imageOnRight"
-        title="Ockam Vault for Microchip"
-        subtitle="Share trust with anydevice, anywhere."
+        title="Microchip Add-ons for Ockam"
+        subtitle="Simply and safely manage cryptographic keys"
       >
         <Text>
-          Ockam Registry is an open source secure distributed device and service
-          registry based on distributed identifiers [DIDs] and verifiable
-          claims. Makes it easy to manage an unlimited number of keys and
-          credentials and speeds trustful authenticatio
+          Ockam and Microchip make it simple to keep cryptogrpahic keys safe
+          outside of the cloud.
         </Text>
         <CheckedListItem>
-          Ockam Router Service
-          <Text color="caption">a cloud based routing service</Text>
-        </CheckedListItem>
-        <CheckedListItem>
-          Ockam Cloud SDK
+          Key Generation
           <Text color="caption">
-            allows other services and environments to securely connect with an
-            Ockam Router.
+            Private keys are generated inside the chip.
           </Text>
         </CheckedListItem>
         <CheckedListItem>
-          A cloud based HSM (Hardware Security Module)
+          Key Management
+          <Text color="caption">
+            Private keys never leave the chip and are partitioned from
+            application processes.
+          </Text>
+        </CheckedListItem>
+        <CheckedListItem>
+          Ease-of-Use
+          <Text color="caption">
+            Ockam brings key management into your applicaiton layer.
+            We've already done the nitty-gritty of embedded scurity engineering.
         </CheckedListItem>
       </DefaultGridSection>
     </SpacingContainer>

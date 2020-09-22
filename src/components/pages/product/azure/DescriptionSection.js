@@ -42,28 +42,30 @@ const DescriptionSection = () => {
       <DefaultGridSection
         image={azure}
         direction="imageOnRight"
-        title="Ockam Vault for Azure Key Store"
-        subtitle="Share trust with anydevice, anywhere."
+        title="Azure HSM Add-on for Ockam"
+        subtitle="Simply and safely manage cryptographic keys"
       >
         <Text>
-          Ockam Registry is an open source secure distributed device and service
-          registry based on distributed identifiers [DIDs] and verifiable
-          claims. Makes it easy to manage an unlimited number of keys and
-          credentials and speeds trustful authenticatio
+          Ockam and Azure make it simple to keep cryptogrpahic keys safe inside
+          the cloud.
         </Text>
         <CheckedListItem>
-          Ockam Router Service
-          <Text color="caption">a cloud based routing service</Text>
-        </CheckedListItem>
-        <CheckedListItem>
-          Ockam Cloud SDK
+          Key Generation
           <Text color="caption">
-            allows other services and environments to securely connect with an
-            Ockam Router.
+            Private keys are generated inside the HSM
           </Text>
         </CheckedListItem>
         <CheckedListItem>
-          A cloud based HSM (Hardware Security Module)
+          Key Management
+          <Text color="caption">
+            Private keys never leave the HSM and can be rotated anytime.
+          </Text>
+        </CheckedListItem>
+        <CheckedListItem>
+          Ease-of-Use
+          <Text color="caption">
+            Ockam brings key management into your applicaiton layer.
+            We've already done the nitty-gritty of IT and OT configurations.
         </CheckedListItem>
       </DefaultGridSection>
       <ImageBoxContainer>

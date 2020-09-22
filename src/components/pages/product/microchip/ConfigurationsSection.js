@@ -43,19 +43,20 @@ const ConfigurationsSection = () => {
       <Container>
         <Heading textAlign={{ _: 'center', lg: 'left' }} flex={5} as="h2">
           <AnimateOnScroll slideIn="left">
-            Ockam Registry is available in the following configurations
+            Ockam Add-ons for Microchip are available for the following chips:
           </AnimateOnScroll>
         </Heading>
         <ConfigurationList mt={{ _: 3, lg: 0 }} flex={4}>
           <AnimateOnScroll slideIn="right">
             <ConfigurationItem>
-              Single Party / Private Registry
+              ATECC608A
             </ConfigurationItem>
             <ConfigurationItem>
-              Multi-Party / Private Registry
+              PolarFire RISC-V
+              <Badge ml={2}>Coming soon</Badge>
             </ConfigurationItem>
             <ConfigurationItem>
-              Multi-Party / Public Registry
+              ...and more
               <Badge ml={2}>Coming soon</Badge>
             </ConfigurationItem>
           </AnimateOnScroll>

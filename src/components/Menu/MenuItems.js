@@ -33,11 +33,11 @@ const productOptions = [
     to: 'product/influx',
   },
   {
-    label: 'Azure',
+    label: 'Azure HSM Add-on',
     to: 'product/azure',
   },
   {
-    label: 'Microchip',
+    label: 'Microchip Add-ons',
     to: 'product/microchip',
   },
 ];

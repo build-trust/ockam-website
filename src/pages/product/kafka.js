@@ -10,7 +10,7 @@ const Kafka = () => {
     <>
       <SEO
         title="Ockam | Kafka"
-        description="Authenticating event streams across networks is hard. Ockam makes it easy"
+        description="Authenticating event streams across networks is hard. Ockam and Confluent makes it easy"
       />
       <HeaderSection />
       <ConfigurationsSection />

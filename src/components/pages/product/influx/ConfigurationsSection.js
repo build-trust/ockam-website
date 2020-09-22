@@ -43,7 +43,8 @@ const ConfigurationsSection = () => {
       <Container>
         <Heading textAlign={{ _: 'center', lg: 'left' }} flex={5} as="h2">
           <AnimateOnScroll slideIn="left">
-            The InfluxData Add-on for Ockam is available in the following configurations
+            The InfluxData Add-on for Ockam is available in the following
+            configurations:
           </AnimateOnScroll>
         </Heading>
         <ConfigurationList mt={{ _: 3, lg: 0 }} flex={3}>

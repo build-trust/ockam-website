@@ -43,20 +43,26 @@ const ConfigurationsSection = () => {
       <Container>
         <Heading textAlign={{ _: 'center', lg: 'left' }} flex={5} as="h2">
           <AnimateOnScroll slideIn="left">
-            Ockam Registry is available in the following configurations
+            Ockam, Azure Key Vault and a dedicated HSM bring complance to
+            your IoT and Edge applications:
           </AnimateOnScroll>
         </Heading>
         <ConfigurationList mt={{ _: 3, lg: 0 }} flex={4}>
           <AnimateOnScroll slideIn="right">
             <ConfigurationItem>
-              Single Party / Private Registry
+              FIPS 140-2 Level-3
             </ConfigurationItem>
             <ConfigurationItem>
-              Multi-Party / Private Registry
+              HIPAA
             </ConfigurationItem>
             <ConfigurationItem>
-              Multi-Party / Public Registry
-              <Badge ml={2}>Coming soon</Badge>
+              PCI-DSS
+            </ConfigurationItem>
+            <ConfigurationItem>
+              eIDAS
+            </ConfigurationItem>
+            <ConfigurationItem>
+              ...and many more
             </ConfigurationItem>
           </AnimateOnScroll>
         </ConfigurationList>

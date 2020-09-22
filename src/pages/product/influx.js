@@ -10,7 +10,7 @@ const Influx = () => {
     <>
       <SEO
         title="Ockam | Influx"
-        description="Building trust in time series data across distributed networks is hard. Ockam makes it easy"
+        description="Building trust in time series data across distributed networks is hard. Ockam and InfluxData makes it easy"
       />
       <HeaderSection />
       <ConfigurationsSection />

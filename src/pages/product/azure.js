@@ -10,7 +10,7 @@ const Azure = () => {
     <>
       <SEO
         title="Ockam | Azure"
-        description="Building trust in time series data across distributed networks is hard. Ockam makes it easy"
+        description="Building trust across distributed networks is hard. Ockam makes it easy"
       />
       <DescriptionSection />
       <ConfigurationsSection />
