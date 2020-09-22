@@ -41,6 +41,7 @@ const DescriptionSection = () => {
           <Text color="caption">
             Ockam brings key management into your applicaiton layer.
             We've already done the nitty-gritty of embedded scurity engineering.
+          </Text>
         </CheckedListItem>
       </DefaultGridSection>
     </SpacingContainer>
