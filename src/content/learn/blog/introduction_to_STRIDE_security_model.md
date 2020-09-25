@@ -4,6 +4,7 @@ date: 2020-01-02
 description: "A Beginners Guide to the STRIDE Security Threat Model"
 metaTitle: "How to think about security and threats in your distributed application"
 author: "Mrinal Wadhwa"
+authorAvatar: ./assets/mrinal-wadhwa-1.jpg
 ---
 
 Everyone wants to build secure software, but it’s not simply a checkbox you select. There are a number of factors, from how you validate input to the libraries you choose that could cause vulnerabilities. Threat modeling provides a little preparation that can help you identify blind spots in your application’s security.

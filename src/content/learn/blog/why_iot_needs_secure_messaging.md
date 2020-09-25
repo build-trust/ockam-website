@@ -4,6 +4,7 @@ date: 2020-02-10
 description: "Mrinal Wadhwa presented at the San Francisco IoT Meetup on why IoT needs Secure Messaging"
 metaTitle: "Secure end-to-end encryption among distributed systems is critical for a Trust Architecture."
 author: "Mrinal Wadhwa"
+authorAvatar: ./assets/mrinal-wadhwa-1.jpg
 ---
 
 Security and privacy are key concerns in the design of how data flows within IoT. Many popular IoT communication
