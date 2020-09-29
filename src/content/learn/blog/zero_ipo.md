@@ -241,7 +241,6 @@ Ockam's services simplify deployment for your production environments. You have 
 At enterprise scale, Ockam becomes an interoperable architecture for universal trust between any device or cloud service anywhere. This is what we call the Ockam Platform.
 
 
-
 # How other frameworks map to ours
 
 ## Peter Levine - Partner at a16z
@@ -269,8 +268,8 @@ Amit Karp, Mike Droesh, Ariel Sterman, Jenny Gao, and Ethan Kurzweil recently co
 >One major development is worth emphasizing: once considered the cheaper version of closed source software, open-source software is now viewed as the superior alternative offering higher quality, better support, and more flexibility.
 
 We couldn't say it any better ourselves, so I encourage you to read their entire post!
-![Bessemer Roadmap: Open Source](https://www.bvp.com/atlas/roadmap-open-source)
+[Bessemer Roadmap: Open Source](https://www.bvp.com/atlas/roadmap-open-source)
 
 They describe `The Open Source Six: Good, Better, Best Framework` in their blog. I'd argue that Ockam's Vision, Zero-to-IPO framework, metrics, and our community/project/company structure aligns with Bessemer's 'Best'. What do you think? Am I right, or wrong? Either way, I'd love for you to reach out and let me know!
 
-You can find me in ![this thread](https://github.com/ockam-network/ockam/discussions/448) in GitHub Discussions, where we openly collaborate, learn, and share all-things-open-source related to Ockam.
+You can find me in [this thread](https://github.com/ockam-network/ockam/discussions/448) in GitHub Discussions, where we openly collaborate, learn, and share all-things-open-source related to Ockam.
