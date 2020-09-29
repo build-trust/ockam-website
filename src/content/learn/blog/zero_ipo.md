@@ -1,8 +1,8 @@
 ---
 title: "Zero-to-IPO: Charting Ockam’s Route"
 date: 2020-09-21
-description: "Ockam's Zero-to-IPO framework is a map for our journey."
-metaTitle: "Ockam’s Zero-to-IPO map is a key strategy input to our tactical short, medium and long-term business planning for our open source based products."
+description: "Ockam's Zero-to-IPO framework is a product and GTM roadmap for open source companies"
+metaTitle: "Ockam's Zero-to-IPO framework is a product and GTM roadmap for open source companies"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---
@@ -256,3 +256,21 @@ Here’s how Peter’s ‘3 pillars of Open Source’ align with Ockam’s Zero-
 Adam has a self-serve product model that he call’s ‘1,2,3’. He outlines it in this presentation and I suggest that you consume it, [here](https://www.heavybit.com/library/video/self-serve-go-to-market/). What I specifically love about his presentation is the detail that he paints in the self-serve SaaS phases from his own experiences. Ockam’s Zero-to-IPO differs in some ways, but directionally we are aligned.
 
 ![123 Model for SaaS](./assets/zero_ipo/123.png)
+
+
+## Bessemer Venture Partners
+
+Amit Karp, Mike Droesh, Ariel Sterman, Jenny Gao, and Ethan Kurzweil recently collaborated on a 'Roadmap for Open Source' companies. They share:
+
+>After years of investing in open source software, we’re releasing our thinking on what positions these companies as emerging technology giants.
+
+>It’s no secret that open source is taking over the software development world. In just the past two years, there has been over $80 billion in liquidity value generated from the acquisition, merger, and IPOs of open source software-based businesses, so it should come as no surprise that the pace of venture investments into this space is growing faster than ever.
+
+>One major development is worth emphasizing: once considered the cheaper version of closed source software, open-source software is now viewed as the superior alternative offering higher quality, better support, and more flexibility.
+
+We couldn't say it any better ourselves, so I encourage you to read their entire post!
+![Bessemer Roadmap: Open Source](https://www.bvp.com/atlas/roadmap-open-source)
+
+They describe `The Open Source Six: Good, Better, Best Framework` in their blog. I'd argue that Ockam's Vision, Zero-to-IPO framework, metrics, and our community/project/company structure aligns with Bessemer's 'Best'. What do you think? Am I right, or wrong? Either way, I'd love for you to reach out and let me know!
+
+You can find me in ![this thread](https://github.com/ockam-network/ockam/discussions/448) in GitHub Discussions, where we openly collaborate, learn, and share all-things-open-source related to Ockam.
