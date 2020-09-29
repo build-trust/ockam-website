@@ -1,12 +1,10 @@
 ---
-title: "Ockam.io is open source!"
+title: "Even this website is open source..."
 date: 2020-04-09
 description: "All of the source code and build tools for Ockam.io is OSS. This is how we built it..."
 metaTitle: "To build ockam.io as open source we used Azure Pipelines, a CDN, JAMstack, GitHub and a bunch of other awesome tools. This is how we did it."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
-isHomepageFeatured: true
-homepageFeaturedOrder: 3
 ---
 
 Modern web development involves building on the excellent work of others. Between open source frameworks and cloud tools, you can get a big boost in your projects. Indeed, that’s one of the reasons [why we love open source](https://www.ockam.io/learn/blog/why_we_love_open_source) and why we are building Ockam as an open source centric company.

@@ -1,10 +1,12 @@
 ---
 title: "Zero-to-IPO: Charting Ockam’s Route"
 date: 2020-09-21
-description: "Ockam's Zero-to-IPO framework is a product and GTM roadmap for open source companies"
+description: "We live our values at Ockam, and as an open source company, we want to share our roadmap"
 metaTitle: "Ockam's Zero-to-IPO framework is a product and GTM roadmap for open source companies"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
+isHomepageFeatured: true
+homepageFeaturedOrder: 3
 ---
 
 # Introduction
