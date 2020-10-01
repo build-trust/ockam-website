@@ -27,7 +27,7 @@ Ockam website is built with a static site generator that is based on gatsby star
 
 ### Folder structure and urls
 
-Under `src/content` folder are stored all files related to generating html from md files.
+All files related to generating html from md files are stored under `src/content` folder.
 
 However, the CI pipeline process mount under this directory, others repository defined in `dependencies_repos.csv`.
 So according to this file specification ( please check [Depended repositories](#depended-repositories) ) for entry like:
