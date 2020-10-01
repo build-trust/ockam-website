@@ -13,44 +13,44 @@ import DropdownLink from './DropdownLink';
 const productOptions = [
   {
     label: 'Open Source SDKs',
-    to: 'product',
+    to: '/product',
     isRoot: true,
   },
   {
     label: 'Ockam Registry',
-    to: 'product/registry',
+    to: '/product/registry',
   },
   {
     label: 'Ockam Router',
-    to: 'product/router',
+    to: '/product/router',
   },
   {
     label: 'Kafka Add-on',
-    to: 'product/kafka',
+    to: '/product/kafka',
   },
   {
     label: 'InfluxData Add-on',
-    to: 'product/influx',
+    to: '/product/influx',
   },
   {
     label: 'Azure HSM Add-on',
-    to: 'product/azure',
+    to: '/product/azure',
   },
   {
     label: 'Microchip Add-ons',
-    to: 'product/microchip',
+    to: '/product/microchip',
   },
 ];
 
 const teamOptions = [
   {
     label: 'Overview',
-    to: 'team',
+    to: '/team',
     isRoot: true,
   },
   {
     label: 'Open Roles',
-    to: 'team#open-roles',
+    to: '/team#open-roles',
     isRoot: true,
   },
 ];
@@ -66,7 +66,7 @@ const MenuItems = ({ isCollapsedHeader, onClickItem, contactAsButton }) => {
 
   learnOptions.unshift({
     label: 'Overview',
-    to: 'learn',
+    to: '/learn',
     isRoot: true,
   });
 

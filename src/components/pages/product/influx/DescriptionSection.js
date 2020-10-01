@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import { media } from '../../../../utils/emotion';
-import kafkaHero from '../../../../assets/product/hero-graphic.svg';
-import kafkaCar from '../../../../assets/product/kafka-car.svg';
-import kafkaBox from '../../../../assets/product/kafka-box.svg';
-import kafkaBoxMobile from '../../../../assets/product/kafka-box-mobile.svg';
+import influxHero from '../../../../assets/product/hero-influx.svg';
+import influxCar from '../../../../assets/product/influx-car.svg';
+import influxBox from '../../../../assets/product/influx-box.svg';
+import influxBoxMobile from '../../../../assets/product/influx-box-mobile.svg';
 import AnimateOnScroll from '../../../AnimateOnScroll';
 import Heading from '../../../Heading';
 import Subheading from '../../Subheading';
@@ -55,12 +55,12 @@ const ImageContainer = styled('div')`
 const ImageBox = styled('div')`
   display: flex;
   margin: 5rem 0;
-  background: transparent url(${kafkaBoxMobile}) no-repeat center center;
+  background: transparent url(${influxBoxMobile}) no-repeat center center;
   background-size: contain;
-  min-height: 74rem;
+  min-height: 48rem;
   ${media.tablet`
     margin: 9.6rem 0;
-    background: transparent url(${kafkaBox}) no-repeat center center;
+    background: transparent url(${influxBox}) no-repeat center center;
     background-size: contain;
     min-height: 20rem;
   `}
@@ -84,19 +84,19 @@ const Container = styled('div')`
   `};
 `;
 
-const ImageBoxContainer = styled('div')`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 100%;
-`;
-
 const TitleWrapper = styled('div')`
   grid-area: title;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   margin-top: -1.5rem;
+`;
+
+const ImageBoxContainer = styled('div')`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
 `;
 
 const Image = styled(BaseImage)`
@@ -123,51 +123,49 @@ ListItem.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.func.isRequired,
 };
 
-const HeaderSection = () => {
+const DescriptionSection = () => {
   return (
     <SpacingContainer>
       <Container>
         <DescriptionContainer>
           <AnimateOnScroll>
             <Subheading>
-              Ockam and Confluent deliver event streams everywhere.
+              Ockam and InfluxData solve unique challenges for IoT data.
             </Subheading>
             <TitleWrapper>
               <Heading linked as="h2" textAlign={{ _: 'center', lg: 'left' }}>
-                Kafka Add-on for Ockam
+                InfluxDB and Telegraf <br />
+                Add-ons for Ockam
               </Heading>
             </TitleWrapper>
-            <Text>
-              There is a lot to consider when your application relies on event
-              streams in a distributed environment:
-            </Text>
+            <Text>IoT data is unique:</Text>
             <ListContainer>
               <ListItem icon={MessageIcon}>
-                Kafka is a fantastic tool to manage real-time event streams.
-                Your applications need to be able to send secure, private, and
-                trusted event messages between each other.
+                IoT devices typically produce time series data. InfluxDB is
+                structured and optimized to store and query time-stamped data.
               </ListItem>
               <ListItem icon={HandsIcon}>
-                Applications today are spread between the edge and the cloud.
-                Ockam's protocols guarantee autentication across distributed
-                workloads that are connected across different networks.
+                IoT devices create streams of data. Ockam's protocols guarantee
+                authentication between each IoT device and your instance of
+                InfluxDB, regardless of where-in-the-world either sits.
               </ListItem>
               <ListItem icon={FingerPrint}>
-                Ensure security and confidentiality when you create and manage
-                cryptographic keys in your application environments with Ockam.
+                Ensure security and confidentiality of your IoT data when you
+                create and manage cryptographic keys in your IoT devices with
+                Ockam.
               </ListItem>
             </ListContainer>
           </AnimateOnScroll>
         </DescriptionContainer>
         <ImageContainer>
           <AnimateOnScroll slideIn="down">
-            <Image src={kafkaCar} />
+            <Image src={influxCar} />
           </AnimateOnScroll>
           <AnimateOnScroll slideIn="down">
-            <Image src={kafkaHero} />
+            <Image src={influxHero} />
           </AnimateOnScroll>
         </ImageContainer>
       </Container>
@@ -178,6 +176,6 @@ const HeaderSection = () => {
   );
 };
 
-HeaderSection.propTypes = {};
+DescriptionSection.propTypes = {};
 
-export default HeaderSection;
+export default DescriptionSection;

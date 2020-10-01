@@ -13,11 +13,9 @@ const DropdownLink = React.forwardRef(
     return (
       <Link
         fontSize={fontSize}
-        zIndex={10}
         onClick={e => e.preventDefault()}
         to={to}
         position="relative"
-        alignItems="center"
         display={{ _: 'flex' }}
         title={label}
         style={getActiveStyleForPathname(to)}
