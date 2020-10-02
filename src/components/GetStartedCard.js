@@ -106,7 +106,7 @@ GetStartedCard.propTypes = {
   ]),
   to: PropTypes.string,
   onClick: PropTypes.func,
-  icon: PropTypes.func.isRequired,
+  icon: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 

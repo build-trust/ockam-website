@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import { media } from '../../../../utils/emotion';
-import influxHero from '../../../../assets/product/hero-influx.svg';
-import influxCar from '../../../../assets/product/influx-car.svg';
-import influxBox from '../../../../assets/product/influx-box.svg';
-import influxBoxMobile from '../../../../assets/product/influx-box-mobile.svg';
+import kafkaHero from '../../../../assets/product/hero-graphic.svg';
+import kafkaBox from '../../../../assets/product/kafka-box.svg';
+import kafkaBoxMobile from '../../../../assets/product/kafka-box-mobile.svg';
 import AnimateOnScroll from '../../../AnimateOnScroll';
 import Heading from '../../../Heading';
 import Subheading from '../../Subheading';
@@ -35,7 +34,7 @@ const DescriptionContainer = styled('div')`
   flex-direction: column;
   width: 100%;
   ${media.tablet`
-    width: 40%;
+    width: 50%;
   `}
 `;
 
@@ -46,7 +45,7 @@ const ImageContainer = styled('div')`
   width: 100%;
   margin-bottom: 5rem;
   ${media.tablet`
-    width: 60%;
+    width: 50%;
     margin-bottom: 0;
     padding-left: 2rem;
   `}
@@ -55,12 +54,12 @@ const ImageContainer = styled('div')`
 const ImageBox = styled('div')`
   display: flex;
   margin: 5rem 0;
-  background: transparent url(${influxBoxMobile}) no-repeat center center;
+  background: transparent url(${kafkaBoxMobile}) no-repeat center center;
   background-size: contain;
-  min-height: 48rem;
+  min-height: 74rem;
   ${media.tablet`
     margin: 9.6rem 0;
-    background: transparent url(${influxBox}) no-repeat center center;
+    background: transparent url(${kafkaBox}) no-repeat center center;
     background-size: contain;
     min-height: 20rem;
   `}
@@ -84,6 +83,13 @@ const Container = styled('div')`
   `};
 `;
 
+const ImageBoxContainer = styled('div')`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+`;
+
 const TitleWrapper = styled('div')`
   grid-area: title;
   display: flex;
@@ -92,18 +98,14 @@ const TitleWrapper = styled('div')`
   margin-top: -1.5rem;
 `;
 
-const ImageBoxContainer = styled('div')`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 100%;
-`;
-
 const Image = styled(BaseImage)`
   width: 100%;
-  max-height: 8rem;
+  height: 18rem;
   ${media.tablet`
     max-height: 100%;
+    height: 54rem;
+    max-width: 100%;
+    width:54rem;
   `}
 `;
 
@@ -123,49 +125,48 @@ ListItem.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.func.isRequired,
 };
 
-const HeaderSection = () => {
+const DescriptionSection = () => {
   return (
     <SpacingContainer>
       <Container>
         <DescriptionContainer>
           <AnimateOnScroll>
             <Subheading>
-              Ockam and InfluxData solve unique challenges for IoT data.
+              Ockam and Confluent deliver event streams everywhere.
             </Subheading>
             <TitleWrapper>
               <Heading linked as="h2" textAlign={{ _: 'center', lg: 'left' }}>
-                InfluxDB and Telegraf <br />
-                Add-ons for Ockam
+                Kafka Add-on for Ockam
               </Heading>
             </TitleWrapper>
-            <Text>IoT data is unique:</Text>
+            <Text>
+              There is a lot to consider when your application relies on event
+              streams in a distributed environment:
+            </Text>
             <ListContainer>
               <ListItem icon={MessageIcon}>
-                IoT devices typically produce time series data. InfluxDB is
-                structured and optimized to store and query time-stamped data.
+                Kafka is a fantastic tool to manage real-time event streams.
+                Your applications need to be able to send secure, private, and
+                trusted event messages between each other.
               </ListItem>
               <ListItem icon={HandsIcon}>
-                IoT devices create streams of data. Ockam's protocols guarantee
-                authentication between each IoT device and your instance of
-                InfluxDB, regardless of where-in-the-world either sits.
+                Applications today are spread between the edge and the cloud.
+                Ockam's protocols guarantee autentication across distributed
+                workloads that are connected across different networks.
               </ListItem>
               <ListItem icon={FingerPrint}>
-                Ensure security and confidentiality of your IoT data when you
-                create and manage cryptographic keys in your IoT devices with
-                Ockam.
+                Ensure security and confidentiality when you create and manage
+                cryptographic keys in your application environments with Ockam.
               </ListItem>
             </ListContainer>
           </AnimateOnScroll>
         </DescriptionContainer>
         <ImageContainer>
           <AnimateOnScroll slideIn="down">
-            <Image src={influxCar} />
-          </AnimateOnScroll>
-          <AnimateOnScroll slideIn="down">
-            <Image src={influxHero} />
+            <Image src={kafkaHero} />
           </AnimateOnScroll>
         </ImageContainer>
       </Container>
@@ -176,6 +177,6 @@ const HeaderSection = () => {
   );
 };
 
-HeaderSection.propTypes = {};
+DescriptionSection.propTypes = {};
 
-export default HeaderSection;
+export default DescriptionSection;

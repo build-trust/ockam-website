@@ -46,7 +46,9 @@ const Link = styled(BaseLink)`
   ${layout};
   ${flexbox}
   ${position}
-  transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out
+  z-index: 10;
+  align-items: center;
   color: ${props => props.theme.colors.link.default};
   :hover {
     color: ${props => props.theme.colors.link.hover};
