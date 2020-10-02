@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 
 import { media } from '../../../../utils/emotion';
 import influxHero from '../../../../assets/product/hero-influx.svg';
-import influxCar from '../../../../assets/product/influx-car.svg';
 import influxBox from '../../../../assets/product/influx-box.svg';
 import influxBoxMobile from '../../../../assets/product/influx-box-mobile.svg';
 import AnimateOnScroll from '../../../AnimateOnScroll';
@@ -35,7 +34,7 @@ const DescriptionContainer = styled('div')`
   flex-direction: column;
   width: 100%;
   ${media.tablet`
-    width: 40%;
+    width: 50%;
   `}
 `;
 
@@ -46,7 +45,7 @@ const ImageContainer = styled('div')`
   width: 100%;
   margin-bottom: 5rem;
   ${media.tablet`
-    width: 60%;
+    width: 50%;
     margin-bottom: 0;
     padding-left: 2rem;
   `}
@@ -101,9 +100,12 @@ const ImageBoxContainer = styled('div')`
 
 const Image = styled(BaseImage)`
   width: 100%;
-  max-height: 8rem;
+  height: 18rem;
   ${media.tablet`
     max-height: 100%;
+    height: 54rem;
+    max-width: 100%;
+    width:54rem;
   `}
 `;
 
@@ -161,9 +163,6 @@ const DescriptionSection = () => {
           </AnimateOnScroll>
         </DescriptionContainer>
         <ImageContainer>
-          <AnimateOnScroll slideIn="down">
-            <Image src={influxCar} />
-          </AnimateOnScroll>
           <AnimateOnScroll slideIn="down">
             <Image src={influxHero} />
           </AnimateOnScroll>
