@@ -8,8 +8,11 @@ import Link from '../Link';
 import Icon from '../Icon';
 import useActiveMenuStyles from '../../hooks/useActiveMenuStyles';
 
-const Dropdown = styled.span`
+const Dropdown = styled.div`
   z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const DropdownLink = React.forwardRef(
@@ -28,13 +31,15 @@ const DropdownLink = React.forwardRef(
         ref={ref}
         {...rest}
       >
-        <Dropdown>{label}</Dropdown>
-        <Icon
-          ml={{ _: 'auto', lg: 2 }}
-          icon={isDropdownVisible ? Cross : ChevronDown}
-          size={22}
-          color={getActiveStyleForPathname(to).color}
-        />
+        <Dropdown>
+          {label}
+          <Icon
+            ml={{ _: 'auto', lg: 2 }}
+            icon={isDropdownVisible ? Cross : ChevronDown}
+            size={22}
+            color={getActiveStyleForPathname(to).color}
+          />
+        </Dropdown>
       </Link>
     );
   }
