@@ -46,14 +46,12 @@ const DescriptionSection = () => {
         subtitle="Simply and safely manage cryptographic keys"
       >
         <Text>
-          Ockam and Azure make it simple to keep cryptogrpahic keys safe inside
+          Ockam and Azure make it simple to keep cryptographic keys safe inside
           the cloud.
         </Text>
         <CheckedListItem>
           Key Generation
-          <Text color="caption">
-            Private keys are generated inside the HSM
-          </Text>
+          <Text color="caption">Private keys are generated inside the HSM</Text>
         </CheckedListItem>
         <CheckedListItem>
           Key Management
@@ -64,8 +62,8 @@ const DescriptionSection = () => {
         <CheckedListItem>
           Ease-of-Use
           <Text color="caption">
-            Ockam brings key management into your applicaiton layer.
-            We've already done the nitty-gritty of IT and OT configurations.
+            Ockam brings key management into your applicaiton layer. We've
+            already done the nitty-gritty of IT and OT configurations.
           </Text>
         </CheckedListItem>
       </DefaultGridSection>
