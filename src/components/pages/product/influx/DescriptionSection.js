@@ -30,11 +30,13 @@ const ListContainer = styled('div')`
 `;
 
 const DescriptionContainer = styled('div')`
+  text-align: center;
   display: flex;
   flex-direction: column;
   width: 100%;
   ${media.tablet`
     width: 50%;
+    text-align: left;
   `}
 `;
 

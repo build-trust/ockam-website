@@ -60,6 +60,7 @@ const TitleWrapper = styled('div')`
 `;
 
 const SubtitleWrapper = styled('div')`
+  text-align: center;
   grid-area: title-start;
   max-width: 100%;
   margin-bottom: 8rem;
@@ -68,11 +69,16 @@ const SubtitleWrapper = styled('div')`
   `};
   ${media.desktop`
     max-width: 85%;
+    text-align: left;
   `};
 `;
 
 const Image = styled(BaseImage)`
   width: 100%;
+  padding: 0 3rem;
+  ${media.desktop`
+    padding: 0;
+  `};
 `;
 
 const DefaultGridSection = ({
