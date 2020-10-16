@@ -251,6 +251,17 @@ Here’s how Peter’s ‘3 pillars of Open Source’ align with Ockam’s Zero-
 
 ![a16z Model for Open Source](./assets/zero_ipo/a16z.png)
 
+## Battery Ventures
+
+The way that Dharmesh Thakker and Chiraag Deora articulate 'time to value' and 'structuring self-service vs. enterprise sales playbooks' highly aligns with the GTM aspects of Ockam's Zero-to-IPO framework.
+
+Moreover this quote,
+
+>With bottoms-up offerings, it is critical that your end users can create immediate value with your (great) product without needing to speak with a salesperson or pre-sales engineer,
+
+highly aligns with Ockam's Values around [simplicity and the love that builders have for their tools](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/#builders-love-their-tools).
+
+[<More on the Battery GTM framework here>](https://www.battery.com/powered/market-uncertainty-cloud-native/)
 
 ## Adam Gross - CEO at Heroku
 
