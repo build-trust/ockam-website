@@ -261,7 +261,7 @@ Moreover this quote,
 
 highly aligns with Ockam's Values around [simplicity and the love that builders have for their tools](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/#builders-love-their-tools).
 
-[<More on the Battery GTM framework here>](https://www.battery.com/powered/market-uncertainty-cloud-native/)
+[Click here to read more on the Battery GTM framework](https://www.battery.com/powered/market-uncertainty-cloud-native/)
 
 ## Adam Gross - CEO at Heroku
 
