@@ -5,10 +5,10 @@ import { grid, flexbox } from 'styled-system';
 
 import { media } from '../../utils/emotion';
 import Heading from '../Heading';
-import Subheading from './Subheading';
 import AnimateOnScroll from '../AnimateOnScroll';
 import BaseImage from '../Image';
 
+import Subheading from './Subheading';
 import PageSection from './PageSection';
 
 const Grid = styled('div')(grid);
@@ -98,8 +98,8 @@ const DefaultGridSection = ({
       <GridSection
         contentAlign={contentAlign}
         gridTemplateAreas={{
-          _: `"title"
-              "image"
+          _: `"image"
+              "title"
               "content";`,
           lg:
             direction === 'imageOnLeft'
@@ -166,7 +166,6 @@ DefaultGridSection.propTypes = {
   isStickyImage: PropTypes.bool,
   id: PropTypes.string,
   contentAlign: PropTypes.oneOf(['top', 'center']),
-  subheading: PropTypes.bool,
   subtitle: PropTypes.string,
 };
 

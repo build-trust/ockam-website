@@ -32,15 +32,13 @@ const DescriptionContainer = styled('div')`
 `;
 
 const ImageContainer = styled('div')`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
+  padding: 0 3rem;
   margin-bottom: 5rem;
   ${media.tablet`
     width: 50%;
     margin-bottom: 0;
-    padding-left: 2rem;
+    padding-right: 0;
   `}
 `;
 
@@ -70,7 +68,6 @@ const TitleWrapper = styled('div')`
 
 const Image = styled(BaseImage)`
   width: 100%;
-  height: 27rem;
   ${media.tablet`
     max-height: 100%;
     height: 54rem;
@@ -100,8 +97,8 @@ const DescriptionSection = () => {
               </Heading>
             </TitleWrapper>
             <Text>
-              Ockam and Azure make it simple to keep cryptographic keys safe inside
-              the cloud.
+              Ockam and Azure make it simple to keep cryptographic keys safe
+              inside the cloud.
             </Text>
             <CheckedListItemWrapper>
               <CheckedListItem>Key Generation</CheckedListItem>

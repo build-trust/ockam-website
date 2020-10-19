@@ -41,15 +41,13 @@ const DescriptionContainer = styled('div')`
 `;
 
 const ImageContainer = styled('div')`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
+  padding: 0 3rem;
   margin-bottom: 5rem;
   ${media.tablet`
     width: 50%;
+    padding-right: 0;
     margin-bottom: 0;
-    padding-left: 2rem;
   `}
 `;
 
@@ -64,7 +62,7 @@ const ImageBox = styled('div')`
     background: transparent url(${influxBox}) no-repeat center center;
     background-size: contain;
     min-height: 20rem;
-  `}
+  `};
   width: 100%;
   max-width: 110rem;
 `;
@@ -102,7 +100,6 @@ const ImageBoxContainer = styled('div')`
 
 const Image = styled(BaseImage)`
   width: 100%;
-  height: 18rem;
   ${media.tablet`
     max-height: 100%;
     height: 54rem;
