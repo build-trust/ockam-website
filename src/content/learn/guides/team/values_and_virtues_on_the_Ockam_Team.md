@@ -60,7 +60,7 @@ Some teams use a model where trust is earned over time based upon past performan
 
 The Team gives people responsibility, not ownership. I have never liked it when people use the word ‘Own’ inside a product driven company. Typically it is used in the context of “I own the relationship with the customer”, or “she owns the problem with her feature.” Describing individual ‘ownership’ inside our high performance team culture doesn’t make any sense.
 
-We uses a RACI framework at Ockam. R-A-C-I it stands for
+We use a RACI framework at Ockam. R-A-C-I it stands for
 
 * Responsible
 * Approved
