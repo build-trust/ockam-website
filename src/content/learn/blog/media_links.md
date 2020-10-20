@@ -26,6 +26,8 @@ Check out our list of favorite links for Ockam content around the internet. We m
 
 ## Podcasts
 
+[DevToolsTopia](https://devtoolstopia.buzzsprout.com/1063450/5908849-the-future-of-iot-security-with-mrinal-wadhwa)
+
 [State of Identity](https://podcasts.apple.com/us/podcast/ockam-architecture-for-trust/id1183881265?i=1000477528615)
 
 [Diginomica](https://jonerp.podbean.com/e/solving-the-vexing-problem-of-iot-security-mrinal-wadhwa-of-ockams-open-source-community-challenge/)
@@ -43,6 +45,8 @@ Check out our list of favorite links for Ockam content around the internet. We m
 
 
 ## And more...
+
+[InfluxData](https://www.influxdata.com/partners/ockam/)
 
 [RISC-V](https://riscv.org/membership/9902/ockam/)
 

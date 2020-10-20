@@ -41,29 +41,24 @@ const ConfigurationsSection = () => {
   return (
     <StyledPageSection darkenBg>
       <Container>
-        <Heading textAlign={{ _: 'center', lg: 'left' }} flex={5} as="h2">
+        <Heading
+          textAlign={{ _: 'center', lg: 'left' }}
+          marginRight={{ lg: '3.5rem' }}
+          flex={4}
+          as="h2"
+        >
           <AnimateOnScroll slideIn="left">
-            Ockam, Azure Key Vault and a dedicated HSM bring complance to
-            your IoT and Edge applications:
+            Ockam, Azure Key Vault and a dedicated HSM bring complance to your
+            IoT and Edge applications:
           </AnimateOnScroll>
         </Heading>
-        <ConfigurationList mt={{ _: 3, lg: 0 }} flex={4}>
+        <ConfigurationList mt={{ _: 3, lg: 0 }} flex={3}>
           <AnimateOnScroll slideIn="right">
-            <ConfigurationItem>
-              FIPS 140-2 Level-3
-            </ConfigurationItem>
-            <ConfigurationItem>
-              HIPAA
-            </ConfigurationItem>
-            <ConfigurationItem>
-              PCI-DSS
-            </ConfigurationItem>
-            <ConfigurationItem>
-              eIDAS
-            </ConfigurationItem>
-            <ConfigurationItem>
-              ...and many more
-            </ConfigurationItem>
+            <ConfigurationItem>FIPS 140-2 Level-3</ConfigurationItem>
+            <ConfigurationItem>HIPAA</ConfigurationItem>
+            <ConfigurationItem>PCI-DSS</ConfigurationItem>
+            <ConfigurationItem>eIDAS</ConfigurationItem>
+            <ConfigurationItem>...and many more</ConfigurationItem>
           </AnimateOnScroll>
         </ConfigurationList>
       </Container>

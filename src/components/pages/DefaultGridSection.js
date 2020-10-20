@@ -5,10 +5,10 @@ import { grid, flexbox } from 'styled-system';
 
 import { media } from '../../utils/emotion';
 import Heading from '../Heading';
-import Subheading from './Subheading';
 import AnimateOnScroll from '../AnimateOnScroll';
 import BaseImage from '../Image';
 
+import Subheading from './Subheading';
 import PageSection from './PageSection';
 
 const Grid = styled('div')(grid);
@@ -60,6 +60,7 @@ const TitleWrapper = styled('div')`
 `;
 
 const SubtitleWrapper = styled('div')`
+  text-align: center;
   grid-area: title-start;
   max-width: 100%;
   margin-bottom: 8rem;
@@ -68,11 +69,16 @@ const SubtitleWrapper = styled('div')`
   `};
   ${media.desktop`
     max-width: 85%;
+    text-align: left;
   `};
 `;
 
 const Image = styled(BaseImage)`
   width: 100%;
+  padding: 0 3rem;
+  ${media.desktop`
+    padding: 0;
+  `};
 `;
 
 const DefaultGridSection = ({
@@ -92,8 +98,8 @@ const DefaultGridSection = ({
       <GridSection
         contentAlign={contentAlign}
         gridTemplateAreas={{
-          _: `"title"
-              "image"
+          _: `"image"
+              "title"
               "content";`,
           lg:
             direction === 'imageOnLeft'
@@ -160,7 +166,6 @@ DefaultGridSection.propTypes = {
   isStickyImage: PropTypes.bool,
   id: PropTypes.string,
   contentAlign: PropTypes.oneOf(['top', 'center']),
-  subheading: PropTypes.bool,
   subtitle: PropTypes.string,
 };
 

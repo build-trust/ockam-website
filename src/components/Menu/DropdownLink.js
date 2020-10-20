@@ -2,10 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ChevronDown from 'emotion-icons/material/ExpandMore';
 import Cross from 'emotion-icons/material/Close';
+import styled from '@emotion/styled';
 
 import Link from '../Link';
 import Icon from '../Icon';
 import useActiveMenuStyles from '../../hooks/useActiveMenuStyles';
+
+const Dropdown = styled.div`
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
 
 const DropdownLink = React.forwardRef(
   ({ to, fontSize, label, isDropdownVisible, ...rest }, ref) => {
@@ -23,13 +31,15 @@ const DropdownLink = React.forwardRef(
         ref={ref}
         {...rest}
       >
-        {label}
-        <Icon
-          ml={{ _: 'auto', lg: 2 }}
-          icon={isDropdownVisible ? Cross : ChevronDown}
-          size={22}
-          color={getActiveStyleForPathname(to).color}
-        />
+        <Dropdown>
+          {label}
+          <Icon
+            ml={{ _: 'auto', lg: 2 }}
+            icon={isDropdownVisible ? Cross : ChevronDown}
+            size={22}
+            color={getActiveStyleForPathname(to).color}
+          />
+        </Dropdown>
       </Link>
     );
   }

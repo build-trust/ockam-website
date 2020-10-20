@@ -41,7 +41,12 @@ const ConfigurationsSection = () => {
   return (
     <StyledPageSection darkenBg>
       <Container>
-        <Heading textAlign={{ _: 'center', lg: 'left' }} flex={5} as="h2">
+        <Heading
+          textAlign={{ _: 'center', lg: 'left' }}
+          marginRight={{ md: '2rem' }}
+          flex={4}
+          as="h2"
+        >
           <AnimateOnScroll slideIn="left">
             Ockam - Kafka Connector is available in the following configurations
           </AnimateOnScroll>

@@ -30,24 +30,25 @@ const ListContainer = styled('div')`
 `;
 
 const DescriptionContainer = styled('div')`
+  text-align: center;
   display: flex;
   flex-direction: column;
   width: 100%;
   ${media.tablet`
     width: 50%;
+    text-align: left;
   `}
 `;
 
 const ImageContainer = styled('div')`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   margin-bottom: 5rem;
+  padding: 0 3rem;
   ${media.tablet`
     width: 50%;
     margin-bottom: 0;
-    padding-left: 2rem;
+    padding-right: 0;
+
   `}
 `;
 
@@ -62,7 +63,7 @@ const ImageBox = styled('div')`
     background: transparent url(${kafkaBox}) no-repeat center center;
     background-size: contain;
     min-height: 20rem;
-  `}
+  `};
   width: 100%;
   max-width: 110rem;
 `;
@@ -100,7 +101,6 @@ const TitleWrapper = styled('div')`
 
 const Image = styled(BaseImage)`
   width: 100%;
-  height: 18rem;
   ${media.tablet`
     max-height: 100%;
     height: 54rem;
