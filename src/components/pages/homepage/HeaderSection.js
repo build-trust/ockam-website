@@ -40,11 +40,9 @@ const DescriptionContainer = styled('div')`
 `;
 
 const ImageContainer = styled('div')`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   margin-bottom: 5rem;
+  padding: 0 3rem;
   ${media.tablet`
     width: 50%;
     margin-bottom: 0;
@@ -78,7 +76,6 @@ const TitleWrapper = styled('div')`
 
 const Image = styled(BaseImage)`
   width: 100%;
-  height: 21rem;
   ${media.tablet`
     max-height: 100%;
     height: 54rem;
