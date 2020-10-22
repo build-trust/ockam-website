@@ -1,8 +1,8 @@
 ---
-title: "Ockam: A Philosophy of Open Source Software Design"
+title: "Ockam: A Philosophy on Open Source Software Design"
 date: 2020-10-15
 description: "Our approach with software is to create simple designs that enable us to build up our systems without them ever becoming overwhelming."
-metaTitle: "Symmetric and asymmetric keys both play an important role in cryptography, the foundation of Internet security."
+metaTitle: "The Ockam approach to software design is to keep it simple by fighting complexity in our open source code"
 author: "Mrinal Wadhwa"
 authorAvatar: ./assets/mrinal-wadhwa-1.jpg
 ---
@@ -10,7 +10,7 @@ authorAvatar: ./assets/mrinal-wadhwa-1.jpg
 
 Complex code can be hard to manage and build upon. That's especially true for open source projects, where strong open source communication is crucial for success. Since we’re building an open source company, we made [simplicity a core value](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team)—and even referenced it in the name of our company: Ockam. Our approach with software is to create simple designs that enable us to build up our systems without them ever becoming overwhelming.
 
-In this post, we'll be walking you through our open source software design philosophy, inspired heavily by *A Philosophy of Software Design* by John Ousterhout. The post is based on a [talk at the Elixir virtual meetup](.assets/fight_complexity_in_software_design.pdf).
+In this post, we'll be walking you through our open source software design philosophy, inspired heavily by *A Philosophy of Software Design* by John Ousterhout.
 
 ## Complexity and the Flaws of Tactical Programming
 
@@ -67,3 +67,5 @@ If you like the idea of getting first-hand experience with strategic programming
 You can also watch my presentation on this topic here:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/W2CdtvIlQCQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[You can grab the slides from this presentation here:](https://github.com/ockam-network/website/tree/production/src/content/learn/blog/assets/Fighting_Complexity_in_Elixir_Codebases.pdf)
