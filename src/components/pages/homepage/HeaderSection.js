@@ -121,18 +121,13 @@ const HeaderSection = () => {
             </Text>
             <ListContainer>
               <ListItem icon={MessageIcon}>
-                IoT devices typically produce time series data. InfluxDB is
-                structured and optimized to store and query time-stamped data.
+                Send end-to-end encrypted messages through your connected system,
               </ListItem>
               <ListItem icon={HandsIcon}>
-                IoT devices create streams of data. Ockam's protocols guarantee
-                authentication between each IoT device and your instance of
-                InfluxDB, regardless of where-in-the-world either sits.
+              Establish authenticated channels between endpoints regardless of the transports or network hops,
               </ListItem>
               <ListItem icon={FingerPrint}>
-                Ensure security and confidentiality of your IoT data when you
-                create and manage cryptographic keys in your IoT devices with
-                Ockam.
+              Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments.
               </ListItem>
             </ListContainer>
           </AnimateOnScroll>

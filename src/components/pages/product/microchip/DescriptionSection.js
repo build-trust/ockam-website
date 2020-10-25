@@ -93,7 +93,7 @@ const DescriptionSection = () => {
             <Subheading>Simply and safely manage cryptographic keys</Subheading>
             <TitleWrapper>
               <Heading linked as="h2" textAlign={{ _: 'center', lg: 'left' }}>
-                Azure HSM Add-on for Ockam
+                Microchip Add-ons for Ockam
               </Heading>
             </TitleWrapper>
             <Text>
