@@ -8,6 +8,15 @@ authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
 homepageFeaturedOrder: 3
 ---
+My presentation at the [2020 Open Core Summit:](https://2020.opencoresummit.com/)
+
+<div id="presentation">
+    <div class="rwd-container">
+        <iframe class="rwd-iframe" src="https://www.youtube.com/embed/19PeGYB2P54" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+The following is a transcript of this recording:
 
 # Introduction
 
