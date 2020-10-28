@@ -12,6 +12,19 @@ doesn't know about the service and visa versa. This happens with the help of an 
 
 The three parties are the Ockam Enrollment Service (*service*) that a device wants to connect to, the *enroller* that helps onboard the device, and the device to be onboarded or enrolled called the *enrollee*.
 
+## Background and the Problem
+
+Enrolling IoT devices (and non IoT devices) currently happens using non-secure and/or manual processes:
+
+1- Hardcoded credentials (username, password, api tokens)
+2- Hardcoded service endpoints to obtain credentials with little to no vetting process
+3- No credentials at all, device connects to another system that authenticates the connection to the service
+1- Credential revocation or rotation is not implemented or easily performed
+
+This results in the following problems
+
+1- No security when connecting externally e.g. all data (including credentials) are sent and received in plaintext vs with encryption.
+1- Usernames, passwords, api tokens are often stored without any protection on the device––an attacker can extract these values with minimal effort with remote or physical access or downloading and reverse engineering the firmware.
 
 ### Enroller
 
