@@ -5,6 +5,8 @@ order: 1
 
 # InfluxDB Ockam Add-on
 
+!["You are here"](../assets/you-are-here-REPLACE.png)
+
 Adding security to any network transaction is hard. As the `TODO`'s pile up, and your application
 logic becomes more complex, the last thing you need is to manage credentials, certificates, network
 code, and cryptographic keys. Leaving your critical time-series data exposed to tampering or 
