@@ -1,8 +1,8 @@
-```yaml=
+---
 order: 7
 title: Enrollment Guide
 status: Draft
-```
+---
 
 
 ## Description
