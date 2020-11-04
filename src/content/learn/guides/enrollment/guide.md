@@ -1,11 +1,11 @@
 ---
 order: 7
-title: Enrollment Guide
+title: Overview
 status: Draft
 ---
 
 
-## Description
+# Ockam Enrollment Service
 
 The enrollment protocol is designed to facilitate secure onboarding a device to a service where the device
 doesn't know about the service and visa versa. This happens with the help of an enroller intermediary like a phone, terminal, or another device.
@@ -32,7 +32,7 @@ Ockam provides a secure enrollment protocol that solves this problem by providin
 
 ### Enrollee
 
-The enrollee can be any device or application that needs to be onboarded. Enrollees will first connect to an enroller before knowing what to do next. During this initial connection, the enrollee generates a unique identifier to send to the enroller and an optional pet name. The pet name is for human readability like "Robot Axiom" vs the unique identifier a0b1c2d3e4f5a6b7c8d9. 
+The enrollee can be any device or application that needs to be onboarded. Enrollees will first connect to an enroller before knowing what to do next. During this initial connection, the enrollee generates a unique identifier to send to the enroller and an optional pet name. The pet name is for human readability like _"Robot Axiom"_ vs the unique identifier `a0b1c2d3e4f5a6b7c8d9`. 
 
 ### Enroller
 
@@ -45,7 +45,7 @@ The service puts any enrollment identifiers received from an enroller in a pendi
 
 ### Enrollee
 
-The enrollee processes the enrollment bundle to create an unique encrypted enrollment message. This message is sentto the service.
+The enrollee processes the enrollment bundle to create an unique encrypted enrollment message. This message is sent to the service.
 
 ### Service
 
@@ -66,3 +66,4 @@ If the checks pass, the service and the enrollee can immediately begin communica
 
 ## Details
 The specific cryptographic details can be found [here](https://github.com/ockam-network/proposals/tree/ml/enrollment-key-agreement/design/0006-enrollment).
+

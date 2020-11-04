@@ -1,9 +1,9 @@
 ---
-title: Using the InfluxDB (with Telegraf) Ockam Add-on
+title: InfluxDB Ockam Add-on
 order: 1
 ---
 
-# InfluxDB Ockam Add-on
+# Using the InfluxDB (with Telegraf) Ockam Add-on
 
 !["You are here"](../assets/you-are-here-REPLACE.png)
 
@@ -16,17 +16,20 @@ Let us help! The Ockam InfluxDB Add-on makes it a simple to encrypt and move you
 application and InfluxDB. Here's a demo of how to use `ockamd`, our deamon process you can run next
 to your application and get drop-in security in minutes.
 
-**1. Clone the Ockam repo to get the demo scripts:**
+### Step 1 **Clone the Ockam repo to get the demo scripts:**
 ```sh
 git clone https://github.com/ockam-network/ockam.git
-cd ockam
+cd ockam && git checkout develop # TODO: update with tag
 ```
 
 > Make sure you're running the following commands from within the `ockam` directory. All commands 
 below require that [Docker](https://docker.com) be installed on your machine. Using Ockam does _not_
 require Docker, but it makes this demo easy to run and share!
 
-**2. Run `InfluxDB` and `ockamd` as the responder end:**
+---
+
+
+### Step 2: **Run `InfluxDB` and `ockamd`**
 ```sh
 ./tools/docker/demo/influxdb.sh influxdb-ockamd
 ```
@@ -37,7 +40,9 @@ will store in `InfluxDB`. Note the "Responder public key" line written to your t
 to copy & paste this string into the `$COPIED_RESPONDER_PUBLIC_KEY` as the next command's argument. 
 This is a basic way to verify that the initiator and responder are who they claim to be.
 
-**3. Run `Telegraf` and `ockamd` as the initiator end:**
+---
+
+### Step 3: **Run `Telegraf` and `ockamd`**
 ```sh
 ./tools/docker/demo/influxdb.sh telegraf-ockamd $COPIED_RESPONDER_PUBLIC_KEY
 ```
@@ -49,7 +54,9 @@ all messages sent between them are fully encrypted, end-to-end. Note that you ar
 managing certificates, or having to set up TLS anywhere in this architechture! Learn more about 
 `Telegraf` by InfluxData [here](https://www.influxdata.com/time-series-platform/telegraf/).
 
-**4. Send `Telegraf` some input via HTTP:**
+---
+
+### Step 4: **Send `Telegraf` some input via HTTP**
 ```sh
 ./tools/docker/demo/influxdb.sh telegraf-write
 ```
@@ -68,7 +75,9 @@ _Read more about how Ockam simplifies encryption using our
 > Note, use a packet capture tool such as WireShark to inspect the network traffic and see that it's
 fully encrypted as `ockamd` sends and receives your time-series data over the wire.
 
-**5. Observe the line format data written to `InfluxDB` in the responder end by running some `influxql`:**
+---
+
+### Step 5: **See data written to `InfluxDB`**
 ```sh
 ./tools/docker/demo/influxdb.sh influxdb-query
 ```
@@ -77,7 +86,9 @@ Now that there's data in `InfluxDB`, run a query using this command and see it s
 `influx` client. Feel free to write more data to `Telegraf` by repeating Step 4 above and re-run 
 the `influxdb-query` command to see it populated. 
 
-**6. Stop & clean-up the docker containers:**
+---
+
+### Step 6: **6. Stop & clean-up the docker containers**
 ```sh
 ./tools/docker/demo/influxdb.sh kill-all
 ```
