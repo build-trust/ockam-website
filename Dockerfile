@@ -8,7 +8,7 @@ RUN npm -g install gatsby-cli
 
 COPY package*.json ./
 
-RUN npm i && npm ci
+RUN npm ci
 
 # Bundle app source
 COPY . .
