@@ -1,9 +1,9 @@
 ---
 title: Microchip ATECC608A Ockam Add-on
-order: 2
+order: 3
 ---
 
-# Using the Microchip Ockam Add-on (with ATECC608A on initiator side)
+# Using the Microchip Ockam Add-on (with ATECC608A)
 
 ## Hardware cryptography to the rescue!
 
@@ -84,7 +84,7 @@ This launches `ockamd` ready to capture time-series data from stdin. The "initia
 all messages sent between them are fully encrypted, end-to-end. Note that you aren't signing or 
 managing certificates, or having to set up TLS anywhere in this architecture! 
 
-!["ATECC demo"](../assets/ATECC-working.png)
+!["ATECC demo"](./assets/ATECC-working.png)
 
 ---
 
