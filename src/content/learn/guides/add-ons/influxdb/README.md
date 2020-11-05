@@ -3,20 +3,20 @@ title: InfluxDB Ockam Add-on
 order: 1
 ---
 
-# Using the InfluxDB (with Telegraf) Ockam Add-on
+# Using the InfluxDB Ockam Add-on (with Telegraf)
 
 !["You are here"](../assets/you-are-here-REPLACE.png)
 
 Adding security to any network transaction is hard. As the `TODO`'s pile up, and your application
 logic becomes more complex, the last thing you need is to manage credentials, certificates, network
 code, and cryptographic keys. Leaving your critical time-series data exposed to tampering or 
-disclosure to untrusted parties isn't going to fly, though, so what do you do? 
+disclosure to untrusted parties isn't going to fly though, so what do you do? 
 
-Let us help! The Ockam InfluxDB Add-on makes it a simple to encrypt and move your data between your 
+Let us help! The _Ockam InfluxDB Add-on_ makes it a simple to encrypt and move your data between your 
 application and InfluxDB. Here's a demo of how to use `ockamd`, our deamon process you can run next
 to your application and get drop-in security in minutes.
 
-### Step 1 **Clone the Ockam repo to get the demo scripts:**
+### Step 1: **Clone the Ockam repo to get the demo scripts:**
 ```sh
 git clone https://github.com/ockam-network/ockam.git
 cd ockam && git checkout develop # TODO: update with tag
@@ -29,7 +29,7 @@ require Docker, but it makes this demo easy to run and share!
 ---
 
 
-### Step 2: **Run `InfluxDB` and `ockamd`**
+### Step 2: **Run InfluxDB and ockamd**
 ```sh
 ./tools/docker/demo/influxdb.sh influxdb-ockamd
 ```
@@ -42,7 +42,7 @@ This is a basic way to verify that the initiator and responder are who they clai
 
 ---
 
-### Step 3: **Run `Telegraf` and `ockamd`**
+### Step 3: **Run Telegraf and ockamd**
 ```sh
 ./tools/docker/demo/influxdb.sh telegraf-ockamd $COPIED_RESPONDER_PUBLIC_KEY
 ```
@@ -51,19 +51,21 @@ This launches `Telegraf` (a helpful data collection agent by InfluxData) and `oc
 ready to capture time-series data. The "initiator" creates a 
 [**secure channel**](https://www.ockam.io/learn/concepts/secure_channels) with the "responder" and 
 all messages sent between them are fully encrypted, end-to-end. Note that you aren't signing or 
-managing certificates, or having to set up TLS anywhere in this architechture! Learn more about 
-`Telegraf` by InfluxData [here](https://www.influxdata.com/time-series-platform/telegraf/).
+managing certificates, or having to set up TLS anywhere in this architechture! 
+
+_Learn more about `Telegraf` by InfluxData 
+[here](https://www.influxdata.com/time-series-platform/telegraf/)._
 
 ---
 
-### Step 4: **Send `Telegraf` some input via HTTP**
+### Step 4: **Send Telegraf input via HTTP**
 ```sh
 ./tools/docker/demo/influxdb.sh telegraf-write
 ```
 
 `Telegraf` is configured to launch `ockamd` as an 
 [execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/exec/README.md), 
-which conveniently extends Telegraf to capture and process time-series data for `InfluxDB`. `ockamd` 
+which conveniently extends Telegraf to capture and process time-series data for InfluxDB. `ockamd` 
 creates the [**secure channel**](https://www.ockam.io/learn/concepts/secure_channels), manages the 
 [**transports**](https://www.ockam.io/learn/concepts/transports/), and encrypts the input from 
 `Telegraf` and/or your application before it securely sends it to another `ockamd` (sitting next to 
@@ -77,7 +79,7 @@ fully encrypted as `ockamd` sends and receives your time-series data over the wi
 
 ---
 
-### Step 5: **See data written to `InfluxDB`**
+### Step 5: **Query data written to InfluxDB**
 ```sh
 ./tools/docker/demo/influxdb.sh influxdb-query
 ```
@@ -88,7 +90,7 @@ the `influxdb-query` command to see it populated.
 
 ---
 
-### Step 6: **6. Stop & clean-up the docker containers**
+### Step 6: **6. Stop & clean-up the Docker containers**
 ```sh
 ./tools/docker/demo/influxdb.sh kill-all
 ```
@@ -99,6 +101,6 @@ Ockam's fully open-source components (including Rust, Elixir, and C libraries), 
 [GitHub repo](https://github.com/ockam-network/ockam). Follow along by starring the repo, and send 
 us a PR!
 
-_Learn more about `InfluxDB` and how to use `Ockamd` with robust their time-series databases on the 
-[`InfluxData` website](https://www.influxdata.com/), and our detailed 
+_Learn more about `InfluxDB` and how to use `ockamd` with the robust time-series database on the 
+[InfluxData website](https://www.influxdata.com/), and our detailed 
 [partner page](https://www.influxdata.com/partners/ockam/)._
