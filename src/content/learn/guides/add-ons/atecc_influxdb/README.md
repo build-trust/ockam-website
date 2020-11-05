@@ -84,6 +84,8 @@ This launches `ockamd` ready to capture time-series data from stdin. The "initia
 all messages sent between them are fully encrypted, end-to-end. Note that you aren't signing or 
 managing certificates, or having to set up TLS anywhere in this architecture! 
 
+!["ATECC demo"](../assets/ATECC-working.png)
+
 ---
 
 Thanks for checking out Ockam's Microchip Add-on! For more information, or to try using any of 
