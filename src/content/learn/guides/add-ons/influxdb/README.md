@@ -13,7 +13,7 @@ code, and cryptographic keys. Leaving your critical time-series data exposed to 
 disclosure to untrusted parties isn't going to fly though, so what do you do? 
 
 Let us help! The _Ockam InfluxDB Add-on_ makes it a simple to encrypt and move your data between your 
-application and InfluxDB. Here's a demo of how to use `ockamd`, our deamon process you can run next
+application and InfluxDB. Here's a demo of how to use `ockamd`, our daemon process you can run next
 to your application and get drop-in security in minutes.
 
 ### Step 1: **Clone the Ockam repo to get the demo scripts:**
@@ -51,7 +51,7 @@ This launches `Telegraf` (a helpful data collection agent by InfluxData) and `oc
 ready to capture time-series data. The "initiator" creates a 
 [**secure channel**](https://www.ockam.io/learn/concepts/secure_channels) with the "responder" and 
 all messages sent between them are fully encrypted, end-to-end. Note that you aren't signing or 
-managing certificates, or having to set up TLS anywhere in this architechture! 
+managing certificates, or having to set up TLS anywhere in this architecture! 
 
 _Learn more about `Telegraf` by InfluxData 
 [here](https://www.influxdata.com/time-series-platform/telegraf/)._
@@ -90,7 +90,7 @@ the `influxdb-query` command to see it populated.
 
 ---
 
-### Step 6: **6. Stop & clean-up the Docker containers**
+### Step 6: **Stop & clean-up the Docker containers**
 ```sh
 ./tools/docker/demo/influxdb.sh kill-all
 ```
