@@ -81,4 +81,4 @@ The service will accept or reject the enrollment message.
 ---
 
 ## Technical Details
-The specific cryptographic details can be found [here](https://github.com/ockam-network/proposals/tree/ml/enrollment-key-agreement/design/0006-enrollment).
+The specific cryptographic details can be found [here](/learn/proposals/0006-enrollment/).
