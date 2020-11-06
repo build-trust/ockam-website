@@ -51,7 +51,7 @@ If the checks pass, the service and the enrollee can immediately begin communica
 
 ### Step 1
 
-![Enrollment 2](enrollment2.svg)
+![Enrollment: Step 1](enrollment-step1.svg)
 
 The enroller requests an enrollment bundle from the service, which it will later use to provide
 enrollees with information about how to connect to the service.
@@ -60,7 +60,7 @@ enrollees with information about how to connect to the service.
 
 ### Step 2
 
-![Enrollment 3](enrollment3.svg)
+![Enrollment: Step 2](enrollment-step2.svg)
 
 The service puts any enrollment identifiers received from an enroller in a pending state with a possible expiration time. The service then waits for contact from the enrollee.
 
@@ -70,7 +70,7 @@ Once the enrollee has the enrollment bundle from the enroller, it can contact th
 
 ### Step 3
 
-![Enrollment 4](enrollment4.svg)
+![Enrollment: Step 3](enrollment-step3.svg)
 
 The enrollee processes the enrollment bundle to create a unique encrypted enrollment message. This message is sent to the service.
 
