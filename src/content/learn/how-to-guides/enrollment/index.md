@@ -84,4 +84,4 @@ The specific cryptographic details can be found [here](/learn/proposals/0006-enr
 
 ---
 
-###### The mobile device icon is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode) from [Martins Ratkus](https://www.iconfinder.com/iconsets/mobile-smart-phone).
+_The mobile device icon is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode) from [Martins Ratkus](https://www.iconfinder.com/iconsets/mobile-smart-phone)._
