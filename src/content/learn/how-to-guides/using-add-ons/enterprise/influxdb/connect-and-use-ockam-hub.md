@@ -112,7 +112,7 @@ the `influxdb-query` command to see it populated.
 ```
 ---
 
-Thanks for checking out Ockam's InlfluxDB Add-on! For more information, or to try using any of
+Thanks for checking out Ockam's InfluxDB Add-on! For more information, or to try using any of
 Ockam's fully open-source components (including Rust, Elixir, and C libraries), head to the
 [GitHub repo](https://github.com/ockam-network/ockam). Follow along by starring the repo, and send
 us a PR!

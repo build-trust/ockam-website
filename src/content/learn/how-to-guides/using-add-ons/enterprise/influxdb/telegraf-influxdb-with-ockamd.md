@@ -67,8 +67,8 @@ managing certificates, or having to set up TLS anywhere in this architecture!
 _Learn more about `Telegraf` by InfluxData 
 [here](https://www.influxdata.com/time-series-platform/telegraf/)._
 
-Within the `telegraf.conf` configuration file used by `Telegraf`, you can see how is starts `ockamd`
-and provides some detail about how to set up connections, etc. 
+Within the `telegraf.conf` configuration file used by `Telegraf`, you can see how it starts `ockamd`
+and provides some detail about how to set up connections, validate identity, and more:
 
 ```toml
 [agent]
@@ -146,7 +146,7 @@ the `influxdb-query` command to see it populated.
 ```
 ---
 
-Thanks for checking out Ockam's InlfluxDB Add-on! For more information, or to try using any of 
+Thanks for checking out Ockam's InfluxDB Add-on! For more information, or to try using any of 
 Ockam's fully open-source components (including Rust, Elixir, and C libraries), head to the 
 [GitHub repo](https://github.com/ockam-network/ockam). Follow along by starring the repo, and send 
 us a PR!
