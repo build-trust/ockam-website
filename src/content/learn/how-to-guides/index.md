@@ -7,11 +7,11 @@ order: 3
 
 | Name | Description |
 | ------------------------------- | ----------------------------------------------------------------------|
-| [Using Add-Ons]() | Use a pre-packaged Ockam Add-On to integrate with your stack. |
-| [Building Add-Ons]() | Create your own Ockam Add-On to extend Ockam and meet your individual needs. |
-| [Enrollment]() | Learn about the Ockam Enrollment Service, and how to onboard devices securly. |
-| [High Performance Team]() | Understand how Ockam operates as a High Performance Team and how to join us. |
-| [Contributing to Open Source]() | Join the Open Source community around Ockam. |
+| [Using Add-Ons](/learn/how-to-guides/using-add-ons) | Use a pre-packaged Ockam Add-On to integrate with your stack. |
+| [Building Add-Ons](/learn/how-to-guides/building-add-ons) | Create your own Ockam Add-On to extend Ockam and meet your individual needs. |
+| [Enrollment](/learn/how-to-guides/enrollment) | Learn about the Ockam Enrollment Service, and how to onboard devices securly. |
+| [High Performance Team](/learn/how-to-guides/high-performance-team) | Understand how Ockam operates as a High Performance Team and how to join us. |
+| [Contributing to Open Source](/learn/how-to-guides/contributing) | Join the Open Source community around Ockam. |
 
 ---
 
