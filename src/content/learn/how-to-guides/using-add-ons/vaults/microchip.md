@@ -1,6 +1,6 @@
 ---
-title: Microchip ATECC608A Ockam Add-on
-order: 3
+title: Microchip
+order: 1
 ---
 
 # Using the Microchip Ockam Add-on (with ATECC608A)
