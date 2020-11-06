@@ -56,7 +56,10 @@ const teamOptions = [
 ];
 
 const mapNodesToMenuOptions = nodes =>
-  nodes.map(node => ({ label: capitalize(node.name), to: node.url }));
+  nodes.map(node => {
+    const label = node.title ? node.title : node.name;
+    return { label: capitalize(label), to: node.url };
+  });
 
 const MenuItems = ({ isCollapsedHeader, onClickItem, contactAsButton }) => {
   const [, showContactModal] = useModal(ContactModal);
@@ -115,7 +118,7 @@ MenuItems.propTypes = {
 MenuItems.defaultProps = {
   isCollapsedHeader: false,
   contactAsButton: true,
-  onClickItem() {},
+  onClickItem() { },
 };
 
 export default MenuItems;
