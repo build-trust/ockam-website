@@ -80,3 +80,8 @@ The service will accept or reject the enrollment message.
 
 ## Technical Details
 The specific cryptographic details can be found [here](/learn/proposals/0006-enrollment/).
+
+
+---
+
+<small>The mobile device icon is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode) from [Martins Ratkus](https://www.iconfinder.com/iconsets/mobile-smart-phone).</small>
