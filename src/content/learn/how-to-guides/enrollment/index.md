@@ -10,6 +10,8 @@ doesn't know about the service and vice versa. This process happens with the hel
 
 The three parties are the Ockam Enrollment Service (*service*) to which a device wants to connect, the *enroller* that helps onboard the device, and the device to be onboarded or enrolled called the *enrollee*.
 
+![Enrollment Parties](enrollment-parties.svg)
+
 ## Background and the Problem
 
 Enrolling IoT devices (and non-IoT devices) currently happens using non-secure and/or manual processes like:
