@@ -5,6 +5,8 @@ order: 2
 
 # Connect and use Ockam Hub
 
+![Telegraf, Ockam and InfluxDB](./assets/influx-add-on-ockam.png)
+
 An Ockam Hub provides a variety of services that are typically needed for secure communication
 within IoT. One of the services it provides is use of the Ockam Routing Protocol for Application
 Layer Routing of end to end encrypted messages.
