@@ -5,7 +5,7 @@ order: 1
 
 # Secure Communication Between Telegraf and InfluxDB with OckamD
 
-!["You are here"](./assets/you-are-here-REPLACE.png)
+![Telegraf, Ockam and InfluxDB](./assets/influx-direct-add-on-ockam.png)
 
 Adding security to any network transaction is hard. As the `TODO`'s pile up, and your application
 logic becomes more complex, the last thing you need is to manage credentials, certificates, network
@@ -15,6 +15,14 @@ disclosure to untrusted parties isn't going to fly though, so what do you do?
 Let us help! The _Ockam InfluxDB Add-on_ makes it a simple to encrypt and move your data between your 
 application and InfluxDB. Here's a demo of how to use `ockamd`, our daemon process you can run next
 to your application and get drop-in security in minutes.
+
+This demo shows:
+1. How Ockam InfluxDB Add-On can run as a sidecar next to your InfluxDB.
+2. How OckamD can run as an
+[execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/exec/README.md)
+for Telegraf inside your connected devices
+3. How these two components enable end-to-end encrypted secure connections between your devices and
+your Influx TICK stack in a variety of complex IoT, edge and cloud network topologies.
 
 ### Step 1: **Clone the Ockam repo to get the demo scripts:**
 ```sh
@@ -40,6 +48,9 @@ will store in `InfluxDB`. Note the "Responder public key" line written to your t
 to copy & paste this string into the `$COPIED_RESPONDER_PUBLIC_KEY` as the next command's argument. 
 This is a basic way to verify that the initiator and responder are who they claim to be.
 
+`ockamd` will receive messages over the network from the next container, decrypt them, and insert
+them into InfluxDB.
+
 ---
 
 ### Step 3: **Run Telegraf and ockamd**
@@ -55,6 +66,45 @@ managing certificates, or having to set up TLS anywhere in this architecture!
 
 _Learn more about `Telegraf` by InfluxData 
 [here](https://www.influxdata.com/time-series-platform/telegraf/)._
+
+Within the `telegraf.conf` configuration file used by `Telegraf`, you can see how is starts `ockamd`
+and provides some detail about how to set up connections, etc. 
+
+```toml
+[agent]
+    interval = "3s"
+    round_interval = true
+    metric_batch_size = 1000
+    metric_buffer_limit = 10000
+    collection_jitter = "0s"
+    flush_interval = "3s"
+    flush_jitter = "0s"
+    precision = ""
+
+[[outputs.execd]]
+    command = ["ockamd", 
+        "--role", "source", 
+        "--route-sink", "${OCKAMD_ROUTE}",
+        "--local-socket", "${OCKAMD_LOCAL_SOCKET}",
+        "--public-key-sink", "${OCKAMD_RESPONDER_PUBLIC_KEY}", 
+        "--service-address", "01242020"
+    ] 
+    restart_delay = "5s"   
+    data_format = "influx"
+
+[[inputs.http_listener_v2]]
+    service_address = "0.0.0.0:8080"
+    path = "/telegraf"
+    methods = ["POST"]
+    read_timeout = "3s"
+    write_timeout = "3s"
+    max_body_size = "16KB"
+    data_format = "influx"
+```
+
+Specific details about `ockamd` is out of scope for this guide, but check out the 
+[README](https://github.com/ockam-network/ockam/blob/develop/implementations/rust/daemon/README.md) 
+on GitHub to learn more about how to use it.
 
 ---
 
@@ -74,7 +124,7 @@ creates the [**secure channel**](https://www.ockam.io/learn/concepts/secure_chan
 _Read more about how Ockam simplifies encryption using our 
 [**Vault**](https://www.ockam.io/learn/concepts/vaults/) interface abstraction._ 
 
-> Note, use a packet capture tool such as WireShark to inspect the network traffic and see that it's
+> Note: use a packet capture tool such as WireShark to inspect the network traffic and see that it's
 fully encrypted as `ockamd` sends and receives your time-series data over the wire.
 
 ---
@@ -90,7 +140,7 @@ the `influxdb-query` command to see it populated.
 
 ---
 
-### Step 6: **6. Stop & clean-up the Docker containers**
+### Step 6: **Stop & clean-up the Docker containers**
 ```sh
 ./tools/docker/demo/influxdb.sh kill-all
 ```
@@ -104,3 +154,9 @@ us a PR!
 _Learn more about `InfluxDB` and how to use `ockamd` with the robust time-series database on the 
 [InfluxData website](https://www.influxdata.com/), and our detailed 
 [partner page](https://www.influxdata.com/partners/ockam/)._
+
+---
+
+Next, try a [more advanced demo](/learn/how-to-guides/using-add-ons/enterprise/influxdb/connect-and-use-ockam-hub/) 
+which leverages Ockam Hub, a cloud-hosted service that makes it easy to route messages between an 
+unlimited number of Ockam authenticated connections in your business.

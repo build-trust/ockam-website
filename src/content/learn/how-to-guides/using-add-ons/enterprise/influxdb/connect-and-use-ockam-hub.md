@@ -9,7 +9,7 @@ order: 2
 
 An Ockam Hub provides a variety of services that are typically needed for secure communication
 within IoT. One of the services it provides is use of the Ockam Routing Protocol for Application
-Layer Routing of end to end encrypted messages.
+Layer Routing of end-to-end encrypted messages.
 
 The Ockam Routing Protocol enables this service using a thin, binary wire format that encodes onward
 and return routes for a message and carries end-to-end encrypted payloads over multiple hops of
@@ -106,7 +106,7 @@ the `influxdb-query` command to see it populated.
 
 ---
 
-### Step 6: **6. Stop & clean-up the Docker containers**
+### Step 6: **Stop & clean-up the Docker containers**
 ```sh
 ./tools/docker/demo/influxdb.sh kill-all
 ```
