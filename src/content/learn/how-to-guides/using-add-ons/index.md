@@ -10,9 +10,9 @@ These Add-Ons allow you to simply include pre-packaged, configurable extensions 
 Use them to secure systems, connect devices, leverage advanced cryptography, and more.
 
 Learn about using Add-Ons available for:
-- [Enterprise](#link)
-- [Transports](#link)
-- [Vaults](#link)
+- [Enterprise](/learn/how-to-guides/using-add-ons/enterprise)
+- [Transports](/learn/how-to-guides/using-add-ons/transports)
+- [Vaults](/learn/how-to-guides/using-add-ons/vaults)
 
 ---
 
