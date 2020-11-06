@@ -11,7 +11,7 @@ Layer Routing of end to end encrypted messages.
 
 The Ockam Routing Protocol enables this service using a thin, binary wire format that encodes onward
 and return routes for a message and carries end-to-end encrypted payloads over multiple hops of
-transport layer connection.
+transport layer connections.
 
 This allows us to have application layer, asynchronous end-to-end secure channels without revealing
 our business data on the wire as it passes through a variety of IoT gateways, load balancers and
@@ -20,11 +20,11 @@ services cannot become a weakness when we send commands to our remote devices. I
 critical time-series sensor data and device commands from eavesdropping, tampering, and forgery en-route.
 
 This demo shows:
-1. How Ockam InfluxDB Add-On can run as sidecar next to your InfluxDB.
+1. How Ockam InfluxDB Add-On can run as a sidecar next to your InfluxDB.
 2. How OckamD can run as an
 [execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/exec/README.md)
-for Telegraf inside you connected devices
-3. How these two components enable end-to-end encrypted messages between your connected devices and
+for Telegraf inside your connected devices
+3. How these two components enable end-to-end encrypted secure connections between your devices and
 your Influx TICK stack in a variety of complex IoT, edge and cloud network topologies.
 
 ### Step 1: **Clone the Ockam repo to get the demo scripts:**
