@@ -3,7 +3,7 @@ title: Telegraf and InfluxDB with OckamD
 order: 1
 ---
 
-# Secure communication between Telegraf and InfluxDB with OckamD
+# Secure Communication Between Telegraf and InfluxDB with OckamD
 
 !["You are here"](./assets/you-are-here-REPLACE.png)
 
