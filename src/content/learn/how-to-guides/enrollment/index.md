@@ -1,9 +1,7 @@
 ---
-order: 7
+order: 3
 title: Enrollment
-status: Draft
 ---
-
 
 # Ockam Enrollment Service
 

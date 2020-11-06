@@ -1,6 +1,6 @@
 ---
 title: Building Add-Ons
-order: 1
+order: 2
 ---
 
 # Building Add-Ons
