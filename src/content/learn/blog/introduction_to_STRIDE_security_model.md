@@ -24,7 +24,7 @@ Authored in 1999 by two Microsoft security researchers, STRIDE remains a useful 
 
 When you provide access to your systems or data, you need to authenticate every request. The security of your systems depends upon trust in the other party’s identity. A threat to this trust is spoofing — when someone claims to be a person or system they are not.
 
-There are many types of spoofing, from the teenager’s fake ID to more serious infiltration of technology systems. A major area of concern is network security, as much of our connected devices are dependent upon trusting the identity of other devices. In these systems, passwords, keys, tokens, and signatures are among the methods used to authenticate requests. The level of vulnerability varies based on the method.
+There are many types of spoofing, from the teenager’s fake ID to more serious infiltration of technology systems. A major area of concern is network security, as much of our connected devices are dependent upon trusting the [identity](/learn/concepts/machine-identities-and-credentials/) of other devices. In these systems, passwords, keys, tokens, and signatures are among the methods used to authenticate requests. The level of vulnerability varies based on the method.
 
 For example, here are some common authentication methods for systems and what would be required to spoof a request:
 

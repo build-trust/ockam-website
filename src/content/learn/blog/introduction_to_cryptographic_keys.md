@@ -38,7 +38,7 @@ Asymmetric key pairs work similarly. Instead of a lockbox and key pair, you have
 
 In our example, Bob gives you a lockbox to secure the message, and he has the only private key to open it. When encrypting online communication, you would secure the messages with Bob’s public key, and that information can only be unlocked via his private/secret key.
 
-There are many advantages to using asymmetric key pairs. By encrypting your message with your private key, you are essentially validating it has originated from you, as you are the only one with that key. Anyone can confirm that you signed it with your private key when they can use your widely-available public key to do so. By securing the message with your private key and their public key, you get the benefits of both authenticating your identity and keeping the message safe from prying eyes.
+There are many advantages to using asymmetric key pairs. By encrypting your message with your private key, you are essentially validating it has originated from you, as you are the only one with that key. Anyone can confirm that you signed it with your private key when they can use your widely-available public key to do so. By securing the message with your private key and their public key, you get the benefits of both authenticating your [identity](/learn/concepts/machine-identities-and-credentials/) and keeping the message safe from prying eyes.
 
 ## The Importance of Cryptographic Keys
 

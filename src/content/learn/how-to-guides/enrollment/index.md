@@ -5,8 +5,7 @@ title: Enrollment
 
 # Ockam Enrollment Service
 
-The enrollment protocol facilitates a secure onboarding for a device to a service where the device
-doesn't know about the service and vice versa. This process happens with the help of an enroller intermediary like a phone, terminal, or another device.
+The [enrollment](/learn/concepts/enrollment/) protocol facilitates a secure onboarding for a device to a service where the device doesn't know about the service and vice versa. This process happens with the help of an enroller intermediary like a phone, terminal, or another device.
 
 The three parties are the Ockam Enrollment Service (*service*) to which a device wants to connect, the *enroller* that helps onboard the device, and the device to be onboarded or enrolled called the *enrollee*.
 
@@ -27,7 +26,7 @@ This results in the following problems:
 1. Usernames, passwords, API tokens are often stored without any protection on the device––an attacker can extract these values with minimal effort with remote or physical access or downloading and reverse engineering the firmware.
 1. Service endpoints can become stale. When the device turns on, it looks for an old version of the endpoint.
 
-Ockam provides a secure enrollment protocol that solves this problem by providing a solution that is easy to use and results in secure connections between devices and an Ockam Service.
+Ockam provides a secure enrollment protocol that solves this problem by providing a solution that is easy to use and results in [secure connections](/learn/concepts/secure_channels/) between devices and an Ockam Service.
 
 ## Protocol
 
@@ -76,7 +75,10 @@ Once the enrollee has the enrollment bundle from the enroller, it can contact th
 
 The enrollee processes the enrollment bundle to create a unique encrypted enrollment message. This message is sent to the service.
 
-The service will accept or reject the enrollment message.
+The service will either accept or reject the enrollment message.
+
+Once the service has accepted an enrollment message, the device is able to securely participate in
+the network amongst other enrolled devices. 
 
 ---
 

@@ -11,7 +11,7 @@ Security and privacy are key concerns in the design of how data flows within IoT
 protocols provide mechanisms to handle identification, authentication, data integrity, confidentiality and other
 functionality related to secure communication.
 
-These mechanisms, however, are usually tightly coupled with the transport protocol. IoT systems, on the other hand,
+These mechanisms, however, are usually tightly coupled with the [transport protocol](/learn/concepts/application-layer-routing/). IoT systems, on the other hand,
 tend to have data flows that span multiple transport layer connections and often multiple transport protocols.
 
 Below is a slide deck that I presented at the San Francisco IoT Meetup on how decoupling secure communication

@@ -20,9 +20,9 @@ This demo shows:
 1. How Ockam InfluxDB Add-On can run as a sidecar next to your InfluxDB.
 2. How OckamD can run as an
 [execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/exec/README.md)
-for Telegraf inside your connected devices
-3. How these two components enable end-to-end encrypted secure connections between your devices and
-your Influx TICK stack in a variety of complex IoT, edge and cloud network topologies.
+for Telegraf inside your connected devices.
+3. How these two components enable end-to-end encrypted [secure connections](/learn/concepts/secure_channels/) 
+between your devices and your Influx TICK stack.
 
 ### Step 1: **Clone the Ockam repo to get the demo scripts:**
 ```sh
@@ -60,7 +60,7 @@ them into InfluxDB.
 
 This launches `Telegraf` (a helpful data collection agent by InfluxData) and `ockamd` in a container
 ready to capture time-series data. The "initiator" creates a 
-[**secure channel**](https://www.ockam.io/learn/concepts/secure_channels) with the "responder" and 
+[**secure channel**](/learn/concepts/secure_channels) with the "responder" and 
 all messages sent between them are fully encrypted, end-to-end. Note that you aren't signing or 
 managing certificates, or having to set up TLS anywhere in this architecture! 
 
@@ -68,7 +68,7 @@ _Learn more about `Telegraf` by InfluxData
 [here](https://www.influxdata.com/time-series-platform/telegraf/)._
 
 Within the `telegraf.conf` configuration file used by `Telegraf`, you can see how it starts `ockamd`
-and provides some detail about how to set up connections, validate identity, and more:
+and provides some detail about how to set up connections, validate [identity](/learn/concepts/machine-identities-and-credentials/), and more:
 
 ```toml
 [agent]
@@ -83,10 +83,10 @@ and provides some detail about how to set up connections, validate identity, and
 
 [[outputs.execd]]
     command = ["ockamd", 
-        "--role", "source", 
-        "--route-sink", "${OCKAMD_ROUTE}",
+        "--role", "initiator", 
+        "--route", "${OCKAMD_ROUTE}",
         "--local-socket", "${OCKAMD_LOCAL_SOCKET}",
-        "--public-key-sink", "${OCKAMD_RESPONDER_PUBLIC_KEY}", 
+        "--service-public-key", "${OCKAMD_RESPONDER_PUBLIC_KEY}", 
         "--service-address", "01242020"
     ] 
     restart_delay = "5s"   
@@ -116,13 +116,13 @@ on GitHub to learn more about how to use it.
 `Telegraf` is configured to launch `ockamd` as an 
 [execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/exec/README.md), 
 which conveniently extends Telegraf to capture and process time-series data for InfluxDB. `ockamd` 
-creates the [**secure channel**](https://www.ockam.io/learn/concepts/secure_channels), manages the 
-[**transports**](https://www.ockam.io/learn/concepts/transports/), and encrypts the input from 
+creates the [**secure channel**](/learn/concepts/secure_channels/), manages the 
+[**transports**](/learn/concepts/transports/), and encrypts the input from 
 `Telegraf` and/or your application before it securely sends it to another `ockamd` (sitting next to 
 `InfluxDB`) where it is inserted into the database after being decrypted by `ockamd`. 
 
 _Read more about how Ockam simplifies encryption using our 
-[**Vault**](https://www.ockam.io/learn/concepts/vaults/) interface abstraction._ 
+[**Vault**](/learn/concepts/vaults/) interface abstraction._ 
 
 > Note: use a packet capture tool such as WireShark to inspect the network traffic and see that it's
 fully encrypted as `ockamd` sends and receives your time-series data over the wire.

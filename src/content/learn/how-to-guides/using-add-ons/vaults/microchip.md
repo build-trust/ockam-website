@@ -36,7 +36,7 @@ pip install cryptoauthlib==20190517 --no-cache-dir
 ```
 
 ### Step 3: **Configure ATECC608A**
-Be ware that following step will lock your chip's configuration and you won't be able to change it!
+Beware that the following step will lock your chip's configuration and you won't be able to change it!
 Get following script https://gist.github.com/SanjoDeundiak/83775c6914dbdf5aa9145c8bde917f5b
 and run it:
 ```sh
@@ -80,7 +80,7 @@ ockamd --role initiator --route udp://$PC_IP:$PC_PORT --local-socket $RASP_IP:$R
 ```
 
 This launches `ockamd` ready to capture time-series data from stdin. The "initiator" creates a 
-[**secure channel**](https://www.ockam.io/learn/concepts/secure_channels) with the "responder" and 
+[**secure channel**](/learn/concepts/secure_channels) with the "responder" and 
 all messages sent between them are fully encrypted, end-to-end. Note that you aren't signing or 
 managing certificates, or having to set up TLS anywhere in this architecture! 
 
