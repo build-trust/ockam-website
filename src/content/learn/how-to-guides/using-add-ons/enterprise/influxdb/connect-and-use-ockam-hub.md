@@ -35,7 +35,7 @@ topologies.
 ### Step 1: **Clone the Ockam repo to get the demo scripts:**
 ```sh
 git clone https://github.com/ockam-network/ockam.git
-cd ockam && git checkout develop # TODO: update with tag
+cd ockam && git checkout tags/v0.10.1 -b main
 ```
 
 > Make sure you're running the following commands from within the `ockam` directory. All commands
