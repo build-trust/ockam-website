@@ -1,26 +1,26 @@
 ---
-title: Connect and use Ockam Hub
+title: Connect to Ockam Hub
 order: 2
 ---
 
-# Connect and use Ockam Hub
+# Use Ockam Hub to Connect Telegraf to InfluxDB
 
 ![Telegraf, Ockam and InfluxDB](./assets/influx-add-on-ockam.png)
 
 An Ockam Hub provides a variety of services that are typically needed for secure communication
-within IoT. One of the services it provides is use of the Ockam Routing Protocol for 
-[Application Layer Routing](/learn/concepts/application-layer-routing/) of end-to-end encrypted 
+within IoT. One of the services it provides is use of the Ockam Routing Protocol for
+[Application Layer Routing](/learn/concepts/application-layer-routing/) of end-to-end encrypted
 messages.
 
-The Ockam Routing Protocol enables this service using a thin, [binary wire format](/learn/proposals/0004-wire-protocol/) 
-that encodes onward and return routes for a message and carries end-to-end encrypted payloads over 
+The Ockam Routing Protocol enables this service using a thin, [binary wire format](/learn/proposals/0004-wire-protocol/)
+that encodes onward and return routes for a message and carries end-to-end encrypted payloads over
 multiple hops of [transport layer](/learn/concepts/transports/) connections.
 
-This allows us to have application layer, asynchronous end-to-end [secure channels](/learn/concepts/secure_channels/) 
-without revealing our business data on the wire as it passes through a variety of IoT gateways, 
-load balancers and network proxies. It also ensures that any network layer infrastructure or 
-intermediary vendor cloud services cannot become a weakness when we send commands to our remote 
-devices. It protects out critical time-series sensor data and device commands from eavesdropping, 
+This allows us to have application layer, asynchronous end-to-end [secure channels](/learn/concepts/secure_channels/)
+without revealing our business data on the wire as it passes through a variety of IoT gateways,
+load balancers and network proxies. It also ensures that any network layer infrastructure or
+intermediary vendor cloud services cannot become a weakness when we send commands to our remote
+devices. It protects out critical time-series sensor data and device commands from eavesdropping,
 tampering, and forgery en-route.
 
 This demo shows:
@@ -28,8 +28,8 @@ This demo shows:
 2. How OckamD can run as an
 [execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/exec/README.md)
 for Telegraf inside your connected devices.
-3. How these two components enable end-to-end encrypted [secure connections](/learn/concepts/secure_channels/) 
-between your devices and your Influx TICK stack in a variety of complex IoT, edge and cloud network 
+3. How these two components enable end-to-end encrypted [secure connections](/learn/concepts/secure_channels/)
+between your devices and your Influx TICK stack in a variety of complex IoT, edge and cloud network
 topologies.
 
 ### Step 1: **Clone the Ockam repo to get the demo scripts:**

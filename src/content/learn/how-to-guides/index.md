@@ -15,4 +15,4 @@ order: 3
 
 ---
 
-> Didn't find what you're looking for? Reach out to us directly on [Ockam.io](https://ockam.io), or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).
+> Didn't find what you're looking for? Reach out to us directly through the Contact, or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

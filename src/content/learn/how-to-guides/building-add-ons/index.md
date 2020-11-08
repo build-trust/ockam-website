@@ -5,11 +5,12 @@ order: 2
 
 # Building Ockam Add-Ons
 
-> Coming soon!
+We are working in direct partnership with companies and open source maintainers who are interested in building their own Ockam Add-on.
 
-**Until then:**
+In the future we will have a programatic way to create an Ockam Add-on and to onboard your creation into the Ockam ecosystem.
 
-- Discuss in-flight proposals or make a suggestion for an Ockam Add-On 
-[on GitHub](https://github.com/ockam-network/ockam/discussions/624).
-- Interested in partnering on an [Add-On for your enterprise offering](/learn/concepts/enterprise-systems/)? Contact us directly through the 
-[Ockam website](https://ockam.io).
+---
+
+> Didn't find what you're looking for?
+> Contact us directly through the Contact menu item in the header of this page,
+> or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).
