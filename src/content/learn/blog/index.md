@@ -6,14 +6,14 @@ metaDescription: "Ockam blog"
 metaImage: ../../../assets/default-ockam-og-image.png
 ---
 
-Ockam.io/Learn is broken into four sections:
+Our learning materials are broken into four sections:
 
-| Class | Section | What you'll learn |
-|:---:|:---:|:---|
-| `100 Level` | [Blogs](learn/blogs) | Meta topics at the industry level |
-| `200 Level` | [Concepts](learn/concepts) | Core building blocks of Ockam |
-| `300 Level` | [How-to Guides](learn/how-to-guides) | Get started building with Ockam |
-| `400 Level` | [Design and Architecture](learn/proposals) | How we are building Ockam protocols in Open Source |
+| Level | Section | What you'll learn |
+|---|---|---|
+| **100** | [Blogs](learn/blogs) | Meta topics at the industry level |
+| **200** | [Concepts](learn/concepts) | Core building blocks of Ockam |
+| **300** | [How-to Guides](learn/how-to-guides) | Get started building with Ockam |
+| **400** | [Design and Architecture](learn/proposals) | How we are building Ockam protocols in Open Source |
 
 ---
 

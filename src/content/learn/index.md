@@ -13,19 +13,14 @@ Ockam’s developer tools enable you to:
 * Establish authenticated channels between endpoints regardless of the [transports](/learn/concepts/transports/) or route,
 * Create and manage [cryptographic keys](/learn/concepts/vaults/), [unique device identifiers, and verifiable credentials](/learn/concepts/machine-identities-and-credentials/) in your connected environments.
 
----
+Our learning materials are broken into four sections:
 
-Ockam.io/Learn is broken into four sections:
-
-| Class | Section | What you'll learn |
-|:---:|:---:|:---|
-| `100 Level` | [Blogs](learn/blogs) | Meta topics at the industry level |
-| `200 Level` | [Concepts](learn/concepts) | Core building blocks of Ockam |
-| `300 Level` | [How-to Guides](learn/how-to-guides) | Get started building with Ockam |
-| `400 Level` | [Design and Architecture](learn/proposals) | How we are building Ockam protocols in Open Source |
-
-
----
+| Level | Section | What you'll learn |
+|---|---|---|
+| **100** | [Blogs](learn/blogs) | Meta topics at the industry level |
+| **200** | [Concepts](learn/concepts) | Core building blocks of Ockam |
+| **300** | [How-to Guides](learn/how-to-guides) | Get started building with Ockam |
+| **400** | [Design and Architecture](learn/proposals) | How we are building Ockam protocols in Open Source |
 
 **The Ockam Team is here to help you. If you have questions after reading through our published content, please reach out to us. We’d love to connect with you to hear about what you are building.**
 
