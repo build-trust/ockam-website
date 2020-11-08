@@ -90,4 +90,12 @@ Check out the `Enrollment Key Agreement` in the [Architecture and Protocol Desig
 
 ---
 
-_The mobile device icon is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode) from [Martins Ratkus](https://www.iconfinder.com/iconsets/mobile-smart-phone)._
+*The mobile device icon is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode) from [Martins Ratkus](https://www.iconfinder.com/iconsets/mobile-smart-phone).*
+
+---
+
+> Didn't find what you're looking for?
+>
+> Contact us directly through the Contact menu item in the header of this page,
+>
+> or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

@@ -5,7 +5,11 @@ order: 2
 
 # Transport Add-Ons
 
-> Coming soon!
+> More content is coming soon!
+
+Ockam Transport Add-ons currently support UDP and TCP.
+
+We will soon support Bluetooth, WebSocket, LoRa, NBIoT, ZWave, Zigbee, HTTP, and more...
 
 **Until then:**
 
@@ -15,5 +19,7 @@ order: 2
 ---
 
 > Didn't find what you're looking for?
+>
 > Contact us directly through the Contact menu item in the header of this page,
+>
 > or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

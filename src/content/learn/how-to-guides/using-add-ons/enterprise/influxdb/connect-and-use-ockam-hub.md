@@ -123,3 +123,11 @@ us a PR!
 _Learn more about `InfluxDB` and how to use `ockamd` with the robust time-series database on the
 [InfluxData website](https://www.influxdata.com/), and our detailed
 [partner page](https://www.influxdata.com/partners/ockam/)._
+
+---
+
+> Didn't find what you're looking for?
+>
+> Contact us directly through the Contact menu item in the header of this page,
+>
+> or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

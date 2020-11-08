@@ -63,10 +63,10 @@ require Docker, but it makes this demo easy to run and share!
 # TODO: -s atecc argument should be added to ockamd command to use corresponding cipher suite
 ```
 
-This launches `InfluxDB` and `ockamd` in a container, waiting for input from the "initiator" end, 
+This launches `InfluxDB` and `ockamd` in a container, waiting for input from the "initiator" end,
 which you'll launch next. Think of that as your application, which creates the time-series data you
 will store in `InfluxDB`. Note the "Responder public key" line written to your terminal. Make sure
-to copy & paste this string into the `$COPIED_RESPONDER_PUBLIC_KEY` as the next command's argument. 
+to copy & paste this string into the `$COPIED_RESPONDER_PUBLIC_KEY` as the next command's argument.
 This is a basic way to verify that the initiator and responder are who they claim to be.
 
 ---
@@ -79,16 +79,24 @@ cargo build --features=atecc608a
 ockamd --role initiator --route udp://$PC_IP:$PC_PORT --local-socket $RASP_IP:$RASP_PORT --service-public-key $COPIED_RESPONDER_PUBLIC_KEY --service-address 01242020 -s atecc -v ATECC
 ```
 
-This launches `ockamd` ready to capture time-series data from stdin. The "initiator" creates a 
-[**secure channel**](/learn/concepts/secure_channels) with the "responder" and 
-all messages sent between them are fully encrypted, end-to-end. Note that you aren't signing or 
-managing certificates, or having to set up TLS anywhere in this architecture! 
+This launches `ockamd` ready to capture time-series data from stdin. The "initiator" creates a
+[**secure channel**](/learn/concepts/secure_channels) with the "responder" and
+all messages sent between them are fully encrypted, end-to-end. Note that you aren't signing or
+managing certificates, or having to set up TLS anywhere in this architecture!
 
 !["ATECC demo"](./assets/ATECC-working.png)
 
 ---
 
-Thanks for checking out Ockam's Microchip Add-on! For more information, or to try using any of 
-Ockam's fully open-source components (including Rust, Elixir, and C libraries), head to the 
-[GitHub repo](https://github.com/ockam-network/ockam). Follow along by starring the repo, and send 
+Thanks for checking out Ockam's Microchip Add-on! For more information, or to try using any of
+Ockam's fully open-source components (including Rust, Elixir, and C libraries), head to the
+[GitHub repo](https://github.com/ockam-network/ockam). Follow along by starring the repo, and send
 us a PR!
+
+---
+
+> Didn't find what you're looking for?
+>
+> Contact us directly through the Contact menu item in the header of this page,
+>
+> or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

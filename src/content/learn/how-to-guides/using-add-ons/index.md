@@ -11,13 +11,17 @@ Use them to secure systems, connect devices, leverage advanced cryptography, and
 
 Learn about using Add-Ons available for:
 - [Enterprise](/learn/how-to-guides/using-add-ons/enterprise)
-  -[InfluxData](/learn/how-to-guides/using-add-ons/enterprise/influxdb/)
+
+ -[InfluxData](/learn/how-to-guides/using-add-ons/enterprise/influxdb/)
 - [Transports](/learn/how-to-guides/using-add-ons/transports)
 - [Vaults](/learn/how-to-guides/using-add-ons/vaults)
-  -[Microchip](/learn/how-to-guides/using-add-ons/enterprise/microchip)
+
+ -[Microchip](/learn/how-to-guides/using-add-ons/enterprise/microchip)
 
 ---
 
 > Didn't find what you're looking for?
+>
 > Contact us directly through the Contact menu item in the header of this page,
+>
 > or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

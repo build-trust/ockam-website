@@ -12,5 +12,7 @@ In the future we will have a programatic way to create an Ockam Add-on and to on
 ---
 
 > Didn't find what you're looking for?
+>
 > Contact us directly through the Contact menu item in the header of this page,
+>
 > or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

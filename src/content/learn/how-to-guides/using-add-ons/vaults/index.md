@@ -21,5 +21,7 @@ suggestion for an Ockam Vault Add-On [on GitHub](https://github.com/ockam-networ
 ---
 
 > Didn't find what you're looking for?
+>
 > Contact us directly through the Contact menu item in the header of this page,
+>
 > or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

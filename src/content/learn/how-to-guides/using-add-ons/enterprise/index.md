@@ -17,5 +17,7 @@ Next up is an Ockam Add-on for Confluent Kafka. Stay tuned.
 ---
 
 > Didn't find what you're looking for?
+>
 > Contact us directly through the Contact menu item in the header of this page,
+>
 > or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).

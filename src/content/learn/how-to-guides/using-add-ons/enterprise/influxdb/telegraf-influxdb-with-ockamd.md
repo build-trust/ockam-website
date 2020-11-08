@@ -155,8 +155,6 @@ _Learn more about `InfluxDB` and how to use `ockamd` with the robust time-series
 [InfluxData website](https://www.influxdata.com/), and our detailed
 [partner page](https://www.influxdata.com/partners/ockam/)._
 
----
-
 Next, try a [more advanced demo](/learn/how-to-guides/using-add-ons/enterprise/influxdb/connect-and-use-ockam-hub/)
 which leverages Ockam Hub, a cloud-hosted service that makes it easy to route messages between an
 unlimited number of Ockam authenticated connections in your business.

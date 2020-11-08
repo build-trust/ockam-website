@@ -18,4 +18,8 @@ In the following guides, you'll learn about how Ockam works within the Open Sour
 
 ---
 
-> Didn't find what you're looking for? Reach out to us directly on [Ockam.io](https://ockam.io), or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).
+> Didn't find what you're looking for?
+>
+> Contact us directly through the Contact menu item in the header of this page,
+>
+> or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).
