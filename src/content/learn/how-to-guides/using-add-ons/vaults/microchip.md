@@ -15,7 +15,7 @@ supported by Ockam.
 Let's go through the demo and observe secure communication between Raspberry Pi with connected ATECC608A
 and your PC.
 
-### Prerecquites:
+### Prerequisites:
 To run this demo you need some special hardware:
 * Raspberry Pi with installed OS
 * Development board with ATECC608A (e.g. CryptoAuth Xplained Pro)

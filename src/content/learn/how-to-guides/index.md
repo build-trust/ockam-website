@@ -7,11 +7,11 @@ order: 3
 
 | Name | Description |
 | ------------------------------- | ----------------------------------------------------------------------|
-| [Using Add-Ons](/learn/how-to-guides/using-add-ons) | Use a pre-packaged Ockam Add-On to integrate with your stack. |
-| [Building Add-Ons](/learn/how-to-guides/building-add-ons) | Create your own Ockam Add-On to extend Ockam and meet your individual needs. |
-| [Device Enrollment](/learn/how-to-guides/enrollment) | Learn about the Ockam Device Enrollment Service, and how to onboard devices securely. |
-| [High Performance Team](/learn/how-to-guides/high-performance-team) | Understand how Ockam operates as a High Performance Team and how to join us. |
-| [Contributing to Open Source](/learn/how-to-guides/contributing) | Join the Open Source community around Ockam. |
+| [Using Add-Ons](/learn/how-to-guides/using-add-ons) | Use a pre-packaged Ockam Add-On to integrate with your stack |
+| [Building Add-Ons](/learn/how-to-guides/building-add-ons) | How to create your own Ockam Add-On and partner with Ockam |
+| [Device Enrollment](/learn/how-to-guides/enrollment) | How to onboard devices securely with Ockam Device Enrollment Service |
+| [High Performance Team](/learn/how-to-guides/high-performance-team) | How Ockam operates as a High Performance Team and how to join us |
+| [Contributing to Open Source](/learn/how-to-guides/contributing) | How to Join the Open Source community around Ockam. |
 
 ---
 
