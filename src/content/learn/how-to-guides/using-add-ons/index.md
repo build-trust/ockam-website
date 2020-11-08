@@ -10,13 +10,11 @@ These Add-Ons allow you to simply include pre-packaged, configurable extensions 
 Use them to secure systems, connect devices, leverage advanced cryptography, and more.
 
 Learn about using Add-Ons available for:
-- [Enterprise](/learn/how-to-guides/using-add-ons/enterprise)
-
- -[InfluxData](/learn/how-to-guides/using-add-ons/enterprise/influxdb/)
-- [Transports](/learn/how-to-guides/using-add-ons/transports)
-- [Vaults](/learn/how-to-guides/using-add-ons/vaults)
-
- -[Microchip](/learn/how-to-guides/using-add-ons/enterprise/microchip)
+- [Enterprise](/learn/how-to-guides/using-add-ons/enterprise)  
+ - [InfluxData](/learn/how-to-guides/using-add-ons/enterprise/influxdb/telegraf-influxdb-with-ockamd/)  
+- [Transports](/learn/how-to-guides/using-add-ons/transports)  
+- [Vaults](/learn/how-to-guides/using-add-ons/vaults)  
+ - [Microchip](learn/how-to-guides/using-add-ons/vaults/microchip/)
 
 ---
 
