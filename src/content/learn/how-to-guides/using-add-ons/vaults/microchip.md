@@ -35,15 +35,7 @@ sudo apt-get install libusb-1.0-0-dev libhidapi-dev
 pip install cryptoauthlib==20190517 --no-cache-dir
 ```
 
-### Step 3: **Configure ATECC608A**
-Beware that the following step will lock your chip's configuration and you won't be able to change it!
-Get following script https://gist.github.com/SanjoDeundiak/83775c6914dbdf5aa9145c8bde917f5b
-and run it:
-```sh
-python atecc608a.py -i i2c -p slave_address=0xC0
-```
-
-### Step 4: **Clone the Ockam repo**
+### Step 3: **Clone the Ockam repo**
 Run this commands on both Raspberry Pi and your PC
 ```sh
 git clone --single-branch --branch sanjo/ockamd_p256 https://github.com/ockam-network/ockam.git
@@ -56,6 +48,12 @@ require Docker, but it makes this demo easy to run and share!
 
 ---
 
+### Step 4: **Configure ATECC608A**
+Beware that the following step will lock your chip's configuration and you won't be able to change it!
+Run following script:
+```sh
+python ./tools/microchip/atecc608a.py -i i2c --i2c 0xC0
+```
 
 ### Step 5: **Run InfluxDB and ockamd on your PC**
 ```sh
