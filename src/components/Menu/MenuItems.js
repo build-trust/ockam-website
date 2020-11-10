@@ -21,8 +21,8 @@ const productOptions = [
     to: '/product/registry',
   },
   {
-    label: 'Ockam Router',
-    to: '/product/router',
+    label: 'Ockam Hub',
+    to: '/product/hub',
   },
   {
     label: 'Kafka Add-on',
@@ -118,7 +118,7 @@ MenuItems.propTypes = {
 MenuItems.defaultProps = {
   isCollapsedHeader: false,
   contactAsButton: true,
-  onClickItem() { },
+  onClickItem() {},
 };
 
 export default MenuItems;

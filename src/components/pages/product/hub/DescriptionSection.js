@@ -42,23 +42,23 @@ const DescriptionSection = () => {
       <DefaultGridSection
         image={routerGraphics}
         direction="imageOnRight"
-        title="Ockam Router"
+        title="Ockam Hub"
         subtitle="Connect your distributed system with ease."
       >
         <Text>
-          Ockam Router is a service hosted in a cloud environment that makes it
+          Ockam Hub is a service hosted in a cloud environment that makes it
           easy to route messages between an unlimited number of Ockam
           authenticated connections in your business.
         </Text>
         <CheckedListItem>
-          Ockam Router Service
+          Ockam Hub Service
           <Text color="caption">a cloud based routing service</Text>
         </CheckedListItem>
         <CheckedListItem>
-          Ockam Cloud SDK
+          Ockam Add-Ons
           <Text color="caption">
-            allows other services and environments to authenticate and message
-            with an Ockam Router.
+            allow other services and environments to authenticate and message
+            with an Ockam Hub.
           </Text>
         </CheckedListItem>
         <CheckedListItem>
