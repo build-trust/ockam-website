@@ -71,7 +71,6 @@ This is a basic way to verify that the initiator and responder are who they clai
 
 ### Step 6: **Run ockamd**
 ```sh
-# TODO: This should be more user-friendly somehow
 cd implementations/rust/daemon
 cargo build --features=atecc608a
 ockamd --role initiator --route udp://$PC_IP:$PC_PORT --local-socket $RASP_IP:$RASP_PORT --service-public-key $COPIED_RESPONDER_PUBLIC_KEY --service-address 01242020 -s atecc -v ATECC
