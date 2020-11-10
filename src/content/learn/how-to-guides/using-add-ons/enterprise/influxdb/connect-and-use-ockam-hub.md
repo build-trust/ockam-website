@@ -26,7 +26,7 @@ tampering, and forgery en-route.
 This demo shows:
 1. How Ockam InfluxDB Add-On can run as a sidecar next to your InfluxDB.
 2. How OckamD can run as an
-[execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/exec/README.md)
+[execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/execd/README.md)
 for Telegraf inside your connected devices.
 3. How these two components enable end-to-end encrypted [secure connections](/learn/concepts/secure_channels/)
 between your devices and your Influx TICK stack in a variety of complex IoT, edge and cloud network
@@ -83,7 +83,7 @@ _Learn more about `Telegraf` by InfluxData
 ```
 
 `Telegraf` is configured to launch `ockamd` as an
-[execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/exec/README.md),
+[execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/execd/README.md),
 which conveniently extends Telegraf to capture and process time-series data for InfluxDB. `ockamd`
 creates the [**secure channel**](/learn/concepts/secure_channels/), manages the
 [**transports**](/learn/concepts/transports/), and encrypts the input from
