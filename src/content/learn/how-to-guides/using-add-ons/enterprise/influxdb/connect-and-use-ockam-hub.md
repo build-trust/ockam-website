@@ -46,25 +46,25 @@ require Docker, but it makes this demo easy to run and share!
 
 ### Step 2: **Run InfluxDB and ockamd**
 ```sh
-./tools/docker/demo/influxdb.sh influxdb-ockam-sidecar-via-ockam-hub
+./tools/docker/demo/influxdb.sh influxdb-ockamd-via-ockam-hub
 ```
 
 This launches `InfluxDB` and `ockamd` in a container, waiting for input from the "initiator" end,
 which you'll launch next. Think of that as your device, which creates the time-series data you
 will store in `InfluxDB`.
 
-Note the "Responder public key" and "Responder address on hub" values written to your terminal.
-Make sure to copy & paste this string in place of `RESPONDER_PUBLIC_KEY` and
-`RESPONDER_ADDRESS_ON_HUB` as the next command's argument.
+Note the "Responder public key" and "Channel cleartext address" values written to your terminal.
+Make sure to copy & paste these strings in place of `RESPONDER_PUBLIC_KEY` and
+`CHANNEL_ADDRESS` as the next command's argument.
 
-The `COPIED_RESPONDER_PUBLIC_KEY` is used to cryptographically authenticate to the initiator, that
+The `RESPONDER_PUBLIC_KEY` is used to cryptographically authenticate to the initiator, that
 the responder is in fact the responder that it is configured to communicate with.
 
 ---
 
 ### Step 3: **Run Telegraf and ockamd**
 ```sh
-./tools/docker/demo/influxdb.sh telegraf-ockamd-via-ockam-hub RESPONDER_PUBLIC_KEY RESPONDER_ADDRESS_ON_HUB
+./tools/docker/demo/influxdb.sh telegraf-ockamd-via-ockam-hub RESPONDER_PUBLIC_KEY CHANNEL_ADDRESS
 ```
 
 This launches `Telegraf` (a helpful data collection agent by InfluxData) and `ockamd` in a container
