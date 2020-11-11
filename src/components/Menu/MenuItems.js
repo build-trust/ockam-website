@@ -30,7 +30,7 @@ const productOptions = [
   },
   {
     label: 'InfluxData Add-on',
-    to: '/product/influx',
+    to: '/product/influxdata',
   },
   {
     label: 'Azure HSM Add-on',
