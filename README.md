@@ -114,6 +114,7 @@ Below are listed described available metadata fields under a certain path of `sr
 - **metaTitle** SEO meta title
 - **metaDescription** SEO meta description
 - **wideContent** if set to `true`, makes content column in full width
+- **redirect_from** Redirects regarding to [gatsby-redirect-plugin documentation](https://www.gatsbyjs.com/plugins/gatsby-redirect-from/)
 
 ## Sidebar menu items ordering
 
@@ -142,6 +143,34 @@ Example repo definition:
 ```
 masterborn;ockam-sample-documentation;4f3789304ad3a4421fc772cd59d95b71af98d4d9;/;documentation
 ```
+
+## Redirects
+
+#### Redirecting markdown pages
+
+To keep redirects in more readable and maintainable manner, please use `redirect_from` YAML frontmatter inside your md files, i.e:
+
+```
+title: Using Add-Ons
+redirect_from:
+ - /sample-redirect-address/
+ - /another/old/url/
+```
+
+Above code will create redirects from this two URLs to URL of this md file.
+
+For more details, please check [plugin documentation](https://www.gatsbyjs.com/plugins/gatsby-redirect-from/#usage)
+
+#### Redirect other pages
+
+To redirect other url, please modify `redirects.csv` file, where first chunk is "from address" and second is to "to address", i.e:
+
+```
+/product/router;/product/hub
+```
+
+Entry above mean redirect `/product/router` to `/product/hub`
+Each line inside this file is new redirect entry
 
 ## 🧐 What's inside?
 

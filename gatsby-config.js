@@ -12,6 +12,12 @@ const plugins = [
   'gatsby-transformer-sharp',
   'gatsby-plugin-svgr',
   {
+    resolve: 'gatsby-redirect-from',
+    options: {
+      query: 'allMdx',
+    },
+  },
+  {
     resolve: `gatsby-plugin-layout`,
     options: {
       component: require.resolve(`./src/templates/index.js`),
@@ -102,6 +108,7 @@ const plugins = [
       verboseOutput: false,
     },
   },
+  'gatsby-plugin-meta-redirect',
 ];
 
 if (isProductionStage)

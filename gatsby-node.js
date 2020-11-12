@@ -1,10 +1,10 @@
-const path = require('path');
-
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const { startCase } = require('lodash');
 const slugify = require('slugify');
+const path = require('path');
 
 const getMarkdownPages = require('./scripts/get-markdown-pages');
+const getRedirects = require('./scripts/get-redirects');
 const getLeverPages = require('./scripts/get-lever-pages');
 const learnIndices = require('./scripts/get-algolia-learn-indices');
 
@@ -13,9 +13,13 @@ const mapReadmeSlug = slug => {
 };
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
+  const redirects = await getRedirects();
   const mdxPages = await getMarkdownPages(graphql);
   const leverPages = await getLeverPages(graphql);
+  redirects.forEach(({ from, to }) =>
+    createRedirect({ fromPath: from, toPath: to, isPermanent: true })
+  );
   mdxPages.forEach(mdxPage => createPage(mdxPage));
   leverPages.forEach(leverPage => createPage(leverPage));
 };
