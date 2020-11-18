@@ -7,14 +7,25 @@ order: 1
 
 ![Telegraf, Ockam and InfluxDB](./assets/influx-direct-add-on-ockam.png)
 
-Adding security to any network transaction is hard. As the `TODO`'s pile up, and your application
-logic becomes more complex, the last thing you need is to manage credentials, certificates, network
-code, and cryptographic keys. Leaving your critical time-series data exposed to tampering or
-disclosure to untrusted parties isn't going to fly though, so what do you do?
+Ockam is a suite of programming libraries and infrastructure that make it easy to build devices
+that communicate securely and privately with cloud services and other devices. Below we show how
+`OckamD` integrates with Telegraf to deliver end-to-end encrypted data, from devices that are
+running Telegraf, at the edge, to InfluxDB in the cloud.  
 
-Let us help! The _Ockam InfluxDB Add-on_ makes it simple to encrypt and move your data between your
-application and InfluxDB. Here's a demo of how to use `ockamd`, our daemon process you can run next
-to your application and get drop-in security in minutes.
+Cryptographic protocols can be a powerful tool to solve many complex, real world challenges in
+deploying dependable IoT at scale. Such protocols, however, must be designed and implemented with
+extreme care.
+
+In Ockam, we're taking proven cryptographic building blocks and applying them to build solutions
+for common IoT and edge computing problems like:
+
+* Secure, easy and rapid __enrollment of large fleets__ of devices.
+* Scalable provisioning, proof of possession, rotation, and revocation of
+  __identity keys and credentials__.
+* __End-to-end encrypted communication__ over low-bandwidth, intermittently
+  connected, multi-protocol IoT and edge network topologies.
+
+If you're running InfluxDB to store and process time-series IoT data, the below demo shows:
 
 This demo shows:
 1. How Ockam InfluxDB Add-On can run as a sidecar next to your InfluxDB.
@@ -155,6 +166,8 @@ _Learn more about `InfluxDB` and how to use `ockamd` with the robust time-series
 [InfluxData website](https://www.influxdata.com/), and our detailed
 [partner page](https://www.influxdata.com/partners/ockam/)._
 
+---
+
 Next, try a [more advanced demo](/learn/how-to-guides/using-add-ons/enterprise/influxdb/connect-and-use-ockam-hub/)
-which leverages Ockam Hub, a cloud-hosted service that makes it easy to route messages between an
-unlimited number of Ockam authenticated connections in your business.
+which leverages Ockam Hub, a cloud-hosted service that makes it easy to route end-to-end encrypted
+messages within complex real world IoT topologies.
