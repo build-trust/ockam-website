@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import OpenIcon from 'emotion-icons/octicons/ChevronDown';
 import CloseIcon from 'emotion-icons/octicons/ChevronRight';
 import isArray from 'lodash/isArray';
+import { rgba } from 'polished';
 
 import Icon from '../../Icon';
 import SidebarMenuItem from '../../Sidebar/SidebarMenuItem';
@@ -13,6 +14,12 @@ import removeStartEndSlugSlash from '../../../utils/removeStartEndSlugSlash';
 const NodeLink = styled(SidebarMenuItem)`
   padding-left: 1rem;
   margin-left: 0;
+  :hover {
+    color: ${props => props.theme.colors.link.hover};
+    svg {
+      color: ${props => props.theme.colors.icon};
+    }
+  }
 `;
 
 const NodeList = styled.ul`
@@ -27,6 +34,15 @@ const ButtonChevron = styled.button`
   background: transparent;
   border: 0;
   margin-left: auto;
+  padding: 0.4rem 0.4rem;
+  cursor: auto;
+  :hover {
+    ${({ theme }) => `
+      background-color: ${rgba(theme.colors.icon, 0.24)};
+      border-radius: ${theme.radii.button};
+      cursor: pointer;
+    `}
+  }
 `;
 
 const getArtificiallyUrl = (url, deepLevel) => {
@@ -44,16 +60,25 @@ const LearnSidebarMenuNode = ({
   nodes,
   deepLevel,
   location,
+  expandedNodes,
+  onToggle,
+  hideNode,
+  expandNode,
+  parentHasSameUrl,
 }) => {
   const hasChildren = isArray(nodes) && nodes.length !== 0;
 
-  // This `artificiallyUrl` is needed cause nodes without root file (index.md or README.md), generates same
+  // This `artificiallyUrl` is necessary cause nodes without root file (index.md or README.md), generates same
   // url as first child
   const isRootWithSameUrl = hasChildren && url === nodes[0].url;
   const artificiallyUrl = isRootWithSameUrl
     ? getArtificiallyUrl(url, deepLevel)
     : false;
-  const isActive = location && location.pathname.match(artificiallyUrl || url);
+  const isActive = useMemo(
+    () => location && location.pathname.match(artificiallyUrl || url),
+    [location.pathname, artificiallyUrl, url]
+  );
+  const isExpandedNode = expandedNodes.some(item => item === url);
 
   const trimmedUrl = removeStartEndSlugSlash(artificiallyUrl || url);
   const trimmedPathname = removeStartEndSlugSlash(location.pathname);
@@ -62,6 +87,17 @@ const LearnSidebarMenuNode = ({
 
   const isDirectoryNode = nodes && nodes[0] ? nodes[0].url === url : false;
   const directoryTitle = capitalize(name);
+
+  const handleToggle = e => onToggle(e, url);
+
+  useEffect(() => {
+    if (parentHasSameUrl) return;
+    if (isActive) {
+      expandNode(url);
+    } else {
+      hideNode(url);
+    }
+  }, [parentHasSameUrl, isActive, expandNode, url, hideNode]);
 
   return (
     <div>
@@ -74,8 +110,8 @@ const LearnSidebarMenuNode = ({
         >
           {isDirectoryNode ? directoryTitle : title}
           {hasChildren && (
-            <ButtonChevron type="button">
-              {isActive ? (
+            <ButtonChevron type="button" onClick={handleToggle}>
+              {isExpandedNode ? (
                 <Icon icon={OpenIcon} size={16} />
               ) : (
                 <Icon icon={CloseIcon} size={16} />
@@ -85,7 +121,7 @@ const LearnSidebarMenuNode = ({
         </NodeLink>
       )}
 
-      {isActive && hasChildren ? (
+      {isExpandedNode && hasChildren ? (
         <NodeList deepLevel={deepLevel}>
           {nodes.map(item => (
             <LearnSidebarMenuNode
@@ -96,6 +132,11 @@ const LearnSidebarMenuNode = ({
               url={item.url}
               deepLevel={item.deepLevel}
               nodes={item.nodes}
+              expandedNodes={expandedNodes}
+              onToggle={onToggle}
+              hideNode={hideNode}
+              expandNode={expandNode}
+              parentHasSameUrl={isRootWithSameUrl}
             />
           ))}
         </NodeList>
@@ -117,12 +158,18 @@ LearnSidebarMenuNode.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
+  expandedNodes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onToggle: PropTypes.func.isRequired,
+  hideNode: PropTypes.func.isRequired,
+  expandNode: PropTypes.func.isRequired,
+  parentHasSameUrl: PropTypes.bool,
 };
 
 LearnSidebarMenuNode.defaultProps = {
   url: '',
   title: '',
   name: '',
+  parentHasSameUrl: false,
 };
 
 export default LearnSidebarMenuNode;

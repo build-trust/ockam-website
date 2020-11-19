@@ -12,20 +12,24 @@ const useActiveHashInViewport = (hashes = []) => {
     }
     const windowHeight =
       window.innerHeight || document.documentElement.clientHeight;
-    const elements = hashes.map(hash => document.querySelector(hash));
-    const activeEl = elements.find((item, index) => {
-      const rect = item.getBoundingClientRect();
-      const vertInView =
-        rect.top <= windowHeight && rect.top + rect.height >= 0;
-      if (!vertInView) {
-        const nextEl = elements[index + 1];
-        if (nextEl) {
-          const rectNext = nextEl.getBoundingClientRect();
-          return rectNext.top + rect.height > windowHeight / 2;
+    const elements = hashes
+      .filter(item => item)
+      .map(hash => document.getElementById(hash.substring(1)));
+    const activeEl = elements
+      .filter(item => item)
+      .find((item, index) => {
+        const rect = item.getBoundingClientRect();
+        const vertInView =
+          rect.top <= windowHeight && rect.top + rect.height >= 0;
+        if (!vertInView) {
+          const nextEl = elements[index + 1];
+          if (nextEl) {
+            const rectNext = nextEl.getBoundingClientRect();
+            return rectNext.top + rect.height > windowHeight / 2;
+          }
         }
-      }
-      return vertInView;
-    });
+        return vertInView;
+      });
 
     if (activeEl) {
       setActiveViewportHash(`#${activeEl.getAttribute('id')}`);
