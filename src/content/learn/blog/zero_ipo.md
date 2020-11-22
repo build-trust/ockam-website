@@ -264,7 +264,7 @@ Here’s how Peter’s ‘3 pillars of Open Source’ align with Ockam’s Zero-
 
 [Nnamdi](https://lsvp.com/team/nnamdi-iregbulem/) wrote a perspective on go-to-market strategy that's backed by quantitative analysis and empirical data. I encourage you to read his entire blog post: [Enterprise Software Monetization is Fat-Tailed](https://whoisnnamdi.com/software-fat-tailed/). It's spot on - and perfectly aligns with our sequential staging of Self-serve SaaS => Inside Sales => Enterprise Sales in Ockam's Zero-to-IPO strategy.
 
-His advise?
+His advice?
 
 >Focus on the Tails!
 
