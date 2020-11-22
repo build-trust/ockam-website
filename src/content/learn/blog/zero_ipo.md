@@ -1,6 +1,6 @@
 ---
 title: "Zero-to-IPO: Charting Ockam’s Route"
-date: 2020-09-21
+date: 2020-11-21
 description: "We live our values at Ockam, and as an open source company, we want to share our roadmap"
 metaTitle: "Ockam's Zero-to-IPO framework is a product and GTM roadmap for open source companies"
 author: "Matthew Gregory"
@@ -259,6 +259,18 @@ At enterprise scale, Ockam becomes an interoperable architecture for universal t
 Here’s how Peter’s ‘3 pillars of Open Source’ align with Ockam’s Zero-to-IPO map. He does such a fantastic job of laying out his structure, I’ll direct you to consume his frameworks from [first principles](https://a16z.com/2019/10/04/commercializing-open-source/):
 
 ![a16z Model for Open Source](./assets/zero_ipo/a16z.png)
+
+## [Nnamdi Iregbulem](https://lsvp.com/team/nnamdi-iregbulem/) - Partner at Lightspeed
+
+Nnamdi wrote a perspective on go-to-market strategy that's backed by quantitative analysis and empirical data. I encourage you to read his entire blog post:[Enterprise Software Monetization is Fat-Tailed](Enterprise Software Monetization is Fat-Tailed). It's spot on - and perfectly aligns with our sequential staging of Self-serve SaaS => Inside Sales => Enterprise Sales in Ockam's Zero-to-IPO strategy.
+
+His advise?
+
+>Focus on the Tails!
+
+>If the distribution of revenue is fat-tailed, vendors should be trying to insert their software into as many customers as possible, as cheaply as possible.
+
+Exactly right. Moreover, Nnamdi's blog contains the detail and explanation for why CAC_per_segment is a key metric for Ockam during our Inside Sales phase. Simply, we are gathering data then analyzing on our Tails.
 
 ## Battery Ventures
 
