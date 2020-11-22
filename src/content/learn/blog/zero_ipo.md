@@ -260,9 +260,9 @@ Here’s how Peter’s ‘3 pillars of Open Source’ align with Ockam’s Zero-
 
 ![a16z Model for Open Source](./assets/zero_ipo/a16z.png)
 
-## [Nnamdi Iregbulem](https://lsvp.com/team/nnamdi-iregbulem/) - Partner at Lightspeed
+## Nnamdi Iregbulem - Partner at Lightspeed
 
-Nnamdi wrote a perspective on go-to-market strategy that's backed by quantitative analysis and empirical data. I encourage you to read his entire blog post:[Enterprise Software Monetization is Fat-Tailed](Enterprise Software Monetization is Fat-Tailed). It's spot on - and perfectly aligns with our sequential staging of Self-serve SaaS => Inside Sales => Enterprise Sales in Ockam's Zero-to-IPO strategy.
+[Nnamdi](https://lsvp.com/team/nnamdi-iregbulem/) wrote a perspective on go-to-market strategy that's backed by quantitative analysis and empirical data. I encourage you to read his entire blog post: [Enterprise Software Monetization is Fat-Tailed](https://whoisnnamdi.com/software-fat-tailed/). It's spot on - and perfectly aligns with our sequential staging of Self-serve SaaS => Inside Sales => Enterprise Sales in Ockam's Zero-to-IPO strategy.
 
 His advise?
 
@@ -270,7 +270,7 @@ His advise?
 
 >If the distribution of revenue is fat-tailed, vendors should be trying to insert their software into as many customers as possible, as cheaply as possible.
 
-Exactly right. Moreover, Nnamdi's blog contains the detail and explanation for why CAC_per_segment is a key metric for Ockam during our Inside Sales phase. Simply, we are gathering data then analyzing on our Tails.
+Exactly right. Moreover, Nnamdi's blog contains the detail to why CACs-by-segment are key metrics during our Inside Sales phase. Simply, we are gathering data then analyzing on our Tails.
 
 ## Battery Ventures
 
