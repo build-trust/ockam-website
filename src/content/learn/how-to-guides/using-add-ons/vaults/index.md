@@ -15,7 +15,7 @@ implementation into an Ockam system.
 See an Ockam Vault Add-On in action, in the following guide:
 - [Microchip ATECC608a Add-On](/learn/how-to-guides/using-add-ons/vaults/microchip/)
 
-[Learn more](/learn/concepts/add-ons/vaults/) about Ockam's Vault concept, and reach out or make a
+[Learn more](/learn/concepts/vaults/) about Ockam's Vault concept, and reach out or make a
 suggestion for an Ockam Vault Add-On [on GitHub](https://github.com/ockam-network/ockam/discussions/624).
 
 ---

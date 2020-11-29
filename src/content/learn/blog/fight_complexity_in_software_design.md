@@ -9,7 +9,7 @@ authorAvatar: ./assets/mrinal-wadhwa-1.jpg
 
 # How to Fight Against Code Complexity in Open Source Projects
 
-Complex code can be hard to manage and build upon. That's especially true for open source projects, where strong open source communication is crucial for success. Since we’re building an open source company, we made [simplicity a core value](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team)—and even referenced it in the name of our company: Ockam. Our approach with software is to create simple designs that enable us to build up our systems without them ever becoming overwhelming.
+Complex code can be hard to manage and build upon. That's especially true for open source projects, where strong open source communication is crucial for success. Since we’re building an open source company, we made [simplicity a core value](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team)—and even referenced it in the name of our company: Ockam. Our approach with software is to create simple designs that enable us to build up our systems without them ever becoming overwhelming.
 
 In this post, we'll be walking you through our open source software design philosophy, inspired heavily by _A Philosophy of Software Design_ by John Ousterhout.
 
