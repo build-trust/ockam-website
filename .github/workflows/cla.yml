@@ -18,7 +18,7 @@ jobs:
           PERSISTANCE_GITHUB_TOKEN: ${{ secrets.PERSISTANCE_GITHUB_TOKEN }}
         with: 
           path-to-signatures: 'cla-signers.json'
-          path-to-cla-document: 'https://www.ockam.io/learn/guides/contributions/cla'
+          path-to-cla-document: 'https://www.ockam.io/learn/how-to-guides/contributing/cla'
           branch: 'master'
           persistance-repository: 'contributors'
           empty-commit-flag: false

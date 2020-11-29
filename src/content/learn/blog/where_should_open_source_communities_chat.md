@@ -56,4 +56,4 @@ It’s important to listen on Twitter and other public forums like StackOverflow
 
 Ultimately, real-time and social chat may be a decision left to your community. You’ll need leaders and contributors to listen for questions. You’ll want everyone engaged in the conversation and encouraging contributions.
 
-Regardless of how you communicate around your open source projects, find communities that help you work on what you’re most passionate about. If that happens to be making the internet more secure, then check out Ockam's [open source community](https://www.ockam.io/learn/guides/team/join_us)!
+Regardless of how you communicate around your open source projects, find communities that help you work on what you’re most passionate about. If that happens to be making the internet more secure, then check out Ockam's [open source community](https://www.ockam.io/learn/how-to-guides/high-performance-team/join_us)!
