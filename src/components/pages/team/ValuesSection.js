@@ -130,11 +130,11 @@ const ValuesSection = () => {
               What we do is who we are.
             </Text>
             <Text mb={4}>
-              Ockam is a distributed team and we have a remote-first culture.
+              Ockam is a remote-first team and we have an objective-oriented culture.
             </Text>
             <ButtonsContainer>
               <Button
-                to="/learn/guides/team/values_and_virtues_on_the_Ockam_Team"
+                to="/learn/how-to-guides/high-performance-team/"
                 variant="primary"
                 as={Link}
               >
