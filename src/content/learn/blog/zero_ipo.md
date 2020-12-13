@@ -1,13 +1,14 @@
 ---
-title: "Zero-to-IPO: Charting Ockam’s Route"
+title: 'Zero-to-IPO: Charting Ockam’s Route'
 date: 2020-11-21
-description: "We live our values at Ockam, and as an open source company, we want to share our roadmap"
+description: 'We live our values at Ockam, and as an open source company, we want to share our roadmap'
 metaTitle: "Ockam's Zero-to-IPO framework is a product and GTM roadmap for open source companies"
-author: "Matthew Gregory"
+author: 'Matthew Gregory'
 authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
 homepageFeaturedOrder: 3
 ---
+
 My presentation at the [2020 Open Core Summit:](https://2020.opencoresummit.com/)
 
 <div id="presentation">
@@ -24,17 +25,17 @@ Ockam’s Zero-to-IPO map is a key strategy input to our tactical short, medium 
 
 As outlined in the progression below, we’ve plotted a course from stoking awareness to operating an enterprise sales machine.
 
-![Zero to IPO map](./assets/zero_ipo/map.png)
+![Zero to IPO map](./assets/zero_ipo/zero_1.svg)
 
 The time scale for our route to IPO is, as you’d expect, years long. Given that startups plan around funding cycles, let’s plot funding cycles as waypoints on our course. It can generally be assumed that there is 18-24 months between these waypoints.
 
-![Funding time scale](./assets/zero_ipo/funding.png)
+![Funding time scale](./assets/zero_ipo/zero_2.svg)
 
 The cloud, edge, and open source landscape continues to evolve - which means that we need to chart our own course into the future. However, Ockam’s route to IPO also considers the various ways that other companies have run the gauntlet from Zero-to-IPO. I’ve been fortunate to have been ‘in the rooms where it happened’. Over the past 10 years I’ve directly worked with well over 100 companies that were underpinned by open source software projects. I’ve seen spectacular successes, breathtaking failures, modest acquisitions, and some companies that simply fade into the darkness. I'll save those stories for another time, maybe over a beer.
 
 In the image below are experiences that I’ve drawn from the previous decade in the open source, cloud, and developer tool space.
 
-![Rooms where it happened](./assets/zero_ipo/rooms.png)
+![Rooms where it happened](./assets/zero_ipo/zero_3.svg)
 
 Let’s dive into each stage, in turn, to unpack what we are doing, when we are doing it, and how we are going to measure it.
 
@@ -44,7 +45,7 @@ Let’s dive into each stage, in turn, to unpack what we are doing, when we are 
 
 In order to recruit our team, or for a developer to consider using Ockam, first they have to know we exist. We create and distribute a tremendous amount of content at Ockam with one goal - driving developer awareness.
 
-For example, The first product Ockam shipped was [a blog on our Values](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/). The second was a white paper that shared our vision. Even this post is an example!  We have a learning library that outlines our thesis on the open source ecosystem, teaches computer science fundamentals, gives insights into our team culture, and demonstrates our technology. We’ve sat down for dozens of podcasts and interviews over the past two years. Ockam’s content is based around teaching. Being an effective listener and a great teacher are core underpinnings when building an open source community.
+For example, The first product Ockam shipped was [a blog on our Values](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/). The second was a white paper that shared our vision. Even this post is an example! We have a learning library that outlines our thesis on the open source ecosystem, teaches computer science fundamentals, gives insights into our team culture, and demonstrates our technology. We’ve sat down for dozens of podcasts and interviews over the past two years. Ockam’s content is based around teaching. Being an effective listener and a great teacher are core underpinnings when building an open source community.
 
 ## Metrics
 
@@ -91,9 +92,10 @@ Finally open source activity and engagement is transparent through the tools in 
 This is a really fun stage for a product-and-pricing-nut like me. By this point in our journey we have users, but not customers. To satisfy investor expectations and to further fund product development, we start to feed our product development machine with revenue.
 
 This stage is far simpler than it’s often made out to be. Here’s my basic formula;
-* If you are an individual developer, then Ockam is free.
-* If you are a commercial enterprise, but have not yet had a ‘technical win’ with Ockam, then Ockam is free.
-* If you are a commercial enterprise, and have had a ‘technical win’ with Ockam, then you pay.
+
+- If you are an individual developer, then Ockam is free.
+- If you are a commercial enterprise, but have not yet had a ‘technical win’ with Ockam, then Ockam is free.
+- If you are a commercial enterprise, and have had a ‘technical win’ with Ockam, then you pay.
 
 From here things get a bit more complicated. Services need to be packaged and priced. This, in my opinion, is the most challenging, but also the most fun part of product development. The classic product marketing mix (aka the 4P’s) framework is durable and applies for Ockam’s planned product offerings. In this phase we are packaging **P**roducts (say S, M, L sizes), establishing a **P**rice for each product, **P**romoting the product through rigorous segmentation and targeting, and **P**lacing it into various channels and partner marketplaces for distribution.
 
@@ -105,7 +107,7 @@ Monthly Recurring Revenue (MRR) is the top line / key metric during this phase.
 
 The free-to-paid funnel is another key metric since it is a leading indicator and helps to forecast MRR. We will track both conversion and velocity of our freemium SaaS users.
 
-The metrics we track in the Self-Serve SaaS phase allow us to A/B test in our demand generation funnel. A/B testing allows us to optimize month-over-month revenue growth.  The target is 10-15% MoM growth.
+The metrics we track in the Self-Serve SaaS phase allow us to A/B test in our demand generation funnel. A/B testing allows us to optimize month-over-month revenue growth. The target is 10-15% MoM growth.
 
 # Inside Sales
 
@@ -115,8 +117,8 @@ Inside Sales is a channel strategy for specific types of large customers we alre
 
 There are two separate objectives during this phase.
 
-* Increase MRR through an increase in our customer base, and in the average ticket size.
-* Learn about Customer Acquisition Costs (CAC) for specific segments, prior to launching the Enterprise Sales phase.
+- Increase MRR through an increase in our customer base, and in the average ticket size.
+- Learn about Customer Acquisition Costs (CAC) for specific segments, prior to launching the Enterprise Sales phase.
 
 Monthly recurring revenue is still our top priority during the Inside Sales phase.
 
@@ -176,7 +178,7 @@ What’s more interesting, at the scale of Enterprise sales, is the number of no
 
 # Summary
 
-![Summary](./assets/zero_ipo/summary.png)
+![Summary](./assets/zero_ipo/zero_4.svg)
 
 # But wait! There’s more...
 
@@ -194,9 +196,7 @@ I think of everything we do in layers. We need to balance moving up the stack wi
 
 Below are a couple examples for snapshots of our building in different states of construction.
 
-![Building Projection](./assets/zero_ipo/building.png)
-
-
+![Building Projection](./assets/zero_ipo/zero_5.svg)
 
 ## The ‘feedback’ projection
 
@@ -206,9 +206,7 @@ Our Zero-to-IPO implies forward motion. However we continuously back fill steps 
 
 We continuously look to the horizon, and keep building on what we’ve already accomplished.
 
-![Feedback Projection](./assets/zero_ipo/feedback.png)
-
-
+![Feedback Projection](./assets/zero_ipo/zero_6.svg)
 
 ## The ‘virtuous cycle' projection
 
@@ -220,9 +218,7 @@ To get Ockam's business model you need to understand the virtuous cycle open sou
 
 For Ockam's virtuous-cycle take on open source, I recommend you [watch my presentation from Oktane 2020](https://www.ockam.io/learn/blog/oktane_2020_the_future_of_identity/).
 
-![The Ockam ecosystem](./assets/open_source_ecosystem.png)
-
-
+![The Ockam ecosystem](./assets/zero_ipo/zero_10.svg)
 
 ## The ‘technology’ projection
 
@@ -234,14 +230,13 @@ Here’s an example for how this has played out over the past 10 months; We are 
 
 Fortunately we’ve [built a team of investors](https://www.ockam.io/learn/blog/ockam_raises_seed_round/) that know how to build for a grand vision of the future by solving exceptionally complex problems with world class teams.
 
-
 ## The ‘product roadmap' projection
 
 Ockam is a product company.
 
 At a high level, I think of our product roadmap in the following phases:
 
-![Ockam's product roadmap](./assets/zero_ipo/product.png)
+![Ockam's product roadmap](./assets/zero_ipo/zero_7.svg)
 
 Content is a product. I think of the pixels on this website and in GitHub as part of our product suite. All of it is focused on educating and informing our community of builders on topics related to Ockam's vision to add trust to every device, every cloud service, everywhere.
 
@@ -251,14 +246,13 @@ Ockam's services simplify deployment for your production environments. You have 
 
 At enterprise scale, Ockam becomes an interoperable architecture for universal trust between any device or cloud service anywhere. This is what we call the Ockam Platform.
 
-
 # How other frameworks map to ours
 
 ## Peter Levine - Partner at a16z
 
 Here’s how Peter’s ‘3 pillars of Open Source’ align with Ockam’s Zero-to-IPO map. He does such a fantastic job of laying out his structure, I’ll direct you to consume his frameworks from [first principles](https://a16z.com/2019/10/04/commercializing-open-source/):
 
-![a16z Model for Open Source](./assets/zero_ipo/a16z.png)
+![a16z Model for Open Source](./assets/zero_ipo/zero_8.svg)
 
 ## Nnamdi Iregbulem - Partner at Lightspeed
 
@@ -266,9 +260,9 @@ Here’s how Peter’s ‘3 pillars of Open Source’ align with Ockam’s Zero-
 
 His advice?
 
->Focus on the Tails!
+> Focus on the Tails!
 
->If the distribution of revenue is fat-tailed, vendors should be trying to insert their software into as many customers as possible, as cheaply as possible.
+> If the distribution of revenue is fat-tailed, vendors should be trying to insert their software into as many customers as possible, as cheaply as possible.
 
 Exactly right. Moreover, Nnamdi's blog contains the detail to why CACs-by-segment are key metrics during our Inside Sales phase. Simply, we are gathering data then analyzing on our Tails.
 
@@ -278,7 +272,7 @@ The way that Dharmesh Thakker and Chiraag Deora articulate 'time to value' and '
 
 Moreover this quote,
 
->With bottoms-up offerings, it is critical that your end users can create immediate value with your (great) product without needing to speak with a salesperson or pre-sales engineer,
+> With bottoms-up offerings, it is critical that your end users can create immediate value with your (great) product without needing to speak with a salesperson or pre-sales engineer,
 
 highly aligns with Ockam's Values around [simplicity and the love that builders have for their tools](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/#builders-love-their-tools).
 
@@ -288,18 +282,17 @@ highly aligns with Ockam's Values around [simplicity and the love that builders 
 
 Adam has a self-serve product model that he call’s ‘1,2,3’. He outlines it in this presentation and I suggest that you consume it, [here](https://www.heavybit.com/library/video/self-serve-go-to-market/). What I specifically love about his presentation is the detail that he paints in the self-serve SaaS phases from his own experiences. Ockam’s Zero-to-IPO differs in some ways, but directionally we are aligned.
 
-![123 Model for SaaS](./assets/zero_ipo/123.png)
-
+![123 Model for SaaS](./assets/zero_ipo/zero_9.svg)
 
 ## Bessemer Venture Partners
 
 Amit Karp, Mike Droesh, Ariel Sterman, Jenny Gao, and Ethan Kurzweil recently collaborated on a 'Roadmap for Open Source' companies. They share:
 
->After years of investing in open source software, we’re releasing our thinking on what positions these companies as emerging technology giants.
+> After years of investing in open source software, we’re releasing our thinking on what positions these companies as emerging technology giants.
 
->It’s no secret that open source is taking over the software development world. In just the past two years, there has been over $80 billion in liquidity value generated from the acquisition, merger, and IPOs of open source software-based businesses, so it should come as no surprise that the pace of venture investments into this space is growing faster than ever.
+> It’s no secret that open source is taking over the software development world. In just the past two years, there has been over \$80 billion in liquidity value generated from the acquisition, merger, and IPOs of open source software-based businesses, so it should come as no surprise that the pace of venture investments into this space is growing faster than ever.
 
->One major development is worth emphasizing: once considered the cheaper version of closed source software, open-source software is now viewed as the superior alternative offering higher quality, better support, and more flexibility.
+> One major development is worth emphasizing: once considered the cheaper version of closed source software, open-source software is now viewed as the superior alternative offering higher quality, better support, and more flexibility.
 
 We couldn't say it any better ourselves, so I encourage you to read their entire post!
 [Bessemer Roadmap: Open Source](https://www.bvp.com/atlas/roadmap-open-source)
