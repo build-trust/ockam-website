@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DescriptionSection from '../../components/pages/product/azure/DescriptionSection';
-import GetStartedSection from '../../components/pages/product/azure/GetStartedSection';
+import GetStartedSection from '../../components/pages/GetStartedSection';
 import ConfigurationsSection from '../../components/pages/product/azure/ConfigurationsSection';
 import SEO from '../../components/SEO';
 
@@ -14,7 +14,7 @@ const Azure = () => {
       />
       <DescriptionSection />
       <ConfigurationsSection />
-      <GetStartedSection />
+      <GetStartedSection demoPathname="/learn/how-to-guides/using-add-ons/vaults" />
     </>
   );
 };

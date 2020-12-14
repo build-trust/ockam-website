@@ -2,7 +2,7 @@ import React from 'react';
 
 import SEO from '../../components/SEO';
 import DescriptionSection from '../../components/pages/product/registry/DescriptionSection';
-import GetStartedSection from '../../components/pages/homepage/GetStartedSection';
+import GetStartedSection from '../../components/pages/GetStartedSection';
 import ConfigurationsSection from '../../components/pages/product/registry/ConfigurationsSection';
 
 const seo = {

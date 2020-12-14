@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DescriptionSection from '../../components/pages/product/microchip/DescriptionSection';
-import GetStartedSection from '../../components/pages/product/microchip/GetStartedSection';
+import GetStartedSection from '../../components/pages/GetStartedSection';
 import ConfigurationsSection from '../../components/pages/product/microchip/ConfigurationsSection';
 import SEO from '../../components/SEO';
 
@@ -14,7 +14,7 @@ const Microchip = () => {
       />
       <DescriptionSection />
       <ConfigurationsSection />
-      <GetStartedSection />
+      <GetStartedSection demoPathname="/learn/how-to-guides/using-add-ons/vaults/microchip" />
     </>
   );
 };

@@ -7,7 +7,7 @@ import CloudSdkSection from '../../components/pages/product/CloudSdkSection';
 import EdgeSdkSection from '../../components/pages/product/EdgeSdkSection';
 import SectionArrowSeparator from '../../components/pages/product/SectionArrowSeparator';
 import EmbeddedSdkSection from '../../components/pages/product/EmbeddedSdkSection';
-import GetStartedSection from '../../components/pages/homepage/GetStartedSection';
+import GetStartedSection from '../../components/pages/GetStartedSection';
 
 const SpacingContainer = styled('div')`
   margin-top: 6rem;

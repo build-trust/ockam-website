@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DescriptionSection from '../../components/pages/product/kafka/DescriptionSection';
-import GetStartedSection from '../../components/pages/product/kafka/GetStartedSection';
+import GetStartedSection from '../../components/pages/GetStartedSection';
 import ConfigurationsSection from '../../components/pages/product/kafka/ConfigurationsSection';
 import SEO from '../../components/SEO';
 

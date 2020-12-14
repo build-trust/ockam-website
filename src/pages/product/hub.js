@@ -2,7 +2,7 @@ import React from 'react';
 
 import SEO from '../../components/SEO';
 import DescriptionSection from '../../components/pages/product/hub/DescriptionSection';
-import GetStartedSection from '../../components/pages/homepage/GetStartedSection';
+import GetStartedSection from '../../components/pages/GetStartedSection';
 import ConfigurationsSection from '../../components/pages/product/hub/ConfigurationsSection';
 
 const seo = {
@@ -16,7 +16,7 @@ const Hub = () => {
       <SEO title={seo.title} description={seo.description} />
       <DescriptionSection />
       <ConfigurationsSection />
-      <GetStartedSection />
+      <GetStartedSection demoPathname="/learn/how-to-guides/using-add-ons/enterprise/influxdb/connect-and-use-ockam-hub" />
     </>
   );
 };

@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
-import githubIcon from '../../../assets/homepage/github-icon.svg';
-import communityIcon from '../../../assets/community-blue-icon.svg';
-import sendIcon from '../../../assets/homepage/send-icon.svg';
-import twitterIcon from '../../../assets/homepage/twitter-icon.svg';
-import { media } from '../../../utils/emotion';
-import PageSection from '../PageSection';
-import Subheading from '../Subheading';
-import useSiteMetadata from '../../../hooks/useSiteMetadata';
-import GetStartedCard from '../../GetStartedCard';
-import useModal from '../../../hooks/useModal';
-import ContactModal from '../../../modals/ContactModal';
-import AnimateOnScroll from '../../AnimateOnScroll';
+import githubIcon from '../../assets/homepage/github-icon.svg';
+import communityIcon from '../../assets/community-blue-icon.svg';
+import sendIcon from '../../assets/homepage/send-icon.svg';
+import twitterIcon from '../../assets/homepage/twitter-icon.svg';
+import { media } from '../../utils/emotion';
+import useSiteMetadata from '../../hooks/useSiteMetadata';
+import GetStartedCard from '../GetStartedCard';
+import AnimateOnScroll from '../AnimateOnScroll';
+
+import Subheading from './Subheading';
+import PageSection from './PageSection';
 
 const GetStartedGrid = styled.div`
   display: grid;
@@ -32,10 +32,8 @@ const GetStartedGrid = styled.div`
   `}
 `;
 
-const GetStartedSection = () => {
+const GetStartedSection = ({ demoPathname }) => {
   const { ockamLibraryRepo, communityChannel, twitter } = useSiteMetadata();
-  const [, showContactModal] = useModal(ContactModal);
-  const onShowContactModal = () => showContactModal();
 
   return (
     <PageSection>
@@ -55,8 +53,8 @@ const GetStartedSection = () => {
             icon={communityIcon}
           />
           <GetStartedCard
-            onClick={onShowContactModal}
-            title="Request a demo"
+            to={demoPathname}
+            title="Run a demo"
             icon={sendIcon}
           />
           <GetStartedCard
@@ -68,6 +66,14 @@ const GetStartedSection = () => {
       </AnimateOnScroll>
     </PageSection>
   );
+};
+
+GetStartedSection.propTypes = {
+  demoPathname: PropTypes.string,
+};
+
+GetStartedSection.defaultProps = {
+  demoPathname: '/learn/how-to-guides',
 };
 
 export default GetStartedSection;
