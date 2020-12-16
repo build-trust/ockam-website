@@ -21,7 +21,7 @@ Open source is exceptionally empowering - no level of involvement is to small. H
 
 **Easy to do**
 * Attend one of our [monthly community calls](https://github.com/ockam-network/meetings).
-* Engage on [Twitter](https://twitter.com/Ockam_io).
+* Engage on [Twitter](https://twitter.com/Ockam).
 * Join the [community discussion](https://github.com/ockam-network/ockam/discussions), star the repo to keep up with updates, and say [HI!](https://github.com/ockam-network/ockam/discussions/137)
 
 **Medium difficultly**

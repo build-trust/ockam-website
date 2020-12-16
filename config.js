@@ -23,7 +23,7 @@ const config = {
     markdownPath: 'src/content',
     githubProductionPath: 'tree/production',
     communityChannel: 'https://github.com/ockam-network/ockam/discussions',
-    twitter: 'https://twitter.com/Ockam_io',
+    twitter: 'https://twitter.com/Ockam',
     algoliaHitsPerPage: 5,
     starredRepoUsername: 'ockam-network',
     starredRepoName: 'ockam',

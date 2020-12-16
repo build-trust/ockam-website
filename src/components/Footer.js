@@ -93,13 +93,13 @@ const Footer = () => {
           <MenuLink onClick={openContactModal}>Contact Sales</MenuLink>
         </MenuContainer>
         <CopyrightContainer>
-          <Caption>© 2017-2020 Ockam.io. All rights reserved.</Caption>
+          <Caption>© 2017-2021 Ockam.io. All rights reserved.</Caption>
         </CopyrightContainer>
         <SocialContainer>
           <Link to="https://www.linkedin.com/company/ockam.io/">
             <Icon ml={3} icon={LinkedinLogo} />
           </Link>
-          <Link to="https://twitter.com/ockam_io">
+          <Link to="https://twitter.com/ockam">
             <Icon ml={3} icon={TwitterLogo} />
           </Link>
         </SocialContainer>
