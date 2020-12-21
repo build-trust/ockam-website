@@ -5,12 +5,12 @@ order: 1
 
 # Get Secure Communication Between Telegraf and InfluxDB by adding OckamD
 
-![Telegraf, Ockam and InfluxDB](./assets/influx-direct-add-on-ockam.png)
+![Telegraf, Ockam and InfluxDB](./assets/influx-direct-add-on-ockam.svg)
 
 Ockam is a suite of programming libraries and infrastructure that make it easy to build devices
 that communicate securely and privately with cloud services and other devices. Below we show how
 `OckamD` integrates with Telegraf to deliver end-to-end encrypted data, from devices that are
-running Telegraf, at the edge, to InfluxDB in the cloud.  
+running Telegraf, at the edge, to InfluxDB in the cloud.
 
 Cryptographic protocols can be a powerful tool to solve many complex, real world challenges in
 deploying dependable IoT at scale. Such protocols, however, must be designed and implemented with
@@ -19,36 +19,38 @@ extreme care.
 In Ockam, we're taking proven cryptographic building blocks and applying them to build solutions
 for common IoT and edge computing problems like:
 
-* Secure, easy and rapid __enrollment of large fleets__ of devices.
-* Scalable provisioning, proof of possession, rotation, and revocation of
-  __identity keys and credentials__.
-* __End-to-end encrypted communication__ over low-bandwidth, intermittently
+- Secure, easy and rapid **enrollment of large fleets** of devices.
+- Scalable provisioning, proof of possession, rotation, and revocation of
+  **identity keys and credentials**.
+- **End-to-end encrypted communication** over low-bandwidth, intermittently
   connected, multi-protocol IoT and edge network topologies.
 
 If you're running InfluxDB to store and process time-series IoT data, the below demo shows:
 
 This demo shows:
+
 1. How Ockam InfluxDB Add-On can run as a sidecar next to your InfluxDB.
 2. How OckamD can run as an
-[execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/execd/README.md)
-for Telegraf inside your connected devices.
+   [execd output plugin](https://github.com/influxdata/telegraf/blob/release-1.16/plugins/outputs/execd/README.md)
+   for Telegraf inside your connected devices.
 3. How these two components enable end-to-end encrypted [secure connections](/learn/concepts/secure_channels/)
-between your devices and your Influx TICK stack.
+   between your devices and your Influx TICK stack.
 
 ### Step 1: **Clone the Ockam repo to get the demo scripts:**
+
 ```sh
 git clone https://github.com/ockam-network/ockam.git
 cd ockam && git checkout tags/v0.10.0 -b main
 ```
 
 > Make sure you're running the following commands from within the `ockam` directory. All commands
-below require that [Docker](https://docker.com) be installed on your machine. Using Ockam does _not_
-require Docker, but it makes this demo easy to run and share!
+> below require that [Docker](https://docker.com) be installed on your machine. Using Ockam does _not_
+> require Docker, but it makes this demo easy to run and share!
 
 ---
 
-
 ### Step 2: **Run InfluxDB and OckamD**
+
 ```sh
 ./tools/docker/demo/influxdb.sh influxdb-ockamd
 ```
@@ -65,6 +67,7 @@ them into InfluxDB.
 ---
 
 ### Step 3: **Run Telegraf and OckamD**
+
 ```sh
 ./tools/docker/demo/influxdb.sh telegraf-ockamd $COPIED_RESPONDER_PUBLIC_KEY
 ```
@@ -100,7 +103,7 @@ and provides some detail about how to set up connections, validate [identity](/l
         "--service-public-key", "${OCKAMD_RESPONDER_PUBLIC_KEY}",
         "--service-address", "01242020"
     ]
-    restart_delay = "5s"   
+    restart_delay = "5s"
     data_format = "influx"
 
 [[inputs.http_listener_v2]]
@@ -120,6 +123,7 @@ on GitHub to learn more about how to use it.
 ---
 
 ### Step 4: **Send Telegraf input via HTTP**
+
 ```sh
 ./tools/docker/demo/influxdb.sh telegraf-write
 ```
@@ -136,11 +140,12 @@ _Read more about how Ockam simplifies encryption using our
 [**Vault**](/learn/concepts/vaults/) interface abstraction._
 
 > Note: use a packet capture tool such as WireShark to inspect the network traffic and see that it's
-fully encrypted as `ockamd` sends and receives your time-series data over the wire.
+> fully encrypted as `ockamd` sends and receives your time-series data over the wire.
 
 ---
 
 ### Step 5: **Query data written to InfluxDB**
+
 ```sh
 ./tools/docker/demo/influxdb.sh influxdb-query
 ```
@@ -152,9 +157,11 @@ the `influxdb-query` command to see it populated.
 ---
 
 ### Step 6: **Stop & clean-up the Docker containers**
+
 ```sh
 ./tools/docker/demo/influxdb.sh kill-all
 ```
+
 ---
 
 Thanks for checking out Ockam's InfluxDB Add-on! For more information, or to try using any of
