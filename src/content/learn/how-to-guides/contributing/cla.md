@@ -1,6 +1,8 @@
 ---
 title: CLAs
 order: 2
+redirect_from:
+- /learn/guides/contributions/cla
 ---
 
 # Contributor License Agreements (CLA)
@@ -47,17 +49,17 @@ Your Full Name:
 
 Mailing Address:
 
-Country:		
+Country:
 
 Phone:
 
 Email:
 
-GitHub Handle:		
+GitHub Handle:
 
-Your Signature:		
+Your Signature:
 
-Date:			
+Date:
 
 *This Ockam Contributor License Agreement (Individuals) is derived from the Apache Software Foundation’s Individual Contributor License Agreement v2.0. Ockam’s substantive changes from that are agreement are as follows:*
 
@@ -113,15 +115,15 @@ Signatory Information:
 
 Signature:
 
-Name:		
+Name:
 
 Title:
 
-Phone:		
+Phone:
 
-Email:		
+Email:
 
-Date:		
+Date:
 
 *This Ockam Contributor License Agreement (Corporations) is derived from the Apache Software Foundation’s Corporate Contributor License Agreement v2.0. Ockam’s substantive changes from that are agreement are as follows:*
 
