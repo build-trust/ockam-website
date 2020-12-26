@@ -50,4 +50,4 @@ You can:
 - Create or summarize issues
 - Build a feature (big or small)
 
-Ockam even has a [contribution guide](https://www.ockam.io/learn/guides/contributions/CONTRIBUTING/) to explain the process. Your first or next open source contribution could help improve our connected future!
+Ockam even has a [contribution guide](https://www.ockam.io/learn/how-to-guides/contributing/CONTRIBUTING/) to explain the process. Your first or next open source contribution could help improve our connected future!

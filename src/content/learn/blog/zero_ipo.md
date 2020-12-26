@@ -45,7 +45,7 @@ Let’s dive into each stage, in turn, to unpack what we are doing, when we are 
 
 In order to recruit our team, or for a developer to consider using Ockam, first they have to know we exist. We create and distribute a tremendous amount of content at Ockam with one goal - driving developer awareness.
 
-For example, The first product Ockam shipped was [a blog on our Values](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/). The second was a white paper that shared our vision. Even this post is an example! We have a learning library that outlines our thesis on the open source ecosystem, teaches computer science fundamentals, gives insights into our team culture, and demonstrates our technology. We’ve sat down for dozens of podcasts and interviews over the past two years. Ockam’s content is based around teaching. Being an effective listener and a great teacher are core underpinnings when building an open source community.
+For example, The first product Ockam shipped was [a blog on our Values](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team/). The second was a white paper that shared our vision. Even this post is an example!  We have a learning library that outlines our thesis on the open source ecosystem, teaches computer science fundamentals, gives insights into our team culture, and demonstrates our technology. We’ve sat down for dozens of podcasts and interviews over the past two years. Ockam’s content is based around teaching. Being an effective listener and a great teacher are core underpinnings when building an open source community.
 
 ## Metrics
 
@@ -274,7 +274,7 @@ Moreover this quote,
 
 > With bottoms-up offerings, it is critical that your end users can create immediate value with your (great) product without needing to speak with a salesperson or pre-sales engineer,
 
-highly aligns with Ockam's Values around [simplicity and the love that builders have for their tools](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/#builders-love-their-tools).
+highly aligns with Ockam's Values around [simplicity and the love that builders have for their tools](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team/#builders-love-their-tools).
 
 [Click here to read more on the Battery GTM framework](https://www.battery.com/powered/market-uncertainty-cloud-native/)
 

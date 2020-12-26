@@ -21,7 +21,7 @@ I read Ben Horowitz’s new book “What you do is who you are” and it crystal
 
 I decided that this framework was the simplifying structure I was looking for; To connect Ockam’s Values with the best of proven management behaviors from iconic technology companies - including Intel & Google (OKRs), Amazon (Day One / Decisions), Salesforce (V2MOM), Gitlab & Hashicorp (Remote-First), Heroku (Maker Day) - and Ockam’s own innovations to build simple tools with a high performance team.
 
-I also recommend the following books for a deeper understanding of our culture and frameworks that we use everyday at Ockam: “The Score Takes Care of Itself” by Bill Walsh, "Growth Mindset" by Carol Dweck, and “Measure What Matters” by John Doerr. Our entire reading library of recommended books, blogs and videos can be found [here](https://www.ockam.io/learn/guides/team/reading_list/).
+I also recommend the following books for a deeper understanding of our culture and frameworks that we use everyday at Ockam: “The Score Takes Care of Itself” by Bill Walsh, "Growth Mindset" by Carol Dweck, and “Measure What Matters” by John Doerr. Our entire reading library of recommended books, blogs and videos can be found [here](/learn/how-to-guides/high-performance-team/reading_list/).
 
 *Matthew Gregory*
 
@@ -95,7 +95,7 @@ Understanding ‘Why?’ aligns the entire team to prioritize, make fast decisio
 
 Ockam is a team of doers, builders, shippers, and finishers. We celebrate things that are complete. Ideas are the easy part. We win by turning ideas into action.
 
-Like many mission driven product teams, we utilize the Objective-Key Result (OKR) framework. Drawing from the Salesforce V2MOM structure, we additionally layer Ockam’s Values and Vision on top of the classic OKR structure. As you will read in the [next section](https://www.ockam.io/learn/guides/team/values_and_virtues_on_the_Ockam_Team/#we-preserve-and-cherish-time), we break time into four intervals. We assign OKRs to each time interval across five categories;
+Like many mission driven product teams, we utilize the Objective-Key Result (OKR) framework. Drawing from the Salesforce V2MOM structure, we additionally layer Ockam’s Values and Vision on top of the classic OKR structure. As you will read in the [next section](#we-preserve-and-cherish-time), we break time into four intervals. We assign OKRs to each time interval across five categories;
 
 * Team
 * Values
