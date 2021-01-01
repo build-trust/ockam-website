@@ -81,7 +81,7 @@ The purpose of this call is to understand if and how you could fit into the team
 
 ### Second round
 
-This is a 50 minute technical interview with [Mrinal Wadwha](https://www.linkedin.com/in/mrinalwadhwa/), Ockam's CTO. We will want to dig deep into things you've built and technologies you've used.
+This is a 50 minute technical interview with [Mrinal Wadhwa](https://www.linkedin.com/in/mrinalwadhwa/), Ockam's CTO. We will want to dig deep into things you've built and technologies you've used.
 
 ### OSS collaboration project
 
