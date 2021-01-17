@@ -1,3 +1,6 @@
+const ReactGA = require('react-ga');
+
+const config = require('./config');
 const isLearnPath = require('./src/utils/isLearnPath');
 
 function scrollToAnchor(location) {
@@ -18,4 +21,9 @@ function scrollToAnchor(location) {
   }
 }
 
+function onInitialClientRender() {
+  ReactGA.initialize(config.gatsby.gaTrackingId);
+}
+
 exports.onRouteUpdate = ({ location }) => scrollToAnchor(location);
+exports.onInitialClientRender = onInitialClientRender;

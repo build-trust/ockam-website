@@ -76,12 +76,12 @@ const Wrapper = styled('div')`
 
 const GetStartedCard = ({ children, icon, title, to, onClick }) => {
   const handleClick = e => {
+    onClick(e);
     if (to) {
       if (isAbsoluteUrl(to)) {
         window.location = to;
       } else navigate(to);
     }
-    onClick(e);
   };
 
   return (

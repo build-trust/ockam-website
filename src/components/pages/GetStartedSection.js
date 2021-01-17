@@ -10,6 +10,7 @@ import { media } from '../../utils/emotion';
 import useSiteMetadata from '../../hooks/useSiteMetadata';
 import GetStartedCard from '../GetStartedCard';
 import AnimateOnScroll from '../AnimateOnScroll';
+import GAEvents from '../../utils/GAEvents';
 
 import Subheading from './Subheading';
 import PageSection from './PageSection';
@@ -43,21 +44,25 @@ const GetStartedSection = ({ demoPathname }) => {
         </Subheading>
         <GetStartedGrid>
           <GetStartedCard
+            onClick={GAEvents.outboundGithubLink}
             to={ockamLibraryRepo}
             title={'{ockam}'}
             icon={githubIcon}
           />
           <GetStartedCard
+            onClick={GAEvents.outboundCommunityLink}
             to={communityChannel}
             title="Join Community"
             icon={communityIcon}
           />
           <GetStartedCard
+            onClick={GAEvents.navigateToHowToGuides}
             to={demoPathname}
             title="Run a demo"
             icon={sendIcon}
           />
           <GetStartedCard
+            onClick={GAEvents.outboundTwitterLink}
             to={twitter}
             title="Follow Ockam"
             icon={twitterIcon}
