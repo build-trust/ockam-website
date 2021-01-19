@@ -25,7 +25,7 @@ const HeaderSection = () => {
           that your applications depend upon. Developers of all skills and
           backgrounds can now connect cloud services to the edge without
           specific distributed systems integration skills, cryptographic
-          security know how, or even network protocol expereince.
+          security know how, or even network protocol experience.
         </Text>
         <SlideDownAnchor to="#sdk" />
       </DefaultGridSection>
