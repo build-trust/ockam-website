@@ -17,7 +17,7 @@ Day 1 is today.
 
 Ockam, the Tool Company, is the maintainer of Ockam, the open source code base. The easiest way to get involved with The Ockam Team is to get involved with the open source code base. We consider all of our open source contributors and industry partners to be part of The Team. We welcome everyone to our community, and simply ask that you reciprocate our [community code of conduct](https://www.ockam.io/learn/how-to-guides/high-performance-team/conduct/).
 
-Open source is exceptionally empowering - no level of involvement is to small. Here are a couple ideas for how to get started:
+Open source is exceptionally empowering - no level of involvement is too small. Here are a couple ideas for how to get started:
 
 **Easy to do**
 * Attend one of our [monthly community calls](https://github.com/ockam-network/meetings).
