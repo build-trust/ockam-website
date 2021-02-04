@@ -1,0 +1,76 @@
+---
+title: "Zero Trust in Time Series Data?"
+date: 2021-01-25
+description: "A partnership between InfluxData and Ockam brings trust to time series data."
+metaTitle: "InfluxData and Ockam: How to build applications with trusted time series data in a zero trust environment."
+author: "Matthew Gregory"
+authorAvatar: ./assets/matthew_gregory-1.png
+isHomepageFeatured: true
+homepageFeaturedOrder: 2
+---
+# A partnership between InfluxData and Ockam brings trust to time series data.
+
+In this article we will investigate how to build applications with trusted time series data. To trust an application we need to trust the data that feeds into it. Increasingly, applications rely on time series data from outside the datacenter, at the edge, or in IoT. This means we need to think of trust and data in new ways.
+
+This is why InfluxData and Ockam have partnered to bring trust to time series data streams and data warehouses. First let’s start with the challenges faced by application developers;
+
+# Network boundaries are not sufficient for data-layer trust, security, nor privacy.
+
+Time series data typically needs to traverse multiple networks to connect a machine at the edge with InfluxDB in the cloud. This makes it nearly impossible to control a network perimeter - particularly for an application developer.
+
+The Zero Trust network architecture principles give guidance to how we should think about connections between the edge and InfluxDB. A Zero Trust architecture is based on the assumptions that;
+
+* The network is always hostile,
+* External and internal threats exist on the network at all times,
+* Network locality is not sufficient for determining trust in a network,
+* Every device, user, and network flow must be authenticated and authorized,
+* Security and privacy policies must be dynamic and calculated from as many sources of data as possible.
+
+To build an application that places zero trust in network boundaries can be challenging for an application architect who simply wants to connect an agent, like Telegraf, running on a device at the edge to a cloud hosted instance of InfluxDB. That’s why InfluxData has partnered with Ockam. Ockam abstracts away the complexities required to build such distributed applications.
+
+Let's look at the components that make up Ockam's systems, and how they provide security and privacy to time series data streams.
+
+# What is Ockam?
+
+[Ockam is an open source](https://github.com/ockam-network/ockam) suite of tools, programming libraries and infrastructure that makes it easy to build devices that communicate securely, privately and trustfully with cloud services and other devices. Security, Privacy and Trust are application layer concerns and IoT developers should have simple tools to granularly control these aspects of their applications.
+
+Ockam has taken proven cryptographic building blocks and applied them to build solutions for common IoT and edge-computing problems like:
+
+* Secure, rapid enrollment of large fleets of devices.
+* Scalable provisioning, proof of possession, rotation, and revocation of identity keys and credentials.
+* End-to-end encrypted communication over low-bandwidth, intermittently connected, multi-protocol IoT and edge network topologies.
+
+The goal is to provide this functionality in multiple programming languages with secure, high-level application interfaces that are easy to use correctly and hard to misuse. Let’s look at some of the core features of Ockam’s tools:
+
+![Ockam Architecture, Features, Add-ons](./assets/trust_influx/architecture.svg)
+
+## End-to-end encrypted secure channels:
+
+Ockam’s Secure Channels provide end-to-end encrypted and mutually authenticated communication that is safe against eavesdropping, tampering, and forgery of messages sent across multiple application layer hops. This enables an application to place Zero-Trust in network boundaries and instead delivers granular control to application developers on what data is revealed where in their system.
+
+## Machine identity and access management:
+
+Application developers need fine-grained control over data access in their systems, this can only be achieved if all interactions are mutually authenticated. To enable this, all devices must have unique cryptographically provable identities and access control must be managed with secure credentials. Enrolling large fleets of devices and managing the lifecycle of their keys and credentials can be quite challenging at scale. Ockam includes easy to use cryptographic protocols for;
+
+* Device Enrollment
+* Policy Enforcement
+* Key Management, Rotation, and Revocation
+* Credential Issuance
+...and more.
+
+## Built for InfluxDB developers:
+
+Ockam includes a suite of robust cryptographic protocols, accessible through simple to use programming libraries, that enable application developers to focus on the trust rules and policies of their IoT and time series data-dependent applications.
+
+The Ockam programming libraries help easily encode, business specific, granular access control logic into applications without having to deal with the complexities of cryptographic protocols or falling back to weak, coarse grained security based on network boundaries. If you are building an application with InfluxDB, adding trust with Ockam is easy.
+InfluxDB and Telegraf Add-ons for Ockam are easy to integrate
+
+![InfluxData and Ockam Hub create secure channels](./assets/trust_influx/channel.png)
+
+There are two ways to use Ockam with InfluxDB. Let’s start with Ockam Hub.
+
+Ockam Hub is a service hosted in a cloud environment that makes it easy to route messages between an unlimited number of machines at the edge and InfluxDB. While it may work in a prototype, TLS is not the right tool for the job of securing our data streams at scale. It’s impossible to control the network boundary across the multiple networks you are likely to encounter in the real world, issuing unique tokens or credentials is onerous at enterprise scale, and it’s not user friendly for a typical application layer developer. Ockam Hub solves all of these problems, and more.
+
+If you are deploying Telegraf agents into machines we have a solution for you as well. OckamD is a daemon that runs alongside Telegraf and is downloadable from Github (https://github.com/ockam-network/ockam). OckamD and Telegraf are preconfigured to create an end-to-end encrypted messaging channel all the way to your InfluxDB instance in the cloud.
+
+**It’s that easy!**

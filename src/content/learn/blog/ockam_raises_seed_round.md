@@ -5,8 +5,6 @@ description: "Ockam secures $4.9 million in seed funding from Future Ventures, C
 metaTitle: "Okta, Core Ventures Group and Future Ventures team up to fund Ockam's quest to build beautiful tools for developers."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
-isHomepageFeatured: true
-homepageFeaturedOrder: 2
 ---
 Today we are excited to announce a major milestone in the evolution of Ockam. We closed $4.9 million in seed funding from a group of world class investors: Future Ventures, Core Ventures Group, Okta Ventures, and SGH Capital. These additional resources will accelerate our mission: to enable the builders who are ushering in our shared vision of a seamless connected world.
 
