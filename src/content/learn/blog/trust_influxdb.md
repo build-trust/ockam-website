@@ -75,4 +75,4 @@ If you are deploying Telegraf agents into machines we have a solution for you as
 
 **It’s that easy!**
 
-[Take the first step with this demo <Link>](https://www.ockam.io/learn/how-to-guides/using-add-ons/enterprise/influxdb/telegraf-influxdb-with-ockamd/)
+[Click here to run the demo](https://www.ockam.io/learn/how-to-guides/using-add-ons/enterprise/influxdb/telegraf-influxdb-with-ockamd/)
