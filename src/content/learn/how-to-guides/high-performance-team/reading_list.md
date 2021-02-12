@@ -35,7 +35,6 @@ references on tools and processes that our team uses.
 ### C
 * [C Programming Language, 2nd Edition by Brian W. Kernighan, Dennis M. Ritchie](https://amazon.com/dp/0131103628)
 * [Modern C by Jens Gustedt](https://modernc.gforge.inria.fr/)
-* [Git in Practice](https://manning.com/books/git-in-practice)
 * [Expert C Programming: Deep C Secrets by Peter van der Linden](https://amazon.com/dp/0131774298)
 
 ### Erlang / Elixir
