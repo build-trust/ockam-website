@@ -75,7 +75,7 @@ Now I want to go through a specific case study. I'll speak to something I know b
 
 So what does that look like in practice?
 
-![The Ockam ecosystem](./assets/assets/open_source_as_an_integrator/ockam_ecosystem_map.svg)
+![The Ockam ecosystem](./assets/open_source_as_an_integrator/ockam_ecosystem_map.svg)
 
 This is a diagram of our world.
 
