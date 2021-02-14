@@ -30,7 +30,7 @@ Reliability is one of the important benefits created by the contribution/usage c
 
 As more developers rely upon an open source project, the more likely they’ll be able to contribute. One important side effect of contributions is that software becomes more reliable. It’s not just one company responsible for reliability, it’s a shared concern by the entire community that supports the project.
 
-![The Ockam ecosystem](./assets/why_we_love_open_source/open_source_ecosystem.svg)
+![The Ockam ecosystem](./assets/zero_ipo/zero_10.svg)
 
 ## Open source increases adoption
 
