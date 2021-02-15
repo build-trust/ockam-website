@@ -2,7 +2,7 @@
 title: "How we built Ockam is a High Performance Team"
 date: 2021-02-14
 description: "High Performance Teams don't happen by accident. We've got a playbook to build one."
-metaTitle: "One of Ockam's core values is that we are a High Performance Team. Just like open source software builds on top of the shoulders of giants, so do my ideas around team building. Specifically about building a *High Performance Team*."
+metaTitle: "One of Ockam's core values is that we are a High Performance Team. Just like open source software builds on top of the shoulders of giants, so do my ideas around team building. Specifically about building a High Performance Team"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---
@@ -32,7 +32,7 @@ There’s a [Bo Schembechler speech](https://www.youtube.com/watch?v=qjv2iDxiGBI
 > When we play as a team and the old season is over, you and I both know, it’s going to be Michigan again. Michigan.”
 > Bo Schembechler, 1983
 
-His mantra about “the team, the team, the team” informed my earliest ideas of group performance. You’ll notice I still wear the hat. I got two degrees at Michigan. Over the years, I’ve noticed there are more similarities than differences between the best sports teams and companies. To achieve high performance at any level requires operating as a team.
+His mantra about “The Team, The Team, The Team” informed my earliest ideas of group performance. You’ll notice I still wear the hat. I got two degrees at Michigan. Over the years, I’ve noticed there are more similarities than differences between the best sports teams and companies. To achieve high performance at any level requires operating as a team.
 
 In the rest of this talk, I’ll share the elements of a high performance team and the group mindset required to make one.
 
@@ -80,7 +80,7 @@ There is no organizational structure to baseball. There are nine world-class peo
 
 Like baseball, each player plays a critical role on the field. Everyone needs to be a leader in their role for the team to win.
 
-### Trust.
+### Trust
 
  There is a common state of Trust across a High Performance Team. They believe in each other, to be responsible and accountable for their area of expertise. Being on a team like this is a once-in-a-lifetime experience. This is the rarified air; When everyone is focused on winning - as a team.
 
@@ -105,8 +105,7 @@ It’s hard to express in English, but here’s how Archbishop Desmond Tutu expl
 
 It turns out it also played an important role for Doc Rivers. He realized;
 
-> I can’t be all I can be unless you are all you can be. I can never be threatened by you because you’re good. Because the better you are, the better I am.”
-> Doc Rivers
+> I can’t be all I can be unless you are all you can be. I can never be threatened by you because you’re good. Because the better you are, the better I am.” ~ Doc Rivers
 
 The season that Doc Rivers introduced Ubuntu at the Celtics, they went onto win the NBA championship - as a High Performance Team.
 
@@ -116,6 +115,6 @@ Compare that to the classic company approach where you’re given a new role and
 
 High performance team members each bring their best to every single game, every single meeting, every single pull request. As the team grows and scales out, everyone is a leader, the captain of their role. The only way to grow excellent team members is to be an excellent team member. Even our youngest, newest members have responsibilities that place them at the top of the org chart. This is because the high performance team org chart actually has a graph relationships.
 
-At Ockam we aim to empower everyone to finds excellence in their role, and to trust their teammates to do the same for them. Everyone puts the needs of the team ahead of themselves. Everyone knows what winning looks like. And everyone helps one another — with this singular focus — to be the best that they can be. In fact better than they could imagine for themselves.
+At Ockam we aim to empower everyone to be excellent in their role. Everyone puts the needs of the team ahead of themselves. Everyone knows what winning looks like. And everyone helps one another — with this singular focus — to be the best that they can be. In fact, better than they could imagine for themselves.
 
-You may only experience it once in your career, but you owe it to yourself, and those who work alongside you, to always be reach for the ideals of high performance team.
+You may only experience it once in your career, but you owe it to yourself, and those who work alongside you, to reach for the ideals of high performance team.
