@@ -7,7 +7,7 @@ author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 ---
 
-<Video coming soon>
+**Video to be added soon**
 
 *Transcript*
 
