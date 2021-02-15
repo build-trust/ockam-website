@@ -1,0 +1,121 @@
+---
+title: "How we built Ockam is a High Performance Team"
+date: 2021-02-14
+description: "High Performance Teams don't happen by accident. We've got a playbook to build one."
+metaTitle: "One of Ockam's core values is that we are a High Performance Team. Just like open source software builds on top of the shoulders of giants, so do my ideas around team building. Specifically about building a *High Performance Team*."
+author: "Matthew Gregory"
+authorAvatar: ./assets/matthew_gregory-1.png
+---
+
+<Video coming soon>
+
+*Transcript*
+
+One of Ockam's core values is that we are a High Performance Team. Just like open source software builds on top of the shoulders of giants, so do my ideas around team building. Specifically about building a *High Performance Team*.
+
+# The Team, The Team, The Team
+
+I grew up outside of Detroit when Bo Schembechler was head football coach of the University of Michigan Wolverines - what would eventually become my alma matter. Coach Bo retired in 1989 with over 200 wins and 13 Big Ten championships. He was a builder of high performance teams.
+
+There’s a [Bo Schembechler speech](https://www.youtube.com/watch?v=qjv2iDxiGBI) that inspired my approach to high performance teams:
+
+> “We’re going to win this as a team. They can throw out their great backs and great quarterbacks and great defensive players. There’s going to be one team that plays solely as a team. No man is more important than the team. No coach is more important than the team.
+>
+> The team, the team, the team.
+>
+> And if we think that way, all of us, everything that you do, you take into consideration ‘what effect does it have on my team?’
+>
+>You can go into professional football, you can go anywhere you want to play after you play here. You will never play for a team again. You’ll play for a contract. You’ll play for this, you’ll play for that. You’ll play for everything except the team.
+>
+> Think what a great thing it is. You’ll be a part of something that is a team. We’re doing to win it. We’re going to win the championship again. And we’re going to play as a team. Better than anybody else in this conference, we’re going to play together as a team. We’re going to believe in each other, we aren’t going to criticize each other, we aren’t going to talk about each other. We’re going to encourage each other.
+>
+> When we play as a team and the old season is over, you and I both know, it’s going to be Michigan again. Michigan.”
+> Bo Schembechler, 1983
+
+His mantra about “the team, the team, the team” informed my earliest ideas of group performance. You’ll notice I still wear the hat. I got two degrees at Michigan. Over the years, I’ve noticed there are more similarities than differences between the best sports teams and companies. To achieve high performance at any level requires operating as a team.
+
+In the rest of this talk, I’ll share the elements of a high performance team and the group mindset required to make one.
+
+## A High Performing Team Knows What Winning Looks Like
+
+Winning is a destination. I also like to call winning 'a dream with a deadline.'
+
+Winning needs to be defined. Everyone on the team needs to know what winning means for The Team.
+
+For example. When we published the [Zero to IPO](https://www.ockam.io/learn/blog/zero_ipo/) framework on this blog, a lot of people said, “whoa, whoa, whoa!” They thought we were way too early to talk about where the company is going. I disagree.
+
+Our entire team wants Ockam to become a publicly traded company. We look to companies like Okta, Cloudflare, Snowflake who have come before us. These companies democratize complex internet infrastructure - at massive scale- just as The Ockam Team intends to do.
+
+## Building blocks of a High Performance Team
+
+Whether you are dealing with a sports team or a company team, there are a stack of skills that define the focus. Within those, there’s a normal distribution. Many teams and companies can do quite well just by showing up. I'd argue that if you have a functional team that can 'show up' you probably can be an average team. If you add some self management you can probably get outside of one standard deviation from the mean. You probably get to two standard deviations out from the mean with great leadership traits across the team.
+
+But to be a high performance team, you don’t want to be average. You aren’t satisfied with just finishing the season or making the playoffs. High Performance Teams play the game to be the absolute best. Maybe the best - ever.
+
+![Performance Bell Curve](./assets/team/bell.png)
+
+It’s not enough to declare “we’re a high performance team.” In fact, it’s a rare thing to experience. Coach Schembechler knew this when he told his players 'they may never, really, play for a team again'. A high performance team is an aspiration, a process and something that doesn't happen by accident.
+
+Let's break this down further:
+
+![Performance Levels](./assets/team/levels.png)
+
+### Show up
+
+At the basic level, a team must show up. Individuals show up. Everybody delivers on time. There's an abundance of opinions and fixed mindsets. Congratulations you and your team are average.
+
+### Management
+
+As you move up to the management level, you find what you’ve probably experienced most often. There’s more organization and measurement of outcomes. You can rely on processes and forecast deliverables. There’s not much long term vision. You manage the moment, not the future.
+
+### Leadership
+
+Leadership is where you start to see empowerment across the organization. Teammates are encouraged to be creative and take risks. This is possible because you can see beyond today’s work. There’s a vision for where you’re headed. Each individual is in the spotlight, each has complete responsibility in the top of the hierarchy in their own area. Real leadership is about everyone - not just the CEO.
+
+Think of a baseball team.
+
+![Players on the Field](./assets/team/baseball.png)
+
+There is no organizational structure to baseball. There are nine world-class people that specialize in a role. When there’s a fly ball to left field, one person is responsible for the outcome: the left fielder. When the pitcher holds the ball on the mound, he’s in charge of what happens next. The right fielder may have the strongest arm on the team, but the pitcher can deliver the ball with control. They have a portfolio of movement and speeds. Meanwhile, when that right fielder comes to the plate, it might be his job to hit the home runs or to get on base.
+
+Like baseball, each player plays a critical role on the field. Everyone needs to be a leader in their role for the team to win.
+
+### Trust.
+
+ There is a common state of Trust across a High Performance Team. They believe in each other, to be responsible and accountable for their area of expertise. Being on a team like this is a once-in-a-lifetime experience. This is the rarified air; When everyone is focused on winning - as a team.
+
+## Leaders put The Team First
+
+Netflix has a coaching documentary, The Playbook, that brought this lesson into clarity for me. The first episode kicks off with a quote from championship coach Doc Rivers. I’m in violent agreement with it. Like the quote from Bo Schembechler, it makes clear the priority you must set to become a high performance team:
+
+> “Every time I walk in the locker room for the first time I tell my players, every year and I’ve told them for 21 years: ‘I’m Doc Rivers, and I’m human, and I’m going to make mistakes. Having said that, every decision I make will be about what’s good for the team. And that may not be what’s good for you. Or me. But if it’s good for the team, it’s good.’”
+> Doc Rivers
+
+In my role as the CEO at Ockam, my job is to make decisions that are good for The Team. Full stop. That's it. That's what I do here.
+
+>The Team, The Team, The Team.
+
+## Ubuntu is a Team’s Way of Life
+
+One element that we’ve brought into our high performance team is “Ubuntu.” Those of us that build with open source software, might immediately think of the open source Linux operating system distribution. However the origin of the word comes from South Africa
+
+It’s hard to express in English, but here’s how Archbishop Desmond Tutu explains it:
+
+> “Ubuntu is the essence of being human. It says a solitary human being is a contraction in terms. I have to learn from other human beings how to be human.”
+
+It turns out it also played an important role for Doc Rivers. He realized;
+
+> I can’t be all I can be unless you are all you can be. I can never be threatened by you because you’re good. Because the better you are, the better I am.”
+> Doc Rivers
+
+The season that Doc Rivers introduced Ubuntu at the Celtics, they went onto win the NBA championship - as a High Performance Team.
+
+To me, Ubuntu transcends culture, politics, and sports. It's a philosophy for high performance. I’d venture that every winning team lives Ubuntu, even if they didn’t have the word specifically.
+
+Compare that to the classic company approach where you’re given a new role and then someone says, “we’ll see how you do.” That’s not empowering! Empowerment is a prerequisite for a high performance team. The better you are, the better I am, and vice-versa.
+
+High performance team members each bring their best to every single game, every single meeting, every single pull request. As the team grows and scales out, everyone is a leader, the captain of their role. The only way to grow excellent team members is to be an excellent team member. Even our youngest, newest members have responsibilities that place them at the top of the org chart. This is because the high performance team org chart actually has a graph relationships.
+
+At Ockam we aim to empower everyone to finds excellence in their role, and to trust their teammates to do the same for them. Everyone puts the needs of the team ahead of themselves. Everyone knows what winning looks like. And everyone helps one another — with this singular focus — to be the best that they can be. In fact better than they could imagine for themselves.
+
+You may only experience it once in your career, but you owe it to yourself, and those who work alongside you, to always be reach for the ideals of high performance team.
