@@ -1,2 +1,3 @@
 ockam-network;ockam;00bf0b4473a550d4d1b87530adb3b6bf2a06a565;/documentation/concepts;learn/concepts
 ockam-network;proposals;1e540957333526d9107980e413358d9812945e06;/design;learn/proposals
+ockam-network;ockam;02305073c82176b42f77417f6e43ab3ff777f26f;/implementations/rust/ockam/ockam_examples/guide/;learn/rust
