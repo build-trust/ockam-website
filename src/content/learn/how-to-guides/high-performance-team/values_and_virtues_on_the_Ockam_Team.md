@@ -81,7 +81,7 @@ As a team, and as individuals, we embrace a growth mindset. We are curious learn
 
 After we ask 'why', we ask 'why' again. We use the mechanism of ‘5 whys’; Usually it takes asking ‘why’ five layers deep before we can really start to understand 'why'.
 
-Once we think we understand 'why', then we then move onto ‘for who’. Segmentation and personas are critically important in a product driven company. A proposal for a feature may be important to one user, but not to another. When we understand ‘for who’ we gain an even clearer understanding of 'why'.
+Once we think we understand 'why', then we move onto ‘for who’. Segmentation and personas are critically important in a product driven company. A proposal for a feature may be important to one user, but not to another. When we understand ‘for who’ we gain an even clearer understanding of 'why'.
 
 Time is important at Ockam; a cherished asset actually. ‘When?’ is the next level of understanding to consider. Knowing when an objective needs to be accomplished forces prioritization. For example, a feature may be important to a customer, but when do they need it? Can we ship a partially implemented feature version, if the customer is satisfied that it is in our roadmap? Understanding ‘when’ helps us better understand 'why'.
 
