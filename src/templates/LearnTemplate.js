@@ -16,6 +16,12 @@ import defaultAvatar from '../assets/default_avatar.png';
 import LearnPost from '../components/blog/LearnPost';
 import LearnGridLayout from '../components/LearnGridLayout';
 import RightSidebar from '../components/learn/RightSidebar/RightSidebar';
+import Prism from 'prism-react-renderer/prism';
+
+(typeof global !== 'undefined' ? global : window).Prism = Prism;
+
+require('prismjs/components/prism-rust');
+require('prismjs/components/prism-elixir');
 
 const Content = styled.div`
   display: flex;
@@ -34,7 +40,7 @@ const Content = styled.div`
       margin-left: auto;
       margin-right: auto;
   `};
-  
+
   h1 {
     :first-child {
       line-height: 1;
