@@ -1,6 +1,6 @@
 ---
-order: 3
 title: Ockam Enrollment Service
+order: 4
 ---
 
 # Ockam Enrollment Service

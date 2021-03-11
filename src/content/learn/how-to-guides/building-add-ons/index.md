@@ -1,6 +1,6 @@
 ---
 title: Building Add-Ons
-order: 2
+order: 3
 ---
 
 # Building Ockam Add-Ons

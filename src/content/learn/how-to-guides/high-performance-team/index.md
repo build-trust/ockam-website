@@ -1,11 +1,19 @@
 ---
 title: High Performance Team
-order: 4
+order: 6
 ---
 
 # Ockam is a High Performance Team
 
 We are building a Team. Learn how we do it in this series of guides!
+
+<div id="presentation">
+    <div class="rwd-container">
+        <iframe class="rwd-iframe" src="https://www.youtube.com/embed/b5RpsAmiZZQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+[For the transcript of this recording, go to our blog.](/learn/blog/high_performance_team/#the-team-the-team-the-team)
 
 ## We are Values Driven
 

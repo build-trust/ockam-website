@@ -1,7 +1,7 @@
-```yaml
-title: Ockam Nodes and Workers
-order: 1
-```
+---
+title: Build a Node
+order: 2
+---
 
 # Nodes and Workers
 

@@ -1,6 +1,6 @@
 ---
 title: Using Add-Ons
-order: 1
+order: 2
 redirect_from:
   - /sample-redirect-address/
 ---

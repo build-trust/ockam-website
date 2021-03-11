@@ -1,13 +1,16 @@
 ---
 title: Rust SDK Code Examples
-order: 6
+order: 1
 ---
+
 
 # Rust SDK Code Examples
 
-1. [Getting Started](/learn/how-to-guides/rust-sdk-code-examples/getting-started)
-1. [Node and Workers](/learn/how-to-guides/rust-sdk-code-examples/nodes-and-workers)
-1. [Credentials](/learn/how-to-guides/rust-sdk-code-examples/credentials)
+| Name | Description |
+| ------------------------------- | ----------------------------------------------------------------------|
+|[Getting Started](/learn/how-to-guides/rust-sdk-code-examples/getting-started) | The steps necessary to use the Ockam Rust SDK |
+|[Node and Workers](/learn/how-to-guides/rust-sdk-code-examples/nodes-and-workers) | Build your first Ockam node and worker |
+|[Credentials](/learn/how-to-guides/rust-sdk-code-examples/credentials) | WIP |
 
 ## WIP
 

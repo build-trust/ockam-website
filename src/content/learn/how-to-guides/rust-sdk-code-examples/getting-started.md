@@ -1,4 +1,8 @@
-# Getting Started with the Ockam Rust SDK
+---
+title: Start Here
+order: 1
+---
+# Get Started with the Ockam Rust SDK
 
 This guide walks you through the steps necessary to use the Ockam Rust SDK.
 
