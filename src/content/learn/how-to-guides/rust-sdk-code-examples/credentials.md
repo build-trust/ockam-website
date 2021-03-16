@@ -3,23 +3,31 @@ title: Credentials
 order: 3
 ---
 
+# Glossary
+
+- **[Attribute](https://docs.rs/ockam/0.3.0/ockam/enum.CredentialAttribute.html)**: Information such as a property or a tag.
+- **Claim**: Attributes that have been digitally signed for inclusion in a Credential.
+- **[Credential](https://docs.rs/ockam/0.3.0/ockam/struct.Credential.html)**: A set of Claims and their digital signature. Provided by an Issuer to Holders.
+- **[Holder](https://docs.rs/ockam/0.3.0/ockam/struct.CredentialHolder.html)**: An entity which posesses a Credential.
+- **[Verifier](https://docs.rs/ockam/0.3.0/ockam/struct.CredentialVerifier.htmll)**: An entity which can prove a Credential is trusted by an Issuer.
+- **[Schema](https://docs.rs/ockam/0.3.0/ockam/struct.CredentialSchema.html)**: The set of Claims and Attributes required by a Verifier.
+- **[Issuer](https://docs.rs/ockam/0.3.0/ockam/struct.CredentialIssuer.html)**: A trusted entity which provides Credentials to a Holder.
+- **[Credential Offer](https://docs.rs/ockam/0.3.0/ockam/struct.CredentialOffer.html)**: A message sent from the Issuer to a Holder containing information about obtaining a credential.
+- **[Credential Request](https://docs.rs/ockam/0.3.0/ockam/struct.CredentialRequest.html)**: A message sent from the Holder to the Issuer, in response to a Credential Offer. This message indicates that the Holder wants the Issuer to produce a Credential.
+
 # Ockam Credentials
 
-An Ockam Credential is comprised of a set of claims and a group signature. Claims are information that has been digitally signed or included in a credential. The layout and definition of what claims are in a credential is known as a schema.
+This example shows how to use the Ockam Credentials API exchange trusted Credentials between Holders, Issuers, and Verifiers.
 
-An Issuer is a trusted party that creates and signs credentials. Requesting a credential offer from an issuer is the initial stage of establishing a trusted connection.
+To obtain a Credential, the following exchange protocol takes place:
 
-An entity that obtains and keeps a credential is called the credential holder. A holder must request a credential from an issuer:
+1. The Holder receives a references to the Issuer service. This message contains meta-information about the Issuer.
+2. The Holder sends a "New Credential" message to the Issuer.
+3. The Issuer replies to the Holder with a Credential Offer.
+4. The Holder uses the Credential Offer to build and send a Credential Request.
+5. The Issuer replies to the Holder with the actual Credential.
 
-1. The holder receives a references to the issuer service.
-2. The holder asks for a new credential from the issuer.
-3. The issuer sends the holder a credential offer.
-4. The holder accepts this credential offer, and turns it into a formal credential request.
-5. The issuer sends the holder the credential.
-
-At some point in the future, the credential holder can use the credential and a verifier can prove that it is trusted. To do this, the credential holder creates a presentation manifest. This manifest describes the format of the credential for the verifier.
-
-## Credential Example
+## Credential Example Setup
 
 Clone the ockam repository and change into the credential example directory:
 
@@ -64,7 +72,7 @@ Client closed connection
 
 ### Verifier
 
-TBD: I'm not sure how to tie `verifier` into this example. It requires a public key and it is not clear which one to use (i.e. the other programs don't label one to use.)
+WIP
 
 ### Credential API Deep Dive
 
@@ -209,7 +217,7 @@ if let CredentialMessage::CredentialResponse(credential_fragment2) = msg {
 }
 ```
 
-At this point, the holder has posession of credentials that can be provably trusted. We can
+The holder now has possession of credentials that can be provably trusted. We can
 prove this to verifiers by using a presentation manifest:
 
 ```rust
