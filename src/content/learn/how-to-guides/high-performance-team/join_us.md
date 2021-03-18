@@ -101,6 +101,14 @@ As you wrap up your OSS collaboration exercise you will spend time discussing th
 
 *It's possible that if you are known in the Ockam community, and if we align in our collaboration style, a candidate may start at the Culture Connection stage.*
 
+Prior to this stage in the interview process you should be familiar with how Ockam defines a `High Performance Team`. Be prepared to talk about specific examples where you felt like you were (or were not) on a High Performance Team. Also share stories about how you have put your team first and empowered others to be their best selves.
+
+<div id="presentation">
+    <div class="rwd-container">
+        <iframe class="rwd-iframe" src="https://www.youtube.com/embed/b5RpsAmiZZQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
 ### Role Memo
 
 Internally we will finalize a role that we've custom crafted for you. We collaborate on a memo that includes your level, and our thesis for how your background fits into the problems we are solving at Ockam. We will define the project you will start with so that you are set up for success from the onset.
