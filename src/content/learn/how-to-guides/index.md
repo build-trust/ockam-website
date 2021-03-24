@@ -13,7 +13,6 @@ order: 3
 | [High Performance Team](/learn/how-to-guides/high-performance-team)   | How Ockam operates as a High Performance Team and how to join us     |
 | [Contributing to Open Source](/learn/how-to-guides/contributing)      | How to Join the Open Source community around Ockam.                  |
 | [Rust SDK Code Examples](/learn/how-to-guides/rust-sdk-code-examples) | How to use the Ockam Rust SDK.                                       |
-| [Ockam Hub Code Examples](/learn/how-to-guides/hub-code-examples)     | How to use the Ockam Hub.                                            |
 
 Our learning materials are broken into four sections:
 

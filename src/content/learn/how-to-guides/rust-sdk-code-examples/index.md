@@ -3,14 +3,15 @@ title: Rust SDK Code Examples
 order: 1
 ---
 
-
 # Rust SDK Code Examples
 
-| Name | Description |
-| ------------------------------- | ----------------------------------------------------------------------|
-|[Getting Started](/learn/how-to-guides/rust-sdk-code-examples/getting-started) | The steps necessary to use the Ockam Rust SDK |
-|[Node and Workers](/learn/how-to-guides/rust-sdk-code-examples/nodes-and-workers) | Build your first Ockam node and worker |
-|[Credentials](/learn/how-to-guides/rust-sdk-code-examples/credentials) | WIP |
+| Name                                                                                          | Description                                     |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [Getting Started](/learn/how-to-guides/rust-sdk-code-examples/getting-started)                | The steps necessary to use the Ockam Rust SDK   |
+| [Node and Workers](/learn/how-to-guides/rust-sdk-code-examples/nodes-and-workers)             | Build your first Ockam node and worker          |
+| [Node and Ockam Hub](/learn/how-to-guides/rust-sdk-code-examples/nodes-and-hub)               | Learn how to use the Ockam Hub                  |
+| [Ockam Hub Message Forwarding](/learn/how-to-guides/rust-sdk-code-examples/forwarding-to-hub) | Use Ockam Hub to forward messages between Nodes |
+| [Credentials](/learn/how-to-guides/rust-sdk-code-examples/credentials)                        | WIP                                             |
 
 ## WIP
 

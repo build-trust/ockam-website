@@ -1,7 +1,8 @@
 ---
 title: Start Here
-order: 1
+order: 2
 ---
+
 # Get Started with the Ockam Rust SDK
 
 This guide walks you through the steps necessary to use the Ockam Rust SDK.
