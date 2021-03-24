@@ -1,6 +1,6 @@
 ---
 title: High Performance Team
-order: 6
+order: 7
 ---
 
 # Ockam is a High Performance Team

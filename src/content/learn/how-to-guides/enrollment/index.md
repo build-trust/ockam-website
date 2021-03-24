@@ -1,13 +1,13 @@
 ---
 title: Ockam Enrollment Service
-order: 4
+order: 6
 ---
 
 # Ockam Enrollment Service
 
 The [enrollment](/learn/concepts/enrollment/) protocol facilitates a secure onboarding for a device to a service where the device doesn't know about the service and vice versa. This process happens with the help of an enroller intermediary like a phone, terminal, or another device.
 
-The three parties are the Ockam Enrollment Service (*service*) to which a device wants to connect, the *enroller* that helps onboard the device, and the device to be onboarded or enrolled called the *enrollee*.
+The three parties are the Ockam Enrollment Service (_service_) to which a device wants to connect, the _enroller_ that helps onboard the device, and the device to be onboarded or enrolled called the _enrollee_.
 
 ![Enrollment Parties](enrollment-parties.svg)
 
@@ -18,7 +18,7 @@ Enrolling IoT devices (and non-IoT devices) currently happens using non-secure a
 1. Hardcoded credentials (username, password, API tokens)
 2. Hardcoded service endpoints to obtain credentials with a little-to-no vetting process
 3. No credentials at all. The device connects to another system that authenticates the connection to the service
-1. Credential revocation or rotation is not implemented or easily performed
+4. Credential revocation or rotation is not implemented or easily performed
 
 This results in the following problems:
 
@@ -83,14 +83,14 @@ the network amongst other enrolled devices.
 ---
 
 ## Technical Details
+
 How does this work?
 
 Check out the `Enrollment Key Agreement` in the [Architecture and Protocol Design](/learn/proposals/0006-enrollment/) section of Ockam Learn.
 
-
 ---
 
-*The mobile device icon is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode) from [Martins Ratkus](https://www.iconfinder.com/iconsets/mobile-smart-phone).*
+_The mobile device icon is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/legalcode) from [Martins Ratkus](https://www.iconfinder.com/iconsets/mobile-smart-phone)._
 
 ---
 
