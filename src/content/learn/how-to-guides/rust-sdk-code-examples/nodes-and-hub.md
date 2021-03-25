@@ -16,7 +16,7 @@ Follow these steps to get started with Ockam Hub:
 1. Sign in to Ockam Hub at (https://hub.ockam.network/)[https://hub.ockam.network/] with your GitHub account.
 1. After your Ockam Node is deployed, you will see a confirmation page with instructions.
    1. Find and save the hostname of the node. You will use this hostname in your code to build a route to the Hub.
-   1. Alternatively, you can download a pre-configured code snippet by clicking the '(??)' button.
+   1. Alternatively, you can download a pre-configured code snippet by clicking the "**Get a pre-configured echo service example**" button.
 
 We recommend using the hostname associated with the Hub instance, instead of the IP address. Most Ockam APIs take `SocketAddr`
 arguments for remote hosts. You can turn your Ockam Hub hostname into a `SocketAddr` with the following code:
@@ -67,7 +67,7 @@ async fn main(ctx: Context) -> Result<()> {
 
 ## Ockam Transports
 
-Ockam uses pluggable transport libraries to interface with different networking channels. The `ockam_tcp_transport`
+Ockam uses pluggable transport libraries to interface with different networking protocols. The `ockam_tcp_transport`
 crate provides workers that can listen, connect, and route messages over TCP. With it, you can connect to any other TCP transport
 implementation.
 
