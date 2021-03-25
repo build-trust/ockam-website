@@ -14,8 +14,9 @@ Ockam Hub is a service provided by Ockam that allows you to easily test Ockam No
 Follow these steps to get started with Ockam Hub:
 
 1. Sign in to Ockam Hub at (https://hub.ockam.network/)[https://hub.ockam.network/] with your GitHub account.
-2. After your Ockam Node is deployed, find and save the hostname of the node. You will use this hostname in your code to
-   build a route to the Hub.
+1. After your Ockam Node is deployed, you will see a confirmation page with instructions.
+   1. Find and save the hostname of the node. You will use this hostname in your code to build a route to the Hub.
+   1. Alternatively, you can download a pre-configured code snippet by clicking the '(??)' button.
 
 We recommend using the hostname associated with the Hub instance, instead of the IP address. Most Ockam APIs take `SocketAddr`
 arguments for remote hosts. You can turn your Ockam Hub hostname into a `SocketAddr` with the following code:
