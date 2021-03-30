@@ -124,4 +124,4 @@ async fn main(mut ctx: Context) -> Result<()> {
 
 ```
 
-The Ockam Hub [creates a node for you instantly](../03-hub). Let's move the `echo_service` to a node on the hub.
+The Ockam Hub [creates a node for you instantly](/learn/how-to-guides/rust/03-hub). Let's move the `echo_service` to a node on the hub.
