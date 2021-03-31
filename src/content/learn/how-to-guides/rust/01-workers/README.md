@@ -108,13 +108,13 @@ Workers have message handling callbacks that are invoked when a new message arri
 There are two ways to receive a message as a worker:
 
 - Wait for the node to call `handle_message`. This is the typical scenario.
-- Use the `Context` API to block on a call to `receive`. This function will block the current thread until a message is available.
+- Use the `Context` API to block on a call to `receive`. This function will block the worker until a message is available.
 
 ```rust
 let reply = ctx.receive::<String>().await?;
 ```
 
-## Stop the mode
+## Stop the node
 
 The Ockam Node can be stopped by calling the `Context` trait `stop` API.
 
@@ -153,6 +153,12 @@ async fn main(mut ctx: Context) -> Result<()> {
     ctx.stop().await
 }
 
+```
+
+Run the example:
+
+```shell
+cargo run --example echo_service
 ```
 
 Now we are ready to [use a transport](/learn/how-to-guides/rust/02-transports) to connect to remote nodes.
