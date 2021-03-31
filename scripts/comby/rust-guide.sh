@@ -3,7 +3,13 @@
 COMBY=`which comby`
 CLONE=`mktemp -d`
 CONFIG=rust-guide.toml
-GUIDE="../../src/content/learn/how-to-guides/rust/"
+GUIDES="src/content/learn/how-to-guides"
+
+if [ ! -e dependencies_repos.csv ]
+then
+  echo "Run this from the website root!"
+  exit 1
+fi
 
 if [ -z $COMBY ]
 then
@@ -15,9 +21,8 @@ fi
 pushd $CLONE
 git clone https://github.com/ockam-network/ockam.git 
 popd
-rm -rf $GUIDE 
-cp -r $CLONE/ockam/documentation/guides/rust/ $GUIDE
-rm -rf $CLONE
+rm -rf "$GUIDES/rust" 
+cp -r $CLONE/ockam/documentation/guides/rust/ $GUIDES
 
-comby -i -config $CONFIG -d $GUIDE -f .md
+comby -i -config scripts/comby/$CONFIG -d $GUIDES -f .md
 
