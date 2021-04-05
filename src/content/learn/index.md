@@ -22,8 +22,12 @@ Our learning materials are broken into four sections:
 | **300** | [How-to Guides](learn/how-to-guides) | Get started building with Ockam |
 | **400** | [Design and Architecture](learn/proposals) | How we are building Ockam protocols in Open Source |
 
-**The Ockam Team is here to help you. If you have questions after reading through our published content, please reach out to us. We’d love to connect with you to hear about what you are building.**
+Introduction to Ockam:
 
-> Contact us directly through the Contact menu item in the header of this page,
->
-> or start a discussion on [GitHub](https://github.com/ockam-network/ockam/discussions).
+<div id="presentation">
+    <div class="rwd-container">
+        <iframe class="rwd-iframe" src="https://www.youtube.com/embed/3Ujf7HkhPks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+**The Ockam Team is here to help you. If you have questions after reading through our published content, please [reach out to us](https://github.com/ockam-network/ockam/discussions). We’d love to connect with you to hear about what you are building.**
