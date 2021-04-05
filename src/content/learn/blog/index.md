@@ -15,6 +15,14 @@ Our learning materials are broken into four sections:
 | **300** | [How-to Guides](learn/how-to-guides) | Get started building with Ockam |
 | **400** | [Design and Architecture](learn/proposals) | How we are building Ockam protocols in Open Source |
 
+Introduction to Ockam:
+
+<div id="presentation">
+    <div class="rwd-container">
+        <iframe class="rwd-iframe" src="https://www.youtube.com/watch?v=3Ujf7HkhPks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
 ---
 
 import PostList from '../../../components/blog/PostList.js'
