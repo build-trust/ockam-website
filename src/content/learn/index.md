@@ -1,7 +1,7 @@
 ---
 title: Learn
 ---
-# Learn with Ockam
+## Learn with Ockam
 
 Like you, Ockam envisions a connected future. It is inevitable that data and computing power will become evermore distributed and a part of our everyday lives. Consumer, enterprise, and industrial systems will become interconnected and automated around us. These systems require trust architectures to make our data secure and private.
 
@@ -22,11 +22,21 @@ Our learning materials are broken into four sections:
 | **300** | [How-to Guides](learn/how-to-guides) | Get started building with Ockam |
 | **400** | [Design and Architecture](learn/proposals) | How we are building Ockam protocols in Open Source |
 
-# Introduction to Ockam:
+
+## Introduction to Ockam
 
 <div id="presentation">
     <div class="rwd-container">
         <iframe class="rwd-iframe" src="https://www.youtube.com/embed/3Ujf7HkhPks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+
+## How Ockam works
+
+<div id="presentation">
+    <div class="rwd-container">
+        <iframe class="rwd-iframe" src="https://www.youtube.com/embed/_rwsHF9HrNg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 </div>
 
