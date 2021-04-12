@@ -79,9 +79,18 @@ The hiring manager for the role will reach out to you via email and schedule a 2
 
 The purpose of this call is to understand if and how you could fit into the team. By this point in our process we've thrown away the job description for the role you've applied for and have started to co-create a role with you. Help us with this process by giving as much relevant background about your passions as possible. If we have a hypothesis for how you could fit into a full time role we will proceed to the second round.
 
+You should be prepared to discuss the following: 
+* How did you find Ockam and what inspired you to apply for this role?
+* Why do you want to work at an early stage, 'Silicon Valley' startup?
+* What do you think about Ockam's High Performance Team culture, [based on this video](https://www.ockam.io/learn/how-to-guides/high-performance-team/)
+* What about the [problem that Ockam is solving](https://www.ockam.io/learn) interests you?
+* What [level](https://www.ockam.io/learn/how-to-guides/high-performance-team/join_us/#give-us-an-honest-assessment-of-your-level) do you think you are? Can you cite examples from your previous work that aligns with specific qualities in our levels guide?
+
 ### Second round
 
 This is a 50 minute technical interview with [Mrinal Wadhwa](https://www.linkedin.com/in/mrinalwadhwa/), Ockam's CTO. We will want to dig deep into things you've built and technologies you've used.
+
+Bring a demo - we'll be impressed.
 
 ### OSS collaboration project
 
@@ -109,6 +118,7 @@ Prior to this stage in the interview process you should be familiar with how Ock
     </div>
 </div>
 
+
 ### Role Memo
 
 Internally we will finalize a role that we've custom crafted for you. We collaborate on a memo that includes your level, and our thesis for how your background fits into the problems we are solving at Ockam. We will define the project you will start with so that you are set up for success from the onset.
@@ -122,7 +132,8 @@ Finally this memo attempts to predict several growth paths and success outcomes 
 Starting a new job is really hard. There is a lot to learn, and a lot to do. Be sure to come in rested and recharged. Please give us an honest assessment on your start date. Remember that you've just wrapped up an old job, while you were looking for this role. Be kind to yourself and take some time to charge your batteries and to take on some self care.
 
 We try to be as transparent as possible with our culture. Be sure to re-read [Ockam's Values and Virtues](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team/).
-I also recommend the following books for a deeper understanding of our culture and frameworks that we use everyday at Ockam: “The Score Takes Care of Itself” by Bill Walsh, "Growth Mindset" by Carol Dweck, and “Measure What Matters” by John Doerr.
+
+Read the following books for a deeper understanding of our culture and frameworks that we use everyday at Ockam: “The Score Takes Care of Itself” by Bill Walsh, "Growth Mindset" by Carol Dweck, and “Measure What Matters” by John Doerr.
 
 There is a lot of 'tech' coming your way, your gap time is a great time to ground yourself in Ockam's culture and to do some self reflecting.
 
