@@ -56,7 +56,7 @@ In this example we create a worker that handles messages of a `String` type. Whe
 with the same message.
 
 ```rust
-use ockam::{async_worker, Context, Result, Worker, Routed};
+use ockam::{async_worker, Context, Result, Routed, Worker};
 
 struct EchoService;
 
@@ -67,7 +67,7 @@ impl Worker for EchoService {
 
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<String>) -> Result<()> {
         println!("echo_service: {}", msg);
-        ctx.send_message(msg.reply(), msg.take()).await
+        ctx.send(msg.return_route(), msg.body()).await
     }
 }
 ```
@@ -88,17 +88,17 @@ If you don't need to perform any special steps during startup, you can omit the 
 
 ## Send a message
 
-The `echo_service` takes the incoming message and use the `send_message` API to echo the message back to
+The `echo_service` takes the incoming message and use the `send` API to echo the message back to
 the sender.
 
 ```rust
-ctx.send_message(msg.reply(), msg.take()).await?;
+ctx.send(msg.return_route(), msg.body()).await
 ```
 
 Likewise, the app sends the initial message to the `echo_service` using this API:
 
 ```rust
-ctx.send_message("echo_service", "Hello Ockam!".to_string()).await?;
+ctx.send("echo_service", "Hello Ockam!".to_string()).await?;
 ```
 
 ## Receive a message
@@ -136,7 +136,7 @@ impl Worker for EchoService {
 
     async fn handle_message(&mut self, ctx: &mut Context, msg: Routed<String>) -> Result<()> {
         println!("echo_service: {}", msg);
-        ctx.send_message(msg.reply(), msg.take()).await
+        ctx.send(msg.return_route(), msg.body()).await
     }
 }
 
@@ -144,8 +144,7 @@ impl Worker for EchoService {
 async fn main(mut ctx: Context) -> Result<()> {
     ctx.start_worker("echo_service", EchoService).await?;
 
-    ctx.send_message("echo_service", "Hello Ockam!".to_string())
-        .await?;
+    ctx.send("echo_service", "Hello Ockam!".to_string()).await?;
 
     let reply = ctx.receive::<String>().await?;
     println!("Reply: {}", reply);
