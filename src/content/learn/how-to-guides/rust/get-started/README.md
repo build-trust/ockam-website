@@ -25,8 +25,10 @@ Add the Ockam dependency to your `Cargo.toml`:
 
 ```
 [dependencies]
-ockam = "0"
+ockam = { version = "0", features = ["ockam_transport_tcp"] }
 ```
+
+The `ockam_transport_tcp` feature provides the optional TCP transport add-on for Ockam.
 
 ## Working with multiple binaries
 

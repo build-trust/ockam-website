@@ -27,8 +27,7 @@ Follow these steps to get started with Ockam Hub:
 To send an echo message to your node, change the remote node address in the `echo_client` from Step 2.
 
 ```rust
-use ockam::{Context, Result, Route};
-use ockam_transport_tcp::{TcpTransport, TCP};
+use ockam::{Context, Result, Route, TcpTransport, TCP};
 
 #[ockam::node]
 async fn main(mut ctx: Context) -> Result<()> {

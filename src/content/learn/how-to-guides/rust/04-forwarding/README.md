@@ -14,15 +14,14 @@ This example shows how you can route messages through remote nodes. With message
 address is needed to send messages to a worker. A forwarding address is an alias to a route. By using a forwarding address,
 messages don't need to contain the entire route to a worker.
 
-## Using a Remote Mailbox
+## Using a RemoteForwarder
 
-The `RemoteMailbox` API provides a convenient way to create a forwarding address on Ockam Hub. The inner type for RemoteMailbox
-determines the type of messages the mailbox will relay.
+The `RemoteForwarder` API provides a convenient way to create a forwarding address on Ockam Hub.
 
 We use the `remote_address` of the mailbox as the destination for messages.
 
 ```rust
-let mailbox = RemoteMailbox::<String>::create(&mut ctx, hub, "echo_service").await?;
+let mailbox = RemoteForwarder::create(&mut ctx, hub, "echo_service").await?;
 println!(
     "echo_service forwarding address: {}",
     mailbox.remote_address()
@@ -38,8 +37,7 @@ copy and paste the `echo_service` forwarding address.
 # Putting it all Together - Forwarded Echo Service
 
 ```rust
-use ockam::{async_worker, Context, RemoteMailbox, Result, Routed, Worker};
-use ockam_transport_tcp::TcpTransport;
+use ockam::{async_worker, Context, RemoteMailbox, Result, Routed, TcpTransport, Worker};
 
 struct EchoService;
 
@@ -64,7 +62,7 @@ async fn main(mut ctx: Context) -> Result<()> {
 
     ctx.start_worker("echo_service", EchoService).await?;
 
-    let mailbox = RemoteMailbox::<String>::create(&mut ctx, hub, "echo_service").await?;
+    let mailbox = RemoteForwarder::create(&mut ctx, hub, "echo_service").await?;
 
     println!(
         "echo_service forwarding address: {}",
@@ -85,8 +83,7 @@ cargo run --example echo_service
 # Putting it all together - Echo Client
 
 ```rust
-use ockam::{Context, Result, Route};
-use ockam_transport_tcp::{TcpTransport, TCP};
+use ockam::{Context, Result, Route, TcpTransport, TCP};
 
 #[ockam::node]
 async fn main(mut ctx: Context) -> Result<()> {
