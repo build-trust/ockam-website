@@ -57,7 +57,7 @@ We publish a [levels guide](https://www.ockam.io/learn/how-to-guides/high-perfor
 
 To use the Ockam levels guide, first determine if you are applying for an [individual contributor](https://www.ockam.io/learn/how-to-guides/high-performance-team/engineering_levels/#engineering---individual-contributors) or a [management](https://www.ockam.io/learn/how-to-guides/high-performance-team/engineering_levels/#engineering---management) role.
 
-We don't expect a candidate, or full time member of our team, to check every box straight down a single column in this matrix. The matrix is a guide and a way to facilitate a conversation. A Sr Engineer (Level 5) is likely to have a couple Level 4 and Level 6 qualities. That's OK.
+We don't expect a candidate, or full time member of our team, to check every box straight down a single column in this matrix. The matrix is a guide and a way to facilitate a conversation. A Principal Engineer (Level 5) is likely to have a couple Level 4 and Level 6 qualities. That's OK.
 
 Moreover, we are usually open to bring on full time teammates above or below the level that we advertise for. It's exceptionally helpful if you can communicate a level self-assessment as you apply. If we post for a Level 6 Architect and you are a solid Level 3/4 Engineer, we probably still would like to talk with you! As you will see in the following sections we co-create every role for every individual.
 
