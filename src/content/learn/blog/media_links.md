@@ -41,6 +41,8 @@ Check out our list of favorite links for Ockam content around the internet. We m
 
 [Oktane 2020](https://www.okta.com/resources/oktane-content/2020/future-of-identity/)
 
+[Oktane 2021](https://www.youtube.com/watch?v=9VIjGd_uA68)
+
 [IoT Slam '20](https://iotslam.com/session/iot-needs-secure-messaging/)
 
 

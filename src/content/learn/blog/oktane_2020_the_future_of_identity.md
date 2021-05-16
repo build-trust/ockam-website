@@ -5,8 +5,6 @@ description: "Matthew Gregory presented his view of the future of Trust at Oktan
 metaTitle: "Matthew Gregory presented his view of the future of Trust at Oktane 2020. He believes that Trust in IoT will be driven by an ecosystem of open source technologies. This is a video of his presentation at the Okta conference"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
-isHomepageFeatured: true
-homepageFeaturedOrder: 1
 ---
 
 # Trust in IoT? The Open Source Ecosystem is Coming to the Rescue!

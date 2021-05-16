@@ -1,7 +1,7 @@
 ---
 title: 'How to Make Your First Open Source Contribution'
 date: 2020-09-18
-description: 'Learn how to transition from open source user to open source contributer.'
+description: 'Learn how to transition from open source user to open source contributor.'
 metaTitle: 'You too can contribute to open source.'
 author: 'Keegan Henckel-Miller'
 authorAvatar: ./assets/keegan_henckelmiller.png
