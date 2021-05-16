@@ -1,7 +1,7 @@
 ---
 title: "Ockam at Oktane 2021 - A builders guide to Trust."
-date: 2020-04-10
-description: "A builders guide to Trust in autonomous connected applications. We'll show how cloud services can establish lightweight secure channels with IoT and edge devices that guarantee end-to-end data integrity, authenticity, and authorization."
+date: 2021-04-10
+description: "A builders guide to Trust in autonomous connected applications."
 metaTitle: "Replay from Okta Oktane21. A builders guide to Trust in autonomous connected applications. We'll show how cloud services can establish lightweight secure channels with IoT and edge devices that guarantee end-to-end data integrity, authenticity, and authorization."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
@@ -18,6 +18,8 @@ What happens when that data is generated at the edge, in IoT, or connected devic
 Enjoy this builders guide to Trust in autonomous connected applications. We'll show how cloud services can establish lightweight secure channels with IoT and edge devices that guarantee end-to-end data integrity, authenticity, and authorization.
 
 This demo will show how a fleet of machines can be enrolled with cloud services and how applications can exchange attribute based cryptographic credentials to ensure granular, dynamic, policy driven access control.
+
+
 
 <div id="presentation">
     <div class="rwd-container">
