@@ -17,10 +17,10 @@ This allows end-to-end secure communication between application layer entities t
 
 Let's get started.
 
-- <a href="/learn/how-to-guides/rust/00-setup">00. Setup</a></li>
-- <a href="/learn/how-to-guides/rust/01-node">01. Node</a></li>
+- <a href="/learn/how-to-guides/rust/00-setup">00. Setup</a>
+- <a href="/learn/how-to-guides/rust/01-node">01. Node</a>
 - <a href="/learn/how-to-guides/rust/02-worker">02. Worker</a>
-- <a href="/learn/how-to-guides/rust/03-routing">03. Routing</a></li>
+- <a href="/learn/how-to-guides/rust/03-routing">03. Routing</a>
 - <a href="/learn/how-to-guides/rust/04-routing-many-hops">04. Routing over many hops</a>
 - <a href="/learn/how-to-guides/rust/05-secure-channel">05. Secure Channel</a>
 - <a href="/learn/how-to-guides/rust/06-secure-channel-many-hops">06. Secure Channel over many hops</a>
