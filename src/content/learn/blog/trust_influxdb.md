@@ -8,6 +8,7 @@ authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
 homepageFeaturedOrder: 2
 ---
+
 *A partnership between InfluxData and Ockam brings trust to time series data.*
 
 Let's investigate how to build applications with trusted time series data in a zero trust environment! To trust an application we need to trust the data that feeds into it. Increasingly, applications rely on time series data from outside the datacenter, at the edge, or in IoT. This means we need to think of trust and data in new ways.
