@@ -97,7 +97,7 @@ const DescriptionSection = () => {
               </Heading>
             </TitleWrapper>
             <Text>
-              Ockam and Microchip make it simple to keep cryptogrpahic keys safe
+              Ockam and Microchip make it simple to keep cryptographic keys safe
               outside of the cloud.
             </Text>
             <CheckedListItemWrapper>
