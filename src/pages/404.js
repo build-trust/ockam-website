@@ -41,8 +41,7 @@ const NotFoundPage = ({ location }) => {
           </Heading>
           <h4>You will be redirected to homepage in 5 seconds...</h4>
           <p>
-            Go to
-            <HomepageLink to="/">Homepage</HomepageLink>
+            Go to <HomepageLink to="/">Homepage</HomepageLink>
           </p>
         </div>
       </StyledContent>
