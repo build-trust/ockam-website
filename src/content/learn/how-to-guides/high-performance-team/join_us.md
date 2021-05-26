@@ -28,14 +28,14 @@ Open source is exceptionally empowering - no level of involvement is to small. H
 * Fix typos on this website and submit a pull request to fix it. Even our website is [open source](https://github.com/ockam-network/website)!
 
 **Things are getting serious...**
-* Run and test one of our demos or examples.
+* Run and test one of our [demos or examples](https://www.ockam.io/learn/how-to-guides).
 * Create an [issue](https://github.com/ockam-network/ockam/issues).
 * Engage with a [technical question](https://github.com/ockam-network/ockam/discussions).
 * Update or submit new documentation.
 
 **Advanced open sourcing**
 * Offer a solution to an existing [issue](https://github.com/ockam-network/ockam/issues).
-* Grab a 'help wanted' issue, resolve the issue, and submit a PR.
+* Grab a ['help wanted' issue](https://github.com/ockam-network/ockam/labels/help%20wanted), resolve the issue, and submit a PR.
 
 As a maintainer of an open source code base, it's fantastically flattering when a stranger from internet-land gets involved. In most small to medium sized OSS projects anyone that actively participates is known to the entire team.
 
