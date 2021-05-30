@@ -1,12 +1,12 @@
 ---
-title: Secure Channel
+title: Secure Channel with Entity
 order: 11
 ---
 
-# Secure Channel
+# Secure Channel with Entity
 
-Now that we understand the basics of [Nodes](../01-node),
-[Workers](../02-worker), and [Routing](../03-routing) ... let's
+Now that we understand the basics of [Nodes](/learn/how-to-guides/rust/01-node),
+[Workers](/learn/how-to-guides/rust/02-worker), and [Routing](/learn/how-to-guides/rust/03-routing) ... let's
 create our first encrypted secure channel.
 
 Establishing a secure channel requires establishing a shared secret key between
@@ -33,13 +33,13 @@ mutually trust one another by constructing `IdentifierTrustPolicy`s which contai
 ## App worker
 
 For demonstration, we'll create a secure channel within a single node. Like our
-previous example, [Workers](../02-worker), we'll create an `"echoer"` worker and
+previous example, [Workers](/learn/how-to-guides/rust/02-worker), we'll create an `"echoer"` worker and
 send it a message, but we'll route the message through a secure channel:
 
 Create a new file at:
 
 ```
-touch examples/05a-secure-channel-with-entity.rs
+touch examples/10-secure-channel-with-entity.rs
 ```
 
 Add the following code to this file:
