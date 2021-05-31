@@ -97,7 +97,7 @@ const DescriptionSection = () => {
               </Heading>
             </TitleWrapper>
             <Text>
-              Ockam and Microchip make it simple to keep cryptogrpahic keys safe
+              Ockam and Microchip make it simple to keep cryptographic keys safe
               outside of the cloud.
             </Text>
             <CheckedListItemWrapper>
@@ -117,8 +117,8 @@ const DescriptionSection = () => {
               <CheckedListItem>Ease-of-Use</CheckedListItem>
             </CheckedListItemWrapper>
             <Text color="caption">
-              Ockam brings key management into your applicaiton layer. We've
-              already done the nitty-gritty of embedded scurity engineering.
+              Ockam brings key management into your application layer. We've
+              already done the nitty-gritty of embedded security engineering.
             </Text>
           </AnimateOnScroll>
         </DescriptionContainer>
