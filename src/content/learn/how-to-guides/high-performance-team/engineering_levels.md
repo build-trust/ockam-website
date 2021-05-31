@@ -2,6 +2,8 @@
 title: Level Ladders at Ockam
 order: 3
 wideContent: true
+redirect_from:
+ - /Learn/Guides/Team/Engineering_levels/
 ---
 
 # Guide to Roles at Ockam by Level
