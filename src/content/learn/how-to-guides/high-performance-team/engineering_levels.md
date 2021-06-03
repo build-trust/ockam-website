@@ -14,6 +14,10 @@ At Ockam we [value our High Performance Team](https://www.ockam.io/learn/how-to-
 
 You can find open roles on The Team [here](https://www.ockam.io/team#open-roles).
 
+This guide should not be read column-wise. Instead, it should be thought of holistically from left to right. For example, a Senior Engineer at Level 4 would be expected to master of the characteristics of an Engineer and bring strong repeatable competence in their role as a Sr Engineer. They should look at the qualities of a a Level 5 Principal engineer as growth areas and put a plan in place to grown those skills.
+
+What we do is who we are. We bring this philosophy to our engineer roles. Because we are a small and growing team most people spend most of their time completing tasks regardless of their levels. An Architect's at Level 7 is responsible for *exploring their space*, *defining a set of problems*, then *picking a solution* before *completing / shipping the tasks*.  
+
 ## Engineering - Individual Contributors
 
 <div style="overflow-x: auto;">
@@ -46,11 +50,11 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
            Responsibility abstraction
         </strong>
     </td>
-    <td>"Tasks" </td>
-    <td>“Solutions” </td>
-    <td>“Problems” </td>
-    <td>“Spaces” </td>
-    <td>“Frontiers” </td>
+    <td>"Complete Tasks" </td>
+    <td>“Find Solutions” </td>
+    <td>“Define Problems” </td>
+    <td>“Explore Spaces” </td>
+    <td>“Envision Frontiers” </td>
   </tr>
 
   <tr>
@@ -64,7 +68,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
           <li> Has an engineering and programming foundation based upon several years of study.</li>
           <li> Expected to spend the majority of time learning about code and development best practices.</li>
           <li> Understands scope of small features.</li>
-          <li> Has a basic understanding of what all components in their product are.</li>
+          <li> Has a basic understanding of what all components in their product area.</li>
       </ul>
     </td>
     <td>
@@ -120,28 +124,28 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
         <ul>
-          <b>Performs standard programming tasks:</b>
+          <b>Performs complex programming tasks:</b>
           <li> Contributes to functional specifications and participates in code reviews.</li>
           <li> Writes documentation and examples that ship along with their code.</li>
           <li> Writes and executes sophisticated test plans.</li>
           <li> Has the network, and ability, to recruit ‘A player’ engineers at their own level.</li>
-          <li> Can accurately forecast and deliver a mile (2 week) deliverables.</li>
+          <li> Can accurately forecast deliverables two weeks ahead and deliver on that timeline.</li>
         </ul>
     </td>
     <td>
       <ul>
-          <b>Performs complex programming tasks:</b>
+          <b>Performs expert programming tasks:</b>
           <li> Can write functional specifications for features.</li>
           <li> Can sign off on test plans and code reviews.</li>
           <li> Participates in requirement building with architects.</li>
           <li> Gathers feedback and ‘pulse’ from Ockam's open source community.</li>
           <li> Has the network, and has demonstrated the ability, to recruit engineers above their level.</li>
-          <li> Can accurately forecast and deliver Race (8 weeks) OKRs.</li>
+          <li> Can accurately forecast deliverables two months ahead and deliver on that timeline.</li>
       </ul>
     </td>
     <td>
       <ul>
-          <b>Performs expert programming tasks:</b>
+          <b>Performs expert design tasks and defines scope:</b>
           <li> Handles large-scale technical debt and refactoring.</li>
           <li> Shapes coding methodologies, style, DX, and best practices across wide areas of the Ockam code base.</li>
           <li> Leads code reviews and can sign-off on large features.</li>
@@ -178,14 +182,14 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
       <ul>
           <li> Shows initiative and offers assistance when needed without being asked.</li>
           <li> Provides guidance to entry-level engineers, the open source community, and to technical partners.</li>
-          <li> Constructively escalates problems and issues.</li>
+          <li> Constructively escalates problems and issues early.</li>
       </ul>
     </td>
     <td>
       <ul>
           <li> Delivers feedback across the entire team in a constructive manner.</li>
           <li> Provides guidance to internal and external engineers.</li>
-          <li> Works well with technical leads, incorporating feedback as needed.</li>
+          <li> Aligns projects with Principals and Architects outside of their area of scope.</li>
           <li> Helps focus discussion on the most important aspects that align with OKRs.</li>
       </ul>
     </td>
@@ -194,6 +198,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
           <li> An approachable mentor who is viewed as an expert and acts like one.</li>
           <li> Constructively challenges assumptions.</li>
           <li> Guides engineers to correct solutions while encouraging collaboration.</li>
+          <li> Brings ideas and best practices from external resources into their space.</li>
       </ul>
     </td>
     <td>
@@ -212,7 +217,7 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
     </td>
     <td>
       <ul>
-          <li> Given an introduction to a small task from a more senior engineer, can drive a task to completion independently.</li>
+          <li> Given an introduction to a small task from a senior engineer, can drive a task to completion independently.</li>
           <li> “Can fill in the blanks”</li>
       </ul>
     </td>
