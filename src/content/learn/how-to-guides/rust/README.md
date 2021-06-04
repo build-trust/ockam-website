@@ -27,3 +27,4 @@ Let's get started.
 - <a href="/learn/how-to-guides/rust/07-routing-over-transport">07. Routing over a transport</a>
 - <a href="/learn/how-to-guides/rust/08-routing-over-many-transport-hops">08. Routing over many transport hops</a>
 - <a href="/learn/how-to-guides/rust/09-secure-channel-over-many-transport-hops">09. Secure Channel over many transport hops</a>
+- <a href="/learn/how-to-guides/rust/10-secure-channel-with-entity">10. Secure Channel with Entity</a>
