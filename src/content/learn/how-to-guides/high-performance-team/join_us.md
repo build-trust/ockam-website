@@ -11,7 +11,7 @@ We want to support you on your journey with Ockam from Day 1.
 
 Day 1 is today.
 
-*Welcome to The Team!*
+_Welcome to The Team!_
 
 ## How to 'Open Source'
 
@@ -20,22 +20,26 @@ Ockam, the Tool Company, is the maintainer of Ockam, the open source code base. 
 Open source is exceptionally empowering - no level of involvement is to small. Here are a couple ideas for how to get started:
 
 **Easy to do**
-* Attend one of our [monthly community calls](https://github.com/ockam-network/meetings).
-* Engage on [Twitter](https://twitter.com/Ockam).
-* Join the [community discussion](https://github.com/ockam-network/ockam/discussions), star the repo to keep up with updates, and say [HI!](https://github.com/ockam-network/ockam/discussions/137)
+
+- Attend one of our [monthly community calls](https://github.com/ockam-network/meetings).
+- Engage on [Twitter](https://twitter.com/Ockam).
+- Join the [community discussion](https://github.com/ockam-network/ockam/discussions), star the repo to keep up with updates, and say [HI!](https://github.com/ockam-network/ockam/discussions/137)
 
 **Medium difficultly**
-* Fix typos on this website and submit a pull request to fix it. Even our website is [open source](https://github.com/ockam-network/website)!
+
+- Fix typos on this website and submit a pull request to fix it. Even our website is [open source](https://github.com/ockam-network/website)!
 
 **Things are getting serious...**
-* Run and test one of our demos or examples.
-* Create an [issue](https://github.com/ockam-network/ockam/issues).
-* Engage with a [technical question](https://github.com/ockam-network/ockam/discussions).
-* Update or submit new documentation.
+
+- Run and test one of our demos or examples.
+- Create an [issue](https://github.com/ockam-network/ockam/issues).
+- Engage with a [technical question](https://github.com/ockam-network/ockam/discussions).
+- Update or submit new documentation.
 
 **Advanced open sourcing**
-* Offer a solution to an existing [issue](https://github.com/ockam-network/ockam/issues).
-* Grab a 'help wanted' issue, resolve the issue, and submit a PR.
+
+- Offer a solution to an existing [issue](https://github.com/ockam-network/ockam/issues).
+- Grab a 'help wanted' issue, resolve the issue, and submit a PR.
 
 As a maintainer of an open source code base, it's fantastically flattering when a stranger from internet-land gets involved. In most small to medium sized OSS projects anyone that actively participates is known to the entire team.
 
@@ -43,7 +47,7 @@ Frankly, simply by showing up and getting involved you immediately become one of
 
 Getting involved with open source projects is something that you'll never regret. It's a great way to show off your skills and build a portfolio of work that is open and accessible to everyone.
 
-*Hint: Open source based companies look at open source histories when reviewing candidates for a full time role*
+_Hint: Open source based companies look at open source histories when reviewing candidates for a full time role_
 
 ## Find an open role
 
@@ -79,12 +83,13 @@ The hiring manager for the role will reach out to you via email and schedule a 2
 
 The purpose of this call is to understand if and how you could fit into the team. By this point in our process we've thrown away the job description for the role you've applied for and have started to co-create a role with you. Help us with this process by giving as much relevant background about your passions as possible. If we have a hypothesis for how you could fit into a full time role we will proceed to the second round.
 
-You should be prepared to discuss the following: 
-* How did you find Ockam and what inspired you to apply for this role?
-* Why do you want to work at an early stage, 'Silicon Valley' startup?
-* What do you think about Ockam's High Performance Team culture, [based on this video](https://www.ockam.io/learn/how-to-guides/high-performance-team/)
-* What about the [problem that Ockam is solving](https://www.ockam.io/learn) interests you?
-* What [level](https://www.ockam.io/learn/how-to-guides/high-performance-team/join_us/#give-us-an-honest-assessment-of-your-level) do you think you are? Can you cite examples from your previous work that aligns with specific qualities in our levels guide?
+You should be prepared to discuss the following:
+
+- How did you find Ockam and what inspired you to apply for this role?
+- Why do you want to work at an early stage, 'Silicon Valley' startup?
+- What do you think about Ockam's High Performance Team culture, [based on this video](https://www.ockam.io/learn/how-to-guides/high-performance-team/)
+- What about the [problem that Ockam is solving](https://www.ockam.io/learn) interests you?
+- What [level](https://www.ockam.io/learn/how-to-guides/high-performance-team/join_us/#give-us-an-honest-assessment-of-your-level) do you think you are? Can you cite examples from your previous work that aligns with specific qualities in our levels guide?
 
 ### Second round
 
@@ -96,9 +101,10 @@ Bring a demo - we'll be impressed.
 
 If we ask you to move to this round, we have a strong thesis for your potential on The Team.
 
-We will ask you to complete a small task that's directly related to the Ockam code base. You will submit your project as a pull request and open source contribution to the code base.  We believe that white boarding or live coding examples are a waste of time. They don't mimic a typical work setting, and all of the time spent on the exercise is *throw away code* for everyone. [Time is a virtue at Ockam](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team/#we-preserve-and-cherish-time).
+We will ask you to complete a small task that's directly related to the Ockam code base. You will submit your project as a pull request and open source contribution to the code base. We believe that white boarding or live coding examples are a waste of time. They don't mimic a typical work setting, and all of the time spent on the exercise is _throw away code_ for everyone. [Time is a virtue at Ockam](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team/#we-preserve-and-cherish-time).
 
 There are two primary goals in this exercise.
+
 1. We want to assess your ability to digest a problem, explore solutions, and deliver an open source contribution using our [contribution standards](https://www.ockam.io/learn/how-to-guides/contributing/CONTRIBUTING/). We are equally interested in how you engage the Ockam team and published resources, as we are about your PR.
 2. The exercise is designed to give you insight into the Ockam Code and The Team. You will get to meet the entire team, be able to challenge assumptions, and to ask questions. We know that moving to a new team is a big decision and we want to make sure we give you as much data as possible to facilitate your decision. A real project with our actual team is the best way to accomplish this goal.
 
@@ -108,7 +114,7 @@ This task is custom crafted for every individual, in every role, at every level.
 
 As you wrap up your OSS collaboration exercise you will spend time discussing the Ockam culture, and our [values and virtues](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team/) with our CEO, [Matthew Gregory](https://www.linkedin.com/in/matthewgregory/). We will also make our advisors and board members available to you. In this stage of our process we want to expose as much of the culture to you as possible to help you make an informed decision about the type of team you will be committing full time to.
 
-*It's possible that if you are known in the Ockam community, and if we align in our collaboration style, a candidate may start at the Culture Connection stage.*
+_It's possible that if you are known in the Ockam community, and if we align in our collaboration style, a candidate may start at the Culture Connection stage._
 
 Prior to this stage in the interview process you should be familiar with how Ockam defines a `High Performance Team`. Be prepared to talk about specific examples where you felt like you were (or were not) on a High Performance Team. Also share stories about how you have put your team first and empowered others to be their best selves.
 
@@ -117,7 +123,6 @@ Prior to this stage in the interview process you should be familiar with how Ock
         <iframe class="rwd-iframe" src="https://www.youtube.com/embed/b5RpsAmiZZQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 </div>
-
 
 ### Role Memo
 
@@ -139,11 +144,23 @@ There is a lot of 'tech' coming your way, your gap time is a great time to groun
 
 ## On boarding
 
+We all know about the uncertainty when beginning a new job. In order to decrease it we will all work through the following bullets:
+
+- **Introduction to the team, personally and professionally**: You will be introduced to the team and you will have the opportunity to know them, because you will work with them. You will also know who usually work in which area, which will help you to understand the current structure of the team.
+
+- **Current Race Status**: You will be informed about the current race status, what the goals are and how you will contribute.
+
+- **Tools**: We will present the tools that we usually use and we will grant access to them.
+
+- **Meetings**: We will explain you which kind of meetings we have, when they are, what is your role in each one and what we expect from them.
+
+- **OKR**: We work with [OKR](https://www.wikipedia.org/wiki/OKR). This is really important for us, so we encourage you to learn about it and we will provide some online resources to help you.
+
 In your first week you will ship production code. We want to give you a win as quickly as possible.
 
 Remember that [We start with trust](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team/#we-start-with-trust).
 
-*The Team believes in you.*
+_The Team believes in you._
 
 Focus on learning the code base, asking questions, and getting to know our team. Schedule 1:1s. Chip away at issues and push code regularly in little bite sizes.
 
@@ -153,6 +170,6 @@ Use [Maker Day](https://www.ockam.io/learn/how-to-guides/high-performance-team/v
 
 ## Off boarding
 
-The Ockam Team is excited to be a part of *your* journey. We will think of you as a teammate forever. This Team was built to help you succeed, regardless if you are a some-times OSS contributor or a multi-year full-time member of our Team.
+The Ockam Team is excited to be a part of _your_ journey. We will think of you as a teammate forever. This Team was built to help you succeed, regardless if you are a some-times OSS contributor or a multi-year full-time member of our Team.
 
 Thank you for being a part of it!
