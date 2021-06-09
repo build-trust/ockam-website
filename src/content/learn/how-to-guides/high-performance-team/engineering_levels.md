@@ -14,9 +14,11 @@ At Ockam we [value our High Performance Team](https://www.ockam.io/learn/how-to-
 
 You can find open roles on The Team [here](https://www.ockam.io/team#open-roles).
 
-This guide should not be read column-wise. Instead, it should be thought of holistically from left to right. For example, a Senior Engineer at Level 4 would be expected to master of the characteristics of an Engineer and bring strong repeatable competence in their role as a Sr Engineer. They should look at the qualities of a a Level 5 Principal engineer as growth areas and put a plan in place to grown those skills.
+##How to use this Guide
 
-What we do is who we are. We bring this philosophy to our engineer roles. Because we are a small and growing team most people spend most of their time completing tasks regardless of their levels. An Architect's at Level 7 is responsible for *exploring their space*, *defining a set of problems*, then *picking a solution* before *completing / shipping the tasks*.  
+Think of this matrix, holistically, from left to right. For example, a `Level 4 Senior Engineer`  would be a master at the characteristics of an `Engineer` and bring strong repeatable competence into their role as a `Sr Engineer`. The qualities in the column of `Level 5 Principal Engineer` can be used as a guide to grow new skills.
+
+What we do is who we are. We bring this philosophy to our engineer roles. Because we are a small and growing team we spend most of their time *completing tasks* regardless of our level. A `Level 7 Architect` is responsible for *exploring their space*, *defining a set of problems*, then *picking a solution*, before *building / shipping the tasks*.  
 
 ## Engineering - Individual Contributors
 
@@ -296,7 +298,7 @@ What we do is who we are. We bring this philosophy to our engineer roles. Becaus
         </strong>
     </td>
     <td>“Ship the Code” </td>
-    <td>“Build the Team” </td>
+    <td>“Empower the Team” </td>
     <td>“Create the Product” </td>
   </tr>
 
