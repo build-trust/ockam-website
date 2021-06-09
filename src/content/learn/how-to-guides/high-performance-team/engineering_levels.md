@@ -14,7 +14,7 @@ At Ockam we [value our High Performance Team](https://www.ockam.io/learn/how-to-
 
 You can find open roles on The Team [here](https://www.ockam.io/team#open-roles).
 
-##How to use this Guide
+## How to use this Guide
 
 Think of this matrix, holistically, from left to right. For example, a `Level 4 Senior Engineer`  would be a master at the characteristics of an `Engineer` and bring strong repeatable competence into their role as a `Sr Engineer`. The qualities in the column of `Level 5 Principal Engineer` can be used as a guide to grow new skills.
 
