@@ -1,14 +1,15 @@
 ---
-title: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
+title: 'The Nine-Factors Of A Well Tuned Network Of Connected Devices'
 date: 2019-04-15
-description: "The Nine-Factors Of A Well Tuned Network Of Connected Devices"
+description: 'The Nine-Factors Of A Well Tuned Network Of Connected Devices'
 metaTitle: "IoT and distributed systems are all unique. They are complicated. Let's look at what makes them the same."
-author: "Matthew Gregory"
+author: 'Matthew Gregory'
 authorAvatar: ./assets/matthew_gregory-1.png
 ---
-***“Ockam is tuned for connected devices”***
 
-So what exactly goes into tuning a network for IoT? Let me tell you about the the nine-factors that influence IoT network design:
+**_“Ockam is tuned for connected devices”_**
+
+So what exactly goes into tuning a network for IoT? Let me tell you about the nine-factors that influence IoT network design:
 
 ## Factor I: IoT Is Naturally Multi-Party.
 
@@ -51,6 +52,7 @@ The hub and zone structure of an Ockam Network solves this problem. As IoT deman
 A network tuned for IoT needs sufficient efficiency to accommodate the huge volume of data that IoT devices generate. In isolation, this data is of relatively low value. However the true value of IoT is unlocked when huge amounts of data feed higher order processes such as AI/ML. To put it simply: moving data in an IoT network can’t cost more than the data packet is worth!
 
 ## Factor VIII. Flexibility For Public + Private Consortiums
+
 A device owner may only want to share data among trusted business partners. However they may also want to deliver a zero knowledge proof on the state of their data to an external regulator, partner, or customer.
 
 The Ockam architecture allows private zones to interact with the public root zone. A private zone will commit the merkle root of its state to the main hub. This will keep the data in the zone private to the zone, but still allow permissions and proofs to be represented externally. This feature is further enabled by how did:ockam identifiers are specified.
