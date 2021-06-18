@@ -86,7 +86,7 @@ What we do is who we are. We bring this philosophy to our engineer roles. Becaus
     <td>
       <ul>
           <li> Has in-depth understanding of development best practices.</li>
-          <li> Highly attuned to various coding styles used in the open source community and his hyper-focused on writing simple, well designed, human readable code.</li>
+          <li> Highly attuned to various coding styles used in the open source community and is hyper-focused on writing simple, well designed, human readable code.</li>
           <li> Has mastered the tools needed to debug and diagnose issues in any type of environment.</li>
           <li> Understands the scope and relationships of large features and production stack for their area.</li>
           <li> Has subject matter expertise in several components.</li>
