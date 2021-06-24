@@ -32,11 +32,6 @@ references on tools and processes that our team uses.
 
 ## Programming Languages
 
-### C
-* [C Programming Language, 2nd Edition by Brian W. Kernighan, Dennis M. Ritchie](https://amazon.com/dp/0131103628)
-* [Modern C by Jens Gustedt](https://modernc.gforge.inria.fr/)
-* [Git in Practice](https://manning.com/books/git-in-practice)
-* [Expert C Programming: Deep C Secrets by Peter van der Linden](https://amazon.com/dp/0131774298)
 
 ### Erlang / Elixir
 * [Programming Elixir by Dave Thomas](https://pragprog.com/titles/elixir16/)
@@ -53,11 +48,6 @@ references on tools and processes that our team uses.
 * [Cargo Book](https://doc.rust-lang.org/cargo/)
 
 ## Build Tools
-
-### CMake
-* [Professional CMake: A Practical Guide by Craig Scott](https://crascit.com/professional-cmake/)
-* [Effective CMake by Daniel Pfeifer](https://youtube.com/watch?v=bsXLMQ6WgIk)
-* [Deep CMake for Library Authors by Craig Scott](https://youtube.com/watch?v=m0DwB4OvDXk)
 
 ### Gradle
 * [Gradle in Action by Benjamin Muschko](https://manning.com/books/gradle-in-action)
