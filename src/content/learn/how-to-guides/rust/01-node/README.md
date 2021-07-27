@@ -63,4 +63,4 @@ This will download various dependencies, compile and then run our code. When it
 runs, you'll see log output that shows the node starting and then
 immediately shutting down.
 
-<span><b>Next:</b> <a href=" /learn/how-to-guides/rust/02-worker">02. Create an Ockam worker</a></span>
+<span><b>Next:</b> <a href="/learn/how-to-guides/rust/02-worker">02. Create an Ockam worker</a></span>
