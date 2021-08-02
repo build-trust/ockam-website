@@ -3,28 +3,53 @@ title: Get Started
 order: 1
 ---
 
-## Get started
+# End-to-End Secure Communication for Distributed Applications
 
-In this step-by-step guide we’ll show code examples that exchange end-to-end
-encrypted messages. We'll introduce various Ockam features that enable secure
-communication between distributed applications.
+In this step-by-step guide we’ll learn how to build mutually-authenticated, end-to-end encrypted,
+secure messaging channels that protect en-route messages against eavesdropping, tampering, and forgery.
 
-To protect en-route messages against eavesdropping, tampering, and forgery we must exchange them over mutually authenticated, end-to-end encrypted secure channels.
+Data, within modern distributed applications, are rarely exchanged over a single point-to-point
+transport connection. Application messages routinely flow over complex, multi-hop, multi-protocol
+routes — _across data centers, through queues and caches, via gateways and brokers_ — before reaching
+their end destination.
 
-Ockam enables your applications to create Secure Channels over complex, multi-hop, multi-protocol routes.
+Transport layer security protocols are unable to protect application messages because their protection
+is constrained by the length and duration of the underlying transport connection. Ockam is a collection of
+programming libraries (in Rust and Elixir) that make it simple for our applications to guarantee end-to-end
+integrity, authenticity, and confidentiality of data.
 
-This allows end-to-end secure communication between application layer entities that are not directly connected by simple point-to-point transport connections. En-route encrypted messages can travel over multiple transport layer connections and can be stored in message queues, databases or caches for asynchronous, end-to-end protected communication between entities that may not be online at the same time.
+We no longer have to implicitly depend on the defenses of every machine or application within the same,
+usually porous, network boundary. Our application's messages don't have to be vulnerable at every point,
+along their journey, where a transport connection terminates.
 
-Let's get started.
+Instead, our application can have a strikingly smaller vulnerability surface and easily make
+_granular authorization decisions about all incoming information and commands._
 
-- <a href="/learn/how-to-guides/rust/00-setup">00. Setup</a>
-- <a href="/learn/how-to-guides/rust/01-node">01. Node</a>
-- <a href="/learn/how-to-guides/rust/02-worker">02. Worker</a>
-- <a href="/learn/how-to-guides/rust/03-routing">03. Routing</a>
-- <a href="/learn/how-to-guides/rust/04-routing-many-hops">04. Routing over many hops</a>
-- <a href="/learn/how-to-guides/rust/05-secure-channel">05. Secure Channel</a>
-- <a href="/learn/how-to-guides/rust/06-secure-channel-many-hops">06. Secure Channel over many hops</a>
-- <a href="/learn/how-to-guides/rust/07-routing-over-transport">07. Routing over a transport</a>
-- <a href="/learn/how-to-guides/rust/08-routing-over-many-transport-hops">08. Routing over many transport hops</a>
-- <a href="/learn/how-to-guides/rust/09-secure-channel-over-many-transport-hops">09. Secure Channel over many transport hops</a>
-- <a href="/learn/how-to-guides/rust/10-secure-channel-with-entity">10. Secure Channel with Entity</a>
+Let's build mutually-authenticated, end-to-end protected communication between distributed applications:
+
+### Setup
+
+If you don't have it, please [install](https://www.rust-lang.org/tools/install) the latest version of Rust.
+
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Next, create a new cargo project to get started:
+
+```
+cargo new --lib hello_ockam && cd hello_ockam && mkdir examples &&
+  echo 'ockam = "*"' >> Cargo.toml && cargo build
+```
+
+If the above instructions don't work on your machine, please
+[post a question](https://github.com/ockam-network/ockam/discussions/1642),
+we would love to help.
+
+### Step-by-step
+
+- [01. Node](/learn/how-to-guides/rust/01-node/)
+- [02. Worker](/learn/how-to-guides/rust/02-worker)
+- [03. Routing](/learn/how-to-guides/rust/03-routing)
+- [04. Transport](/learn/how-to-guides/rust/04-transport)
+- [05. Secure Channel](/learn/how-to-guides/rust/05-secure-channel)

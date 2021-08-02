@@ -1,18 +1,3 @@
-[markdown-link-get-started]
-
-match="[Get Started](:[page])"
-rewrite="[Get Started](/learn/how-to-guides/rust/:[page])"
-
-[markdown-link-steps]
-
-match="[Step :[step]](:[page])"
-rewrite="[Step :[step]](/learn/how-to-guides/rust/:[page])"
-
 [markdown-link-relative]
-match="(../:[page])"
-rewrite="(/learn/how-to-guides/rust/:[page])"
-
-
-[typos-echo-server]
-match="echo_server"
-rewrite="echo_service"
+match=(../:[page])
+rewrite=(/learn/how-to-guides/rust/:[page])
