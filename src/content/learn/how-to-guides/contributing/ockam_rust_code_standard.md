@@ -6,7 +6,7 @@ order: 5
 
 This guide will help us keep the style in our Rust Library consistent.
 
-This guide builds on the normal rust style guide [here](https://doc.rust-lang.org/1.0.0/style/)
+This guide builds on the normal Rust style guide [here](https://doc.rust-lang.org/1.0.0/style/)
 
 ## Names
 
