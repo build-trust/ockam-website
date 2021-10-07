@@ -103,7 +103,7 @@ Instructions for signing git commits with Krypton can be found [here][sign]
 Before you submit your pull request consider the following guidelines:
 
 * Search [GitHub][github-pulls] for an open or closed Pull Request that relates to your submission. You don't want to duplicate effort.
-* Make your changes in a new git branch and use the branch naming convention `username/feature`
+* Fork the repository and make your changes in a new git branch using the branch naming convention `username/feature`.
 * This is the fun part! Build your feature.
 * If the changes affect public APIs, change or add relevant documentation.
 * If you have formatting errors your PR will be rejected by our build tools.
@@ -112,7 +112,7 @@ Before you submit your pull request consider the following guidelines:
 * Be sure to squash your commits in your feature branch.
 * Push your local feature branch to GitHub
 * In GitHub, send a pull request to `ockam:develop`.
-* The Ockam Contributor License Agreement tool will check to see if you've signed our CLA. If you have not yet done so, the PR will be blocked. The fix is easy. Simply click the link in the PR 'Conversation' user experience on github.com and follow the signing steps. Be sure to read the CLA during the process.
+* The Ockam Contributor License Agreement tool will check to see if you've signed our CLA. If you have not yet done so, the PR will be blocked. The fix is easy. Simply fork our [contributors repository](https://github.com/ockam-network/contributors/), append your information to the [CONTRIBUTORS.csv](https://github.com/ockam-network/contributors/blob/main/CONTRIBUTORS.csv), and create a new PR. Be sure to read the CLA during the process.
 * Look at the 'Checks' user experience on github.com. We trigger a process to check that your code follows the guidelines set out in this contributor guide.
 * If you find that our CI has failed, look into the logs on Azure Pipelines to find out if your changes caused test failures, the commit message was malformed, etc. If you find that the tests failed or times out for unrelated reasons, you should reach out to an Ockam team member in the [Ockam Community][discuss] so that the build can be restarted.
 * If we suggest changes, then:
@@ -121,7 +121,7 @@ Before you submit your pull request consider the following guidelines:
   ** Re-run the Ockam test suite to ensure tests are still passing.
   ** Commit your changes to your feature branch (e.g. `username/feature`).
   ** Squash your commit history and rebase your feature branch to the current version of `ockam:develop`.
-  ** Push the changes to your feature branch. This will update your Pull Request.  
+  ** Push the changes to your feature branch. This will update your Pull Request.
 
 That's it! Thank you for your contribution!
 
