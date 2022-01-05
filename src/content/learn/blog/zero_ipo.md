@@ -5,8 +5,6 @@ description: 'We live our values at Ockam, and as an open source company, we wan
 metaTitle: "Ockam's Zero-to-IPO framework is a product and GTM roadmap for open source companies"
 author: 'Matthew Gregory'
 authorAvatar: ./assets/matthew_gregory-1.png
-isHomepageFeatured: true
-homepageFeaturedOrder: 3
 ---
 
 My presentation at the [2020 Open Core Summit:](https://2020.opencoresummit.com/)
@@ -245,58 +243,3 @@ We love tools, and we know that you do too. All builders do! Ockam's tools empow
 Ockam's services simplify deployment for your production environments. You have products to build, and you don't want to worry about deploying infrastructure. That's our job!
 
 At enterprise scale, Ockam becomes an interoperable architecture for universal trust between any device or cloud service anywhere. This is what we call the Ockam Platform.
-
-# How other frameworks map to ours
-
-## Peter Levine - Partner at a16z
-
-Here’s how Peter’s ‘3 pillars of Open Source’ align with Ockam’s Zero-to-IPO map. He does such a fantastic job of laying out his structure, I’ll direct you to consume his frameworks from [first principles](https://a16z.com/2019/10/04/commercializing-open-source/):
-
-![a16z Model for Open Source](./assets/zero_ipo/zero_8.svg)
-
-## Nnamdi Iregbulem - Partner at Lightspeed
-
-[Nnamdi](https://lsvp.com/team/nnamdi-iregbulem/) wrote a perspective on go-to-market strategy that's backed by quantitative analysis and empirical data. I encourage you to read his entire blog post: [Enterprise Software Monetization is Fat-Tailed](https://whoisnnamdi.com/software-fat-tailed/). It's spot on - and perfectly aligns with our sequential staging of Self-serve SaaS => Inside Sales => Enterprise Sales in Ockam's Zero-to-IPO strategy.
-
-His advice?
-
-> Focus on the Tails!
-
-> If the distribution of revenue is fat-tailed, vendors should be trying to insert their software into as many customers as possible, as cheaply as possible.
-
-Exactly right. Moreover, Nnamdi's blog contains the detail to why CACs-by-segment are key metrics during our Inside Sales phase. Simply, we are gathering data then analyzing on our Tails.
-
-## Battery Ventures
-
-The way that Dharmesh Thakker and Chiraag Deora articulate 'time to value' and 'structuring self-service vs. enterprise sales playbooks' highly aligns with the GTM aspects of Ockam's Zero-to-IPO framework.
-
-Moreover this quote,
-
-> With bottoms-up offerings, it is critical that your end users can create immediate value with your (great) product without needing to speak with a salesperson or pre-sales engineer,
-
-highly aligns with Ockam's Values around [simplicity and the love that builders have for their tools](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team/#builders-love-their-tools).
-
-[Click here to read more on the Battery GTM framework](https://www.battery.com/powered/market-uncertainty-cloud-native/)
-
-## Adam Gross - CEO at Heroku
-
-Adam has a self-serve product model that he call’s ‘1,2,3’. He outlines it in this presentation and I suggest that you consume it, [here](https://www.heavybit.com/library/video/self-serve-go-to-market/). What I specifically love about his presentation is the detail that he paints in the self-serve SaaS phases from his own experiences. Ockam’s Zero-to-IPO differs in some ways, but directionally we are aligned.
-
-![123 Model for SaaS](./assets/zero_ipo/zero_9.svg)
-
-## Bessemer Venture Partners
-
-Amit Karp, Mike Droesh, Ariel Sterman, Jenny Gao, and Ethan Kurzweil recently collaborated on a 'Roadmap for Open Source' companies. They share:
-
-> After years of investing in open source software, we’re releasing our thinking on what positions these companies as emerging technology giants.
-
-> It’s no secret that open source is taking over the software development world. In just the past two years, there has been over \$80 billion in liquidity value generated from the acquisition, merger, and IPOs of open source software-based businesses, so it should come as no surprise that the pace of venture investments into this space is growing faster than ever.
-
-> One major development is worth emphasizing: once considered the cheaper version of closed source software, open-source software is now viewed as the superior alternative offering higher quality, better support, and more flexibility.
-
-We couldn't say it any better ourselves, so I encourage you to read their entire post!
-[Bessemer Roadmap: Open Source](https://www.bvp.com/atlas/roadmap-open-source)
-
-They describe `The Open Source Six: Good, Better, Best Framework` in their blog. I'd argue that Ockam's Vision, Zero-to-IPO framework, metrics, and our community/project/company structure aligns with Bessemer's 'Best'. What do you think? Am I right, or wrong? Either way, I'd love for you to reach out and let me know!
-
-You can find me in [this thread](https://github.com/ockam-network/ockam/discussions/448) in GitHub Discussions, where we openly collaborate, learn, and share all-things-open-source related to Ockam.
