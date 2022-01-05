@@ -5,7 +5,6 @@ description: '5 reasons why Ockam loves open source, and you should too!'
 metaTitle: 'Open source software drives reliability, security, adoption, and more for IoT and edge devices.'
 author: 'Matthew Gregory'
 authorAvatar: ./assets/matthew_gregory-1.png
-isFeature: true
 ---
 
 Every company must now at least dabble in software. In fact, to be competitive, many will need to make building and running software a core competency. To meet their software needs, companies obviously can’t write everything from scratch. They’ll need to work off the efforts of others.
