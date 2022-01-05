@@ -1,15 +1,15 @@
 ---
-title: 'Ockam raises a $12.5m Series A to build a remote-first, high-performance team.'
+title: "Ockam raises a $12.5m Series A to build a remote-first, high-performance team."
 date: 2022-01-04
-description: 'Ockam builds open-source developer-first tools for mutual authentication and end-to-end encrypted messaging between distributed applications, in any environment, anywhere… Trust Data-in-Motion.'
-metaTitle: 'Ockam has secured $12.5 million of Series A funding from Craft Ventures, Future Ventures, SineWave Ventures, OCV, and Okta Ventures, among others.'
-author: 'Matthew Gregory'
+description: "Ockam has secured $12.5 million of Series A funding from Craft Ventures, Future Ventures, SineWave Ventures, OCV, and Okta Ventures, among others."
+metaTitle: "Ockam builds open-source developer-first tools for mutual authentication and end-to-end encrypted messaging between distributed applications, in any environment, anywhere."
+author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
 homepageFeaturedOrder: 3
 ---
 
-**Ockam builds open-source developer-first tools for mutual authentication and end-to-end encrypted messaging between distributed applications, in any environment, anywhere… Trust Data-in-Motion.**
+*Ockam builds open-source developer-first tools for mutual authentication and end-to-end encrypted messaging between distributed applications, in any environment, anywhere… Trust Data-in-Motion.*
 
 Ockam has secured $12.5 million of Series A funding from [Craft Ventures](https://www.craftventures.com/), [Future Ventures](https://future.ventures/), [SineWave Ventures](https://sinewave.vc/), [OCV](https://www.ocvpartners.com/) and [Okta Ventures](https://www.okta.com/okta-ventures/), among others.
 
