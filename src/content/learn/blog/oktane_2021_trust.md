@@ -6,7 +6,7 @@ metaTitle: "Replay from Okta Oktane21. A builders guide to Trust in autonomous c
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
-homepageFeaturedOrder: 1
+homepageFeaturedOrder: 3
 ---
 
 # End-to-end encryption and mutual authentication between cloud and edge apps

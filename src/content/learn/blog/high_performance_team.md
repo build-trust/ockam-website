@@ -5,6 +5,7 @@ description: "High Performance Teams don't happen by accident. We've got a playb
 metaTitle: "One of Ockam's core values is that we are a High Performance Team. Just like open source software builds on top of the shoulders of giants, so do my ideas around team building. Specifically about building a High Performance Team"
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
+isFeature: true
 ---
 
 <div id="presentation">

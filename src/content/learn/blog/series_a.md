@@ -6,7 +6,7 @@ metaTitle: "Ockam builds open-source developer-first tools for mutual authentica
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
-homepageFeaturedOrder: 3
+homepageFeaturedOrder: 1
 ---
 
 *Ockam builds open-source developer-first tools for mutual authentication and end-to-end encrypted messaging between distributed applications, in any environment, anywhere… Trust Data-in-Motion.*
