@@ -26,6 +26,14 @@ const NotFoundPage = ({ location }) => {
 
   const currentUrl = location.hostname + location.pathname;
 
+  const [counter, setCounter] = React.useState(5);
+
+  React.useEffect(() => {
+    const timer =
+      counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer);
+  }, [counter]);
+
   return (
     <>
       <StyledContent>
@@ -39,7 +47,7 @@ const NotFoundPage = ({ location }) => {
             {currentUrl}
             &quot; doesn&apos;t exist.
           </Heading>
-          <h4>You will be redirected to homepage in 5 seconds...</h4>
+          <h4>You will be redirected to homepage in {counter} seconds...</h4>
           <p>
             Go to <HomepageLink to="/">Homepage</HomepageLink>
           </p>
