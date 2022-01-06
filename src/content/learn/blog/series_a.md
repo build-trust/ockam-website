@@ -1,8 +1,8 @@
 ---
 title: "Ockam raises a $12.5m Series A to build a remote-first, high-performance team."
 date: 2022-01-04
-description: "Ockam has secured $12.5 million of Series A funding from Craft Ventures, Future Ventures, SineWave Ventures, OCV, and Okta Ventures, among others."
-metaTitle: "Ockam builds open-source developer-first tools for mutual authentication and end-to-end encrypted messaging between distributed applications, in any environment, anywhere."
+description: "Ockam raised $12.5 million of Series A funding from Craft Ventures, Future Ventures, SineWave Ventures, OCV, and Okta Ventures, among others."
+metaTitle: "Ockam raised $12.5 million of Series A funding from Craft Ventures, Future Ventures, SineWave Ventures, OCV, and Okta Ventures, among others."
 author: "Matthew Gregory"
 authorAvatar: ./assets/matthew_gregory-1.png
 isHomepageFeatured: true
