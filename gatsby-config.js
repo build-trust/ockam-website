@@ -26,7 +26,11 @@ const plugins = [
   {
     resolve: `gatsby-transformer-remark`,
     options: {
+<<<<<<< HEAD
       plugins: [`gatsby-remark-images`,`gatsby-remark-responsive-iframe`],
+=======
+      plugins: [`gatsby-remark-images`],[`gatsby-remark-responsive-iframe`],
+>>>>>>> develop
     },
   },
   {
