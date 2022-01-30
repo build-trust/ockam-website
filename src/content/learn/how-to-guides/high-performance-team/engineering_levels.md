@@ -16,28 +16,16 @@ You can find open roles on The Team [here](https://www.ockam.io/team#open-roles)
 
 ## Engineering Career Tracks
 
-<div id="presentation">
-    <div class="rwd-container">
-     <iframe src="https://coda.io/embed/badhlzjYbw/_sucIY?hideSections=true" width=900 height=650 style="max-width: 100%;" allow="fullscreen"></iframe>
-    </div>
- </div>
+<iframe src="https://coda.io/embed/badhlzjYbw/_sucIY?hideSections=true" width=900 height=650 style="max-width: 100%;" allow="fullscreen"></iframe>
 
 ## Engineering - Individual Contributors
 
-<div id="presentation">
-    <div class="rwd-container">
-     <iframe src="https://coda.io/embed/badhlzjYbw/_suKZ-?hideSections=true" width=1200 height=3000 style="max-width: 100%;" allow="fullscreen"></iframe>
-     </div>
-  </div>
+<iframe src="https://coda.io/embed/badhlzjYbw/_suKZ-?hideSections=true" width=1200 height=3000 style="max-width: 100%;" allow="fullscreen"></iframe>
 
 ## Engineering - Management
 
-<div id="presentation">
-    <div class="rwd-container">
-     <iframe src="https://coda.io/embed/badhlzjYbw/_su82c?hideSections=true" width=1200 height=2000 style="max-width: 100%;" allow="fullscreen"></iframe>
-     </div>
-  </div>
-
+<iframe src="https://coda.io/embed/badhlzjYbw/_su82c?hideSections=true" width=1200 height=2000 style="max-width: 100%;" allow="fullscreen"></iframe>
+  
 ## References
 
 * [Holloway Guides](https://www.holloway.com/g/technical-recruiting-hiring/sections/setting-levels-and-titles)
