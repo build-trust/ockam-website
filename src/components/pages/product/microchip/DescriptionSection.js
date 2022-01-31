@@ -118,7 +118,7 @@ const DescriptionSection = () => {
             </CheckedListItemWrapper>
             <Text color="caption">
               Ockam brings key management into your applicaiton layer. We've
-              already done the nitty-gritty of embedded scurity engineering.
+              already done the nitty-gritty of embedded security engineering.
             </Text>
           </AnimateOnScroll>
         </DescriptionContainer>

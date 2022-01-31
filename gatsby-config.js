@@ -11,6 +11,7 @@ const plugins = [
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp',
   'gatsby-plugin-svgr',
+  'gatsby-transformer-remark',
   {
     resolve: 'gatsby-redirect-from',
     options: {
@@ -27,6 +28,12 @@ const plugins = [
     resolve: `gatsby-transformer-remark`,
     options: {
       plugins: [`gatsby-remark-images`],
+    },
+  },
+  {
+    resolve: `gatsby-transformer-remark`,
+    options: {
+      plugins: [`gatsby-remark-responsive-iframe`],
     },
   },
   {
