@@ -240,7 +240,6 @@ export const pageQuery = graphql`
             }
           }
         }
-        wideContent
         description
         date(fromNow: true)
         author
