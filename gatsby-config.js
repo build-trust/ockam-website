@@ -11,7 +11,6 @@ const plugins = [
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp',
   'gatsby-plugin-svgr',
-  'gatsby-transformer-remark',
   {
     resolve: 'gatsby-redirect-from',
     options: {
