@@ -6,7 +6,6 @@ import PageSection from '../../PageSection';
 import { media } from '../../../../utils/emotion';
 import Heading from '../../../Heading';
 import AnimateOnScroll from '../../../AnimateOnScroll';
-import Badge from '../../../Badge';
 
 const StyledPageSection = styled(PageSection)`
   padding: 11rem 0;

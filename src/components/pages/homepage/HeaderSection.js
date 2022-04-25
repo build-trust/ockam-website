@@ -121,13 +121,16 @@ const HeaderSection = () => {
             </Text>
             <ListContainer>
               <ListItem icon={MessageIcon}>
-                Send end-to-end encrypted messages through your connected system,
+                Send end-to-end encrypted messages through your connected
+                system,
               </ListItem>
               <ListItem icon={HandsIcon}>
-              Establish authenticated channels between endpoints regardless of the transports or network hops,
+                Establish authenticated channels between endpoints regardless of
+                the transports or network hops,
               </ListItem>
               <ListItem icon={FingerPrint}>
-              Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments.
+                Create and manage cryptographic keys, unique device identifiers,
+                and verifiable credentials in your connected environments.
               </ListItem>
             </ListContainer>
           </AnimateOnScroll>
