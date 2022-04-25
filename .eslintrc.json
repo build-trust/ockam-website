@@ -77,7 +77,8 @@
     "max-classes-per-file": ["error", 1],
     "max-depth": ["error", 3],
     "max-nested-callbacks": ["error", 2],
-    "complexity": ["error", 4]
+    "complexity": ["error", 8],
+    "react/no-unescaped-entities": "off"
   },
   "plugins": ["import", "react", "react-hooks", "jsx-a11y", "jest"],
   "overrides": [
