@@ -5,6 +5,7 @@ node_modules
 *.env
 .idea/
 .gitmodules
+.eslintcache
 
 src/content/learn/proposals
 src/content/learn/concepts
