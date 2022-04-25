@@ -1,37 +1,50 @@
 const crypto = require('crypto');
-
 const trim = require('lodash/trim');
 
 const excludedChildTypes = ['export', 'import'];
 
-const matchExcludedType = type => excludedChildTypes.some(excluded => excluded === type);
+const matchExcludedType = type =>
+  excludedChildTypes.some(excluded => excluded === type);
 
-const mergeNestedChildrenMdxAst = (child) => {
-  if(matchExcludedType(child.type)) return '';
-  if(child.type === "text" || !child.children) {
+const mergeNestedChildrenMdxAst = child => {
+  if (matchExcludedType(child.type)) return '';
+  if (child.type === 'text' || !child.children) {
     return child.value || '';
   }
-  return child.children.reduce((acc, item) => `${acc}${mergeNestedChildrenMdxAst(item)} `,'')
+  return child.children.reduce(
+    (acc, item) => `${acc}${mergeNestedChildrenMdxAst(item)} `,
+    ''
+  );
 };
 
-const parseMdxAst = (mdxAST) => {
+const parseMdxAst = mdxAST => {
   return mdxAST.children.reduce((acc, child) => {
     const text = trim(mergeNestedChildrenMdxAst(child));
-    if(!text) return acc;
-    return [...acc, {
-      type: child.type,
-      text,
-    }]
-  }, [])
+    if (!text) return acc;
+    return [
+      ...acc,
+      {
+        type: child.type,
+        text,
+      },
+    ];
+  }, []);
 };
 
-const mapMdxNodeToAlgoliaRecords = ({mdxAST, excerpt, objectID, title, ...node}) => {
+const mapMdxNodeToAlgoliaRecords = ({
+  mdxAST,
+  excerpt,
+  objectID,
+  title,
+  ...node
+}) => {
   const chunks = parseMdxAst(mdxAST);
   const articleName = title;
   const records = chunks.map(chunk => ({
-    objectID: crypto.createHash("md5")
+    objectID: crypto
+      .createHash('md5')
       .update(objectID + chunk.text)
-      .digest("hex"),
+      .digest('hex'),
     articleName,
     ...node,
     ...chunk,

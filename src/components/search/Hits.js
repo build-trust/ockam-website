@@ -2,7 +2,7 @@ import React from 'react';
 import { connectInfiniteHits } from 'react-instantsearch-dom';
 import PropTypes from 'prop-types';
 
-import { LearnHit } from './HitComps';
+import LearnHit from './HitComps';
 import LoadMoreButton from './LoadMoreButton';
 
 const Hits = ({ hasMore, refineNext, hits, onClick }) => (

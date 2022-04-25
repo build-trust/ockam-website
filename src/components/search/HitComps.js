@@ -57,4 +57,4 @@ LearnHit.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export { LearnHit };
+export default LearnHit;

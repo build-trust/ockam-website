@@ -14,7 +14,7 @@ function walkDir(dir, callback) {
 }
 
 function changeFrontMatter(dir) {
-  walkDir(dir, function(filePath) {
+  walkDir(dir, function traverse(filePath) {
     const ext = path.extname(filePath);
     if (ext === '.md') {
       const contents = fs.readFileSync(filePath, 'utf8');

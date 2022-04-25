@@ -3,12 +3,10 @@ import styled from '@emotion/styled';
 import LinkedinLogo from 'emotion-icons/fa-brands/Linkedin';
 import TwitterLogo from 'emotion-icons/fa-brands/Twitter';
 import { lighten } from 'polished';
-import GithubIcon from 'emotion-icons/simpleIcons/GitHub';
 
 import { media } from '../utils/emotion';
 import useModal from '../hooks/useModal';
 import ContactModal from '../modals/ContactModal';
-import useSiteMetadata from '../hooks/useSiteMetadata';
 
 import PageSection from './pages/PageSection';
 import Link from './Link';
@@ -80,7 +78,6 @@ const SocialContainer = styled.div`
 
 const Footer = () => {
   const [, showContactModal] = useModal(ContactModal);
-  const siteMetaData = useSiteMetadata();
   const openContactModal = () => showContactModal();
   return (
     <PageSection mb={3}>

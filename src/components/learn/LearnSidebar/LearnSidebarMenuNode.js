@@ -76,6 +76,8 @@ const LearnSidebarMenuNode = ({
     : false;
   const isActive = useMemo(
     () => location && location.pathname.match(artificiallyUrl || url),
+    // Since location is coming straight up from Gatsby we know that is memoized.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [location.pathname, artificiallyUrl, url]
   );
   const isExpandedNode = expandedNodes.some(item => item === url);

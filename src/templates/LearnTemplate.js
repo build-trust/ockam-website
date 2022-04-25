@@ -4,6 +4,7 @@ import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { layout } from 'styled-system';
+import Prism from 'prism-react-renderer/prism';
 
 import NextPrevious from '../components/NextPrevious';
 import SEO from '../components/SEO';
@@ -16,7 +17,6 @@ import defaultAvatar from '../assets/default_avatar.png';
 import LearnPost from '../components/blog/LearnPost';
 import LearnGridLayout from '../components/LearnGridLayout';
 import RightSidebar from '../components/learn/RightSidebar/RightSidebar';
-import Prism from 'prism-react-renderer/prism';
 
 (typeof global !== 'undefined' ? global : window).Prism = Prism;
 
@@ -59,6 +59,8 @@ const ContentLearnContainer = styled(LearnGridLayout)`
   `}
 `;
 
+// TODO: This render function could be refactored into several rendering helper functions
+// eslint-disable-next-line complexity
 export default function LearnTemplate(props) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
