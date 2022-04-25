@@ -18,7 +18,12 @@ exports.createPages = async ({ graphql, actions }) => {
   const mdxPages = await getMarkdownPages(graphql);
   const leverPages = await getLeverPages(graphql);
   redirects.forEach(({ from, to }) =>
-    createRedirect({ fromPath: from, toPath: to, isPermanent: true })
+    createRedirect({
+      fromPath: from,
+      toPath: to,
+      isPermanent: true,
+      redirectInBrowser: true,
+    })
   );
   mdxPages.forEach(mdxPage => createPage(mdxPage));
   leverPages.forEach(leverPage => createPage(leverPage));

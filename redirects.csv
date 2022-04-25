@@ -1,1 +1,10 @@
-/product/router;/product/hub
+/product/router;/
+/product/hub;/
+/product/azure;/
+/product/hub;/
+/product;/
+/product/;/
+/product/influxdata;/
+/product/kafka;/
+/product/microchip;/
+/product/registry;/
