@@ -10,38 +10,6 @@ import capitalize from '../../utils/capitalize';
 import ContactButton from './ContactButton';
 import DropdownLink from './DropdownLink';
 
-const productOptions = [
-  {
-    label: 'Open Source SDKs',
-    to: '/product',
-    isRoot: true,
-  },
-  {
-    label: 'Ockam Registry',
-    to: '/product/registry',
-  },
-  {
-    label: 'Ockam Hub',
-    to: '/product/hub',
-  },
-  {
-    label: 'Kafka Add-on',
-    to: '/product/kafka',
-  },
-  {
-    label: 'InfluxData Add-on',
-    to: '/product/influxdata',
-  },
-  {
-    label: 'Azure HSM Add-on',
-    to: '/product/azure',
-  },
-  {
-    label: 'Microchip Add-ons',
-    to: '/product/microchip',
-  },
-];
-
 const teamOptions = [
   {
     label: 'Overview',
@@ -75,14 +43,6 @@ const MenuItems = ({ isCollapsedHeader, onClickItem, contactAsButton }) => {
 
   return (
     <>
-      <DropdownMenu
-        onClickItem={onClickItem}
-        isCollapsedHeader={isCollapsedHeader}
-        options={productOptions}
-        triggerEvent="mouseover"
-      >
-        <DropdownLink fontSize={LinkFontSize} to="/product" label="Product" />
-      </DropdownMenu>
       <DropdownMenu
         onClickItem={onClickItem}
         isCollapsedHeader={isCollapsedHeader}
