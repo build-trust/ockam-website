@@ -65,7 +65,7 @@
     "is-absolute-url": "3.0.3",
     "lodash": "^4.17.21",
     "neat-csv": "5.2.0",
-    "node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
     "polished": "3.6.4",
     "prism-react-renderer": "1.1.1",
     "prismjs": "^1.23.0",
