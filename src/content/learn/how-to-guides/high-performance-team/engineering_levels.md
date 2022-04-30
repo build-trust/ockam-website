@@ -70,7 +70,7 @@ What we do is who we are. We bring this philosophy to our engineer roles. Becaus
           <li> Has an engineering and programming foundation based upon several years of study.</li>
           <li> Expected to spend the majority of time learning about code and development best practices.</li>
           <li> Understands scope of small features.</li>
-          <li> Has a basic understanding of what all components in their product area.</li>
+          <li> Has a basic understanding of what all components in their product are.</li>
       </ul>
     </td>
     <td>
