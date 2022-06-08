@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@public/*": ["./public/*"],
+      "@root/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@consts/*": ["./src/consts/*"],
+      "@config": ["./src/config.ts"],
+      "@contextProviders/*": ["./src/contextProviders/*"],
+      "@theme/*": ["./src/theme/*"],
+      "@theme": ["./src/theme/index.ts"],
+      "@utils/*": ["./src/utils/*"],
+      "@utils": ["./src/utils/index.ts"],
+      "@typings/*": ["./src/typings/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@views/*": ["./src/views/*"],
+      "@views": ["./src/views/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}
