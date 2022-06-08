@@ -1,3 +1,0 @@
-[markdown-link-relative]
-match=(../:[page])
-rewrite=(/learn/how-to-guides/rust/:[page])

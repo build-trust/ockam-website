@@ -1,49 +1,54 @@
-public
-.cache
-node_modules
-*DS_Store
-*.env
-.idea/
-.gitmodules
+# Dependency directories
+node_modules/
+.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# custom typings folder
+!typings/
+
+# Optional eslint cache
 .eslintcache
 
-src/content/learn/proposals
-src/content/learn/concepts
+# dotenv environment variables file
+.env
+.env.development
+.envrc
 
-**/cli.config
-**/*.swp
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Created by https://www.gitignore.io/api/terraform
-# Edit at https://www.gitignore.io/?templates=terraform
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-### Terraform ###
-# Local .terraform directories
-**/.terraform/*
-**/main.tf
-# .tfstate files
-*.tfstate
-*.tfstate.*
+# next.js build output
+.next
+out
+build
 
-# Crash log files
-crash.log
+# system files
+.zfs
+.DS_Store
+.*.swp
+*.pem
+*~
 
-# Ignore any .tfvars files that are generated automatically for each Terraform run. Most
-# .tfvars files are managed as part of configuration and so should be included in
-# version control.
-#
-# example.tfvars
+# directories used by IDEs
+.idea
+.project
+.settings
+.vscode
 
-# Ignore override files as they are usually used to override resources locally and so
-# are not checked in
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
+# vercel
+.vercel
+*.tsbuildinfo
 
-# Include override files you do wish to add to version control using negated pattern
-# !example_override.tf
-
-# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
-# example: *tfplan*
-
-# End of https://www.gitignore.io/api/terraform
+# storybook
+storybook-static

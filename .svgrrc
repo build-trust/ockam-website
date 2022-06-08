@@ -1,0 +1,20 @@
+{
+    "ref": true,
+    "svgoConfig": {
+        "plugins": [
+            {
+                "removeViewBox": false,
+                "cleanupIDs": true,
+                "removeComments": true,
+                "removeUselessDefs": true,
+                "removeUselessStrokeAndFill": true,
+                "removeEmptyAttrs": true,
+                "removeTitle": true,
+                "removeDesc": true,
+                "convertShapeToPath": true,
+                "cleaupAttrs": true,
+                "removeEditorsNSData" : true,
+            }
+        ]
+    }
+}
