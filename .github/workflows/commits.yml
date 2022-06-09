@@ -80,7 +80,7 @@ jobs:
       - name: Lint Commit Messages
         run: |
           npx commitlint \
-            --config tools/commitlint/commitlint.config.js \
+            --config commitlint.config.js \
             --from $FIRST_COMMIT \
             --to HEAD \
             --help-url https://www.ockam.io/learn/how-to-guides/contributing/CONTRIBUTING#commit-messages || \
