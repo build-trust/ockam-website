@@ -14,11 +14,11 @@ jobs:
     name: Commits - Check
     runs-on: ubuntu-20.04
 
-    # We assume that commit 7838e7c08277b560914ce5934467e95698dc65ca will be in the history
+    # We assume that commit 82c2a8ec3a33fff8f5d28f7ad0ce338dfe625750 will be in the history
     # of all commits based on ockam develop branch
-    # https://github.com/build-trust/ockam-website/commit/7838e7c08277b560914ce5934467e95698dc65ca
+    # https://github.com/build-trust/ockam-website/commit/82c2a8ec3a33fff8f5d28f7ad0ce338dfe625750
     env:
-      FIRST_COMMIT: 7838e7c08277b560914ce5934467e95698dc65ca
+      FIRST_COMMIT: 82c2a8ec3a33fff8f5d28f7ad0ce338dfe625750
 
     steps:
       - name: Checkout
