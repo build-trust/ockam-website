@@ -36,7 +36,7 @@ jobs:
 
       - name: Get commit information from Github (Pull Request)
         if: github.event_name == 'pull_request'
-        run: gh api repos/build-trust/ockam/pulls/${{ github.event.number }}/commits > commits.json
+        run: gh api repos/build-trust/ockam-website/pulls/${{ github.event.number }}/commits > commits.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -61,7 +61,7 @@ jobs:
             but it seems this is not the case with the current HEAD.
 
             Try rebasing to the develop branch of ockam.
-            https://github.com/build-trust/ockam/tree/develop
+            https://github.com/build-trust/ockam-website/tree/develop
           " && exit 1)
 
       - name: Check no merge commits
@@ -104,7 +104,7 @@ jobs:
               5. Only feat, fix, refactor type commits are included in our changelog.
 
               The linting rules are defined in:
-              https://github.com/build-trust/ockam/blob/develop/tools/commitlint/commitlint.config.js
+              https://github.com/build-trust/ockam-website/blob/develop/commitlint.config.js
 
               More about the Ockam Commit Message Convention
               https://ockam.io/learn/how-to-guides/contributing/CONTRIBUTING#commit-messages
