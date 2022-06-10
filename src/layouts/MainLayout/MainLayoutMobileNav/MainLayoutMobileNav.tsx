@@ -37,9 +37,11 @@ const MainLayoutMobileNav: FunctionComponent<MainLayoutMobileNavProps> = ({
       minH={isOpenMobileNav ? '100vh' : 0}
       overflow={isOpenMobileNav ? 'auto' : 'hidden'}
     >
-      <MainLayoutMobileNavMenu />
+      <Flex pb={16} w="full" h="inherit" direction="column" align="center">
+        <MainLayoutMobileNavMenu />
 
-      <MainLayoutCtaButtons />
+        <MainLayoutCtaButtons />
+      </Flex>
     </Flex>
   </>
 );

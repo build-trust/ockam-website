@@ -14,7 +14,7 @@ const CARDS = [
     text: 'Join our community, start a discussion, or file an issue.',
     link: {
       text: 'Go to Github',
-      href: '#',
+      href: 'https://github.com/build-trust/ockam',
     },
   },
   {
@@ -23,7 +23,7 @@ const CARDS = [
     text: 'Let’s build an application together in a step-by-step guide.',
     link: {
       text: 'Go to the Guide',
-      href: '#',
+      href: 'https://github.com/build-trust/ockam#next-steps',
     },
   },
   {
@@ -32,7 +32,7 @@ const CARDS = [
     text: 'Sign up for an account and move to production with Ockam Cloud.',
     link: {
       text: 'Subscribe Through AWS',
-      href: '#',
+      href: 'mailto:ockambeta@ockam.io',
     },
   },
 ];
@@ -55,7 +55,7 @@ const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, 
     border="1px"
     borderColor="gray.200"
     borderBottom="4px"
-    borderBottomColor="avocado.400"
+    borderBottomColor="avocado.500"
     borderRadius="md"
     bg="white"
     maxW="lg"
@@ -72,9 +72,16 @@ const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, 
       <Text mb={5} fontSize="sm">
         {text}
       </Text>
-      <Text fontWeight="semibold" color="black" fontSize="md">
+      <Text
+        as="a"
+        href={link.href}
+        target="_blank"
+        fontWeight="semibold"
+        color="black"
+        fontSize="md"
+      >
         {link.text}
-        <ArrowForwardIcon w={5} h={5} />
+        <ArrowForwardIcon w={5} h={5} ml={2} />
       </Text>
     </Box>
   </Flex>
@@ -84,20 +91,23 @@ const GetStarted: FunctionComponent = () => (
   <Box bgColor="gray.50" pt={{ base: 6, lg: 8 }}>
     <Container variant="section" zIndex={0}>
       <DashedLineDivider display={{ base: 'none', lg: 'block' }} />
-      <StepsLabel mb={{ base: 4, lg: 12 }}>
+
+      <StepsLabel mb={{ base: 4, lg: 2 }}>
         <LineDivider bottom="100%" h={{ base: 6, lg: 8 }} gradientDir="fromBottomToTop" />
         Let&apos;s Build Trust
-        <LineDivider top="100%" h={{ base: 8, lg: 14 }} />
+        <LineDivider top="100%" h={{ base: 8, lg: 8 }} />
       </StepsLabel>
-      <ArrowDownIcon w={8} h={8} color="avocado.400" />
+
+      <ArrowDownIcon w={8} h={8} color="avocado.500" />
 
       <SimpleGrid
+        bgColor="gray.50"
         columns={{ base: 1, lg: 3 }}
         spacing={{ base: 6, lg: 10 }}
         mb={{ base: 20, lg: 20 }}
         mt={{ base: 8, lg: 6 }}
-        py={{ lg: 6 }}
-        bgColor="gray.50"
+        pt={{ lg: 8 }}
+        pb={{ lg: 6 }}
       >
         {CARDS.map((card) => (
           <Card key={card.title} {...card} />

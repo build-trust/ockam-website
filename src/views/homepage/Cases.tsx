@@ -43,13 +43,13 @@ const Card: FunctionComponent<CardProps> = ({ src, title, texts }) => (
     border="1px"
     borderColor="gray.200"
     borderBottom="4px"
-    borderBottomColor="avocado.400"
+    borderBottomColor="avocado.500"
     borderRadius="md"
     bg="white"
     maxW="lg"
   >
     <Center pb={6} mb={6} borderBottom="1px" borderColor="gray.200">
-      <Image src={src} width={312} height={170} />
+      <Image src={src} width={311} height={170} />
     </Center>
 
     <Box>
@@ -67,7 +67,7 @@ const Card: FunctionComponent<CardProps> = ({ src, title, texts }) => (
 );
 
 const Cases: FunctionComponent = () => (
-  <Container variant="section" py={{ base: 16, lg: 20 }}>
+  <Container variant="section" id="use-cases" py={{ base: 16, lg: 20 }}>
     <Heading as="h2" size="h2" mb={6}>
       How is Ockam Used?
     </Heading>

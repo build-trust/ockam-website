@@ -15,3 +15,8 @@ export { default as TwitterIcon } from './TwitterIcon';
 export { default as PackagesIcon } from './PackagesIcon';
 export { default as CheckIcon } from './CheckIcon';
 export { default as CloseIcon } from './CloseIcon';
+export { default as QuoteIcon } from './QuoteIcon';
+export { default as BrainIcon } from './BrainIcon';
+export { default as BulbIcon } from './BulbIcon';
+export { default as ClarityIcon } from './ClarityIcon';
+export { default as TimeIcon } from './TimeIcon';

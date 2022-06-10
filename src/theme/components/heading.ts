@@ -7,7 +7,7 @@ const Heading = {
   sizes: {
     h1: {
       fontSize: { base: '6.25xl', lg: '10xl' },
-      lineHeight: 0.95,
+      lineHeight: { base: 0.95 },
     },
     h2: {
       fontSize: { base: '4xl', lg: '4.5xl' },

@@ -13,7 +13,7 @@ const LineDivider: FunctionComponent<BoxProps & { gradientDir?: 'fromBottomToTop
       borderBottomRadius="3px"
       position="absolute"
       left="50%"
-      bg={gradients.primaryGradient}
+      bg={gradients.primary}
       {...(gradientDir === 'fromBottomToTop'
         ? { transform: 'rotate(180deg) translateX(50%)' }
         : { transform: 'translateX(-50%)' })}
