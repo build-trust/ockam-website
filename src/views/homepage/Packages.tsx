@@ -63,7 +63,7 @@ const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, 
     bg="white"
     maxW="lg"
     borderBottom="4px"
-    borderBottomColor="avocado.400"
+    borderBottomColor="avocado.500"
   >
     <SimpleGrid>
       <Flex
@@ -127,7 +127,7 @@ const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, 
 );
 
 const Packages: FunctionComponent = () => (
-  <Container variant="section" py={{ base: 16, lg: 20 }}>
+  <Container variant="section" id="products" py={{ base: 16, lg: 20 }}>
     <StepsLabel mb={{ base: 6, lg: 16 }}>
       <LineDivider
         h={32}

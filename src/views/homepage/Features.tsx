@@ -69,14 +69,14 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon: IconComponent, title, 
 );
 
 const Features: FunctionComponent = () => (
-  <Box bgColor="gray.50" py={{ base: 16, lg: 24 }}>
-    <Container variant="section">
-      <Box alignSelf="flex-start" w="full" maxW="xl" mb={{ base: 10, md: 16 }}>
-        <Heading as="h2" size="h2" mb={{ md: 6, lg: 8 }}>
+  <Box bgColor="gray.50" pt={{ base: 16, lg: 24 }} pb={{ base: 16, lg: 30 }}>
+    <Container variant="section" id="features">
+      <Box alignSelf="flex-start" w="full" maxW="2.5xl" mb={{ base: 10, md: 16 }}>
+        <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }}>
           Features of Ockam
         </Heading>
 
-        <Text fontSize={{ lg: 'lg' }}>
+        <Text fontSize={{ lg: 'lg' }} lineHeight={1.4}>
           Managing data in motion is really really hard. We’ve thought of the details and have
           reduced the vulnerability surface of your data to something manageable.
         </Text>

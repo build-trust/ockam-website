@@ -27,10 +27,10 @@ const Hero: FunctionComponent = () => {
   const { gradients } = useTheme();
 
   return (
-    <Container variant="section" pt={{ base: 10, lg: 12 }} pb={{ base: 10, lg: 0 }}>
-      <Heading as="h1" size="h1" fontWeight="extrabold" textAlign="center" mb={{ base: 8, lg: 10 }}>
+    <Container variant="section" pb={{ base: 10, lg: 0 }}>
+      <Heading as="h1" size="h1" fontWeight="extrabold" textAlign="center">
         Build{' '}
-        <chakra.span bgImage={gradients.primaryGradient} bgClip="text">
+        <chakra.span bgImage={gradients.primary} bgClip="text">
           Trust
         </chakra.span>
         .
@@ -41,6 +41,7 @@ const Hero: FunctionComponent = () => {
         justifyContent="center"
         flexWrap="wrap"
         flexDirection="row"
+        mt={{ base: 8, lg: 10 }}
         mb={{ base: 16, lg: 20 }}
       >
         {SUBHEADING_TEXTS.map(({ text, icon: IconComponent }) => (
@@ -52,7 +53,7 @@ const Hero: FunctionComponent = () => {
             mb={{ base: 5, lg: 0 }}
             fontSize={{ base: 'lg', lg: 'xl' }}
             fontWeight="medium"
-            lineHeight={1}
+            lineHeight={1.3}
             color="brand.900"
           >
             <ListIcon as={IconComponent} w={6} h={6} mr={4} />
@@ -66,7 +67,7 @@ const Hero: FunctionComponent = () => {
         boundaries. These applications must exchange data with Trust.
       </Text>
 
-      <Flex direction="column" align="center">
+      <Flex direction="column" align="center" mt={{ base: 6, lg: 0 }}>
         <StepsLabel mb={12}>
           <LineDivider
             bottom="100%"
@@ -77,7 +78,7 @@ const Hero: FunctionComponent = () => {
           Ockam Empowers Developers
           <LineDivider top="100%" h={16} />
         </StepsLabel>
-        <ArrowDownIcon w={6} h={6} color="avocado.400" />
+        <ArrowDownIcon w={6} h={6} color="avocado.500" />
       </Flex>
     </Container>
   );
