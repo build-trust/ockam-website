@@ -5,6 +5,7 @@ import {
   Flex,
   Heading,
   Text,
+  Box,
   List,
   ListItem,
   ListIcon,
@@ -21,6 +22,10 @@ const SUBHEADING_TEXTS = [
   { icon: AuthenticityIcon, text: 'Authenticity' },
   { icon: PrivacyIcon, text: 'Privacy' },
   { icon: ControlIcon, text: 'Control' },
+];
+
+const DESCRIPTION_TEXTS = [
+  'Modern applications are distributed, interconnected, and have Zero-Trust in network boundaries. These applications must exchange data with Trust.',
 ];
 
 const Hero: FunctionComponent = () => {
@@ -62,10 +67,18 @@ const Hero: FunctionComponent = () => {
         ))}
       </List>
 
-      <Text mb={{ base: 20, lg: 24 }} maxW="3xl" fontSize={{ base: 'lg', lg: 'xl' }} align="center">
-        Modern applications are distributed, interconnected, and have Zero-Trust in network
-        boundaries. These applications must exchange data with Trust.
-      </Text>
+      <Box
+        mb={{ base: 20, lg: 24 }}
+        maxW="3xl"
+        fontSize={{ base: 'lg', lg: 'xl' }}
+        textAlign="center"
+      >
+        {DESCRIPTION_TEXTS.map((text, index) => (
+          <Text key={text} mb={index + 1 === DESCRIPTION_TEXTS.length ? 0 : 2}>
+            {text}
+          </Text>
+        ))}
+      </Box>
 
       <Flex direction="column" align="center" mt={{ base: 6, lg: 0 }}>
         <StepsLabel mb={12}>

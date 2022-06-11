@@ -28,8 +28,8 @@ const CARDS = [
   },
   {
     icon: CloudIcon,
-    title: 'Ockam Cloud',
-    text: 'Sign up for an account and move to production with Ockam Cloud.',
+    title: 'Ockam Orchestrator',
+    text: 'Sign up for an account and move to production with Ockam Orchestrator.',
     link: {
       text: 'Subscribe Through AWS',
       href: 'mailto:ockambeta@ockam.io',

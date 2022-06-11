@@ -9,7 +9,7 @@ const Hero: FunctionComponent = () => {
 
   return (
     <Container variant="section">
-      <Heading as="h1" size="h1" fontWeight="extrabold" textAlign="center">
+      <Heading as="h1" size="h1" w="full" fontWeight="extrabold" textAlign="center">
         Build
         <br /> for
         <br />
@@ -41,7 +41,7 @@ const Hero: FunctionComponent = () => {
 
         <StepsLabel>
           <LineDivider bottom="100%" h={16} bg={gradients.tertiary} />
-          Our only value is trust
+          Join Us
           <LineDivider top="100%" h={16} borderRadius="0" />
         </StepsLabel>
       </Flex>

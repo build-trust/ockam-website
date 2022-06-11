@@ -1,37 +1,41 @@
 import { FunctionComponent } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { Box, Container, Flex, Text, Heading, SimpleGrid, Center } from '@chakra-ui/react';
+
+import CasesOneImage from '@assets/images/cases1.png';
+import CasesTwoImage from '@assets/images/cases2.png';
+import CasesThreeImage from '@assets/images/cases3.png';
 
 const CARDS = [
   {
-    src: '/cases1.png',
+    src: CasesOneImage,
     title: 'Connect at Micro-Service Scale',
     texts: [
-      `Modern applications are made up of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of Cloud marketplace services. With so many endpoints that need to interoperate it’s become impossible to manage.`,
-      `Ockam’s key generation and handshake protocols allow for dynamic, massive scale orchistrations across complex network topologies.`,
+      'Modern applications are made up of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of Cloud marketplace services. With so many endpoints that need to interoperate it’s become impossible to manage.',
+      'Ockam’s key generation and handshake protocols allow for dynamic, massive scale orchistrations across complex network topologies. ',
     ],
   },
   {
-    src: '/cases2.png',
+    src: CasesTwoImage,
     title: 'Get Out of the Middle',
     texts: [
-      `You are building an app that moves data from here to there. Perhaps it’s a message service like Kafka or RabbitMQ?`,
-      `You don’t want your application to be able to access the data that moves through your service. Particularly if its Hippa or PCI protected data!`,
-      `Ockam’s end-to-end encryption originates at the source and terminates at the target application, so that no app in the middle has access to  data-in-motion.`,
+      'You are building an app that moves data from over-there to over-there. Perhaps it’s a message service like Kafka or RabbitMQ?',
+      'You don’t want to be able to access the data that moves through your service. Particularly if its Hippa or PCI protected data!',
+      'Ockam’s end-to-end encryption originates at the data source and terminates at the data target , so your app-in-the-middle has no ability to decrypt and access data-in-motion. ',
     ],
   },
   {
-    src: '/cases3.png',
+    src: CasesThreeImage,
     title: 'Trust Anything, Anywhere',
     texts: [
-      `If you access data that is in a VPC, you are exposing your applications to new threats.`,
-      `Ockam’s inlets and outlets create topologies that eliminate either application to threats from the internet. Effectively your data can from from VPC to VPC without ever exposing either application to the internet. Virtually it feels like the applications are sitting next to eachother as separate processes in the same box.`,
+      'If you access data in a VPC, you are exposing your applications to threats by exposing your VPC to the internet.',
+      'Ockam’s inlets and outlets create topologies that eliminate threats from the internet for applications in VPCs. Effectively, your data can move from from VPC to VPC without ever exposing either application to the internet. Virtually it feels like the applications are sitting next to each other, as separate processes, in the same box.',
     ],
   },
 ];
 
 type CardProps = {
-  src: string;
+  src: StaticImageData;
   title: string;
   texts: string[];
 };
@@ -49,7 +53,7 @@ const Card: FunctionComponent<CardProps> = ({ src, title, texts }) => (
     maxW="lg"
   >
     <Center pb={6} mb={6} borderBottom="1px" borderColor="gray.200">
-      <Image src={src} width={311} height={170} />
+      <Image src={src} alt={`${title} image`} width={313} height={171} />
     </Center>
 
     <Box>

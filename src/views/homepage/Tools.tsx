@@ -3,22 +3,23 @@ import { Box, Container, Flex, Text, SimpleGrid, Heading, useTheme } from '@chak
 import { ArrowDownIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 
+import ToolsImage from '@assets/images/tools.png';
 import StepsLabel from '@components/StepsLabel';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import BorderDot from '@components/BorderDot';
 
 const STEPS = [
   {
-    title: 'Get an Ockam Package',
-    text: 'Ockam packages are currently available for homebrew, docker, terraform, and as rust libraries.',
+    title: 'Get Ockam',
+    text: 'Install Ockam using Homebrew, Docker, Terraform, or Rust’s Cargo.',
   },
   {
-    title: 'Set Up Your Infrastructure',
-    text: 'Generate identity keys, enroll with Ockam Orchestrator, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam gravida congue mauris. Fusce rutrum venenatis nibh at iaculis. ',
+    title: 'Set Up an Ockam Project',
+    text: 'Enroll with Ockam Orchestrator, and setup a project and generate identities keys.',
   },
   {
     title: 'Move Data with Trust',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam gravida congue mauris. Fusce rutrum venenatis nibh at iaculis. ',
+    text: 'Build a demo that starts two local applications on your computer and creates an end-to-end encrypted, mutually authenticated communication between them, through an Ockam Orchestrator in the cloud.',
   },
 ];
 
@@ -36,7 +37,7 @@ const Tools: FunctionComponent = () => {
       </Heading>
 
       <StepsLabel mb={{ lg: 24 }}>
-        1. Add Our Code
+        1. Use Ockam
         <LineDivider
           display={{ base: 'none', lg: 'block' }}
           top="100%"
@@ -48,10 +49,10 @@ const Tools: FunctionComponent = () => {
 
       <SimpleGrid columns={{ base: 1, lg: 2 }} w="full">
         <Box my={{ base: 16, lg: 'auto' }} mx={{ base: 'auto', lg: 0 }}>
-          <Image src="/tools.png" width={510} height={397} />
+          <Image src={ToolsImage} width={510} height={397} />
         </Box>
 
-        <Box pl={{ lg: 30 }} maxW={{ lg: 'lg' }} my="auto" ml={{ lg: '1px' }} position="relative">
+        <Box pl={{ lg: 30 }} maxW={{ lg: 'lg' }} my="auto" position="relative">
           <BorderDot />
 
           <Box>

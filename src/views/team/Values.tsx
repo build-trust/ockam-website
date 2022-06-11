@@ -6,26 +6,36 @@ import { GreenIconWrapper } from '@components/icons/wrappers';
 
 const VALUES = [
   {
-    title: 'High-Performance Mindset',
-    text: 'Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments.',
+    title: 'High-Performant',
+    texts: [
+      'Ockam is a team of doers, builders, shippers, and finishers. We’ve created an environment where every individual is empowered to act, and trusted to be world-class in their role.',
+    ],
     icon: BrainIcon,
   },
   {
-    title: 'Keep Things Simple',
-    text: 'Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments. and verifiable credentials in your connected.',
+    title: 'Simple',
+    texts: [
+      'The creation of simple solutions out of complex problems is the basis for our namesake, Ockam. Every idea, product, and procedure at Ockam should be refined to make it as simple as it should be.',
+    ],
     icon: BulbIcon,
   },
   {
-    title: 'Default to Transparency',
-    text: 'Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments.',
+    title: 'Transparent',
+    texts: [
+      'We trust eachother to be transparent,authentic and honest. As a globally distributed remote-first team trasparent communications establishes our culture of trust.',
+    ],
     icon: ClarityIcon,
   },
   {
-    title: 'Time is Precious',
-    text: 'Create and manage cryptographic keys, unique device identifiers, and verifiable credentials in your connected environments. and verifiable credentials in your connected.',
+    title: 'Time Efficient',
+    texts: [
+      'Time is the most valuable asset that we have. We trust each other to use our time with respect. We consider how our actions and use of time imact everyone else on The Team.',
+    ],
     icon: TimeIcon,
   },
 ];
+
+const DESCRIPTIONS = ['Values are what we believe - Virtues are what we do'];
 
 const Values: FunctionComponent = () => (
   <Container variant="section" py={{ base: 16, lg: 30 }}>
@@ -34,9 +44,17 @@ const Values: FunctionComponent = () => (
         Virtues of the Ockam Team
       </Heading>
 
-      <Text fontSize={{ lg: 'lg' }} lineHeight={{ base: 1.5, lg: 1.4 }} my={6}>
-        Values are what we believe - Virtues are what we do
-      </Text>
+      <Box my={6}>
+        {DESCRIPTIONS.map((text, index) => (
+          <Text
+            fontSize={{ lg: 'lg' }}
+            lineHeight={{ base: 1.5, lg: 1.4 }}
+            mb={index + 1 === DESCRIPTIONS.length ? 0 : 2}
+          >
+            {text}
+          </Text>
+        ))}
+      </Box>
     </Box>
 
     <SimpleGrid
@@ -45,7 +63,7 @@ const Values: FunctionComponent = () => (
       spacingX={{ md: 16, lg: 14, xl: 24 }}
       pb={{ base: 4, lg: 10 }}
     >
-      {VALUES.map(({ icon: IconComponent, text, title }) => (
+      {VALUES.map(({ icon: IconComponent, texts, title }) => (
         <Box key={title}>
           <GreenIconWrapper flex={1} mb={4}>
             <IconComponent color="white" w={6} h={6} />
@@ -55,9 +73,11 @@ const Values: FunctionComponent = () => (
             {title}
           </Text>
 
-          <Text fontSize="sm" lineHeight={1.5}>
-            {text}
-          </Text>
+          {texts.map((text, index) => (
+            <Text key={text} fontSize="sm" lineHeight={1.5} mb={index + 1 === texts.length ? 0 : 2}>
+              {text}
+            </Text>
+          ))}
         </Box>
       ))}
     </SimpleGrid>

@@ -16,42 +16,64 @@ const FEATURES = [
   {
     icon: DeveloperIcon,
     title: 'Developer First',
-    text: 'Stripe did is for payment rails. Twilio did it for telecom. Ockam abstracts away complex infrastructure and cryptogrpahic protocols to empower millions of developers.',
+    texts: [
+      'Stripe did is for payment rails. Twilio did it for telecom.',
+      'Ockam abstracts away complex infrastructure and cryptogrpahic protocols to empower millions of developers.',
+    ],
   },
   {
     icon: CloudIcon,
     title: 'Cloud Native',
-    text: 'Ockam is built for enterprise scale. Add-ons are ready-made connectors for your favorite authentication, database and message broker services.',
+    texts: [
+      'Ockam is built for enterprise scale.',
+      'Add-ons are ready-made connectors for your favorite authentication, database and message broker services.',
+    ],
   },
   {
     icon: GitHubIcon,
     title: 'Open Source',
-    text: `Built with community feedback and scrutany, Ockam’s protocol security becomes stronger through transparency. Add-ons can be built by anyone.`,
+    texts: [
+      'Ockam’s protocol security becomes stronger through transparency, community feedback, and scrutany.',
+      'Add-ons can be built by anyone to create hardware key vaults or cloud service connectors.',
+    ],
   },
   {
     icon: LockIcon,
     title: 'Zero Trust',
-    text: `Ockam is *actually* end-to-end encrypted, and suitable for use on networks that can not be trusted. Transports are agnostic and pluggable so our protocols work across any network topology.`,
+    texts: [
+      'Ockam messaging is *actually* end-to-end encrypted, so it trustfully moves data across networks that should not be trusted. ',
+      'Transports are agnostic and pluggable so Ockam’s protocols can work across any network topology.',
+    ],
   },
   {
     icon: KeyIcon,
     title: 'Key Management',
-    text: `Private keys are created inside of the app and never leave the hardware environment. Revocation and rotation are already built in, so you have one less thing to worry about.`,
+    texts: [
+      'Private keys are created inside of all of your applications. They never leave the hardware environment. ',
+      'Orchestration, revocation and rotation of private, public and shared keys are built in, so you have one less thing to worry about.',
+    ],
   },
   {
     icon: EngineIcon,
     title: 'BYO Auth Engine',
-    text: `Ockam Add-ons empower you to use your existing authentication, roll-based authorization tools. Bring your own Okta, Auth0, OAuth, or even Web3 tools. We’ve got an Add-on for that!`,
+    texts: [
+      'Ockam Add-ons empower you to use your existing authentication, attribute-based (ABAC) authorization tools. ',
+      'Bring your own Okta, Auth0, OAuth, AWS, Azure, Google or Web3 IAM tools. Ockam has an Add-on for that!',
+    ],
   },
+];
+
+const DESCRIPTIONS = [
+  'Managing data in motion is really really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable. ',
 ];
 
 type FeatureProps = {
   icon: FunctionComponent<IconProps>;
   title: string;
-  text: string;
+  texts: string[];
 };
 
-const Feature: FunctionComponent<FeatureProps> = ({ icon: IconComponent, title, text }) => (
+const Feature: FunctionComponent<FeatureProps> = ({ icon: IconComponent, title, texts }) => (
   <Flex>
     <Box flex={0} mr={5}>
       <GreenIconWrapper>
@@ -63,7 +85,12 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon: IconComponent, title, 
       <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
         {title}
       </Text>
-      <Text fontSize="sm">{text}</Text>
+
+      {texts.map((text, index) => (
+        <Text key={text} fontSize="sm" mb={{ base: 4, lg: index + 1 === texts.length ? 0 : 2 }}>
+          {text}
+        </Text>
+      ))}
     </Box>
   </Flex>
 );
@@ -76,10 +103,16 @@ const Features: FunctionComponent = () => (
           Features of Ockam
         </Heading>
 
-        <Text fontSize={{ lg: 'lg' }} lineHeight={1.4}>
-          Managing data in motion is really really hard. We’ve thought of the details and have
-          reduced the vulnerability surface of your data to something manageable.
-        </Text>
+        {DESCRIPTIONS.map((text, index) => (
+          <Text
+            key={text}
+            fontSize={{ lg: 'lg' }}
+            lineHeight={1.4}
+            mb={index + 1 === DESCRIPTIONS.length ? 0 : 2}
+          >
+            {text}
+          </Text>
+        ))}
       </Box>
 
       <SimpleGrid

@@ -16,14 +16,21 @@ const Footer: FunctionComponent = () => {
         py={{ base: 10, lg: 16 }}
       >
         <Heading as="h3" size="h3" maxW="lg" mb={{ base: 9, lg: 0 }}>
+          Developers{' '}
           <chakra.span bgImage={gradients.primary} bgClip="text">
-            Developers Love Ockam.
-          </chakra.span>{' '}
-          Start Building With Us!
+            Love Ockam.
+          </chakra.span>
         </Heading>
 
-        <Button colorScheme="avocado" color="black" size="lg">
-          Go To Open Source
+        <Button
+          as="a"
+          href="https://github.com/build-trust/ockam#next-steps"
+          target="_blank"
+          colorScheme="avocado"
+          color="black"
+          size="lg"
+        >
+          Build a Demo App
         </Button>
       </Flex>
     </Container>

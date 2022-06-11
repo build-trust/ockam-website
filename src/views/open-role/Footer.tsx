@@ -22,7 +22,14 @@ const Footer: FunctionComponent = () => {
           </chakra.span>
         </Heading>
 
-        <Button colorScheme="avocado" color="black" size="lg">
+        <Button
+          as="a"
+          href="mailto:hello@ockam.io"
+          target="_blank"
+          colorScheme="avocado"
+          color="black"
+          size="lg"
+        >
           Contact Us
         </Button>
       </Flex>

@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Box, Container, Flex, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Link, Text } from '@chakra-ui/react';
 
-import LogoDark from '@assets/logo-dark.svg';
-// import { LinkedinIcon, TwitterIcon } from '@components/icons';
+import LogoGray from '@assets/logo-gray.svg';
+import { LinkedinIcon, TwitterIcon } from '@components/icons';
 
 const LINKS = [
   { text: 'Support', href: 'https://github.com/build-trust/ockam/discussions/categories/support' },
@@ -21,10 +21,9 @@ const MainLayoutFooter: FunctionComponent = () => (
       >
         <Flex align="center" direction={{ base: 'column', lg: 'row' }} order={{ base: 1, lg: 0 }}>
           <Box
-            as={LogoDark}
+            as={LogoGray}
             w={{ base: '126px', lg: '154px' }}
             h={{ base: '36px', lg: '44px' }}
-            filter="grayscale(100%) brightness(20%)"
             mb={{ base: 6, lg: 0 }}
             mr={{ base: 0, lg: 8 }}
           />
@@ -56,9 +55,15 @@ const MainLayoutFooter: FunctionComponent = () => (
               </Text>
             ))}
           </Flex>
+
           <Box>
-            {/* <LinkedinIcon w={6} h={6} color="gray.500" mr={5} /> */}
-            {/* <TwitterIcon w={6} h={6} color="gray.500" /> */}
+            <Link href="https://www.linkedin.com/company/ockam.io/" isExternal>
+              <LinkedinIcon w={6} h={6} color="gray.500" mr={5} />
+            </Link>
+
+            <Link href="https://twitter.com/ockam" isExternal>
+              <TwitterIcon w={6} h={6} color="gray.500" />
+            </Link>
           </Box>
         </Flex>
       </Flex>

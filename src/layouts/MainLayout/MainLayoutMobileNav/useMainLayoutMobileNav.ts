@@ -30,9 +30,11 @@ const useMainLayoutMobileNav = (): UseMainLayoutMobileNavReturnType => {
       }
     };
 
+    router.events.on('hashChangeStart', handleRouteChange);
     router.events.on('routeChangeStart', handleRouteChange);
 
     return (): void => {
+      router.events.off('hashChangeStart', handleRouteChange);
       router.events.off('routeChangeStart', handleRouteChange);
     };
   }, [router.events, isOpenMobileNav, onCloseMobileNav]);
