@@ -47,6 +47,7 @@ const Values: FunctionComponent = () => (
       <Box my={6}>
         {DESCRIPTIONS.map((text, index) => (
           <Text
+            key={text}
             fontSize={{ lg: 'lg' }}
             lineHeight={{ base: 1.5, lg: 1.4 }}
             mb={index + 1 === DESCRIPTIONS.length ? 0 : 2}

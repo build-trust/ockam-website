@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
-import { Hero, Quote, Values, OpenRoles, Footer } from '@views/team';
+import { Hero, Quote, Values, OpenRoles } from '@views/team';
 import CONFIG from '@config';
 import { LeverPostingsGroup } from '@typings/lever';
 
@@ -18,7 +18,6 @@ const OpenRolesPage: NextPageWithLayout<{ openRoles: LeverPostingsGroup[] }> = (
     <Quote />
     <Values />
     <OpenRoles openRoles={openRoles} />
-    <Footer />
   </>
 );
 

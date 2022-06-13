@@ -1,5 +1,14 @@
 import { FunctionComponent } from 'react';
-import { Box, Button, Container, Heading, List, ListItem, ListItemProps } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Heading,
+  List,
+  ListItem,
+  ListItemProps,
+} from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
 
@@ -43,36 +52,75 @@ const DetailsList: FunctionComponent<LeverPostingList> = ({ text, content }): JS
 
 type OpenRoleProps = { openRole: LeverPosting };
 
-const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => (
-  <Container variant="section" alignItems="flex-start">
-    <Box maxW="3xl" pb={16}>
-      <Button size="lg" color="brand.900" as="a" href={OPEN_ROLES_PATH} variant="link" mb={10}>
-        <ArrowBackIcon w={6} h={6} mr={2} /> Back to All Positions
-      </Button>
+const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
+  const ApplyButton = (
+    <Button
+      as="a"
+      href={openRole.applyUrl}
+      target="_blank"
+      colorScheme="avocado"
+      color="black"
+      mt={{ base: 10, lg: 0 }}
+    >
+      Apply
+    </Button>
+  );
 
-      <Heading as="h2" size="h2" lineHeight={1.3}>
-        {openRole.text}
-      </Heading>
+  return (
+    <Container variant="section" alignItems="flex-start">
+      <Box maxW="3xl" pb={16}>
+        <Button size="lg" color="brand.900" as="a" href={OPEN_ROLES_PATH} variant="link" mb={10}>
+          <ArrowBackIcon w={6} h={6} mr={2} /> Back to All Positions
+        </Button>
 
-      <Box
-        maxW="3xs"
-        h="4px"
-        bgColor="avocado.500"
-        mt={3}
-        mb={{ base: 16, lg: 24 }}
-        borderRadius="md"
-      />
+        <Flex
+          direction={{ base: 'column', lg: 'row' }}
+          align={{ lg: 'center' }}
+          mb={{ base: 16, lg: 24 }}
+        >
+          <Box position="relative">
+            <Heading as="h2" size="h2" lineHeight={1.3}>
+              {openRole.text}
+            </Heading>
 
-      <Box fontSize={{ lg: 'lg' }} color="gray.500" lineHeight={1.4}>
-        <Box dangerouslySetInnerHTML={{ __html: openRole.description }} />
-        <Box dangerouslySetInnerHTML={{ __html: openRole.additional }} />
+            <Box
+              position="absolute"
+              bottom={-3}
+              left={0}
+              maxW="3xs"
+              w="100%"
+              h="4px"
+              bgColor="avocado.500"
+              borderRadius="md"
+            />
+          </Box>
+
+          {ApplyButton}
+        </Flex>
+
+        <Box fontSize={{ lg: 'lg' }} color="gray.500" lineHeight={1.4}>
+          <Box dangerouslySetInnerHTML={{ __html: openRole.description }} />
+          <Box dangerouslySetInnerHTML={{ __html: openRole.additional }} />
+        </Box>
+
+        <Box maxW="md" h="1px" bgColor="gray.200" my={{ base: 10, lg: 20 }} />
+
+        {openRole.lists.map(DetailsList)}
+
+        <Flex
+          direction={{ base: 'column', lg: 'row' }}
+          align={{ lg: 'center' }}
+          justify={{ lg: 'space-between' }}
+          pb={16}
+        >
+          <Heading as="h3" fontSize="4xl">
+            Join the Ockam Team
+          </Heading>
+          {ApplyButton}
+        </Flex>
       </Box>
-
-      <Box maxW="md" h="1px" bgColor="gray.200" my={{ base: 10, lg: 20 }} />
-
-      {openRole.lists.map(DetailsList)}
-    </Box>
-  </Container>
-);
+    </Container>
+  );
+};
 
 export default OpenRole;

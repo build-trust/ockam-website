@@ -7,7 +7,7 @@ import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import CONFIG from '@config';
 import MainLayout from '@layouts/MainLayout';
 import { LeverPosting } from '@typings/lever';
-import { OpenRole, Footer } from '@views/open-role';
+import { OpenRole } from '@views/open-role';
 import { generateSlug } from '@utils/generateSlug';
 
 const OpenRolePage: NextPageWithLayout<{ openRole: LeverPosting }> = ({ openRole }) => (
@@ -19,7 +19,6 @@ const OpenRolePage: NextPageWithLayout<{ openRole: LeverPosting }> = ({ openRole
     </Head>
 
     <OpenRole openRole={openRole} />
-    <Footer />
   </>
 );
 

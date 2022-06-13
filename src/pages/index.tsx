@@ -12,7 +12,6 @@ import {
   Features,
   Cases,
   Packages,
-  Footer,
 } from '@views/homepage';
 import CONFIG from '@config';
 
@@ -30,7 +29,6 @@ const HomePage: NextPageWithLayout = () => (
     <Features />
     <Cases />
     <Packages />
-    <Footer />
   </>
 );
 
