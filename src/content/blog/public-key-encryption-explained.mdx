@@ -1,0 +1,58 @@
+---
+title: 'Public Key Encryption Explained'
+date: '2020-08-20'
+description: "Public key encryption protects your data. Here's how it does so."
+metaTitle: "Public key encryption and why it's important for internet security."
+author: 'Luke Russell'
+authorAvatar: /blog/luke_russell.png
+---
+
+So much of our information is transmitted via the internet. Naturally, we're concerned with the security of that information, whether it's your private iMessages or your credit card payment information. You ensure you utilize HTTPS and you may have even started using privacy-focused messaging apps like Signal, but how do the algorithms behind those processes actually work? Their security involves the transmission of public and private key pairs among the participants in a process called _Public Key Encryption_. The math behind public key encryption makes it nearly impossible to be compromised.
+
+In this article, we'll explain why public key encryption is so important, how it works, and whether it can be compromised by either hackers or by a government's desired "back-door."
+
+## What Public Key Encryption Gets Right
+
+As its name implies, public key encryption relies on public keys, though it actually uses public and private key pairs. It’s called public key encryption as its use of public keys is what makes it unique; private keys are what most of us think of when we think of encrypting something.
+
+With private keys, the same key encrypts and decrypts the message. Whatever method you use is reversible. Public key encryption makes use of keys that are **not** reversible, hence why it’s also called **asymmetric encryption**. Let’s go over how that works.
+
+As typical of the people who exist solely in hypothetical computer science examples, let’s imagine two people named Alice and Bob. They’d like to exchange secure messages with one another, and they’re going to do so with public key encryption.
+
+Both Alice and Bob have two keys each. They each have a private key; Alice is the only one who has her key, and Bob is the only one who has his. They also have a public key: something that is available to anyone. The beauty of asymmetric encryption lies in how these keys relate to one another. Something encrypted with Alice’s private key can only be decrypted by her public key. Something encrypted with her public key can only be decrypted by her private key.
+
+We’ll get to the math that makes that relationship possible, but for now, let’s look at what that enables Alice and Bob to do. Alice can take her message that she wants to go to Bob and encrypt it with his widely-available public key. She can send that through whatever service she likes, because anyone who sees this message can’t decrypt it. Why is that? Well, because the only thing that can decrypt a message encrypted with Bob’s public key is Bob’s private key. Since Bob is the only person who has his private key, he is the only person who can read the message.
+
+Most developers—and many individual users—have used public key encryption, even if they didn’t know that’s what was happening. Far fewer have explored the math that makes it possible. As you’ll see, it’s not as scary as it sounds.
+
+## The Math Behind Public Key Encryption
+
+Remember that the concept of public keys works through asymmetrical encryption. Only the other key in the pair can unlock data a key has locked. Essentially, we need a way to easily encrypt something while making it hard to unencrypt without having another key.
+
+The mathematics behind the ability to easily lock something while making it hard to unlock relies on one-way functions. These functions are quick to compute, but hard to reverse. There’s a specific type of one-way functions useful here: trapdoor functions. These are quick to compute, but hard to reverse **without some additional information**. To tie that back to public key encryption, the corresponding key is that additional information that makes it easy to reverse.
+
+A simple example of this is the multiplication of two prime numbers. If I asked you “What two numbers multiplied together equals 34,427?”, it’d take you a while. You’d have to go through every prime number combination to get the answer. And while computers can do this much faster, I could just come up with a 20 digit number that would take them an infeasible amount of time.
+
+That being said, it’s simple to create such a number. You just take two prime numbers, in this case they were 173 and 199, and multiply them together. It’s just as simple to find one of the numbers if you have the other, as well.
+
+Another example of one-way functions can be found with [modular exponentiation](https://en.wikipedia.org/wiki/Modular_exponentiation). The mathematics behind today’s encryption is much more elaborate, but are built upon functions like these.
+
+So how secure are these functions in practicality? As previously mentioned, a pure brute force attack is easily protected against. If you have a long enough key, the heat death of the universe would happen before computers could brute force it. While they aren’t quite that long in reality, they still take an insurmountable time for there to be any use in implementing a brute force attack.
+
+Now, that’s all assuming these functions are designed without any vulnerabilities. This becomes relevant when discussing how a government “back door” to access encrypted messaging services would work. Because, with how public encryption works, it’s frankly not possible to do so without inherently weakening the encryption. The idea behind this is that the functions would have some vulnerability that only the government would know about. That vulnerability would have to perpetuate within the math itself, and there’s no math in the world that can only be exclusively used by government agencies. If a vulnerability is created for the government, it can be employed by others. Just look at how the NSA’s development of EternalBlue, an exploit for Windows computers, was leaked and became the basis for the infamous WannaCry ransomware attacks.
+
+We’re concerned with the integrity of public key cryptography because of its widespread use in today’s internet infrastructure. Just how widespread? Well, let’s take a look.
+
+## Public Key Cryptography's Importance Today
+
+We’ve discussed what public key cryptography encrypts under the broad umbrella term of “messages.” Our example used the term quite literally and discussed the sharing of encrypted messages between two people, via some messaging service such as iMessage or WhatsApp. While personal messaging between two people is indeed one of the uses, there are many other types of messages in your day-to-day life that are encrypted with public key encryption.
+
+Take the communication between you and a website. The protocol that secures our web traffic is TLS - Transport Layer Security. It uses public key encryption, but only at the beginning of a session, as part of the TLS handshake. Public key encryption is slower than private key encryption, so it's only used to securely exchange symmetric private keys. This way, you get the speed of symmetric encryption protected within the security of the asymmetric encryption. The information you’ll exchange with a website, your credit card details with an online shop, for example, are secured because of this. There are many other security protocols that have their particular uses, and many of them use public key encryption as well.
+
+We’ve been discussing public keys with respect to their encryption abilities, but that’s not all they’re useful for! Public key encryption is part of the larger system of public key cryptography. This includes another cool use of asymmetric keys: digital signatures.
+
+Let’s imagine what would happen if Alice encrypted her message to Bob with her own private key. Well, that wouldn’t be very good for securing the message, as anyone can use her public key to decrypt its contents. What it is useful for, however, is authenticating that the message came from Alice. If the message can be decrypted with her public key, then only her private key could have encrypted it, and only she has that key.
+
+In fact, this post itself was signed with a public key! It’s part of Ockam’s process that allows anyone to make contributions to the [open-source website](https://www.ockam.io/learn/blog/ockam_website_is_open_source).
+
+That’s just one example of many where we can encounter public key cryptography. It’s no coincidence, as once you start looking you’ll see the security of the internet truly is dependent on public key cryptography. That’s why Ockam is trying to make sure that security extends to the internet-connected devices you use every day. You can learn more at [ockam.io](https://www.ockam.io/).

@@ -31,6 +31,7 @@
       "@hooks/*": ["./src/hooks/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@views/*": ["./src/views/*"],
+      "@api": ["./src/api/*"],
       "@views": ["./src/views/index.ts"]
     }
   },
