@@ -76,9 +76,10 @@ const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
         <Flex
           direction={{ base: 'column', lg: 'row' }}
           align={{ lg: 'center' }}
+          justifyContent={{ lg: 'space-between' }}
           mb={{ base: 16, lg: 24 }}
         >
-          <Box position="relative">
+          <Box position="relative" flex={1}>
             <Heading as="h2" size="h2" lineHeight={1.3}>
               {openRole.text}
             </Heading>

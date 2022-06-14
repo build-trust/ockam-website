@@ -20,3 +20,4 @@ export { default as BrainIcon } from './BrainIcon';
 export { default as BulbIcon } from './BulbIcon';
 export { default as ClarityIcon } from './ClarityIcon';
 export { default as TimeIcon } from './TimeIcon';
+export { default as TeamIcon } from './TeamIcon';

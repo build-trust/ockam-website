@@ -27,6 +27,7 @@ const MainLayoutMobileNavButton: FunctionComponent<MainLayoutMobileNavButtonProp
     ml="auto"
     icon={isOpenMobileNav ? <CloseIcon /> : <HamburgerIcon />}
     onClick={onClick}
+    display={{ lg: 'none' }}
   />
 );
 

@@ -97,7 +97,8 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon: IconComponent, title, 
 
 const Features: FunctionComponent = () => (
   <Box bgColor="gray.50" pt={{ base: 16, lg: 24 }} pb={{ base: 16, lg: 30 }}>
-    <Container variant="section" id="features">
+    <Container variant="section">
+      <Box id="features" visibility="hidden" position="absolute" left={0} top="-80px" />
       <Box alignSelf="flex-start" w="full" maxW="2.5xl" mb={{ base: 10, md: 16 }}>
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }}>
           Features of Ockam
@@ -114,7 +115,6 @@ const Features: FunctionComponent = () => (
           </Text>
         ))}
       </Box>
-
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 3 }}
         spacingX={{ base: 8, md: 20, lg: 24 }}

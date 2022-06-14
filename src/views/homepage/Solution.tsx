@@ -17,7 +17,7 @@ const Solution: FunctionComponent = () => {
     <Container variant="section" py={{ base: 14, lg: 24 }}>
       <SimpleGrid columns={{ base: 1, lg: 2 }} mb={{ base: 6, lg: 0 }}>
         {/* TODO change pixels for theme units */}
-        <Box maxW={{ lg: '518px' }} my="auto">
+        <Box maxW={{ lg: '547px' }} my="auto">
           <Heading as="h3" size="h3" lineHeight={1.3}>
             Build Applications That Can{' '}
             <chakra.span bgImage={gradients.primary} bgClip="text">

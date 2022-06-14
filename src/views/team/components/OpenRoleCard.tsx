@@ -10,8 +10,9 @@ import { generateSlug } from '@utils/generateSlug';
 type OpenRoleCardProps = Pick<LeverPosting, 'text' | 'categories' | 'id'>;
 
 const OpenRoleCard: FunctionComponent<OpenRoleCardProps> = ({ text, categories, id }) => (
-  <Link href={`${OPEN_ROLE_PATH}/${generateSlug(text)}/${id}`}>
+  <Link href={`${OPEN_ROLE_PATH}/${generateSlug(text)}/${id}`} passHref>
     <Flex
+      as="a"
       position="relative"
       border="1px"
       borderColor="gray.200"
