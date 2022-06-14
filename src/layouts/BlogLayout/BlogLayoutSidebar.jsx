@@ -10,8 +10,8 @@ const BlogLayoutSidebar = ({ posts, ...restProps }) => {
           <ListItem mb={4}>
             <ChakraLink _hover={{ color: 'avocado.500'}}>
               <Link
-                as={`/learn/blog/${post.filePath.replace(/\.mdx?$/, '')}`}
-                href={`/learn/blog/[slug]`}
+                as={`/blog/${post.filePath.replace(/\.mdx?$/, '')}`}
+                href={`/blog/[slug]`}
               >
                 {post.data.title}
               </Link>

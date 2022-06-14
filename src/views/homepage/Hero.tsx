@@ -38,7 +38,6 @@ const Hero: FunctionComponent = () => {
         <chakra.span bgImage={gradients.primary} bgClip="text">
           Trust
         </chakra.span>
-        .
       </Heading>
 
       <List

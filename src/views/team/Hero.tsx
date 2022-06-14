@@ -16,7 +16,6 @@ const Hero: FunctionComponent = () => {
         <chakra.span bgImage={gradients.primary} bgClip="text">
           Builders
         </chakra.span>
-        .
       </Heading>
 
       <Flex

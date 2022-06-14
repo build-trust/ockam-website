@@ -1,13 +1,12 @@
 import { MDXRemote } from 'next-mdx-remote'
 import Link from 'next/link'
 import { Link as ChakraLink, AspectRatio, Stack, Text, chakra } from '@chakra-ui/react'
-import { getAllPosts, getPostBySlug, postFilePaths } from '../../../api/blogApi';
+import { getAllPosts, getPostBySlug, postFilePaths } from '../../api/blogApi';
 import mdxComponents from '@components/mdx';
 import { ArrowBackIcon } from '@chakra-ui/icons'
 
 import { Box, Heading, Flex } from '@chakra-ui/react';
 import BlogLayout from '@layouts/BlogLayout/BlogLayout';
-
 
 export default function PostPage({ source, frontMatter, posts }) {
   console.log('authorAvatar',frontMatter.authorAvatar)
@@ -15,8 +14,8 @@ export default function PostPage({ source, frontMatter, posts }) {
     <BlogLayout posts={posts}>
       <Box alignSelf="flex-start" mb={6} display={{ base: 'block', lg: 'none' }}>
         <Link
-          as={`/learn/blog`}
-          href={`/learn/blog`}
+          as={`/blog`}
+          href={`/blog`}
         >
           <ChakraLink fontSize="sm">
             <ArrowBackIcon /> Back to post list

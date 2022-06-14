@@ -31,8 +31,8 @@ const CARDS = [
     title: 'Ockam Orchestrator',
     text: 'Sign up for an account and move to production with Ockam Orchestrator.',
     link: {
-      text: 'Subscribe Through AWS',
-      href: 'mailto:ockambeta@ockam.io',
+      text: 'Get Beta Access',
+      href: 'mailto:hello@ockam.io',
     },
   },
 ];
