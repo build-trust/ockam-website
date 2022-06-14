@@ -9,14 +9,15 @@ import LineDivider from '@components/LineDivider';
 
 const TEXTS = [
   [
-    'A lot happened when you ran this demo. It started two local applications - an echo service and an echo client - on your computer. In a production scenario, these two applications would be running in two separate private networks. Each application, on startup, created a vault to store private keys and generated a unique cryptographic identity.',
-    "The echo service application then created a Forwarder, in the cloud, using Ockam Orchestrator and registered a forwarding address. Whenever a message is sent to the echo service's Forwarder it will transparently relay that message to the echo service. This allows the echo service to receive messages, from other applications on the Internet, even thought it is running behind a NAT and hasn't exposed any network ports to the Internet.",
+    'A lot happened in this demo. We started two applications; echo_service and an echo_client. Each is local but, imagine that these applications were in two separated private networks. Each application then generated a unique cryptographic identity and a Vault to protect it.',
+    'The echo_service used Ockam Orchestrator to register an address with an Ockam Forwarder. A Forwarder can transparently relay messages to the to echo_service - even if its running behind a NAT without an exposed port.',
   ],
 
   [
-    'The echo service application then started a SecureChannel Listener and waited for authenticated secure channels to be established.',
-    'The echo client application then initiated a secure channel handshake with the echo service application using its forwarding address, in the cloud. This established a mutually authenticated, end-to-end encrypted, bidirectional secure channel between the two applications via the Internet. The Forwarder in the cloud, is relaying messages but cannot see or tamper their contents. Our echo service & echo client have established trustful communication on the application layer and place zero-trust in network boundaries and intermediaries. ',
-    'Finally we sent a "hello" message through this end-to-end trusted channel and got an echo back.',
+    'The echo_service used Ockam Orchestrator to start a Listener and waited for an authenticated secure channels to be established. ',
+    'Next, the echo_client used Ockam Orchestrator to create a mutually authenticated, end-to-end encrypted, bi-directional, Secure Channel to the echo_service.',
+    'Now that the applications have built Trust, they exchage "Hello Ockam" messages. ',
+
   ],
 ];
 

@@ -17,8 +17,8 @@ const FEATURES = [
     icon: DeveloperIcon,
     title: 'Developer First',
     texts: [
-      'Stripe did is for payment rails. Twilio did it for telecom.',
-      'Ockam abstracts away complex infrastructure and cryptogrpahic protocols to empower millions of developers.',
+      'Stripe did it for payment rails. Twilio did it for telecom.',
+      'Ockam abstracts away complex infrastructure and cryptography orchestration to empower millions of developers.',
     ],
   },
   {
@@ -26,22 +26,22 @@ const FEATURES = [
     title: 'Cloud Native',
     texts: [
       'Ockam is built for enterprise scale.',
-      'Add-ons are ready-made connectors for your favorite authentication, database and message broker services.',
+      'Add-ons are ready-made connectors to your hosted authentication, database, and message broker services.',
     ],
   },
   {
     icon: GitHubIcon,
     title: 'Open Source',
     texts: [
-      'Ockam’s protocol security becomes stronger through transparency, community feedback, and scrutany.',
-      'Add-ons can be built by anyone to create hardware key vaults or cloud service connectors.',
+      'Ockam’s protocols become ever more secure through transparency, community feedback, and scrutany.',
+      'Add-ons can be built by anyone to create new hardware key vaults or cloud service connectors.',
     ],
   },
   {
     icon: LockIcon,
     title: 'Zero Trust',
     texts: [
-      'Ockam messaging is *actually* end-to-end encrypted, so it trustfully moves data across networks that should not be trusted. ',
+      'Ockam messaging is *actually* end-to-end encrypted, so it can trustfully move data across networks that should not be trusted.',
       'Transports are agnostic and pluggable so Ockam’s protocols can work across any network topology.',
     ],
   },
@@ -49,22 +49,22 @@ const FEATURES = [
     icon: KeyIcon,
     title: 'Key Management',
     texts: [
-      'Private keys are created inside of all of your applications. They never leave the hardware environment. ',
-      'Orchestration, revocation and rotation of private, public and shared keys are built in, so you have one less thing to worry about.',
+      'Private keys are created inside of all of your applications. They never leave the hardware environment.',
+      'Orchestration, revocation, and rotation of keys are built in, so you have one less thing to worry about.',
     ],
   },
   {
     icon: EngineIcon,
     title: 'BYO Auth Engine',
     texts: [
-      'Ockam Add-ons empower you to use your existing authentication, attribute-based (ABAC) authorization tools. ',
+      'Ockam Add-ons empower you to use your existing authentication, attribute-based (ABAC) authorization tools.',
       'Bring your own Okta, Auth0, OAuth, AWS, Azure, Google or Web3 IAM tools. Ockam has an Add-on for that!',
     ],
   },
 ];
 
 const DESCRIPTIONS = [
-  'Managing data in motion is really really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable. ',
+  'Managing data in motion is really really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable.',
 ];
 
 type FeatureProps = {

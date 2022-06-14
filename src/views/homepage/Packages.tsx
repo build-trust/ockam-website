@@ -20,36 +20,34 @@ const CARDS = [
   {
     icon: PackagesIcon,
     title: 'Hobby',
-    text: 'Recommended for individual developers working on side projects.',
+    text: 'Recommended for your side project.',
     items: [
-      { text: 'Two Collaborators', icon: CloseIcon },
+      { text: 'Two Collaborators', icon: CheckIcon },
       { text: 'Limited Scale', icon: CloseIcon },
       { text: 'Basic Authorization', icon: CheckIcon },
       { text: 'Limited Addons', icon: CheckIcon },
-      { text: 'SLA', icon: CloseIcon },
       { text: 'Free', icon: CheckIcon },
     ],
   },
   {
     icon: CloudIcon,
     title: 'Production',
-    text: 'Recommended for users that are new and need guide step by step. ',
+    text: 'Recommended for your team at work.',
     items: [
       { text: 'Team Collaboration', icon: CheckIcon },
       { text: 'Scaleable', icon: CheckIcon },
       { text: 'Enterprise Authorization', icon: CheckIcon },
       { text: 'All Add-ons', icon: CheckIcon },
       { text: 'SLA', icon: CheckIcon },
-      { text: 'Paid Throught AWS Marketplace', icon: CheckIcon },
     ],
   },
 ];
 
 const DESCRIPTIONS = [
-  'Ockam Orchestrator is how applications Trust Data-in-Motion at scale.',
-  'Ockam Orchestrator is a managed service that is available through the AWS marketplace. Ockam Orchestrator scales with your needs whether it’s to scale message throughput, or to connect to your existing cloud services.',
-  'We are committed to empowering all developers. That’s why we sponsor your hobby projects through our Hobby-level service offering. ',
-  'If you are working on a project at work, you will want to get started with a production-grade Orchestrator. The production version is easy to get started with in development and will scale with your team as you move from development, through testing, to production, and then scale from there. ',
+  'Ockam Orchestrator enables distributed applications to Trust Data-in-Motion at scale - with ease.',
+  'Ockam offers Orchestrator as a managed service through the AWS marketplace.',
+  'We are committed to empowering all developers. That’s why we sponsor your hobby projects. All applications should be built with Trust.',
+  'Orchestrator was built for builders that build big things. It can move massive amounts of data through dynamic and complicated service architectures.',
 ];
 
 type CardProps = {

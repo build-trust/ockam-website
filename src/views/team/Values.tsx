@@ -6,36 +6,36 @@ import { GreenIconWrapper } from '@components/icons/wrappers';
 
 const VALUES = [
   {
-    title: 'High-Performant',
+    title: 'High-Performance',
     texts: [
-      'Ockam is a team of doers, builders, shippers, and finishers. We’ve created an environment where every individual is empowered to act, and trusted to be world-class in their role.',
+      'Ockam is a team of doers, builders, shippers, and finishers. We created an environment where every individual is empowered to act, and trusted to be world-class in their role.',
     ],
     icon: BrainIcon,
   },
   {
     title: 'Simple',
     texts: [
-      'The creation of simple solutions out of complex problems is the basis for our namesake, Ockam. Every idea, product, and procedure at Ockam should be refined to make it as simple as it should be.',
+      'The creation of simple solutions out of complex problems is the basis for our namesake, Ockam. Every idea, product, and procedure at Ockam  is refined to be as simple as it should be.',
     ],
     icon: BulbIcon,
   },
   {
     title: 'Transparent',
     texts: [
-      'We trust eachother to be transparent,authentic and honest. As a globally distributed remote-first team trasparent communications establishes our culture of trust.',
+      'We trust eachother to be transparent, authentic and honest. As a globally-distributed, remote-first team transparent communication establishes our culture of trust.',
     ],
     icon: ClarityIcon,
   },
   {
     title: 'Time Efficient',
     texts: [
-      'Time is the most valuable asset that we have. We trust each other to use our time with respect. We consider how our actions and use of time imact everyone else on The Team.',
+      'Time is the most valuable asset that we have. We trust each other to use our time with respect. We consider how our actions, and use of time, impact everyone else on The Team.',
     ],
     icon: TimeIcon,
   },
 ];
 
-const DESCRIPTIONS = ['Values are what we believe - Virtues are what we do'];
+const DESCRIPTIONS = ['Our Value is what we believe - Our Virtues are what we do'];
 
 const Values: FunctionComponent = () => (
   <Container variant="section" py={{ base: 16, lg: 30 }}>

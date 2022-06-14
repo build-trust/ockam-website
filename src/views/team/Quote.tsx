@@ -34,8 +34,7 @@ const Quote: FunctionComponent = () => (
           </Heading>
 
           <Heading as="h2" size="h2" mb={8} maxW="lg" lineHeight={1.3}>
-            That’s why <chakra.span color="avocado.300">Trust</chakra.span> is the one-and-only
-            value at Ockam.
+            That’s why <chakra.span color="avocado.300">Trust</chakra.span> is our one-and-only value.
           </Heading>
 
           <Text fontSize="xl" fontWeight="bold" color="brand.900" lineHeight={1.3}>

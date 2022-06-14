@@ -19,11 +19,11 @@ const Solution: FunctionComponent = () => {
         {/* TODO change pixels for theme units */}
         <Box maxW={{ lg: '547px' }} my="auto">
           <Heading as="h3" size="h3" lineHeight={1.3}>
-            Build Applications That Can{' '}
+            Build Applications That {' '}
             <chakra.span bgImage={gradients.primary} bgClip="text">
               Trust Data-in-Motion
             </chakra.span>{' '}
-            Across Cloud Services, Beyond Data Centers, Throught Cashes And Gateaways
+            Across Cloud Services, Beyond Data Centers, Through Gateaways
           </Heading>
 
           <Box mt={{ base: 8, lg: 10 }}>

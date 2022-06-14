@@ -15,11 +15,11 @@ const STEPS = [
   },
   {
     title: 'Set Up an Ockam Project',
-    text: 'Enroll with Ockam Orchestrator, and setup a project and generate identities keys.',
+    text: 'Enroll with Ockam Orchestrator, and generate identity keys.',
   },
   {
     title: 'Move Data with Trust',
-    text: 'Build a demo that starts two local applications on your computer and creates an end-to-end encrypted, mutually authenticated communication between them, through an Ockam Orchestrator in the cloud.',
+    text: 'Build a demo that creates an end-to-end encrypted, mutually authenticated communication between two local applications - via a round trip through the cloud.',
   },
 ];
 

@@ -9,10 +9,10 @@ import CasesThreeImage from '@assets/images/cases3.png';
 const CARDS = [
   {
     src: CasesOneImage,
-    title: 'Connect at Micro-Service Scale',
+    title: 'Orchestrate at Micro-Service Scale',
     texts: [
-      'Modern applications are made up of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of Cloud marketplace services. With so many endpoints that need to interoperate it’s become impossible to manage.',
-      'Ockam’s key generation and handshake protocols allow for dynamic, massive scale orchistrations across complex network topologies. ',
+      'Modern applications are made up of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of cloud marketplace services. With so many endpoints that need to interoperate, it’s become impossible to manage.',
+      'Ockam’s key generation and handshake protocols allow for dynamic, massive-scale orchistrations across complex network topologies.',
     ],
   },
   {
@@ -20,8 +20,8 @@ const CARDS = [
     title: 'Get Out of the Middle',
     texts: [
       'You are building an app that moves data from over-there to over-there. Perhaps it’s a message service like Kafka or RabbitMQ?',
-      'You don’t want to be able to access the data that moves through your service. Particularly if its Hippa or PCI protected data!',
-      'Ockam’s end-to-end encryption originates at the data source and terminates at the data target , so your app-in-the-middle has no ability to decrypt and access data-in-motion. ',
+      'You don’t want to be liable for data that moves through your service; Particularly if its Hippa or PCI protected data!',
+      'Ockam’s end-to-end encryption originates at the data-source and terminates at the data-target , so your app-in-the-middle can not decipher data-in-motion. ',
     ],
   },
   {
@@ -29,7 +29,7 @@ const CARDS = [
     title: 'Trust Anything, Anywhere',
     texts: [
       'If you access data in a VPC, you are exposing your applications to threats by exposing your VPC to the internet.',
-      'Ockam’s inlets and outlets create topologies that eliminate threats from the internet for applications in VPCs. Effectively, your data can move from from VPC to VPC without ever exposing either application to the internet. Virtually it feels like the applications are sitting next to each other, as separate processes, in the same box.',
+      'Ockam’s inlets and outlets create topologies that eliminate threats from the internet for applications in VPCs. Effectively, your data can move from from VPC to VPC without exposing either application to the internet. Virtually, the applications are running next to each other in the same environment.',
     ],
   },
 ];
@@ -77,7 +77,7 @@ const Cases: FunctionComponent = () => (
     </Heading>
 
     <Text fontSize={{ lg: 'lg' }} mb={{ base: 12, lg: 16 }}>
-      Ockam can and should be used between every application, everywhere.
+      Ockam can, and should, be used between every application, everywhere.
     </Text>
 
     <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 6, lg: 10 }}>

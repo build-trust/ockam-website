@@ -87,7 +87,7 @@ const Hero: FunctionComponent = () => {
             bg="linear-gradient(180deg, #4FDAB8 0%, rgba(79, 218, 184, 0) 202.69%);"
             gradientDir="fromBottomToTop"
           />
-          Ockam Empowers Developers
+          Ockam Empowers You
           <LineDivider top="100%" h={16} />
         </StepsLabel>
         <ArrowDownIcon w={6} h={6} color="avocado.500" />

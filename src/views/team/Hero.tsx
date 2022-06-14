@@ -24,7 +24,7 @@ const Hero: FunctionComponent = () => {
         mt={{ base: 16, lg: 14 }}
       >
         <Button as="a" href="#open-roles" size="lg" colorScheme="avocado" color="black">
-          See the Open Roles
+          See our Open Roles
         </Button>
       </Flex>
 

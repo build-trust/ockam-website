@@ -11,7 +11,7 @@ const CARDS = [
   {
     icon: GitHubIcon,
     title: 'Open Source',
-    text: 'Join our community, start a discussion, or file an issue.',
+    text: 'Join your community, start a discussion, or file an issue.',
     link: {
       text: 'Go to Github',
       href: 'https://github.com/build-trust/ockam',
@@ -29,7 +29,7 @@ const CARDS = [
   {
     icon: CloudIcon,
     title: 'Ockam Orchestrator',
-    text: 'Sign up for an account and move to production with Ockam Orchestrator.',
+    text: 'Sign up for Ockam Orchestrator. Now in Private Beta!',
     link: {
       text: 'Get Beta Access',
       href: 'mailto:hello@ockam.io',
