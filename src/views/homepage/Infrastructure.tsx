@@ -17,7 +17,6 @@ const TEXTS = [
     'The echo_service used Ockam Orchestrator to start a Listener and waited for an authenticated secure channels to be established. ',
     'Next, the echo_client used Ockam Orchestrator to create a mutually authenticated, end-to-end encrypted, bi-directional, Secure Channel to the echo_service.',
     'Now that the applications have built Trust, they exchage "Hello Ockam" messages. ',
-
   ],
 ];
 
@@ -70,11 +69,15 @@ const Infrastructure: FunctionComponent = () => {
 
         <Box
           display={{ base: 'none', lg: 'initial' }}
-          pr={{ lg: 16 }}
           my={{ lg: 'auto' }}
           transform="translateY(6px)"
         >
-          <Image src={InfrastructureImage} alt="Infrastructure image" width={956} height={392} />
+          <Image
+            src={InfrastructureImage}
+            alt="Infrastructure image"
+            width={1196.58}
+            height={449.71}
+          />
         </Box>
       </Container>
     </Flex>

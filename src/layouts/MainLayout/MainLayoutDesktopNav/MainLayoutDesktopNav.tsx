@@ -1,16 +1,18 @@
 import { FunctionComponent } from 'react';
 import {
   Flex,
+  Box,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Button,
   ButtonProps,
+  Link as ChakraLink,
   forwardRef,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
 import { NAV_MENU_ITEMS } from '@consts/navigation';
 
@@ -19,6 +21,7 @@ import MainLayoutCtaButtons from '../MainLayoutCtaButtons';
 const activeMenuItemStyle = {
   textDecoration: 'none',
   bg: 'none',
+  svg: { color: 'avocado.500' },
   _after: {
     content: '" "',
     display: 'block',
@@ -31,6 +34,13 @@ const activeMenuItemStyle = {
   },
 };
 
+const iconStyles = {
+  w: 6,
+  h: 6,
+  mr: 3,
+  borderRadius: '4px',
+};
+
 const NavMenuItem = forwardRef<ButtonProps, 'div'>((props, ref) => (
   <Button
     variant="link"
@@ -40,7 +50,7 @@ const NavMenuItem = forwardRef<ButtonProps, 'div'>((props, ref) => (
     bg="transparent"
     _active={activeMenuItemStyle}
     _hover={activeMenuItemStyle}
-    sx={{ ':not(last-child)': { mr: 8 } }}
+    mr={8}
     {...props}
     ref={ref}
   />
@@ -49,51 +59,49 @@ const NavMenuItem = forwardRef<ButtonProps, 'div'>((props, ref) => (
 const MainLayoutDesktopNav: FunctionComponent = () => (
   <>
     <Flex
-      display={{ base: 'none', lg: 'block' }}
+      display={{ base: 'none', lg: 'flex' }}
       align="center"
       w="full"
       flexWrap="wrap"
       pl={{ lg: 8, xl: 16 }}
     >
-      {NAV_MENU_ITEMS.map((item) => {
+      {NAV_MENU_ITEMS.map(({ icon: IconComponent, ...item }) => {
         const isDropdown = !!item.children;
 
         if (isDropdown) {
           return (
             <Menu key={item.text} placement="bottom" autoSelect={false}>
-              <MenuButton as={NavMenuItem} rightIcon={<ChevronDownIcon w={6} h={6} />}>
+              <MenuButton
+                as={NavMenuItem}
+                rightIcon={<ChevronDownIcon w={6} h={6} color="inherit!important" />}
+              >
+                {IconComponent && <IconComponent {...iconStyles} />}
                 {item.text}
               </MenuButton>
 
               <MenuList borderColor="gray.50">
-                {item.children.map(({ icon: IconComponent, ...childItem }) => (
-                  <Link href={childItem.href} passHref key={childItem.text}>
+                {item.children.map(({ icon: ChildItemIconComponent, ...childItem }) => (
+                  <Box
+                    key={childItem.text}
+                    as={childItem.isExternal ? ChakraLink : NextLink}
+                    href={childItem.href}
+                    {...(childItem.isExternal ? { isExternal: true } : { passHref: true })}
+                  >
                     <MenuItem
-                      as="a"
+                      {...(childItem.isExternal ? { as: 'span' } : { as: 'a' })}
                       color="brand.900"
                       _hover={{
                         bgColor: 'transparent',
                         textDecoration: 'underline',
                         svg: { bgColor: 'avocado.500' },
                       }}
-                      {...(IconComponent
-                        ? {
-                            iconSpacing: 3,
-                            icon: (
-                              <IconComponent
-                                w={6}
-                                h={6}
-                                borderRadius="4px"
-                                color="white"
-                                bgColor="brand.900"
-                              />
-                            ),
-                          }
-                        : {})}
                     >
+                      {ChildItemIconComponent && (
+                        <ChildItemIconComponent {...iconStyles} color="white" bgColor="brand.900" />
+                      )}
                       {childItem.text}
                     </MenuItem>
-                  </Link>
+                  </Box>
                 ))}
               </MenuList>
             </Menu>
@@ -101,9 +109,22 @@ const MainLayoutDesktopNav: FunctionComponent = () => (
         }
 
         return (
-          <Link key={item.text} href={item.href} passHref>
-            <NavMenuItem as="a">{item.text}</NavMenuItem>
-          </Link>
+          <Box
+            key={item.text}
+            as={item.isExternal ? ChakraLink : NextLink}
+            href={item.href}
+            {...(item.isExternal
+              ? {
+                  isExternal: true,
+                  _hover: { textDecoration: 'none', svg: { color: 'avocado.500' } },
+                }
+              : { passHref: true })}
+          >
+            <NavMenuItem {...(item.isExternal ? { as: 'span' } : { as: 'a' })}>
+              {IconComponent && <IconComponent {...iconStyles} />}
+              {item.text}
+            </NavMenuItem>
+          </Box>
         );
       })}
     </Flex>

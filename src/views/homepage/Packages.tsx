@@ -8,6 +8,7 @@ import {
   Text,
   Heading,
   SimpleGrid,
+  Box,
 } from '@chakra-ui/react';
 import { IconProps } from '@chakra-ui/icons';
 
@@ -63,7 +64,7 @@ type CardProps = {
 const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, items }) => (
   <Flex
     direction="column"
-    align="center"
+    align={{ lg: 'center' }}
     maxW="lg"
     bg="white"
     borderRadius="md"
@@ -132,7 +133,7 @@ const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, 
 );
 
 const Packages: FunctionComponent = () => (
-  <Container variant="section" id="products" py={{ base: 16, lg: 20 }}>
+  <Container variant="section" py={{ base: 16, lg: 20 }}>
     <StepsLabel mb={{ base: 6, lg: 16 }}>
       <LineDivider
         h={32}
@@ -142,6 +143,14 @@ const Packages: FunctionComponent = () => (
       />
       Ockam is for you
     </StepsLabel>
+
+    <Box
+      id="products"
+      visibility="hidden"
+      position="absolute"
+      left={0}
+      top={{ base: '50px', lg: '80px' }}
+    />
 
     <SimpleGrid columns={{ base: 1, lg: 2 }}>
       <Flex direction="column" justify="center" pr={{ base: 0, lg: 24 }}>

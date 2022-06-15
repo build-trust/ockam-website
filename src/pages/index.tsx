@@ -16,6 +16,8 @@ import {
 } from '@views/homepage';
 import CONFIG from '@config';
 
+import Stats from '../views/homepage/Stats';
+
 const HomePage: NextPageWithLayout = () => (
   <Box pt={{ base: 10, lg: 20 }}>
     <Head>
@@ -30,6 +32,7 @@ const HomePage: NextPageWithLayout = () => (
     <Features />
     <Cases />
     <Packages />
+    <Stats stars={1900} contributors={100} downloads={180000} />
   </Box>
 );
 

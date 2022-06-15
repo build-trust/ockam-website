@@ -1,21 +1,29 @@
 import { FunctionComponent } from 'react';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import {
   Accordion,
   AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Link as ChakraLink,
+  Box,
 } from '@chakra-ui/react';
 
 import { NAV_MENU_ITEMS } from '@consts/navigation';
 
 const MainLayoutMobileNavMenu: FunctionComponent = () => (
   <Accordion allowToggle w="full" mb="auto">
-    {NAV_MENU_ITEMS.map((item, index) => {
+    {NAV_MENU_ITEMS.map(({ icon: IconComponent, ...item }, index) => {
       const CurrentButton = (
-        <AccordionButton as="a" fontWeight="medium" px={0} py={3}>
-          {item.text} {!item.href && <AccordionIcon w={6} h={6} ml="auto" />}
+        <AccordionButton
+          {...(item.href ? { as: item.isExternal ? 'span' : 'a' } : {})}
+          fontWeight="medium"
+          px={0}
+          py={3}
+        >
+          {item.text} {IconComponent && <IconComponent w={6} h={6} ml={3} />}
+          {!item.href && <AccordionIcon w={6} h={6} ml="auto" />}
         </AccordionButton>
       );
 
@@ -27,22 +35,37 @@ const MainLayoutMobileNavMenu: FunctionComponent = () => (
           {...(index === 0 ? { borderTop: 'none' } : {})}
         >
           {item.href ? (
-            <Link href={item.href} passHref>
+            <Box
+              href={item.href}
+              as={item.isExternal ? ChakraLink : NextLink}
+              {...(item.isExternal
+                ? { isExternal: true, _hover: { textDecoration: 'none' } }
+                : { passHref: true })}
+            >
               {CurrentButton}
-            </Link>
+            </Box>
           ) : (
             CurrentButton
           )}
 
           {item.children && (
-            <AccordionPanel key={item.text} py={0} px={0}>
+            <AccordionPanel key={item.text} py={1} px={1}>
               {item.children.map((childItem) => (
                 <AccordionItem key={childItem.text} isFocusable border="none" cursor="pointer">
-                  <Link href={childItem.href} passHref>
-                    <AccordionButton as="a" p={3} fontWeight="regular" bgColor="gray.50">
+                  <Box
+                    href={childItem.href}
+                    as={item.isExternal ? ChakraLink : NextLink}
+                    {...(item.isExternal ? { isExternal: true } : { passHref: true })}
+                  >
+                    <AccordionButton
+                      as={item.isExternal ? 'span' : 'a'}
+                      p={3}
+                      fontWeight="regular"
+                      bgColor="gray.50"
+                    >
                       {childItem.text}
                     </AccordionButton>
-                  </Link>
+                  </Box>
                 </AccordionItem>
               ))}
             </AccordionPanel>
