@@ -9,9 +9,9 @@ import CasesThreeImage from '@assets/images/cases3.png';
 const CARDS = [
   {
     src: CasesOneImage,
-    title: 'Orchestrate at Micro-Service Scale',
+    title: 'Orchestrate at Scale',
     texts: [
-      'Modern applications are made up of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of cloud marketplace services. With so many endpoints that need to interoperate, it’s become impossible to manage.',
+      'Modern applications are made up of an unmanageable number of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of cloud marketplace services. With so many endpoints that need to interoperate, it’s become impossible to manage.',
       'Ockam’s key generation and handshake protocols allow for dynamic, massive-scale orchistrations across complex network topologies.',
     ],
   },
