@@ -25,7 +25,8 @@ const SUBHEADING_TEXTS = [
 ];
 
 const DESCRIPTION_TEXTS = [
-  'Modern applications are distributed, interconnected, and have Zero-Trust in network boundaries. These applications must exchange data with Trust.',
+  'Modern applications have an unmanageable number of remote connections.',
+  'All applications must exchange data with Trust.',
 ];
 
 const Hero: FunctionComponent = () => {

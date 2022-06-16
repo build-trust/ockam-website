@@ -23,7 +23,7 @@ const Solution: FunctionComponent = () => {
             <chakra.span bgImage={gradients.primary} bgClip="text">
               Trust Data-in-Motion
             </chakra.span>{' '}
-            Across Cloud Services, Beyond Data Centers, Through Gateaways
+            Across Cloud Services, Beyond Data Centers, Through Gateways
           </Heading>
 
           <Box mt={{ base: 8, lg: 10 }}>
