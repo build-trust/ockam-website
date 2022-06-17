@@ -24,10 +24,6 @@ const SUBHEADING_TEXTS = [
   { icon: ControlIcon, text: 'Control' },
 ];
 
-const DESCRIPTION_TEXTS = [
-  'Modern applications move data between an unmanageable number of remote connections.',
-];
-
 const Hero: FunctionComponent = () => {
   const { gradients } = useTheme();
 
@@ -65,33 +61,6 @@ const Hero: FunctionComponent = () => {
           </ListItem>
         ))}
       </List>
-
-      <Box
-        mb={{ base: 20, lg: 24 }}
-        maxW="3xl"
-        fontSize={{ base: 'lg', lg: 'xl' }}
-        textAlign="center"
-      >
-        {DESCRIPTION_TEXTS.map((text, index) => (
-          <Text key={text} mb={index + 1 === DESCRIPTION_TEXTS.length ? 0 : 2}>
-            {text}
-          </Text>
-        ))}
-      </Box>
-
-      <Flex direction="column" align="center" mt={{ base: 6, lg: 0 }}>
-        <StepsLabel mb={12}>
-          <LineDivider
-            bottom="100%"
-            h={20}
-            bg="linear-gradient(180deg, #4FDAB8 0%, rgba(79, 218, 184, 0) 202.69%);"
-            gradientDir="fromBottomToTop"
-          />
-          Ockam Empowers You
-          <LineDivider top="100%" h={16} />
-        </StepsLabel>
-        <ArrowDownIcon w={6} h={6} color="avocado.500" />
-      </Flex>
     </Container>
   );
 };
