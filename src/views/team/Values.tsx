@@ -35,7 +35,7 @@ const VALUES = [
   },
 ];
 
-const DESCRIPTIONS = ['Our Value is what we believe - Our Virtues are what we do'];
+const DESCRIPTIONS = ['Our Value is what we believe. Our Virtues are what we do.'];
 
 const Values: FunctionComponent = () => (
   <Container variant="section" py={{ base: 16, lg: 30 }}>

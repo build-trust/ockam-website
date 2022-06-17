@@ -25,8 +25,7 @@ const SUBHEADING_TEXTS = [
 ];
 
 const DESCRIPTION_TEXTS = [
-  'Modern applications have an unmanageable number of remote connections.',
-  'All applications must exchange data with Trust.',
+  'Modern applications move data between an unmanageable number of remote connections.',
 ];
 
 const Hero: FunctionComponent = () => {

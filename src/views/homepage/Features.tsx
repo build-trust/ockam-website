@@ -17,7 +17,8 @@ const FEATURES = [
     icon: DeveloperIcon,
     title: 'Developer First',
     texts: [
-      'Stripe did it for payment rails. Twilio did it for telecom.',
+      'Stripe did it for payment rails.',
+      'Twilio did it for telecom.',
       'Ockam abstracts away complex infrastructure and cryptography orchestration to empower millions of developers.',
     ],
   },
@@ -64,7 +65,7 @@ const FEATURES = [
 ];
 
 const DESCRIPTIONS = [
-  'Managing data in motion is really really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable.',
+  'Managing data in motion is really, really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable.',
 ];
 
 type FeatureProps = {

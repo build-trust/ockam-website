@@ -9,7 +9,7 @@ type OpenRolesProps = {
   openRoles: LeverPostingsGroup[];
 };
 
-const DESCRIPTIONS = ['Ockam is a remote-first team and we are globally distributed.'];
+const DESCRIPTIONS = ['Ockam is a remote-first, globally distributed team.'];
 
 const OpenRoles: FunctionComponent<OpenRolesProps> = ({ openRoles }) => (
   <Container variant="section" id="open-roles" py={{ base: 16, lg: 24 }}>

@@ -7,7 +7,7 @@ import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import BorderDot from '@components/BorderDot';
 
 const TEXTS = [
-  'Build Trust with a simple developer experience and powerful primitives that orchestrate end-to-end encryption, key management, authorization policy enforcement, and mutual authentication.',
+  'Ockam has a simple developer experience and powerful primitives that orchestrate end-to-end encryption, key management, authorization policy enforcement, and mutual authentication between distributed applications - at massive scale.',
 ];
 
 const Solution: FunctionComponent = () => {
@@ -23,7 +23,7 @@ const Solution: FunctionComponent = () => {
             <chakra.span bgImage={gradients.primary} bgClip="text">
               Trust Data-in-Motion
             </chakra.span>{' '}
-            Across Cloud Services, Beyond Data Centers, Through Gateways
+            Across Cloud Services, Beyond Data Centers, Through Gateways.
           </Heading>
 
           <Box mt={{ base: 8, lg: 10 }}>
