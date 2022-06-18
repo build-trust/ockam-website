@@ -10,7 +10,7 @@ import LineDivider from '@components/LineDivider';
 const TEXTS = [
   [
     'A lot happened in this demo. We started two applications; echo_service and an echo_client. Each is local but, imagine that these applications were in two separated private networks. Each application then generated a unique cryptographic identity and a Vault to protect it.',
-    'The echo_service used Ockam Orchestrator to register an address with an Ockam Forwarder. A Forwarder can transparently relay messages to the to echo_service - even if its running behind a NAT without an exposed port.',
+    'The echo_service used Ockam Orchestrator to register an address with an Ockam Relay. A Relay can transparently forward messages to the to echo_service - even if its running behind a NAT without an exposed port.',
   ],
 
   [
