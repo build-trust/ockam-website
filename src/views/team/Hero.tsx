@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
-import { chakra, Container, Flex, Heading, Button, useTheme } from '@chakra-ui/react';
+import { chakra, Container, Flex, Heading, useTheme } from '@chakra-ui/react';
 
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import StepsLabel from '@components/StepsLabel';
+import OpenRolesButton from '@components/OpenRolesButton';
 
 const Hero: FunctionComponent = () => {
   const { gradients } = useTheme();
@@ -23,9 +24,7 @@ const Hero: FunctionComponent = () => {
         w={{ base: 'full', md: 'auto' }}
         mt={{ base: 16, lg: 14 }}
       >
-        <Button as="a" href="#open-roles" size="lg" colorScheme="avocado" color="black">
-          Open Roles
-        </Button>
+        <OpenRolesButton />
       </Flex>
 
       <Flex

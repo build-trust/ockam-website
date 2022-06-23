@@ -13,12 +13,14 @@ const fontWeights = {
 };
 
 const fontSizes = {
+  '2.5xl': '1.75rem',
   '4.5xl': '2.5rem',
+  '7.5xl': '5rem',
   '10xl': '8.75rem',
-  '6.25xl': '6.25rem',
 };
 
 const space = {
+  26: '6.5rem', // 104px
   30: '7.5rem', // 120px
 };
 

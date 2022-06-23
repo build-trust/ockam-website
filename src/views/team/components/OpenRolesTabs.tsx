@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 import { LeverPostingsGroup } from '@typings/lever';
+import Card from '@components/Card';
 
 import OpenRolesCustomTab from './OpenRolesCustomTab';
 import OpenRoleCard from './OpenRoleCard';
@@ -38,6 +39,7 @@ const OpenRolesTabs: FunctionComponent<OpenRolesProps> = ({ openRoles, ...restPr
       {...restProps}
     >
       <TabList
+        as={Card}
         minW={270}
         w={{ base: 'full', lg: 270 }}
         px={5}
@@ -45,11 +47,6 @@ const OpenRolesTabs: FunctionComponent<OpenRolesProps> = ({ openRoles, ...restPr
         mr={{ lg: 20, xl: 36 }}
         mb={{ base: 10, lg: 0 }}
         flexWrap="wrap"
-        border="1px"
-        borderColor="gray.200"
-        borderBottom="4px"
-        borderBottomColor="avocado.500"
-        borderRadius="md"
       >
         {openRolesToRender.map(({ title, postings }) => (
           <OpenRolesCustomTab rolesCount={postings?.length} key={title} id={title}>

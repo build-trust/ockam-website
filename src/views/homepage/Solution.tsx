@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 import SolutionImage from '@assets/images/solution.png';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
-import BorderDot from '@components/BorderDot';
 
 const TEXTS = [
   'Ockam has a simple developer experience and powerful primitives that orchestrate end-to-end encryption, key management, authorization policy enforcement, and mutual authentication between distributed applications - at massive scale.',
@@ -19,7 +18,7 @@ const Solution: FunctionComponent = () => {
         {/* TODO change pixels for theme units */}
         <Box maxW={{ lg: '547px' }} my="auto">
           <Heading as="h3" size="h3" lineHeight={1.3}>
-            Build Applications That {' '}
+            Build Applications That{' '}
             <chakra.span bgImage={gradients.primary} bgClip="text">
               Trust Data-in-Motion
             </chakra.span>{' '}
@@ -42,10 +41,9 @@ const Solution: FunctionComponent = () => {
           </Box>
         </Box>
 
-        <DashedLineDivider />
+        <DashedLineDivider withDot />
 
         <Box display={{ base: 'none', lg: 'initial' }} pl={{ lg: 16 }} position="relative">
-          <BorderDot />
           <Image src={SolutionImage} alt="Solution image" width={511} height={488} />
         </Box>
 

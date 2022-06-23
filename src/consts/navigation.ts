@@ -1,5 +1,7 @@
-import { TEAM_PATH, BLOG_PATH } from '@consts/paths';
-import { GitHubIcon, TeamIcon } from '@components/icons';
+import { TEAM_PATH, BLOG_PATH, MISSION_AND_VISION_PATH } from '@consts/paths';
+import { GitHubIcon } from '@components/icons';
+import RocketIcon from '@assets/icons/rocket.svg';
+import UsersIcon from '@assets/icons/users.svg';
 
 // eslint-disable-next-line import/prefer-default-export
 export const NAV_MENU_ITEMS = [
@@ -8,7 +10,15 @@ export const NAV_MENU_ITEMS = [
   { text: 'Products', href: '/#products', isExternal: false },
   {
     text: 'Team',
-    children: [{ text: 'Open Roles', href: TEAM_PATH, icon: TeamIcon, isExternal: false }],
+    children: [
+      { text: 'Open Roles', href: TEAM_PATH, icon: UsersIcon, isExternal: false },
+      {
+        text: 'Our Mission & Vision',
+        href: MISSION_AND_VISION_PATH,
+        icon: RocketIcon,
+        isExternal: false,
+      },
+    ],
   },
   {
     text: 'Blog',

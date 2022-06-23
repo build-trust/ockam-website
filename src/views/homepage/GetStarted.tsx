@@ -1,13 +1,14 @@
 import { FunctionComponent } from 'react';
-import { Box, Container, Flex, Text, SimpleGrid } from '@chakra-ui/react';
+import { Box, Container, Text, SimpleGrid } from '@chakra-ui/react';
 import { ArrowDownIcon, ArrowForwardIcon, IconProps } from '@chakra-ui/icons';
 
 import { GitHubIcon, BuildingIcon, CloudIcon } from '@components/icons';
 import { GreenIconWrapper } from '@components/icons/wrappers';
 import StepsLabel from '@components/StepsLabel';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
+import Card from '@components/Card';
 
-const CARDS = [
+const GET_STARTED_CARDS = [
   {
     icon: GitHubIcon,
     title: 'Open Source',
@@ -37,7 +38,7 @@ const CARDS = [
   },
 ];
 
-type CardProps = {
+type GetStartedCardProps = {
   icon: FunctionComponent<IconProps>;
   title: string;
   text: string;
@@ -47,24 +48,19 @@ type CardProps = {
   };
 };
 
-const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, link }) => (
-  <Flex
-    pt={4}
-    pb={6}
-    px={{ base: 4, lg: 5 }}
-    border="1px"
-    borderColor="gray.200"
-    borderBottom="4px"
-    borderBottomColor="avocado.500"
-    borderRadius="md"
-    bg="white"
-    maxW="lg"
-  >
+const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({
+  icon: IconComponent,
+  title,
+  text,
+  link,
+}) => (
+  <Card pt={4} pb={6} px={{ base: 4, lg: 5 }} direction="row">
     <Box flex={0} mr={5}>
       <GreenIconWrapper>
         <IconComponent color="white" w={5} h={5} />
       </GreenIconWrapper>
     </Box>
+
     <Box>
       <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
         {title}
@@ -84,7 +80,7 @@ const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, 
         <ArrowForwardIcon w={5} h={5} ml={2} />
       </Text>
     </Box>
-  </Flex>
+  </Card>
 );
 
 const GetStarted: FunctionComponent = () => (
@@ -109,8 +105,8 @@ const GetStarted: FunctionComponent = () => (
         pt={{ lg: 8 }}
         pb={{ lg: 6 }}
       >
-        {CARDS.map((card) => (
-          <Card key={card.title} {...card} />
+        {GET_STARTED_CARDS.map((card) => (
+          <GetStartedCard key={card.title} {...card} />
         ))}
       </SimpleGrid>
     </Container>

@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Box, BoxProps, useTheme } from '@chakra-ui/react';
 
+import BorderDot from '@components/BorderDot';
+
 const LineDivider: FunctionComponent<BoxProps & { gradientDir?: 'fromBottomToTop' }> = ({
   gradientDir,
   ...restProps
@@ -22,7 +24,10 @@ const LineDivider: FunctionComponent<BoxProps & { gradientDir?: 'fromBottomToTop
   );
 };
 
-export const DashedLineDivider: FunctionComponent<BoxProps> = (props) => (
+export const DashedLineDivider: FunctionComponent<BoxProps & { withDot?: boolean }> = ({
+  withDot,
+  ...restProps
+}) => (
   <Box
     display={{ base: 'none', lg: 'block' }}
     position="absolute"
@@ -33,8 +38,10 @@ export const DashedLineDivider: FunctionComponent<BoxProps> = (props) => (
     zIndex={-1}
     borderLeft="dashed 2px"
     borderColor="avocado.100"
-    {...props}
-  />
+    {...restProps}
+  >
+    {withDot && <BorderDot left="-8.5px" />}
+  </Box>
 );
 
 export default LineDivider;

@@ -1,14 +1,15 @@
 import { FunctionComponent } from 'react';
 import Image, { StaticImageData } from 'next/image';
-import { Box, Container, Flex, Text, Heading, SimpleGrid, Center } from '@chakra-ui/react';
+import { Box, Container, Text, Heading, SimpleGrid, Center } from '@chakra-ui/react';
 
+import Card from '@components/Card';
 import CasesOneImage from '@assets/images/cases1.png';
 import CasesTwoImage from '@assets/images/cases2.png';
 import CasesThreeImage from '@assets/images/cases3.png';
 
-const CARDS = [
+const CASES_CARDS = [
   {
-    src: CasesOneImage,
+    image: CasesOneImage,
     title: 'Orchestrate at Scale',
     texts: [
       'Modern applications are made up of an unmanageable number of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of cloud marketplace services. With so many endpoints that need to interoperate, it’s become impossible to manage.',
@@ -16,7 +17,7 @@ const CARDS = [
     ],
   },
   {
-    src: CasesTwoImage,
+    image: CasesTwoImage,
     title: 'Get Out of the Middle',
     texts: [
       'You are building an app that moves data from over-there to over-there. Perhaps it’s a message service like Kafka or RabbitMQ?',
@@ -25,7 +26,7 @@ const CARDS = [
     ],
   },
   {
-    src: CasesThreeImage,
+    image: CasesThreeImage,
     title: 'Trust Anything, Anywhere',
     texts: [
       'If you access data in a VPC, you are exposing your applications to threats by exposing your VPC to the internet.',
@@ -34,26 +35,16 @@ const CARDS = [
   },
 ];
 
-type CardProps = {
-  src: StaticImageData;
+type CasesCardProps = {
+  image: StaticImageData;
   title: string;
   texts: string[];
 };
 
-const Card: FunctionComponent<CardProps> = ({ src, title, texts }) => (
-  <Flex
-    direction="column"
-    p={6}
-    border="1px"
-    borderColor="gray.200"
-    borderBottom="4px"
-    borderBottomColor="avocado.500"
-    borderRadius="md"
-    bg="white"
-    maxW="lg"
-  >
+const CasesCard: FunctionComponent<CasesCardProps> = ({ image, title, texts }) => (
+  <Card p={6}>
     <Center pb={6} mb={6} borderBottom="1px" borderColor="gray.200">
-      <Image src={src} alt={`${title} image`} width={313} height={171} />
+      <Image src={image} alt={`${title} image`} width={313} height={171} />
     </Center>
 
     <Box>
@@ -67,7 +58,7 @@ const Card: FunctionComponent<CardProps> = ({ src, title, texts }) => (
         </Text>
       ))}
     </Box>
-  </Flex>
+  </Card>
 );
 
 const Cases: FunctionComponent = () => (
@@ -81,8 +72,8 @@ const Cases: FunctionComponent = () => (
     </Text>
 
     <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 6, lg: 10 }}>
-      {CARDS.map((card) => (
-        <Card key={card.title} {...card} />
+      {CASES_CARDS.map((card) => (
+        <CasesCard key={card.title} {...card} />
       ))}
     </SimpleGrid>
   </Container>

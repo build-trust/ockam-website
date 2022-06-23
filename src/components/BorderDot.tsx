@@ -9,7 +9,7 @@ const BorderDot: FunctionComponent<BoxProps> = (props) => (
     bgColor="avocado.200"
     position="absolute"
     top="calc(50% - 8px)"
-    left="-9.5px"
+    left="-8px"
     borderRadius="50%"
     {...props}
   />

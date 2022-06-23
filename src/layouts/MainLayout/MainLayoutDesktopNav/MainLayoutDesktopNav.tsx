@@ -10,6 +10,7 @@ import {
   ButtonProps,
   Link as ChakraLink,
   forwardRef,
+  Icon,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
@@ -65,7 +66,7 @@ const MainLayoutDesktopNav: FunctionComponent = () => (
       flexWrap="wrap"
       pl={{ lg: 8, xl: 16 }}
     >
-      {NAV_MENU_ITEMS.map(({ icon: IconComponent, ...item }) => {
+      {NAV_MENU_ITEMS.map(({ icon, ...item }) => {
         const isDropdown = !!item.children;
 
         if (isDropdown) {
@@ -75,12 +76,12 @@ const MainLayoutDesktopNav: FunctionComponent = () => (
                 as={NavMenuItem}
                 rightIcon={<ChevronDownIcon w={6} h={6} color="inherit!important" />}
               >
-                {IconComponent && <IconComponent {...iconStyles} />}
+                {icon && <Icon as={icon} {...iconStyles} />}
                 {item.text}
               </MenuButton>
 
               <MenuList borderColor="gray.50">
-                {item.children.map(({ icon: ChildItemIconComponent, ...childItem }) => (
+                {item.children.map(({ icon: childIcon, ...childItem }) => (
                   <Box
                     key={childItem.text}
                     as={childItem.isExternal ? ChakraLink : NextLink}
@@ -96,8 +97,8 @@ const MainLayoutDesktopNav: FunctionComponent = () => (
                         svg: { bgColor: 'avocado.500' },
                       }}
                     >
-                      {ChildItemIconComponent && (
-                        <ChildItemIconComponent {...iconStyles} color="white" bgColor="brand.900" />
+                      {childIcon && (
+                        <Icon as={childIcon} {...iconStyles} color="white" bgColor="brand.900" />
                       )}
                       {childItem.text}
                     </MenuItem>
@@ -121,7 +122,7 @@ const MainLayoutDesktopNav: FunctionComponent = () => (
               : { passHref: true })}
           >
             <NavMenuItem {...(item.isExternal ? { as: 'span' } : { as: 'a' })}>
-              {IconComponent && <IconComponent {...iconStyles} />}
+              {icon && <Icon as={icon} {...iconStyles} />}
               {item.text}
             </NavMenuItem>
           </Box>
