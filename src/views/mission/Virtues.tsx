@@ -20,7 +20,8 @@ import TimeIsPreciousImage from '@assets/images/time-is-precious.png';
 import VirtuesCard from './components/VirtuesCard';
 
 const DESCRIPTIONS = [
-  'Ockam’s Virtues are actions that are embedded in the fabric of our day-today life at Ockam. The four Virtues we live by are:',
+  'Ockam’s Virtues are actions that are embedded in the fabric of our day-today life at Ockam.',
+  'The four Virtues we live by are:',
 ];
 
 const VIRTUES_TABS = [
@@ -30,7 +31,7 @@ const VIRTUES_TABS = [
       image: PerformanceMindsetImage,
       texts: [
         'Ockam is a team of doers, builders, shippers, and finishers. We celebrate things that are complete and intentional. Ideas are the easy part. We win by turning ideas into action. ',
-        'At Ockam, it’s essential to embrace a growth mindset. High Performance teams have the grit to do the hard things and maintain a growth mindset. We dream audacious goals, and continue to progress towards those goals regardless of obstacles or setbacks. We also understand that every team member will win some, and lose some—learning from losses is essential and a key indicator of a growth mindset. Winning also means doing better than you did before.',
+        'At Ockam, it’s essential to embrace a growth mindset. High Performance teams have the grit to do the hard things and to maintain a growth mindset. We dream audacious goals, and continue to progress towards those goals regardless of obstacles or setbacks. We also understand that every team member will win some, and lose some. Learning from losses is an essential part of a growth mindset. We strive for continuous improvement in everything that we do.',
       ],
     },
   },
@@ -50,8 +51,8 @@ const VIRTUES_TABS = [
     panel: {
       image: DefaultToTransparencyImage,
       texts: [
-        'At Ockam, in the spirit of open source, we believe it’s best to err on the side of disclosure and clarity. By making information public, we can reduce the threshold to contribution and make collaboration easier. Practicing transparency, even when hiding the details could be easier, builds trust. ',
-        'Transparency is closely connected with Ockam virtue of Simplicity. When we are transparent, we must communicate ideas simply. By writing down our plans and showcasing our work we gain simplicity because we are transparent.',
+        'In the ethos of open source, we believe it’s best to err on the side of disclosure and clarity. By making information public, we can reduce the threshold to contribution and make collaboration easier. Practicing transparency, even when hiding the details could be easier, builds trust. ',
+        'Transparency is closely connected with Ockam virtue of Simplicity. To be transparent, we must communicate ideas simply. By writing down our plans and showcasing our work we demonstrate our virtue of transparency.',
       ],
     },
   },
@@ -60,9 +61,9 @@ const VIRTUES_TABS = [
     panel: {
       image: TimeIsPreciousImage,
       texts: [
-        'Time is the most valuable asset that we have. ',
-        'We trust each team member to use their time and others’ time wisely. This includes showing up on time to meetings, keeping meetings on track, and taking consideration for others on the team when taking time off.',
-        'We value your time. There are 168 hours in a week and Ockam only requires the Team to attend two mandatory meetings each week. We trust each team member to manage the remaining 164 hours in any way they see fit.',
+        'Time is the most valuable asset that we have.',
+        'We trust each team member to use time wisely. Responsibile use of time includes our own and that of others. We show up on time to meetings, keep meetings on track, and consider the impact to others when we take holidays.',
+        'We value your time. There are 168 hours in a week and Ockam only requires the Team to attend two team meetings per week. We trust each team member to manage the remaining 165 hours in any way they see fit.',
       ],
     },
   },

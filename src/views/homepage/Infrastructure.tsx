@@ -14,7 +14,7 @@ const TEXTS = [
   ],
 
   [
-    'The echo_service used Ockam Orchestrator to start a Listener and waited for an authenticated secure channels to be established. ',
+    'The echo_service started a Secure Channel Listener and waited for an authenticated channel to be established. ',
     'Next, the echo_client used Ockam Orchestrator to create a mutually authenticated, end-to-end encrypted, bi-directional, Secure Channel to the echo_service.',
     'Now that the applications have built Trust, echo_client can send a "Hello Ockam" message, and echo_service can echo "Hello Ockam" back.',
   ],
