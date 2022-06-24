@@ -20,8 +20,7 @@ import TimeIsPreciousImage from '@assets/images/time-is-precious.png';
 import VirtuesCard from './components/VirtuesCard';
 
 const DESCRIPTIONS = [
-  'Ockam’s Virtues are actions that are embedded in the fabric of our day-today life at Ockam.',
-  'The four Virtues we live by are:',
+  'The actions that are embedded in the fabric of what we do.',
 ];
 
 const VIRTUES_TABS = [
@@ -90,7 +89,7 @@ const Virtues: FunctionComponent = () => (
     <Container variant="section" px={{ base: 5, lg: 220 }}>
       <Box maxW="3xl" mb={{ base: 16, lg: 14 }} textAlign={{ base: 'left', lg: 'center' }}>
         <Heading as="h2" size="h2" mb={6}>
-          Virtues - What We Do
+          Ockam's Virtues
         </Heading>
 
         {DESCRIPTIONS.map((text, index) => (
