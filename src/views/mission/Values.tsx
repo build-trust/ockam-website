@@ -36,8 +36,8 @@ const TRUST_VALUES_CARDS = [
   {
     title: 'Take Responsibility',
     texts: [
-      `Everyone is accountable for their role’s Responsibility. Ockam’s culture is Resonsibility driven - not consensus or ownership driven.`,
-      `The responsibility of the Team is to provide an environment where every individual is empowered to act, and trusted to be world-class in their role.`,
+      `Everyone is accountable for their role’s Responsibility. Ockam’s culture is responsibility driven - not consensus or ownership driven.`,
+      `The responsibility of The Team is to provide an environment where every individual is empowered to act, and trusted to be world-class in their role. The Team aims to allow you to be your best.`,
     ],
     icon: HandHeartIcon,
   },

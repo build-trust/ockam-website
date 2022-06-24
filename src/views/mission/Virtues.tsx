@@ -39,7 +39,7 @@ const VIRTUES_TABS = [
     panel: {
       image: KeppThingsSimpleImage,
       texts: [
-        'The creation of simple solutions out of complex problems is the basis for our namesake, Ockam. Every idea, product, and procedure at Ockam should be governed by the principles in Ockham’s Razor. ',
+        'The creation of simple solutions out of complex problems is the basis for our namesake, Ockam. Every idea, product, and procedure at Ockam should be governed by the principles in Occam’s Razor. ',
         'We recognize that simplifying is a difficult and iterative journey. But in the end, when you keep things simple, they tend to be robust - less goes wrong, and there is less to maintain - and less to breakdown.',
         'OKRs help align the team, so that we have a simple clear direction.',
       ],
@@ -61,8 +61,8 @@ const VIRTUES_TABS = [
       image: TimeIsPreciousImage,
       texts: [
         'Time is the most valuable asset that we have.',
-        'We trust each team member to use time wisely. Responsibile use of time includes our own and that of others. We show up on time to meetings, keep meetings on track, and consider the impact to others when we take holidays.',
-        'We value your time. There are 168 hours in a week and Ockam only requires the Team to attend two team meetings per week. We trust each team member to manage the remaining 165 hours in any way they see fit.',
+        'We trust each team member to use time wisely. Responsible use of time includes our own and that of others. We show up on time to meetings, keep meetings on track, and consider the impact to others when we take holidays.',
+        'We value your time. There are 168 hours in a week and we only have two all-hands meetings per week. We trust you to manage the remaining ~165 hours in any way you see fit.',
       ],
     },
   },

@@ -15,14 +15,14 @@ const VALUES = [
   {
     title: 'Simple',
     texts: [
-      'The creation of simple solutions out of complex problems is the basis for our namesake, Ockam. Every idea, product, and procedure at Ockam  is refined to be as simple as it should be.',
+      'The creation of simple solutions out of complex problems is the basis for our namesake, Ockam. Every idea, product, and procedure at Ockam is refined to be as simple as it should be.',
     ],
     icon: BulbIcon,
   },
   {
     title: 'Transparent',
     texts: [
-      'We trust eachother to be transparent, authentic and honest. As a globally-distributed, remote-first team transparent communication establishes our culture of trust.',
+      'We trust each other to be transparent, authentic and honest. As a globally-distributed, remote-first team transparent communication establishes our culture of trust.',
     ],
     icon: ClarityIcon,
   },
