@@ -51,7 +51,7 @@ const VIRTUES_TABS = [
       image: DefaultToTransparencyImage,
       texts: [
         'In the ethos of open source, we believe it’s best to err on the side of disclosure and clarity. By making information public, we can reduce the threshold to contribution and make collaboration easier. Practicing transparency, even when hiding the details could be easier, builds trust. ',
-        'Transparency is closely connected with Ockam virtue of Simplicity. To be transparent, we must communicate ideas simply. By writing down our plans and showcasing our work we demonstrate our virtue of transparency.',
+        'Transparency is closely connected with Ockam’s virtue of Simplicity. To be transparent, we must communicate ideas simply. By writing down our plans and showcasing our work we demonstrate our virtue of transparency.',
       ],
     },
   },

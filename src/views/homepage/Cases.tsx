@@ -13,7 +13,7 @@ const CASES_CARDS = [
     title: 'Orchestrate at Scale',
     texts: [
       'Modern applications are made up of an unmanageable number of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of cloud marketplace services. With so many endpoints that need to interoperate, it’s become impossible to manage.',
-      'Ockam’s key generation and handshake protocols allow for dynamic, massive-scale orchistrations across complex network topologies.',
+      'Ockam’s key generation and handshake protocols allow for dynamic, massive-scale orchestrations across complex network topologies.',
     ],
   },
   {
