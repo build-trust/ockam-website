@@ -1,8 +1,10 @@
 import { FunctionComponent } from 'react';
-import { Container, Heading, Box, Text, SimpleGrid } from '@chakra-ui/react';
+import { Container, Heading, Box, Text, SimpleGrid, Flex, Button } from '@chakra-ui/react';
+import Link from 'next/link';
 
 import { BrainIcon, ClarityIcon, TimeIcon, BulbIcon } from '@components/icons';
 import { GreenIconWrapper } from '@components/icons/wrappers';
+import { MISSION_AND_VISION_PATH } from '@consts/paths';
 
 const VALUES = [
   {
@@ -39,24 +41,39 @@ const DESCRIPTIONS = ['Our Value is what we believe. Our Virtues are what we do.
 
 const Values: FunctionComponent = () => (
   <Container variant="section" py={{ base: 16, lg: 30 }}>
-    <Box w="full" pb={{ base: 10, lg: 14 }}>
-      <Heading as="h2" size="h2" lineHeight={1.3}>
-        Virtues of the Ockam Team
-      </Heading>
+    <Flex
+      w="full"
+      pb={{ base: 16, lg: 14 }}
+      mb={{ lg: 6 }}
+      direction={{ base: 'column', lg: 'row' }}
+      align={{ lg: 'center' }}
+      justify="space-between"
+    >
+      <Box w="full">
+        <Heading as="h2" size="h2" lineHeight={1.3}>
+          Virtues of the Ockam Team
+        </Heading>
 
-      <Box my={6}>
-        {DESCRIPTIONS.map((text, index) => (
-          <Text
-            key={text}
-            fontSize={{ lg: 'lg' }}
-            lineHeight={{ base: 1.5, lg: 1.4 }}
-            mb={index + 1 === DESCRIPTIONS.length ? 0 : 2}
-          >
-            {text}
-          </Text>
-        ))}
+        <Box mt={6} mb={{ base: 8, lg: 0 }}>
+          {DESCRIPTIONS.map((text, index) => (
+            <Text
+              key={text}
+              fontSize={{ lg: 'lg' }}
+              lineHeight={{ base: 1.5, lg: 1.4 }}
+              mb={index + 1 === DESCRIPTIONS.length ? 0 : 2}
+            >
+              {text}
+            </Text>
+          ))}
+        </Box>
       </Box>
-    </Box>
+
+      <Link href={`${MISSION_AND_VISION_PATH}#virtues`} passHref>
+        <Button as="a" size="lg" colorScheme="avocado" color="black">
+          Read more
+        </Button>
+      </Link>
+    </Flex>
 
     <SimpleGrid
       columns={{ base: 1, md: 2, lg: 4 }}

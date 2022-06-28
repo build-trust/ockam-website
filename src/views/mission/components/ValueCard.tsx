@@ -48,7 +48,7 @@ const ValueCard: FunctionComponent<TimeLineItemProps> = ({
           p={6}
         >
           <Flex align="center" mb={5}>
-            <GreenIconWrapper mr={8}>
+            <GreenIconWrapper mr={6}>
               <Icon as={icon} color="white" w={6} h={6} />
             </GreenIconWrapper>
 

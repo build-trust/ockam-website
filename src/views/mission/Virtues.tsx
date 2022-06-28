@@ -19,9 +19,7 @@ import TimeIsPreciousImage from '@assets/images/time-is-precious.png';
 
 import VirtuesCard from './components/VirtuesCard';
 
-const DESCRIPTIONS = [
-  'The actions that are embedded in the fabric of what we do.',
-];
+const DESCRIPTIONS = ['The actions that are embedded in the fabric of what we do.'];
 
 const VIRTUES_TABS = [
   {
@@ -85,11 +83,11 @@ const activeTabItemStyle = {
 };
 
 const Virtues: FunctionComponent = () => (
-  <Box bgColor="gray.50" pt={{ base: 16, lg: 20 }} pb={{ base: 20, lg: 30 }}>
+  <Box id="virtues" bgColor="gray.50" pt={{ base: 16, lg: 20 }} pb={{ base: 20, lg: 30 }}>
     <Container variant="section" px={{ base: 5, lg: 220 }}>
       <Box maxW="3xl" mb={{ base: 16, lg: 14 }} textAlign={{ base: 'left', lg: 'center' }}>
         <Heading as="h2" size="h2" mb={6}>
-          Ockam's Virtues
+          Ockam&apos;s Virtues
         </Heading>
 
         {DESCRIPTIONS.map((text, index) => (

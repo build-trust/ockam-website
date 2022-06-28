@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box, Container, Heading, Text, useTheme } from '@chakra-ui/react';
+import { Container, Heading, useTheme } from '@chakra-ui/react';
 
 import ClarityIcon from '@assets/icons/clarity.svg';
 import SpaceshipIcon from '@assets/icons/spaceship.svg';

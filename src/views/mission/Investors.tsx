@@ -9,11 +9,19 @@ import CoreVenturesGroupImage from '@assets/images/investors/core-ventures-group
 import SinewaveVenturesImage from '@assets/images/investors/sinewave-ventures.png';
 
 const INVESTORS = [
-  { name: 'Future Ventures', image: FutureVenturesImage, width: 240, height: 48 },
-  { name: 'Craft', image: CraftImage, width: 217, height: 40 },
-  { name: 'Okta', image: OktaImage, width: 134, height: 45 },
-  { name: 'Core Ventures Group', image: CoreVenturesGroupImage, width: 130, height: 52 },
-  { name: 'Sinewave Ventures', image: SinewaveVenturesImage, width: 179, height: 52 },
+  { name: 'Future Ventures', image: FutureVenturesImage, width: { base: '155px', lg: '240px' } },
+  { name: 'Craft', image: CraftImage, width: { base: '152px', lg: '217px' } },
+  { name: 'Okta', image: OktaImage, width: { base: '89px', lg: '134px' } },
+  {
+    name: 'Core Ventures Group',
+    image: CoreVenturesGroupImage,
+    width: { base: '100px', lg: '130px' },
+  },
+  {
+    name: 'Sinewave Ventures',
+    image: SinewaveVenturesImage,
+    width: { base: '137px', lg: '179px' },
+  },
 ];
 
 const Investors: FunctionComponent = () => (
@@ -30,15 +38,10 @@ const Investors: FunctionComponent = () => (
         Major Investors
       </Heading>
 
-      <Flex direction="row" alignItems="center" justifyContent="center" flexWrap="wrap">
+      <Flex flexWrap="wrap" alignItems="center" justifyContent="center">
         {INVESTORS.map((investor) => (
-          <Box key={investor.name} m={6}>
-            <Image
-              src={investor.image}
-              width={investor.width}
-              height={investor.height}
-              alt={`${investor.name} image`}
-            />
+          <Box key={investor.name} m={{ base: 3, lg: 6 }} width={investor.width}>
+            <Image src={investor.image} alt={`${investor.name} image`} />
           </Box>
         ))}
       </Flex>
