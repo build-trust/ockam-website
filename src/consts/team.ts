@@ -27,7 +27,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.EMPLOYEE_ROSTER],
     country: 'US',
     photo: 'sabeen-syed.png',
-    description: 'lorem',
+    description: 'Enjoys reading historical fiction, playing board games and running after her 4 kids',
   },
   {
     name: 'Antoine van Gelder',
