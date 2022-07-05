@@ -1,3 +1,5 @@
+// TODO: Refactor and remoce components, use .svg files in assets folder just with <Icons> component from chakra.
+
 export { default as IntegrityIcon } from './IntegrityIcon';
 export { default as AuthenticityIcon } from './AuthenticityIcon';
 export { default as PrivacyIcon } from './PrivacyIcon';

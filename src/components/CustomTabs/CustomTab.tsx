@@ -13,7 +13,7 @@ const selectedTabStyle = {
   fontWeight: 'semibold',
 };
 
-const OpenRolesCustomTab = forwardRef(({ rolesCount, ...restProps }, ref) => {
+const CustomTab = forwardRef(({ itemCount, ...restProps }, ref) => {
   const tabProps = useTab({ ...restProps, ref });
   const isSelected = !!tabProps['aria-selected'];
   const styles = useMultiStyleConfig('Tabs', tabProps);
@@ -24,6 +24,7 @@ const OpenRolesCustomTab = forwardRef(({ rolesCount, ...restProps }, ref) => {
       textAlign="left"
       justifyContent="flex-start"
       alignItems="center"
+      alignContent="flex-start"
       fontWeight="medium"
       w="auto"
       lineHeight={1}
@@ -37,6 +38,8 @@ const OpenRolesCustomTab = forwardRef(({ rolesCount, ...restProps }, ref) => {
         px={1}
         py={4}
         fontSize={{ lg: 'lg' }}
+        textAlign="left"
+        whiteSpace="nowrap"
         {...tabProps}
       >
         {tabProps.children}
@@ -52,10 +55,10 @@ const OpenRolesCustomTab = forwardRef(({ rolesCount, ...restProps }, ref) => {
         bg={isSelected ? gradients.primary : 'gray.100'}
         color={isSelected ? 'white' : 'inherit'}
       >
-        {rolesCount}
+        {itemCount}
       </Box>
     </Flex>
   );
 });
 
-export default OpenRolesCustomTab;
+export default CustomTab;

@@ -1,24 +1,20 @@
 import { FunctionComponent } from 'react';
-import {
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  TabsProps,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+import { TabsProps } from '@chakra-ui/react';
 
 import { LeverPostingsGroup } from '@typings/lever';
-import Card from '@components/Card';
+import {
+  CustomTabs,
+  CustomTabList,
+  CustomTab,
+  CustomTabPanel,
+  CustomTabPanels,
+} from '@components/CustomTabs';
 
-import OpenRolesCustomTab from './OpenRolesCustomTab';
 import OpenRoleCard from './OpenRoleCard';
 
 type OpenRolesProps = Omit<TabsProps, 'children'> & { openRoles: LeverPostingsGroup[] };
 
 const OpenRolesTabs: FunctionComponent<OpenRolesProps> = ({ openRoles, ...restProps }) => {
-  const tabsOrientation = useBreakpointValue({ base: 'horizontal', lg: 'vertical' });
-
   if (!openRoles) return null;
 
   const allRoles: LeverPostingsGroup = {
@@ -29,42 +25,25 @@ const OpenRolesTabs: FunctionComponent<OpenRolesProps> = ({ openRoles, ...restPr
   const openRolesToRender = [allRoles, ...openRoles];
 
   return (
-    <Tabs
-      orientation={tabsOrientation as TabsProps['orientation']}
-      variant="unstyled"
-      display="flex"
-      flexDirection={{ base: 'column', lg: 'row' }}
-      alignItems={{ base: 'center', lg: 'flex-start' }}
-      w="full"
-      {...restProps}
-    >
-      <TabList
-        as={Card}
-        minW={270}
-        w={{ base: 'full', lg: 270 }}
-        px={5}
-        py={2}
-        mr={{ lg: 20, xl: 36 }}
-        mb={{ base: 10, lg: 0 }}
-        flexWrap="wrap"
-      >
+    <CustomTabs {...restProps}>
+      <CustomTabList minW={270} w={{ base: 'full', lg: 270 }} mr={{ lg: 20, xl: 36 }}>
         {openRolesToRender.map(({ title, postings }) => (
-          <OpenRolesCustomTab rolesCount={postings?.length} key={title} id={title}>
+          <CustomTab itemCount={postings?.length} key={title} id={title}>
             {title}
-          </OpenRolesCustomTab>
+          </CustomTab>
         ))}
-      </TabList>
+      </CustomTabList>
 
-      <TabPanels>
+      <CustomTabPanels>
         {openRolesToRender.map(({ title, postings }) => (
-          <TabPanel id={title} key={title} p={0}>
+          <CustomTabPanel id={title} key={title}>
             {postings?.map((role) => (
               <OpenRoleCard key={`${role.text}_${title}}`} {...role} />
             ))}
-          </TabPanel>
+          </CustomTabPanel>
         ))}
-      </TabPanels>
-    </Tabs>
+      </CustomTabPanels>
+    </CustomTabs>
   );
 };
 
