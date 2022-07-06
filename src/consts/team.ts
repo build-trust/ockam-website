@@ -35,7 +35,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.EMPLOYEE_ROSTER],
     country: 'ZA',
     photo: 'antoine-van-gelder.png',
-    description: 'lorem',
+    description: 'Raised two kids and still loves playing guitar',
   },
   {
     name: 'Daniil Fedotov',
