@@ -1,7 +1,7 @@
 export const CATEGORIES = {
-  BOARD_MEMBERS: 'Board Members',
+  BOARD_MEMBERS: 'Board of Directors',
   ADVISORS: 'Advisors',
-  EMPLOYEE_ROSTER: 'Employee Roster',
+  EMPLOYEE_ROSTER: 'Full-time Members',
 };
 
 export const MEMBERS = [
@@ -134,11 +134,11 @@ export const MEMBERS = [
     description: 'Partner at SineWave Ventures',
   },
   {
-    name: 'Joanna Drake Earl',
+    name: 'Joanna Drake',
     position: 'Board Member',
     categories: [CATEGORIES.BOARD_MEMBERS],
     country: 'US',
-    photo: 'joanna-drake-earl.png',
+    photo: 'joanna-drake.png',
     description: 'Partner at Core Ventures',
   },
   {
