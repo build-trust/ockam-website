@@ -59,7 +59,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.EMPLOYEE_ROSTER],
     country: 'UA',
     photo: 'oleksandr-deundiak.png',
-    description: 'lorem',
+    description: 'Rides really fast motorcycles',
   },
   {
     name: 'Piotr Sobieszczański',
