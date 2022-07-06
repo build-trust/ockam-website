@@ -67,7 +67,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.EMPLOYEE_ROSTER],
     country: 'PL',
     photo: 'piotr-sobieszczanski.png',
-    description: 'lorem',
+    description: 'Loves nature and passion about space exploration',
   },
   {
     name: 'Pablo Polvorin',
