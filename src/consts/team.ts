@@ -19,7 +19,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.EMPLOYEE_ROSTER, CATEGORIES.BOARD_MEMBERS],
     country: 'US',
     photo: 'matthew-gregory.png',
-    description: 'Started his career in professional sailing and has a passion for meteorology' ,
+    description: 'Started his career in professional sailing and has a passion for meteorology',
   },
   {
     name: 'Sabeen Syed',
@@ -70,19 +70,20 @@ export const MEMBERS = [
     description: 'lorem',
   },
   {
-    name: 'Thom Chiovoloni',
+    name: 'Pablo Polvorin',
     position: 'Engineer',
     categories: [CATEGORIES.EMPLOYEE_ROSTER],
-    country: 'US',
-    photo: 'thom-chiovoloni.png',
+    country: 'AR',
+    photo: 'pablo-polvorin.png',
     description: 'lorem',
   },
+
   {
-    name: 'Toralf Wittner',
+    name: 'Adrian Benavides',
     position: 'Engineer',
     categories: [CATEGORIES.EMPLOYEE_ROSTER],
-    country: 'DE',
-    photo: 'toralf-wittner.png',
+    country: 'ES',
+    photo: 'adrian-benavides.png',
     description: 'lorem',
   },
   {
@@ -94,11 +95,19 @@ export const MEMBERS = [
     description: 'lorem',
   },
   {
-    name: 'Adrian Benavides',
+    name: 'Toralf Wittner',
     position: 'Engineer',
     categories: [CATEGORIES.EMPLOYEE_ROSTER],
-    country: 'ES',
-    photo: 'adrian-benavides.png',
+    country: 'DE',
+    photo: 'toralf-wittner.png',
+    description: 'lorem',
+  },
+  {
+    name: 'Thom Chiovoloni',
+    position: 'Engineer',
+    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    country: 'US',
+    photo: 'thom-chiovoloni.png',
     description: 'lorem',
   },
   {

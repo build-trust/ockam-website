@@ -27,7 +27,7 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
   photo,
   country,
 }) => (
-  <Flex position="relative" w="full" borderRadius="4px" margin="0 auto">
+  <Flex position="relative" w="full" borderRadius="4px" margin="0 auto" overflow="hidden">
     <Box w={{ base: '126px', sm: `${IMG_SIZES.w}px` }} h={`${IMG_SIZES.h}px`} position="relative">
       <ImageWithPlaceholder
         src={`/team/${photo}`}
@@ -38,6 +38,7 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
         ])}
         layout="fill"
         objectFit="cover"
+        priority
       />
     </Box>
 
@@ -51,9 +52,10 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
       borderRightRadius="4px"
       maxH={`${IMG_SIZES.h}px`}
       overflowY="scroll"
+      position="relative"
     >
       <Box pr={8} mb={4}>
-        <Text color="brand.900" fontWeight="bold" fontSize="lg" whiteSpace="pre-wrap">
+        <Text color="brand.900" fontWeight="bold" fontSize={{ md: 'lg' }} whiteSpace="pre-wrap">
           {name}
         </Text>
 
@@ -63,10 +65,17 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
       <Text fontSize="sm" fontWeight="regular">
         {description}
       </Text>
-    </Box>
 
-    <Box as="span" position="absolute" right={2} top={1} fontSize="3xl" lineHeight={1}>
-      {getEmojiFlagFromCountryCode(country as string)}
+      <Box
+        as="span"
+        position="absolute"
+        right={4}
+        top={3}
+        fontSize={{ base: '2.5xl', md: '4xl' }}
+        lineHeight={1}
+      >
+        {getEmojiFlagFromCountryCode(country as string)}
+      </Box>
     </Box>
   </Flex>
 );
