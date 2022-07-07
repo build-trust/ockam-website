@@ -51,7 +51,7 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
       borderLeft={0}
       borderRightRadius="4px"
       maxH={`${IMG_SIZES.h}px`}
-      overflowY="scroll"
+      overflowY="auto"
       position="relative"
     >
       <Box pr={8} mb={4}>

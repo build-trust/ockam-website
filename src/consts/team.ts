@@ -1,7 +1,7 @@
 export const CATEGORIES = {
+  EMPLOYEE_ROSTER: 'Employee Roster',
   BOARD_MEMBERS: 'Board Members',
   ADVISORS: 'Advisors',
-  EMPLOYEE_ROSTER: 'Employee Roster',
 };
 
 export const MEMBERS = [
