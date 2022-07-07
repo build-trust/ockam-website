@@ -75,7 +75,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.EMPLOYEE_ROSTER],
     country: 'AR',
     photo: 'pablo-polvorin.png',
-    description: 'lorem',
+    description: 'Once debugged a performance issue on a large scale system below a giant tree in the amazon',
   },
 
   {
