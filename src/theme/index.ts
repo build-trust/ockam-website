@@ -20,6 +20,7 @@ const fontSizes = {
 };
 
 const space = {
+  18: '4.5rem',
   26: '6.5rem', // 104px
   30: '7.5rem', // 120px
 };

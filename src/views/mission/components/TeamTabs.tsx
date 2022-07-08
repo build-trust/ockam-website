@@ -18,7 +18,7 @@ const getMembersForSpecificCategory = (
 
 const TeamTabs: FunctionComponent<Omit<TabsProps, 'children'>> = (props) => (
   <CustomTabs {...props}>
-    <CustomTabList minW={226} w={{ base: 'full', lg: 226 }} mr={{ lg: 20, xl: 24 }}>
+    <CustomTabList minW={250} w={{ base: 'full', lg: 'auto' }} mr={{ lg: 20, xl: 18 }}>
       {Object.values(CATEGORIES).map((category) => (
         <CustomTab
           itemCount={getMembersForSpecificCategory(category).length}

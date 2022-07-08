@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
 
 import ImageWithPlaceholder from '@components/ImageWithPlaceholder';
-import PlaceholderSilverImage from '@assets/images/placeholders/placeholder-silver.png';
-import PlaceholderBlueImage from '@assets/images/placeholders/placeholder-blue.png';
-import PlaceholderGreenImage from '@assets/images/placeholders/placeholder-green.png';
+import PlaceholderSilverImage from '@assets/images/placeholders/placeholder-team-member-silver.png';
+import PlaceholderBlueImage from '@assets/images/placeholders/placeholder-team-member-blue.png';
+import PlaceholderGreenImage from '@assets/images/placeholders/placeholder-team-member-green.png';
 import getEmojiFlagFromCountryCode from '@utils/getEmojiFlagFromCountryCode';
 import getRandomImage from '@utils/getRandomImage';
 
@@ -27,10 +27,11 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
   photo,
   country,
 }) => (
-  <Flex position="relative" w="full" borderRadius="4px" margin="0 auto" overflow="hidden">
+  <Flex position="relative" maxW="xl" w="full" borderRadius="4px" margin="0 auto" overflow="hidden">
     <Box w={{ base: '126px', sm: `${IMG_SIZES.w}px` }} h={`${IMG_SIZES.h}px`} position="relative">
       <ImageWithPlaceholder
         src={`/team/${photo}`}
+        alt={`${name} photo`}
         placeholderImg={getRandomImage([
           PlaceholderSilverImage,
           PlaceholderBlueImage,
@@ -38,7 +39,6 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
         ])}
         layout="fill"
         objectFit="cover"
-        priority
       />
     </Box>
 

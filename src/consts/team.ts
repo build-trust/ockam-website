@@ -1,14 +1,14 @@
 export const CATEGORIES = {
-  BOARD_MEMBERS: 'Board of Directors',
+  FULL_TIME_MEMBERS: 'Full-time Members',
+  BOARD_OF_DIRECTORS: 'Board of Directors',
   ADVISORS: 'Advisors',
-  EMPLOYEE_ROSTER: 'Full-time Members',
 };
 
 export const MEMBERS = [
   {
     name: 'Mrinal Wadwha',
     position: 'CTO',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
     photo: 'mrinal-wadwha.png',
     description: 'Loves rock-n-roll and has a dog named Sargent Pepper',
@@ -16,7 +16,7 @@ export const MEMBERS = [
   {
     name: 'Matthew Gregory',
     position: 'CEO',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER, CATEGORIES.BOARD_MEMBERS],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS, CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
     photo: 'matthew-gregory.png',
     description: 'Started his career in professional sailing and has a passion for meteorology',
@@ -24,15 +24,16 @@ export const MEMBERS = [
   {
     name: 'Sabeen Syed',
     position: 'VP of Engineering',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
     photo: 'sabeen-syed.png',
-    description: 'Enjoys reading historical fiction, playing board games and running after her 4 kids',
+    description:
+      'Enjoys reading historical fiction, playing board games and running after her 4 kids',
   },
   {
     name: 'Antoine van Gelder',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'ZA',
     photo: 'antoine-van-gelder.png',
     description: 'Raised two kids and still loves playing guitar',
@@ -40,7 +41,7 @@ export const MEMBERS = [
   {
     name: 'Daniil Fedotov',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'CA',
     photo: 'daniil-fedotov.png',
     description: 'lorem',
@@ -48,7 +49,7 @@ export const MEMBERS = [
   {
     name: 'Michael Uti',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'NG',
     photo: 'michael-uti.png',
     description: 'lorem',
@@ -56,7 +57,7 @@ export const MEMBERS = [
   {
     name: 'Oleksandr Deundiak',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'UA',
     photo: 'oleksandr-deundiak.png',
     description: 'Rides really fast motorcycles',
@@ -64,7 +65,7 @@ export const MEMBERS = [
   {
     name: 'Piotr Sobieszczański',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'PL',
     photo: 'piotr-sobieszczanski.png',
     description: 'Loves nature and passion about space exploration',
@@ -72,16 +73,17 @@ export const MEMBERS = [
   {
     name: 'Pablo Polvorin',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'AR',
     photo: 'pablo-polvorin.png',
-    description: 'Once debugged a performance issue on a large scale system below a giant tree in the amazon',
+    description:
+      'Once debugged a performance issue on a large scale system below a giant tree in the amazon',
   },
 
   {
     name: 'Adrian Benavides',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'ES',
     photo: 'adrian-benavides.png',
     description: 'lorem',
@@ -89,7 +91,7 @@ export const MEMBERS = [
   {
     name: 'Katharina Fey',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'DE',
     photo: 'katharina-fey.png',
     description: 'lorem',
@@ -97,7 +99,7 @@ export const MEMBERS = [
   {
     name: 'Toralf Wittner',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'DE',
     photo: 'toralf-wittner.png',
     description: 'lorem',
@@ -105,7 +107,7 @@ export const MEMBERS = [
   {
     name: 'Thom Chiovoloni',
     position: 'Engineer',
-    categories: [CATEGORIES.EMPLOYEE_ROSTER],
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
     photo: 'thom-chiovoloni.png',
     description: 'lorem',
@@ -113,7 +115,7 @@ export const MEMBERS = [
   {
     name: 'Maryanna Saenko',
     position: 'Board Member',
-    categories: [CATEGORIES.BOARD_MEMBERS],
+    categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
     photo: 'maryanna-saenko.png',
     description: 'Partner at Future Ventures',
@@ -121,7 +123,7 @@ export const MEMBERS = [
   {
     name: 'Arra Malekzadeh',
     position: 'Board Member',
-    categories: [CATEGORIES.BOARD_MEMBERS],
+    categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
     photo: 'arra-malekzadeh.png',
     description: 'Partner at Craft Ventures',
@@ -129,7 +131,7 @@ export const MEMBERS = [
   {
     name: 'Fergal Donoher',
     position: 'Board Member',
-    categories: [CATEGORIES.BOARD_MEMBERS],
+    categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
     photo: 'fergal-donoher.png',
     description: 'SVP at Flex',
@@ -137,7 +139,7 @@ export const MEMBERS = [
   {
     name: 'Patricia Muoio',
     position: 'Board Member',
-    categories: [CATEGORIES.BOARD_MEMBERS],
+    categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
     photo: 'patricia-muoio.png',
     description: 'Partner at SineWave Ventures',
@@ -145,7 +147,7 @@ export const MEMBERS = [
   {
     name: 'Joanna Drake',
     position: 'Board Member',
-    categories: [CATEGORIES.BOARD_MEMBERS],
+    categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
     photo: 'joanna-drake.png',
     description: 'Partner at Core Ventures',

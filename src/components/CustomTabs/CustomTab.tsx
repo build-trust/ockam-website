@@ -39,7 +39,7 @@ const CustomTab = forwardRef(({ itemCount, ...restProps }, ref) => {
         py={4}
         fontSize={{ lg: 'lg' }}
         textAlign="left"
-        whiteSpace="nowrap"
+        variant="link"
         {...tabProps}
       >
         {tabProps.children}
