@@ -86,7 +86,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'ES',
     photo: 'adrian-benavides.png',
-    description: 'lorem',
+    description: 'Loves music, playing the guitar and video games',
   },
   {
     name: 'Katharina Fey',
