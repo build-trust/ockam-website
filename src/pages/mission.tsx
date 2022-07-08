@@ -10,7 +10,7 @@ import CONFIG from '@config';
 const MissionAndVisionPage: NextPageWithLayout = () => (
   <Box pt={{ base: 10, lg: 20 }}>
     <Head>
-      <title>{CONFIG.app.title} | Mission & Vision</title>
+      <title>{CONFIG.app.title} | Our Mission</title>
     </Head>
 
     <Hero />
