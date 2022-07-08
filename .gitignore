@@ -52,3 +52,7 @@ build
 
 # storybook
 storybook-static
+
+# sitemap and robots file
+robots.txt
+sitemap.xml
