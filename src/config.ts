@@ -1,7 +1,7 @@
 export default {
   app: {
-    title: 'Ockam',
-    description: `Ockam is a Tool Company. Ockam's open source developer tools make it simple to send trustful end-to-end encrypted messages between connected devices and cloud services.`,
+    title: 'Ockam | Build Trust',
+    description: `Modern applications are distributed, interconnected, and have Zero-Trust in network boundaries. These applications must exchange data with Trust. Ockam empowers developers to build applications that can Trust Data-in-Motion across complex, variable, and hostile networks.Ockam has a simple developer experience and powerful primitives thatorchestrate end-to-end encryption, key management, authorization policy enforcement, and mutual authentication.`,
   },
   lever: {
     apiUrl: 'https://api.lever.co/v0/postings/ockam',

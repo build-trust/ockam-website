@@ -44,7 +44,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'CA',
     photo: 'daniil-fedotov.png',
-    description: 'lorem',
+    description: 'Is playing his bagpipes in Canada',
   },
   {
     name: 'Michael Uti',
@@ -52,7 +52,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'NG',
     photo: 'michael-uti.png',
-    description: 'lorem',
+    description: 'A recent graduate that is an ace with GitHub actions',
   },
   {
     name: 'Oleksandr Deundiak',
@@ -86,7 +86,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'ES',
     photo: 'adrian-benavides.png',
-    description: 'lorem',
+    description: 'Loves music, playing the guitar and video games',
   },
   {
     name: 'Katharina Fey',
@@ -94,7 +94,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'DE',
     photo: 'katharina-fey.png',
-    description: 'lorem',
+    description: 'Pineapple on a Pizza may be the title of their next song?',
   },
   {
     name: 'Toralf Wittner',
@@ -102,7 +102,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'DE',
     photo: 'toralf-wittner.png',
-    description: 'lorem',
+    description: 'A passion for privacy, open souce software and Rust',
   },
   {
     name: 'Thom Chiovoloni',
@@ -158,7 +158,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.ADVISORS],
     country: 'US',
     photo: 'j-dewitt-grosser.png',
-    description: 'Head of Revenue & Growth at Stripe',
+    description: 'Head of Revenue and Growth at Stripe',
   },
   {
     name: 'Matthew Trifiro',
