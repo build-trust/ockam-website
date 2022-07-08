@@ -110,7 +110,7 @@ export const MEMBERS = [
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
     photo: 'thom-chiovoloni.png',
-    description: 'lorem',
+    description: 'Hobbyist game designer and pixel artist',
   },
   {
     name: 'Maryanna Saenko',
