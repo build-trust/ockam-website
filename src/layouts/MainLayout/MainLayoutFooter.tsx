@@ -27,8 +27,8 @@ const MainLayoutFooter: FunctionComponent = () => {
       <Container variant="section">
         <Flex
           direction={{ base: 'column', lg: 'row' }}
-          justify="space-between"
-          align={{ base: 'flex-start', lg: 'center' }}
+          justify={{ base: 'space-between' }}
+          align="center"
           w="full"
           borderTop="1px"
           borderColor="gray.200"
