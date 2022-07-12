@@ -1,21 +1,7 @@
 import { FunctionComponent } from 'react';
-import {
-  chakra,
-  Container,
-  Flex,
-  Heading,
-  Text,
-  Box,
-  List,
-  ListItem,
-  ListIcon,
-  useTheme,
-} from '@chakra-ui/react';
-import { ArrowDownIcon } from '@chakra-ui/icons';
+import { chakra, Container, Heading, List, ListItem, ListIcon, useTheme } from '@chakra-ui/react';
 
 import { IntegrityIcon, AuthenticityIcon, PrivacyIcon, ControlIcon } from '@components/icons';
-import LineDivider from '@components/LineDivider';
-import StepsLabel from '@components/StepsLabel';
 
 const SUBHEADING_TEXTS = [
   { icon: IntegrityIcon, text: 'Integrity' },

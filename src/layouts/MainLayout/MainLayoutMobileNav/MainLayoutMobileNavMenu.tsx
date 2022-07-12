@@ -21,6 +21,7 @@ const MainLayoutMobileNavMenu: FunctionComponent = () => (
           fontWeight="medium"
           px={0}
           py={3}
+          _hover={{ textDecoration: 'underline' }}
         >
           {item.text} {IconComponent && <IconComponent w={6} h={6} ml={3} />}
           {!item.href && <AccordionIcon w={6} h={6} ml="auto" />}

@@ -1,15 +1,15 @@
-import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 
-type UseMainLayoutMobileNavReturnType = {
+export type UseLayoutMobileNavReturnType = {
   isOpenMobileNav: boolean;
   onCloseMobileNav: () => void;
   onToggleMobileNav: () => void;
   isBelowSmallLaptop?: boolean;
 };
 
-const useMainLayoutMobileNav = (): UseMainLayoutMobileNavReturnType => {
+const useLayoutMobileNav = (): UseLayoutMobileNavReturnType => {
   const router = useRouter();
   const {
     isOpen: isOpenMobileNav,
@@ -47,4 +47,4 @@ const useMainLayoutMobileNav = (): UseMainLayoutMobileNavReturnType => {
   };
 };
 
-export default useMainLayoutMobileNav;
+export default useLayoutMobileNav;

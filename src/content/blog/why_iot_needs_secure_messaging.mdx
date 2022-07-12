@@ -1,14 +1,20 @@
 ---
-title: "Why IoT needs Secure Messaging"
+title: 'Why IoT needs Secure Messaging'
 date: '2020-03-28'
-description: "Mrinal Wadhwa on why IoT needs Secure Messaging"
-metaTitle: "Secure end-to-end encryption among distributed systems is critical for a Trust Architecture."
-author: "Mrinal Wadhwa"
+description: 'Mrinal Wadhwa on why IoT needs Secure Messaging'
+metaTitle: 'Secure end-to-end encryption among distributed systems is critical for a Trust Architecture.'
+author: 'Mrinal Wadhwa'
 authorAvatar: /blog/mrinal-wadhwa-1.jpg
 ---
 
-<AspectRatio maxW="100%" ratio={16/9}>
-    <iframe src="https://www.youtube.com/embed/_rwsHF9HrNg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+<AspectRatio maxW="100%" ratio={16 / 9}>
+  <iframe
+    src="https://www.youtube.com/embed/_rwsHF9HrNg"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
 </AspectRatio>
 
 Hi. My name is Mrinal Wadhwa.
@@ -71,12 +77,11 @@ Secure applications should not do this they should instead place Zero Trust in N
 Every message, that is received by an application, must carry a proof to assure that the message
 wasn’t tapered or forged.
 
-
 A dependable application must be able to dynamically decide if it has enough assurance to trust
 and act on the information or a command received in a specific incoming message.
 
 2. The second reason connected applications often have weaknesses is that their architecture
-lacks the ability to establish **mutual** trust.
+   lacks the ability to establish **mutual** trust.
 
 It is common for IoT application architects to take inspiration from how they design browser based
 web applications and only establish trust in cloud services with one-way authentication. They
@@ -92,14 +97,13 @@ Dependable IoT applications must instead be able to mutually authenticate and au
 exchanges of sensed information and control instructions.
 
 3. The third common reason for vulnerabilities in connected applications is … poor management of
-credentials.
+   credentials.
 
 Once application developers discern that in order to have trust-worthy,
 dependable information flowing within their applications they need to mutually authenticate and
 authorize all exchange of messages …
 
 Once they discern this … they are faced with some hard challenges …
-
 
 To ensure that sensor readings and command acknowledgements sent by remote devices cannot be
 forged or tampered each device must possess unique cryptographic keys and credentials.
@@ -119,7 +123,7 @@ Teams shouldn’t have to design ad-hoc protocols for enrollment and access cont
 need simple and proven tools to safely manage keys and credentials at scale.
 
 4. The fourth common reason for weaknesses in connected applications is the lack of end-to-end
-safety for messages at the application layer
+   safety for messages at the application layer
 
 To protect en-route messages against eavesdropping, tampering, and forgery … we usually need a
 cryptographic secure channel protocol.

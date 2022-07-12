@@ -1,14 +1,15 @@
 ---
-title: "Zero Trust in Time Series Data?"
+title: 'Zero Trust in Time Series Data?'
 date: '2021-01-25'
-description: "A partnership between InfluxData and Ockam brings trust to time series data."
-metaTitle: "InfluxData and Ockam: How to build applications with trusted time series data in a zero trust environment."
-author: "Matthew Gregory"
+description: 'A partnership between InfluxData and Ockam brings trust to time series data.'
+metaTitle: 'InfluxData and Ockam: How to build applications with trusted time series data in a zero trust environment.'
+author: 'Matthew Gregory'
 authorAvatar: /blog/matthew_gregory-1.png
-isHomepageFeatured: true
-homepageFeaturedOrder: 2
+isFeatured: true
+featuredOrder: 2
 ---
-*A partnership between InfluxData and Ockam brings trust to time series data.*
+
+_A partnership between InfluxData and Ockam brings trust to time series data._
 
 Let's investigate how to build applications with trusted time series data in a zero trust environment! To trust an application we need to trust the data that feeds into it. Increasingly, applications rely on time series data from outside the datacenter, at the edge, or in IoT. This means we need to think of trust and data in new ways.
 
@@ -20,11 +21,11 @@ Time series data typically needs to traverse multiple networks to connect a mach
 
 The Zero Trust network architecture principles give guidance to how we should think about connections between the edge and InfluxDB. A Zero Trust architecture is based on the assumptions that;
 
-* The network is always hostile,
-* External and internal threats exist on the network at all times,
-* Network locality is not sufficient for determining trust in a network,
-* Every device, user, and network flow must be authenticated and authorized,
-* Security and privacy policies must be dynamic and calculated from as many sources of data as possible.
+- The network is always hostile,
+- External and internal threats exist on the network at all times,
+- Network locality is not sufficient for determining trust in a network,
+- Every device, user, and network flow must be authenticated and authorized,
+- Security and privacy policies must be dynamic and calculated from as many sources of data as possible.
 
 To build an application that places zero trust in network boundaries can be challenging for an application architect who simply wants to connect an agent, like Telegraf, running on a device at the edge to a cloud hosted instance of InfluxDB. That’s why InfluxData has partnered with Ockam. Ockam abstracts away the complexities required to build such distributed applications.
 
@@ -36,9 +37,9 @@ Let's look at the components that make up Ockam's systems, and how they provide 
 
 Ockam has taken proven cryptographic building blocks and applied them to build solutions for common IoT and edge-computing problems like:
 
-* Secure, rapid enrollment of large fleets of devices.
-* Scalable provisioning, proof of possession, rotation, and revocation of identity keys and credentials.
-* End-to-end encrypted communication over low-bandwidth, intermittently connected, multi-protocol IoT and edge network topologies.
+- Secure, rapid enrollment of large fleets of devices.
+- Scalable provisioning, proof of possession, rotation, and revocation of identity keys and credentials.
+- End-to-end encrypted communication over low-bandwidth, intermittently connected, multi-protocol IoT and edge network topologies.
 
 The goal is to provide this functionality in multiple programming languages with secure, high-level application interfaces that are easy to use correctly and hard to misuse. Let’s look at some of the core features of Ockam’s tools:
 
@@ -52,11 +53,11 @@ Ockam’s Secure Channels provide end-to-end encrypted and mutually authenticate
 
 Application developers need fine-grained control over data access in their systems, this can only be achieved if all interactions are mutually authenticated. To enable this, all devices must have unique cryptographically provable identities and access control must be managed with secure credentials. Enrolling large fleets of devices and managing the lifecycle of their keys and credentials can be quite challenging at scale. Ockam includes easy to use cryptographic protocols for;
 
-* Device Enrollment
-* Policy Enforcement
-* Key Management, Rotation, and Revocation
-* Credential Issuance
-...and more.
+- Device Enrollment
+- Policy Enforcement
+- Key Management, Rotation, and Revocation
+- Credential Issuance
+  ...and more.
 
 ## Built for InfluxDB developers
 

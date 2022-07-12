@@ -15,30 +15,43 @@ import LinkedImage from './LinkedImage';
 import Table from './Table';
 import Strong from './Strong';
 
-const generateHeading = size => props => (
-  <Heading {...props} as={size} linked>
-    {props.children}
-  </Heading>
-);
+const generateHeading = (size) => (props) =>
+  (
+    <Heading {...props} as={size} linked>
+      {props.children}
+    </Heading>
+  );
 
 export default {
-  h1: props => <Heading as="h1" size="xl" {...props} />,
-  h2: props => <Heading as="h1" size="lg" {...props} />,
-  h3: props => <Heading as="h1" size="md" {...props} />,
-  h4: props => <Heading as="h1" size="sm" {...props} />,
-  h5: props => <Heading as="h1" size="xs" {...props} />,
-  h6: props => <Heading as="h1" size="xs" {...props} />,
-  p: props => <Text {...props} mt={3} mb={3} />,
-  pre: Pre,
-  code: CodeBlock,
-  strong: Strong,
-  inlineCode: Code,
-  a: Link,
-  ul: List,
-  ol: ListOrdered,
+  h1: (props) => (
+    <Heading as="h1" fontSize={{ base: 'xl', sm: '3xl' }} mb={{ base: 6, sm: 10 }} {...props} />
+  ),
+  h2: (props) => (
+    <Heading as="h2" fontSize={{ base: 'xl', sm: '3xl' }} mb={{ base: 6, sm: 10 }} {...props} />
+  ),
+  h3: (props) => (
+    <Heading as="h3" fontSize={{ base: 'xl', sm: '3xl' }} mb={{ base: 6, sm: 10 }} {...props} />
+  ),
+  h4: (props) => (
+    <Heading as="h4" fontSize={{ base: 'xl', sm: '3xl' }} mb={{ base: 6, sm: 10 }} {...props} />
+  ),
+  h5: (props) => (
+    <Heading as="h5" fontSize={{ base: 'xl', sm: '3xl' }} mb={{ base: 6, sm: 10 }} {...props} />
+  ),
+  h6: (props) => (
+    <Heading as="h6" fontSize={{ base: 'xl', sm: '3xl' }} mb={{ base: 6, sm: 10 }} {...props} />
+  ),
+  p: (props) => <Text {...props} mb={6} color="inherit" />,
+  pre: (props) => <Pre {...props} mb={6} />,
+  code: (props) => <CodeBlock {...props} mb={6} />,
+  strong: (props) => <Strong {...props} mb={6} />,
+  inlineCode: (props) => <Code {...props} mb={6} />,
+  a: (props) => <Link {...props} mb={6} />,
+  ul: (props) => <List {...props} mb={6} />,
+  ol: (props) => <ListOrdered {...props} mb={6} />,
   li: ListItem,
-  img: LinkedImage,
-  table: props => <Table {...props} mb={4} />,
+  img: (props) => <LinkedImage {...props} mb={6} />,
+  table: (props) => <Table {...props} mb={4} />,
   blockquote: Blockquote,
   hr: Hr,
 };

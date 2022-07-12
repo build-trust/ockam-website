@@ -2,12 +2,12 @@ import { FunctionComponent } from 'react';
 import { IconButton } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 
-type MainLayoutMobileNavButtonProps = {
-  isOpenMobileNav: boolean;
-  onClick: () => void;
+type LayoutMobileNavButtonProps = {
+  isOpenMobileNav: boolean | undefined;
+  onClick: (() => void) | undefined;
 };
 
-const MainLayoutMobileNavButton: FunctionComponent<MainLayoutMobileNavButtonProps> = ({
+const LayoutMobileNavButton: FunctionComponent<LayoutMobileNavButtonProps> = ({
   isOpenMobileNav,
   onClick,
 }) => (
@@ -27,8 +27,7 @@ const MainLayoutMobileNavButton: FunctionComponent<MainLayoutMobileNavButtonProp
     ml="auto"
     icon={isOpenMobileNav ? <CloseIcon /> : <HamburgerIcon />}
     onClick={onClick}
-    display={{ lg: 'none' }}
   />
 );
 
-export default MainLayoutMobileNavButton;
+export default LayoutMobileNavButton;

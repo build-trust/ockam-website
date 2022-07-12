@@ -6,6 +6,7 @@ import components from './components';
 
 const fontFamily = {
   inter: `'Inter', sans-serif`,
+  blogPost: `'Source Serif Pro', serif`,
 } as const;
 
 const fontWeights = {
@@ -20,7 +21,7 @@ const fontSizes = {
 };
 
 const space = {
-  18: '4.5rem',
+  18: '4.5rem', // 72px
   26: '6.5rem', // 104px
   30: '7.5rem', // 120px
 };
@@ -35,13 +36,20 @@ const gradients = {
   tertiary: 'linear-gradient(180deg, rgba(79, 218, 184, 0) 20.47%, #4FDAB8 102.84%)',
 };
 
+const breakpoints = {
+  '1.25xl': '83.125em', // 1330px
+  '1.5xl': '87.5em', // 1400px
+};
+
 const themeExtension = {
   styles: { global: globalStyles },
   fonts: {
     body: `${fontFamily.inter}, ${base.fonts.body}`,
     heading: `${fontFamily.inter}, ${base.fonts.heading}`,
+    blogPost: `${fontFamily.blogPost}, ${base.fonts.body}`,
   },
   components,
+  breakpoints,
   colors,
   gradients,
   space,

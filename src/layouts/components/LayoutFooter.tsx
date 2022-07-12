@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import {
   Box,
+  BoxProps,
   Button,
   chakra,
   Container,
@@ -13,17 +14,18 @@ import {
 
 import LogoGray from '@assets/logo-gray.svg';
 import { LinkedinIcon, TwitterIcon } from '@components/icons';
+import socialsLinks from '@consts/socialsLinks';
 
 const LINKS = [
   { text: 'Support', href: 'https://github.com/build-trust/ockam/discussions/categories/support' },
   { text: 'Discussion', href: 'https://github.com/build-trust/ockam/discussions' },
 ];
 
-const MainLayoutFooter: FunctionComponent = () => {
+const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
   const { gradients } = useTheme();
 
   return (
-    <Box as="footer">
+    <Box as="footer" {...restProps}>
       <Container variant="section">
         <Flex
           direction={{ base: 'column', lg: 'row' }}
@@ -37,7 +39,7 @@ const MainLayoutFooter: FunctionComponent = () => {
           <Heading as="h3" size="h3" maxW="lg" mb={{ base: 9, lg: 0 }}>
             Developers{' '}
             <chakra.span bgImage={gradients.primary} bgClip="text">
-              Love Ockam.
+              Love Ockam
             </chakra.span>
           </Heading>
 
@@ -99,11 +101,11 @@ const MainLayoutFooter: FunctionComponent = () => {
             </Flex>
 
             <Box>
-              <Link href="https://www.linkedin.com/company/ockam.io/" isExternal>
+              <Link href={socialsLinks.linkedIn} isExternal>
                 <LinkedinIcon w={6} h={6} color="gray.500" mr={5} />
               </Link>
 
-              <Link href="https://twitter.com/ockam" isExternal>
+              <Link href={socialsLinks.twitter} isExternal>
                 <TwitterIcon w={6} h={6} color="gray.500" />
               </Link>
             </Box>
@@ -114,4 +116,4 @@ const MainLayoutFooter: FunctionComponent = () => {
   );
 };
 
-export default MainLayoutFooter;
+export default LayoutFooter;
