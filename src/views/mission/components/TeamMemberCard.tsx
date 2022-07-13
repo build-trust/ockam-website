@@ -10,6 +10,7 @@ import getRandomImage from '@utils/getRandomImage';
 
 type TeamMemberCardProps = {
   name: string;
+  surname: string;
   position: string;
   description: string;
   photo: string;
@@ -17,11 +18,12 @@ type TeamMemberCardProps = {
 };
 const IMG_SIZES = {
   w: 164,
-  h: 199,
+  h: 229,
 };
 
 const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
   name,
+  surname,
   position,
   description,
   photo,
@@ -55,8 +57,18 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
       position="relative"
     >
       <Box pr={8} mb={4}>
-        <Text color="brand.900" fontWeight="bold" fontSize={{ md: 'lg' }} whiteSpace="pre-wrap">
-          {name}
+        <Text
+          color="brand.900"
+          fontWeight="bold"
+          fontSize={{ md: 'lg' }}
+          whiteSpace="pre-wrap"
+          display="flex"
+          flexDirection="column"
+          lineHeight={1.2}
+          mb={2}
+        >
+          <span>{name}</span>
+          <span>{surname}</span>
         </Text>
 
         <Text fontSize="sm">{position}</Text>

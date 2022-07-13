@@ -6,7 +6,8 @@ export const CATEGORIES = {
 
 export const MEMBERS = [
   {
-    name: 'Mrinal Wadwha',
+    name: 'Mrinal',
+    surname: 'Wadwha',
     position: 'CTO',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
@@ -14,7 +15,8 @@ export const MEMBERS = [
     description: 'Loves rock-n-roll and has a dog named Sargent Pepper',
   },
   {
-    name: 'Matthew Gregory',
+    name: 'Matthew',
+    surname: 'Gregory',
     position: 'CEO',
     categories: [CATEGORIES.FULL_TIME_MEMBERS, CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
@@ -22,7 +24,8 @@ export const MEMBERS = [
     description: 'Started his career in professional sailing and has a passion for meteorology',
   },
   {
-    name: 'Sabeen Syed',
+    name: 'Sabeen',
+    surname: 'Syed',
     position: 'VP of Engineering',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
@@ -31,7 +34,8 @@ export const MEMBERS = [
       'Enjoys reading historical fiction, playing board games and running after her 4 kids',
   },
   {
-    name: 'Antoine van Gelder',
+    name: 'Antoine',
+    surname: 'van Gelder',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'ZA',
@@ -39,7 +43,8 @@ export const MEMBERS = [
     description: 'Raised two kids and still loves playing guitar',
   },
   {
-    name: 'Daniil Fedotov',
+    name: 'Daniil',
+    surname: 'Fedotov',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'CA',
@@ -47,7 +52,8 @@ export const MEMBERS = [
     description: 'Is playing his bagpipes in Canada',
   },
   {
-    name: 'Michael Uti',
+    name: 'Michael',
+    surname: 'Uti',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'NG',
@@ -55,7 +61,8 @@ export const MEMBERS = [
     description: 'A recent graduate that is an ace with GitHub actions',
   },
   {
-    name: 'Oleksandr Deundiak',
+    name: 'Oleksandr',
+    surname: 'Deundiak',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'UA',
@@ -63,7 +70,8 @@ export const MEMBERS = [
     description: 'Rides really fast motorcycles',
   },
   {
-    name: 'Piotr Sobieszczański',
+    name: 'Piotr',
+    surname: 'Sobieszczański',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'PL',
@@ -71,7 +79,8 @@ export const MEMBERS = [
     description: 'Loves nature and passion about space exploration',
   },
   {
-    name: 'Pablo Polvorin',
+    name: 'Pablo',
+    surname: 'Polvorin',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'AR',
@@ -81,7 +90,8 @@ export const MEMBERS = [
   },
 
   {
-    name: 'Adrian Benavides',
+    name: 'Adrian',
+    surname: 'Benavides',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'ES',
@@ -89,7 +99,8 @@ export const MEMBERS = [
     description: 'Loves music, playing the guitar and video games',
   },
   {
-    name: 'Katharina Fey',
+    name: 'Katharina',
+    surname: 'Fey',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'DE',
@@ -97,7 +108,8 @@ export const MEMBERS = [
     description: 'Pineapple on a Pizza may be the title of their next song?',
   },
   {
-    name: 'Toralf Wittner',
+    name: 'Toralf',
+    surname: 'Wittner',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'DE',
@@ -105,7 +117,8 @@ export const MEMBERS = [
     description: 'A passion for privacy, open souce software and Rust',
   },
   {
-    name: 'Thom Chiovoloni',
+    name: 'Thom',
+    surname: 'Chiovoloni',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
@@ -113,7 +126,8 @@ export const MEMBERS = [
     description: 'Hobbyist game designer and pixel artist',
   },
   {
-    name: 'Maryanna Saenko',
+    name: 'Maryanna',
+    surname: 'Saenko',
     position: 'Board Member',
     categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
@@ -121,7 +135,8 @@ export const MEMBERS = [
     description: 'Partner at Future Ventures',
   },
   {
-    name: 'Arra Malekzadeh',
+    name: 'Arra',
+    surname: 'Malekzadeh',
     position: 'Board Member',
     categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
@@ -129,7 +144,8 @@ export const MEMBERS = [
     description: 'Partner at Craft Ventures',
   },
   {
-    name: 'Fergal Donoher',
+    name: 'Fergal',
+    surname: 'Donoher',
     position: 'Board Member',
     categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
@@ -137,7 +153,8 @@ export const MEMBERS = [
     description: 'SVP at Flex',
   },
   {
-    name: 'Patricia Muoio',
+    name: 'Patricia',
+    surname: 'Muoio',
     position: 'Board Member',
     categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
@@ -145,7 +162,8 @@ export const MEMBERS = [
     description: 'Partner at SineWave Ventures',
   },
   {
-    name: 'Joanna Drake',
+    name: 'Joanna',
+    surname: 'Drake',
     position: 'Board Member',
     categories: [CATEGORIES.BOARD_OF_DIRECTORS],
     country: 'US',
@@ -153,7 +171,8 @@ export const MEMBERS = [
     description: 'Partner at Core Ventures',
   },
   {
-    name: 'Jeanne DeWitt Grosser',
+    name: 'Jeanne',
+    surname: 'DeWitt Grosser',
     position: 'Product Advisor',
     categories: [CATEGORIES.ADVISORS],
     country: 'US',
@@ -161,7 +180,8 @@ export const MEMBERS = [
     description: 'Head of Revenue and Growth at Stripe',
   },
   {
-    name: 'Matthew Trifiro',
+    name: 'Matthew',
+    surname: 'Trifiro',
     position: 'Product Advisor',
     categories: [CATEGORIES.ADVISORS],
     country: 'US',
@@ -169,7 +189,8 @@ export const MEMBERS = [
     description: 'CMO at Vapor.io',
   },
   {
-    name: 'Brian Mullen',
+    name: 'Brian',
+    surname: 'Mullen',
     position: 'Product Advisor',
     categories: [CATEGORIES.ADVISORS],
     country: 'US',

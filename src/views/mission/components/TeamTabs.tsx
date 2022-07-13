@@ -39,7 +39,8 @@ const TeamTabs: FunctionComponent<Omit<TabsProps, 'children'>> = (props) => (
             spacingX={{ lg: 6 }}
           >
             {getMembersForSpecificCategory(category)?.map(
-              (member) => member && <TeamMemberCard key={member.name} {...member} />
+              (member) =>
+                member && <TeamMemberCard key={`${member.name}_${member.surname}`} {...member} />
             )}
           </SimpleGrid>
         </CustomTabPanel>
