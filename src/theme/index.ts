@@ -6,7 +6,7 @@ import components from './components';
 
 const fontFamily = {
   inter: `'Inter', sans-serif`,
-  blogPost: `'Source Serif Pro', serif`,
+  blogPostBody: `'Source Serif Pro', serif`,
 } as const;
 
 const fontWeights = {
@@ -46,7 +46,7 @@ const themeExtension = {
   fonts: {
     body: `${fontFamily.inter}, ${base.fonts.body}`,
     heading: `${fontFamily.inter}, ${base.fonts.heading}`,
-    blogPost: `${fontFamily.blogPost}, ${base.fonts.body}`,
+    blogPostBody: `${fontFamily.blogPostBody}, ${base.fonts.body}`,
   },
   components,
   breakpoints,

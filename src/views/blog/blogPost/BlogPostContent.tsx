@@ -11,7 +11,7 @@ const BlogPostContent: FunctionComponent<BlogPostContentProps> = ({ children }) 
     maxW="3xl"
     mx="auto"
     mt={{ base: 10, '1.5xl': 16 }}
-    fontFamily="blogPost"
+    fontFamily="blogPostBody"
     color="brand.900"
   >
     {children}

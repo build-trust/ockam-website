@@ -24,7 +24,7 @@ const Infrastructure: FunctionComponent = () => {
   const { gradients } = useTheme();
 
   return (
-    <Flex position="relative" w="full">
+    <Flex position="relative" w="full" overflowX="hidden">
       <Box
         display={{ base: 'none', lg: 'block' }}
         position="absolute"
