@@ -117,15 +117,6 @@ export const MEMBERS = [
     description: 'A passion for privacy, open souce software and Rust',
   },
   {
-    name: 'Thom',
-    surname: 'Chiovoloni',
-    position: 'Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'thom-chiovoloni.png',
-    description: 'Hobbyist game designer and pixel artist',
-  },
-  {
     name: 'Maryanna',
     surname: 'Saenko',
     position: 'Board Member',
