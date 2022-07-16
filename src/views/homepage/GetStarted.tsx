@@ -14,7 +14,7 @@ const GET_STARTED_CARDS = [
     title: 'Open Source',
     text: 'Join your community, start a discussion, or file an issue.',
     link: {
-      text: 'Go to Github',
+      text: 'Go to GitHub',
       href: 'https://github.com/build-trust/ockam',
     },
   },
