@@ -12,7 +12,7 @@ const GET_STARTED_CARDS = [
   {
     icon: GitHubIcon,
     title: 'Open Source',
-    text: 'Join your community, start a discussion, or file an issue.',
+    text: 'Join our community, start a discussion, read some code, or file an issue.',
     link: {
       text: 'Go to GitHub',
       href: 'https://github.com/build-trust/ockam',
@@ -30,9 +30,9 @@ const GET_STARTED_CARDS = [
   {
     icon: CloudIcon,
     title: 'Ockam Orchestrator',
-    text: 'Sign up for Ockam Orchestrator. Now in Private Beta!',
+    text: 'Sign up for Ockam Orchestrator - Now in Private Availability. Coming to AWS Marketplace in September.',
     link: {
-      text: 'Get Beta Access',
+      text: 'Contact us',
       href: 'mailto:hello@ockam.io',
     },
   },
