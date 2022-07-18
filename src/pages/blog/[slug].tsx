@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
-import Head from 'next/head';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { Box, AspectRatio } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 import { getAllPosts, getPostBySlug, postFilePaths } from '@api/blogApi';
 import mdxComponents from '@components/mdx';
@@ -9,7 +9,7 @@ import { BlogPost, BlogPostData, GroupedBlogPosts } from '@typings/BlogPost';
 import BlogLayout from '@layouts/BlogLayout/BlogLayout';
 import groupPostsByCategory from '@utils/groupPostsByCategory';
 import { BlogPostHeader, BlogPostContent } from '@views/blog/blogPost';
-import CONFIG from '@config';
+import SEOHead from '@components/SEOHead';
 
 type BlogPostPageProps = {
   params?: { slug: string };
@@ -59,25 +59,27 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({
   frontMatter,
   posts,
   groupedPosts,
-}) => (
-  <BlogLayout posts={posts} groupedPosts={groupedPosts}>
-    <Head>
-      <title>
-        {CONFIG.app.title} | {frontMatter.metaTitle}
-      </title>
-    </Head>
-    <Box
-      maxW={{ base: '3xl', '1.5xl': 'fit-content' }}
-      mt={{ base: 10, lg: 0 }}
-      mx="auto"
-      px={{ base: 5, '1.5xl': 0 }}
-    >
-      <BlogPostHeader post={frontMatter as BlogPostData} />
-      <BlogPostContent>
-        <MDXRemote {...source} components={{ ...mdxComponents, AspectRatio } as never} />
-      </BlogPostContent>
-    </Box>
-  </BlogLayout>
-);
+}) => {
+  const router = useRouter();
+  const canonicalPath = `/blog/${router.query.slug}`;
+
+  return (
+    <BlogLayout posts={posts} groupedPosts={groupedPosts}>
+      <SEOHead subTitle={(frontMatter?.metaTitle as string) || ''} canonicalPath={canonicalPath} />
+
+      <Box
+        maxW={{ base: '3xl', '1.5xl': 'fit-content' }}
+        mt={{ base: 10, lg: 0 }}
+        mx="auto"
+        px={{ base: 5, '1.5xl': 0 }}
+      >
+        <BlogPostHeader post={frontMatter as BlogPostData} />
+        <BlogPostContent>
+          <MDXRemote {...source} components={{ ...mdxComponents, AspectRatio } as never} />
+        </BlogPostContent>
+      </Box>
+    </BlogLayout>
+  );
+};
 
 export default BlogPostPage;

@@ -1,17 +1,14 @@
 import { ReactElement, ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
-import Head from 'next/head';
 
+import SEOHead from '@components/SEOHead';
 import { Hero, Values, Virtues, Investors, Team } from '@views/mission';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
-import CONFIG from '@config';
 
 const MissionAndVisionPage: NextPageWithLayout = () => (
   <Box pt={{ base: 10, lg: 20 }}>
-    <Head>
-      <title>{CONFIG.app.title} | Our Mission</title>
-    </Head>
+    <SEOHead subTitle="Our Mission" />
 
     <Hero />
     <Values />

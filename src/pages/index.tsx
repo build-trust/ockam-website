@@ -1,6 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
-import Head from 'next/head';
 
 import githubApi from '@api/githubApi';
 import cratesApi from '@api/cratesApi';
@@ -50,18 +49,14 @@ export async function getStaticProps(): Promise<{ props: HomePageProps }> {
       },
     };
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e);
-
     return { props: {} };
   }
 }
 
 const HomePage: NextPageWithLayout<HomePageProps> = ({ stars, contributors, downloads }) => (
   <Box pt={{ base: 10, lg: 20 }}>
-    <Head>
-      <title>{CONFIG.app.title}</title>
-    </Head>
-
     <Hero />
     <Solution />
     <GetStarted />

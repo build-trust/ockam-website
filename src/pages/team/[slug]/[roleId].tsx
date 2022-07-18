@@ -1,7 +1,7 @@
 import axios from 'axios';
-import Head from 'next/head';
 import { ReactElement, ReactNode } from 'react';
 import { GetServerSidePropsContext, GetStaticPathsResult } from 'next';
+import { useRouter } from 'next/router';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import CONFIG from '@config';
@@ -9,18 +9,20 @@ import MainLayout from '@layouts/MainLayout';
 import { LeverPosting } from '@typings/lever';
 import { OpenRole } from '@views/open-role';
 import { generateSlug } from '@utils/generateSlug';
+import SEOHead from '@components/SEOHead';
 
-const OpenRolePage: NextPageWithLayout<{ openRole: LeverPosting }> = ({ openRole }) => (
-  <>
-    <Head>
-      <title>
-        {CONFIG.app.title} | {openRole.text}
-      </title>
-    </Head>
+const OpenRolePage: NextPageWithLayout<{ openRole: LeverPosting }> = ({ openRole }) => {
+  const router = useRouter();
+  const canonicalPath = `/blog/${router.query.slug}/${router.query.roleId}`;
 
-    <OpenRole openRole={openRole} />
-  </>
-);
+  return (
+    <>
+      <SEOHead subTitle={openRole.text} canonicalPath={canonicalPath} />
+
+      <OpenRole openRole={openRole} />
+    </>
+  );
+};
 
 OpenRolePage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
 

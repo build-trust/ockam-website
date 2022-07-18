@@ -1,5 +1,4 @@
 import { ReactElement, ReactNode } from 'react';
-import Head from 'next/head';
 import axios from 'axios';
 import { Box } from '@chakra-ui/react';
 
@@ -8,12 +7,12 @@ import MainLayout from '@layouts/MainLayout';
 import { Hero, Quote, Values, OpenRoles } from '@views/team';
 import CONFIG from '@config';
 import { LeverPostingsGroup } from '@typings/lever';
+import SEOHead from '@components/SEOHead';
 
 const OpenRolesPage: NextPageWithLayout<{ openRoles: LeverPostingsGroup[] }> = ({ openRoles }) => (
   <Box pt={{ base: 10, lg: 20 }}>
-    <Head>
-      <title>{CONFIG.app.title} | Open Roles</title>
-    </Head>
+    <SEOHead subTitle="Open Roles" />
+
     <Hero />
     <Quote />
     <Values />
