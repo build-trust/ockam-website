@@ -12,6 +12,7 @@ const BlogPostContent: FunctionComponent<BlogPostContentProps> = ({ children }) 
     mx="auto"
     mt={{ base: 10, '1.5xl': 16 }}
     fontFamily="blogPostBody"
+    fontSize="lg"
     color="brand.900"
   >
     {children}

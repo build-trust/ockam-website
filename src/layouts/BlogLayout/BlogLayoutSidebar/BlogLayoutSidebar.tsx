@@ -19,10 +19,15 @@ const BlogLayoutSidebar: FunctionComponent<BlogLayoutSidebarProps> = ({ posts, .
   <Container
     as="aside"
     w={305}
-    h="fit-content"
+    h="100vh"
+    minH="fit-content"
     py={8}
     pl={6}
     pr={3}
+    pos="sticky"
+    top={0}
+    display="flex"
+    flexDir="column"
     borderRight="1px"
     borderColor="gray.100"
     {...restProps}
@@ -34,8 +39,8 @@ const BlogLayoutSidebar: FunctionComponent<BlogLayoutSidebarProps> = ({ posts, .
     </Link>
     <BlogSearchInput w="2xs" mt={14} />
 
-    <BlogLayoutSidebarNavigation mt={10} posts={posts} />
-    <BlogLayoutSocials mt={188} />
+    <BlogLayoutSidebarNavigation mt={10} mb={12} posts={posts} />
+    <BlogLayoutSocials mt="auto" mb={12} />
   </Container>
 );
 export default BlogLayoutSidebar;

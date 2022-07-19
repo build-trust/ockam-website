@@ -17,7 +17,7 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({ children, posts, group
     <SearchValueProvider posts={posts}>
       <BlogLayoutMobileNav posts={groupedPosts} />
       <Container px={0} alignItems="top" variant="section" flexDirection="row">
-        <BlogLayoutSidebar display={{ base: 'none', lg: 'block' }} posts={groupedPosts} />
+        <BlogLayoutSidebar display={{ base: 'none', lg: 'flex' }} posts={groupedPosts} />
         <Box as="main" w="full">
           {children}
         </Box>
