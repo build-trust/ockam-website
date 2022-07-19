@@ -7,11 +7,11 @@ export const CATEGORIES = {
 export const MEMBERS = [
   {
     name: 'Mrinal',
-    surname: 'Wadwha',
+    surname: 'Wadhwa',
     position: 'CTO',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
-    photo: 'mrinal-wadwha.png',
+    photo: 'mrinal-wadhwa.png',
     description: 'Loves rock-n-roll and has a dog named Sargent Pepper',
   },
   {
