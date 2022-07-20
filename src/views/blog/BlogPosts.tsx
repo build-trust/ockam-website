@@ -1,26 +1,18 @@
-import { FunctionComponent, useContext } from 'react';
-import { orderBy } from 'lodash';
+import { FunctionComponent } from 'react';
 import { Grid } from '@chakra-ui/react';
 
-import { BlogPost } from '@typings/BlogPost';
-import { SearchValueContext } from '@contextProviders/SearchValueProvider';
+import { useBlogPostsContext } from '@contextProviders/BlogPostsProvider';
 
 import FeaturedBlogPosts from './FeaturedBlogPosts';
 import SearchBlogPosts from './SearchBlogPosts';
 
-type BlogPostsProps = {
-  posts: BlogPost[];
-};
+type BlogPostsProps = {};
 
-const BlogPosts: FunctionComponent<BlogPostsProps> = ({ posts }) => {
-  const featuredPosts = posts.filter((post) => post.data.isFeatured);
-  const [highlightedFeaturedBlogPost, ...restFeaturedPosts] = orderBy(
-    featuredPosts,
-    ['data.featuredOrder', 'data.date'],
-    ['asc', 'asc']
-  );
+const BlogPosts: FunctionComponent<BlogPostsProps> = () => {
+  const { featuredAndOrderedBlogPosts, searchPostsQuery, searchPostsResult } =
+    useBlogPostsContext();
 
-  const { searchValue, searchPosts } = useContext(SearchValueContext);
+  if (!featuredAndOrderedBlogPosts?.length) return null;
 
   return (
     <Grid
@@ -32,12 +24,12 @@ const BlogPosts: FunctionComponent<BlogPostsProps> = ({ posts }) => {
       mx="auto"
       justifyItems={{ base: 'center', xl: 'normal' }}
     >
-      {searchValue ? (
-        <SearchBlogPosts posts={searchPosts || []} />
+      {searchPostsQuery ? (
+        <SearchBlogPosts posts={searchPostsResult} />
       ) : (
         <FeaturedBlogPosts
-          highlightedFeaturedBlogPost={highlightedFeaturedBlogPost}
-          restFeaturedPosts={restFeaturedPosts}
+          highlightedFeaturedBlogPost={featuredAndOrderedBlogPosts[0]}
+          restFeaturedPosts={featuredAndOrderedBlogPosts.slice(1)}
         />
       )}
     </Grid>

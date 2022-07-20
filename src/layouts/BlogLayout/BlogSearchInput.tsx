@@ -3,18 +3,18 @@ import { Input, InputGroup, InputProps, InputRightElement } from '@chakra-ui/rea
 import { SearchIcon } from '@chakra-ui/icons';
 
 import { MobileNavbarContext } from '@contextProviders/MobileNavbarProvider';
-import { SearchValueContext } from '@contextProviders/SearchValueProvider';
+import { useBlogPostsContext } from '@contextProviders/BlogPostsProvider';
 
 const BlogSearchInput: FunctionComponent<InputProps> = ({ ...restProps }) => {
   const [inputValue, setInputValue] = useState<string>('');
   const { onToggleMobileNav } = useContext(MobileNavbarContext);
-  const { handleSearchValueChange } = useContext(SearchValueContext);
+  const { handleSetSearchPostsQuery } = useBlogPostsContext();
 
   const handleBlogSearchInputChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>): void => setInputValue(value);
 
-  const updateSearchValue = (): void => handleSearchValueChange!(inputValue);
+  const updateSearchValue = (): void => handleSetSearchPostsQuery!(inputValue);
 
   const handleSearchValueUpdate = (event: KeyboardEvent<HTMLInputElement>): void => {
     if (event.key === 'Enter') {

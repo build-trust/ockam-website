@@ -1,16 +1,16 @@
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent } from 'react';
 import Link from 'next/link';
 import { AccordionItem, Link as ChakraLink, LinkProps } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
-import { SearchValueContext } from '@contextProviders/SearchValueProvider';
+import { useBlogPostsContext } from '@contextProviders/BlogPostsProvider';
 import { BLOG_PATH } from '@consts/paths';
 
 const BlogLayoutSidebarSeeAllArticles: FunctionComponent<LinkProps> = ({ ...props }) => {
-  const { handleRemoveSearchQuery } = useContext(SearchValueContext);
+  const { handleRemoveSearchPostsQuery } = useBlogPostsContext();
 
   return (
-    <AccordionItem w="full" py={3} borderTop="none" onClick={handleRemoveSearchQuery}>
+    <AccordionItem w="full" py={3} borderTop="none" onClick={handleRemoveSearchPostsQuery}>
       <Link href={BLOG_PATH} passHref>
         <ChakraLink
           display="flex"

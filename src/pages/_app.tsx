@@ -9,6 +9,7 @@ import defaultOgImage from '@assets/images/open-graphs/default.png';
 import CONFIG from '@config';
 import { KEYS } from '@consts/seo';
 import StylesProvider from '@contextProviders/StylesProvider';
+import MobileNavbarProvider from '@contextProviders/MobileNavbarProvider';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import theme from '@theme';
 
@@ -61,8 +62,10 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
         />
       </Head>
       <StylesProvider>
-        <NextNprogress color={theme.colors.brand[500]} height={3} />
-        {getLayout(<Component {...pageProps} />)}
+        <MobileNavbarProvider>
+          <NextNprogress color={theme.colors.brand[500]} height={3} />
+          {getLayout(<Component {...pageProps} />)}
+        </MobileNavbarProvider>
       </StylesProvider>
     </>
   );
