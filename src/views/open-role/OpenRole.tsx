@@ -8,19 +8,20 @@ import {
   List,
   ListItem,
   ListItemProps,
+  Icon,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
 
 import { OPEN_ROLES_PATH } from '@consts/paths';
 import { LeverPosting, LeverPostingList } from '@typings/lever';
-import { GreenIconWrapper } from '@components/icons/wrappers';
-import { CheckIcon } from '@components/icons';
+import GreenIconWrapper from '@components/GreenIconWrapper';
+import CheckIcon from '@assets/icons/check.svg';
 
 const ListItemWrapper: FunctionComponent<ListItemProps> = ({ children, ...restProps }) => (
   <ListItem display="flex" {...restProps}>
     <GreenIconWrapper as="span" w={6} h={6} mr={3}>
-      <CheckIcon color="white" />
+      <Icon as={CheckIcon} color="white" w="full" h="full" />
     </GreenIconWrapper>
     <Box as="span" flex={1}>
       {children}

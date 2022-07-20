@@ -9,11 +9,13 @@ import {
   Heading,
   Link,
   Text,
+  Icon,
   useTheme,
 } from '@chakra-ui/react';
 
 import LogoGray from '@assets/logo-gray.svg';
-import { LinkedinIcon, TwitterIcon } from '@components/icons';
+import LinkedinIcon from '@assets/icons/linkedin.svg';
+import TwitterIcon from '@assets/icons/twitter.svg';
 import socialsLinks from '@consts/socialsLinks';
 
 const LINKS = [
@@ -102,11 +104,11 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
 
             <Box>
               <Link href={socialsLinks.linkedIn} isExternal>
-                <LinkedinIcon w={6} h={6} color="gray.500" mr={5} />
+                <Icon as={LinkedinIcon} w={6} h={6} color="gray.500" mr={5} />
               </Link>
 
               <Link href={socialsLinks.twitter} isExternal>
-                <TwitterIcon w={6} h={6} color="gray.500" />
+                <Icon as={TwitterIcon} w={6} h={6} color="gray.500" />
               </Link>
             </Box>
           </Flex>

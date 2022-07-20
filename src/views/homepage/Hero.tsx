@@ -1,7 +1,10 @@
 import { FunctionComponent } from 'react';
 import { chakra, Container, Heading, List, ListItem, ListIcon, useTheme } from '@chakra-ui/react';
 
-import { IntegrityIcon, AuthenticityIcon, PrivacyIcon, ControlIcon } from '@components/icons';
+import ControlIcon from '@assets/icons/control.svg';
+import PrivacyIcon from '@assets/icons/privacy.svg';
+import IntegrityIcon from '@assets/icons/integrity.svg';
+import AuthenticityIcon from '@assets/icons/authenticity.svg';
 
 const SUBHEADING_TEXTS = [
   { icon: IntegrityIcon, text: 'Integrity' },
@@ -30,7 +33,7 @@ const Hero: FunctionComponent = () => {
         mt={{ base: 8, lg: 10 }}
         mb={{ base: 16, lg: 20 }}
       >
-        {SUBHEADING_TEXTS.map(({ text, icon: IconComponent }) => (
+        {SUBHEADING_TEXTS.map(({ text, icon }) => (
           <ListItem
             key={text}
             display="flex"
@@ -42,7 +45,7 @@ const Hero: FunctionComponent = () => {
             lineHeight={1.3}
             color="brand.900"
           >
-            <ListIcon as={IconComponent} w={6} h={6} mr={4} />
+            <ListIcon as={icon} w={6} h={6} mr={4} />
             {text}
           </ListItem>
         ))}

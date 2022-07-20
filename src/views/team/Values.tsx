@@ -1,9 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Container, Heading, Box, Text, SimpleGrid, Flex, Button } from '@chakra-ui/react';
+import { Container, Heading, Box, Text, SimpleGrid, Flex, Button, Icon } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import { BrainIcon, ClarityIcon, TimeIcon, BulbIcon } from '@components/icons';
-import { GreenIconWrapper } from '@components/icons/wrappers';
+import TimeIcon from '@assets/icons/time.svg';
+import BulbIcon from '@assets/icons/bulb.svg';
+import BrainIcon from '@assets/icons/brain.svg';
+import ClarityIcon from '@assets/icons/clarity.svg';
+import GreenIconWrapper from '@components/GreenIconWrapper';
 import { MISSION_AND_VISION_PATH } from '@consts/paths';
 
 const VALUES = [
@@ -81,10 +84,10 @@ const Values: FunctionComponent = () => (
       spacingX={{ md: 16, lg: 14, xl: 24 }}
       pb={{ base: 4, lg: 10 }}
     >
-      {VALUES.map(({ icon: IconComponent, texts, title }) => (
+      {VALUES.map(({ icon, texts, title }) => (
         <Box key={title}>
           <GreenIconWrapper flex={1} mb={4}>
-            <IconComponent color="white" w={6} h={6} />
+            <Icon as={icon} color="white" w={6} h={6} />
           </GreenIconWrapper>
 
           <Text fontSize="xl" fontWeight="bold" color="brand.900" my={2} lineHeight={1.3}>

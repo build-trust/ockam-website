@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
-import { chakra, Box, Container, Flex, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { chakra, Box, Container, Flex, Heading, SimpleGrid, Text, Icon } from '@chakra-ui/react';
 import { ArrowDownIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 
+import QuoteIcon from '@assets/icons/quote.svg';
 import MatthewGregoryImage from '@assets/images/matthew-gregory.png';
 import LineDivider from '@components/LineDivider';
-import { QuoteIcon } from '@components/icons';
 
 const Quote: FunctionComponent = () => (
   <Box bgColor="gray.50">
@@ -28,13 +28,14 @@ const Quote: FunctionComponent = () => (
         </Flex>
 
         <Flex direction="column" justify="center" pt={{ base: 8, lg: 0 }}>
-          <QuoteIcon w={10} h={8} color="avocado.500" />
+          <Icon as={QuoteIcon} w={10} h={8} color="avocado.500" />
           <Heading as="h2" size="h2" mt={6} mb={4} maxW="lg" lineHeight={1.3}>
             Everything The Team does is based on <chakra.span color="brand.400">Trust</chakra.span>.
           </Heading>
 
           <Heading as="h2" size="h2" mb={8} maxW="lg" lineHeight={1.3}>
-            That’s why <chakra.span color="avocado.300">Trust</chakra.span> is our one-and-only value.
+            That’s why <chakra.span color="avocado.300">Trust</chakra.span> is our one-and-only
+            value.
           </Heading>
 
           <Text fontSize="xl" fontWeight="bold" color="brand.900" lineHeight={1.3}>

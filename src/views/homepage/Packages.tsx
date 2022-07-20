@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, SVGAttributes } from 'react';
 import {
   List,
   ListItem,
@@ -9,11 +9,14 @@ import {
   Heading,
   SimpleGrid,
   Box,
+  Icon,
 } from '@chakra-ui/react';
-import { IconProps } from '@chakra-ui/icons';
 
-import { CloudIcon, PackagesIcon, CheckIcon, CloseIcon } from '@components/icons';
-import { GreenIconWrapper } from '@components/icons/wrappers';
+import CloudIcon from '@assets/icons/cloud.svg';
+import PackagesIcon from '@assets/icons/packages.svg';
+import CheckIcon from '@assets/icons/check.svg';
+import CloseIcon from '@assets/icons/close.svg';
+import GreenIconWrapper from '@components/GreenIconWrapper';
 import LineDivider from '@components/LineDivider';
 import StepsLabel from '@components/StepsLabel';
 
@@ -52,16 +55,16 @@ const DESCRIPTIONS = [
 ];
 
 type CardProps = {
-  icon: FunctionComponent<IconProps>;
+  icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
   text: string;
   items: Array<{
     text: string;
-    icon: FunctionComponent<IconProps>;
+    icon: FunctionComponent<SVGAttributes<SVGElement>>;
   }>;
 };
 
-const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, items }) => (
+const Card: FunctionComponent<CardProps> = ({ icon, title, text, items }) => (
   <Flex
     direction="column"
     align={{ lg: 'center' }}
@@ -84,7 +87,7 @@ const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, 
         textAlign={{ base: 'center', lg: 'left' }}
       >
         <GreenIconWrapper>
-          <IconComponent color="white" w={5} h={5} />
+          <Icon as={icon} color="white" w={6} h={6} />
         </GreenIconWrapper>
 
         <Flex direction="column" pt={{ base: 4, lg: 6 }}>
@@ -109,21 +112,17 @@ const Card: FunctionComponent<CardProps> = ({ icon: IconComponent, title, text, 
         py={6}
         px={{ base: 3, lg: 6 }}
       >
-        {items.map(({ icon: ItemIconComponent, text: itemText }) => (
+        {items.map(({ icon: itemIcon, text: itemText }) => (
           <ListItem
             key={itemText}
             display="flex"
             alignItems="center"
             fontSize={{ base: 'sm', lg: 'md' }}
           >
-            <ListIcon
-              as={ItemIconComponent}
-              w={6}
-              h={6}
-              color="brand.900"
-              bgColor="gray.100"
-              mr={{ base: 3, lg: 5 }}
-            />
+            <ListIcon bgColor="gray.100" mr={{ base: 3, lg: 5 }} w={6} h={6} color="brand.900">
+              <Icon as={itemIcon} />
+            </ListIcon>
+
             {itemText}
           </ListItem>
         ))}

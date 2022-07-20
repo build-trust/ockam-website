@@ -98,7 +98,13 @@ const MainLayoutDesktopNav: FunctionComponent = () => (
                       }}
                     >
                       {childIcon && (
-                        <Icon as={childIcon} {...iconStyles} color="white" bgColor="brand.900" />
+                        <Icon
+                          as={childIcon}
+                          {...iconStyles}
+                          p="0.15rem"
+                          color="white"
+                          bgColor="brand.900"
+                        />
                       )}
                       {childItem.text}
                     </MenuItem>

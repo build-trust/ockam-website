@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { Container, Heading, useTheme } from '@chakra-ui/react';
 
 import ClarityIcon from '@assets/icons/clarity.svg';
-import SpaceshipIcon from '@assets/icons/spaceship.svg';
+import RocketIcon from '@assets/icons/rocket.svg';
 import TeamIcon from '@assets/icons/team.svg';
-import HandHeartIcon from '@assets/icons/hand-heart.svg';
+import HelpIcon from '@assets/icons/help.svg';
 import SearchZoomInIcon from '@assets/icons/search-zoom-in.svg';
 import ValueCard from '@views/mission/components/ValueCard';
 import StepsLabel from '@components/StepsLabel';
@@ -21,7 +21,7 @@ const MISSION_AND_VISION_CARDS = [
     texts: [
       'To empower every developer with simple tools so they can create applications that Trust Data-in-Motion',
     ],
-    icon: SpaceshipIcon,
+    icon: RocketIcon,
   },
 ];
 
@@ -39,7 +39,7 @@ const TRUST_VALUES_CARDS = [
       `Everyone is accountable for their role’s Responsibility. Ockam’s culture is responsibility driven - not consensus or ownership driven.`,
       `The responsibility of The Team is to provide an environment where every individual is empowered to act, and trusted to be world-class in their role. The Team aims to allow you to be your best.`,
     ],
-    icon: HandHeartIcon,
+    icon: HelpIcon,
   },
   {
     title: 'Be Curious',

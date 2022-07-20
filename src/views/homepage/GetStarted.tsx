@@ -1,9 +1,11 @@
-import { FunctionComponent } from 'react';
-import { Box, Container, Text, SimpleGrid } from '@chakra-ui/react';
-import { ArrowDownIcon, ArrowForwardIcon, IconProps } from '@chakra-ui/icons';
+import { FunctionComponent, SVGAttributes } from 'react';
+import { Box, Container, Text, SimpleGrid, Icon } from '@chakra-ui/react';
+import { ArrowDownIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
-import { GitHubIcon, BuildingIcon, CloudIcon } from '@components/icons';
-import { GreenIconWrapper } from '@components/icons/wrappers';
+import BuildingIcon from '@assets/icons/building.svg';
+import CloudIcon from '@assets/icons/cloud.svg';
+import GitHubIcon from '@assets/icons/github.svg';
+import GreenIconWrapper from '@components/GreenIconWrapper';
 import StepsLabel from '@components/StepsLabel';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import Card from '@components/Card';
@@ -39,7 +41,7 @@ const GET_STARTED_CARDS = [
 ];
 
 type GetStartedCardProps = {
-  icon: FunctionComponent<IconProps>;
+  icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
   text: string;
   link: {
@@ -48,16 +50,11 @@ type GetStartedCardProps = {
   };
 };
 
-const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({
-  icon: IconComponent,
-  title,
-  text,
-  link,
-}) => (
+const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, text, link }) => (
   <Card pt={4} pb={6} px={{ base: 4, lg: 5 }} direction="row">
     <Box flex={0} mr={5}>
       <GreenIconWrapper>
-        <IconComponent color="white" w={5} h={5} />
+        <Icon as={icon} color="white" w={6} h={6} />
       </GreenIconWrapper>
     </Box>
 

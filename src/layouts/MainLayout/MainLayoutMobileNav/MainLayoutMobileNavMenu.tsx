@@ -8,13 +8,14 @@ import {
   AccordionPanel,
   Link as ChakraLink,
   Box,
+  Icon,
 } from '@chakra-ui/react';
 
 import { NAV_MENU_ITEMS } from '@consts/navigation';
 
 const MainLayoutMobileNavMenu: FunctionComponent = () => (
   <Accordion allowToggle w="full" mb="auto">
-    {NAV_MENU_ITEMS.map(({ icon: IconComponent, ...item }, index) => {
+    {NAV_MENU_ITEMS.map(({ icon, ...item }, index) => {
       const CurrentButton = (
         <AccordionButton
           {...(item.href ? { as: item.isExternal ? 'span' : 'a' } : {})}
@@ -23,7 +24,7 @@ const MainLayoutMobileNavMenu: FunctionComponent = () => (
           py={3}
           _hover={{ textDecoration: 'underline' }}
         >
-          {item.text} {IconComponent && <IconComponent w={6} h={6} ml={3} />}
+          {item.text} {icon && <Icon as={icon} w={6} h={6} ml={3} />}
           {!item.href && <AccordionIcon w={6} h={6} ml="auto" />}
         </AccordionButton>
       );

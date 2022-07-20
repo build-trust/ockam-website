@@ -1,13 +1,13 @@
-import { FunctionComponent } from 'react';
-import { Box, Flex, IconProps, Text, useBreakpointValue, useTheme, Icon } from '@chakra-ui/react';
+import { FunctionComponent, SVGAttributes } from 'react';
+import { Box, Flex, Text, Icon, useBreakpointValue, useTheme } from '@chakra-ui/react';
 
 import { DashedLineDivider } from '@components/LineDivider';
 import Card from '@components/Card';
-import { GreenIconWrapper } from '@components/icons/wrappers';
+import GreenIconWrapper from '@components/GreenIconWrapper';
 import BorderDot from '@components/BorderDot';
 
 type TimeLineItemProps = {
-  icon: FunctionComponent<IconProps>;
+  icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
   texts: string[];
   itemPosition: 'left' | 'right';

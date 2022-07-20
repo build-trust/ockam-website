@@ -1,16 +1,13 @@
-import { FunctionComponent } from 'react';
-import { Box, Container, Flex, Text, Heading, SimpleGrid } from '@chakra-ui/react';
-import { IconProps } from '@chakra-ui/icons';
+import { FunctionComponent, SVGAttributes } from 'react';
+import { Box, Container, Flex, Text, Heading, SimpleGrid, Icon } from '@chakra-ui/react';
 
-import {
-  GitHubIcon,
-  CloudIcon,
-  DeveloperIcon,
-  LockIcon,
-  KeyIcon,
-  EngineIcon,
-} from '@components/icons';
-import { GreenIconWrapper } from '@components/icons/wrappers';
+import GitHubIcon from '@assets/icons/github.svg';
+import CloudIcon from '@assets/icons/cloud.svg';
+import DeveloperIcon from '@assets/icons/developer.svg';
+import LockIcon from '@assets/icons/lock.svg';
+import KeyIcon from '@assets/icons/key.svg';
+import EngineIcon from '@assets/icons/engine.svg';
+import GreenIconWrapper from '@components/GreenIconWrapper';
 
 const FEATURES = [
   {
@@ -69,16 +66,16 @@ const DESCRIPTIONS = [
 ];
 
 type FeatureProps = {
-  icon: FunctionComponent<IconProps>;
+  icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
   texts: string[];
 };
 
-const Feature: FunctionComponent<FeatureProps> = ({ icon: IconComponent, title, texts }) => (
+const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts }) => (
   <Flex>
     <Box flex={0} mr={5}>
       <GreenIconWrapper>
-        <IconComponent color="white" w={5} h={5} />
+        <Icon as={icon} color="white" w={6} h={6} />
       </GreenIconWrapper>
     </Box>
 

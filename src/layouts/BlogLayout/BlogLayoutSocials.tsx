@@ -1,21 +1,23 @@
 import { FunctionComponent } from 'react';
-import { Box, BoxProps, Heading, HStack, Link } from '@chakra-ui/react';
+import { Box, BoxProps, Heading, HStack, Link, Icon } from '@chakra-ui/react';
 
-import { LinkedinIcon, TwitterIcon, GitHubIcon } from '@components/icons';
+import LinkedinIcon from '@assets/icons/linkedin.svg';
+import TwitterIcon from '@assets/icons/twitter.svg';
+import GitHubIcon from '@assets/icons/github.svg';
 import socialsLinks from '@consts/socialsLinks';
 
 const SOCIALS = [
   {
     href: socialsLinks.linkedIn,
-    Icon: LinkedinIcon,
+    icon: LinkedinIcon,
   },
   {
     href: socialsLinks.twitter,
-    Icon: TwitterIcon,
+    icon: TwitterIcon,
   },
   {
     href: socialsLinks.github,
-    Icon: GitHubIcon,
+    icon: GitHubIcon,
   },
 ];
 
@@ -27,7 +29,7 @@ const BlogLayoutSocials: FunctionComponent<BoxProps> = ({ ...props }) => (
     <HStack gap={5} mt={5}>
       {SOCIALS.map((social) => (
         <Link href={social.href} isExternal key={social.href}>
-          <social.Icon w={6} h={6} color="gray.500" />
+          <Icon as={social.icon} w={6} h={6} color="gray.500" />
         </Link>
       ))}
     </HStack>
