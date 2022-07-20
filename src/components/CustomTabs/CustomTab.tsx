@@ -50,7 +50,7 @@ const CustomTab = forwardRef(({ itemCount, ...restProps }, ref) => {
         ml={3}
         py="5px"
         px="3px"
-        borderRadius="3px"
+        borderRadius="base"
         fontSize="sm"
         bg={isSelected ? gradients.primary : 'gray.100'}
         color={isSelected ? 'white' : 'inherit'}

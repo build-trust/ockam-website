@@ -70,7 +70,7 @@ const Card: FunctionComponent<CardProps> = ({ icon, title, text, items }) => (
     align={{ lg: 'center' }}
     maxW="lg"
     bg="white"
-    borderRadius="md"
+    borderRadius="base"
     borderBottom={{ base: 0, lg: '4px' }}
     borderBottomColor={{ base: 'none', lg: 'avocado.500' }}
   >
@@ -167,7 +167,7 @@ const Packages: FunctionComponent = () => (
       <SimpleGrid
         columns={2}
         spacingX={{ lg: 4 }}
-        borderRadius="md"
+        borderRadius="base"
         borderBottom={{ base: '4px', lg: 0 }}
         borderBottomColor={{ base: 'avocado.500', lg: 'none' }}
       >

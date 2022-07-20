@@ -60,7 +60,7 @@ const Tools: FunctionComponent = () => {
               <Flex flex={1} key={step.title} mb={{ base: 6, lg: 9 }}>
                 <Box
                   bgColor="brand.900"
-                  borderRadius="md"
+                  borderRadius="base"
                   w={{ base: 6, lg: 8 }}
                   h={{ base: 6, lg: 8 }}
                   p={{ base: 1.5, lg: 2 }}

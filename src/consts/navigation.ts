@@ -1,7 +1,7 @@
 import { TEAM_PATH, BLOG_PATH, MISSION_AND_VISION_PATH } from '@consts/paths';
-import GitHubIcon from '@assets/icons/github.svg';
 import RocketIcon from '@assets/icons/rocket.svg';
 import UsersIcon from '@assets/icons/users.svg';
+import { GITHUB_REPO_OCKAM } from '@consts/externalResources';
 
 // eslint-disable-next-line import/prefer-default-export
 export const NAV_MENU_ITEMS = [
@@ -27,8 +27,8 @@ export const NAV_MENU_ITEMS = [
   },
   {
     text: 'Source',
-    href: 'https://github.com/build-trust/ockam',
-    icon: GitHubIcon,
+    href: GITHUB_REPO_OCKAM.href,
+    icon: GITHUB_REPO_OCKAM.icon,
     isExternal: true,
   },
 ];

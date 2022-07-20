@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Button, Flex, useBreakpointValue } from '@chakra-ui/react';
 
+import { CONTACT } from '@consts/externalResources';
+
 const MainLayoutCtaButtons: FunctionComponent = () => {
   const contactUsButtonColorScheme = useBreakpointValue({ base: 'avocado', lg: 'gray' });
   const buttonsSize = useBreakpointValue({ base: 'lg', lg: 'md' });
@@ -13,7 +15,7 @@ const MainLayoutCtaButtons: FunctionComponent = () => {
     >
       <Button
         as="a"
-        href="mailto:hello@ockam.io"
+        href={CONTACT.href}
         target="_blank"
         variant={{ base: 'solid', lg: 'outline' }}
         colorScheme={contactUsButtonColorScheme}

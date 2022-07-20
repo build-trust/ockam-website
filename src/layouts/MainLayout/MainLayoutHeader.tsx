@@ -41,12 +41,12 @@ const MainLayoutHeader: FunctionComponent = () => {
       <Container variant="section" display="flex" w="full">
         <Flex w="full" alignItems="center">
           <Link href={HOME_PATH} passHref>
-            <Box as="a" flex={0} pr={{ base: 2, xl: 4 }} maxW="175px" h="auto">
+            <Box as="a" flex={0} pr={{ base: 2, xl: 4 }} maxW="11rem" h="auto">
               <Box
                 as={LogoDark}
                 transition="all 400ms ease-in-out"
-                w={{ base: '126px', lg: isScrolled ? '140px' : '175px' }}
-                h={{ base: '36px', lg: isScrolled ? '40px' : '50px' }}
+                w={{ base: '7.875rem', lg: isScrolled ? '8.75rem' : '11rem' }}
+                h={{ base: '2.25rem', lg: isScrolled ? '2.5rem' : '3.125rem' }}
               />
             </Box>
           </Link>

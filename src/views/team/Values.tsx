@@ -58,12 +58,12 @@ const Values: FunctionComponent = () => (
         </Heading>
 
         <Box mt={6} mb={{ base: 8, lg: 0 }}>
-          {DESCRIPTIONS.map((text, index) => (
+          {DESCRIPTIONS.map((text) => (
             <Text
               key={text}
               fontSize={{ lg: 'lg' }}
               lineHeight={{ base: 1.5, lg: 1.4 }}
-              mb={index + 1 === DESCRIPTIONS.length ? 0 : 2}
+              _notLast={{ mb: 2 }}
             >
               {text}
             </Text>
@@ -94,8 +94,8 @@ const Values: FunctionComponent = () => (
             {title}
           </Text>
 
-          {texts.map((text, index) => (
-            <Text key={text} fontSize="sm" lineHeight={1.5} mb={index + 1 === texts.length ? 0 : 2}>
+          {texts.map((text) => (
+            <Text key={text} fontSize="sm" lineHeight={1.5} _notLast={{ mb: 2 }}>
               {text}
             </Text>
           ))}

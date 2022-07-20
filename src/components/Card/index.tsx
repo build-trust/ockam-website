@@ -69,7 +69,7 @@ const Card: FunctionComponent<CardProps> = ({
   boldBorderGradient,
   boldBorderColor = 'avocado.500',
   boldBorderSize = '4px',
-  borderRadius = '4px',
+  borderRadius = 'base',
   _hover,
   ...restProps
 }) => {

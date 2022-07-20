@@ -91,7 +91,7 @@ const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
               left={0}
               maxW="3xs"
               w="100%"
-              h="4px"
+              h="0.25rem"
               bgColor="avocado.500"
               borderRadius="md"
             />

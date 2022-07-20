@@ -30,7 +30,14 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
   photo,
   country,
 }) => (
-  <Flex position="relative" maxW="xl" w="full" borderRadius="4px" margin="0 auto" overflow="hidden">
+  <Flex
+    position="relative"
+    maxW="xl"
+    w="full"
+    borderRadius="base"
+    margin="0 auto"
+    overflow="hidden"
+  >
     <Box w={{ base: '7.875rem', sm: IMG_SIZES.w }} h={IMG_SIZES.h} position="relative">
       <ImageWithPlaceholder
         src={`/team/${photo}`}
@@ -52,7 +59,7 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
       borderWidth="1px"
       border="gray.50"
       borderLeft={0}
-      borderRightRadius="4px"
+      borderRightRadius="base"
       maxH={IMG_SIZES.h}
       overflowY="auto"
       position="relative"

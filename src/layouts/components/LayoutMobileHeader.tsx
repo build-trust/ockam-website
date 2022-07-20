@@ -39,7 +39,7 @@ const LayoutMobileHeader: FunctionComponent<LayoutMobileHeaderProps> = ({
     >
       <Container
         variant="section"
-        h={isOpenMobileNav ? '100vh' : '68px'}
+        h={isOpenMobileNav ? '100vh' : '4.25rem'}
         px={0}
         pos="absolute"
         display="flex"
@@ -47,8 +47,8 @@ const LayoutMobileHeader: FunctionComponent<LayoutMobileHeaderProps> = ({
       >
         <Flex w="full" px={4} py={4} alignItems="center">
           <Link href={HOME_PATH} passHref>
-            <Box as="a" flex={0} maxW="175px" h="auto">
-              <Box as={LogoDark} w="126px" h="36px" />
+            <Box as="a" flex={0} maxW="11rem" h="auto">
+              <Box as={LogoDark} w="7.875rem" h="2.25rem" />
             </Box>
           </Link>
 

@@ -11,7 +11,11 @@ import Card from '@components/Card';
 type OpenRoleCardProps = Pick<LeverPosting, 'text' | 'categories' | 'id'>;
 
 const OpenRoleCard: FunctionComponent<OpenRoleCardProps> = ({ text, categories, id }) => (
-  <Link href={`${OPEN_ROLE_PATH}/${generateSlug(text)}/${id}`} passHref>
+  <Link
+    as={`${OPEN_ROLE_PATH}/${generateSlug(text)}/${id}`}
+    href={`${OPEN_ROLE_PATH}/[slug]/[roleId]`}
+    passHref
+  >
     <Card
       as="a"
       boldBorderPosition="Left"

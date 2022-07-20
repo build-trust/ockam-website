@@ -20,7 +20,7 @@ const VirtuesCard: FunctionComponent<VirtuesCardProps> = ({ title, panel, ...res
     bgColor="white"
     border="1px"
     borderColor="gray.200"
-    borderRadius="4px"
+    borderRadius="base"
     {...restProps}
   >
     {panel.image && (
@@ -34,8 +34,8 @@ const VirtuesCard: FunctionComponent<VirtuesCardProps> = ({ title, panel, ...res
         {title}
       </Heading>
 
-      {panel.texts.map((text, index) => (
-        <Text key={text} mb={index + 1 === panel.texts.length ? 0 : 5}>
+      {panel.texts.map((text) => (
+        <Text key={text} _notLast={{ mb: 5 }}>
           {text}
         </Text>
       ))}

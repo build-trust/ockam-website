@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Button, chakra, Container, Flex, Heading, useTheme } from '@chakra-ui/react';
 
+import { BUILD_DEMO } from '@consts/externalResources';
+
 const Footer: FunctionComponent = () => {
   const { gradients } = useTheme();
 
@@ -24,7 +26,7 @@ const Footer: FunctionComponent = () => {
 
         <Button
           as="a"
-          href="https://github.com/build-trust/ockam#next-steps"
+          href={BUILD_DEMO.href}
           target="_blank"
           colorScheme="avocado"
           color="black"

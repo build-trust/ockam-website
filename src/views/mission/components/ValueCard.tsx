@@ -57,12 +57,8 @@ const ValueCard: FunctionComponent<TimeLineItemProps> = ({
             </Text>
           </Flex>
 
-          {texts.map((text, index) => (
-            <Text
-              key={text}
-              fontSize={{ base: 'lg', lg: 'xl' }}
-              mb={index + 1 === texts.length ? 0 : 2}
-            >
+          {texts.map((text) => (
+            <Text key={text} fontSize={{ base: 'lg', lg: 'xl' }} _notLast={{ mb: 2 }}>
               {text}
             </Text>
           ))}

@@ -54,12 +54,8 @@ const Infrastructure: FunctionComponent = () => {
         <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={16} mb={{ base: 16, lg: 24 }}>
           {TEXTS.map((column) => (
             <Box key={`${column[1]}column`} mb={{ lg: 8 }}>
-              {column.map((text, index) => (
-                <Text
-                  key={text}
-                  fontSize={{ lg: 'lg' }}
-                  mb={{ base: 4, lg: index + 1 === column.length ? 0 : 4 }}
-                >
+              {column.map((text) => (
+                <Text key={text} fontSize={{ lg: 'lg' }} mb={{ base: 4 }} _last={{ lg: { mb: 0 } }}>
                   {text}
                 </Text>
               ))}

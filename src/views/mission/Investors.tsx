@@ -9,18 +9,22 @@ import CoreVenturesGroupImage from '@assets/images/investors/core-ventures-group
 import SinewaveVenturesImage from '@assets/images/investors/sinewave-ventures.png';
 
 const INVESTORS = [
-  { name: 'Future Ventures', image: FutureVenturesImage, width: { base: '155px', lg: '240px' } },
-  { name: 'Craft', image: CraftImage, width: { base: '152px', lg: '217px' } },
-  { name: 'Okta', image: OktaImage, width: { base: '89px', lg: '134px' } },
+  {
+    name: 'Future Ventures',
+    image: FutureVenturesImage,
+    width: { base: '9.75rem', lg: '15rem' },
+  },
+  { name: 'Craft', image: CraftImage, width: { base: '9.5rem', lg: '13.5rem' } },
+  { name: 'Okta', image: OktaImage, width: { base: '5.5rem', lg: '8.375rem' } },
   {
     name: 'Core Ventures Group',
     image: CoreVenturesGroupImage,
-    width: { base: '100px', lg: '130px' },
+    width: { base: '6.25rem', lg: '8.125rem' },
   },
   {
     name: 'Sinewave Ventures',
     image: SinewaveVenturesImage,
-    width: { base: '137px', lg: '179px' },
+    width: { base: '8.5rem', lg: '11.125rem' },
   },
 ];
 

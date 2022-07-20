@@ -32,7 +32,7 @@ const CategoryBadge: FunctionComponent<CategoryBadgeProps> = ({ children, isOnTo
     );
   }
   return (
-    <Badge borderRadius={4} bgImage={gradients.secondary} {...badgeStyle} {...props}>
+    <Badge borderRadius="base" bgImage={gradients.secondary} {...badgeStyle} {...props}>
       {children || 'No category'}
     </Badge>
   );

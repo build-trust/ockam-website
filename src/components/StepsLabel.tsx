@@ -12,7 +12,7 @@ const StepsLabel: FunctionComponent<BoxProps> = ({ children, ...restProps }) => 
       fontSize="md"
       fontWeight="bold"
       p={2}
-      borderRadius="4px"
+      borderRadius="base"
       lineHeight={1}
       bg={gradients.secondary}
       {...restProps}

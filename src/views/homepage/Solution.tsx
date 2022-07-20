@@ -15,8 +15,7 @@ const Solution: FunctionComponent = () => {
   return (
     <Container variant="section" py={{ base: 14, lg: 24 }}>
       <SimpleGrid columns={{ base: 1, lg: 2 }} mb={{ base: 6, lg: 0 }}>
-        {/* TODO change pixels for theme units */}
-        <Box maxW={{ lg: '547px' }} my="auto">
+        <Box maxW={{ lg: '34.2rem' }} my="auto">
           <Heading as="h3" size="h3" lineHeight={1.3}>
             Build Applications That{' '}
             <chakra.span bgImage={gradients.primary} bgClip="text">
@@ -26,8 +25,8 @@ const Solution: FunctionComponent = () => {
           </Heading>
 
           <Box mt={{ base: 8, lg: 10 }}>
-            {TEXTS.map((text, index) => (
-              <Box key={text} position="relative" mb={index + 1 === TEXTS.length ? 0 : 2}>
+            {TEXTS.map((text) => (
+              <Box key={text} position="relative" _notLast={{ mb: 2 }}>
                 <LineDivider left={0} h="full" />
                 <Text
                   fontSize={{ lg: 'lg' }}

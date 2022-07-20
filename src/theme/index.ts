@@ -21,9 +21,10 @@ const fontSizes = {
 };
 
 const space = {
-  18: '4.5rem', // 72px
-  26: '6.5rem', // 104px
-  30: '7.5rem', // 120px
+  18: '4.5rem',
+  26: '6.5rem',
+  30: '7.5rem',
+  33: '8.25rem',
 };
 
 const sizes = {

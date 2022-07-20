@@ -73,7 +73,7 @@ const activeTabItemStyle = {
   _after: {
     content: '" "',
     display: 'block',
-    borderRadius: '2px',
+    borderRadius: 'sm',
     height: '4px',
     width: '50%',
     bgColor: 'avocado.500',
@@ -90,8 +90,8 @@ const Virtues: FunctionComponent = () => (
           Ockam&apos;s Virtues
         </Heading>
 
-        {DESCRIPTIONS.map((text, index) => (
-          <Text fontSize={{ lg: 'lg' }} key={text} mb={index + 1 === DESCRIPTIONS.length ? 0 : 2}>
+        {DESCRIPTIONS.map((text) => (
+          <Text fontSize={{ lg: 'lg' }} key={text} _notLast={{ mb: 2 }}>
             {text}
           </Text>
         ))}

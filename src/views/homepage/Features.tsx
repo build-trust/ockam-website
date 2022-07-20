@@ -84,8 +84,8 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts }) => (
         {title}
       </Text>
 
-      {texts.map((text, index) => (
-        <Text key={text} fontSize="sm" mb={{ base: 4, lg: index + 1 === texts.length ? 0 : 2 }}>
+      {texts.map((text) => (
+        <Text key={text} fontSize="sm" mb={{ base: 4, lg: 2 }} _last={{ mb: { lg: 0 } }}>
           {text}
         </Text>
       ))}
@@ -102,13 +102,8 @@ const Features: FunctionComponent = () => (
           Features of Ockam
         </Heading>
 
-        {DESCRIPTIONS.map((text, index) => (
-          <Text
-            key={text}
-            fontSize={{ lg: 'lg' }}
-            lineHeight={1.4}
-            mb={index + 1 === DESCRIPTIONS.length ? 0 : 2}
-          >
+        {DESCRIPTIONS.map((text) => (
+          <Text key={text} fontSize={{ lg: 'lg' }} lineHeight={1.4} _notLast={{ mb: 2 }}>
             {text}
           </Text>
         ))}

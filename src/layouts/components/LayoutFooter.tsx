@@ -10,18 +10,15 @@ import {
   Link,
   Text,
   Icon,
+  HStack,
   useTheme,
 } from '@chakra-ui/react';
 
 import LogoGray from '@assets/logo-gray.svg';
-import LinkedinIcon from '@assets/icons/linkedin.svg';
-import TwitterIcon from '@assets/icons/twitter.svg';
-import socialsLinks from '@consts/socialsLinks';
+import { LINKEDIN, TWITTER, SUPPORT, DISCUSSION, BUILD_DEMO } from '@consts/externalResources';
 
-const LINKS = [
-  { text: 'Support', href: 'https://github.com/build-trust/ockam/discussions/categories/support' },
-  { text: 'Discussion', href: 'https://github.com/build-trust/ockam/discussions' },
-];
+const NAV = [SUPPORT, DISCUSSION];
+const SOCIALS = [LINKEDIN, TWITTER];
 
 const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
   const { gradients } = useTheme();
@@ -47,7 +44,7 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
 
           <Button
             as="a"
-            href="https://github.com/build-trust/ockam#next-steps"
+            href={BUILD_DEMO.href}
             target="_blank"
             colorScheme="avocado"
             color="black"
@@ -68,8 +65,8 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
           <Flex align="center" direction={{ base: 'column', lg: 'row' }} order={{ base: 1, lg: 0 }}>
             <Box
               as={LogoGray}
-              w={{ base: '126px', lg: '154px' }}
-              h={{ base: '36px', lg: '44px' }}
+              w={{ base: '7.875rem', lg: '9.625rem' }}
+              h={{ base: '2.25rem', lg: '2.75rem' }}
               mb={{ base: 6, lg: 0 }}
               mr={{ base: 0, lg: 8 }}
             />
@@ -87,30 +84,36 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
             mb={{ base: 12, lg: 0 }}
           >
             <Flex mb={{ base: 4, lg: 0 }}>
-              {LINKS.map((link) => (
+              {NAV.map((link) => (
                 <Text
-                  key={link.text}
-                  as="a"
+                  key={link.name}
+                  as={Link}
+                  isExternal
                   href={link.href}
-                  target="_blank"
                   _hover={{ textDecoration: 'underline' }}
-                  opacity="0.8"
+                  opacity={0.8}
                   mr={6}
                 >
-                  {link.text}
+                  {link.name}
                 </Text>
               ))}
             </Flex>
 
-            <Box>
-              <Link href={socialsLinks.linkedIn} isExternal>
-                <Icon as={LinkedinIcon} w={6} h={6} color="gray.500" mr={5} />
-              </Link>
-
-              <Link href={socialsLinks.twitter} isExternal>
-                <Icon as={TwitterIcon} w={6} h={6} color="gray.500" />
-              </Link>
-            </Box>
+            <HStack spacing={5}>
+              {SOCIALS.map((social) => (
+                <Link key={social.href} href={social.href} isExternal>
+                  <Icon
+                    as={social.icon}
+                    w={6}
+                    h={6}
+                    display="block"
+                    color="gray.500"
+                    _hover={{ color: 'gray.300' }}
+                    transition="all 400ms ease-in-out"
+                  />
+                </Link>
+              ))}
+            </HStack>
           </Flex>
         </Flex>
       </Container>

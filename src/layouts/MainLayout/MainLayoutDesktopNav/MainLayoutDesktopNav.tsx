@@ -26,7 +26,7 @@ const activeMenuItemStyle = {
   _after: {
     content: '" "',
     display: 'block',
-    borderRadius: '2px',
+    borderRadius: 'sm',
     height: '2px',
     width: '60%',
     bgColor: 'avocado.500',
@@ -39,7 +39,7 @@ const iconStyles = {
   w: 6,
   h: 6,
   mr: 3,
-  borderRadius: '4px',
+  borderRadius: 'base',
 };
 
 const NavMenuItem = forwardRef<ButtonProps, 'div'>((props, ref) => (

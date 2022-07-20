@@ -9,6 +9,7 @@ import GreenIconWrapper from '@components/GreenIconWrapper';
 import StepsLabel from '@components/StepsLabel';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import Card from '@components/Card';
+import { BUILD_DEMO, CONTACT, GITHUB_REPO_OCKAM } from '@consts/externalResources';
 
 const GET_STARTED_CARDS = [
   {
@@ -17,7 +18,7 @@ const GET_STARTED_CARDS = [
     text: 'Join our community, start a discussion, read some code, or file an issue.',
     link: {
       text: 'Go to GitHub',
-      href: 'https://github.com/build-trust/ockam',
+      href: GITHUB_REPO_OCKAM.href,
     },
   },
   {
@@ -26,7 +27,7 @@ const GET_STARTED_CARDS = [
     text: 'Let’s build an application together in a step-by-step guide.',
     link: {
       text: 'Go to the Guide',
-      href: 'https://github.com/build-trust/ockam#next-steps',
+      href: BUILD_DEMO.href,
     },
   },
   {
@@ -35,7 +36,7 @@ const GET_STARTED_CARDS = [
     text: 'Sign up for Ockam Orchestrator - Now in Private Availability. Coming to AWS Marketplace in September.',
     link: {
       text: 'Contact us',
-      href: 'mailto:hello@ockam.io',
+      href: CONTACT.href,
     },
   },
 ];
