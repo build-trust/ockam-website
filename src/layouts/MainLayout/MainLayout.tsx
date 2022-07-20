@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 import { ChildrenProp } from '@typings/ChildrenProp';
 import MobileNavbarProvider from '@contextProviders/MobileNavbarProvider';
@@ -12,11 +12,13 @@ const MainLayout: FunctionComponent<ChildrenProp> = ({ children }) => (
   <MobileNavbarProvider>
     <MainLayoutHeader />
 
-    <Box as="main" w="full" p={0} flex={1}>
-      {children}
-    </Box>
+    <Flex direction="column" minH="100vh" w="full" overflowX="hidden">
+      <Box as="main" w="full" p={0} flex={1}>
+        {children}
+      </Box>
 
-    <LayoutFooter />
+      <LayoutFooter />
+    </Flex>
   </MobileNavbarProvider>
 );
 
