@@ -12,6 +12,8 @@ import { CATEGORIES, MEMBERS } from '@consts/team';
 
 import TeamMemberCard from './TeamMemberCard';
 
+const ALL_MEMBERS_KEY = 'all-members';
+
 const getMembersForSpecificCategory = (
   category: typeof CATEGORIES[keyof typeof CATEGORIES]
 ): Partial<typeof MEMBERS> => MEMBERS.filter((member) => member.categories.includes(category));
@@ -19,6 +21,10 @@ const getMembersForSpecificCategory = (
 const TeamTabs: FunctionComponent<Omit<TabsProps, 'children'>> = (props) => (
   <CustomTabs {...props}>
     <CustomTabList minW={250} w={{ base: 'full', lg: 'auto' }} mr={{ lg: 20, xl: 18 }}>
+      <CustomTab itemCount={MEMBERS.length} key={ALL_MEMBERS_KEY} id={ALL_MEMBERS_KEY}>
+        All Team Members
+      </CustomTab>
+
       {Object.values(CATEGORIES).map((category) => (
         <CustomTab
           itemCount={getMembersForSpecificCategory(category).length}
@@ -31,6 +37,15 @@ const TeamTabs: FunctionComponent<Omit<TabsProps, 'children'>> = (props) => (
     </CustomTabList>
 
     <CustomTabPanels>
+      <CustomTabPanel id={ALL_MEMBERS_KEY} key={ALL_MEMBERS_KEY}>
+        <SimpleGrid columns={{ base: 1, xl: 2 }} spacingY={{ base: 5, lg: 8 }} spacingX={{ lg: 6 }}>
+          {MEMBERS.map(
+            (member) =>
+              member && <TeamMemberCard key={`${member.name}_${member.surname}`} {...member} />
+          )}
+        </SimpleGrid>
+      </CustomTabPanel>
+
       {Object.values(CATEGORIES).map((category) => (
         <CustomTabPanel id={category} key={category}>
           <SimpleGrid
