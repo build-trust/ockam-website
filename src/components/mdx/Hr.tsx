@@ -1,5 +1,4 @@
-import { chakra } from "@chakra-ui/react"
-
+import { chakra } from '@chakra-ui/react';
 
 const Hr = chakra('hr', {
   baseStyle: {
@@ -10,6 +9,6 @@ const Hr = chakra('hr', {
     borderBottomStyle: 'solid',
     borderBottomColor: 'grey.500',
   },
-})
+});
 
 export default Hr;

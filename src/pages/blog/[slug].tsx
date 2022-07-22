@@ -1,5 +1,5 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { Box, AspectRatio } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect } from 'react';
 
@@ -21,7 +21,6 @@ type BlogPostPageProps = {
 const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts }) => {
   const router = useRouter();
   const canonicalPath = `/blog/${router.query.slug}`;
-
   const { handleSetBlogPosts } = useBlogPostsContext();
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
       >
         <BlogPostHeader post={frontMatter as BlogPostData} />
         <BlogPostContent>
-          <MDXRemote {...source} components={{ ...mdxComponents, AspectRatio }} />
+          <MDXRemote {...source} components={mdxComponents} />
         </BlogPostContent>
       </Box>
     </>
