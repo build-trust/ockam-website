@@ -24,6 +24,8 @@ type BlogPostsContextType = {
   handleSetBlogPosts: (value: BlogPost[]) => void;
   handleSetSearchPostsQuery: (value: string) => void;
   handleRemoveSearchPostsQuery: () => void;
+  searchInputValue: string;
+  handleSetSearchInputValue: (value: string) => void;
 };
 
 export const BlogPostsContext = createContext<BlogPostsContextType>({} as BlogPostsContextType);
@@ -31,18 +33,23 @@ export const useBlogPostsContext = (): BlogPostsContextType => useContext(BlogPo
 
 const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ children }) => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+
   const [searchPostsQuery, setSearchPostValue] = useState('');
+  const [searchInputValue, setSearchInputValue] = useState('');
 
   const handleSetBlogPosts = useCallback((posts: BlogPost[]) => setBlogPosts(posts), []);
   const handleSetSearchPostsQuery = useCallback(
     (value: string): void => setSearchPostValue(value),
     []
   );
-
-  const handleRemoveSearchPostsQuery = useCallback(
-    (): void => handleSetSearchPostsQuery!(''),
-    [handleSetSearchPostsQuery]
+  const handleSetSearchInputValue = useCallback(
+    (value: string): void => setSearchInputValue(value),
+    []
   );
+  const handleRemoveSearchPostsQuery = useCallback((): void => {
+    handleSetSearchPostsQuery('');
+    handleSetSearchInputValue('');
+  }, [handleSetSearchPostsQuery, handleSetSearchInputValue]);
 
   const searchPostsResult = useMemo(
     (): BlogPost[] =>
@@ -50,7 +57,7 @@ const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ childr
         [post.data.title, post.data.date, post.data.author, post.data.category]
           .join('')
           .toLowerCase()
-          .includes(searchPostsQuery.toLowerCase())
+          .includes(searchPostsQuery.trim().toLowerCase())
       ),
     [blogPosts, searchPostsQuery]
   );
@@ -79,7 +86,10 @@ const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ childr
       searchPostsResult,
       handleSetSearchPostsQuery,
       handleRemoveSearchPostsQuery,
+      searchInputValue,
+      handleSetSearchInputValue,
     }),
+
     [
       blogPosts,
       featuredAndOrderedBlogPosts,
@@ -89,6 +99,8 @@ const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ childr
       searchPostsResult,
       handleSetSearchPostsQuery,
       handleRemoveSearchPostsQuery,
+      searchInputValue,
+      handleSetSearchInputValue,
     ]
   );
 

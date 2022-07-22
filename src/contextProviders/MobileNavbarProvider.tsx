@@ -6,7 +6,9 @@ type MobileNavbarContextProps = {
   children: ReactNode;
 };
 
-export const MobileNavbarContext = createContext<Partial<UseLayoutMobileNavReturnType>>({});
+export const MobileNavbarContext = createContext<UseLayoutMobileNavReturnType>(
+  {} as UseLayoutMobileNavReturnType
+);
 
 const MobileNavbarProvider: FunctionComponent<MobileNavbarContextProps> = ({ children }) => {
   const layoutMobileNav = useLayoutMobileNav();

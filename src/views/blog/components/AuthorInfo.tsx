@@ -15,7 +15,9 @@ type AuthorInfoProps = {
 
 const AuthorInfo: FunctionComponent<AuthorInfoProps> = ({ postInfo, withDate, ...restProps }) => {
   const { author, authorAvatar, date, authorPosition } = postInfo;
-  const memberPosition = MEMBERS.find((member) => member.name === author)?.position;
+  const memberPosition = MEMBERS.find(
+    (member) => `${member.name} ${member.surname}` === author
+  )?.position;
   const position = authorPosition || memberPosition;
 
   return (

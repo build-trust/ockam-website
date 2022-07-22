@@ -21,7 +21,7 @@ const BlogPosts: FunctionComponent<BlogPostsProps> = () => {
       templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', '1.25xl': 'repeat(3, 1fr)' }}
       rowGap={18}
       columnGap={{ base: 10, lg: 7, '1.25xl': 2, '1.5xl': 10 }}
-      mx="auto"
+      mx={{ base: 'auto', '2xl': 12 }}
       justifyItems={{ base: 'center', xl: 'normal' }}
     >
       {searchPostsQuery ? (

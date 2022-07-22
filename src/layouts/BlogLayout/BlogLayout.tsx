@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react';
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Container, Flex } from '@chakra-ui/react';
 
 import BlogPostsProvider from '@contextProviders/BlogPostsProvider';
 
@@ -14,15 +14,17 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({ children }) => (
   <BlogPostsProvider>
     <BlogLayoutMobileNav />
 
-    <Container px={0} alignItems="top" variant="section" flexDirection="row">
+    <Flex>
       <BlogLayoutSidebar display={{ base: 'none', lg: 'block' }} />
 
-      <Box as="main" w="full">
-        {children}
-      </Box>
-    </Container>
+      <Container alignItems="top" variant="section" px={0}>
+        <Box as="main" w="full">
+          {children}
+        </Box>
 
-    <LayoutFooter mt={24} />
+        <LayoutFooter mt={24} px={12} />
+      </Container>
+    </Flex>
   </BlogPostsProvider>
 );
 

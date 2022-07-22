@@ -71,7 +71,7 @@ const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
     <Container variant="section" alignItems="flex-start">
       <Box maxW="3xl" pb={16}>
         <Button size="lg" color="brand.900" as="a" href={OPEN_ROLES_PATH} variant="link" mb={10}>
-          <ArrowBackIcon w={6} h={6} mr={2} /> Back to All Positions
+          <ArrowBackIcon w={6} h={6} mr={2} /> Back to Job Positions
         </Button>
 
         <Flex
