@@ -11,6 +11,7 @@ type SEOHeadProps = {
   description?: string;
   ogImageSrc?: string;
   canonicalPath?: string;
+  smallTwitterCard?: boolean;
 };
 
 const SEOHead: FunctionComponent<SEOHeadProps> = ({
@@ -20,6 +21,7 @@ const SEOHead: FunctionComponent<SEOHeadProps> = ({
   description,
   ogImageSrc,
   canonicalPath,
+  smallTwitterCard,
 }) => {
   const commonTitleWithSubTitle = subTitle && `${CONFIG.app.title} | ${subTitle}`;
   const specificTitle = title || commonTitleWithSubTitle;
@@ -51,6 +53,8 @@ const SEOHead: FunctionComponent<SEOHeadProps> = ({
         </>
       )}
       {canonicalPath && <link rel="canonical" href={canonicalUrl} key={KEYS.canonicalUrl} />}
+      {smallTwitterCard && <meta name="twitter:card" content="summary" key={KEYS.twitterCard} />}
+
       {children}
     </Head>
   );

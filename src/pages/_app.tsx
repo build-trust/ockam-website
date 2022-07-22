@@ -39,8 +39,9 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
         <meta property="og:image" content={ogImageUrl} key={KEYS.ogImageUrl} />
         <meta property="og:description" content={CONFIG.app.description} key={KEYS.ogDescription} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" key={KEYS.twitterCard} />
         <meta name="twitter:title" content={CONFIG.app.title} key={KEYS.twitterTitle} />
+        <meta name="twitter:site" content="@Ockam" key={KEYS.twitterSite} />
         <meta
           name="twitter:description"
           content={CONFIG.app.description}

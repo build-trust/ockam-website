@@ -10,6 +10,8 @@ export const KEYS = {
 
   ogImageUrl: 'og:imageUrl',
   twitterImageUrl: 'twitter:imageUrl',
+  twitterCard: 'twitter:card',
+  twitterSite: 'twitterSite',
 
   canonicalUrl: 'canonicalUrl',
 };
