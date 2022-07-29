@@ -100,14 +100,17 @@ const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
           {ApplyButton}
         </Flex>
 
-        <Box fontSize={{ lg: 'lg' }} color="gray.500" lineHeight={1.4}>
+        <Box fontSize={{ lg: 'lg' }} color="gray.500" lineHeight={1.4} mb={{ base: 10, lg: 20 }}>
           <Box dangerouslySetInnerHTML={{ __html: openRole.description }} />
+        </Box>
+
+        {openRole.lists.map(DetailsList)}
+
+        <Box fontSize={{ lg: 'lg' }} color="gray.500" lineHeight={1.4}>
           <Box dangerouslySetInnerHTML={{ __html: openRole.additional }} />
         </Box>
 
         <Box maxW="md" h="1px" bgColor="gray.200" my={{ base: 10, lg: 20 }} />
-
-        {openRole.lists.map(DetailsList)}
 
         <Flex
           direction={{ base: 'column', lg: 'row' }}
