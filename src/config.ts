@@ -14,7 +14,8 @@ export default {
     rootUrl: getRootUrl(),
   },
   lever: {
-    apiUrl: 'https://api.lever.co/v0/postings/ockam',
+    siteName: 'ockam',
+    apiUrl: 'https://api.lever.co/v0',
   },
   github: {
     ownerName: 'build-trust',

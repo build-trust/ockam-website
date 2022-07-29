@@ -1,14 +1,12 @@
-import axios from 'axios';
 import { ReactElement, ReactNode } from 'react';
 import { GetServerSidePropsContext, GetStaticPathsResult } from 'next';
 import { useRouter } from 'next/router';
 
+import leverApi from '@api/leverApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
-import CONFIG from '@config';
 import MainLayout from '@layouts/MainLayout';
 import { LeverPosting } from '@typings/lever';
 import { OpenRole } from '@views/open-role';
-import { generateSlug } from '@utils/generateSlug';
 import SEOHead from '@components/SEOHead';
 
 const OpenRolePage: NextPageWithLayout<{ openRole: LeverPosting }> = ({ openRole }) => {
@@ -27,23 +25,14 @@ const OpenRolePage: NextPageWithLayout<{ openRole: LeverPosting }> = ({ openRole
 OpenRolePage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
 
 type GetServerSidePropsReturnType = {
-  props: { openRole: LeverPosting };
+  props?: { openRole: LeverPosting };
+  revalidate?: number;
+  notFound?: boolean;
 };
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const { data } = await axios.get(`${CONFIG.lever.apiUrl}`, {
-    params: { mode: 'json' },
-  });
-
-  const paths = data.map((role: LeverPosting) => ({
-    params: {
-      slug: generateSlug(role?.text),
-      roleId: role?.id,
-    },
-  }));
-
   return {
-    paths,
+    paths: [],
     fallback: 'blocking',
   };
 }
@@ -51,15 +40,18 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 export async function getStaticProps({
   params,
 }: GetServerSidePropsContext): Promise<GetServerSidePropsReturnType> {
-  const { data } = await axios.get(`${CONFIG.lever.apiUrl}/${params?.roleId}`, {
-    params: { mode: 'json' },
-  });
+  try {
+    const { data } = await leverApi.postingsService.getRole(params?.roleId as string);
 
-  return {
-    props: {
-      openRole: data,
-    },
-  };
+    return {
+      props: {
+        openRole: data,
+      },
+      revalidate: 60,
+    };
+  } catch (e) {
+    return { notFound: true, revalidate: 60 };
+  }
 }
 
 export default OpenRolePage;

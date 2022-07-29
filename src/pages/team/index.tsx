@@ -1,11 +1,10 @@
 import { ReactElement, ReactNode } from 'react';
-import axios from 'axios';
 import { Box } from '@chakra-ui/react';
 
+import leverApi from '@api/leverApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
 import { Hero, Quote, Values, OpenRoles } from '@views/team';
-import CONFIG from '@config';
 import { LeverPostingsGroup } from '@typings/lever';
 import SEOHead from '@components/SEOHead';
 
@@ -24,18 +23,19 @@ OpenRolesPage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}<
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export async function getServerSideProps() {
-  const { data } = await axios.get(CONFIG.lever.apiUrl, {
-    params: {
-      mode: 'json',
-      group: 'team',
-    },
-  });
+  try {
+    const { data } = await leverApi.postingsService.getGroupedRoles();
 
-  return {
-    props: {
-      openRoles: [...data] || [],
-    },
-  };
+    return {
+      props: {
+        openRoles: [...data] || [],
+      },
+    };
+  } catch (e) {
+    return {
+      props: [],
+    };
+  }
 }
 
 export default OpenRolesPage;
