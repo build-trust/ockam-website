@@ -4,4 +4,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 const withSvgr = require('next-svgr');
 
-module.exports = withPlugins([withSvgr, withBundleAnalyzer]);
+const nextConfig = {
+  images: { formats: ['image/webp'] },
+};
+
+module.exports = withPlugins([withSvgr, withBundleAnalyzer], nextConfig);

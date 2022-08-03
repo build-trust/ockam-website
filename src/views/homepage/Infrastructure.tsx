@@ -38,6 +38,8 @@ const Infrastructure: FunctionComponent = () => {
           alt="Infrastructure background image"
           width={2000}
           height={805}
+          priority
+          placeholder="blur"
         />
       </Box>
 
@@ -68,7 +70,14 @@ const Infrastructure: FunctionComponent = () => {
           my={{ lg: 'auto' }}
           transform="translateY(6px)"
         >
-          <Image src={InfrastructureImage} alt="Infrastructure image" width={1022} height={441} />
+          <Image
+            src={InfrastructureImage}
+            alt="Infrastructure image"
+            width={1022}
+            height={441}
+            priority
+            placeholder="blur"
+          />
         </Box>
       </Container>
     </Flex>

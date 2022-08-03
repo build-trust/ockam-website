@@ -44,6 +44,7 @@ const MainLayoutHeader: FunctionComponent = () => {
             <Box as="a" flex={0} pr={{ base: 2, xl: 4 }} maxW="11rem" h="auto">
               <Box
                 as={LogoDark}
+                alt="Homepage link"
                 transition="all 400ms ease-in-out"
                 w={{ base: '7.875rem', lg: isScrolled ? '8.75rem' : '11rem' }}
                 h={{ base: '2.25rem', lg: isScrolled ? '2.5rem' : '3.125rem' }}

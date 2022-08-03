@@ -45,7 +45,7 @@ const Investors: FunctionComponent = () => (
       <Flex flexWrap="wrap" alignItems="center" justifyContent="center">
         {INVESTORS.map((investor) => (
           <Box key={investor.name} m={{ base: 3, lg: 6 }} width={investor.width}>
-            <Image src={investor.image} alt={`${investor.name} image`} />
+            <Image src={investor.image} alt={`${investor.name} image`} placeholder="blur" />
           </Box>
         ))}
       </Flex>

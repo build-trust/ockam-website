@@ -23,6 +23,8 @@ const Quote: FunctionComponent = () => (
               width="308"
               height="417"
               alt="Matthew Gregory, CEO of Ockam image"
+              placeholder="blur"
+              priority
             />
           </Box>
         </Flex>

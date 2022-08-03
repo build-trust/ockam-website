@@ -43,7 +43,14 @@ const Solution: FunctionComponent = () => {
         <DashedLineDivider withDot />
 
         <Box display={{ base: 'none', lg: 'initial' }} pl={{ lg: 16 }} position="relative">
-          <Image src={SolutionImage} alt="Solution image" width={511} height={488} />
+          <Image
+            src={SolutionImage}
+            alt="Solution image"
+            width={532}
+            height={523}
+            placeholder="blur"
+            priority
+          />
         </Box>
 
         <LineDivider bottom={0} h={20} bg={gradients.tertiary} />

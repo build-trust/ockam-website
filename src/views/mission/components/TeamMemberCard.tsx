@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
 
 import ImageWithPlaceholder from '@components/ImageWithPlaceholder';
@@ -29,75 +29,78 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
   description,
   photo,
   country,
-}) => (
-  <Flex
-    position="relative"
-    maxW="xl"
-    w="full"
-    borderRadius="base"
-    margin="0 auto"
-    overflow="hidden"
-  >
-    <Box w={{ base: '7.875rem', sm: IMG_SIZES.w }} h={IMG_SIZES.h} position="relative">
-      <ImageWithPlaceholder
-        src={`/team/${photo}`}
-        alt={`${name} photo`}
-        placeholderImg={getRandomImage([
-          PlaceholderSilverImage,
-          PlaceholderBlueImage,
-          PlaceholderGreenImage,
-        ])}
-        layout="fill"
-        objectFit="cover"
-      />
-    </Box>
+}) => {
+  const placeholderImg = useMemo(
+    () => getRandomImage([PlaceholderSilverImage, PlaceholderBlueImage, PlaceholderGreenImage]),
+    []
+  );
 
-    <Box
-      flex={1}
-      px={{ base: 4, lg: 6 }}
-      py={4}
-      borderWidth="1px"
-      border="gray.50"
-      borderLeft={0}
-      borderRightRadius="base"
-      maxH={IMG_SIZES.h}
-      overflowY="auto"
+  return (
+    <Flex
       position="relative"
+      maxW="xl"
+      w="full"
+      borderRadius="base"
+      margin="0 auto"
+      overflow="hidden"
     >
-      <Box pr={8} mb={4}>
-        <Text
-          color="brand.900"
-          fontWeight="bold"
-          fontSize={{ md: 'lg' }}
-          whiteSpace="pre-wrap"
-          display="flex"
-          flexDirection="column"
-          lineHeight={1.2}
-          mb={2}
-        >
-          <span>{name}</span>
-          <span>{surname}</span>
-        </Text>
-
-        <Text fontSize="sm">{position}</Text>
+      <Box w={{ base: '7.875rem', sm: IMG_SIZES.w }} h={IMG_SIZES.h} position="relative">
+        <ImageWithPlaceholder
+          src={`/team/${photo}`}
+          alt={`${name} photo`}
+          placeholderImg={placeholderImg}
+          layout="fill"
+          objectFit="cover"
+        />
       </Box>
-
-      <Text fontSize="sm" fontWeight="regular">
-        {description}
-      </Text>
 
       <Box
-        as="span"
-        position="absolute"
-        right={4}
-        top={3}
-        fontSize={{ base: '2.5xl', md: '4xl' }}
-        lineHeight={1}
+        flex={1}
+        px={{ base: 4, lg: 6 }}
+        py={4}
+        borderWidth="1px"
+        border="gray.50"
+        borderLeft={0}
+        borderRightRadius="base"
+        maxH={IMG_SIZES.h}
+        overflowY="auto"
+        position="relative"
       >
-        {getEmojiFlagFromCountryCode(country as string)}
+        <Box pr={8} mb={4}>
+          <Text
+            color="brand.900"
+            fontWeight="bold"
+            fontSize={{ md: 'lg' }}
+            whiteSpace="pre-wrap"
+            display="flex"
+            flexDirection="column"
+            lineHeight={1.2}
+            mb={2}
+          >
+            <span>{name}</span>
+            <span>{surname}</span>
+          </Text>
+
+          <Text fontSize="sm">{position}</Text>
+        </Box>
+
+        <Text fontSize="sm" fontWeight="regular">
+          {description}
+        </Text>
+
+        <Box
+          as="span"
+          position="absolute"
+          right={4}
+          top={3}
+          fontSize={{ base: '2.5xl', md: '4xl' }}
+          lineHeight={1}
+        >
+          {getEmojiFlagFromCountryCode(country as string)}
+        </Box>
       </Box>
-    </Box>
-  </Flex>
-);
+    </Flex>
+  );
+};
 
 export default TeamMemberCard;

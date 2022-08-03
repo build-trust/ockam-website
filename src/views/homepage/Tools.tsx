@@ -49,7 +49,14 @@ const Tools: FunctionComponent = () => {
 
       <SimpleGrid columns={{ base: 1, lg: 2 }} w="full">
         <Box my={{ base: 16, lg: 'auto' }} mx={{ base: 'auto', lg: 0 }}>
-          <Image src={ToolsImage} width={510} height={397} />
+          <Image
+            src={ToolsImage}
+            alt="tools image"
+            width={510}
+            height={397}
+            placeholder="blur"
+            priority
+          />
         </Box>
 
         <Box pl={{ lg: 30 }} maxW={{ lg: 'lg' }} my="auto" position="relative">

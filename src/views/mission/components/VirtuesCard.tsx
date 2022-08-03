@@ -25,7 +25,7 @@ const VirtuesCard: FunctionComponent<VirtuesCardProps> = ({ title, panel, ...res
   >
     {panel.image && (
       <Box pr={{ lg: 9 }}>
-        <Image src={panel.image} width={404} height={436} />
+        <Image src={panel.image} width={404} height={436} placeholder="blur" />
       </Box>
     )}
 

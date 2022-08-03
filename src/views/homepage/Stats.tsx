@@ -74,7 +74,13 @@ const Stats: FunctionComponent<StatsProps> = ({ stars, contributors, downloads }
                   {stat.title}
                 </Text>
                 <Box>
-                  <Image src={stat.icon} width={72} height={40} />
+                  <Image
+                    src={stat.icon}
+                    alt={`${stat.title} icons image`}
+                    width={72}
+                    height={40}
+                    placeholder="blur"
+                  />
                 </Box>
               </Flex>
             </Box>

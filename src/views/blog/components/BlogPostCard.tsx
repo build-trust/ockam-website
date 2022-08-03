@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import Link from 'next/link';
 import {
   Box,
@@ -31,6 +31,16 @@ const BlogPostCard: FunctionComponent<BlogPostCardProps> = ({ post, ...restProps
     filePath,
   } = post;
 
+  const placeholderImg = useMemo(
+    () =>
+      getRandomImage([
+        PlaceholderBlogPostGreen,
+        PlaceholderBlogPostBlue,
+        PlaceholderBlogPostSilver,
+      ]),
+    []
+  );
+
   return (
     <GridItem as="article" {...restProps}>
       <Link
@@ -52,14 +62,8 @@ const BlogPostCard: FunctionComponent<BlogPostCardProps> = ({ post, ...restProps
               <CategoryBadge isOnTop>{category}</CategoryBadge>
               <ImageWithPlaceholder
                 src={image}
-                width={335}
-                height={312}
                 layout="fill"
-                placeholderImg={getRandomImage([
-                  PlaceholderBlogPostGreen,
-                  PlaceholderBlogPostBlue,
-                  PlaceholderBlogPostSilver,
-                ])}
+                placeholderImg={placeholderImg}
                 alt={title}
               />
             </Box>

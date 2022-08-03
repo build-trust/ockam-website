@@ -44,7 +44,7 @@ type CasesCardProps = {
 const CasesCard: FunctionComponent<CasesCardProps> = ({ image, title, texts }) => (
   <Card p={6}>
     <Center pb={6} mb={6} borderBottom="1px" borderColor="gray.200">
-      <Image src={image} alt={`${title} image`} width={313} height={171} />
+      <Image src={image} alt={`${title} image`} width={313} height={171} placeholder="blur" />
     </Center>
 
     <Box>

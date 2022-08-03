@@ -102,6 +102,7 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
               <Link key={social.href} href={social.href} isExternal>
                 <Icon
                   as={social.icon}
+                  alt={`${social.name} link`}
                   w={6}
                   h={6}
                   display="block"

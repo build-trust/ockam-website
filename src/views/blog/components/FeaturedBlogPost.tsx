@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import Link from 'next/link';
 import {
   Box,
@@ -31,6 +31,16 @@ const FeaturedBlogPost: FunctionComponent<FeaturedBlogPostProps> = ({ post, ...r
     filePath,
   } = post;
 
+  const placeholderImg = useMemo(
+    () =>
+      getRandomImage([
+        PlaceholderBlogPostGreen,
+        PlaceholderBlogPostBlue,
+        PlaceholderBlogPostSilver,
+      ]),
+    []
+  );
+
   return (
     <GridItem as="article" colSpan={3} {...restProps}>
       <Link
@@ -53,12 +63,9 @@ const FeaturedBlogPost: FunctionComponent<FeaturedBlogPostProps> = ({ post, ...r
                 width={600}
                 height={331}
                 layout="fixed"
-                placeholderImg={getRandomImage([
-                  PlaceholderBlogPostGreen,
-                  PlaceholderBlogPostBlue,
-                  PlaceholderBlogPostSilver,
-                ])}
+                placeholderImg={placeholderImg}
                 alt={title}
+                priority
               />
             </Box>
             <Flex direction="column" w="sm" minH="full" p={0} ml={10}>
