@@ -1,14 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import Link from 'next/link';
-import {
-  Box,
-  Link as ChakraLink,
-  Flex,
-  GridItem,
-  Heading,
-  Text,
-  GridItemProps,
-} from '@chakra-ui/react';
+import { Box, Link as ChakraLink, Flex, Heading, Text, GridItemProps } from '@chakra-ui/react';
 
 import { BlogPost } from '@typings/BlogPost';
 import ImageWithPlaceholder from '@components/ImageWithPlaceholder';
@@ -25,7 +17,7 @@ type BlogPostCardProps = {
   post: BlogPost;
 } & GridItemProps;
 
-const BlogPostCard: FunctionComponent<BlogPostCardProps> = ({ post, ...restProps }) => {
+const BlogPostCard: FunctionComponent<BlogPostCardProps> = ({ post }) => {
   const {
     data: { title, description, image, category },
     filePath,
@@ -42,43 +34,44 @@ const BlogPostCard: FunctionComponent<BlogPostCardProps> = ({ post, ...restProps
   );
 
   return (
-    <GridItem as="article" {...restProps}>
-      <Link
-        as={`${BLOG_PATH}/${filePath.replace(/\.mdx?$/, '')}`}
-        href={`${BLOG_PATH}/[slug]`}
-        passHref
+    <Link
+      as={`${BLOG_PATH}/${filePath.replace(/\.mdx?$/, '')}`}
+      href={`${BLOG_PATH}/[slug]`}
+      passHref
+    >
+      <ChakraLink
+        height="20px"
+        _hover={{
+          cursor: 'pointer',
+          h4: {
+            textDecoration: 'underline',
+          },
+        }}
       >
-        <ChakraLink
-          height="20px"
-          _hover={{
-            cursor: 'pointer',
-            h4: {
-              textDecoration: 'underline',
-            },
-          }}
-        >
-          <Flex width={{ base: 335, '1.5xl': 312 }} height="full" direction="column">
-            <Box width="full" height={{ base: 207, '1.5xl': 194 }} pos="relative">
-              <CategoryBadge isOnTop>{category}</CategoryBadge>
-              <ImageWithPlaceholder
-                src={image}
-                layout="fill"
-                placeholderImg={placeholderImg}
-                alt={title}
-              />
-            </Box>
-            <Heading as="h4" fontSize="xl" mt={6} mb={5} noOfLines={3}>
-              {title}
-            </Heading>
-            <Text mb={6} noOfLines={5}>
-              {description}
-            </Text>
+        <Flex width={{ base: 335, lg: 312 }} height="full" direction="column">
+          <Box width="full" height={{ base: 207, lg: 194 }} pos="relative" mb={6}>
+            <CategoryBadge isOnTop>{category}</CategoryBadge>
 
-            <AuthorInfo postInfo={post.data} />
-          </Flex>
-        </ChakraLink>
-      </Link>
-    </GridItem>
+            <ImageWithPlaceholder
+              src={image}
+              layout="fill"
+              placeholderImg={placeholderImg}
+              alt={title}
+            />
+          </Box>
+
+          <Heading as="h4" fontSize="xl" mb={5} noOfLines={2} maxW="90%">
+            {title}
+          </Heading>
+
+          <Text mb={6} noOfLines={3}>
+            {description}
+          </Text>
+
+          <AuthorInfo postInfo={post.data} />
+        </Flex>
+      </ChakraLink>
+    </Link>
   );
 };
 

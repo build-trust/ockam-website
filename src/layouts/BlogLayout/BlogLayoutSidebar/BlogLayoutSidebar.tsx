@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import Link from 'next/link';
-import { Box, Container, Link as ChakraLink, ContainerProps } from '@chakra-ui/react';
+import { Box, Flex, Link as ChakraLink } from '@chakra-ui/react';
 
 import { HOME_PATH } from '@consts/paths';
 import LogoDark from '@assets/logo-dark.svg';
@@ -11,37 +11,44 @@ import BlogSearchInput from '../BlogSearchInput';
 
 import BlogLayoutSidebarNavigation from './BlogLayoutSidebarNavigation';
 
-const BlogLayoutSidebar: FunctionComponent<ContainerProps> = (props) => {
+const BlogLayoutSidebar: FunctionComponent = () => {
   const { groupedBlogPostsByCategory } = useBlogPostsContext();
 
   return (
-    <Container
+    <Flex
+      display={{ base: 'none', lg: 'flex' }}
       as="aside"
-      w={305}
+      w="container.sidebar"
+      minW="container.sidebar"
       h="100vh"
       minH="fit-content"
       py={8}
-      pl={6}
-      pr={3}
+      px={6}
       pos="sticky"
       top={0}
-      display="flex"
       flexDir="column"
       borderRight="1px"
       borderColor="gray.100"
-      {...props}
+      overflow="hidden"
     >
       <Link href={HOME_PATH} passHref>
         <ChakraLink>
-          <Box as={LogoDark} w={175} h={50} display="inline" />
+          <Box as={LogoDark} w={175} h={50} />
         </ChakraLink>
       </Link>
-      <BlogSearchInput w="2xs" mt={14} />
 
-      <BlogLayoutSidebarNavigation mt={10} mb={12} posts={groupedBlogPostsByCategory} />
+      <BlogSearchInput mt={14} />
 
-      <BlogLayoutSocials mt="auto" mb={12} />
-    </Container>
+      <BlogLayoutSidebarNavigation
+        posts={groupedBlogPostsByCategory}
+        overflowY="scroll"
+        overflowX="hidden"
+        mt={10}
+        mb={30}
+      />
+
+      <BlogLayoutSocials position="absolute" bottom={0} mt="auto" mb={12} />
+    </Flex>
   );
 };
 export default BlogLayoutSidebar;

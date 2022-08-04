@@ -29,6 +29,10 @@ const space = {
 
 const sizes = {
   '2.5xl': '43.75rem', // 700px
+  container: {
+    sidebar: '305px',
+    max: '1440px',
+  },
 };
 
 const gradients = {

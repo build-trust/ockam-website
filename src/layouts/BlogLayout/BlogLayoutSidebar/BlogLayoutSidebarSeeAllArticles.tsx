@@ -41,7 +41,7 @@ const BlogLayoutSidebarSeeAllArticles: FunctionComponent<
             color={router.pathname === BLOG_PATH && !searchPostsQuery ? 'avocado.500' : 'brand.900'}
             display={{ base: 'none', lg: 'block' }}
           />
-          All articles
+          Featured articles
         </ChakraLink>
       </Link>
     </AccordionItem>

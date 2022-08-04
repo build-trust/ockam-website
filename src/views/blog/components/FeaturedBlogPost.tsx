@@ -1,14 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import Link from 'next/link';
-import {
-  Box,
-  Link as ChakraLink,
-  Flex,
-  GridItem,
-  Heading,
-  Text,
-  GridItemProps,
-} from '@chakra-ui/react';
+import { Box, Link as ChakraLink, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { BlogPost } from '@typings/BlogPost';
 import ImageWithPlaceholder from '@components/ImageWithPlaceholder';
@@ -23,14 +15,9 @@ import AuthorInfo from './AuthorInfo';
 
 type FeaturedBlogPostProps = {
   post: BlogPost;
-} & GridItemProps;
+};
 
-const FeaturedBlogPost: FunctionComponent<FeaturedBlogPostProps> = ({ post, ...restProps }) => {
-  const {
-    data: { title, description, image, category },
-    filePath,
-  } = post;
-
+const FeaturedBlogPost: FunctionComponent<FeaturedBlogPostProps> = ({ post }) => {
   const placeholderImg = useMemo(
     () =>
       getRandomImage([
@@ -41,45 +28,56 @@ const FeaturedBlogPost: FunctionComponent<FeaturedBlogPostProps> = ({ post, ...r
     []
   );
 
+  if (!post) return null;
+
+  const {
+    data: { title, description, image, category },
+    filePath,
+  } = post;
+
   return (
-    <GridItem as="article" colSpan={3} {...restProps}>
-      <Link
-        as={`${BLOG_PATH}/${filePath.replace(/\.mdx?$/, '')}`}
-        href={`${BLOG_PATH}/[slug]`}
-        passHref
+    <Link
+      as={`${BLOG_PATH}/${filePath.replace(/\.mdx?$/, '')}`}
+      href={`${BLOG_PATH}/[slug]`}
+      passHref
+    >
+      <ChakraLink
+        _hover={{
+          cursor: 'pointer',
+          h3: {
+            textDecoration: 'underline',
+          },
+        }}
       >
-        <ChakraLink
-          _hover={{
-            cursor: 'pointer',
-            h3: {
-              textDecoration: 'underline',
-            },
-          }}
-        >
-          <Flex>
-            <Box width={600} height={331}>
-              <ImageWithPlaceholder
-                src={image}
-                width={600}
-                height={331}
-                layout="fixed"
-                placeholderImg={placeholderImg}
-                alt={title}
-                priority
-              />
-            </Box>
-            <Flex direction="column" w="sm" minH="full" p={0} ml={10}>
-              <CategoryBadge>{category}</CategoryBadge>
-              <Heading as="h3" fontSize="2xl" mt={4} mb={6} noOfLines={3}>
-                {title}
-              </Heading>
-              <Text noOfLines={4}>{description}</Text>
-              <AuthorInfo mt="auto" postInfo={post.data} />
-            </Flex>
+        <Flex>
+          <Box width={600} height={331}>
+            <ImageWithPlaceholder
+              src={image}
+              width={600}
+              height={331}
+              layout="fixed"
+              placeholderImg={placeholderImg}
+              alt={title}
+              priority
+            />
+          </Box>
+
+          <Flex direction="column" w="sm" h="full" p={0} ml={10} my="auto">
+            <CategoryBadge>{category}</CategoryBadge>
+
+            <Heading as="h3" fontSize="2xl" mt={4} mb={6} noOfLines={3}>
+              {title}
+            </Heading>
+
+            <Text mb={6} noOfLines={4}>
+              {description}
+            </Text>
+
+            <AuthorInfo postInfo={post.data} />
           </Flex>
-        </ChakraLink>
-      </Link>
-    </GridItem>
+        </Flex>
+      </ChakraLink>
+    </Link>
   );
 };
 

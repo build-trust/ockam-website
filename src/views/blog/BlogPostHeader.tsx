@@ -8,8 +8,8 @@ import PlaceholderBlogPostBlue from '@assets/images/placeholders/placeholder-blo
 import PlaceholderBlogPostSilver from '@assets/images/placeholders/placeholder-blog-post-silver.png';
 import getRandomImage from '@utils/getRandomImage';
 
-import CategoryBadge from '../components/CategoryBadge';
-import AuthorInfo from '../components/AuthorInfo';
+import CategoryBadge from './components/CategoryBadge';
+import AuthorInfo from './components/AuthorInfo';
 
 type BlogPostHeaderProps = {
   post: BlogPostData;
@@ -17,11 +17,10 @@ type BlogPostHeaderProps = {
 
 const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
   const { title, category, image } = post;
-  
+
   return (
     <Flex
       mx={{ base: 'auto', '1.5xl': 0 }}
-      ml={{ '1.5xl': 12 }}
       maxW={{ base: '3xl', '1.5xl': 'full' }}
       justifyContent="space-between"
       alignItems="center"
@@ -29,15 +28,19 @@ const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
     >
       <Box w={{ base: 'full', '1.5xl': 'sm' }} pr={{ '1.5xl': 10 }}>
         <CategoryBadge display={{ base: 'none', '1.5xl': 'block' }}>{category}</CategoryBadge>
+
         <Heading as="h1" mt={4} mb={8} fontSize={{ base: 'xl', sm: '3xl' }}>
           {title}
         </Heading>
+
         <AuthorInfo postInfo={post} withDate />
       </Box>
+
       <Box w={{ base: 'full', '1.5xl': '2xl' }} ml={{ '1.5xl': 'auto' }} pos="relative">
         <CategoryBadge display={{ base: 'block', '1.5xl': 'none' }} isOnTop>
           {category}
         </CategoryBadge>
+
         <ImageWithPlaceholder
           src={image}
           width={670}

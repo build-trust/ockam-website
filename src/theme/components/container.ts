@@ -5,7 +5,7 @@ const Container = {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      maxW: 1440,
+      maxW: 'container.max',
       px: {
         base: 5,
         lg: 20,

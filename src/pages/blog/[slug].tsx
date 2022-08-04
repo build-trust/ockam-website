@@ -1,5 +1,5 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect } from 'react';
 
@@ -7,7 +7,7 @@ import { getAllPosts, getPostBySlug, postFilePaths } from '@api/blogApi';
 import mdxComponents from '@components/mdx';
 import { BlogPost, BlogPostData } from '@typings/BlogPost';
 import BlogLayout from '@layouts/BlogLayout/BlogLayout';
-import { BlogPostHeader, BlogPostContent } from '@views/blog/blogPost';
+import { BlogPostHeader } from '@views/blog';
 import SEOHead from '@components/SEOHead';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { useBlogPostsContext } from '@contextProviders/BlogPostsProvider';
@@ -40,9 +40,18 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
         px={{ base: 5, '1.5xl': 0 }}
       >
         <BlogPostHeader post={frontMatter as BlogPostData} />
-        <BlogPostContent>
+
+        <Flex
+          direction="column"
+          maxW="3xl"
+          mx="auto"
+          mt={{ base: 10, '1.5xl': 16 }}
+          fontFamily="blogPostBody"
+          fontSize="lg"
+          color="brand.900"
+        >
           <MDXRemote {...source} components={mdxComponents} />
-        </BlogPostContent>
+        </Flex>
       </Box>
     </>
   );
