@@ -11,9 +11,9 @@ import ContactExtensiveActionsCard from './ContactExtensiveActionsCard';
 
 const CONTACT_EXTENSIVE_ACTIONS_CARDS = [
   {
-    title: 'Build Demo App',
+    title: 'Build a Demo App',
     icon: GitHubIcon,
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales mi nisi, id vulputate quam facilisis eget. Donec mollis leo justo, et tristique nibh auctor ut.',
+    text: 'If you want to put fingers to the keyboard and to get started with Ockam, we have a bunch of step-by-step guides that will help you build your first application with Ockam.',
     actionText: `Let's Build`,
     actionLink: BUILD_DEMO.href,
     isExternal: true,
@@ -21,14 +21,14 @@ const CONTACT_EXTENSIVE_ACTIONS_CARDS = [
   {
     title: 'Join Our Team',
     icon: TeamIcon,
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales mi nisi, id vulputate quam facilisis eget. Donec mollis leo justo, et tristique nibh auctor ut.',
+    text: 'We recently raised a Series A, and are building our team. We are currently hiring Product Managers, Rust and Elixir engineers, and Customer support engineers.',
     actionText: 'See the Open Roles',
     actionLink: TEAM_PATH,
   },
   {
     title: 'Follow Us',
     icon: TwitterIcon,
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sodales mi nisi, id vulputate quam facilisis eget. Donec mollis leo justo, et tristique nibh auctor ut.',
+    text: 'Keep up to date with product announcements, new user guides, team updates and our commentary on the broad open source community.',
     actionText: 'Follow Us on Twitter',
     actionLink: TWITTER.href,
     isExternal: true,

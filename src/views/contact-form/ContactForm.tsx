@@ -73,7 +73,7 @@ const FIELDS = [
     name: 'description',
     type: 'textarea',
     required: true,
-    placeholder: 'Your message',
+    placeholder: 'What are you working on and how can we help?',
     label: 'Message',
     errorMsg: 'Please use valid message',
 
@@ -103,7 +103,7 @@ const ContactForm: FunctionComponent = () => {
     try {
       await axios({ method: 'post', url: CONFIG.salesforce.actionUrl, data });
       toast({
-        title: 'Your message has been sent successfully',
+        title: 'Your message has been sent!',
         status: 'success',
         duration: 9000,
         isClosable: true,

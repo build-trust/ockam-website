@@ -11,32 +11,32 @@ import ContactMainActionsCard from './ContactMainActionsCard';
 
 const CONTACT_MAIN_ACTIONS_CARDS = [
   {
-    title: 'Support',
+    title: 'Community Discussion',
     icon: SupportAgentIcon,
-    text: 'We`re here to help with any Ockam related questions.',
+    text: 'We are building a community and use GitHub Discussions to facilitate trasparent learning opportunities for everyone.',
     link: {
       isExternal: true,
       href: SUPPORT.href,
-      text: 'Get Support',
+      text: 'Start a Discussion',
     },
   },
   {
     title: 'Contact Us',
     icon: EmailIcon,
-    text: 'If you don`t have tome to talk, you can just write to us.',
+    text: 'We want to meet you! If you want to meet with our CEO and CTO to discuss your use case for Ockam, then let us know.',
 
     link: {
       href: CONTACT_FORM_PATH,
-      text: 'Fill the Form',
+      text: 'Schedule a 1:1',
     },
   },
   {
-    title: 'Docs / Blog',
+    title: 'Documentation',
     icon: DocsIcon,
-    text: 'Learn more about how Ockam makes your workflow easier.',
+    text: 'Check out our documentation pages for an introduction, or for a deep dive into how Ockam works!',
     link: {
       href: BLOG_PATH,
-      text: 'Learn About Ockam',
+      text: 'docs.ockam.io',
     },
   },
 ];
