@@ -7,16 +7,16 @@ import PlaceholderBlogPostGreen from '@assets/images/placeholders/placeholder-bl
 import PlaceholderBlogPostBlue from '@assets/images/placeholders/placeholder-blog-post-blue.png';
 import PlaceholderBlogPostSilver from '@assets/images/placeholders/placeholder-blog-post-silver.png';
 import getRandomImage from '@utils/getRandomImage';
+import AuthorSignature from '@components/AuthorSignature';
 
 import CategoryBadge from './components/CategoryBadge';
-import AuthorInfo from './components/AuthorInfo';
 
 type BlogPostHeaderProps = {
   post: BlogPostData;
 };
 
 const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
-  const { title, category, image } = post;
+  const { title, category, image, author, authorAvatar, authorPosition, date } = post;
 
   return (
     <Flex
@@ -33,7 +33,13 @@ const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
           {title}
         </Heading>
 
-        <AuthorInfo postInfo={post} withDate />
+        <AuthorSignature
+          withDate
+          author={author}
+          authorAvatar={authorAvatar}
+          authorPosition={authorPosition}
+          date={date}
+        />
       </Box>
 
       <Box w={{ base: 'full', '1.5xl': '2xl' }} ml={{ '1.5xl': 'auto' }} pos="relative">

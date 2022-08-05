@@ -1,20 +1,24 @@
 import { FunctionComponent } from 'react';
-import { Flex, Avatar, Heading, FlexProps, Box } from '@chakra-ui/react';
+import { Flex, Avatar, Heading, FlexProps, Box, Text } from '@chakra-ui/react';
 
 import { MEMBERS } from '@consts/team';
 
-type AuthorInfoProps = {
-  postInfo: {
-    author: string;
-    authorAvatar: string;
-    authorPosition: string;
-    date: string;
-  };
+type AuthorSignatureProps = {
+  author: string;
+  authorAvatar: string;
+  authorPosition?: string;
+  date?: string;
   withDate?: boolean;
 } & FlexProps;
 
-const AuthorInfo: FunctionComponent<AuthorInfoProps> = ({ postInfo, withDate, ...restProps }) => {
-  const { author, authorAvatar, date, authorPosition } = postInfo;
+const AuthorSignature: FunctionComponent<AuthorSignatureProps> = ({
+  author,
+  authorAvatar,
+  date,
+  authorPosition,
+  withDate,
+  ...restProps
+}) => {
   const memberPosition = MEMBERS.find(
     (member) => `${member.name} ${member.surname}` === author
   )?.position;
@@ -23,16 +27,19 @@ const AuthorInfo: FunctionComponent<AuthorInfoProps> = ({ postInfo, withDate, ..
   return (
     <Flex mt="auto" alignItems="center" {...restProps}>
       <Avatar src={authorAvatar} name={author} size="md" />
+
       <Box ml={5}>
         <Heading as="h5" fontSize="sm" fontWeight="medium" color="black">
           {author}
+
           {withDate && (
-            <Heading as="span" fontSize="sm" fontWeight="regular" color="gray.500">
+            <Text as="span" fontSize="sm" fontWeight="regular" color="gray.500">
               {' '}
               {position}
-            </Heading>
+            </Text>
           )}
         </Heading>
+
         <Heading as="h6" mt={1} fontSize="sm" fontWeight="regular" color="gray.500">
           {withDate ? `Published ${date}` : position}
         </Heading>
@@ -41,4 +48,4 @@ const AuthorInfo: FunctionComponent<AuthorInfoProps> = ({ postInfo, withDate, ..
   );
 };
 
-export default AuthorInfo;
+export default AuthorSignature;

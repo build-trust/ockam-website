@@ -9,9 +9,9 @@ import PlaceholderBlogPostBlue from '@assets/images/placeholders/placeholder-blo
 import PlaceholderBlogPostSilver from '@assets/images/placeholders/placeholder-blog-post-silver.png';
 import getRandomImage from '@utils/getRandomImage';
 import { BLOG_PATH } from '@consts/paths';
+import AuthorSignature from '@components/AuthorSignature';
 
 import CategoryBadge from './CategoryBadge';
-import AuthorInfo from './AuthorInfo';
 
 type FeaturedBlogPostProps = {
   post: BlogPost;
@@ -31,7 +31,7 @@ const FeaturedBlogPost: FunctionComponent<FeaturedBlogPostProps> = ({ post }) =>
   if (!post) return null;
 
   const {
-    data: { title, description, image, category },
+    data: { title, description, image, category, author, authorAvatar, authorPosition, date },
     filePath,
   } = post;
 
@@ -73,7 +73,12 @@ const FeaturedBlogPost: FunctionComponent<FeaturedBlogPostProps> = ({ post }) =>
               {description}
             </Text>
 
-            <AuthorInfo postInfo={post.data} />
+            <AuthorSignature
+              author={author}
+              authorAvatar={authorAvatar}
+              authorPosition={authorPosition}
+              date={date}
+            />
           </Flex>
         </Flex>
       </ChakraLink>
