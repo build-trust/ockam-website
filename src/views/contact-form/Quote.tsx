@@ -16,7 +16,7 @@ const Quote: FunctionComponent = () => (
     <Icon as={QuoteIcon} w={6} h={5} color="avocado.500" />
 
     <Text mt={2} fontSize="xl" fontWeight="regular" color="brand.900" lineHeight={1.3}>
-      We are here to help! Regardless of your use case for Ockam, reach out to us. Let us know what you are working on. We'd love to schedule a Zoom to learn about your use case and to discover how we can assist you.
+      We are here to help! Regardless of your use case for Ockam, reach out to us. Let us know what you are working on. We will follow up with a calendar link to schedule 1:1 time over a Zoom.
     </Text>
 
     <AuthorSignature {...QUOTE_AUTHOR} mt={8} />
