@@ -24,7 +24,7 @@ type HomePageProps = {
   downloads?: number;
 };
 
-export async function getStaticProps(): Promise<{ props: HomePageProps }> {
+export async function getStaticProps(): Promise<{ props: HomePageProps; revalidate: number }> {
   try {
     const { data: repoContentsData } = await githubApi.reposService.getRepoContents(
       'ockam-contributors',
@@ -47,11 +47,12 @@ export async function getStaticProps(): Promise<{ props: HomePageProps }> {
             .split(/\r\n|\r|\n/).length || 2) - 2, // minus column names first row and last empty row
         downloads: downloadsSum,
       },
+      revalidate: 120,
     };
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
-    return { props: {} };
+    return { props: {}, revalidate: 120 };
   }
 }
 
