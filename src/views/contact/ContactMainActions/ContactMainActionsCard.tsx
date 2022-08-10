@@ -23,17 +23,17 @@ const ContactMainActionsCard: FunctionComponent<ContactMainActionsCardProps> = (
   link,
 }) => (
   <Card w={{ base: '21rem', md: '23rem' }} align="center" px={{ base: 6, md: 8 }} pt={6} pb={9}>
-    <Flex align="center">
+    <Flex align="center" mb={6}>
       <GreenIconWrapper mr={4}>
         <Icon as={icon} w={6} h={6} color="white" />
       </GreenIconWrapper>
 
-      <Heading as="h4" fontSize="2xl">
+      <Heading as="h4" fontSize="xl">
         {title}
       </Heading>
     </Flex>
 
-    <Text mt={6} textAlign="center" fontWeight="regular" color="brand.900">
+    <Text mb={8} textAlign="center" fontWeight="regular" color="brand.900">
       {text}
     </Text>
 
@@ -47,7 +47,7 @@ const ContactMainActionsCard: FunctionComponent<ContactMainActionsCardProps> = (
     >
       <Button
         as={link.isExternal ? 'span' : 'a'}
-        mt={8}
+        mt="auto"
         colorScheme="avocado"
         size="md"
         color="black"

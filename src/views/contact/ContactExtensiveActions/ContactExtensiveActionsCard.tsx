@@ -25,20 +25,22 @@ const ContactExtensiveActionsCard: FunctionComponent<ContactExtensiveActionsCard
   const LinkWrapper = isExternal ? Box : NextLink;
 
   return (
-    <Box
+    <Flex
+      direction="column"
       maxW="lg"
-      pr={{ lg: 9 }}
       pos="relative"
-      _notLast={{
-        borderRightWidth: { base: 0, lg: '1px' },
-        borderBottomWidth: { base: '1px', lg: 0 },
+      _notFirst={{
+        borderLeftWidth: { base: 0, lg: '1px' },
+        borderTopWidth: { base: '1px', lg: 0 },
         borderColor: 'gray.200',
-        mr: { base: 0, lg: 9 },
-        mb: { base: 10, lg: 0 },
-        pb: { base: 8, lg: 0 },
+        pl: { base: 0, lg: 9 },
+        pt: { base: 8, lg: 0 },
+      }}
+      _notLast={{
+        pr: { lg: 9 },
       }}
     >
-      <Flex align="center">
+      <Flex align="center" mb={5}>
         <GreenIconWrapper mr={5}>
           <Icon as={icon} w={6} h={6} color="white" />
         </GreenIconWrapper>
@@ -48,14 +50,16 @@ const ContactExtensiveActionsCard: FunctionComponent<ContactExtensiveActionsCard
         </Heading>
       </Flex>
 
-      <Text mt={5}>{text}</Text>
+      <Text mb={7}>{text}</Text>
 
       {/* TODO repair type check */}
       {/* @ts-ignore */}
-      <LinkWrapper {...(isExternal ? { as: 'span' } : { href: actionLink, passHref: true })}>
+      <LinkWrapper
+        mt="auto"
+        {...(isExternal ? { as: 'span' } : { href: actionLink, passHref: true })}
+      >
         <ChakraLink
           {...(isExternal ? { isExternal: true, href: actionLink } : {})}
-          mt={7}
           display="flex"
           alignItems="center"
           fontSize="md"
@@ -65,7 +69,7 @@ const ContactExtensiveActionsCard: FunctionComponent<ContactExtensiveActionsCard
           <ArrowForwardIcon w={6} h={6} ml={1} />
         </ChakraLink>
       </LinkWrapper>
-    </Box>
+    </Flex>
   );
 };
 

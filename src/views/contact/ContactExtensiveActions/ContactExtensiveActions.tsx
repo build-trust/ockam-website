@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Container, SimpleGrid } from '@chakra-ui/react';
 
 import GitHubIcon from '@assets/icons/github.svg';
 import TwitterIcon from '@assets/icons/twitter.svg';
@@ -36,16 +36,13 @@ const CONTACT_EXTENSIVE_ACTIONS_CARDS = [
 ];
 
 const ContactExtensiveActions: FunctionComponent = () => (
-  <Box w="full" mt={{ base: 14, lg: 30 }} mb={5} bgColor="gray.50">
-    <Container
-      variant="section"
-      px={{ base: 5, lg: 32 }}
-      py={{ base: 16, lg: 24 }}
-      flexDir={{ base: 'column', lg: 'row' }}
-    >
-      {CONTACT_EXTENSIVE_ACTIONS_CARDS.map((card) => (
-        <ContactExtensiveActionsCard {...card} key={card.title} />
-      ))}
+  <Box w="full" mt={{ base: 14, lg: 30 }} mb={5} py={{ base: 16, lg: 24 }} bgColor="gray.50">
+    <Container variant="section">
+      <SimpleGrid columns={{ base: 1, lg: 3 }} rowGap={{ base: 10, lg: 0 }} w={{ lg: 'full' }}>
+        {CONTACT_EXTENSIVE_ACTIONS_CARDS.map((card) => (
+          <ContactExtensiveActionsCard {...card} key={card.title} />
+        ))}
+      </SimpleGrid>
     </Container>
   </Box>
 );
