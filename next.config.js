@@ -5,6 +5,13 @@ const withSvgr = require('next-svgr');
 
 const nextConfig = {
   images: { formats: ['image/webp'] },
+  redirects: async () => [
+    {
+      source: '/learn/how-to-guides/high-performance-team/engineering_levels',
+      destination: '/blog/levels_ladder',
+      permanent: true,
+    },
+  ],
 };
 
 module.exports = (_phase, { defaultPlugin }) => {
