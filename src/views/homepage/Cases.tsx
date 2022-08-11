@@ -21,7 +21,7 @@ const CASES_CARDS = [
     title: 'Get Out of the Middle',
     texts: [
       'You are building an app that moves data from over-there to over-there. Perhaps it’s a message service like Kafka or RabbitMQ?',
-      'You don’t want to be liable for data that moves through your service; Particularly if its Hippa or PCI protected data!',
+      'You don’t want to be liable for data that moves through your service; Particularly if its HIPAA or PCI protected data!',
       'Ockam’s end-to-end encryption originates at the data-source and terminates at the data-target , so your app-in-the-middle can not decipher data-in-motion. ',
     ],
   },

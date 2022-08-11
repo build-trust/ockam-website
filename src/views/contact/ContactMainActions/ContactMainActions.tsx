@@ -11,9 +11,9 @@ import ContactMainActionsCard from './ContactMainActionsCard';
 
 const CONTACT_MAIN_ACTIONS_CARDS = [
   {
-    title: 'Community Discussion',
+    title: 'Community',
     icon: SupportAgentIcon,
-    text: 'We are building a community and use GitHub Discussions to facilitate trasparent learning opportunities for everyone.',
+    text: 'We use GitHub Discussions to facilitate transparent learning opportunities for everyone.',
     link: {
       isExternal: true,
       href: SUPPORT.href,
