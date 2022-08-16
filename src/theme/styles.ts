@@ -4,6 +4,11 @@ export const globalStyles = {
     scrollBehavior: 'smooth',
   },
 
+  'html, body, div#__next': {
+    width: '100%',
+    height: '100%',
+  },
+
   '*': {
     WebkitFontSmoothing: 'antialiased',
     boxSizing: 'border-box',

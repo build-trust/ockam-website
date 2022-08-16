@@ -12,7 +12,7 @@ const MainLayout: FunctionComponent<ChildrenProp> = ({ children }) => (
   <MobileNavbarProvider>
     <MainLayoutHeader />
 
-    <Flex direction="column" minH="100vh" w="full" overflowX="hidden">
+    <Flex direction="column" minH="full" w="full" overflowX="hidden">
       <Box as="main" w="full" p={0} flex={1}>
         {children}
       </Box>

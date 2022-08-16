@@ -43,7 +43,7 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
 
         <Flex
           direction="column"
-          maxW="3xl"
+          maxW="52rem"
           mx="auto"
           mt={{ base: 10, '1.5xl': 16 }}
           fontFamily="blogPostBody"

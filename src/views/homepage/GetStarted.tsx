@@ -1,6 +1,7 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import { Box, Container, Text, SimpleGrid, Icon } from '@chakra-ui/react';
+import { Box, Flex, Container, Text, SimpleGrid, Icon, Link as ChakraLink } from '@chakra-ui/react';
 import { ArrowDownIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import NextLink from 'next/link';
 
 import BuildingIcon from '@assets/icons/building.svg';
 import CloudIcon from '@assets/icons/cloud.svg';
@@ -19,6 +20,7 @@ const GET_STARTED_CARDS = [
     link: {
       text: 'Go to GitHub',
       href: GITHUB_REPO_OCKAM.href,
+      isExternal: true,
     },
   },
   {
@@ -28,6 +30,7 @@ const GET_STARTED_CARDS = [
     link: {
       text: 'Go to the Guide',
       href: BUILD_DEMO.href,
+      isExternal: true,
     },
   },
   {
@@ -48,6 +51,7 @@ type GetStartedCardProps = {
   link: {
     text: string;
     href: string;
+    isExternal?: boolean;
   };
 };
 
@@ -59,25 +63,32 @@ const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, t
       </GreenIconWrapper>
     </Box>
 
-    <Box>
+    <Flex direction="column">
       <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
         {title}
       </Text>
-      <Text mb={5} fontSize="sm">
+
+      <Text mb={5} fontSize="sm" flex={1}>
         {text}
       </Text>
-      <Text
-        as="a"
+
+      <Box
         href={link.href}
-        target="_blank"
-        fontWeight="semibold"
-        color="black"
-        fontSize="md"
+        as={link.isExternal ? ChakraLink : NextLink}
+        {...(link.isExternal ? { isExternal: true } : { passHref: true })}
       >
-        {link.text}
-        <ArrowForwardIcon w={5} h={5} ml={2} />
-      </Text>
-    </Box>
+        <Text
+          as={link.isExternal ? 'span' : 'a'}
+          fontWeight="semibold"
+          color="black"
+          fontSize="md"
+          mt="auto"
+        >
+          {link.text}
+          <ArrowForwardIcon w={5} h={5} ml={2} />
+        </Text>
+      </Box>
+    </Flex>
   </Card>
 );
 

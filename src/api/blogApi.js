@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import orderBy from 'lodash/orderBy';
 import RemarkGFM from 'remark-gfm';
+import RehypeSlug from 'rehype-slug';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 
@@ -37,7 +38,7 @@ export const getPostBySlug = async (slug) => {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [RemarkGFM],
-      rehypePlugins: [],
+      rehypePlugins: [RehypeSlug],
     },
     scope: data,
   });

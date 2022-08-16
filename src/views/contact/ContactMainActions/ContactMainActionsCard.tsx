@@ -42,7 +42,7 @@ const ContactMainActionsCard: FunctionComponent<ContactMainActionsCardProps> = (
       href={link.href}
       as={link.isExternal ? ChakraLink : NextLink}
       {...(link.isExternal
-        ? { isExternal: true, _hover: { textDecoration: 'none' } }
+        ? { isExternal: true, _hover: { textDecoration: 'none' }, mt: 'auto' }
         : { passHref: true })}
     >
       <Button

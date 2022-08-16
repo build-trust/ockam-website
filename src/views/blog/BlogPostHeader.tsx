@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 
 import ImageWithPlaceholder from '@components/ImageWithPlaceholder';
@@ -17,6 +17,16 @@ type BlogPostHeaderProps = {
 
 const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
   const { title, category, image, author, authorAvatar, authorPosition, date } = post;
+
+  const placeholderImg = useMemo(
+    () =>
+      getRandomImage([
+        PlaceholderBlogPostGreen,
+        PlaceholderBlogPostBlue,
+        PlaceholderBlogPostSilver,
+      ]),
+    []
+  );
 
   return (
     <Flex
@@ -52,11 +62,7 @@ const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
           width={670}
           height={363}
           layout="responsive"
-          placeholderImg={getRandomImage([
-            PlaceholderBlogPostGreen,
-            PlaceholderBlogPostBlue,
-            PlaceholderBlogPostSilver,
-          ])}
+          placeholderImg={placeholderImg}
           alt={title}
         />
       </Box>
