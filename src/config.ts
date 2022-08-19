@@ -20,7 +20,7 @@ export default {
   salesforce: {
     oid: '00D4T000000FcUg',
     actionUrl: 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8',
-    returnUrl: `${getRootUrl()}${CONTACT_PAGE_PATH}`,
+    returnUrl: `${getRootUrl()}${CONTACT_PAGE_PATH}?contactFormStatus=success`,
   },
   lever: {
     siteName: 'ockam',

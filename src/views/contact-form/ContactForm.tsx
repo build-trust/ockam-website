@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useRef } from 'react';
 import {
   Button,
   GridItem,
@@ -6,13 +6,12 @@ import {
   Alert,
   AlertIcon,
   Stack,
-  useToast,
   FormControl,
   FormErrorMessage,
+  chakra,
 } from '@chakra-ui/react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import ReCAPTCHA from 'react-google-recaptcha';
-import axios from 'axios';
 
 import CONFIG from '@config';
 import FormInput from '@components/FormInput';
@@ -87,7 +86,7 @@ const FIELDS = [
   },
 ];
 
-// TODO Types for react-hook-form - inputs, errors; Refactor to separately hook, axios client, etc
+// TODO Types for react-hook-form - inputs, errors;
 const ContactForm: FunctionComponent = () => {
   const {
     register,
@@ -95,20 +94,13 @@ const ContactForm: FunctionComponent = () => {
     handleSubmit,
     setError,
     setValue,
-    reset,
   } = useForm();
-  const toast = useToast();
 
-  const onSubmit = async (data: FieldValues): Promise<void> => {
+  const contactFormRef = useRef<HTMLFormElement>(null);
+
+  const onSubmit = (): void => {
     try {
-      await axios({ method: 'post', url: CONFIG.salesforce.actionUrl, data });
-      toast({
-        title: 'Your message has been sent!',
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      });
-      reset();
+      contactFormRef?.current?.submit();
     } catch (error) {
       // @ts-ignore
       setError('global', { message: error.message });
@@ -117,82 +109,90 @@ const ContactForm: FunctionComponent = () => {
 
   return (
     <Card w="full" maxW="2xl" p={10}>
-      <SimpleGrid
-        as="form"
+      <chakra.form
+        ref={contactFormRef}
+        method="POST"
+        action={CONFIG.salesforce.actionUrl}
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        columns={{ base: 1, md: 2 }}
-        spacingX={10}
-        spacingY={{ base: 4, md: 7 }}
-        pos="relative"
-        w="full"
       >
-        {FIELDS.map((field) => (
-          <GridItem key={field.name} {...field.wrapperStyles}>
-            {/* @ts-ignore */}
-            <FormInput
-              type={field.type}
-              label={field.label}
-              placeholder={field.placeholder}
-              errorMessage={field.errorMsg}
-              isRequired={field.required}
-              isInvalid={!!errors[field.name]}
-              isDisabled={isSubmitting}
-              {...field.inputStyles}
-              {...register(field.name, { required: field.required, pattern: field.pattern })}
-            />
-          </GridItem>
-        ))}
-
-        <input type="hidden" value={CONFIG.salesforce.oid} {...register('oid')} />
-        <input type="hidden" value={CONFIG.salesforce.returnUrl} {...register('retURL')} />
-
-        {errors.global && (
-          <GridItem colSpan={2}>
-            <Stack spacing={3}>
-              <Alert status="error" variant="solid" borderRadius="base">
-                <>
-                  <AlertIcon />
-                  {errors.global.message}
-                </>
-              </Alert>
-            </Stack>
-          </GridItem>
-        )}
-
-        <GridItem colStart={{ md: 1 }}>
-          <FormControl isInvalid={!!errors.recaptcha}>
-            <ReCAPTCHA
-              sitekey={CONFIG.app.recaptchaSiteKey}
-              onChange={(recaptchaValue): void => setValue('recaptcha', recaptchaValue)}
-            />
-            <input
-              type="hidden"
-              {...register('recaptcha', { required: 'Recaptcha is required' })}
-            />
-            {/* @ts-ignore */}
-            <FormErrorMessage>{errors?.recaptcha?.message}</FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem
-          colStart={{ md: 2 }}
-          justifySelf="end"
-          mt={{ base: 2, md: 1 }}
-          w={{ base: 'full', md: '80%' }}
+        <SimpleGrid
+          columns={{ base: 1, md: 2 }}
+          spacingX={10}
+          spacingY={{ base: 4, md: 7 }}
+          pos="relative"
+          w="full"
         >
-          <Button
-            colorScheme="avocado"
-            type="submit"
-            color="black"
-            w="full"
-            disabled={isSubmitting}
-            isLoading={isSubmitting}
+          {FIELDS.map((field) => (
+            <GridItem key={field.name} {...field.wrapperStyles}>
+              {/* @ts-ignore */}
+              <FormInput
+                type={field.type}
+                label={field.label}
+                placeholder={field.placeholder}
+                errorMessage={field.errorMsg}
+                isRequired={field.required}
+                isInvalid={!!errors[field.name]}
+                isDisabled={isSubmitting}
+                {...field.inputStyles}
+                {...register(field.name, {
+                  required: field.required,
+                  pattern: field.pattern,
+                })}
+              />
+            </GridItem>
+          ))}
+
+          <input type="hidden" value={CONFIG.salesforce.oid} {...register('oid')} />
+          <input type="hidden" value={CONFIG.salesforce.returnUrl} {...register('retURL')} />
+
+          {errors.global && (
+            <GridItem colSpan={2}>
+              <Stack spacing={3}>
+                <Alert status="error" variant="solid" borderRadius="base">
+                  <>
+                    <AlertIcon />
+                    {errors.global.message}
+                  </>
+                </Alert>
+              </Stack>
+            </GridItem>
+          )}
+
+          <GridItem colStart={{ md: 1 }}>
+            <FormControl isInvalid={!!errors.recaptcha}>
+              <ReCAPTCHA
+                sitekey={CONFIG.app.recaptchaSiteKey}
+                onChange={(recaptchaValue): void => setValue('recaptcha', recaptchaValue)}
+              />
+              <input
+                type="hidden"
+                {...register('recaptcha', { required: 'Recaptcha is required' })}
+              />
+              {/* @ts-ignore */}
+              <FormErrorMessage>{errors?.recaptcha?.message}</FormErrorMessage>
+            </FormControl>
+          </GridItem>
+
+          <GridItem
+            colStart={{ md: 2 }}
+            justifySelf="end"
+            mt={{ base: 2, md: 1 }}
+            w={{ base: 'full', md: '80%' }}
           >
-            Submit
-          </Button>
-        </GridItem>
-      </SimpleGrid>
+            <Button
+              colorScheme="avocado"
+              type="submit"
+              color="black"
+              w="full"
+              disabled={isSubmitting}
+              isLoading={isSubmitting}
+            >
+              Submit
+            </Button>
+          </GridItem>
+        </SimpleGrid>
+      </chakra.form>
     </Card>
   );
 };
