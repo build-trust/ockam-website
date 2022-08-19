@@ -39,7 +39,7 @@ const CARDS = [
     text: 'Recommended for your team at work.',
     items: [
       { text: 'Team Collaboration', icon: CheckIcon },
-      { text: 'Scaleable', icon: CheckIcon },
+      { text: 'Scalable', icon: CheckIcon },
       { text: 'Enterprise Authorization', icon: CheckIcon },
       { text: 'All Add-ons', icon: CheckIcon },
       { text: 'SLA', icon: CheckIcon },
