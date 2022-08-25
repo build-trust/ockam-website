@@ -1,5 +1,5 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import { Box, Container, Flex, Text, Heading, SimpleGrid, Icon , LinkBox, LinkOverlay } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, Heading, SimpleGrid, Icon } from '@chakra-ui/react';
 
 import GitHubIcon from '@assets/icons/github.svg';
 import CloudIcon from '@assets/icons/cloud.svg';
@@ -18,7 +18,6 @@ const FEATURES = [
       'Twilio did it for telecom.',
       'Ockam abstracts away complex infrastructure and cryptography orchestration to empower millions of developers.',
     ],
-    href: '/features#developerFirst',
   },
   {
     icon: CloudIcon,
@@ -27,7 +26,6 @@ const FEATURES = [
       'Ockam is built for enterprise scale.',
       'Add-ons are ready-made connectors to your hosted authentication, database, and message broker services.',
     ],
-    href: '/features#cloudNative',
   },
   {
     icon: GitHubIcon,
@@ -36,7 +34,6 @@ const FEATURES = [
       'Ockam’s protocols become ever more secure through transparency, community feedback, and scrutany.',
       'Add-ons can be built by anyone to create new hardware key vaults or cloud service connectors.',
     ],
-    href: '/features#openSource',
   },
   {
     icon: LockIcon,
@@ -45,7 +42,6 @@ const FEATURES = [
       'Ockam messaging is *actually* end-to-end encrypted, so it can trustfully move data across networks that should not be trusted.',
       'Transports are agnostic and pluggable so Ockam’s protocols can work across any network topology.',
     ],
-    href: '/features#zeroTrust',
   },
   {
     icon: KeyIcon,
@@ -54,7 +50,6 @@ const FEATURES = [
       'Private keys are created inside of all of your applications. They never leave the hardware environment.',
       'Orchestration, revocation, and rotation of keys are built in, so you have one less thing to worry about.',
     ],
-    href: '/features#keyManagement',
   },
   {
     icon: EngineIcon,
@@ -63,7 +58,6 @@ const FEATURES = [
       'Ockam Add-ons empower you to use your existing authentication, attribute-based (ABAC) authorization tools.',
       'Bring your own Okta, Auth0, OAuth, AWS, Azure, Google or Web3 IAM tools. Ockam has an Add-on for that!',
     ],
-    href: '/features#byoAuthEngine',
   },
 ];
 
@@ -75,11 +69,10 @@ type FeatureProps = {
   icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
   texts: string[];
-  href: string;
 };
 
-const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts, href }) => (
-  <LinkBox as={Flex}>
+const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts }) => (
+  <Flex>
     <Box flex={0} mr={5}>
       <GreenIconWrapper>
         <Icon as={icon} color="white" w={6} h={6} />
@@ -87,11 +80,9 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts, href }) 
     </Box>
 
     <Box>
-      <LinkOverlay href={href}>
-        <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
-          {title}
-        </Text>
-      </LinkOverlay>
+      <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
+        {title}
+      </Text>
 
       {texts.map((text) => (
         <Text key={text} fontSize="sm" mb={{ base: 4, lg: 2 }} _last={{ mb: { lg: 0 } }}>
@@ -99,7 +90,7 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts, href }) 
         </Text>
       ))}
     </Box>
-  </LinkBox>
+  </Flex>
 );
 
 const Features: FunctionComponent = () => (
