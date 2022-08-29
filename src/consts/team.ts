@@ -99,15 +99,6 @@ export const MEMBERS = [
     description: 'Loves music, playing the guitar and video games',
   },
   {
-    name: 'Katharina',
-    surname: 'Fey',
-    position: 'Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'DE',
-    photo: 'katharina-fey.png',
-    description: 'Pineapple on a Pizza may be the title of their next song?',
-  },
-  {
     name: 'Toralf',
     surname: 'Wittner',
     position: 'Engineer',
