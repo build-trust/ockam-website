@@ -4,8 +4,8 @@ import { Container, Flex } from '@chakra-ui/react';
 import EmailIcon from '@assets/icons/email.svg';
 import DocsIcon from '@assets/icons/docs.svg';
 import SupportAgentIcon from '@assets/icons/support.svg';
-import { BLOG_PATH, CONTACT_FORM_PATH } from '@consts/paths';
-import { SUPPORT } from '@consts/externalResources';
+import { CONTACT_FORM_PATH } from '@consts/paths';
+import { SUPPORT, DOCS } from '@consts/externalResources';
 
 import ContactMainActionsCard from './ContactMainActionsCard';
 
@@ -35,7 +35,8 @@ const CONTACT_MAIN_ACTIONS_CARDS = [
     icon: DocsIcon,
     text: 'Check out our documentation pages for an introduction, or for a deep dive into how Ockam works!',
     link: {
-      href: BLOG_PATH,
+      isExternal: true,
+      href: DOCS.href,
       text: 'docs.ockam.io',
     },
   },

@@ -29,6 +29,11 @@ export const DISCUSSION = {
   href: 'https://github.com/build-trust/ockam/discussions',
 };
 
+export const DOCS = {
+  name: 'docs.ockam.io',
+  href: 'https://docs.ockam.io'
+}
+
 export const BUILD_DEMO = { href: 'https://github.com/build-trust/ockam#next-steps' };
 
 export default [
@@ -40,4 +45,5 @@ export default [
   SUPPORT,
   DISCUSSION,
   BUILD_DEMO,
+  DOCS,
 ];
