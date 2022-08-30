@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from 'react';
+import { FormEvent, FunctionComponent, useRef } from 'react';
 import {
   Button,
   GridItem,
@@ -91,19 +91,17 @@ const ContactForm: FunctionComponent = () => {
   const {
     register,
     formState: { errors, isSubmitting },
-    handleSubmit,
-    setError,
     setValue,
+    trigger,
   } = useForm();
 
   const contactFormRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = (): void => {
-    try {
-      contactFormRef?.current?.submit();
-    } catch (error) {
-      // @ts-ignore
-      setError('global', { message: error.message });
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const onSubmit = async (e:FormEvent) => {
+    const results = await trigger();
+    if(!results) {
+      e.preventDefault();
     }
   };
 
@@ -113,7 +111,6 @@ const ContactForm: FunctionComponent = () => {
         ref={contactFormRef}
         method="POST"
         action={CONFIG.salesforce.actionUrl}
-        onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
         <SimpleGrid
@@ -183,6 +180,7 @@ const ContactForm: FunctionComponent = () => {
             <Button
               colorScheme="avocado"
               type="submit"
+              onClick={onSubmit}
               color="black"
               w="full"
               disabled={isSubmitting}
