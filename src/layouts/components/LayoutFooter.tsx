@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import NextLink from 'next/link';
 import {
   Box,
   BoxProps,
@@ -7,7 +8,7 @@ import {
   Container,
   Flex,
   Heading,
-  Link,
+  Link as ChakraLink,
   Text,
   Icon,
   HStack,
@@ -15,9 +16,17 @@ import {
 } from '@chakra-ui/react';
 
 import LogoGray from '@assets/logo-gray.svg';
-import { LINKEDIN, TWITTER, SUPPORT, DISCUSSION, BUILD_DEMO } from '@consts/externalResources';
+import { LINKEDIN, TWITTER, DISCUSSION, BUILD_DEMO } from '@consts/externalResources';
+import { CONTACT_PAGE_PATH } from '@consts/paths';
 
-const NAV = [SUPPORT, DISCUSSION];
+const NAV = [
+  {
+    name: 'Support',
+    href: CONTACT_PAGE_PATH,
+    isExternal: false,
+  },
+  { ...DISCUSSION, isExternal: true },
+];
 const SOCIALS = [LINKEDIN, TWITTER];
 
 const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
@@ -83,23 +92,26 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
         >
           <Flex mb={{ base: 4, lg: 0 }}>
             {NAV.map((link) => (
-              <Text
+              <ChakraLink
                 key={link.name}
-                as={Link}
-                isExternal
                 href={link.href}
-                _hover={{ textDecoration: 'underline' }}
-                opacity={0.8}
-                mr={6}
+                {...(link.isExternal ? { isExternal: true } : { passHref: true, as: NextLink })}
               >
-                {link.name}
-              </Text>
+                <Text
+                  as={link.isExternal ? 'span' : 'a'}
+                  _hover={{ textDecoration: 'underline' }}
+                  opacity={0.8}
+                  mr={6}
+                >
+                  {link.name}
+                </Text>
+              </ChakraLink>
             ))}
           </Flex>
 
           <HStack spacing={5}>
             {SOCIALS.map((social) => (
-              <Link key={social.href} href={social.href} isExternal>
+              <ChakraLink key={social.href} href={social.href} isExternal>
                 <Icon
                   as={social.icon}
                   alt={`${social.name} link`}
@@ -110,7 +122,7 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
                   _hover={{ color: 'gray.300' }}
                   transition="all 400ms ease-in-out"
                 />
-              </Link>
+              </ChakraLink>
             ))}
           </HStack>
         </Flex>
