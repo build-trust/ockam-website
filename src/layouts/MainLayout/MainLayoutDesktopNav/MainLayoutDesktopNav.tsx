@@ -62,6 +62,7 @@ const MainLayoutDesktopNav: FunctionComponent = () => (
     <Flex
       display={{ base: 'none', lg: 'flex' }}
       align="center"
+      justify="center"
       w="full"
       flexWrap="wrap"
       pl={{ lg: 8, xl: 16 }}
