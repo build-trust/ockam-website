@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { CONTACT_PAGE_PATH } from '@consts/paths';
 
 const MainLayoutCtaButtons: FunctionComponent = () => {
-  const contactUsButtonColorScheme = useBreakpointValue({ base: 'avocado', lg: 'gray' });
   const buttonsSize = useBreakpointValue({ base: 'lg', lg: 'md' });
 
   return (
@@ -15,13 +14,7 @@ const MainLayoutCtaButtons: FunctionComponent = () => {
       direction={{ base: 'column', lg: 'row' }}
     >
       <Link href={CONTACT_PAGE_PATH} passHref>
-        <Button
-          as="a"
-          variant={{ base: 'solid', lg: 'outline' }}
-          colorScheme={contactUsButtonColorScheme}
-          size={buttonsSize}
-          color="black!important" // TODO investigate how to force black color without important
-        >
+        <Button as="a" variant="solid" colorScheme="avocado" size={buttonsSize} color="black">
           Contact Us
         </Button>
       </Link>
