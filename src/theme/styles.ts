@@ -4,7 +4,7 @@ export const globalStyles = {
     scrollBehavior: 'smooth',
   },
 
-  'html, body, div#__next': {
+  'html, body': {
     width: '100%',
     height: '100%',
   },
