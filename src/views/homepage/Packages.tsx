@@ -15,7 +15,6 @@ import {
 import CloudIcon from '@assets/icons/cloud.svg';
 import PackagesIcon from '@assets/icons/packages.svg';
 import CheckIcon from '@assets/icons/check.svg';
-import CloseIcon from '@assets/icons/close.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import LineDivider from '@components/LineDivider';
 import StepsLabel from '@components/StepsLabel';
@@ -23,35 +22,36 @@ import StepsLabel from '@components/StepsLabel';
 const CARDS = [
   {
     icon: PackagesIcon,
-    title: 'Hobby',
-    text: 'Recommended for your side project.',
+    title: 'Open Source',
+    text: 'The Tools for Builders',
     items: [
-      { text: 'Two Collaborators', icon: CheckIcon },
-      { text: 'Limited Scale', icon: CloseIcon },
-      { text: 'Basic Authorization', icon: CheckIcon },
-      { text: 'Limited Addons', icon: CheckIcon },
-      { text: 'Free', icon: CheckIcon },
+      { text: 'Manually-configurable Scale', icon: CheckIcon },
+      { text: 'Cryptographic Protocols', icon: CheckIcon },
+      { text: 'Ready-to-use Packages', icon: CheckIcon },
+      { text: 'Community Supported', icon: CheckIcon },
+      { text: 'Apache 2 License', icon: CheckIcon },
     ],
   },
   {
     icon: CloudIcon,
-    title: 'Production',
-    text: 'Recommended for your team at work.',
+    title: 'Orchestrator',
+    text: 'The Service for Enterprises',
     items: [
-      { text: 'Team Collaboration', icon: CheckIcon },
-      { text: 'Scalable', icon: CheckIcon },
-      { text: 'Enterprise Authorization', icon: CheckIcon },
-      { text: 'All Add-ons', icon: CheckIcon },
-      { text: 'SLA', icon: CheckIcon },
+      { text: 'Automation-required Scale', icon: CheckIcon },
+      { text: 'Company-wide Access Controls', icon: CheckIcon },
+      { text: 'Message guarantees', icon: CheckIcon },
+      { text: 'Add-on connectors', icon: CheckIcon },
+      { text: 'AWS Marketplace', icon: CheckIcon },
     ],
   },
 ];
 
 const DESCRIPTIONS = [
-  'Ockam Orchestrator enables distributed applications to Trust Data-in-Motion at scale - with ease.',
-  'Ockam offers Orchestrator as a managed service through the AWS marketplace.',
-  'We are committed to empowering all developers. That’s why we sponsor your hobby projects. All applications should be built with Trust.',
-  'Orchestrator was built for builders that build big things. It can move massive amounts of data through dynamic and complicated service architectures.',
+  'Ockam Open Source contains all of the cryptographic protocols, packages, and developer tools that a builder - of any  skill or expereince level - would require to move data between their applications with Trust. Ockam is commited to supporting the Open Source community through contributions to discussions and collective learning.',
+
+  'Ockam Orchestrator is a cloud-based, fully-managed service that enables companies to connect their distributed applications with ease. Orchestrator was built for enterprised that build big things. It can move massive amounts of data through dynamic and complicated architectures. If you are starting a new work project, you can be assured that Orchestrator will meet your needs as you move into production and then scale.',
+
+  'The Ockam Orchestrator was built for the Zero-Trust enterprise. Orchestrator Add-ons connect to Key Management, ABAC policy engines, Data Stores, and Messaging infrastructure; such as Confluent Cloud, InfluxData, Okta, Auth0, and KMS.',
 ];
 
 type CardProps = {
@@ -154,7 +154,7 @@ const Packages: FunctionComponent = () => (
     <SimpleGrid columns={{ base: 1, lg: 2 }}>
       <Flex direction="column" justify="center" pr={{ base: 0, lg: 24 }}>
         <Heading as="h3" size="h3" mb={{ base: 6, lg: 8 }}>
-          Ockam Orchestrator
+          The Ockam Products
         </Heading>
 
         {DESCRIPTIONS.map((text) => (
