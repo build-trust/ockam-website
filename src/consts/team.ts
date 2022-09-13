@@ -34,15 +34,6 @@ export const MEMBERS = [
       'Enjoys reading historical fiction, playing board games and running after her 4 kids',
   },
   {
-    name: 'Antoine',
-    surname: 'van Gelder',
-    position: 'Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'ZA',
-    photo: 'antoine-van-gelder.png',
-    description: 'Raised two kids and still loves playing guitar',
-  },
-  {
     name: 'Daniil',
     surname: 'Fedotov',
     position: 'Engineer',
@@ -88,7 +79,15 @@ export const MEMBERS = [
     description:
       'Once debugged a performance issue on a large scale system below a giant tree in the amazon',
   },
-
+  {
+    name: 'Nicholas',
+    surname: 'Ippolito',
+    position: 'Business Operations',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'US',
+    photo: 'nick-ippolito.png',
+    description: 'The newest member of The Team',
+  },
   {
     name: 'Adrian',
     surname: 'Benavides',
