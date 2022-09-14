@@ -6,7 +6,8 @@ import SolutionImage from '@assets/images/solution.png';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 
 const TEXTS = [
-  'Ockam has a simple developer experience and powerful primitives that orchestrate end-to-end encryption, key management, authorization policy enforcement, and mutual authentication between distributed applications - at massive scale.',
+  'Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. Ockam makes it simple to build secure by-design applications that have granular control over every trust and access decision.',
+  'Ockam is a suite of open source tools, programming libraries and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management & authorization policy enforcement — at scale.',
 ];
 
 const Solution: FunctionComponent = () => {
@@ -20,8 +21,7 @@ const Solution: FunctionComponent = () => {
             Build Applications That{' '}
             <chakra.span bgImage={gradients.primary} bgClip="text">
               Trust Data-in-Motion
-            </chakra.span>{' '}
-            Across Cloud Services, Beyond Data Centers, Through Gateways.
+            </chakra.span>
           </Heading>
 
           <Box mt={{ base: 8, lg: 10 }}>
