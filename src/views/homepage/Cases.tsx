@@ -6,6 +6,7 @@ import Card from '@components/Card';
 import CasesOneImage from '@assets/images/cases1.png';
 import CasesTwoImage from '@assets/images/cases2.png';
 import CasesThreeImage from '@assets/images/cases3.png';
+import SectionAnchor from '@components/SectionAnchor';
 
 const CASES_CARDS = [
   {
@@ -63,9 +64,11 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({ image, title, texts }) =
 
 const Cases: FunctionComponent = () => (
   <Container variant="section" id="use-cases" py={{ base: 16, lg: 20 }}>
-    <Heading as="h2" size="h2" mb={6}>
-      How is Ockam Used?
-    </Heading>
+    <SectionAnchor id="cases">
+      <Heading as="h2" size="h2" mb={6}>
+        How is Ockam Used?
+      </Heading>
+    </SectionAnchor>
 
     <Text fontSize={{ lg: 'lg' }} mb={{ base: 12, lg: 16 }}>
       Ockam can, and should, be used between every application, everywhere.

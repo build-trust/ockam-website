@@ -7,6 +7,7 @@ import CraftImage from '@assets/images/investors/craft.png';
 import OktaImage from '@assets/images/investors/okta.png';
 import CoreVenturesGroupImage from '@assets/images/investors/core-ventures-group.png';
 import SinewaveVenturesImage from '@assets/images/investors/sinewave-ventures.png';
+import SectionAnchor from '@components/SectionAnchor';
 
 const INVESTORS = [
   {
@@ -31,16 +32,18 @@ const INVESTORS = [
 const Investors: FunctionComponent = () => (
   <Box bgColor="gray.50">
     <Container variant="section" pt={12} pb={24}>
-      <Heading
-        as="h5"
-        color="gray.500"
-        textTransform="uppercase"
-        fontSize="xl"
-        fontWeight="bold"
-        mb={10}
-      >
-        Major Investors
-      </Heading>
+      <SectionAnchor id="investors">
+        <Heading
+          as="h5"
+          color="gray.500"
+          textTransform="uppercase"
+          fontSize="xl"
+          fontWeight="bold"
+          mb={10}
+        >
+          Major Investors
+        </Heading>
+      </SectionAnchor>
 
       <Flex flexWrap="wrap" alignItems="center" justifyContent="center">
         {INVESTORS.map((investor) => (

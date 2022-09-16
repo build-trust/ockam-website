@@ -18,6 +18,7 @@ import CheckIcon from '@assets/icons/check.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import LineDivider from '@components/LineDivider';
 import StepsLabel from '@components/StepsLabel';
+import SectionAnchor from '@components/SectionAnchor';
 
 const CARDS = [
   {
@@ -153,9 +154,11 @@ const Packages: FunctionComponent = () => (
 
     <SimpleGrid columns={{ base: 1, lg: 2 }}>
       <Flex direction="column" justify="center" pr={{ base: 0, lg: 24 }}>
-        <Heading as="h3" size="h3" mb={{ base: 6, lg: 8 }}>
-          The Ockam Products
-        </Heading>
+        <SectionAnchor id="products">
+          <Heading as="h3" size="h3" mb={{ base: 6, lg: 8 }}>
+            The Ockam Products
+          </Heading>
+        </SectionAnchor>
 
         {DESCRIPTIONS.map((text) => (
           <Text key={text} fontSize={{ lg: 'lg' }} mb={{ base: 4, lg: 5 }}>

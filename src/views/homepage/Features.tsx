@@ -8,6 +8,7 @@ import LockIcon from '@assets/icons/lock.svg';
 import KeyIcon from '@assets/icons/key.svg';
 import EngineIcon from '@assets/icons/engine.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
+import SectionAnchor from '@components/SectionAnchor';
 
 const FEATURES = [
   {
@@ -98,9 +99,11 @@ const Features: FunctionComponent = () => (
     <Container variant="section">
       <Box id="features" visibility="hidden" position="absolute" left={0} top="-80px" />
       <Box alignSelf="flex-start" w="full" maxW="2.5xl" mb={{ base: 10, md: 16 }}>
-        <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }}>
-          Features of Ockam
-        </Heading>
+        <SectionAnchor id="features">
+          <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }}>
+            Features of Ockam
+          </Heading>
+        </SectionAnchor>
 
         {DESCRIPTIONS.map((text) => (
           <Text key={text} fontSize={{ lg: 'lg' }} lineHeight={1.4} _notLast={{ mb: 2 }}>

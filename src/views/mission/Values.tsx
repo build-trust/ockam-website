@@ -9,6 +9,7 @@ import SearchZoomInIcon from '@assets/icons/search-zoom-in.svg';
 import ValueCard from '@views/mission/components/ValueCard';
 import StepsLabel from '@components/StepsLabel';
 import LineDivider from '@components/LineDivider';
+import SectionAnchor from '@components/SectionAnchor';
 
 const MISSION_AND_VISION_CARDS = [
   {
@@ -57,9 +58,11 @@ const Values: FunctionComponent = () => {
   return (
     <>
       <Container variant="section" pt={16}>
-        <Heading as="h2" size="h2" fontWeight="bold" lineHeight={1.3} mb={{ lg: 10 }}>
-          The Team is Built with Trust
-        </Heading>
+        <SectionAnchor id="values">
+          <Heading as="h2" size="h2" fontWeight="bold" lineHeight={1.3} mb={{ lg: 10 }}>
+            The Team is Built with Trust
+          </Heading>
+        </SectionAnchor>
 
         {MISSION_AND_VISION_CARDS.map((card, index) => (
           <ValueCard key={card.title} {...card} itemPosition={index % 2 ? 'right' : 'left'} />

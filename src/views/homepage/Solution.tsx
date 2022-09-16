@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import SolutionImage from '@assets/images/solution.png';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
+import SectionAnchor from '@components/SectionAnchor';
 
 const TEXTS = [
   'Ockam has a simple developer experience and powerful primitives that orchestrate end-to-end encryption, key management, authorization policy enforcement, and mutual authentication between distributed applications - at massive scale.',
@@ -16,13 +17,15 @@ const Solution: FunctionComponent = () => {
     <Container variant="section" py={{ base: 14, lg: 24 }}>
       <SimpleGrid columns={{ base: 1, lg: 2 }} mb={{ base: 6, lg: 0 }}>
         <Box maxW={{ lg: '34.2rem' }} my="auto">
-          <Heading as="h3" size="h3" lineHeight={1.3}>
-            Build Applications That{' '}
-            <chakra.span bgImage={gradients.primary} bgClip="text">
-              Trust Data-in-Motion
-            </chakra.span>{' '}
-            Across Cloud Services, Beyond Data Centers, Through Gateways.
-          </Heading>
+          <SectionAnchor id="solution">
+            <Heading as="h3" size="h3" lineHeight={1.3}>
+              Build Applications That{' '}
+              <chakra.span bgImage={gradients.primary} bgClip="text">
+                Trust Data-in-Motion
+              </chakra.span>{' '}
+              Across Cloud Services, Beyond Data Centers, Through Gateways.
+            </Heading>
+          </SectionAnchor>
 
           <Box mt={{ base: 8, lg: 10 }}>
             {TEXTS.map((text) => (

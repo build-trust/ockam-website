@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { LeverPostingsGroup } from '@typings/lever';
+import SectionAnchor from '@components/SectionAnchor';
 
 import OpenRolesTabs from './components/OpenRolesTabs';
 
@@ -12,11 +13,13 @@ type OpenRolesProps = {
 const DESCRIPTIONS = ['Ockam is a remote-first, globally distributed team.'];
 
 const OpenRoles: FunctionComponent<OpenRolesProps> = ({ openRoles }) => (
-  <Container variant="section" id="open-roles" py={{ base: 16, lg: 24 }}>
+  <Container variant="section" py={{ base: 16, lg: 24 }}>
     <Flex direction="column" maxW="xl" textAlign={{ base: 'left', lg: 'center' }}>
-      <Heading as="h2" size="h2" mt={{ base: 1, lg: 0 }} lineHeight={1.3}>
-        Open Roles
-      </Heading>
+      <SectionAnchor id="open-roles">
+        <Heading as="h2" size="h2" mt={{ base: 1, lg: 0 }} lineHeight={1.3}>
+          Open Roles
+        </Heading>
+      </SectionAnchor>
 
       <Box my={6}>
         {DESCRIPTIONS.map((text) => (

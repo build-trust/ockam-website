@@ -16,6 +16,7 @@ import PerformanceMindsetImage from '@assets/images/performance-mindset.png';
 import KeppThingsSimpleImage from '@assets/images/keep-things-simple.png';
 import DefaultToTransparencyImage from '@assets/images/default-to-transparency.png';
 import TimeIsPreciousImage from '@assets/images/time-is-precious.png';
+import SectionAnchor from '@components/SectionAnchor';
 
 import VirtuesCard from './components/VirtuesCard';
 
@@ -86,9 +87,11 @@ const Virtues: FunctionComponent = () => (
   <Box id="virtues" bgColor="gray.50" pt={{ base: 16, lg: 20 }} pb={{ base: 20, lg: 30 }}>
     <Container variant="section" px={{ base: 5, lg: 220 }}>
       <Box maxW="3xl" mb={{ base: 16, lg: 14 }} textAlign={{ base: 'left', lg: 'center' }}>
-        <Heading as="h2" size="h2" mb={6}>
-          Ockam&apos;s Virtues
-        </Heading>
+        <SectionAnchor id="virtues">
+          <Heading as="h2" size="h2" mb={6}>
+            Ockam&apos;s Virtues
+          </Heading>
+        </SectionAnchor>
 
         {DESCRIPTIONS.map((text) => (
           <Text fontSize={{ lg: 'lg' }} key={text} _notLast={{ mb: 2 }}>

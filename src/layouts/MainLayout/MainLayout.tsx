@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useRef } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 
 import { ChildrenProp } from '@typings/ChildrenProp';
@@ -8,18 +8,24 @@ import LayoutFooter from '../components/LayoutFooter';
 
 import MainLayoutHeader from './MainLayoutHeader';
 
-const MainLayout: FunctionComponent<ChildrenProp> = ({ children }) => (
-  <MobileNavbarProvider>
-    <MainLayoutHeader />
+const MainLayout: FunctionComponent<ChildrenProp> = ({ children }) => {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const headerHeight = `${headerRef.current?.clientHeight || 80}px`;
 
-    <Flex direction="column" minH="full" w="full" overflowX="hidden">
-      <Box as="main" w="full" p={0} flex={1}>
-        {children}
-      </Box>
+  return (
+    <MobileNavbarProvider>
+      {/* @ts-ignore */}
+      <MainLayoutHeader ref={headerRef} />
 
-      <LayoutFooter />
-    </Flex>
-  </MobileNavbarProvider>
-);
+      <Flex direction="column" minH="full" w="full" overflowX="hidden">
+        <Box as="main" w="full" pt={headerHeight} flex={1}>
+          {children}
+        </Box>
+
+        <LayoutFooter />
+      </Flex>
+    </MobileNavbarProvider>
+  );
+};
 
 export default MainLayout;

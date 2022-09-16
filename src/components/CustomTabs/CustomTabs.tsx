@@ -6,6 +6,7 @@ const CustomTabs: FunctionComponent<TabsProps> = ({ children, ...restProps }) =>
 
   return (
     <Tabs
+      defaultIndex={0}
       orientation={tabsOrientation as TabsProps['orientation']}
       variant="unstyled"
       display="flex"

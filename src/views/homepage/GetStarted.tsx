@@ -11,6 +11,7 @@ import StepsLabel from '@components/StepsLabel';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import Card from '@components/Card';
 import { BUILD_DEMO, CONTACT, GITHUB_REPO_OCKAM } from '@consts/externalResources';
+import SectionAnchor from '@components/SectionAnchor';
 
 const GET_STARTED_CARDS = [
   {
@@ -97,11 +98,13 @@ const GetStarted: FunctionComponent = () => (
     <Container variant="section" zIndex={0}>
       <DashedLineDivider display={{ base: 'none', lg: 'block' }} />
 
-      <StepsLabel mb={{ base: 4, lg: 2 }}>
-        <LineDivider bottom="100%" h={{ base: 6, lg: 8 }} gradientDir="fromBottomToTop" />
-        Let&apos;s Build Trust
-        <LineDivider top="100%" h={{ base: 8, lg: 8 }} />
-      </StepsLabel>
+      <SectionAnchor id="get-started">
+        <StepsLabel mb={{ base: 4, lg: 2 }}>
+          <LineDivider bottom="100%" h={{ base: 6, lg: 8 }} gradientDir="fromBottomToTop" />
+          Let&apos;s Build Trust
+          <LineDivider top="100%" h={{ base: 8, lg: 8 }} />
+        </StepsLabel>
+      </SectionAnchor>
 
       <ArrowDownIcon w={8} h={8} color="avocado.500" />
 

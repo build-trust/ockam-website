@@ -7,6 +7,7 @@ import ToolsImage from '@assets/images/tools.png';
 import StepsLabel from '@components/StepsLabel';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import BorderDot from '@components/BorderDot';
+import SectionAnchor from '@components/SectionAnchor';
 
 const STEPS = [
   {
@@ -32,9 +33,11 @@ const Tools: FunctionComponent = () => {
       <LineDivider top={{ base: -16, lg: 10 }} h={{ base: 28, lg: 14 }} bg={gradients.tertiary} />
       <ArrowDownIcon w={8} h={8} color="avocado.500" mt={{ base: 8, lg: 20 }} />
 
-      <Heading as="h2" size="h2" bgColor="white" py={6}>
-        Simple Tools
-      </Heading>
+      <SectionAnchor id="tools">
+        <Heading as="h2" size="h2" bgColor="white" py={6}>
+          Simple Tools
+        </Heading>
+      </SectionAnchor>
 
       <StepsLabel mb={{ lg: 24 }}>
         1. Use Ockam

@@ -6,6 +6,7 @@ import InfrastructureImage from '@assets/images/infrastructure.png';
 import InfrastructureBgImage from '@assets/images/infrastructure-bg.png';
 import StepsLabel from '@components/StepsLabel';
 import LineDivider from '@components/LineDivider';
+import SectionAnchor from '@components/SectionAnchor';
 
 const TEXTS = [
   [
@@ -49,9 +50,11 @@ const Infrastructure: FunctionComponent = () => {
           2. Get Trust
         </StepsLabel>
 
-        <Heading as="h2" size="h2" mb={{ base: 6, lg: 8 }}>
-          Build Complex Infrastructure
-        </Heading>
+        <SectionAnchor id="infrastructure">
+          <Heading as="h2" size="h2" mb={{ base: 6, lg: 8 }}>
+            Build Complex Infrastructure
+          </Heading>
+        </SectionAnchor>
 
         <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={16} mb={{ base: 16, lg: 24 }}>
           {TEXTS.map((column) => (

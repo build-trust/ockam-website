@@ -8,6 +8,7 @@ import BrainIcon from '@assets/icons/brain.svg';
 import ClarityIcon from '@assets/icons/clarity.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import { MISSION_AND_VISION_PATH } from '@consts/paths';
+import SectionAnchor from '@components/SectionAnchor';
 
 const VALUES = [
   {
@@ -53,9 +54,11 @@ const Values: FunctionComponent = () => (
       justify="space-between"
     >
       <Box w="full">
-        <Heading as="h2" size="h2" lineHeight={1.3}>
-          Virtues of the Ockam Team
-        </Heading>
+        <SectionAnchor id="virtues">
+          <Heading as="h2" size="h2" lineHeight={1.3}>
+            Virtues of the Ockam Team
+          </Heading>
+        </SectionAnchor>
 
         <Box mt={6} mb={{ base: 8, lg: 0 }}>
           {DESCRIPTIONS.map((text) => (
