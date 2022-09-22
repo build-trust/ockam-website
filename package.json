@@ -46,6 +46,7 @@
     "next-mdx-remote": "4.0.3",
     "next-remote-watch": "1.0.0",
     "next-svgr": "0.0.2",
+    "nextjs-google-analytics": "^2.1.0",
     "nextjs-progressbar": "0.0.14",
     "react": "18.1.0",
     "react-dom": "18.1.0",

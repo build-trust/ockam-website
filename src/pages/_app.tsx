@@ -4,6 +4,7 @@ import { AppProps } from 'next/app';
 import NextNprogress from 'nextjs-progressbar';
 import 'focus-visible/dist/focus-visible';
 import { useRouter } from 'next/router';
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 import defaultOgImage from '@assets/images/open-graphs/default.png';
 import CONFIG from '@config';
@@ -57,6 +58,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
           <NextNprogress color={theme.colors.brand[500]} height={3} />
           {getLayout(<Component {...pageProps} />)}
         </MobileNavbarProvider>
+        <GoogleAnalytics trackPageViews />
       </StylesProvider>
     </>
   );
