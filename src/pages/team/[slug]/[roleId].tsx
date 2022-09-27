@@ -8,14 +8,30 @@ import MainLayout from '@layouts/MainLayout';
 import { LeverPosting } from '@typings/lever';
 import { OpenRole } from '@views/open-role';
 import SEOHead from '@components/SEOHead';
+import { OPEN_ROLE_PATH } from '@consts/paths';
+
+const getMetaDescription = (description: string): string => {
+  const META_DESCRIPTION_MAX_LENGTH = 150;
+  const trimmedDescription = description.substring(0, META_DESCRIPTION_MAX_LENGTH);
+  const trimmedDescriptionWithoutTruncatedWords = trimmedDescription.substring(
+    0,
+    Math.min(trimmedDescription.length, trimmedDescription.lastIndexOf(' '))
+  );
+
+  return `${trimmedDescriptionWithoutTruncatedWords} ...`;
+};
 
 const OpenRolePage: NextPageWithLayout<{ openRole: LeverPosting }> = ({ openRole }) => {
   const router = useRouter();
-  const canonicalPath = `/blog/${router.query.slug}/${router.query.roleId}`;
+  const canonicalPath = `${OPEN_ROLE_PATH}/${router.query.slug}/${router.query.roleId}`;
 
   return (
     <>
-      <SEOHead subTitle={openRole.text} canonicalPath={canonicalPath} />
+      <SEOHead
+        subTitle={openRole.text}
+        description={getMetaDescription(openRole.descriptionPlain)}
+        canonicalPath={canonicalPath}
+      />
 
       <OpenRole openRole={openRole} />
     </>

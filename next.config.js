@@ -11,6 +11,11 @@ const nextConfig = {
       destination: '/blog/levels_ladder',
       permanent: true,
     },
+    {
+      source: '/learn/blog/:slug*',
+      destination: '/blog/:slug*',
+      permanent: true,
+    },
   ],
 };
 

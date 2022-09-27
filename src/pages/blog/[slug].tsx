@@ -11,6 +11,7 @@ import { BlogPostHeader } from '@views/blog';
 import SEOHead from '@components/SEOHead';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { useBlogPostsContext } from '@contextProviders/BlogPostsProvider';
+import { BLOG_PATH } from '@consts/paths';
 
 type BlogPostPageProps = {
   source: MDXRemoteSerializeResult;
@@ -20,7 +21,7 @@ type BlogPostPageProps = {
 
 const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts }) => {
   const router = useRouter();
-  const canonicalPath = `/blog/${router.query.slug}`;
+  const canonicalPath = `${BLOG_PATH}/${router.query.slug}`;
   const { handleSetBlogPosts } = useBlogPostsContext();
 
   useEffect(() => {
@@ -31,7 +32,11 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
 
   return (
     <>
-      <SEOHead subTitle={(frontMatter?.metaTitle as string) || ''} canonicalPath={canonicalPath} />
+      <SEOHead
+        subTitle={(frontMatter?.metaTitle as string) || ''}
+        description={(frontMatter?.metaDescription as string) || ''}
+        canonicalPath={canonicalPath}
+      />
 
       <Box
         maxW={{ base: '3xl', '1.5xl': 'fit-content' }}
