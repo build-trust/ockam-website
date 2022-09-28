@@ -11,6 +11,7 @@ import StepsLabel from '@components/StepsLabel';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import Card from '@components/Card';
 import { BUILD_DEMO, CONTACT, GITHUB_REPO_OCKAM } from '@consts/externalResources';
+import GAEvents from '@utils/GAEvents';
 
 const GET_STARTED_CARDS = [
   {
@@ -21,6 +22,7 @@ const GET_STARTED_CARDS = [
       text: 'Go to GitHub',
       href: GITHUB_REPO_OCKAM.href,
       isExternal: true,
+      onClick: GAEvents.outboundGithubLink,
     },
   },
   {
@@ -31,6 +33,7 @@ const GET_STARTED_CARDS = [
       text: 'Go to the Guide',
       href: BUILD_DEMO.href,
       isExternal: true,
+      onClick: GAEvents.outboundStartBuildingLink,
     },
   },
   {
@@ -40,6 +43,7 @@ const GET_STARTED_CARDS = [
     link: {
       text: 'Contact us',
       href: CONTACT.href,
+      onClick: GAEvents.outboundOrchestratorLink,
     },
   },
 ];
@@ -52,6 +56,7 @@ type GetStartedCardProps = {
     text: string;
     href: string;
     isExternal?: boolean;
+    onClick?: () => void;
   };
 };
 
@@ -75,6 +80,7 @@ const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, t
       <Box
         href={link.href}
         as={link.isExternal ? ChakraLink : NextLink}
+        onClick={link.onClick}
         {...(link.isExternal ? { isExternal: true } : { passHref: true })}
       >
         <Text
