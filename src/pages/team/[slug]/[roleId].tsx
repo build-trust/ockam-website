@@ -8,7 +8,7 @@ import MainLayout from '@layouts/MainLayout';
 import { LeverPosting } from '@typings/lever';
 import { OpenRole } from '@views/open-role';
 import SEOHead from '@components/SEOHead';
-import { OPEN_ROLE_PATH } from '@consts/paths';
+import { OPEN_ROLE_PATH, OPEN_ROLES_PATH } from '@consts/paths';
 
 const getMetaDescription = (description: string): string => {
   const META_DESCRIPTION_MAX_LENGTH = 150;
@@ -42,8 +42,12 @@ OpenRolePage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</
 
 type GetServerSidePropsReturnType = {
   props?: { openRole: LeverPosting };
-  revalidate?: number;
-  notFound?: boolean;
+  redirect?: {
+    destination: string;
+    permanent: boolean;
+  };
+
+  revalidate: number;
 };
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
@@ -66,7 +70,13 @@ export async function getStaticProps({
       revalidate: 60,
     };
   } catch (e) {
-    return { notFound: true, revalidate: 60 };
+    return {
+      redirect: {
+        destination: OPEN_ROLES_PATH,
+        permanent: false,
+      },
+      revalidate: 60,
+    };
   }
 }
 

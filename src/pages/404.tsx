@@ -1,14 +1,20 @@
 import { useEffect } from 'react';
-import { useRouter } from "next/router"
+import { useRouter } from 'next/router';
 
 const Custom404 = (): null => {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    router.replace("/")
-  })
+    let reidrectUrl = '/';
 
-  return null
-}
+    if (router.asPath.includes('learn')) {
+      reidrectUrl = '/blog';
+    }
 
-export default Custom404
+    router.replace(reidrectUrl);
+  });
+
+  return null;
+};
+
+export default Custom404;
