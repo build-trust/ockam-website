@@ -10,27 +10,29 @@ import GreenIconWrapper from '@components/GreenIconWrapper';
 import StepsLabel from '@components/StepsLabel';
 import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import Card from '@components/Card';
-import { BUILD_DEMO, CONTACT, GITHUB_REPO_OCKAM } from '@consts/externalResources';
+import { BUILD_DEMO, AWS_MARKETPLACE, DISCUSSION } from '@consts/externalResources';
 import GAEvents from '@utils/GAEvents';
+
+// Links associated with the hrefs below can be found at src/consts/externalResources.ts
 
 const GET_STARTED_CARDS = [
   {
     icon: GitHubIcon,
-    title: 'Open Source',
-    text: 'Join our community, start a discussion, read some code, or file an issue.',
+    title: 'Community',
+    text: 'Join our Open Source community, start a discussion, or file an issue - or just say Hello.',
     link: {
-      text: 'Go to GitHub',
-      href: GITHUB_REPO_OCKAM.href,
+      text: 'GitHub Discussions',
+      href: DISCUSSION.href,
       isExternal: true,
       onClick: GAEvents.outboundGithubLink,
     },
   },
   {
     icon: BuildingIcon,
-    title: 'Start Building',
-    text: 'Let’s build an application together in a step-by-step guide.',
+    title: 'Builders',
+    text: 'Let’s build an application, together, in this step-by-step guide to Ockam.',
     link: {
-      text: 'Go to the Guide',
+      text: 'User Guide',
       href: BUILD_DEMO.href,
       isExternal: true,
       onClick: GAEvents.outboundStartBuildingLink,
@@ -38,11 +40,11 @@ const GET_STARTED_CARDS = [
   },
   {
     icon: CloudIcon,
-    title: 'Ockam Orchestrator',
-    text: 'Sign up for Ockam Orchestrator - Now in Private Availability. Coming to AWS Marketplace in September.',
+    title: 'Companies',
+    text: 'Sign up for Ockam Orchestrator and Build Trust across all of your applications and services.',
     link: {
-      text: 'Contact us',
-      href: CONTACT.href,
+      text: 'AWS Marketplace',
+      href: AWS_MARKETPLACE.href,
       onClick: GAEvents.outboundOrchestratorLink,
     },
   },

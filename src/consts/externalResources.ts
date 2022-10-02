@@ -10,6 +10,11 @@ export const LINKEDIN = {
   icon: LinkedinIcon,
 };
 
+export const AWS_MARKETPLACE = {
+  name: 'Ockam Orchestrator on AWS Marketplace',
+  href: 'https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk',
+};
+
 export const TWITTER = {
   name: 'Twitter',
   href: 'https://twitter.com/ockam',
@@ -34,10 +39,11 @@ export const DOCS = {
   href: 'https://docs.ockam.io'
 }
 
-export const BUILD_DEMO = { href: 'https://github.com/build-trust/ockam#next-steps' };
+export const BUILD_DEMO = { href: 'https://docs.ockam.io/open-source/get-started' };
 
 export default [
   CONTACT,
+  AWS_MARKETPLACE,
   LINKEDIN,
   TWITTER,
   GITHUB,
