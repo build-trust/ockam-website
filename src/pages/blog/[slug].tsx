@@ -29,12 +29,14 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
 
     handleSetBlogPosts(posts);
   }, [handleSetBlogPosts, posts]);
+  const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
+  const description = (frontMatter?.metaDescription as string) || (frontMatter?.description as string) || '';
 
   return (
     <>
       <SEOHead
-        subTitle={(frontMatter?.metaTitle as string) || ''}
-        description={(frontMatter?.metaDescription as string) || ''}
+        subTitle={title}
+        description={description}
         canonicalPath={canonicalPath}
       />
 
