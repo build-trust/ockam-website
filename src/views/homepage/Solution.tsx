@@ -13,29 +13,26 @@ const TEXTS = [
 ];
 
 const Solution: FunctionComponent = () => (
-  <Container variant="section" pb={{ base: 20, lg: 30 }} pt={{ base: 30, lg: 24 }}>
+  <Container variant="section" pb={{ base: 20, lg: 30 }}>
+    <Heading as="h3" size="h3" lineHeight={1.3} maxW={{ lg: '31rem' }} alignSelf="flex-start">
+      {TITLE}
+    </Heading>
+
     <Flex
       w="full"
       direction={{ base: 'column', lg: 'row' }}
       alignItems="center"
       justifyContent="space-between"
       gap={8}
+      mt={{ base: 8, lg: 10 }}
     >
       <Box maxW={{ lg: '31rem' }}>
-        <Heading as="h3" size="h3" lineHeight={1.3}>
-          {TITLE}
-        </Heading>
-
-        <Box mt={{ base: 8, lg: 10 }} position="relative">
+        <Box position="relative">
           <LineDivider left={0} h="full" />
 
           {TEXTS.map((text) => (
             <Box key={text} position="relative" _notLast={{ mb: 2 }}>
-              <Text
-                fontSize={{ lg: 'lg' }}
-                pl={{ base: 4, lg: 5 }}
-                lineHeight={{ base: 1.4, lg: 1.5 }}
-              >
+              <Text fontSize={{ lg: 'lg' }} pl={{ base: 4, lg: 5 }} lineHeight={1.4}>
                 {text}
               </Text>
             </Box>
