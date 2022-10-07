@@ -83,7 +83,12 @@ const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, t
 const GetStarted: FunctionComponent = () => (
   <Box bgColor="gray.50" pt={16} pb={{ base: 16, lg: 24 }}>
     <Container variant="section">
-      <SimpleGrid bgColor="gray.50" columns={{ base: 1, lg: 3 }} spacing={{ base: 6, lg: 10 }}>
+      <SimpleGrid
+        bgColor="gray.50"
+        columns={{ base: 1, lg: 3 }}
+        spacing={{ base: 6, lg: 10 }}
+        px={{ base: 0, lg: 6 }}
+      >
         {GET_STARTED_CARDS.map((card) => (
           <GetStartedCard key={card.title} {...card} />
         ))}

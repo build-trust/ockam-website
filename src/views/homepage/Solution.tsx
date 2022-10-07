@@ -13,7 +13,7 @@ const TEXTS = [
 ];
 
 const Solution: FunctionComponent = () => (
-  <Container variant="section" pb={{ base: 20, lg: 30 }}>
+  <Container variant="section" pb={{ base: 20, lg: 30 }} pt={{ base: 30, lg: 24 }}>
     <Flex
       w="full"
       direction={{ base: 'column', lg: 'row' }}
@@ -43,11 +43,11 @@ const Solution: FunctionComponent = () => (
         </Box>
       </Box>
 
-      <Flex maxW="30rem" mt={{ base: 12, lg: 'auto' }} my={{ base: 12, lg: 'auto' }}>
+      <Flex maxW="30rem" mt={{ base: 12, lg: 'auto' }} mb={{ base: 0, lg: 'auto' }} boxShadow="xl">
         <Image
           src={CodeOneImage}
-          width={1126 / 2}
-          height={685 / 2}
+          width={966 / 2}
+          height={584 / 2}
           alt="Code block 1"
           placeholder="blur"
           priority

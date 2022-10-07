@@ -35,7 +35,17 @@ const Tools: FunctionComponent = () => (
       Simple Tools
     </Heading>
 
-    <Box position="relative" _hover={{ button: { display: 'block' } }} zIndex={0}>
+    <Box
+      position="relative"
+      _hover={{ button: { display: 'block' } }}
+      zIndex={0}
+      p={0}
+      sx={{
+        span: {
+          boxShadow: 'xl',
+        },
+      }}
+    >
       <IconButton
         aria-label="Copy code to clipboard"
         colorScheme="avocado"
@@ -50,10 +60,11 @@ const Tools: FunctionComponent = () => (
         zIndex={1}
         onClick={copyToClipboard}
       />
+
       <Image
         src={CodeTwoImage}
-        width={2240 / 2}
-        height={1401 / 2}
+        width={2080 / 2}
+        height={1301 / 2}
         alt="Code block 2"
         placeholder="blur"
         priority
