@@ -5,18 +5,17 @@ import Image from 'next/image';
 import InfrastructureImage from '@assets/images/infrastructure.png';
 import InfrastructureBgImage from '@assets/images/infrastructure-bg.png';
 
-const TITLE = 'Build Complex Infrastructure';
+const TITLE = 'What you Build is Complex Infrastructure';
 const TEXTS = [
   [
     'A lot happened in this demo. ',
-    'We started two applications; echo_service and an echo_client. Each is local but, imagine that these applications were in two separated private networks. Each application then generated a unique cryptographic identity and a Vault to protect it.',
-    'The echo_service used Ockam Orchestrator to register an address with an Ockam Relay. A Relay can transparently forward messages to the to echo_service - even if its running behind a NAT without an exposed port.',
+    'We started two applications; server_sidecar and an client_sidecar. Each is local but, imagine that these applications were in two separated private networks. Each application then generated a unique Cryptographic Identity and a Vault to protect it.',
+    'The server_sidecar used Ockam Orchestrator to register an address with an Ockam Relay. A Relay can transparently forward messages to the to client_sidecar - even if its running behind a NAT without an exposed port.',
   ],
 
   [
-    'The echo_service started a Secure Channel Listener and waited for an authenticated channel to be established.',
-    'Next, the echo_client used Ockam Orchestrator to create a mutually authenticated, end-to-end encrypted, bi-directional, Secure Channel to the echo_service.',
-    'Now that the applications have built Trust, echo_client can send a "Hello Ockam" message, and echo_service can echo "Hello Ockam" back.',
+    'The server_sidecar started a Secure Channel Listener and waited for an authenticated channel to be established.',
+    'Next, the server_sidecar used Ockam Orchestrator to create a mutually authenticated, end-to-end encrypted, bi-directional, Secure Channel to the echo_service.',
   ],
 ];
 

@@ -20,8 +20,7 @@ import GreenIconWrapper from '@components/GreenIconWrapper';
 
 const TITLE = 'Ockam is for Everyone';
 const TEXTS = [
-  'Ockam Orchestrator is how applications Trust Data-in-Motion at scale.',
-  'Ockam Orchestrator is a managed service that is available through the AWS marketplace. Ockam Orchestrator scales with your needs whether it’s to scale message throughput, or to connect to your existing cloud services.',
+  'We built Ockam with all builders in mind. We have two different configurations for you to choose from:',
 ];
 
 const CARDS = [
@@ -30,12 +29,14 @@ const CARDS = [
     title: 'Open Source',
     text: 'The Tools for Builders',
     descriptions: [
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
+      'Ockam Open Source can be used for small scale projects, with simple architectures, that can be manually configured. ',
+      'Ockam Open Source has all of the Ockam protocols, tools, and programming libraries that a developer needs to Build Trust. ',
     ],
     items: [
-      { text: 'Manually-configurable Scale', icon: ArrowIcon },
-      { text: 'Cryptographic Protocols', icon: ArrowIcon },
+      { text: 'Scale: Maually configurable', icon: ArrowIcon },
+      { text: 'Key generation and storage', icon: ArrowIcon },
+      { text: 'Secure Channels', icon: ArrowIcon },
+      { text: 'End-to-end encrypted messagaging', icon: ArrowIcon },
       { text: 'Ready-to-use Packages', icon: ArrowIcon },
       { text: 'Community Supported', icon: ArrowIcon },
       { text: 'Apache 2 License', icon: ArrowIcon },
@@ -46,15 +47,15 @@ const CARDS = [
     title: 'Orchestrator',
     text: 'The Service for Enterprises',
     descriptions: [
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
+      'Ockam Orchestrator is a fully-managed cloud service that includes all of the features and tools of Ockam Open Source. Orchestrator also has all of the features that you need to collaborate with your team, to integrate with automated infrastructure, to connect with data-layer stores and message brokers, and to facilitate massive scale throughput. ',
     ],
     items: [
-      { text: 'Automation-required Scale', icon: ArrowIcon },
-      { text: 'Company-wide Access Controls', icon: ArrowIcon },
-      { text: 'Message guarantees', icon: ArrowIcon },
-      { text: 'Add-on connectors', icon: ArrowIcon },
+      { text: 'Scale: Automation-required', icon: ArrowIcon },
+      { text: 'Key policy management', icon: ArrowIcon },
+      { text: 'Add-on connectors to data services', icon: ArrowIcon },
+      { text: 'Atribute Based Access Controls (ABAC)', icon: ArrowIcon },
+      { text: 'Message delivery guarantees', icon: ArrowIcon },
+      { text: 'Enterprise-grade support', icon: ArrowIcon },
       { text: 'AWS Marketplace', icon: ArrowIcon },
     ],
   },
