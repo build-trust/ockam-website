@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Box, Flex, Container, Heading, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
+import CodeOneImage from '@assets/images/code1.png';
 import LineDivider from '@components/LineDivider';
-import { CodeBlock, CodeFlag, CodeLine, CodeLog } from '@components/CodeBlock';
 
 const TITLE = 'Trust for Data-in-Motion';
 const TEXTS = [
@@ -10,24 +11,6 @@ const TEXTS = [
   'To build trust for data-in-motion, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. Ockam empowers you to build applications that are private, and secure-by-design.',
   'Orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.',
 ];
-
-const Code = (): JSX.Element => (
-  <CodeBlock py={2} px={6}>
-    <CodeLine lib="ockam">
-      secure-channel create <CodeFlag>--from</CodeFlag> /node/n1 <CodeFlag>--to</CodeFlag>{' '}
-      /node/n2/service/api
-    </CodeLine>
-    <CodeLine prefix="|" prefixColor="#B866EA" lib="ockam" ml={10}>
-      message send <CodeFlag color="#4FDAB8">“hello ockam”</CodeFlag> <CodeFlag>--from</CodeFlag>{' '}
-      /node/n1 <CodeFlag>--from</CodeFlag> 127.0.0.1:7000{' '}
-      <CodeFlag>--to -/service/uppercase</CodeFlag>
-    </CodeLine>
-
-    <CodeLog mt={2}>HELLO OCKAM</CodeLog>
-
-    <br />
-  </CodeBlock>
-);
 
 const Solution: FunctionComponent = () => (
   <Container variant="section" pb={{ base: 20, lg: 30 }}>
@@ -60,14 +43,8 @@ const Solution: FunctionComponent = () => (
         </Box>
       </Box>
 
-      <Flex
-        maxW="30rem"
-        mt={{ base: 12, lg: 'auto' }}
-        my={{ base: 12, lg: 'auto' }}
-        ml="full"
-        mr={0}
-      >
-        <Code />
+      <Flex maxW="30rem" mt={{ base: 12, lg: 'auto' }} my={{ base: 12, lg: 'auto' }}>
+        <Image src={CodeOneImage} width={1126 / 2} height={685 / 2} />
       </Flex>
     </Flex>
   </Container>

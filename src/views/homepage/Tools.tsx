@@ -1,74 +1,33 @@
 import { FunctionComponent } from 'react';
-import { Container, Heading } from '@chakra-ui/react';
+import { Container, Heading, IconButton, Box } from '@chakra-ui/react';
+import { CopyIcon } from '@chakra-ui/icons';
+import Image from 'next/image';
 
-import { CodeLine, CodeFlag, CodeLog, CodeComment, CodeBlock } from '@components/CodeBlock';
+import CodeTwoImage from '@assets/images/code2.png';
 
-const Code = (): JSX.Element => (
-  <CodeBlock py={2} px={6}>
-    <CodeLine lib="ockam">node create relay</CodeLine>
+const CODE_TEXT = `curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 
-    <br />
+ockam node create relay
 
-    <CodeComment># -- APPLICATION SERVICE --</CodeComment>
+# -- APPLICATION SERVICE --
 
-    <br />
+python3 -m http.server --bind 127.0.0.1 5000
 
-    <CodeLine lib="python3">
-      <CodeFlag>-m</CodeFlag> http.server <CodeFlag>--bind</CodeFlag> 127.0.0.1 5000
-    </CodeLine>
+ockam node create server_sidecar
+ockam tcp-outlet create --at /node/server_sidecar --from /service/outlet --to 127.0.0.1:5000
+ockam forwarder create server_sidecar --at /node/relay --to /node/server_sidecar
 
-    <br />
+# -- APPLICATION CLIENT --
 
-    <CodeLine lib="ockam">node create server_sidecar</CodeLine>
-    <CodeLine lib="ockam">
-      tcp-outlet create <CodeFlag>--at</CodeFlag> /node/server_sidecar <CodeFlag>--from</CodeFlag>{' '}
-      /service/outlet <CodeFlag>--to</CodeFlag> 127.0.0.1:5000
-    </CodeLine>
-    <CodeLine lib="ockam">
-      forwarder create server_sidecar <CodeFlag>--at</CodeFlag> /node/relay{' '}
-      <CodeFlag>--to</CodeFlag> /node/server_sidecar
-    </CodeLine>
+ockam node create client_sidecar
+ockam secure-channel create --from /node/client_sidecar --to /node/relay/service/forward_to_server_sidecar/service/api \\
+    | ockam tcp-inlet create --at /node/client_sidecar --from 127.0.0.1:7000 --to -/service/outlet
 
-    <br />
+curl --head 127.0.0.1:7000`;
 
-    <CodeComment> # -- APPLICATION CLIENT --</CodeComment>
-
-    <br />
-
-    <CodeLine lib="ockam">node create client_sidecar</CodeLine>
-    <CodeLine lib="ockam">
-      secure-channel create <CodeFlag>--from</CodeFlag> /node/client_sidecar{' '}
-      <CodeFlag>--to</CodeFlag> /node/relay/service/forward_to_server_sidecar/service/api
-    </CodeLine>
-    <CodeLine prefix="|" prefixColor="#B866EA" lib="ockam" ml={10}>
-      tcp-inlet create <CodeFlag>--at</CodeFlag> /node/client_sidecar <CodeFlag>--from</CodeFlag>{' '}
-      127.0.0.1:7000 <CodeFlag>--to</CodeFlag> -/service/outlet
-    </CodeLine>
-
-    <br />
-
-    <CodeLog>
-      Created Secure Channel to <i>/node/relay/service/api</i>
-    </CodeLog>
-    <CodeLog>
-      Created Secure Channel to <i>/node/relay/service/forward_to_server_sidecar/service/api</i>
-    </CodeLog>
-    <CodeLog>Created TCP Inlet from 127.0.0.1:7000</CodeLog>
-
-    <br />
-
-    <CodeLine lib="curl">
-      <CodeFlag>--head</CodeFlag> 127.0.0.1:7000
-    </CodeLine>
-
-    <br />
-
-    <CodeLog>HTTP/1.0 200 OK</CodeLog>
-    <CodeLog>...</CodeLog>
-
-    <br />
-  </CodeBlock>
-);
+const copyToClipboard = (): void => {
+  if (typeof navigator !== 'undefined') navigator.clipboard.writeText(CODE_TEXT);
+};
 
 const Tools: FunctionComponent = () => (
   <Container variant="section" pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 30 }}>
@@ -76,7 +35,23 @@ const Tools: FunctionComponent = () => (
       Simple Tools
     </Heading>
 
-    <Code />
+    <Box position="relative" _hover={{ button: { display: 'block' } }} zIndex={0}>
+      <IconButton
+        aria-label="Copy code to clipboard"
+        colorScheme="avocado"
+        bgColor="brand.800"
+        _hover={{ bgColor: 'brand.900' }}
+        size="sm"
+        icon={<CopyIcon />}
+        display="none"
+        position="absolute"
+        top="9%"
+        right="4%"
+        zIndex={1}
+        onClick={copyToClipboard}
+      />
+      <Image src={CodeTwoImage} width={2240 / 2} height={1401 / 2} />
+    </Box>
   </Container>
 );
 
