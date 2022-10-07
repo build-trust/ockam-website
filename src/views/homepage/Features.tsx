@@ -1,5 +1,15 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import { Box, Container, Flex, Text, Heading, SimpleGrid, Icon } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Flex,
+  Text,
+  Heading,
+  SimpleGrid,
+  Icon,
+  Button,
+  Link,
+} from '@chakra-ui/react';
 
 import GitHubIcon from '@assets/icons/github.svg';
 import CloudIcon from '@assets/icons/cloud.svg';
@@ -8,6 +18,12 @@ import LockIcon from '@assets/icons/lock.svg';
 import KeyIcon from '@assets/icons/key.svg';
 import EngineIcon from '@assets/icons/engine.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
+import { DOCS } from '@consts/externalResources';
+
+const TITLE = 'Features of Ockam';
+const DESCRIPTIONS = [
+  'Managing data in motion is really, really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable.',
+];
 
 const FEATURES = [
   {
@@ -61,10 +77,6 @@ const FEATURES = [
   },
 ];
 
-const DESCRIPTIONS = [
-  'Managing data in motion is really, really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable.',
-];
-
 type FeatureProps = {
   icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
@@ -94,20 +106,41 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts }) => (
 );
 
 const Features: FunctionComponent = () => (
-  <Box bgColor="gray.50" pt={{ base: 16, lg: 24 }} pb={{ base: 16, lg: 30 }}>
+  <Box bgColor="gray.50" pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 24 }}>
     <Container variant="section">
       <Box id="features" visibility="hidden" position="absolute" left={0} top="-80px" />
-      <Box alignSelf="flex-start" w="full" maxW="2.5xl" mb={{ base: 10, md: 16 }}>
-        <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }}>
-          Features of Ockam
-        </Heading>
 
-        {DESCRIPTIONS.map((text) => (
-          <Text key={text} fontSize={{ lg: 'lg' }} lineHeight={1.4} _notLast={{ mb: 2 }}>
-            {text}
-          </Text>
-        ))}
-      </Box>
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        w="full"
+        justify="space-between"
+        mb={{ base: 10, md: 16 }}
+      >
+        <Box alignSelf="flex-start" w="full" maxW="2.5xl">
+          <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }}>
+            {TITLE}
+          </Heading>
+
+          {DESCRIPTIONS.map((text) => (
+            <Text key={text} fontSize={{ lg: 'lg' }} lineHeight={1.4} _notLast={{ mb: 2 }}>
+              {text}
+            </Text>
+          ))}
+        </Box>
+
+        <Link
+          as={Link}
+          isExternal
+          href={DOCS.href}
+          _hover={{ textDecoration: 'none' }}
+          mt={{ base: 8, md: 0 }}
+        >
+          <Button as="span" colorScheme="avocado" color="black" size="lg">
+            Learn More
+          </Button>
+        </Link>
+      </Flex>
+
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 3 }}
         spacingX={{ base: 8, md: 20, lg: 24 }}

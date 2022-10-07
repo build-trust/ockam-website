@@ -1,9 +1,8 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import NextLink from 'next/link';
-import { Box, Flex, Heading, Icon, Link as ChakraLink, Text } from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { Flex, Heading, Icon, Text } from '@chakra-ui/react';
 
 import GreenIconWrapper from '@components/GreenIconWrapper';
+import CTALink from '@components/CTALink';
 
 type ContactExtensiveActionsCardProps = {
   title: string;
@@ -21,56 +20,36 @@ const ContactExtensiveActionsCard: FunctionComponent<ContactExtensiveActionsCard
   actionText,
   actionLink,
   isExternal,
-}) => {
-  const LinkWrapper = isExternal ? Box : NextLink;
+}) => (
+  <Flex
+    direction="column"
+    maxW="lg"
+    pos="relative"
+    _notFirst={{
+      borderLeftWidth: { base: 0, lg: '1px' },
+      borderTopWidth: { base: '1px', lg: 0 },
+      borderColor: 'gray.200',
+      pl: { base: 0, lg: 9 },
+      pt: { base: 8, lg: 0 },
+    }}
+    _notLast={{
+      pr: { lg: 9 },
+    }}
+  >
+    <Flex align="center" mb={5}>
+      <GreenIconWrapper mr={5}>
+        <Icon as={icon} w={6} h={6} color="white" />
+      </GreenIconWrapper>
 
-  return (
-    <Flex
-      direction="column"
-      maxW="lg"
-      pos="relative"
-      _notFirst={{
-        borderLeftWidth: { base: 0, lg: '1px' },
-        borderTopWidth: { base: '1px', lg: 0 },
-        borderColor: 'gray.200',
-        pl: { base: 0, lg: 9 },
-        pt: { base: 8, lg: 0 },
-      }}
-      _notLast={{
-        pr: { lg: 9 },
-      }}
-    >
-      <Flex align="center" mb={5}>
-        <GreenIconWrapper mr={5}>
-          <Icon as={icon} w={6} h={6} color="white" />
-        </GreenIconWrapper>
-
-        <Heading as="h3" fontSize="xl">
-          {title}
-        </Heading>
-      </Flex>
-
-      <Text mb={7}>{text}</Text>
-
-      {/* TODO repair type check */}
-      {/* @ts-ignore */}
-      <LinkWrapper
-        mt="auto"
-        {...(isExternal ? { as: 'span' } : { href: actionLink, passHref: true })}
-      >
-        <ChakraLink
-          {...(isExternal ? { isExternal: true, href: actionLink } : {})}
-          display="flex"
-          alignItems="center"
-          fontSize="md"
-          fontWeight="semibold"
-        >
-          {actionText}
-          <ArrowForwardIcon w={6} h={6} ml={1} />
-        </ChakraLink>
-      </LinkWrapper>
+      <Heading as="h3" fontSize="xl">
+        {title}
+      </Heading>
     </Flex>
-  );
-};
+
+    <Text mb={7}>{text}</Text>
+
+    <CTALink text={actionText} href={actionLink} isExternal={isExternal} />
+  </Flex>
+);
 
 export default ContactExtensiveActionsCard;

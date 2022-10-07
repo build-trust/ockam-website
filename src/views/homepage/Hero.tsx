@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { chakra, Container, Heading, List, ListItem, ListIcon, useTheme } from '@chakra-ui/react';
+import { Box, Container, Heading, List, ListItem, ListIcon, useTheme } from '@chakra-ui/react';
 
 import ControlIcon from '@assets/icons/control.svg';
 import PrivacyIcon from '@assets/icons/privacy.svg';
@@ -17,12 +17,12 @@ const Hero: FunctionComponent = () => {
   const { gradients } = useTheme();
 
   return (
-    <Container variant="section" pb={{ base: 10, lg: 0 }}>
+    <Container variant="section" pb={{ base: 10, lg: 30 }}>
       <Heading as="h1" size="h1" fontWeight="extrabold" textAlign="center">
         Build{' '}
-        <chakra.span bgImage={gradients.primary} bgClip="text">
+        <Box as="span" bgImage={gradients.primary} bgClip="text">
           Trust
-        </chakra.span>
+        </Box>
       </Heading>
 
       <List
@@ -31,7 +31,6 @@ const Hero: FunctionComponent = () => {
         flexWrap="wrap"
         flexDirection="row"
         mt={{ base: 8, lg: 10 }}
-        mb={{ base: 16, lg: 20 }}
       >
         {SUBHEADING_TEXTS.map(({ text, icon }) => (
           <ListItem

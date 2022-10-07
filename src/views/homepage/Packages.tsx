@@ -7,110 +7,134 @@ import {
   Flex,
   Text,
   Heading,
-  SimpleGrid,
+  Grid,
+  GridItem,
   Box,
   Icon,
 } from '@chakra-ui/react';
 
+import ArrowIcon from '@assets/icons/arrow.svg';
 import CloudIcon from '@assets/icons/cloud.svg';
 import PackagesIcon from '@assets/icons/packages.svg';
-import CheckIcon from '@assets/icons/check.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
-import LineDivider from '@components/LineDivider';
-import StepsLabel from '@components/StepsLabel';
+
+const TITLE = 'Ockam is for Everyone';
+const TEXTS = [
+  'Ockam Orchestrator is how applications Trust Data-in-Motion at scale.',
+  'Ockam Orchestrator is a managed service that is available through the AWS marketplace. Ockam Orchestrator scales with your needs whether it’s to scale message throughput, or to connect to your existing cloud services.',
+];
 
 const CARDS = [
   {
     icon: PackagesIcon,
     title: 'Open Source',
     text: 'The Tools for Builders',
+    descriptions: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
+    ],
     items: [
-      { text: 'Manually-configurable Scale', icon: CheckIcon },
-      { text: 'Cryptographic Protocols', icon: CheckIcon },
-      { text: 'Ready-to-use Packages', icon: CheckIcon },
-      { text: 'Community Supported', icon: CheckIcon },
-      { text: 'Apache 2 License', icon: CheckIcon },
+      { text: 'Manually-configurable Scale', icon: ArrowIcon },
+      { text: 'Cryptographic Protocols', icon: ArrowIcon },
+      { text: 'Ready-to-use Packages', icon: ArrowIcon },
+      { text: 'Community Supported', icon: ArrowIcon },
+      { text: 'Apache 2 License', icon: ArrowIcon },
     ],
   },
   {
     icon: CloudIcon,
     title: 'Orchestrator',
     text: 'The Service for Enterprises',
+    descriptions: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus tortor nec nisi dictum, vitae ullamcorper est maximus. ',
+    ],
     items: [
-      { text: 'Automation-required Scale', icon: CheckIcon },
-      { text: 'Company-wide Access Controls', icon: CheckIcon },
-      { text: 'Message guarantees', icon: CheckIcon },
-      { text: 'Add-on connectors', icon: CheckIcon },
-      { text: 'AWS Marketplace', icon: CheckIcon },
+      { text: 'Automation-required Scale', icon: ArrowIcon },
+      { text: 'Company-wide Access Controls', icon: ArrowIcon },
+      { text: 'Message guarantees', icon: ArrowIcon },
+      { text: 'Add-on connectors', icon: ArrowIcon },
+      { text: 'AWS Marketplace', icon: ArrowIcon },
     ],
   },
 ];
 
-const DESCRIPTIONS = [
-  'Ockam Open Source contains all of the cryptographic protocols, packages, and developer tools that a builder - of any  skill or expereince level - would require to move data between their applications with Trust. Ockam is commited to supporting the Open Source community through contributions to discussions and collective learning.',
-
-  'Ockam Orchestrator is a cloud-based, fully-managed service that enables companies to connect their distributed applications with ease. Orchestrator was built for enterprised that build big things. It can move massive amounts of data through dynamic and complicated architectures. If you are starting a new work project, you can be assured that Orchestrator will meet your needs as you move into production and then scale.',
-
-  'The Ockam Orchestrator was built for the Zero-Trust enterprise. Orchestrator Add-ons connect to Key Management, ABAC policy engines, Data Stores, and Messaging infrastructure; such as Confluent Cloud, InfluxData, Okta, Auth0, and KMS.',
-];
-
-type CardProps = {
+type CardGridItemProps = {
   icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
   text: string;
+  descriptions: string[];
   items: Array<{
     text: string;
     icon: FunctionComponent<SVGAttributes<SVGElement>>;
   }>;
+  columnOrder: number;
 };
 
-const Card: FunctionComponent<CardProps> = ({ icon, title, text, items }) => (
-  <Flex
-    direction="column"
-    align={{ lg: 'center' }}
-    maxW="lg"
-    bg="white"
-    borderRadius="base"
-    borderBottom={{ base: 0, lg: '4px' }}
-    borderBottomColor={{ base: 'none', lg: 'avocado.500' }}
-  >
-    <SimpleGrid>
+const CardGridItem: FunctionComponent<CardGridItemProps> = ({
+  icon,
+  title,
+  text,
+  descriptions,
+  items,
+  columnOrder,
+}) => (
+  <>
+    <GridItem area={`header${columnOrder}`} maxW={{ base: 'lg', lg: '25rem' }}>
       <Flex
-        direction="column"
         align={{ base: 'center', lg: 'initial' }}
         w="full"
         h="full"
-        border="1px"
-        borderColor="gray.100"
         pt={{ base: 4, lg: 6 }}
         px={{ base: 4, lg: 6 }}
-        textAlign={{ base: 'center', lg: 'left' }}
+        textAlign="left"
+        border="1px"
+        borderColor="gray.100"
+        borderTopRadius="base"
       >
         <GreenIconWrapper>
           <Icon as={icon} color="white" w={6} h={6} />
         </GreenIconWrapper>
 
-        <Flex direction="column" pt={{ base: 4, lg: 6 }}>
-          <Text fontWeight="bold" fontSize={{ lg: 'xl' }} color="brand.900" mb={2}>
+        <Flex flex={1} direction="column" pl={{ base: 4, lg: 6 }}>
+          <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={3}>
             {title}
           </Text>
 
-          <Text mb={5} fontWeight="regular" fontSize={{ base: 'sm', lg: 'md' }}>
+          <Text mb={4} fontWeight="regular" color="brand.900" fontSize={{ base: 'sm', lg: 'md' }}>
             {text}
           </Text>
+
+          {descriptions.map((descriptionText) => (
+            <Text
+              key={descriptionText}
+              fontSize="sm"
+              color="gray.500"
+              lineHeight={1.5}
+              _notLast={{ mb: 4 }}
+              _last={{ mb: 8 }}
+            >
+              {descriptionText}
+            </Text>
+          ))}
         </Flex>
       </Flex>
+    </GridItem>
 
+    <GridItem area={`body${columnOrder}`} mb={{ base: 10, lg: 0 }}>
       <List
         spacing={8}
-        border="1px"
-        borderColor="gray.100"
-        borderBottom={0}
-        borderTop={0}
         w="full"
         h="full"
         py={6}
         px={{ base: 3, lg: 6 }}
+        border="1px"
+        borderColor="gray.100"
+        borderTop={0}
+        borderBottom="4px"
+        borderBottomColor="avocado.500"
+        borderBottomRadius="base"
       >
         {items.map(({ icon: itemIcon, text: itemText }) => (
           <ListItem
@@ -127,22 +151,12 @@ const Card: FunctionComponent<CardProps> = ({ icon, title, text, items }) => (
           </ListItem>
         ))}
       </List>
-    </SimpleGrid>
-  </Flex>
+    </GridItem>
+  </>
 );
 
 const Packages: FunctionComponent = () => (
-  <Container variant="section" py={{ base: 16, lg: 20 }}>
-    <StepsLabel mb={{ base: 6, lg: 16 }}>
-      <LineDivider
-        h={32}
-        bottom="100%"
-        gradientDir="fromBottomToTop"
-        bg="linear-gradient(180deg, #4FDAB8 0%, rgba(79, 218, 184, 0) 100%);"
-      />
-      Ockam is for you
-    </StepsLabel>
-
+  <Container variant="section" py={{ base: 16, lg: 24 }}>
     <Box
       id="products"
       visibility="hidden"
@@ -150,32 +164,51 @@ const Packages: FunctionComponent = () => (
       left={0}
       top={{ base: '50px', lg: '80px' }}
     />
+    <Flex
+      direction="column"
+      justify="center"
+      maxW="41.5rem"
+      textAlign="center"
+      mb={{ base: 12, lg: 16 }}
+    >
+      <Heading as="h3" size="h3" mb={{ base: 6, lg: 8 }}>
+        {TITLE}
+      </Heading>
 
-    <SimpleGrid columns={{ base: 1, lg: 2 }}>
-      <Flex direction="column" justify="center" pr={{ base: 0, lg: 24 }}>
-        <Heading as="h3" size="h3" mb={{ base: 6, lg: 8 }}>
-          The Ockam Products
-        </Heading>
+      {TEXTS.map((text) => (
+        <Text key={text} fontSize={{ lg: 'lg' }} mb={{ base: 4, lg: 5 }}>
+          {text}
+        </Text>
+      ))}
+    </Flex>
 
-        {DESCRIPTIONS.map((text) => (
-          <Text key={text} fontSize={{ lg: 'lg' }} mb={{ base: 4, lg: 5 }}>
-            {text}
-          </Text>
-        ))}
-      </Flex>
-
-      <SimpleGrid
-        columns={2}
-        spacingX={{ lg: 4 }}
-        borderRadius="base"
-        borderBottom={{ base: '4px', lg: 0 }}
-        borderBottomColor={{ base: 'avocado.500', lg: 'none' }}
-      >
-        {CARDS.map((card) => (
-          <Card key={card.title} {...card} />
-        ))}
-      </SimpleGrid>
-    </SimpleGrid>
+    <Grid
+      templateAreas={{
+        base: `
+        "header1"
+        "body1"
+        "header2"
+        "body2"
+      `,
+        lg: `
+        "header1 header2"
+        "body1 body2"
+      `,
+      }}
+      gridTemplateRows={{
+        base: 'repeat(4, auto)',
+        lg: 'repeat(2, auto)',
+      }}
+      gridTemplateColumns={{
+        base: '100%',
+        lg: 'repeat(2, 1fr)',
+      }}
+      columnGap={16}
+    >
+      {CARDS.map((card, index) => (
+        <CardGridItem key={card.title} columnOrder={index + 1} {...card} />
+      ))}
+    </Grid>
   </Container>
 );
 

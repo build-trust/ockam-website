@@ -1,62 +1,47 @@
 import { FunctionComponent } from 'react';
-import { chakra, Box, Container, Heading, SimpleGrid, Text, useTheme } from '@chakra-ui/react';
+import { Box, Container, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import SolutionImage from '@assets/images/solution.png';
-import LineDivider, { DashedLineDivider } from '@components/LineDivider';
+import LineDivider from '@components/LineDivider';
+import CodeImage from '@assets/images/tools.png';
 
+const TITLE = 'Trust for Data-in-Motion';
 const TEXTS = [
-  'Ockam has a simple developer experience and powerful primitives that orchestrate end-to-end encryption, key management, authorization policy enforcement, and mutual authentication between distributed applications - at massive scale.',
+  'Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data.',
+  'To build trust for data-in-motion, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. Ockam empowers you to build applications that are private, and secure-by-design.',
+  'Orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.',
 ];
 
-const Solution: FunctionComponent = () => {
-  const { gradients } = useTheme();
+const Solution: FunctionComponent = () => (
+  <Container variant="section" pb={{ base: 20, lg: 30 }}>
+    <SimpleGrid columns={{ base: 1, lg: 2 }}>
+      <Box maxW={{ lg: '31rem' }}>
+        <Heading as="h3" size="h3" lineHeight={1.3}>
+          {TITLE}
+        </Heading>
 
-  return (
-    <Container variant="section" py={{ base: 14, lg: 24 }}>
-      <SimpleGrid columns={{ base: 1, lg: 2 }} mb={{ base: 6, lg: 0 }}>
-        <Box maxW={{ lg: '34.2rem' }} my="auto">
-          <Heading as="h3" size="h3" lineHeight={1.3}>
-            Build Applications That{' '}
-            <chakra.span bgImage={gradients.primary} bgClip="text">
-              Trust Data-in-Motion
-            </chakra.span>{' '}
-            Across Cloud Services, Beyond Data Centers, Through Gateways.
-          </Heading>
+        <Box mt={{ base: 8, lg: 10 }} position="relative">
+          <LineDivider left={0} h="full" />
 
-          <Box mt={{ base: 8, lg: 10 }}>
-            {TEXTS.map((text) => (
-              <Box key={text} position="relative" _notLast={{ mb: 2 }}>
-                <LineDivider left={0} h="full" />
-                <Text
-                  fontSize={{ lg: 'lg' }}
-                  pl={{ base: 4, lg: 5 }}
-                  lineHeight={{ base: 1.4, lg: 1.5 }}
-                >
-                  {text}
-                </Text>
-              </Box>
-            ))}
-          </Box>
+          {TEXTS.map((text) => (
+            <Box key={text} position="relative" _notLast={{ mb: 2 }}>
+              <Text
+                fontSize={{ lg: 'lg' }}
+                pl={{ base: 4, lg: 5 }}
+                lineHeight={{ base: 1.4, lg: 1.5 }}
+              >
+                {text}
+              </Text>
+            </Box>
+          ))}
         </Box>
+      </Box>
 
-        <DashedLineDivider withDot />
-
-        <Box display={{ base: 'none', lg: 'initial' }} pl={{ lg: 16 }} position="relative">
-          <Image
-            src={SolutionImage}
-            alt="Solution image"
-            width={532}
-            height={523}
-            placeholder="blur"
-            priority
-          />
-        </Box>
-
-        <LineDivider bottom={0} h={20} bg={gradients.tertiary} />
-      </SimpleGrid>
-    </Container>
-  );
-};
+      <Box mt={{ base: 12, lg: 'auto' }} my={{ lg: 'auto' }} mx="auto">
+        <Image src={CodeImage} width={1181 / 2} height={896 / 2} placeholder="blur" />
+      </Box>
+    </SimpleGrid>
+  </Container>
+);
 
 export default Solution;

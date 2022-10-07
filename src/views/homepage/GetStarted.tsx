@@ -1,19 +1,14 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import { Box, Flex, Container, Text, SimpleGrid, Icon, Link as ChakraLink } from '@chakra-ui/react';
-import { ArrowDownIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import NextLink from 'next/link';
+import { Box, Flex, Container, Text, SimpleGrid, Icon } from '@chakra-ui/react';
 
 import BuildingIcon from '@assets/icons/building.svg';
 import CloudIcon from '@assets/icons/cloud.svg';
 import GitHubIcon from '@assets/icons/github.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
-import StepsLabel from '@components/StepsLabel';
-import LineDivider, { DashedLineDivider } from '@components/LineDivider';
 import Card from '@components/Card';
 import { BUILD_DEMO, AWS_MARKETPLACE, DISCUSSION } from '@consts/externalResources';
 import GAEvents from '@utils/GAEvents';
-
-// Links associated with the hrefs below can be found at src/consts/externalResources.ts
+import CTALink from '@components/CTALink';
 
 const GET_STARTED_CARDS = [
   {
@@ -44,6 +39,7 @@ const GET_STARTED_CARDS = [
     text: 'Sign up for Ockam Orchestrator and Build Trust across all of your applications and services.',
     link: {
       text: 'AWS Marketplace',
+      isExternal: true,
       href: AWS_MARKETPLACE.href,
       onClick: GAEvents.outboundOrchestratorLink,
     },
@@ -79,49 +75,15 @@ const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, t
         {text}
       </Text>
 
-      <Box
-        href={link.href}
-        as={link.isExternal ? ChakraLink : NextLink}
-        onClick={link.onClick}
-        {...(link.isExternal ? { isExternal: true } : { passHref: true })}
-      >
-        <Text
-          as={link.isExternal ? 'span' : 'a'}
-          fontWeight="semibold"
-          color="black"
-          fontSize="md"
-          mt="auto"
-        >
-          {link.text}
-          <ArrowForwardIcon w={5} h={5} ml={2} />
-        </Text>
-      </Box>
+      <CTALink text={link.text} href={link.href} isExternal={link.isExternal} />
     </Flex>
   </Card>
 );
 
 const GetStarted: FunctionComponent = () => (
-  <Box bgColor="gray.50" pt={{ base: 6, lg: 8 }}>
-    <Container variant="section" zIndex={0}>
-      <DashedLineDivider display={{ base: 'none', lg: 'block' }} />
-
-      <StepsLabel mb={{ base: 4, lg: 2 }}>
-        <LineDivider bottom="100%" h={{ base: 6, lg: 8 }} gradientDir="fromBottomToTop" />
-        Let&apos;s Build Trust
-        <LineDivider top="100%" h={{ base: 8, lg: 8 }} />
-      </StepsLabel>
-
-      <ArrowDownIcon w={8} h={8} color="avocado.500" />
-
-      <SimpleGrid
-        bgColor="gray.50"
-        columns={{ base: 1, lg: 3 }}
-        spacing={{ base: 6, lg: 10 }}
-        mb={{ base: 20, lg: 20 }}
-        mt={{ base: 8, lg: 6 }}
-        pt={{ lg: 8 }}
-        pb={{ lg: 6 }}
-      >
+  <Box bgColor="gray.50" pt={16} pb={{ base: 16, lg: 24 }}>
+    <Container variant="section">
+      <SimpleGrid bgColor="gray.50" columns={{ base: 1, lg: 3 }} spacing={{ base: 6, lg: 10 }}>
         {GET_STARTED_CARDS.map((card) => (
           <GetStartedCard key={card.title} {...card} />
         ))}
