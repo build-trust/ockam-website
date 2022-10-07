@@ -50,7 +50,14 @@ const Tools: FunctionComponent = () => (
         zIndex={1}
         onClick={copyToClipboard}
       />
-      <Image src={CodeTwoImage} width={2240 / 2} height={1401 / 2} />
+      <Image
+        src={CodeTwoImage}
+        width={2240 / 2}
+        height={1401 / 2}
+        alt="Code block 2"
+        placeholder="blur"
+        priority
+      />
     </Box>
   </Container>
 );

@@ -44,7 +44,14 @@ const Solution: FunctionComponent = () => (
       </Box>
 
       <Flex maxW="30rem" mt={{ base: 12, lg: 'auto' }} my={{ base: 12, lg: 'auto' }}>
-        <Image src={CodeOneImage} width={1126 / 2} height={685 / 2} />
+        <Image
+          src={CodeOneImage}
+          width={1126 / 2}
+          height={685 / 2}
+          alt="Code block 1"
+          placeholder="blur"
+          priority
+        />
       </Flex>
     </Flex>
   </Container>
