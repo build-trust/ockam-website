@@ -5,10 +5,13 @@ import Image from 'next/image';
 import InfrastructureImage from '@assets/images/infrastructure.png';
 import InfrastructureBgImage from '@assets/images/infrastructure-bg.png';
 
-const TITLE = 'What you Build is Complex Infrastructure';
+const TITLE = 'End-to-End Data Integrity and Authenticity';
 const TEXTS = [
   [
-    'A lot happened in this demo. ',
+    'A lot happened in the above demo. We created end-to-end trustful communication between an application server and its client running in different private networks, without opening any network ports and without changing any application code.',
+    'To make make this happen, we first created a relay node that runs a forwarding service. We then created a sidecar node next to our ',
+
+
     'We started two applications; server_sidecar and an client_sidecar. Each is local but, imagine that these applications were in two separated private networks. Each application then generated a unique Cryptographic Identity and a Vault to protect it.',
     'The server_sidecar used Ockam Orchestrator to register an address with an Ockam Relay. A Relay can transparently forward messages to the to client_sidecar - even if its running behind a NAT without an exposed port.',
   ],

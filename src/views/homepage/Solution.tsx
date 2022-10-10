@@ -7,9 +7,9 @@ import LineDivider from '@components/LineDivider';
 
 const TITLE = 'Trust for Data-in-Motion';
 const TEXTS = [
-  'Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data.',
-  'To build trust for data-in-motion, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. Ockam empowers you to build applications that are private, and secure-by-design.',
-  'Orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.',
+  'Ockam is a suite of open source tools, programming libraries, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.',
+  'Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To trust data-in-motion, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality.',
+  'Ockam empowers you with simple tools to add these controls and guarantees to any application.',
 ];
 
 const Solution: FunctionComponent = () => (
