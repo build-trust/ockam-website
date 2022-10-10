@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Container, Heading, IconButton, Box } from '@chakra-ui/react';
+import { Container, SimpleGrid, Text, Heading, IconButton, Box } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
 
@@ -25,6 +25,20 @@ ockam secure-channel create --from /node/client_sidecar --to /node/relay/service
 
 curl --head 127.0.0.1:7000`;
 
+const TEXTS = [
+  [
+    'To be private and secure by-design, applications must have granular control over every trust and access decision. This requires a variety of complex cryptographic and messaging protocols that must work together securely and at scale.',
+    'Application developers have to think about creating unique cryptographic keys and issuing credentials to all application entities. Design ways to safely store secrets in hardware. Securely distribute roots of trust. Safely rotate and revoke credentials. Setup channels that gaurantee data integrity and authenticty. Control and enforce authorization decisions etc.',
+  ],
+  [
+    'All of this gets very complicated, very quickly.',
+    'At Ockam, our mission is to empower every developer with simple tools so they can create applications that Trust Data-in-Motion.',
+    'We have taken proven cryptographic protocols and made them easy to use on the command line or call from within your code as a programming library. We handle all the underlying complexity and give you high-level and composable building blocks to create end-to-end, application layer trust.',
+    'Here is one example of this in action …'
+  ],
+];
+
+
 const copyToClipboard = (): void => {
   if (typeof navigator !== 'undefined') navigator.clipboard.writeText(CODE_TEXT);
 };
@@ -32,8 +46,20 @@ const copyToClipboard = (): void => {
 const Tools: FunctionComponent = () => (
   <Container variant="section" pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 30 }}>
     <Heading as="h2" size="h2" bgColor="white" mb={{ base: 12, lg: 16 }}>
-      Ockam is Simple to Use
+      Powerful Protocols, Made Simple
     </Heading>
+
+    <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={16} mb={{ base: 20, lg: 16 }}>
+      {TEXTS.map((column) => (
+        <Box key={`${column[1]}column`} _notLast={{ mb: { base: 5, lg: 0 } }}>
+          {column.map((text) => (
+            <Text key={text} fontSize={{ lg: 'lg' }} _notLast={{ mb: { base: 5, lg: 4 } }}>
+              {text}
+            </Text>
+          ))}
+        </Box>
+      ))}
+    </SimpleGrid>
 
     <Box
       position="relative"

@@ -5,17 +5,21 @@ import Image from 'next/image';
 import InfrastructureImage from '@assets/images/infrastructure.png';
 import InfrastructureBgImage from '@assets/images/infrastructure-bg.png';
 
-const TITLE = 'What you Build is Complex Infrastructure';
+const TITLE = 'End-to-End Data Integrity and Authenticity';
 const TEXTS = [
   [
-    'A lot happened in this demo. ',
-    'We started two applications; server_sidecar and an client_sidecar. Each is local but, imagine that these applications were in two separated private networks. Each application then generated a unique Cryptographic Identity and a Vault to protect it.',
-    'The server_sidecar used Ockam Orchestrator to register an address with an Ockam Relay. A Relay can transparently forward messages to the to client_sidecar - even if its running behind a NAT without an exposed port.',
-  ],
+    'A lot happened in the above demo.',
 
+    'We have an application http server in python and an application client in curl. Our goal is to create trustful communication between the application server and its clients that are running in different private networks. We want to acheive this without exposing the server to the Internet and without modifying existing client or server application code.',
+
+    'To make this happen, we create a relay node that runs a forwarding service exposed on the Internet. Ockam Orchestrator offers highly scalable, managed encrypted relays but for this first demo we create a local relay. We then create a sidecar node next to our application server and another sidecar node next to our application client. All three nodes generate unique cryptographic identities and file system vaults to store private keys. All three nodes are setup to trust each other’s public keys.',
+  ],
   [
-    'The server_sidecar started a Secure Channel Listener and waited for an authenticated channel to be established.',
-    'Next, the server_sidecar used Ockam Orchestrator to create a mutually authenticated, end-to-end encrypted, bi-directional, Secure Channel to the echo_service.',
+    'We ask the server_sidecar to create a TCP outlet to the application server and then ask the relay node to setup a forwarder for the server_sidecar. We then ask the client_sidecar to create an end-to-end encrypted and mutually authenticated secure channel with the server_sidecar via the relay. Finally we open a TCP inlet and tunnel client requests and responses through our end-to-end secure channel.',
+
+    'Ockam gives you the tools to create many such end-to-end secure topologies. In this example topology, the application sidecar nodes create outgoing TCP connections to the relay which allows them to communicate from behind private NATs. The relay node routes encrypted data and connot see or tamper it.',
+
+    'In a few simple commands, without dealing with the cryptographic details, we added end-to-end data integrity, authenticity and privacy to applications that don’t have built in trust gaurantees.',
   ],
 ];
 
