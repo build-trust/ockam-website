@@ -20,15 +20,23 @@ import EngineIcon from '@assets/icons/engine.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import { DOCS } from '@consts/externalResources';
 
-const TITLE = 'Features of Ockam';
+const TITLE = 'Secure by Design, At Scale';
 const DESCRIPTIONS = [
   'Managing data in motion is really, really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable.',
 ];
 
 const FEATURES = [
   {
+    icon: GitHubIcon,
+    title: 'End-to-End Encrypted and Authenticated Channels – for any transport topology',
+    texts: [
+      'Ockam’s protocols become ever more secure through transparency, community feedback, and scrutany.',
+      'Add-ons can be built by anyone to create new hardware key vaults or cloud service connectors.',
+    ],
+  },
+  {
     icon: DeveloperIcon,
-    title: 'Developer First',
+    title: 'Hardware Resident Keys and Add-Ons for Key Management Systems',
     texts: [
       'Stripe did it for payment rails.',
       'Twilio did it for telecom.',
@@ -37,23 +45,23 @@ const FEATURES = [
   },
   {
     icon: CloudIcon,
-    title: 'Cloud Native',
+    title: 'Provable Identities and Mutual Authentication – everywhere',
     texts: [
       'Ockam is built for enterprise scale.',
       'Add-ons are ready-made connectors to your hosted authentication, database, and message broker services.',
     ],
   },
   {
-    icon: GitHubIcon,
-    title: 'Open Source',
+    icon: KeyIcon,
+    title: 'Managed Credential Authorities – Scalable Issuance, Rotation, and Revocation',
     texts: [
-      'Ockam’s protocols become ever more secure through transparency, community feedback, and scrutany.',
-      'Add-ons can be built by anyone to create new hardware key vaults or cloud service connectors.',
+      'Private keys are created inside of all of your applications. They never leave the hardware environment.',
+      'Orchestration, revocation, and rotation of keys are built in, so you have one less thing to worry about.',
     ],
   },
   {
     icon: LockIcon,
-    title: 'Zero Trust',
+    title: 'Authorization Policy Enforcement – ABAC, RBAC, and ACLs',
     texts: [
       'Ockam messaging is *actually* end-to-end encrypted, so it can trustfully move data across networks that should not be trusted.',
       'Transports are agnostic and pluggable so Ockam’s protocols can work across any network topology.',
@@ -61,7 +69,7 @@ const FEATURES = [
   },
   {
     icon: KeyIcon,
-    title: 'Key Management',
+    title: 'Secure Fleet Enrollment',
     texts: [
       'Private keys are created inside of all of your applications. They never leave the hardware environment.',
       'Orchestration, revocation, and rotation of keys are built in, so you have one less thing to worry about.',
@@ -69,9 +77,25 @@ const FEATURES = [
   },
   {
     icon: EngineIcon,
-    title: 'BYO Auth Engine',
+    title: 'Add-Ons for Enterprise Identity Providers',
     texts: [
       'Ockam Add-ons empower you to use your existing authentication, attribute-based (ABAC) authorization tools.',
+      'Bring your own Okta, Auth0, OAuth, AWS, Azure, Google or Web3 IAM tools. Ockam has an Add-on for that!',
+    ],
+  },
+  {
+    icon: EngineIcon,
+    title: 'Add-Ons for Enterprise Policy Providers',
+    texts: [
+      'Ockam Add-ons empower you to use your existing authentication, attribute-based (ABAC) authorization tools.',
+      'Bring your own Okta, Auth0, OAuth, AWS, Azure, Google or Web3 IAM tools. Ockam has an Add-on for that!',
+    ],
+  },
+  {
+    icon: EngineIcon,
+    title: 'Add-Ons for Enterprise Data Systems',
+    texts: [
+      'Ockam Add-ons empower you to guse your existing authentication, attribute-based (ABAC) authorization tools.',
       'Bring your own Okta, Auth0, OAuth, AWS, Azure, Google or Web3 IAM tools. Ockam has an Add-on for that!',
     ],
   },
