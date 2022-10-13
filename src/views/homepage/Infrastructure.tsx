@@ -38,7 +38,6 @@ const Infrastructure: FunctionComponent = () => (
         alt="Infrastructure background image"
         width={2000}
         height={805}
-        priority
         placeholder="blur"
       />
     </Box>
@@ -70,7 +69,6 @@ const Infrastructure: FunctionComponent = () => (
           alt="Infrastructure image"
           width={1022}
           height={441}
-          priority
           placeholder="blur"
         />
       </Box>

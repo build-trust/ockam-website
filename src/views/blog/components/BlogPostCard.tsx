@@ -57,6 +57,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardProps> = ({ post }) => {
               layout="fill"
               placeholderImg={placeholderImg}
               alt={title}
+              priority
             />
           </Box>
 

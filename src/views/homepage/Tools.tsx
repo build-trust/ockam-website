@@ -94,7 +94,6 @@ const Tools: FunctionComponent = () => (
         height={1301 / 2}
         alt="Code block 2"
         placeholder="blur"
-        priority
       />
     </Box>
   </Container>

@@ -89,7 +89,6 @@ const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ childr
       searchInputValue,
       handleSetSearchInputValue,
     }),
-
     [
       blogPosts,
       featuredAndOrderedBlogPosts,

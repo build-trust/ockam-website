@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, useTheme } from '@chakra-ui/react';
 
 import ImageWithPlaceholder from '@components/ImageWithPlaceholder';
 import { BlogPostData } from '@typings/BlogPost';
@@ -17,6 +17,7 @@ type BlogPostHeaderProps = {
 
 const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
   const { title, category, image, author, authorAvatar, authorPosition, date } = post;
+  const { breakpoints } = useTheme();
 
   const placeholderImg = useMemo(
     () =>
@@ -61,6 +62,10 @@ const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
           src={image}
           width={670}
           height={363}
+          sizes={`(max-width: ${breakpoints.sm}) 100vw,
+          (max-width: ${breakpoints.lg}) 66vw,
+          (max-width: ${breakpoints['1.5xl']}) 50vw,
+          50vw`}
           layout="responsive"
           placeholderImg={placeholderImg}
           alt={title}
