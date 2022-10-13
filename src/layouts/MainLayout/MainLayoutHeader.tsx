@@ -1,5 +1,5 @@
-import { FunctionComponent, useContext, useRef } from 'react';
-import { Box, Container, Flex } from '@chakra-ui/react';
+import { FunctionComponent, useContext, RefObject } from 'react';
+import { Box, Container, Flex, forwardRef } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import LogoDark from '@assets/logo-dark.svg';
@@ -11,9 +11,8 @@ import { MobileNavbarContext } from '@contextProviders/MobileNavbarProvider';
 
 import LayoutMobileHeader from '../components/LayoutMobileHeader';
 
-const MainLayoutHeader: FunctionComponent = () => {
-  const ref = useRef(null);
-  const { isScrolled } = useScroll(40, true, ref);
+const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
+  const { isScrolled } = useScroll(40, true, ref as RefObject<HTMLDivElement>);
   const { isBelowSmallLaptop } = useContext(MobileNavbarContext);
   const headerDesktopPaddingY = isScrolled ? 5 : 8;
 
@@ -30,7 +29,7 @@ const MainLayoutHeader: FunctionComponent = () => {
       ref={ref}
       as="header"
       w="full"
-      pos="sticky"
+      pos="fixed"
       top={0}
       zIndex={1}
       bgColor="white"
@@ -57,5 +56,5 @@ const MainLayoutHeader: FunctionComponent = () => {
       </Container>
     </Box>
   );
-};
+});
 export default MainLayoutHeader;
