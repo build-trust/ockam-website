@@ -27,13 +27,14 @@ curl --head 127.0.0.1:7000`;
 
 const TEXTS = [
   [
-    'To be private and secure by-design, applications must have granular control over every trust and access decision. This requires a variety of complex cryptographic and messaging protocols that must work together securely and at scale.',
-    'Application developers have to think about creating unique cryptographic keys and issuing credentials to all application entities. Design ways to safely store secrets in hardware. Securely distribute roots of trust. Safely rotate and revoke credentials. Setup channels that gaurantee data integrity and authenticty. Control and enforce authorization decisions etc.',
+    'To be private and secure by design, applications must have granular control over every trust and access decision.',
+    'This requires a variety of complex cryptographic and messaging protocols to work together in a secure and scalable way.',
+    'Developers have to think about creating unique cryptographic keys and issuing credentials to all application entities. They have to design ways to safely store secrets in hardware and securely distribute roots of trust. They must setup communication channels that gaurantee data authenticty and integrity. They must enforce authorization policies. They also need protocols that rotate and revoke credentials.',
   ],
   [
     'All of this gets very complicated, very quickly.',
-    'At Ockam, our mission is to empower every developer with simple tools so they can create applications that Trust Data-in-Motion.',
-    'We have taken proven cryptographic protocols and made them easy to use on the command line or call from within your code as a programming library. We handle all the underlying complexity and give you high-level and composable building blocks to create end-to-end, application layer trust.',
+    'At Ockam, our mission is to empower every developer with simple tools to create applications that build trust in data.',
+    'We’ve taken proven cryptographic protocols and made them easy to use on the command line or invoke as a programming library. We handle all the underlying complexity and give you high-level and composable building blocks to create end-to-end, application layer trust in data.',
     'Here is one example of this in action …'
   ],
 ];
