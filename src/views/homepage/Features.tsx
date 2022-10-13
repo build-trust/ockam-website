@@ -20,27 +20,34 @@ import EngineIcon from '@assets/icons/engine.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import { DOCS } from '@consts/externalResources';
 
-const TITLE = 'Features of Ockam';
+const TITLE = 'Built for developers, by developers';
 const DESCRIPTIONS = [
   'Managing data in motion is really, really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable.',
 ];
 
 const FEATURES = [
   {
-    icon: DeveloperIcon,
-    title: 'Developer First',
+    icon: KeyIcon,
+    title: 'Secure By Design',
     texts: [
-      'Stripe did it for payment rails.',
-      'Twilio did it for telecom.',
-      'Ockam abstracts away complex infrastructure and cryptography orchestration to empower millions of developers.',
+      'Secure By Design applications minimize their vulnerability surface and embrace the principle of least privillage.',
+      'Ockam’s end-to-end secure channels enable application layer encryption of all data-in-motion. The data integrity and authenticty guarantee, of these channels, create a deny-by-default security posture that minimizes an application’s vulnerability surface and gives true control over every data or service access decision.',
     ],
   },
   {
-    icon: CloudIcon,
-    title: 'Cloud Native',
+    icon: LockIcon,
+    title: 'Zero Trust',
     texts: [
-      'Ockam is built for enterprise scale.',
-      'Add-ons are ready-made connectors to your hosted authentication, database, and message broker services.',
+      'Modern applications operate in untrusted networks and increasingly rely on third-party managed services and infrastructure. This creates exponential growth in the vulnerability surface of our application data.',
+      'Ockam gives you the tools to eliminate implicit trust in network boundaries, third-party services, and infrastructure. Applications get provable cryptographic identities to authenticate and authorize every access decision.',
+    ],
+  },
+  {
+    icon: EngineIcon,
+    title: 'Shift Left',
+    texts: [
+      'We give developers the tools to shift security left and make it an integral part of application design and development.',
+      'Application layer gaurantees along with tools to manage keys, credentials and authorization policies empower developers with granular control on the security and privacy properties of their application and its data.'
     ],
   },
   {
@@ -52,27 +59,20 @@ const FEATURES = [
     ],
   },
   {
-    icon: LockIcon,
-    title: 'Zero Trust',
+    icon: CloudIcon,
+    title: 'Cloud Native',
     texts: [
-      'Ockam messaging is *actually* end-to-end encrypted, so it can trustfully move data across networks that should not be trusted.',
-      'Transports are agnostic and pluggable so Ockam’s protocols can work across any network topology.',
+      'Ockam is built for enterprise scale.',
+      'Add-ons are ready-made connectors to your hosted authentication, database, and message broker services.',
     ],
   },
   {
-    icon: KeyIcon,
-    title: 'Key Management',
+    icon: DeveloperIcon,
+    title: 'Developer First',
     texts: [
-      'Private keys are created inside of all of your applications. They never leave the hardware environment.',
-      'Orchestration, revocation, and rotation of keys are built in, so you have one less thing to worry about.',
-    ],
-  },
-  {
-    icon: EngineIcon,
-    title: 'BYO Auth Engine',
-    texts: [
-      'Ockam Add-ons empower you to use your existing authentication, attribute-based (ABAC) authorization tools.',
-      'Bring your own Okta, Auth0, OAuth, AWS, Azure, Google or Web3 IAM tools. Ockam has an Add-on for that!',
+      'Stripe did it for payment rails.',
+      'Twilio did it for telecom.',
+      'Ockam abstracts away complex infrastructure and cryptography orchestration to empower millions of developers.',
     ],
   },
 ];
