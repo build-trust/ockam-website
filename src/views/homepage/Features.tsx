@@ -46,8 +46,8 @@ const FEATURES = [
     icon: EngineIcon,
     title: 'Shift Left',
     texts: [
-      'We give developers the tools to shift security left and make it an integral part of application design and development.',
-      'Application layer gaurantees along with tools to manage keys, credentials and authorization policies empower developers with granular control on the security and privacy properties of their application and its data.'
+      'Software cannot be secured from the outside. We give developers the tools to shift security left and make it an integral part of application design and development.',
+      'Application layer trust gaurantees along with tools to manage keys, credentials and authorization policies empower developers with granular control on the security and privacy properties of their application and its data.'
     ],
   },
   {
