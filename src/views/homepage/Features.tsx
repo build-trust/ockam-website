@@ -22,7 +22,7 @@ import { DOCS } from '@consts/externalResources';
 
 const TITLE = 'Built for developers, by developers';
 const DESCRIPTIONS = [
-  'Managing data in motion is really, really hard. We’ve thought of the details and have reduced the vulnerability surface of your data to something manageable.',
+  'It is hard to build and scale applications that make identity driven trust decisions. We’ve created simple and composable building blocks so you can easily deliver secure and private applications to your customers.'
 ];
 
 const FEATURES = [
@@ -31,23 +31,31 @@ const FEATURES = [
     title: 'Secure By Design',
     texts: [
       'Secure By Design applications minimize their vulnerability surface and embrace the principle of least privillage.',
-      'Ockam’s end-to-end secure channels enable application layer encryption of all data-in-motion. The data integrity and authenticty guarantee, of these channels, create a deny-by-default security posture that minimizes an application’s vulnerability surface and gives true control over every data or service access decision.',
+      'Ockam’s end-to-end secure channels gaurantee application layer data integrity and authenticty for all data-in-motion. This enables a deny-by-default security posture that minimizes an application’s vulnerability surface and brings true control over every access decision.',
     ],
   },
   {
     icon: LockIcon,
     title: 'Zero Trust',
     texts: [
-      'Modern applications operate in untrusted networks and increasingly rely on third-party managed services and infrastructure. This creates exponential growth in the vulnerability surface of our application data.',
-      'Ockam gives you the tools to eliminate implicit trust in network boundaries, third-party services, and infrastructure. Applications get provable cryptographic identities to authenticate and authorize every access decision.',
+      'Modern applications operate in untrusted networks and increasingly rely on third-party services and infrastructure. This creates exponential growth in their vulnerability surface.',
+      'Ockam gives you the tools to eliminate implicit trust in networks, services, and infrastructure. Applications get provable cryptographic identities to authenticate and authorize every access decision.',
     ],
   },
   {
     icon: EngineIcon,
     title: 'Shift Left',
     texts: [
-      'Software cannot be secured from the outside. We give developers the tools to shift security left and make it an integral part of application design and development.',
-      'Application layer trust gaurantees along with tools to manage keys, credentials and authorization policies empower developers with granular control on the security and privacy properties of their application and its data.'
+      'Software cannot be secured from the outside. Ockam provides powerful building blocks to shift security left and make it an integral part of application design and development.',
+      'Application layer trust gaurantees along with tools to manage keys, credentials and authorization policies give you granular control on the security and privacy properties of your application.'
+    ],
+  },
+  {
+    icon: DeveloperIcon,
+    title: 'Developer First',
+    texts: [
+      'Application security is easiest and most cost-effective to solve at the source. Developer-first application layer security is the only viable approach to scalable secure applications.',
+      'Ockam makes it easy to securely manage the lifecycle of keys, identities, and credentials. We give you simple tools to authenticate and authorize using attribute-based credentials and policies.',
     ],
   },
   {
@@ -62,17 +70,8 @@ const FEATURES = [
     icon: CloudIcon,
     title: 'Cloud Native',
     texts: [
-      'Ockam is built for enterprise scale.',
+      'Ockam Orchestrator is built for enterprise scale.',
       'Add-ons are ready-made connectors to your hosted authentication, database, and message broker services.',
-    ],
-  },
-  {
-    icon: DeveloperIcon,
-    title: 'Developer First',
-    texts: [
-      'Stripe did it for payment rails.',
-      'Twilio did it for telecom.',
-      'Ockam abstracts away complex infrastructure and cryptography orchestration to empower millions of developers.',
     ],
   },
 ];
