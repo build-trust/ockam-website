@@ -15,8 +15,8 @@ import GitHubIcon from '@assets/icons/github.svg';
 import CloudIcon from '@assets/icons/cloud.svg';
 import DeveloperIcon from '@assets/icons/developer.svg';
 import LockIcon from '@assets/icons/lock.svg';
-import KeyIcon from '@assets/icons/key.svg';
-import EngineIcon from '@assets/icons/engine.svg';
+import DesignIcon from '@assets/icons/design.svg';
+import LeftIcon from '@assets/icons/left.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import { DOCS } from '@consts/externalResources';
 
@@ -27,7 +27,7 @@ const DESCRIPTIONS = [
 
 const FEATURES = [
   {
-    icon: KeyIcon,
+    icon: DesignIcon,
     title: 'Secure By Design',
     texts: [
       'Secure By Design applications minimize their vulnerability surface and embrace the principle of least privillage.',
@@ -43,7 +43,7 @@ const FEATURES = [
     ],
   },
   {
-    icon: EngineIcon,
+    icon: LeftIcon,
     title: 'Shift Left',
     texts: [
       'Software cannot be secured from the outside. Ockam provides powerful building blocks to shift security left and make it an integral part of application design and development.',

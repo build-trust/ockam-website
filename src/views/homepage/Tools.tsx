@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Container, SimpleGrid, Text, Heading, IconButton, Box } from '@chakra-ui/react';
-import { CopyIcon } from '@chakra-ui/icons';
+import { Container, SimpleGrid, Text, Heading, Box } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import CodeTwoImage from '@assets/images/code2.png';
+import CopyToClipboard from '@components/CopyToClipboard';
 
 const CODE_TEXT = `curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 
@@ -40,10 +40,6 @@ const TEXTS = [
 ];
 
 
-const copyToClipboard = (): void => {
-  if (typeof navigator !== 'undefined') navigator.clipboard.writeText(CODE_TEXT);
-};
-
 const Tools: FunctionComponent = () => (
   <Container variant="section" pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 30 }}>
     <Heading as="h2" size="h2" bgColor="white" mb={{ base: 12, lg: 16 }}>
@@ -73,21 +69,13 @@ const Tools: FunctionComponent = () => (
         },
       }}
     >
-      <IconButton
-        aria-label="Copy code to clipboard"
-        colorScheme="avocado"
-        bgColor="brand.800"
-        _hover={{ bgColor: 'brand.900' }}
-        size="sm"
-        icon={<CopyIcon />}
+      <CopyToClipboard
+        codeText={CODE_TEXT}
         display="none"
         position="absolute"
         top="9%"
         right="4%"
-        zIndex={1}
-        onClick={copyToClipboard}
       />
-
       <Image
         src={CodeTwoImage}
         width={2080 / 2}

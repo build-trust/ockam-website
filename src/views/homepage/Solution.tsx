@@ -4,6 +4,15 @@ import Image from 'next/image';
 
 import CodeOneImage from '@assets/images/code1.png';
 import LineDivider from '@components/LineDivider';
+import CopyToClipboard from '@components/CopyToClipboard';
+
+const CODE_TEXT = `ockam secure-channel create --from /node/n1 --to /node/n2/service/api \\
+    | ockam message send "hello ockam" --from /node/n1 --to -/service/uppercase
+
+# Created Secure Channel to /node/n2/service/api
+# Received "hello ockam" at /service/uppercase, Responding with "HELLO OCKAM"
+
+# HELLO OCKAM`;
 
 const TITLE = 'Trust for Data-in-Motion';
 const TEXTS = [
@@ -40,15 +49,27 @@ const Solution: FunctionComponent = () => (
         </Box>
       </Box>
 
-      <Flex maxW="30rem" mt={{ base: 12, lg: 'auto' }} mb={{ base: 0, lg: 'auto' }} boxShadow="xl">
+      <Flex maxW="35rem" mt={{ base: 12, lg: 'auto' }} mb={{ base: 0, lg: 'auto' }} boxShadow="xl">
+        <Box
+          position="relative"
+          fontSize={0}
+          _hover={{ button: { display: 'block' } }}
+          zIndex={0}
+        >
+          <CopyToClipboard
+            display="none"
+            position="absolute"
+            top="50px"
+            right="20px"
+            codeText={CODE_TEXT}
+          />
         <Image
           src={CodeOneImage}
-          width={966 / 2}
-          height={584 / 2}
           alt="Code block 1"
           placeholder="blur"
           priority
         />
+        </Box>
       </Flex>
     </Flex>
   </Container>
