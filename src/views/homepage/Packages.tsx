@@ -34,10 +34,18 @@ const CARDS = [
     ],
     items: [
       { text: 'Scale: Maually configurable', icon: ArrowIcon },
-      { text: 'Key generation and storage', icon: ArrowIcon },
+
+      { text: 'Cryptographic Keys', icon: ArrowIcon },
+      { text: 'Provable Identities', icon: ArrowIcon },
+      { text: 'Vault Add-Ons for HSMs and Cloud KMSs.', icon: ArrowIcon },
+
+
+
       { text: 'Secure Channels', icon: ArrowIcon },
       { text: 'End-to-end encrypted messagaging', icon: ArrowIcon },
       { text: 'Ready-to-use Packages', icon: ArrowIcon },
+
+
       { text: 'Community Supported', icon: ArrowIcon },
       { text: 'Apache 2 License', icon: ArrowIcon },
     ],
@@ -53,6 +61,9 @@ const CARDS = [
       { text: 'Scale: Automation-required', icon: ArrowIcon },
       { text: 'Key policy management', icon: ArrowIcon },
       { text: 'Add-on connectors to data services', icon: ArrowIcon },
+      { text: 'Operate project specific and scalable Credential Authorities to issue lightweight, short-lived, easy to revoke, attribute-based credentials.', icon: ArrowIcon },
+      { text: 'Onboard fleets of self-sovereign application identities using Secure Enrollment Protocols to issue credentials to application clients and services.', icon: ArrowIcon },
+
       { text: 'Atribute Based Access Controls (ABAC)', icon: ArrowIcon },
       { text: 'Message delivery guarantees', icon: ArrowIcon },
       { text: 'Enterprise-grade support', icon: ArrowIcon },
