@@ -1,5 +1,7 @@
 import { MDXRemoteProps } from 'next-mdx-remote';
 
+import StyleGuideResourceCaption from '@components/StyleGuideResourceCaption';
+
 import Paragraph from './Paragraph';
 import headingsComponents from './Headings';
 import CodeInline from './CodeInline';
@@ -33,4 +35,5 @@ export default {
   ...tableIntegralComponents,
   ...headingsComponents,
   AspectRatio,
+  StyleGuideResourceCaption,
 } as MDXRemoteProps['components'];

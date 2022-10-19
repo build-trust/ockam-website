@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode, useEffect } from 'react';
 import { Box } from '@chakra-ui/react';
 
-import { getAllPosts } from '@api/blogApi';
+import { getAllPosts } from '@api/mdxApi';
 import { BlogPost } from '@typings/BlogPost';
 import BlogLayout from '@layouts/BlogLayout';
 import SEOHead from '@components/SEOHead';

@@ -3,7 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect } from 'react';
 
-import { getAllPosts, getPostBySlug, postFilePaths } from '@api/blogApi';
+import { getAllPosts, getPostBySlug, postFilePaths } from '@api/mdxApi';
 import mdxComponents from '@components/mdx';
 import { BlogPost, BlogPostData } from '@typings/BlogPost';
 import BlogLayout from '@layouts/BlogLayout/BlogLayout';
