@@ -33,7 +33,7 @@ const CARDS = [
       'Ockam Open Source has all of the Ockam protocols, tools, and programming libraries that a developer needs to Build Trust. ',
     ],
     items: [
-      { text: 'Scale: Maually configurable', icon: ArrowIcon },
+      { text: 'Scale: Manually configurable', icon: ArrowIcon },
       { text: 'Key generation and storage', icon: ArrowIcon },
       { text: 'Secure Channels', icon: ArrowIcon },
       { text: 'End-to-end encrypted messagaging', icon: ArrowIcon },
