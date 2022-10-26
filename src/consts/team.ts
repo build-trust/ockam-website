@@ -1,10 +1,13 @@
+import enhanceTeamMembers from '@utils/enhanceTeamMembers';
+import colors from '@theme/colors';
+
 export const CATEGORIES = {
   FULL_TIME_MEMBERS: 'Full-time Members',
   BOARD_OF_DIRECTORS: 'Board of Directors',
   ADVISORS: 'Advisors',
 };
 
-export const MEMBERS = [
+export const MEMBERS = enhanceTeamMembers([
   {
     name: 'Mrinal',
     surname: 'Wadhwa',
@@ -13,6 +16,7 @@ export const MEMBERS = [
     country: 'US',
     photo: 'mrinal-wadhwa.png',
     description: 'Loves rock-n-roll and has a dog named Sargent Pepper',
+    bgColor: colors.extras.pictonBlue,
   },
   {
     name: 'Matthew',
@@ -22,6 +26,7 @@ export const MEMBERS = [
     country: 'US',
     photo: 'matthew-gregory.png',
     description: 'Started his career in professional sailing and has a passion for meteorology',
+    bgColor: colors.extras.iceCold,
   },
   {
     name: 'Sabeen',
@@ -178,4 +183,4 @@ export const MEMBERS = [
     photo: 'brian-mullen.png',
     description: 'CMO at InfluxData',
   },
-];
+]);

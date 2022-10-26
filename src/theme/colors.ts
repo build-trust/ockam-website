@@ -47,6 +47,10 @@ const colors = {
     800: '#490a02',
     900: '#1f0100',
   },
+  extras: {
+    pictonBlue: "#51C6E9",
+    iceCold: '#92F2DA'
+  }
 };
 
 export default colors;
