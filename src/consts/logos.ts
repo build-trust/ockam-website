@@ -59,3 +59,5 @@ export const logos: LogoContent[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae faucibus odio.',
   },
 ];
+
+export const downloadOptions = ['png', 'jpg', 'svg']
