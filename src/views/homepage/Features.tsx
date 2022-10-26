@@ -30,8 +30,8 @@ const FEATURES = [
     icon: DesignIcon,
     title: 'Secure By Design',
     texts: [
-      'Secure By Design applications minimize their vulnerability surface and embrace the principle of least privillage.',
-      'Ockam’s end-to-end secure channels gaurantee application layer data integrity and authenticty for all data-in-motion. This enables a deny-by-default security posture that minimizes an application’s vulnerability surface and brings true control over every access decision.',
+      'Secure By Design applications minimize their vulnerability surface and embrace the principle of least privilege.',
+      'Ockam’s end-to-end secure channels guarantee application layer data integrity and authenticity for all data-in-motion. This enables a deny-by-default security posture that minimizes an application’s vulnerability surface and brings true control over every access decision.',
     ],
   },
   {
@@ -47,7 +47,7 @@ const FEATURES = [
     title: 'Shift Left',
     texts: [
       'Software cannot be secured from the outside. Ockam provides powerful building blocks to shift security left and make it an integral part of application design and development.',
-      'Application layer trust gaurantees along with tools to manage keys, credentials and authorization policies give you granular control on the security and privacy properties of your application.'
+      'Application layer trust guarantees along with tools to manage keys, credentials and authorization policies give you granular control on the security and privacy properties of your application.'
     ],
   },
   {
@@ -62,7 +62,7 @@ const FEATURES = [
     icon: GitHubIcon,
     title: 'Open Source',
     texts: [
-      'Ockam’s protocols become ever more secure through transparency, community feedback, and scrutany.',
+      'Ockam’s protocols become ever more secure through transparency, community feedback, and scrutiny.',
       'Add-ons can be built by anyone to create new hardware key vaults or cloud service connectors.',
     ],
   },

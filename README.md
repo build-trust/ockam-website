@@ -53,7 +53,7 @@ This repo is based on Nextjs framework, so many of folder are reflecting framewo
 - `src/components` - sharable components across the website.
 - `src/components/mdx` - components used while converting markdowns elements to HTML. You can find mapping in `index.tsx`
 - `src/consts` - constants variables shared across the app
-- `src/content` - this is where mardown files lives
+- `src/content` - this is where markdown files lives
 - `src/contextProviders` - React contexts and it's providers
 - `src/hooks` - sharable React hooks
 - `src/layouts` - React components responsible for page layouting
@@ -99,7 +99,7 @@ Below are listed described available metadata fields under a certain path of `sr
 
 To add a blog post:
 - fork our repo [https://github.com/build-trust/ockam-website](https://github.com/build-trust/ockam-website) and clone you fork locally
-- all you have to do is just add mardown file (*.md) inside `src/content/blog`, with proper metadata fields
+- all you have to do is just add markdown file (*.md) inside `src/content/blog`, with proper metadata fields
 - submit a PR from your local fork to origin `develop` branch
 
 ## Redirects
