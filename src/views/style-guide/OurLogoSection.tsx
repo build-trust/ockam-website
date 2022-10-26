@@ -3,7 +3,7 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 
 import { LogoContent } from '@typings/StyleGuide';
 
-import { LogoCard } from './components/LogoCard';
+import LogoCard from './components/LogoCard';
 
 type OurLogoSectionProps = {
   logos: LogoContent[];

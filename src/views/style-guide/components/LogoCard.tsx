@@ -1,8 +1,9 @@
-import { Box, Image, Text } from '@chakra-ui/react';
-import { LogoContent } from '@root/typings/StyleGuide';
 import { FunctionComponent } from 'react';
+import { Box, Image, Text } from '@chakra-ui/react';
 
-export const LogoCard: FunctionComponent<LogoContent> = ({
+import { LogoContent } from '@root/typings/StyleGuide';
+
+const LogoCard: FunctionComponent<LogoContent> = ({
   isDark,
   logo,
   heading,
@@ -30,3 +31,4 @@ export const LogoCard: FunctionComponent<LogoContent> = ({
     </Box>
   </Box>
 );
+export default LogoCard;
