@@ -109,7 +109,7 @@ export const MEMBERS = enhanceTeamMembers([
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'DE',
     photo: 'toralf-wittner.png',
-    description: 'A passion for privacy, open souce software and Rust',
+    description: 'A passion for privacy, open source software and Rust',
   },
   {
     name: 'Maryanna',
