@@ -54,7 +54,7 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
             onClick={() => setMenuOpen(true)}
             icon={<Image src="/icon/download.svg" width="100%" height="100%" />}
           />
-          <MenuList>
+          <MenuList maxWidth="132px" minWidth="132px">
             <RadioGroup defaultValue={selectedImageType}>
               <Stack>
                 {downloadOptions.map((option: string) => (
@@ -65,9 +65,8 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
               </Stack>
             </RadioGroup>
 
-            <MenuItem>
-              {' '}
-              <Button onClick={handleDownloadImage} type='button' color='#000000' backgroundColor='#4FDAB8'> Download </Button>{' '}
+            <MenuItem as='div'>
+              <Button onClick={handleDownloadImage} type='button' color='#000000' backgroundColor='#4FDAB8'> Download </Button>
             </MenuItem>
           </MenuList>
         </Menu>
