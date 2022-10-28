@@ -50,25 +50,9 @@ const Solution: FunctionComponent = () => (
       </Box>
 
       <Flex maxW="35rem" mt={{ base: 12, lg: 'auto' }} mb={{ base: 0, lg: 'auto' }} boxShadow="xl">
-        <Box
-          position="relative"
-          fontSize={0}
-          _hover={{ button: { display: 'block' } }}
-          zIndex={0}
-        >
-          <CopyToClipboard
-            display="none"
-            position="absolute"
-            top="50px"
-            right="20px"
-            codeText={CODE_TEXT}
-          />
-        <Image
-          src={CodeOneImage}
-          alt="Code block 1"
-          placeholder="blur"
-          priority
-        />
+        <Box position="relative" fontSize={0} zIndex={0}>
+          <CopyToClipboard position="absolute" bottom={5} right={5} codeText={CODE_TEXT} />
+          <Image src={CodeOneImage} alt="Code block 1" placeholder="blur" priority />
         </Box>
       </Flex>
     </Flex>

@@ -25,6 +25,7 @@ ockam secure-channel create --from /node/client_sidecar --to /node/relay/service
 
 curl --head 127.0.0.1:7000`;
 
+const TITLE = 'Powerful Protocols, Made Simple';
 const TEXTS = [
   [
     'To be private and secure by design, applications must have granular control over every trust and access decision.',
@@ -35,15 +36,14 @@ const TEXTS = [
     'All of this gets very complicated, very quickly.',
     'At Ockam, our mission is to empower every developer with simple tools to create applications that build trust in data.',
     'We’ve taken proven cryptographic protocols and made them easy to use on the command line or invoke as a programming library. We handle all the underlying complexity and give you high-level and composable building blocks to create end-to-end, application layer trust in data.',
-    'Here is one example of this in action …'
+    'Here is one example of this in action …',
   ],
 ];
-
 
 const Tools: FunctionComponent = () => (
   <Container variant="section" pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 30 }}>
     <Heading as="h2" size="h2" bgColor="white" mb={{ base: 12, lg: 16 }}>
-      Powerful Protocols, Made Simple
+      {TITLE}
     </Heading>
 
     <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={16} mb={{ base: 20, lg: 16 }}>
@@ -60,7 +60,6 @@ const Tools: FunctionComponent = () => (
 
     <Box
       position="relative"
-      _hover={{ button: { display: 'block' } }}
       zIndex={0}
       p={0}
       sx={{
@@ -69,13 +68,7 @@ const Tools: FunctionComponent = () => (
         },
       }}
     >
-      <CopyToClipboard
-        codeText={CODE_TEXT}
-        display="none"
-        position="absolute"
-        top="9%"
-        right="4%"
-      />
+      <CopyToClipboard codeText={CODE_TEXT} position="absolute" bottom={5} right={5} />
       <Image
         src={CodeTwoImage}
         width={2080 / 2}
