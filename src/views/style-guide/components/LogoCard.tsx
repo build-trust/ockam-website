@@ -20,10 +20,10 @@ import { LogoContent } from '@root/typings/StyleGuide';
 import { downloadOptions } from '@root/consts/logos';
 
 const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, description }) => {
-
   const [selectedImageType, setSelectedImageType] = useState('png');
 
-  const handleDownloadImage = () => saveAs(`/logo/${logo}.${selectedImageType}`, `${logo}.${selectedImageType}`);
+  const handleDownloadImage = () =>
+    saveAs(`/logo/${logo}.${selectedImageType}`, `${logo}.${selectedImageType}`);
 
   return (
     <Box minWidth="335px" width="calc(33% - 26px)">
@@ -48,19 +48,35 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
             as={IconButton}
             icon={<Image src="/icon/download.svg" width="100%" height="100%" />}
           />
-          <MenuList maxWidth="132px" minWidth="132px">
+          <MenuList maxWidth="132px" minWidth="132px" position="absolute" left="-90px">
             <RadioGroup defaultValue={selectedImageType}>
               <Stack>
                 {downloadOptions.map((option: string) => (
-                  <MenuItem key={option}>
-                    <Radio value={option} onChange={(e) => {setSelectedImageType(e.target.value)}}>{option.toUpperCase()}</Radio>
+                  <MenuItem key={option} _hover={{ background: '#ECFDF9' }}>
+                    <Radio
+                      style={{ color: '#3AC6A3', borderColor: '#3AC6A3' }}
+                      value={option}
+                      onChange={(e) => {
+                        setSelectedImageType(e.target.value);
+                      }}
+                      _checked={{ background: '#3AC6A3' }}
+                    >
+                      {option.toUpperCase()}
+                    </Radio>
                   </MenuItem>
                 ))}
               </Stack>
             </RadioGroup>
-
-            <MenuItem as='div'>
-              <Button onClick={handleDownloadImage} type='button' color='#000000' backgroundColor='#4FDAB8'> Download </Button>
+            <MenuItem as="div">
+              <Button
+                onClick={handleDownloadImage}
+                type="button"
+                color="#000000"
+                backgroundColor="#4FDAB8"
+              >
+                {' '}
+                Download{' '}
+              </Button>
             </MenuItem>
           </MenuList>
         </Menu>
