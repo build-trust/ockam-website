@@ -1,7 +1,4 @@
-import { LogoContent } from "@root/typings/StyleGuide";
-
-// eslint-disable-next-line import/prefer-default-export
-export const logos: LogoContent[] = [
+export const logos = [
   {
     logo: 'logo_in_color',
     heading: 'Logo in colour',
