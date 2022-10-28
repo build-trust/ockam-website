@@ -17,16 +17,7 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({ children }) => (
     <Flex w="full">
       <BlogLayoutSidebar />
 
-      <Flex
-        flex={1}
-        direction="column"
-        align="stretch"
-        minH="full"
-        w="full"
-        maxW="container.max"
-        overflowX="hidden"
-        mx="auto"
-      >
+      <Flex flex={1} direction="column" align="stretch" w="full" maxW="container.max" mx="auto">
         <Flex flex={1} direction="column" px={{ base: 5, md: 4, '1.5xl': 12 }}>
           <Box as="main" w="full" h="full">
             {children}
