@@ -22,13 +22,8 @@ import { downloadOptions } from '@root/consts/logos';
 const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, description }) => {
 
   const [selectedImageType, setSelectedImageType] = useState('png');
-  const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const handleDownloadImage = () => {
-    setMenuOpen(false);
-    saveAs(`/logo/${logo}.${selectedImageType}`, `${logo}.${selectedImageType}`);
-
-  }
+  const handleDownloadImage = () => saveAs(`/logo/${logo}.${selectedImageType}`, `${logo}.${selectedImageType}`);
 
   return (
     <Box minWidth="335px" width="calc(33% - 26px)">
@@ -43,7 +38,7 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
         position="relative"
       >
         <Image src={`/logo/${logo}.svg`} />
-        <Menu isOpen={isMenuOpen} >
+        <Menu closeOnSelect={false}>
           <MenuButton
             position="absolute"
             top="3"
@@ -51,7 +46,6 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
             width="12px"
             height="12px"
             as={IconButton}
-            onClick={() => setMenuOpen(true)}
             icon={<Image src="/icon/download.svg" width="100%" height="100%" />}
           />
           <MenuList maxWidth="132px" minWidth="132px">
