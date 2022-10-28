@@ -1,5 +1,4 @@
 export { default as Hero } from './Hero';
-export { default as Solution } from './Solution';
 export { default as GetStarted } from './GetStarted';
 export { default as Tools } from './Tools';
 export { default as Infrastructure } from './Infrastructure';
