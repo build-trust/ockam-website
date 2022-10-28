@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, useTheme } from '@chakra-ui/react';
 
 import BlogPostsProvider from '@contextProviders/BlogPostsProvider';
 
@@ -10,33 +10,25 @@ import BlogLayoutMobileNav from './BlogLayoutMobileNav/BlogLayoutMobileNav';
 
 type BlogLayoutProps = { children: ReactNode };
 
-const BlogLayout: FunctionComponent<BlogLayoutProps> = ({ children }) => (
-  <BlogPostsProvider>
-    <BlogLayoutMobileNav />
+const BlogLayout: FunctionComponent<BlogLayoutProps> = ({ children }) => {
+  const theme = useTheme();
 
-    <Flex w="full">
-      <BlogLayoutSidebar />
+  return (
+    <BlogPostsProvider>
+      <BlogLayoutMobileNav />
+      <BlogLayoutSidebar display={{ base: 'none', lg: 'flex' }} />
 
-      <Flex
-        flex={1}
-        direction="column"
-        align="stretch"
-        minH="full"
-        w="full"
-        maxW="container.max"
-        overflowX="hidden"
-        mx="auto"
-      >
-        <Flex flex={1} direction="column" px={{ base: 5, md: 4, '1.5xl': 12 }}>
-          <Box as="main" w="full" h="full">
+      <Flex w="full" direction="column" pl={{ base: 'none', lg: theme.sizes.container.sidebar }}>
+        <Box w="full" maxW="container.blogBodyMax" mx="auto">
+          <Box as="main" w="full" h="full" mx="auto" px={{ base: 5, md: 4, '1.5xl': 12 }}>
             {children}
           </Box>
-        </Flex>
 
-        <LayoutFooter mt={24} px={10} />
+          <LayoutFooter mt={24} px={10} />
+        </Box>
       </Flex>
-    </Flex>
-  </BlogPostsProvider>
-);
+    </BlogPostsProvider>
+  );
+};
 
 export default BlogLayout;

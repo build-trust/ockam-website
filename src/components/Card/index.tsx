@@ -1,5 +1,4 @@
-import { FunctionComponent } from 'react';
-import { Box, Flex, FlexProps } from '@chakra-ui/react';
+import { Box, Flex, FlexProps, forwardRef } from '@chakra-ui/react';
 
 import SpeachBubbleTriangle from './SpeachBubbleTriangle';
 
@@ -61,64 +60,70 @@ const getBoldBorderAbsoluteStyles = ({
 };
 
 // eslint-disable-next-line complexity
-const Card: FunctionComponent<CardProps> = ({
-  children,
-  speachBubbleTriangle,
-  boldBorderPosition = 'Bottom',
-  boldBorderOnHover = false,
-  boldBorderGradient,
-  boldBorderColor = 'avocado.500',
-  boldBorderSize = '4px',
-  borderRadius = 'base',
-  _hover,
-  ...restProps
-}) => {
-  const boldBorderAbsoluteStyles = getBoldBorderAbsoluteStyles({
-    boldBorderPosition,
-    boldBorderColor,
-    boldBorderGradient,
-    borderRadius,
-    boldBorderSize,
-  });
+const Card = forwardRef<CardProps, 'div'>(
+  (
+    {
+      children,
+      speachBubbleTriangle,
+      boldBorderPosition = 'Bottom',
+      boldBorderOnHover = false,
+      boldBorderGradient,
+      boldBorderColor = 'avocado.500',
+      boldBorderSize = '4px',
+      borderRadius = 'base',
+      _hover,
+      ...restProps
+    },
+    ref
+  ) => {
+    const boldBorderAbsoluteStyles = getBoldBorderAbsoluteStyles({
+      boldBorderPosition,
+      boldBorderColor,
+      boldBorderGradient,
+      borderRadius,
+      boldBorderSize,
+    });
 
-  const boldBorderRegularStyles = {
-    [`border${boldBorderPosition}`]: boldBorderSize,
-    [`border${boldBorderPosition}Color`]: boldBorderColor,
-  };
+    const boldBorderRegularStyles = {
+      [`border${boldBorderPosition}`]: boldBorderSize,
+      [`border${boldBorderPosition}Color`]: boldBorderColor,
+    };
 
-  const boldBorderShouldBeAbsolute = !!boldBorderGradient || !!boldBorderOnHover;
+    const boldBorderShouldBeAbsolute = !!boldBorderGradient || !!boldBorderOnHover;
 
-  return (
-    <Flex
-      position="relative"
-      direction="column"
-      maxW="lg"
-      bg="white"
-      border="1px"
-      borderColor="gray.200"
-      borderRadius={borderRadius}
-      _hover={{
-        ..._hover,
-        ...(boldBorderOnHover ? boldBorderAbsoluteStyles : {}),
-      }}
-      {...(boldBorderShouldBeAbsolute && !boldBorderOnHover ? boldBorderAbsoluteStyles : {})}
-      {...(!boldBorderShouldBeAbsolute ? boldBorderRegularStyles : {})}
-      {...restProps}
-    >
-      {!!speachBubbleTriangle && (
-        <Box
-          position="absolute"
-          top="50%"
-          transform="translateY(-50%)"
-          {...{ [speachBubbleTriangle]: '-5' }}
-        >
-          <SpeachBubbleTriangle {...(speachBubbleTriangle === 'left' ? { rotate: -90 } : {})} />
-        </Box>
-      )}
+    return (
+      <Flex
+        ref={ref}
+        position="relative"
+        direction="column"
+        maxW="lg"
+        bg="white"
+        border="1px"
+        borderColor="gray.200"
+        borderRadius={borderRadius}
+        _hover={{
+          ..._hover,
+          ...(boldBorderOnHover ? boldBorderAbsoluteStyles : {}),
+        }}
+        {...(boldBorderShouldBeAbsolute && !boldBorderOnHover ? boldBorderAbsoluteStyles : {})}
+        {...(!boldBorderShouldBeAbsolute ? boldBorderRegularStyles : {})}
+        {...restProps}
+      >
+        {!!speachBubbleTriangle && (
+          <Box
+            position="absolute"
+            top="50%"
+            transform="translateY(-50%)"
+            {...{ [speachBubbleTriangle]: '-5' }}
+          >
+            <SpeachBubbleTriangle {...(speachBubbleTriangle === 'left' ? { rotate: -90 } : {})} />
+          </Box>
+        )}
 
-      {children}
-    </Flex>
-  );
-};
+        {children}
+      </Flex>
+    );
+  }
+);
 
 export default Card;

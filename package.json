@@ -36,6 +36,7 @@
     "@chakra-ui/theme-tools": "2.0.2",
     "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
+    "@n8tb1t/use-scroll-position": "2.0.3",
     "@next/bundle-analyzer": "12.1.6",
     "axios": "0.27.2",
     "focus-visible": "5.2.0",
