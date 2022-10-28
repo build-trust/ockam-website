@@ -1,5 +1,5 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect } from 'react';
 
@@ -7,11 +7,13 @@ import { getAllPosts, getPostBySlug, postFilePaths } from '@api/mdxApi';
 import mdxComponents from '@components/mdx';
 import { BlogPost, BlogPostData } from '@typings/BlogPost';
 import BlogLayout from '@layouts/BlogLayout/BlogLayout';
-import { BlogPostHeader } from '@views/blog';
+import { BlogPostHeader, BlogPostRightNavigation } from '@views/blog';
 import SEOHead from '@components/SEOHead';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { useBlogPostsContext } from '@contextProviders/BlogPostsProvider';
 import { BLOG_PATH } from '@consts/paths';
+
+const RIGHT_SIDEBAR_WIDTH = '16rem';
 
 type BlogPostPageProps = {
   source: MDXRemoteSerializeResult;
@@ -21,45 +23,46 @@ type BlogPostPageProps = {
 
 const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts }) => {
   const router = useRouter();
-  const canonicalPath = `${BLOG_PATH}/${router.query.slug}`;
   const { handleSetBlogPosts } = useBlogPostsContext();
+
+  const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
+  const description =
+    (frontMatter?.metaDescription as string) || (frontMatter?.description as string) || '';
+  const canonicalPath = `${BLOG_PATH}/${router.query.slug}`;
 
   useEffect(() => {
     if (!handleSetBlogPosts || !posts) return;
 
     handleSetBlogPosts(posts);
   }, [handleSetBlogPosts, posts]);
-  const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
-  const description = (frontMatter?.metaDescription as string) || (frontMatter?.description as string) || '';
 
   return (
     <>
-      <SEOHead
-        subTitle={title}
-        description={description}
-        canonicalPath={canonicalPath}
-      />
+      <SEOHead subTitle={title} description={description} canonicalPath={canonicalPath} />
 
-      <Box
-        maxW={{ base: '3xl', '1.5xl': 'fit-content' }}
+      <Flex
+        direction="column"
+        w="full"
+        maxW={{ base: '3xl', '1.5xl': 'full' }}
         mt={{ base: 10, lg: 0 }}
         mx="auto"
-        px={{ base: 5, '1.5xl': 0 }}
       >
         <BlogPostHeader post={frontMatter as BlogPostData} />
 
-        <Flex
-          direction="column"
-          maxW="52rem"
-          mx="auto"
-          mt={{ base: 10, '1.5xl': 16 }}
-          fontFamily="blogPostBody"
-          fontSize="lg"
-          color="brand.900"
-        >
-          <MDXRemote {...source} components={mdxComponents} />
+        <Flex mt={{ base: 10, '1.5xl': 16 }} position="relative">
+          <Flex
+            w="full"
+            direction="column"
+            fontFamily="blogPostBody"
+            fontSize="lg"
+            color="brand.900"
+            pr={{ '1.5xl': `calc(${RIGHT_SIDEBAR_WIDTH} + 1.5rem)` }}
+          >
+            <MDXRemote {...source} components={mdxComponents} />
+          </Flex>
+          <BlogPostRightNavigation slug={router.query.slug as string} w={RIGHT_SIDEBAR_WIDTH} />
         </Flex>
-      </Box>
+      </Flex>
     </>
   );
 };

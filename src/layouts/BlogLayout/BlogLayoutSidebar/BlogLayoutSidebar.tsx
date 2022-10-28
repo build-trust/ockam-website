@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import Link from 'next/link';
-import { Box, Flex, Link as ChakraLink } from '@chakra-ui/react';
+import { Box, Flex, FlexProps, Link as ChakraLink } from '@chakra-ui/react';
 
 import { HOME_PATH } from '@consts/paths';
 import LogoDark from '@assets/logo-dark.svg';
@@ -11,12 +11,11 @@ import BlogSearchInput from '../BlogSearchInput';
 
 import BlogLayoutSidebarNavigation from './BlogLayoutSidebarNavigation';
 
-const BlogLayoutSidebar: FunctionComponent = () => {
+const BlogLayoutSidebar: FunctionComponent<FlexProps> = (props) => {
   const { groupedBlogPostsByCategory } = useBlogPostsContext();
 
   return (
     <Flex
-      display={{ base: 'none', lg: 'flex' }}
       as="aside"
       w="container.sidebar"
       minW="container.sidebar"
@@ -24,12 +23,14 @@ const BlogLayoutSidebar: FunctionComponent = () => {
       minH="fit-content"
       py={8}
       px={6}
-      pos="sticky"
+      pos="fixed"
       top={0}
+      left={0}
       flexDir="column"
       borderRight="1px"
       borderColor="gray.100"
       overflow="hidden"
+      {...props}
     >
       <Link href={HOME_PATH} passHref>
         <ChakraLink>
