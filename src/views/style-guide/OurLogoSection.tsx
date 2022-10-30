@@ -10,7 +10,7 @@ type OurLogoSectionProps = {
 };
 
 const OurLogoSection: FunctionComponent<OurLogoSectionProps> = ({ logos }) => (
-  <Box width="100%">
+  <Box width="100%" marginBottom={8}>
     <Box marginBottom="56px">
       <Heading as="h3" size={{ base: 'lg', lg: 'xl' }} fontWeight="bold" marginBottom="16px">
         Our logo
