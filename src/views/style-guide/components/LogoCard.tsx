@@ -26,15 +26,15 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
     saveAs(`/logo/${logo}.${selectedImageType}`, `${logo}.${selectedImageType}`);
 
   return (
-    <Box minWidth="335px" width="calc(33% - 26px)">
+    <Box minWidth={20} width="calc(33% - 26px)">
       <Box
         backgroundColor={isDark ? 'brand.900' : 'white'}
-        borderRadius="4px"
-        height="246px"
+        borderRadius={4}
+        height={246}
         display="flex"
         alignItems="center"
         justifyContent="center"
-        borderWidth="1px"
+        borderWidth={1}
         position="relative"
       >
         <Image src={`/logo/${logo}.svg`} />
@@ -48,18 +48,18 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
             as={IconButton}
             icon={<Image src="/icon/download.svg" width="100%" height="100%" />}
           />
-          <MenuList bg="white" maxWidth={32} minWidth={32} >
-            <RadioGroup background="white" defaultValue={selectedImageType}>
+          <MenuList maxWidth={32} minWidth={32} >
+            <RadioGroup defaultValue={selectedImageType}>
               <Stack>
                 {downloadOptions.map((option: string) => (
-                  <MenuItem bg="white" key={option} _hover={{ bg: 'avocado.400'}}>
+                  <MenuItem key={option} _hover={{ bg: 'avocado.400'}}>
                     <Radio
                       colorScheme="avocado"
                       value={option}
                       onChange={(e) => {
                         setSelectedImageType(e.target.value);
                       }}
-                      _checked={{ border: '4px solid', color: 'avocado.600' }}
+                      _checked={{ borderWidth: '4px ', borderColor: 'avocado.600' }}
                     >
                       {option.toUpperCase()}
                     </Radio>
@@ -80,8 +80,8 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
           </MenuList>
         </Menu>
       </Box>
-      <Box marginTop="20px">
-        <Text color="brand.900" fontWeight="bold" fontSize="lg" marginBottom="12px">
+      <Box marginTop={5}>
+        <Text color="brand.900" fontWeight="bold" fontSize="lg" marginBottom={3}>
           {heading}
         </Text>
         <Text color="gray.500" fontSize="sm">
