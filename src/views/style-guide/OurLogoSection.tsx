@@ -11,8 +11,8 @@ type OurLogoSectionProps = {
 
 const OurLogoSection: FunctionComponent<OurLogoSectionProps> = ({ logos }) => (
   <Box width="100%" marginBottom={8}>
-    <Box marginBottom="56px">
-      <Heading as="h3" size={{ base: 'lg', lg: 'xl' }} fontWeight="bold" marginBottom="16px">
+    <Box marginBottom={14}>
+      <Heading as="h3" size={{ base: 'lg', lg: 'xl' }} fontWeight="bold" marginBottom={4}>
         Our logo
       </Heading>
       <Text fontSize={{ lg: 'lg' }} fontWeight={400}>
@@ -22,7 +22,7 @@ const OurLogoSection: FunctionComponent<OurLogoSectionProps> = ({ logos }) => (
     <Box
       display="flex"
       flexWrap="wrap"
-      gap="44px"
+      gap={10}
       justifyContent={{ base: 'center', xl: 'flex-start' }}
     >
       {logos.map((logo: LogoContent) => (
