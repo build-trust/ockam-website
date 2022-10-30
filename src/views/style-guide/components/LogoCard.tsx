@@ -38,28 +38,28 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
         position="relative"
       >
         <Image src={`/logo/${logo}.svg`} />
-        <Menu closeOnSelect={false}>
+        <Menu closeOnSelect={false} placement="bottom-end" >
           <MenuButton
             position="absolute"
-            top="3"
-            right="3"
-            width="12px"
-            height="12px"
+            top={3}
+            right={3}
+            width={4}
+            height={4}
             as={IconButton}
             icon={<Image src="/icon/download.svg" width="100%" height="100%" />}
           />
-          <MenuList maxWidth="132px" minWidth="132px" position="absolute" left="-90px">
-            <RadioGroup defaultValue={selectedImageType}>
+          <MenuList bg="white" maxWidth={32} minWidth={32} >
+            <RadioGroup background="white" defaultValue={selectedImageType}>
               <Stack>
                 {downloadOptions.map((option: string) => (
-                  <MenuItem key={option} _hover={{ background: '#ECFDF9' }}>
+                  <MenuItem bg="white" key={option} _hover={{ bg: 'avocado.400'}}>
                     <Radio
-                      style={{ color: '#3AC6A3', borderColor: '#3AC6A3' }}
+                      colorScheme="avocado"
                       value={option}
                       onChange={(e) => {
                         setSelectedImageType(e.target.value);
                       }}
-                      _checked={{ background: '#3AC6A3' }}
+                      _checked={{ border: '4px solid', color: 'avocado.600' }}
                     >
                       {option.toUpperCase()}
                     </Radio>
@@ -67,12 +67,11 @@ const LogoCard: FunctionComponent<LogoContent> = ({ isDark, logo, heading, descr
                 ))}
               </Stack>
             </RadioGroup>
-            <MenuItem as="div">
+            <MenuItem as="div" _hover={{ background: 'white'}}>
               <Button
                 onClick={handleDownloadImage}
+                colorScheme="avocado"
                 type="button"
-                color="#000000"
-                backgroundColor="#4FDAB8"
               >
                 {' '}
                 Download{' '}

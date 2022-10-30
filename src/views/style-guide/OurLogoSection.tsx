@@ -15,7 +15,7 @@ const OurLogoSection: FunctionComponent<OurLogoSectionProps> = ({ logos }) => (
       <Heading as="h3" size={{ base: 'lg', lg: 'xl' }} fontWeight="bold" marginBottom={4}>
         Our logo
       </Heading>
-      <Text fontSize={{ lg: 'lg' }} fontWeight={400}>
+      <Text fontSize={{ lg: 'lg' }} fontWeight="regular">
         Logo and Signet used on core website, and all marketing & print materials
       </Text>
     </Box>
