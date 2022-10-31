@@ -32,6 +32,7 @@ const sizes = {
   container: {
     sidebar: '305px',
     max: '1440px',
+    blogBodyMax: '1135px',
   },
 };
 

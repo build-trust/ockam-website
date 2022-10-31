@@ -18,7 +18,7 @@ const MainLayout: FunctionComponent<ChildrenProp> = ({ children }) => {
       <MainLayoutHeader ref={headerRef} />
 
       <Flex direction="column" minH="full" w="full" overflowX="hidden">
-        <Box as="main" flex={1} w="full" pt={headerHeight}>
+        <Box as="main" flex={1} w="full" pt={{ base: 0, lg: headerHeight }}>
           {children}
         </Box>
 

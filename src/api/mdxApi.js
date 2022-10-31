@@ -10,12 +10,9 @@ export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guide');
 
 // postFilePaths is the list of all mdx files inside the POSTS_PATH directory
+export const postFilePaths = fs.readdirSync(POSTS_PATH).filter((path) => /\.mdx?$/.test(path));
 
-export const postFilePaths = fs
-  .readdirSync(POSTS_PATH)
-  .filter((path) => /\.mdx?$/.test(path));
-
-export const styleGuideFilePaths =   fs
+export const styleGuideFilePaths = fs
   .readdirSync(STYLE_GUIDE_PATH)
   .filter((path) => /\.mdx?$/.test(path));
 
@@ -47,6 +44,7 @@ export const getPostBySlug = async (slug) => {
     },
     scope: data,
   });
+
   return {
     source: mdxSource,
     frontMatter: data,
@@ -54,23 +52,26 @@ export const getPostBySlug = async (slug) => {
 };
 
 export const getStyleGuideSections = async () => {
-  const styleGuideSections = await Promise.all(styleGuideFilePaths.map(async (filePath) => {
-    const source = fs.readFileSync(path.join(STYLE_GUIDE_PATH, filePath));
-    const { content, data } = matter(source);
+  const styleGuideSections = await Promise.all(
+    styleGuideFilePaths.map(async (filePath) => {
+      const source = fs.readFileSync(path.join(STYLE_GUIDE_PATH, filePath));
+      const { content, data } = matter(source);
 
-    const mdxSource = await serialize(content, {
-      // Optionally pass remark/rehype plugins
-      mdxOptions: {
-        remarkPlugins: [RemarkGFM],
-        rehypePlugins: [RehypeSlug],
-      },
-      scope: data,
-    });
-    return {
-      source: mdxSource,
-      frontMatter: data,
-    };
-  }));
+      const mdxSource = await serialize(content, {
+        // Optionally pass remark/rehype plugins
+        mdxOptions: {
+          remarkPlugins: [RemarkGFM],
+          rehypePlugins: [RehypeSlug],
+          remarkRehypeOptions: { fragment: true },
+        },
+        scope: data,
+      });
+      return {
+        source: mdxSource,
+        frontMatter: data,
+      };
+    })
+  );
 
   return styleGuideSections;
-}
+};

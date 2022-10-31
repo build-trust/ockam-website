@@ -15,6 +15,7 @@ type TeamMemberCardProps = {
   description: string;
   photo: string;
   country: string;
+  bgColor?: string,
 };
 
 const IMG_SIZES = {
@@ -29,6 +30,7 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
   description,
   photo,
   country,
+  bgColor,
 }) => {
   const placeholderImg = useMemo(
     () => getRandomImage([PlaceholderSilverImage, PlaceholderBlueImage, PlaceholderGreenImage]),
@@ -44,7 +46,12 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
       margin="0 auto"
       overflow="hidden"
     >
-      <Box w={{ base: '7.875rem', sm: IMG_SIZES.w }} h={IMG_SIZES.h} position="relative">
+      <Box
+        w={{ base: '7.875rem', sm: IMG_SIZES.w }}
+        h={IMG_SIZES.h}
+        position="relative"
+        backgroundColor={photo ? bgColor : 'transparent'}
+      >
         <ImageWithPlaceholder
           src={`/team/${photo}`}
           alt={`${name} photo`}

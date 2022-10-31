@@ -17,6 +17,7 @@ import ArrowIcon from '@assets/icons/arrow.svg';
 import CloudIcon from '@assets/icons/cloud.svg';
 import PackagesIcon from '@assets/icons/packages.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
+import CTALink from '@components/CTALink';
 
 const TITLE = 'Ockam is for Everyone';
 const TEXTS = [
@@ -41,6 +42,10 @@ const CARDS = [
       { text: 'Community Supported', icon: ArrowIcon },
       { text: 'Apache 2 License', icon: ArrowIcon },
     ],
+    link: {
+      label: 'Get Started',
+      href: 'https://docs.ockam.io/open-source',
+    },
   },
   {
     icon: CloudIcon,
@@ -58,6 +63,10 @@ const CARDS = [
       { text: 'Enterprise-grade support', icon: ArrowIcon },
       { text: 'AWS Marketplace', icon: ArrowIcon },
     ],
+    link: {
+      label: 'Get Started',
+      href: 'https://docs.ockam.io/orchestrator',
+    },
   },
 ];
 
@@ -70,6 +79,10 @@ type CardGridItemProps = {
     text: string;
     icon: FunctionComponent<SVGAttributes<SVGElement>>;
   }>;
+  link: {
+    label: string;
+    href: string;
+  };
   columnOrder: number;
 };
 
@@ -80,6 +93,7 @@ const CardGridItem: FunctionComponent<CardGridItemProps> = ({
   descriptions,
   items,
   columnOrder,
+  link,
 }) => (
   <>
     <GridItem area={`header${columnOrder}`} maxW={{ base: 'lg', lg: '25rem' }}>
@@ -151,7 +165,9 @@ const CardGridItem: FunctionComponent<CardGridItemProps> = ({
             {itemText}
           </ListItem>
         ))}
+        <CTALink display="block" mt={10} text={link.label} href={link.href} isExternal />
       </List>
+
     </GridItem>
   </>
 );
