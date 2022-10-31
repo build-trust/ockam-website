@@ -22,7 +22,7 @@ import { DOCS } from '@consts/externalResources';
 
 const TITLE = 'Built for developers, by developers';
 const DESCRIPTIONS = [
-  'It is hard to build and scale applications that make identity driven trust decisions. We’ve created simple and composable building blocks so you can easily deliver secure and private applications to your customers.'
+  'It is hard to build and scale an application that makes identity driven trust decisions. We created simple, composable building blocks so you can easily deliver secure and private applications to your customers.'
 ];
 
 const FEATURES = [
