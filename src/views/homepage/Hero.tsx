@@ -11,13 +11,22 @@ import CopyToClipboard from '@components/CopyToClipboard';
 import CodeOneImage from '@assets/images/code1.png';
 
 
-const CODE_TEXT = `ockam secure-channel create --from /node/n1 --to /node/n2/service/api \\
+const CODE_TEXT = `# Install Ockam Command
+brew install ockam
+# If you don't use Homebrew, look for alternate ways to install here:
+# https://docs.ockam.io/ockam-open-source#get-started
+
+# Create Two Ockam Nodes - n1 and n2
+ockam node create n1
+ockam node create n2
+
+# Create a Secure Channel from n1 to n2 and send an encrypted message to the uppercase service on n2
+ockam secure-channel create --from /node/n1 --to /node/n2/service/api \\
     | ockam message send "hello ockam" --from /node/n1 --to -/service/uppercase
 
-# Created Secure Channel to /node/n2/service/api
-# Received "hello ockam" at /service/uppercase, Responding with "HELLO OCKAM"
-
-# HELLO OCKAM`;
+# Delete all nodes.
+ockam node delete --all
+`;
 
 const SUBHEADING_TEXTS = [
   { icon: IntegrityIcon, text: 'Integrity' },

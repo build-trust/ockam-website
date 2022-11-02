@@ -5,7 +5,10 @@ import Image from 'next/image';
 import CodeTwoImage from '@assets/images/code2.png';
 import CopyToClipboard from '@components/CopyToClipboard';
 
-const CODE_TEXT = `curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
+const CODE_TEXT = `# Install Ockam Command
+brew install ockam
+# If you don't use Homebrew, look for alternate ways to install here:
+# https://docs.ockam.io/ockam-open-source#get-started
 
 ockam node create relay
 
