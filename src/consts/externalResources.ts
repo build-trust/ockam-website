@@ -36,10 +36,10 @@ export const DISCUSSION = {
 
 export const DOCS = {
   name: 'docs.ockam.io',
-  href: 'https://docs.ockam.io'
-}
+  href: 'https://docs.ockam.io',
+};
 
-export const BUILD_DEMO = { href: 'https://docs.ockam.io/open-source/get-started' };
+export const BUILD_DEMO = { href: 'https://docs.ockam.io/use-cases' };
 
 export default [
   CONTACT,
