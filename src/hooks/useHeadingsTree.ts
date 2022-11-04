@@ -20,6 +20,8 @@ const getHeadingsTree = (headingElements: HeadingElement[]): HeadingItemWithNest
   headingElements.forEach((heading) => {
     const { innerText: title = '', id, nodeName } = heading;
 
+    if (!id) return;
+
     if (nodeName === 'H2') {
       headingsTree.push({ id, title, items: [] });
     } else if (nodeName === 'H3' && headingsTree.length > 0) {
@@ -47,7 +49,11 @@ const getHeadingHashesListFromHeadingsTree = (items: HeadingItemWithNestedHeadin
   }, []);
 };
 
-const useHeadingsTree = (): UseHeadingsTreeReturnType => {
+const useHeadingsTree = ({
+  sourceEl,
+}: {
+  sourceEl?: HTMLElement | null;
+}): UseHeadingsTreeReturnType => {
   const router = useRouter();
   const [headingsTree, setHeadingsTree] = useState<HeadingItemWithNestedHeadings[]>([]);
   const headingHashesList = useMemo(
@@ -56,11 +62,12 @@ const useHeadingsTree = (): UseHeadingsTreeReturnType => {
   );
 
   useEffect(() => {
-    const headingElements = Array.from(document.querySelectorAll('h2, h3'));
+    const source = sourceEl || document;
+    const headingElements = Array.from(source.querySelectorAll('h2, h3'));
 
     const newHeadingsTree = getHeadingsTree(headingElements);
     setHeadingsTree(newHeadingsTree);
-  }, [router.asPath]);
+  }, [sourceEl, router.asPath]);
 
   return { headingsTree, headingHashesList };
 };

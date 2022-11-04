@@ -1,7 +1,7 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { ReactElement, ReactNode, useEffect } from 'react';
+import { ReactElement, ReactNode, useEffect, useRef } from 'react';
 
 import { getAllPosts, getPostBySlug, postFilePaths } from '@api/mdxApi';
 import mdxComponents from '@components/mdx';
@@ -24,6 +24,7 @@ type BlogPostPageProps = {
 const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts }) => {
   const router = useRouter();
   const { handleSetBlogPosts } = useBlogPostsContext();
+  const blogPostBodyRef = useRef<HTMLDivElement | null>(null);
 
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const description =
@@ -51,6 +52,7 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
 
         <Flex mt={{ base: 10, '1.5xl': 16 }} position="relative">
           <Flex
+            ref={blogPostBodyRef}
             w="full"
             direction="column"
             fontFamily="blogPostBody"
@@ -60,7 +62,11 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
           >
             <MDXRemote {...source} components={mdxComponents} />
           </Flex>
-          <BlogPostRightNavigation slug={router.query.slug as string} w={RIGHT_SIDEBAR_WIDTH} />
+          <BlogPostRightNavigation
+            slug={router.query.slug as string}
+            tableOfContentSource={blogPostBodyRef?.current}
+            w={RIGHT_SIDEBAR_WIDTH}
+          />
         </Flex>
       </Flex>
     </>

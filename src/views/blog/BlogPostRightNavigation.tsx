@@ -8,10 +8,12 @@ import useSetFullMaxHeightReducedByTopOffset from '@hooks/useSetFullMaxHeightRed
 
 type BlogPostRightNavigationProps = {
   slug?: string;
+  tableOfContentSource: HTMLDivElement | null;
 } & BoxProps;
 
 const BlogPostRightNavigation = ({
   slug,
+  tableOfContentSource,
   ...restProps
 }: BlogPostRightNavigationProps): JSX.Element => {
   const stickySidebarRef = useRef<HTMLDivElement>();
@@ -52,7 +54,7 @@ const BlogPostRightNavigation = ({
           Edit on Github
         </Link>
 
-        <TableOfContent px={2} pt={6} />
+        <TableOfContent tableOfContentSource={tableOfContentSource} px={2} pt={6} />
       </Card>
     </Box>
   );

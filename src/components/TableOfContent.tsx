@@ -27,13 +27,18 @@ const TOCListItem = ({ heading, isActive, ...restProps }: TOCItemProps): JSX.Ele
   </NextLink>
 );
 
-type TableOfContentProps = BoxProps;
+type TableOfContentProps = {
+  tableOfContentSource: HTMLDivElement | null;
+} & BoxProps;
 
-const TableOfContent = ({ ...restProps }: TableOfContentProps): JSX.Element | null => {
-  const { headingsTree, headingHashesList } = useHeadingsTree();
+const TableOfContent = ({
+  tableOfContentSource,
+  ...restProps
+}: TableOfContentProps): JSX.Element | null => {
+  const { headingsTree, headingHashesList } = useHeadingsTree({ sourceEl: tableOfContentSource });
   const activeHashId = useActiveHashInViewport(headingHashesList);
 
-  if (!headingsTree) return null;
+  if (!headingsTree?.length) return null;
 
   return (
     <Box w="full" {...restProps}>
