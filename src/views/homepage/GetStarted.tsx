@@ -9,6 +9,7 @@ import Card from '@components/Card';
 import { BUILD_DEMO, AWS_MARKETPLACE, DISCUSSION } from '@consts/externalResources';
 import GAEvents from '@utils/GAEvents';
 import CTALink from '@components/CTALink';
+import Transition from '@root/components/Transition/Transition';
 
 const GET_STARTED_CARDS = [
   {
@@ -59,7 +60,7 @@ type GetStartedCardProps = {
 };
 
 const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, text, link }) => (
-  <Card pt={4} pb={6} px={{ base: 4, lg: 5 }} direction="row">
+  <Card pt={4} pb={6} px={{ base: 4, lg: 5 }} height="100%" direction="row">
     <Box flex={0} mr={5}>
       <GreenIconWrapper>
         <Icon as={icon} color="white" w={6} h={6} />
@@ -99,8 +100,10 @@ const GetStarted: FunctionComponent = () => (
         spacing={{ base: 6, lg: 10 }}
         px={{ base: 0, lg: 6 }}
       >
-        {GET_STARTED_CARDS.map((card) => (
-          <GetStartedCard key={card.title} {...card} />
+        {GET_STARTED_CARDS.map((card, index) => (
+          <Transition key={card.title} delay={(index+1) * 150} duration={300}>
+            <GetStartedCard {...card} />
+          </Transition>
         ))}
       </SimpleGrid>
     </Container>

@@ -17,6 +17,7 @@ import ArrowIcon from '@assets/icons/arrow.svg';
 import CloudIcon from '@assets/icons/cloud.svg';
 import PackagesIcon from '@assets/icons/packages.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
+import Transition from '@root/components/Transition/Transition';
 import CTALink from '@components/CTALink';
 
 const TITLE = 'Ockam is for Everyone';
@@ -173,60 +174,72 @@ const CardGridItem: FunctionComponent<CardGridItemProps> = ({
 );
 
 const Packages: FunctionComponent = () => (
-  <Container variant="section" py={{ base: 16, lg: 24 }}>
-    <Box
-      id="products"
-      visibility="hidden"
-      position="absolute"
-      left={0}
-      top={{ base: '50px', lg: '80px' }}
-    />
-    <Flex
-      direction="column"
-      justify="center"
-      maxW="41.5rem"
-      textAlign="center"
-      mb={{ base: 12, lg: 16 }}
-    >
-      <Heading as="h3" size="h3" mb={{ base: 6, lg: 8 }}>
-        {TITLE}
-      </Heading>
+    <Container variant="section" py={{ base: 16, lg: 24 }}>
+      <Box
+        id="products"
+        visibility="hidden"
+        position="absolute"
+        left={0}
+        top={{ base: '50px', lg: '80px' }}
+      />
+      <Flex
+        direction="column"
+        justify="center"
+        maxW="41.5rem"
+        textAlign="center"
+        mb={{ base: 12, lg: 16 }}
+      >
+        <Heading as="h3" size="h3" mb={{ base: 6, lg: 8 }}>
+          {TITLE}
+        </Heading>
 
-      {TEXTS.map((text) => (
-        <Text key={text} fontSize={{ lg: 'lg' }} mb={{ base: 4, lg: 5 }}>
-          {text}
-        </Text>
-      ))}
-    </Flex>
+        {TEXTS.map((text) => (
+          <Text key={text} fontSize={{ lg: 'lg' }} mb={{ base: 4, lg: 5 }}>
+            {text}
+          </Text>
+        ))}
+      </Flex>
 
-    <Grid
-      templateAreas={{
-        base: `
+      <Grid
+        templateAreas={{
+          base: `
         "header1"
         "body1"
         "header2"
         "body2"
       `,
-        lg: `
+          lg: `
         "header1 header2"
         "body1 body2"
       `,
-      }}
-      gridTemplateRows={{
-        base: 'repeat(4, auto)',
-        lg: 'repeat(2, auto)',
-      }}
-      gridTemplateColumns={{
-        base: '100%',
-        lg: 'repeat(2, 1fr)',
-      }}
-      columnGap={16}
-    >
-      {CARDS.map((card, index) => (
-        <CardGridItem key={card.title} columnOrder={index + 1} {...card} />
-      ))}
-    </Grid>
-  </Container>
-);
+        }}
+        gridTemplateRows={{
+          base: 'repeat(4, auto)',
+          lg: 'repeat(2, auto)',
+        }}
+        gridTemplateColumns={{
+          base: '100%',
+          lg: 'repeat(2, 1fr)',
+        }}
+        columnGap={16}
+      >
+        <Transition duration={300} delay={500}>
+          <Box height="100%" display="flex" flexDirection="column" justifyContent="space-between">
+            <CardGridItem columnOrder={1} {...CARDS[0]} />
+          </Box>
+        </Transition>
+        <Transition
+          duration={300}
+          delay={500}
+          initialState={{ opacity: 0, y: -40 }}
+          finalState={{ opacity: 1, y: 0 }}
+        >
+          <Box height="100%" display="flex" flexDirection="column" justifyContent="space-between">
+            <CardGridItem columnOrder={2} {...CARDS[1]} />
+          </Box>
+        </Transition>
+      </Grid>
+    </Container>
+  );
 
 export default Packages;

@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import CodeTwoImage from '@assets/images/code2.png';
 import CopyToClipboard from '@components/CopyToClipboard';
+import Transition from '@root/components/Transition/Transition';
 
 const CODE_TEXT = `# Install Ockam Command
 brew install ockam
@@ -49,38 +50,47 @@ const Tools: FunctionComponent = () => (
       {TITLE}
     </Heading>
 
-    <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={16} mb={{ base: 20, lg: 16 }}>
-      {TEXTS.map((column) => (
-        <Box key={`${column[1]}column`} _notLast={{ mb: { base: 5, lg: 0 } }}>
-          {column.map((text) => (
-            <Text key={text} fontSize={{ lg: 'lg' }} _notLast={{ mb: { base: 5, lg: 4 } }}>
-              {text}
-            </Text>
-          ))}
-        </Box>
-      ))}
-    </SimpleGrid>
+      <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={16} mb={{ base: 20, lg: 16 }}>
+        {TEXTS.map((column) => (
+          <Box key={`${column[1]}column`} _notLast={{ mb: { base: 5, lg: 0 } }}>
+            {column.map((text) => (
+              <Text key={text} fontSize={{ lg: 'lg' }} _notLast={{ mb: { base: 5, lg: 4 } }}>
+                {text}
+              </Text>
+            ))}
+          </Box>
+        ))}
+      </SimpleGrid>
 
-    <Box
-      position="relative"
-      zIndex={0}
-      p={0}
-      sx={{
-        span: {
-          boxShadow: 'xl',
-        },
-      }}
-    >
-      <CopyToClipboard codeText={CODE_TEXT} position="absolute" bottom={5} right={5} />
-      <Image
-        src={CodeTwoImage}
-        width={2080 / 2}
-        height={1301 / 2}
-        alt="Code block 2"
-        placeholder="blur"
-      />
-    </Box>
-  </Container>
-);
+      <Box
+        position="relative"
+        _hover={{ button: { display: 'block' } }}
+        zIndex={0}
+        p={0}
+        sx={{
+          span: {
+            boxShadow: 'xl',
+          },
+        }}
+      >
+        <CopyToClipboard
+          codeText={CODE_TEXT}
+          display="none"
+          position="absolute"
+          top="9%"
+          right="4%"
+        />
+        <Transition delay={200} duration={500}>
+          <Image
+            src={CodeTwoImage}
+            width={2080 / 2}
+            height={1301 / 2}
+            alt="Code block 2"
+            placeholder="blur"
+          />
+        </Transition>
+      </Box>
+    </Container>
+  );
 
 export default Tools;

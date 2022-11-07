@@ -7,6 +7,7 @@ import CasesOneImage from '@assets/images/cases1.png';
 import CasesTwoImage from '@assets/images/cases2.png';
 import CasesThreeImage from '@assets/images/cases3.png';
 import CTALink from '@components/CTALink';
+import Transition from '@root/components/Transition/Transition';
 
 const TITLE = 'How is Ockam Used?';
 const TEXTS = ['Ockam can, and should, be used between every application, everywhere.'];
@@ -65,7 +66,7 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
   actionHref,
   isExternal,
 }) => (
-  <Card p={6}>
+  <Card p={6} height="100%">
     <Center pb={6} mb={6} borderBottom="1px" borderColor="gray.200">
       <Image src={image} alt={`${title} image`} width={313} height={171} placeholder="blur" />
     </Center>
@@ -87,31 +88,33 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
 );
 
 const Cases: FunctionComponent = () => (
-  <Container variant="section" id="use-cases" pt={{ base: 16, lg: 20 }} pb={{ base: 20, lg: 18 }}>
-    <Flex
-      direction="column"
-      alignItems="center"
-      textAlign="center"
-      w="full"
-      mb={{ base: 12, lg: 16 }}
-    >
-      <Heading as="h2" size="h2" mb={6}>
-        {TITLE}
-      </Heading>
+    <Container variant="section" id="use-cases" pt={{ base: 16, lg: 20 }} pb={{ base: 20, lg: 18 }}>
+      <Flex
+        direction="column"
+        alignItems="center"
+        textAlign="center"
+        w="full"
+        mb={{ base: 12, lg: 16 }}
+      >
+        <Heading as="h2" size="h2" mb={6}>
+          {TITLE}
+        </Heading>
 
-      {TEXTS.map((text) => (
-        <Text key={text} fontSize={{ lg: 'lg' }} lineHeight={1.4} _notLast={{ mb: 5 }}>
-          {text}
-        </Text>
-      ))}
-    </Flex>
+        {TEXTS.map((text) => (
+          <Text key={text} fontSize={{ lg: 'lg' }} lineHeight={1.4} _notLast={{ mb: 5 }}>
+            {text}
+          </Text>
+        ))}
+      </Flex>
 
-    <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 6, lg: 10 }}>
-      {CASES_CARDS.map((card) => (
-        <CasesCard key={card.title} {...card} />
-      ))}
-    </SimpleGrid>
-  </Container>
-);
+      <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 6, lg: 10 }}>
+        {CASES_CARDS.map((item, index) => (
+          <Transition key={item.title} delay={(index + 1) * 300} duration={500}>
+            <CasesCard {...item} />
+          </Transition>
+        ))}
+      </SimpleGrid>
+    </Container>
+  );
 
 export default Cases;
