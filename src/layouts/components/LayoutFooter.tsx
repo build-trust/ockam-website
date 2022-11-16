@@ -17,9 +17,14 @@ import {
 
 import LogoGray from '@assets/logo-gray.svg';
 import { LINKEDIN, TWITTER, DISCUSSION, BUILD_DEMO } from '@consts/externalResources';
-import { CONTACT_PAGE_PATH } from '@consts/paths';
+import { CONTACT_PAGE_PATH, STYLE_GUIDE_PATH } from '@consts/paths';
 
 const NAV = [
+  {
+    name: 'Style Guide',
+    href: STYLE_GUIDE_PATH,
+    isExternal: false,
+  },
   {
     name: 'Support',
     href: CONTACT_PAGE_PATH,

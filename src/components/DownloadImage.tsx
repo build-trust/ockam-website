@@ -46,8 +46,11 @@ const DownloadImage: FunctionComponent<DownloadImageProps> = ({
         <RadioGroup defaultValue={selectedImageType}>
           <Stack>
             {downloadOptions.map((option: string) => (
-              <MenuItem key={option} _hover={{ bg: 'avocado.400' }}>
+              <MenuItem key={option} _hover={{ bg: 'avocado.400' }} padding={0}>
                 <Radio
+                  width="100%"
+                  px={4}
+                  py={2}
                   colorScheme="avocado"
                   value={option}
                   onChange={(e): void => {
