@@ -1,10 +1,11 @@
 import { FunctionComponent } from 'react';
-import { chakra, Container, SimpleGrid, Box, Flex, Text, useTheme } from '@chakra-ui/react';
+import { chakra, Container, SimpleGrid, Box, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import StarsImage from '@assets/images/stars.png';
 import ContributorsImage from '@assets/images/contributors.png';
 import DownloadsImage from '@assets/images/downloads.png';
+import NumericAnimation from '@root/components/NumericAnimation/NumericAnimation';
 
 type StatsProps = {
   stars: number;
@@ -21,7 +22,6 @@ const getValueFormat = (fullValue: number): string | number =>
     : '';
 
 const Stats: FunctionComponent<StatsProps> = ({ stars, contributors, downloads }) => {
-  const { gradients } = useTheme();
 
   const STATS = [
     {
@@ -60,9 +60,9 @@ const Stats: FunctionComponent<StatsProps> = ({ stars, contributors, downloads }
             pb={{ base: index === 2 ? 0 : 10, lg: 0 }}
           >
             <Box alignSelf={{ base: 'center', lg: stat.alignSelf || 'flex-start' }}>
-              <Box lineHeight={1.1}>
-                <chakra.span fontSize="10xl" fontWeight="bold" bg={gradients.primary} bgClip="text">
-                  {stat.value}
+              <Box lineHeight={1.1} display="flex" justifyContent="center" alignItems="baseline">
+                <chakra.span fontSize="10xl" fontWeight="bold">
+                  <NumericAnimation number={stat.value} />
                 </chakra.span>
                 <chakra.span fontSize="5xl" color="gray.200" fontWeight="extrabold">
                   {stat.valueFormat}
