@@ -30,8 +30,8 @@ const GraphicsCard: FunctionComponent<TGraphicsContent> = ({
       width="100%"
       height="100%"
     >
-      <Image objectFit="cover" layout="fill" src={`/graphics/${image}.png`} />
-      <DownloadImage downloadOptions={downloadOptions} folderName="graphics" imageName={image} />
+      <Image objectFit="cover" layout="fill" src={`/style-guide/graphics/${image}.png`} />
+      <DownloadImage downloadOptions={downloadOptions} folderName="style-guide/graphics" imageName={image} />
     </Box>
     <Box marginTop={5}>
       <Text color="brand.900" fontWeight="bold" fontSize="lg" marginBottom={3}>

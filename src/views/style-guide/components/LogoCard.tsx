@@ -20,9 +20,9 @@ const LogoCard: FunctionComponent<TLogoContent> = ({ isDark, logo, heading, desc
       position="relative"
     >
       <Box width="50%" height="50%" position="relative">
-        <Image objectFit="contain" layout="fill" src={`/logo/${logo}.png`} />
+        <Image objectFit="contain" layout="fill" src={`/style-guide/logo/${logo}.png`} />
       </Box>
-      <DownloadImage downloadOptions={downloadOptions} folderName="logo" imageName={logo} />
+      <DownloadImage downloadOptions={downloadOptions} folderName="style-guide/logo" imageName={logo} />
     </Box>
     <Box marginTop={5}>
       <Text color="brand.900" fontWeight="bold" fontSize="lg" marginBottom={3}>

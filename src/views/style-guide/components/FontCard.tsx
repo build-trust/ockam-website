@@ -15,7 +15,7 @@ const FontCard: FunctionComponent<TTypographyContent> = ({ name, fileName, fonts
       <Heading as="h3" size={{ base: 'lg', lg: 'md' }} fontWeight="bold" marginBottom={4}>
         {name}
       </Heading>
-      <Link textDecoration="none" href={`/fonts/${fileName}.zip`} download>
+      <Link textDecoration="none" href={`/style-guide/fonts/${fileName}.zip`} download>
         <Button>Download the font</Button>
       </Link>
     </Box>

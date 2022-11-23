@@ -1,5 +1,4 @@
 import { FunctionComponent, useState } from 'react';
-import Image from 'next/image';
 import {
   Button,
   IconButton,
@@ -12,6 +11,8 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { saveAs } from 'file-saver';
+
+import MoveLayerDownIcon from '@assets/icons/move-layer-down.svg';
 
 type DownloadImageProps = {
   downloadOptions: string[];
@@ -35,12 +36,12 @@ const DownloadImage: FunctionComponent<DownloadImageProps> = ({
         position="absolute"
         top={3}
         right={3}
-        width={4}
-        height={4}
+        width={3}
+        height={3}
         as={IconButton}
-        backgroundColor="#d3dbe4"
-        _active={{ backgroundColor: '#d3dbe4' }}
-        icon={<Image src='/icons/download.svg' width={24} height={24} />}
+        backgroundColor="gray.100"
+        _active={{ backgroundColor: 'gray.200' }}
+        icon={<MoveLayerDownIcon width={16} height={16}  />}
       />
       <MenuList maxWidth={32} minWidth={32}>
         <RadioGroup defaultValue={selectedImageType}>
