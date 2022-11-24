@@ -106,3 +106,28 @@ To add a blog post:
 
 For SEO purpose it's highly recommended to add redirect for pages that no longer exist but was indexed by google.
 Go to `next.config.js` file and add proper redirect there. For more info check out the documentation [https://nextjs.org/docs/api-reference/next.config.js/redirects](https://nextjs.org/docs/api-reference/next.config.js/redirects)
+
+## Styleguide
+
+Styleguide page is divided into two general parts:
+1. The top sections contains all the static style guide elements ( they are not supposed to be edited frequently ). It's more of the official part of this page.
+2. Miscellaneous section, where you can put all the other images and guidelines using markdown.
+
+### Top static section
+This one is build using regular React components and nextJS approach. Content of the section was isolated to separate file for easier modifications. 
+You can find content definitions here: `src/consts/styleGuide/*`.
+All assets for this section (images, fonts, graphics, etc), should live under `public` folder. One exception for that are icons, that are dynamically generated from `/src/assets/icons` folder.
+
+### Miscellaneous section
+Miscellaneous section lives here: `src/content/style-guide/miscellaneous.md`. This one is edited using markdown file, extended to use JSX in markdown content (MDX). While playing with this section, all your assets linked inside this file, have to live under `/public` folder.
+You can use one special component prepared for this section purpose, which is `StyleGuideResourceCaption`. Using it under image, will display captions under with nice visual manner. Here is a quick example:
+```jsx
+<StyleGuideResourceCaption
+        marginBottom={10}
+        title="Sample title"
+        description="Sample description"
+/>
+```
+
+
+
