@@ -36,12 +36,14 @@ const DownloadImage: FunctionComponent<DownloadImageProps> = ({
         position="absolute"
         top={3}
         right={3}
-        width={3}
-        height={3}
         as={IconButton}
+        minW={2}
+        minH={2}
+        height={7}
+        width={7}
         backgroundColor="gray.100"
         _active={{ backgroundColor: 'gray.200' }}
-        icon={<MoveLayerDownIcon width={16} height={16}  />}
+        icon={<MoveLayerDownIcon width={14} height={14}  />}
       />
       <MenuList maxWidth={32} minWidth={32}>
         <RadioGroup defaultValue={selectedImageType}>
