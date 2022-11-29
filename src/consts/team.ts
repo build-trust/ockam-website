@@ -81,8 +81,8 @@ export const MEMBERS = enhanceTeamMembers([
     position: 'Business Operations',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
-    photo: 'nick-ippolito.png',
-    description: 'The newest member of The Team',
+    photo: 'nicholas-ippolito.png',
+    description: 'Enjoys snowboarding, fishing and surfing',
   },
   {
     name: 'Adrian',
@@ -92,6 +92,15 @@ export const MEMBERS = enhanceTeamMembers([
     country: 'ES',
     photo: 'adrian-benavides.png',
     description: 'Loves music, playing the guitar and video games',
+  },
+  {
+    name: 'Michał',
+    surname: 'Szpakowski',
+    position: 'Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'PL',
+    photo: 'michal-szpakowski.png',
+    description: 'Loves swimming in the oceans, hiking in the mountains and gazing at the stars',
   },
   {
     name: 'Chris',
