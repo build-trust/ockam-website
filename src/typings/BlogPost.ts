@@ -16,6 +16,7 @@ export type BlogPost = {
   content: string;
   data: BlogPostData;
   filePath: string;
+  slug: string,
 };
 
 export type GroupedBlogPosts = {

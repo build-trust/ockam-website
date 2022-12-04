@@ -11,10 +11,13 @@ export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guid
 
 // postFilePaths is the list of all mdx files inside the POSTS_PATH directory
 export const postFilePaths = fs.readdirSync(POSTS_PATH).filter((path) => /\.mdx?$/.test(path));
+
 export const styleGuideFilePaths = fs
   .readdirSync(STYLE_GUIDE_PATH)
   .filter((path) => /\.mdx?$/.test(path));
 
+export const generateSlugFromPath = (path) => path.replace(/\.mdx?$/, '');
+export const generatePathFromSlug = (slug) => `${slug}.mdx`;
 export const getAllPosts = () => {
   const posts = postFilePaths.map((filePath) => {
     const source = fs.readFileSync(path.join(POSTS_PATH, filePath));
@@ -30,7 +33,7 @@ export const getAllPosts = () => {
 };
 
 export const getPostBySlug = async (slug) => {
-  const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`);
+  const postFilePath = path.join(POSTS_PATH, generatePathFromSlug(slug));
   const source = fs.readFileSync(postFilePath);
 
   const { content, data } = matter(source);

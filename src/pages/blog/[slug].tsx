@@ -3,7 +3,7 @@ import { Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect, useRef } from 'react';
 
-import { getAllPosts, getPostBySlug, postFilePaths } from '@api/mdxApi';
+import { generateSlugFromPath,getAllPosts, getPostBySlug, postFilePaths } from '@api/mdxApi';
 import mdxComponents from '@components/mdx';
 import { BlogPost, BlogPostData } from '@typings/BlogPost';
 import BlogLayout from '@layouts/BlogLayout/BlogLayout';
@@ -12,6 +12,7 @@ import SEOHead from '@components/SEOHead';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { useBlogPostsContext } from '@contextProviders/BlogPostsProvider';
 import { BLOG_PATH } from '@consts/paths';
+import BlogsPagination from '@root/components/BlogsPagination';
 
 const RIGHT_SIDEBAR_WIDTH = '16rem';
 
@@ -51,7 +52,7 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
         <BlogPostHeader post={frontMatter as BlogPostData} />
 
         <Flex mt={{ base: 10, '1.5xl': 16 }} position="relative">
-          <Flex
+          <Flex flexDirection="column" 
             ref={blogPostBodyRef}
             w="full"
             direction="column"
@@ -61,14 +62,19 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
             pr={{ '1.5xl': `calc(${RIGHT_SIDEBAR_WIDTH} + 1.5rem)` }}
           >
             <MDXRemote {...source} components={mdxComponents} />
+            <BlogsPagination/>
           </Flex>
+
           <BlogPostRightNavigation
             slug={router.query.slug as string}
             tableOfContentSource={blogPostBodyRef?.current}
             w={RIGHT_SIDEBAR_WIDTH}
           />
         </Flex>
-      </Flex>
+        
+
+        </Flex>
+     
     </>
   );
 };
@@ -84,12 +90,13 @@ export const getStaticProps = async ({
 }: ParamsType): Promise<{ props: BlogPostPageProps }> => {
   const { source, frontMatter } = await getPostBySlug(params.slug);
   const posts = getAllPosts() as BlogPost[];
+  const postsWithSlug = posts.map(post => ({...post, slug: generateSlugFromPath(post.filePath)}));
 
   return {
     props: {
       source,
       frontMatter,
-      posts,
+      posts: postsWithSlug,
     },
   };
 };
@@ -99,7 +106,7 @@ export const getStaticPaths = async (): Promise<{
   fallback: boolean;
 }> => {
   const paths = postFilePaths
-    .map((path) => path.replace(/\.mdx?$/, ''))
+    .map((path) => generateSlugFromPath(path))
     .map((slug) => ({ params: { slug } }));
 
   return {
@@ -107,5 +114,6 @@ export const getStaticPaths = async (): Promise<{
     fallback: false,
   };
 };
+
 
 export default BlogPostPage;
