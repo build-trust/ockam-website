@@ -13,6 +13,7 @@ import StylesProvider from '@contextProviders/StylesProvider';
 import MobileNavbarProvider from '@contextProviders/MobileNavbarProvider';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import theme from '@theme';
+import { clearTrailingSlashes } from '@utils/seoUtils';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -26,7 +27,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   const { getLayout = (page: ReactElement): ReactNode => page } = Component;
 
   const { pathname } = useRouter();
-  const canonicalUrl = useMemo(() => CONFIG.app.rootUrl + pathname, [pathname]);
+  const canonicalUrl = useMemo(() => clearTrailingSlashes(CONFIG.app.rootUrl + pathname), [pathname]);
   const ogImageUrl = `${CONFIG.app.rootUrl}${defaultOgImage.src}`;
 
   return (

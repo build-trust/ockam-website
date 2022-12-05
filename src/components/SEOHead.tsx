@@ -3,6 +3,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 
 import { KEYS } from '@consts/seo';
 import CONFIG from '@config';
+import { clearTrailingSlashes } from '@utils/seoUtils';
 
 type SEOHeadProps = {
   children?: ReactNode;
@@ -26,7 +27,7 @@ const SEOHead: FunctionComponent<SEOHeadProps> = ({
   const commonTitleWithSubTitle = subTitle && `${CONFIG.app.title} | ${subTitle}`;
   const specificTitle = title || commonTitleWithSubTitle;
   const ogImageUrl = `${CONFIG.app.rootUrl}${ogImageSrc}`;
-  const canonicalUrl = `${CONFIG.app.rootUrl}${canonicalPath}`;
+  const canonicalUrl = clearTrailingSlashes(`${CONFIG.app.rootUrl}${canonicalPath}`);
 
   return (
     <Head>
