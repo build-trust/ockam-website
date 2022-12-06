@@ -112,6 +112,15 @@ export const MEMBERS = enhanceTeamMembers([
     description: 'A passion for privacy, open source software and Rust',
   },
   {
+    name: 'Chris',
+    surname: 'Oakley',
+    position: 'Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'US',
+    photo: 'chris-oakley.png',
+    description: 'Most often found somewhere on top of a mountain'
+  },
+  {
     name: 'Maryanna',
     surname: 'Saenko',
     position: 'Board Member',
