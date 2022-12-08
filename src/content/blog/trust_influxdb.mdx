@@ -14,7 +14,7 @@ Let's investigate how to build applications with trusted time series data in a z
 
 This is why InfluxData and Ockam have partnered to bring trust to time series data streams and data warehouses. First let’s start with the challenges faced by application developers;
 
-# Network boundaries are not sufficient for data-layer trust, security, nor privacy.
+## Network boundaries are not sufficient for data-layer trust, security, nor privacy.
 
 Time series data typically needs to traverse multiple networks to connect a machine at the edge with InfluxDB in the cloud. This makes it nearly impossible to control a network perimeter - particularly for an application developer.
 
@@ -30,7 +30,7 @@ To build an application that places zero trust in network boundaries can be chal
 
 Let's look at the components that make up Ockam's systems, and how they provide security and privacy to time series data streams.
 
-# What is Ockam?
+## What is Ockam?
 
 [Ockam is an open source](https://github.com/ockam-network/ockam) suite of tools, programming libraries and infrastructure that makes it easy to build devices that communicate securely, privately and trustfully with cloud services and other devices. Security, Privacy and Trust are application layer concerns and IoT developers should have simple tools to granularly control these aspects of their applications.
 
@@ -44,11 +44,11 @@ The goal is to provide this functionality in multiple programming languages with
 
 ![Ockam Architecture, Features, Add-ons](/blog/trust_influx/architecture.svg)
 
-## End-to-end encrypted secure channels
+### End-to-end encrypted secure channels
 
 Ockam’s Secure Channels provide end-to-end encrypted and mutually authenticated communication that is safe against eavesdropping, tampering, and forgery of messages sent across multiple application layer hops. This enables an application to place zero trust in network boundaries and instead delivers granular control to application developers on what data is revealed where in their system.
 
-## Machine identity and access management
+### Machine identity and access management
 
 Application developers need fine-grained control over data access in their systems, this can only be achieved if all interactions are mutually authenticated. To enable this, all devices must have unique cryptographically provable identities and access control must be managed with secure credentials. Enrolling large fleets of devices and managing the lifecycle of their keys and credentials can be quite challenging at scale. Ockam includes easy to use cryptographic protocols for;
 
@@ -58,7 +58,7 @@ Application developers need fine-grained control over data access in their syste
 - Credential Issuance
   ...and more.
 
-## Built for InfluxDB developers
+### Built for InfluxDB developers
 
 Ockam includes a suite of robust cryptographic protocols, accessible through simple to use programming libraries, that enable application developers to focus on the trust rules and policies of their IoT and time series data-dependent applications.
 

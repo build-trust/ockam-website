@@ -8,7 +8,7 @@ author: 'Matthew Gregory'
 authorAvatar: /blog/matthew_gregory-1.png
 ---
 
-# A beginners guide to key pairs in cryptography
+## A beginners guide to key pairs in cryptography
 
 As so much of our information is transported via the internet, it’s important to safeguard it just as we safeguard information in real life.
 
@@ -18,7 +18,7 @@ But what happens when the document being transported is computer data? When data
 
 In this article, we’ll take an introductory look at the different types of keys available, and when and how they’re useful.
 
-## Symmetric Keys: Fast & Simple, Yet Potentially Vulnerable
+### Symmetric Keys: Fast & Simple, Yet Potentially Vulnerable
 
 Let’s say your confidential document isn’t secured via a physical lockbox, but via encryption. What does this look like? The answer lies in child's play.
 
@@ -30,7 +30,7 @@ The encryption of messages nowadays extends well past physical notes. With onlin
 
 In order to get around these problems, we have additional security methods. Introducing: **asymmetric key pairs**.
 
-## Asymmetric Key Pairs: A Slower, More Secure Method
+### Asymmetric Key Pairs: A Slower, More Secure Method
 
 Asymmetric key pairs are a creative way to transmit messages without exposing compromising information, like symmetric keys. Let’s go back to our lockbox example for this:
 
@@ -42,7 +42,7 @@ In our example, Bob gives you a lockbox to secure the message, and he has the on
 
 There are many advantages to using asymmetric key pairs. By encrypting your message with your private key, you are essentially validating it has originated from you, as you are the only one with that key. Anyone can confirm that you signed it with your private key when they can use your widely-available public key to do so. By securing the message with your private key and their public key, you get the benefits of both authenticating your [identity](/learn/concepts/machine-identities-and-credentials/) and keeping the message safe from prying eyes.
 
-## The Importance of Cryptographic Keys
+### The Importance of Cryptographic Keys
 
 Both symmetric keys and asymmetric key pairs are used in our online communication. Symmetric keys are incredibly fast to implement, and thus are used for encrypting large amounts of data. Asymmetric keys are slower but are much more secure. This results in technologies making use of a combination of asymmetric key pairs and symmetric keys.
 

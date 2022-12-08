@@ -8,13 +8,13 @@ author: 'Mrinal Wadhwa'
 authorAvatar: /blog/mrinal-wadhwa-1.jpg
 ---
 
-# How to Fight Against Code Complexity in Open Source Projects
+## How to Fight Against Code Complexity in Open Source Projects
 
 Complex code can be hard to manage and build upon. That's especially true for open source projects, where strong open source communication is crucial for success. Since we’re building an open source company, we made [simplicity a core value](https://www.ockam.io/learn/how-to-guides/high-performance-team/values_and_virtues_on_the_Ockam_Team)—and even referenced it in the name of our company: Ockam. Our approach with software is to create simple designs that enable us to build up our systems without them ever becoming overwhelming.
 
 In this post, we'll be walking you through our open source software design philosophy, inspired heavily by _A Philosophy of Software Design_ by John Ousterhout.
 
-## Complexity and the Flaws of Tactical Programming
+### Complexity and the Flaws of Tactical Programming
 
 Let's start by defining what we mean when we talk about _complexity_. Ousterhout's book contains a wealth of knowledge useful to any developer, including his conceptualization of complex code. In his words, complexity is "anything related to the structure of a codebase that makes it hard to understand or improve that codebase." This is an important clarification to make. We aren't using “complex” as a euphemism for technically challenging or impressively large systems. We're using it to describe code structure that is inherently _more_ complex than it has to be.
 
@@ -32,7 +32,7 @@ What causes the eventual slowdown experienced by tactical programmers? It's a re
 
 So what's the alternative? We mentioned that the hare would probably prefer the short-term focused goals of tactical programming, but what would the tortoise prefer? Let's look at the alternative to tactical programming: strategic programming.
 
-## Strategic Programming Works Long-Term
+### Strategic Programming Works Long-Term
 
 So far we've discussed what _not_ to do. Let's move on to what we prefer: strategic programming. To quote Ousterhout once again, strategic programming is the idea that the "primary goal must be to produce a great design, which also happens to work."
 
@@ -44,7 +44,7 @@ Comments are another concept your future self will thank you for. Technically ch
 
 Now, none of this matters if you're not consistent in the implementation. In that case, you're just another version of the hare.
 
-### Code With a Modular Design
+#### Code With a Modular Design
 
 In some ways, however, naming and comments are just nice, albeit useful, decorations. True strategic programming systematically affects how the code itself is written and organized. A key part of this is writing with a modular design in mind.
 
@@ -54,7 +54,7 @@ Another benefit of modular design is that when you want to change one thing of t
 
 We've been introducing you to strategic programming in a broad sense. It's also good to show you specific examples of strategic programming at work. Good thing we’ve been practicing strategic programming!
 
-## How Ockam Benefits From Strategic Programming
+### How Ockam Benefits From Strategic Programming
 
 How do we at Ockam incorporate strategic programming? Well, it's a key pillar to being able to support and connect the vast array of IoT systems.
 
