@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { MDXRemote } from 'next-mdx-remote';
 
 import mdxComponents from '@components/mdx';
@@ -19,9 +19,9 @@ const MiscellaneousSection: FunctionComponent<MiscellaneousSectionProps> = ({
           {frontMatter.title}
         </Heading>
         <Text>{frontMatter.description}</Text>
-        <Box mt={8}>
+        <Flex mt={8} width="100%" flexWrap = "wrap">
           <MDXRemote {...source} components={mdxComponents} />
-        </Box>
+        </Flex>
       </Box>
     ))}
   </>

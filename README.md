@@ -120,9 +120,9 @@ All assets for this section (images, fonts, graphics, etc), should live under `p
 
 ### Miscellaneous section
 Miscellaneous section lives here: `src/content/style-guide/miscellaneous.md`. This one is edited using markdown file, extended to use JSX in markdown content (MDX). While playing with this section, all your assets linked inside this file, have to live under `/public` folder.
-You can use one special component prepared for this section purpose, which is `StyleGuideResourceCaption`. Using it under image, will display captions under with nice visual manner. Here is a quick example:
+You can use one special component prepared for this section purpose, which is `StyleGuideResourceItem`. Using it under image, will display captions under with nice visual manner. Here is a quick example:
 ```jsx
-<StyleGuideResourceCaption
+<StyleGuideResourceItem
         marginBottom={10}
         title="Sample title"
         description="Sample description"

@@ -26,8 +26,9 @@ type StyleGuideProps = {
 
 const StyleGuide: NextPageWithLayout<StyleGuideProps> = ({ styleGuideSections, base64Icons }) => (
   <Container
+  
+  alignItems= "center"
     variant="section"
-    alignItems="flex-start"
     pb={{ base: 10, lg: 20 }}
     mt={{ base: 0, lg: 20 }}
   >

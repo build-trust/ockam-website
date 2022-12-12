@@ -5,7 +5,7 @@ const graphics = [
     height: '360px',
     mobileHeight: '280px',
     heading: 'Open Graph',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae faucibus odio.',
+    text: 'The image is for open graph. You can download it in png, jpg and svg.',
   },
   {
     image: 'graphics_2',
@@ -13,15 +13,15 @@ const graphics = [
     height: '380px',
     mobileHeight: '380px',
     heading: 'Profile Picture for Socials',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae faucibus odio.',
+    text: 'This profile picture should fit for every social media.',
   },
   {
     image: 'graphics_3',
     width: '77%',
     height: '360px',
     mobileHeight: '230px',
-    heading: 'Linked in Cover',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae faucibus odio.',
+    heading: 'LinkedIn Cover',
+    text: 'The cover is dedicated to a LinkedIn. You can download it in png, jpg and svg.',
   },
 ];
 
