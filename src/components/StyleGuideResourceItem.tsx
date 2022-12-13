@@ -1,7 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Stack , Heading, Text, Image, Flex } from '@chakra-ui/react';
-
-
+import { Stack , Heading, Text, Image, Flex, Link } from '@chakra-ui/react';
 
 type StyleGuideResourceCaptionProps= {
   title?: string,
@@ -16,7 +14,9 @@ const StyleGuideResourceCaption: FunctionComponent<StyleGuideResourceCaptionProp
   ...restProps
 }) => (
     <Stack spacing={3} maxWidth="371px" width="100%" {...restProps}>
-      <Image src = {image} maxWidth="100%"/>
+      <Link href={image} isExternal>
+        <Image src ={image} width='100%' height='100%' />
+      </Link>
       <Flex  flexDirection="column" width="100%">
       {title && <Heading as='h5' fontSize='1.125rem'>{title}</Heading>}
       { description && <Text fontWeight="400">{description}</Text> }
