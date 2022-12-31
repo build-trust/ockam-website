@@ -1,7 +1,7 @@
 # OckamWebsite
 
 ## Table of Contents
-
+- [Welcome](./WELCOME.md)
 - [About The Project](#about-the-project)
     * [Built With](#built-with)
     * [Requirements to run projects](#requirements-to-run-projects)
