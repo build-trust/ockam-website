@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ import { OPEN_ROLES_PATH } from '@consts/paths';
 import { LeverPosting, LeverPostingList } from '@typings/lever';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import CheckIcon from '@assets/icons/check.svg';
+import { MobileNavbarContext } from '@root/contextProviders/MobileNavbarProvider';
 
 const ListItemWrapper: FunctionComponent<ListItemProps> = ({ children, ...restProps }) => (
   <ListItem display="flex" {...restProps}>
@@ -54,6 +55,8 @@ const DetailsList: FunctionComponent<LeverPostingList> = ({ text, content }): JS
 type OpenRoleProps = { openRole: LeverPosting };
 
 const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
+  const { isBelowSmallLaptop } = useContext(MobileNavbarContext);
+
   const ApplyButton = (
     <Button
       as="a"
@@ -69,7 +72,7 @@ const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
 
   return (
     <Container variant="section" alignItems="flex-start">
-      <Box maxW="3xl" pb={16}>
+      <Box maxW="3xl" pb={16} pt={isBelowSmallLaptop ? 0 : 12}>
         <Button size="lg" color="brand.900" as="a" href={OPEN_ROLES_PATH} variant="link" mb={10}>
           <ArrowBackIcon w={6} h={6} mr={2} /> Back to Job Positions
         </Button>

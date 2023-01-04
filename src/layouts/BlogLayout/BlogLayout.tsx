@@ -2,19 +2,21 @@ import { FunctionComponent, ReactNode } from 'react';
 import { Box, Flex, useTheme } from '@chakra-ui/react';
 
 import BlogPostsProvider from '@contextProviders/BlogPostsProvider';
+import { BlogPost } from '@root/typings/BlogPost';
 
 import LayoutFooter from '../components/LayoutFooter';
 
 import BlogLayoutSidebar from './BlogLayoutSidebar/BlogLayoutSidebar';
 import BlogLayoutMobileNav from './BlogLayoutMobileNav/BlogLayoutMobileNav';
 
-type BlogLayoutProps = { children: ReactNode };
 
-const BlogLayout: FunctionComponent<BlogLayoutProps> = ({ children }) => {
+type BlogLayoutProps = { children: ReactNode, blogPosts: BlogPost[] };
+
+const BlogLayout: FunctionComponent<BlogLayoutProps> = ({ children, blogPosts }) => {
   const theme = useTheme();
 
   return (
-    <BlogPostsProvider>
+    <BlogPostsProvider blogPosts={blogPosts} >
       <BlogLayoutMobileNav />
       <BlogLayoutSidebar display={{ base: 'none', lg: 'flex' }} />
 

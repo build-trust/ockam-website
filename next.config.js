@@ -1,6 +1,8 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+
+const {redirectJobs, redirectDocs} = require('./lib/redirects')
 const withSvgr = require('next-svgr');
 
 const nextConfig = {
@@ -16,8 +18,16 @@ const nextConfig = {
       destination: '/blog/:slug*',
       permanent: true,
     },
+    {
+      source: '/open-source/:slug*',
+      destination: '/open-source',
+      permanent: true,
+    },
+    ...redirectDocs,
+    ...redirectJobs
+    
   ],
-};
+}
 
 module.exports = (_phase, { defaultPlugin }) => {
   const plugins = [withSvgr, withBundleAnalyzer];

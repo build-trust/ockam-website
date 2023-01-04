@@ -13,6 +13,7 @@ import { BlogPost, GroupedBlogPosts } from '@typings/BlogPost';
 
 type SearchValueProviderProps = {
   children: ReactNode;
+  blogPosts: BlogPost[]
 };
 
 type BlogPostsContextType = {
@@ -21,7 +22,6 @@ type BlogPostsContextType = {
   groupedBlogPostsByCategory: GroupedBlogPosts;
   searchPostsQuery: string;
   searchPostsResult: BlogPost[];
-  handleSetBlogPosts: (value: BlogPost[]) => void;
   handleSetSearchPostsQuery: (value: string) => void;
   handleRemoveSearchPostsQuery: () => void;
   searchInputValue: string;
@@ -31,13 +31,11 @@ type BlogPostsContextType = {
 export const BlogPostsContext = createContext<BlogPostsContextType>({} as BlogPostsContextType);
 export const useBlogPostsContext = (): BlogPostsContextType => useContext(BlogPostsContext);
 
-const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ children }) => {
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ children, blogPosts }) => {
 
   const [searchPostsQuery, setSearchPostValue] = useState('');
   const [searchInputValue, setSearchInputValue] = useState('');
 
-  const handleSetBlogPosts = useCallback((posts: BlogPost[]) => setBlogPosts(posts), []);
   const handleSetSearchPostsQuery = useCallback(
     (value: string): void => setSearchPostValue(value),
     []
@@ -81,7 +79,6 @@ const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ childr
       blogPosts,
       featuredAndOrderedBlogPosts,
       groupedBlogPostsByCategory,
-      handleSetBlogPosts,
       searchPostsQuery,
       searchPostsResult,
       handleSetSearchPostsQuery,
@@ -93,7 +90,6 @@ const BlogPostsProvider: FunctionComponent<SearchValueProviderProps> = ({ childr
       blogPosts,
       featuredAndOrderedBlogPosts,
       groupedBlogPostsByCategory,
-      handleSetBlogPosts,
       searchPostsQuery,
       searchPostsResult,
       handleSetSearchPostsQuery,
