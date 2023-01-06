@@ -12,7 +12,6 @@ import { BlogPost } from '@root/typings/BlogPost';
 
 const BlogsPagination: FC = () => {
   const { groupedBlogPostsByCategory } = useBlogPostsContext();
-
   const router = useRouter();
 
   // creating a sorted list of linear blogs 
@@ -83,11 +82,11 @@ const BlogsPagination: FC = () => {
                 <Text fontSize="14px" fontWeight='normal' color="black">
                   Next Article
                 </Text>
-                <Text width="200px" fontSize="18px" fontWeight="semibold" noOfLines={1} color="black">
+                <Text maxWidth="200px" fontSize="18px" fontWeight="semibold" noOfLines={1} color="black">
                   {sortedLinearGroupedBlogs[currentBlogIndex + 1]?.data?.title}
                 </Text>
               </Flex>
-              <Icon as={NextIcon} w={8} h={8} ml={2} />
+              <Icon as={NextIcon} w={8} h={8}  />
             </Flex>
           </Flex>
         </Flex>
