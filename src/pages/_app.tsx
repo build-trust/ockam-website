@@ -1,10 +1,10 @@
-import { FunctionComponent, ReactElement, ReactNode, useMemo } from 'react';
+import { FunctionComponent, ReactElement, ReactNode, useMemo, useEffect } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import NextNprogress from 'nextjs-progressbar';
 import 'focus-visible/dist/focus-visible';
 import { useRouter } from 'next/router';
-import { GoogleAnalytics } from "nextjs-google-analytics";
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 
 import defaultOgImage from '@assets/images/open-graphs/default.png';
 import CONFIG from '@config';
@@ -26,9 +26,20 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   } = props;
   const { getLayout = (page: ReactElement): ReactNode => page } = Component;
 
-  const { pathname } = useRouter();
-  const canonicalUrl = useMemo(() => clearTrailingSlashes(CONFIG.app.rootUrl + pathname), [pathname]);
+  const router = useRouter();
+  const { pathname } = router;
+  const canonicalUrl = useMemo(
+    () => clearTrailingSlashes(CONFIG.app.rootUrl + pathname),
+    [pathname]
+  );
   const ogImageUrl = `${CONFIG.app.rootUrl}${defaultOgImage.src}`;
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', (url) => {
+      // @ts-ignore window.analytics undefined below
+      window.analytics.page(url);
+    });
+  });
 
   return (
     <>
