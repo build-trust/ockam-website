@@ -66,15 +66,6 @@ export const MEMBERS = enhanceTeamMembers([
     description: 'Rides really fast motorcycles',
   },
   {
-    name: 'Piotr',
-    surname: 'Sobieszczański',
-    position: 'Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'PL',
-    photo: 'piotr-sobieszczanski.png',
-    description: 'Loves nature and passion about space exploration',
-  },
-  {
     name: 'Pablo',
     surname: 'Polvorin',
     position: 'Engineer',
@@ -101,15 +92,6 @@ export const MEMBERS = enhanceTeamMembers([
     country: 'ES',
     photo: 'adrian-benavides.png',
     description: 'Loves music, playing the guitar and video games',
-  },
-  {
-    name: 'Toralf',
-    surname: 'Wittner',
-    position: 'Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'DE',
-    photo: 'toralf-wittner.png',
-    description: 'A passion for privacy, open source software and Rust',
   },
   {
     name: 'Chris',
