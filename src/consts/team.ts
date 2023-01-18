@@ -183,4 +183,13 @@ export const MEMBERS = enhanceTeamMembers([
     photo: 'brian-mullen.png',
     description: 'CMO at InfluxData',
   },
+  {
+    name: 'Eric',
+    surname: 'Torreborre',
+    position: 'Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'NL',
+    photo: 'eric-torreborre.png',
+    description: 'Loves functional programming and blowing into my saxophone',
+  },
 ]);
