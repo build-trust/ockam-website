@@ -142,6 +142,7 @@ const ContactForm: FunctionComponent = () => {
 
           <input type="hidden" value={CONFIG.salesforce.oid} {...register('oid')} />
           <input type="hidden" value={CONFIG.salesforce.returnUrl} {...register('retURL')} />
+          <input type="hidden" value={CONFIG.salesforce.leadSource} {...register('lead_source')} />
 
           {errors.global && (
             <GridItem colSpan={2}>

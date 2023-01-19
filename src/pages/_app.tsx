@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement, ReactNode, useMemo } from 'react';
+import { FunctionComponent, ReactElement, ReactNode, useEffect, useMemo } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import NextNprogress from 'nextjs-progressbar';
@@ -26,9 +26,16 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   } = props;
   const { getLayout = (page: ReactElement): ReactNode => page } = Component;
 
-  const { pathname } = useRouter();
+  const { pathname, events } = useRouter();
   const canonicalUrl = useMemo(() => clearTrailingSlashes(CONFIG.app.rootUrl + pathname), [pathname]);
   const ogImageUrl = `${CONFIG.app.rootUrl}${defaultOgImage.src}`;
+
+  useEffect(() => {
+    events.on('routeChangeComplete', (url) => {
+      // @ts-ignore window.analytics undefined below
+      window.analytics.page(url);
+    });
+  }, [events]);
 
   return (
     <>
