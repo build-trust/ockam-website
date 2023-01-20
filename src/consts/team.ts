@@ -192,4 +192,13 @@ export const MEMBERS = enhanceTeamMembers([
     photo: 'eric-torreborre.png',
     description: 'Loves functional programming and blowing into my saxophone',
   },
+  {
+    name: 'Davide',
+    surname: 'Baldo',
+    position: 'Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'IT',
+    photo: 'davide-baldo.png',
+    description: 'Lives in the countryside, have the urge to learn how everything works',
+  },
 ]);
