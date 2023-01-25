@@ -14,6 +14,7 @@ import MobileNavbarProvider from '@contextProviders/MobileNavbarProvider';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import theme from '@theme';
 import { clearTrailingSlashes } from '@utils/seoUtils';
+import '../utils/segmentAnalytics';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
