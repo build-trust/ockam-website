@@ -21,7 +21,7 @@ export default {
     oid: '00D4T000000FcUg',
     actionUrl: 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8',
     returnUrl: `${getRootUrl()}${CONTACT_PAGE_PATH}?contactFormStatus=success`,
-    leadSource: 'Web'
+    leadSource: 'Ockam.io',
   },
   lever: {
     siteName: 'ockam',
@@ -75,5 +75,5 @@ export default {
   },
   googleAnalytics: {
     key: '8dtzkipp65WtJaMsBoNbabRuFH3kTZFH',
-  }
+  },
 };
