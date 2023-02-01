@@ -53,14 +53,6 @@ const FIELDS = [
     errorMsg: 'Please use valid company name',
   },
   {
-    name: 'title',
-    type: 'text',
-    required: true,
-    placeholder: 'Your message title',
-    label: 'Title',
-    errorMsg: 'Please use valid title',
-  },
-  {
     name: 'country',
     type: 'text',
     required: true,
@@ -142,7 +134,7 @@ const ContactForm: FunctionComponent = () => {
 
           <input type="hidden" value={CONFIG.salesforce.oid} {...register('oid')} />
           <input type="hidden" value={CONFIG.salesforce.returnUrl} {...register('retURL')} />
-          <input type="hidden" value={CONFIG.salesforce.leadSource} {...register('LeadSource')} />
+          <input type="hidden" value={CONFIG.salesforce.leadSource} {...register('lead_source')} />
           <input type="hidden" value={CONFIG.salesforce.debug} {...register('debug')} />
           <input type="hidden" value={CONFIG.salesforce.debugEmail} {...register('debugEmail')} />
 
