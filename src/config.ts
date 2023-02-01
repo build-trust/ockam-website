@@ -23,6 +23,7 @@ export default {
     returnUrl: `${getRootUrl()}${CONTACT_PAGE_PATH}?contactFormStatus=success`,
     leadSource: 'Ockam.io',
     debug: '1',
+    debugEmail: 'glenn@ockam.io',
   },
   lever: {
     siteName: 'ockam',

@@ -144,6 +144,7 @@ const ContactForm: FunctionComponent = () => {
           <input type="hidden" value={CONFIG.salesforce.returnUrl} {...register('retURL')} />
           <input type="hidden" value={CONFIG.salesforce.leadSource} {...register('lead_source')} />
           <input type="hidden" value={CONFIG.salesforce.debug} {...register('debug')} />
+          <input type="hidden" value={CONFIG.salesforce.debugEmail} {...register('debugEmail')} />
 
           {errors.global && (
             <GridItem colSpan={2}>
