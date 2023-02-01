@@ -22,6 +22,7 @@ export default {
     actionUrl: 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8',
     returnUrl: `${getRootUrl()}${CONTACT_PAGE_PATH}?contactFormStatus=success`,
     leadSource: 'Ockam.io',
+    debug: '1',
   },
   lever: {
     siteName: 'ockam',

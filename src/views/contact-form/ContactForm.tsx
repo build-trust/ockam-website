@@ -98,9 +98,9 @@ const ContactForm: FunctionComponent = () => {
   const contactFormRef = useRef<HTMLFormElement>(null);
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const onSubmit = async (e:FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     const results = await trigger();
-    if(!results) {
+    if (!results) {
       e.preventDefault();
     }
   };
@@ -143,6 +143,7 @@ const ContactForm: FunctionComponent = () => {
           <input type="hidden" value={CONFIG.salesforce.oid} {...register('oid')} />
           <input type="hidden" value={CONFIG.salesforce.returnUrl} {...register('retURL')} />
           <input type="hidden" value={CONFIG.salesforce.leadSource} {...register('lead_source')} />
+          <input type="hidden" value={CONFIG.salesforce.debug} {...register('debug')} />
 
           {errors.global && (
             <GridItem colSpan={2}>
