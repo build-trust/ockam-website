@@ -104,8 +104,9 @@ const ContactForm: FunctionComponent = () => {
       const elems = JSON.parse(field.value);
       elems.ts = JSON.stringify(new Date().getTime());
       field.value = JSON.stringify(elems);
+      setValue('captcha_settings', JSON.stringify(elems));
+      setTimeout(sfdcTimestamp, 500);
     }
-    setInterval(sfdcTimestamp, 500);
   };
 
   useEffect(() => {
