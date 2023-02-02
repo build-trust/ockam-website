@@ -23,7 +23,8 @@ export default {
     returnUrl: `${getRootUrl()}${CONTACT_PAGE_PATH}?contactFormStatus=success`,
     leadSource: 'Web',
     debug: '0',
-    debugEmail: 'glenn@ockam.io',
+    debugEmail: '',
+    captchaSettings: '{"keyname":"ockam_io","fallback":"true","orgId":"00D4T000000FcUg","ts":""}',
   },
   lever: {
     siteName: 'ockam',

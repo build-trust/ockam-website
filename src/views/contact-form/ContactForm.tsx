@@ -1,4 +1,4 @@
-import { FormEvent, FunctionComponent, useRef } from 'react';
+import { FormEvent, FunctionComponent, useRef, useEffect } from 'react';
 import {
   Button,
   GridItem,
@@ -97,6 +97,21 @@ const ContactForm: FunctionComponent = () => {
     }
   };
 
+  const sfdcTimestamp = async (): Promise<void> => {
+    const response = document.getElementById('g-recaptcha-response') as HTMLFormElement | null;
+    if (response === null || response.value.trim() === '') {
+      const field = document.getElementsByName('captcha_settings')[0] as HTMLFormElement;
+      const elems = JSON.parse(field.value);
+      elems.ts = JSON.stringify(new Date().getTime());
+      field.value = JSON.stringify(elems);
+    }
+    setInterval(sfdcTimestamp, 500);
+  };
+
+  useEffect(() => {
+    sfdcTimestamp();
+  });
+
   return (
     <Card w="full" maxW="2xl" p={10}>
       <chakra.form
@@ -137,6 +152,11 @@ const ContactForm: FunctionComponent = () => {
           <input type="hidden" value={CONFIG.salesforce.leadSource} {...register('lead_source')} />
           <input type="hidden" value={CONFIG.salesforce.debug} {...register('debug')} />
           <input type="hidden" value={CONFIG.salesforce.debugEmail} {...register('debugEmail')} />
+          <input
+            type="hidden"
+            value={CONFIG.salesforce.captchaSettings}
+            {...register('captcha_settings')}
+          />
 
           {errors.global && (
             <GridItem colSpan={2}>
