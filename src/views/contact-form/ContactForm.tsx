@@ -85,6 +85,7 @@ const ContactForm: FunctionComponent = () => {
     formState: { errors, isSubmitting },
     setValue,
     trigger,
+    getValues,
   } = useForm();
 
   const contactFormRef = useRef<HTMLFormElement>(null);
@@ -100,11 +101,10 @@ const ContactForm: FunctionComponent = () => {
   const sfdcTimestamp = async (): Promise<void> => {
     const response = document.getElementById('g-recaptcha-response') as HTMLFormElement | null;
     if (response === null || response.value.trim() === '') {
-      const field = document.getElementsByName('captcha_settings')[0] as HTMLFormElement;
-      const elems = JSON.parse(field.value);
+      const elems = JSON.parse(getValues('captcha_settings'));
       elems.ts = JSON.stringify(new Date().getTime());
-      field.value = JSON.stringify(elems);
       setValue('captcha_settings', JSON.stringify(elems));
+      console.log('debug captcha:', elems);
       setTimeout(sfdcTimestamp, 500);
     }
   };
