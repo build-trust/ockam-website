@@ -85,7 +85,6 @@ const ContactForm: FunctionComponent = () => {
     formState: { errors, isSubmitting },
     setValue,
     trigger,
-    getValues,
   } = useForm();
 
   const contactFormRef = useRef<HTMLFormElement>(null);
@@ -101,14 +100,12 @@ const ContactForm: FunctionComponent = () => {
   const sfdcTimestamp = async (): Promise<void> => {
     const response = document.getElementById('g-recaptcha-response') as HTMLFormElement | null;
     if (response === null || response.value.trim() === '') {
-      const elems = JSON.parse(getValues('captcha_settings'));
-      console.log('debug captcha get:', elems);
+      const elems = CONFIG.salesforce.captchaSettings;
       elems.ts = JSON.stringify(new Date().getTime());
       setValue('captcha_settings', JSON.stringify(elems), {
         shouldDirty: true,
         shouldTouch: true,
       });
-      console.log('debug captcha set:', elems);
       setTimeout(sfdcTimestamp, 500);
     }
   };
@@ -157,11 +154,7 @@ const ContactForm: FunctionComponent = () => {
           <input type="hidden" value={CONFIG.salesforce.leadSource} {...register('lead_source')} />
           <input type="hidden" value={CONFIG.salesforce.debug} {...register('debug')} />
           <input type="hidden" value={CONFIG.salesforce.debugEmail} {...register('debugEmail')} />
-          <input
-            type="hidden"
-            value={CONFIG.salesforce.captchaSettings}
-            {...register('captcha_settings')}
-          />
+          <input type="hidden" {...register('captcha_settings')} />
 
           {errors.global && (
             <GridItem colSpan={2}>

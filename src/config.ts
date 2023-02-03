@@ -24,7 +24,12 @@ export default {
     leadSource: 'Web',
     debug: '0',
     debugEmail: '',
-    captchaSettings: '{"keyname":"ockam_io","fallback":"true","orgId":"00D4T000000FcUg","ts":""}',
+    captchaSettings: {
+      keyname: 'ockam_io',
+      fallback: 'true',
+      orgId: '00D4T000000FcUg',
+      ts: '',
+    },
   },
   lever: {
     siteName: 'ockam',
