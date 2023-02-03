@@ -102,9 +102,13 @@ const ContactForm: FunctionComponent = () => {
     const response = document.getElementById('g-recaptcha-response') as HTMLFormElement | null;
     if (response === null || response.value.trim() === '') {
       const elems = JSON.parse(getValues('captcha_settings'));
+      console.log('debug captcha get:', elems);
       elems.ts = JSON.stringify(new Date().getTime());
-      setValue('captcha_settings', JSON.stringify(elems));
-      console.log('debug captcha:', elems);
+      setValue('captcha_settings', JSON.stringify(elems), {
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+      console.log('debug captcha set:', elems);
       setTimeout(sfdcTimestamp, 500);
     }
   };
