@@ -27,29 +27,36 @@ import { MobileNavbarContext } from '@contextProviders/MobileNavbarProvider';
 
 import LayoutMobileHeader from '../components/LayoutMobileHeader';
 
-const BrandAssetHelper: FunctionComponent = forwardRef((props) => (
-  <Popover
-    returnFocusOnClose={false}
-    isOpen={props.isOpen}
-    onClose={props.onClose}
-    placement="right"
-    closeOnBlur
-  >
-    <PopoverContent>
-      <PopoverArrow />
-      <PopoverCloseButton />
-      <PopoverHeader>Looking for our logo?</PopoverHeader>
-      <PopoverBody>
-        You can find our logo and the rest of our brand assets over in the{' '}
-        <Link href="/style-guide">
-          <a style={{ fontWeight: 'bold', color: '#51cbdd', textDecoration: 'underline' }}>
-            style guide
-          </a>
-        </Link>
-      </PopoverBody>
-    </PopoverContent>
-  </Popover>
-));
+type BrandAssetHelperProps = {
+  isOpen: boolean | undefined;
+  onClose(): void;
+};
+const BrandAssetHelper = (props: BrandAssetHelperProps): JSX.Element | null => {
+  const { isOpen, onClose } = props;
+  return (
+    <Popover
+      returnFocusOnClose={false}
+      isOpen={isOpen}
+      onClose={onClose}
+      placement="right"
+      closeOnBlur
+    >
+      <PopoverContent>
+        <PopoverArrow />
+        <PopoverCloseButton />
+        <PopoverHeader>Looking for our logo?</PopoverHeader>
+        <PopoverBody>
+          You can find our logo and the rest of our brand assets over in the{' '}
+          <Link href="/style-guide">
+            <a style={{ fontWeight: 'bold', color: '#51cbdd', textDecoration: 'underline' }}>
+              style guide
+            </a>
+          </Link>
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
+  );
+};
 
 const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
   const { isScrolled } = useScroll(40, true, ref as RefObject<HTMLDivElement>);
