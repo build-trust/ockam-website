@@ -1,5 +1,9 @@
 module.exports = {
-  extends: ['@masterborn/eslint-config/frontend/typescript', 'prettier'],
+  extends: [
+    '@masterborn/eslint-config/frontend/typescript',
+    'prettier',
+    'plugin:@next/next/recommended',
+  ],
   plugins: ['@emotion'],
   parserOptions: {
     project: './tsconfig.eslint.json',
