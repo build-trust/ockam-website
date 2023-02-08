@@ -1,1 +1,3 @@
-export { default } from './BlogLayout';
+import BlogLayout from './BlogLayout';
+
+export default BlogLayout;

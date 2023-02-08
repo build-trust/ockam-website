@@ -1,1 +1,3 @@
-export { default } from './MainLayoutMobileNav';
+import MainLayoutMobileNav from './MainLayoutMobileNav';
+
+export default MainLayoutMobileNav;

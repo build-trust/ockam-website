@@ -1,1 +1,3 @@
-export { default } from './ContactExtensiveActions';
+import ContactExtensiveActions from './ContactExtensiveActions';
+
+export default ContactExtensiveActions;

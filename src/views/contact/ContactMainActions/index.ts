@@ -1,1 +1,3 @@
-export { default } from './ContactMainActions';
+import ContactMainActions from './ContactMainActions';
+
+export default ContactMainActions;
