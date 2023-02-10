@@ -11,21 +11,22 @@ brew install ockam
 # If you don't use Homebrew, look for alternate ways to install here:
 # https://docs.ockam.io/ockam-open-source#get-started
 
-ockam node create relay
+ockam enroll
+ockam project information --output json > project.json
 
 # -- APPLICATION SERVICE --
 
 python3 -m http.server --bind 127.0.0.1 5000
 
-ockam node create server_sidecar
-ockam tcp-outlet create --at /node/server_sidecar --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create server_sidecar --at /node/relay --to /node/server_sidecar
+ockam node create s --project project.json
+ockam tcp-outlet create --at /node/s --from /service/outlet --to 127.0.0.1:5000
+ockam forwarder create s --at /project/default --to /node/s
 
 # -- APPLICATION CLIENT --
 
-ockam node create client_sidecar
-ockam secure-channel create --from /node/client_sidecar --to /node/relay/service/forward_to_server_sidecar/service/api \\
-    | ockam tcp-inlet create --at /node/client_sidecar --from 127.0.0.1:7000 --to -/service/outlet
+ockam node create c --project project.json
+ockam secure-channel create --from /node/c --to /project/default/service/forward_to_s/service/api \\
+    | ockam tcp-inlet create --at /node/c --from 127.0.0.1:7000 --to -/service/outlet
 
 curl --head 127.0.0.1:7000`;
 
