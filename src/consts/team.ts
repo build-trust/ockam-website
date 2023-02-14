@@ -109,7 +109,7 @@ export const MEMBERS = enhanceTeamMembers([
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
     photo: 'chris-oakley.png',
-    description: 'Most often found somewhere on top of a mountain'
+    description: 'Most often found somewhere on top of a mountain',
   },
   {
     name: 'Maryanna',
@@ -200,5 +200,14 @@ export const MEMBERS = enhanceTeamMembers([
     country: 'IT',
     photo: 'davide-baldo.png',
     description: 'Lives in the countryside, have the urge to learn how everything works',
+  },
+  {
+    name: 'Glenn',
+    surname: 'Gillen',
+    position: 'Director of Product',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'AU',
+    photo: 'glenn-gillen.png',
+    description: 'Addicted to building world class tools for developers',
   },
 ]);
