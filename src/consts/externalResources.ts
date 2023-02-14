@@ -44,7 +44,7 @@ export const DOCS = {
   href: 'https://docs.ockam.io',
 };
 
-export const BUILD_DEMO = { href: 'https://docs.ockam.io/use-cases' };
+export const BUILD_DEMO = { href: 'https://docs.ockam.io/guides/examples' };
 
 export default [
   CONTACT,
