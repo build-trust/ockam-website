@@ -6,7 +6,7 @@ import CloudIcon from '@assets/icons/cloud.svg';
 import GitHubIcon from '@assets/icons/github.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import Card from '@components/Card';
-import { BUILD_DEMO, AWS_MARKETPLACE, DISCUSSION } from '@consts/externalResources';
+import { BUILD_DEMO, AWS_MARKETPLACE, DISCUSSION, DISCORD } from '@consts/externalResources';
 import GAEvents from '@utils/GAEvents';
 import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
@@ -16,12 +16,20 @@ const GET_STARTED_CARDS = [
     icon: GitHubIcon,
     title: 'Community',
     text: 'Join our Open Source community, start a discussion, or file an issue - or just say Hello.',
-    link: {
-      text: 'GitHub Discussions',
-      href: DISCUSSION.href,
-      isExternal: true,
-      onClick: GAEvents.outboundGithubLink,
-    },
+    link: [
+      {
+        text: 'GitHub Discussions',
+        href: DISCUSSION.href,
+        isExternal: true,
+        onClick: GAEvents.outboundGithubLink,
+      },
+      {
+        text: 'Discord',
+        href: DISCORD.href,
+        isExternal: true,
+        onClick: GAEvents.outboundDiscordLink,
+      },
+    ],
   },
   {
     icon: BuildingIcon,
@@ -47,39 +55,46 @@ const GET_STARTED_CARDS = [
   },
 ];
 
+type CTALinkProps = {
+  text: string;
+  href: string;
+  isExternal?: boolean;
+  onClick?: () => void;
+};
 type GetStartedCardProps = {
   icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
   text: string;
-  link: {
-    text: string;
-    href: string;
-    isExternal?: boolean;
-    onClick?: () => void;
-  };
+  link: CTALinkProps[] | CTALinkProps;
 };
 
-const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, text, link }) => (
-  <Card pt={4} pb={6} px={{ base: 4, lg: 5 }} height="100%" direction="row">
-    <Box flex={0} mr={5}>
-      <GreenIconWrapper>
-        <Icon as={icon} color="white" w={6} h={6} />
-      </GreenIconWrapper>
-    </Box>
+const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, text, link }) => {
+  const links = Array.isArray(link) ? link : [link];
+  const ctas = links.map((l) => (
+    <CTALink text={l.text} href={l.href} isExternal={l.isExternal} key={l.text} />
+  ));
 
-    <Flex direction="column">
-      <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
-        {title}
-      </Text>
+  return (
+    <Card pt={4} pb={6} px={{ base: 4, lg: 5 }} height="100%" direction="row">
+      <Box flex={0} mr={5}>
+        <GreenIconWrapper>
+          <Icon as={icon} color="white" w={6} h={6} />
+        </GreenIconWrapper>
+      </Box>
 
-      <Text mb={5} fontSize="sm" flex={1}>
-        {text}
-      </Text>
+      <Flex direction="column">
+        <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
+          {title}
+        </Text>
 
-      <CTALink text={link.text} href={link.href} isExternal={link.isExternal} />
-    </Flex>
-  </Card>
-);
+        <Text mb={5} fontSize="sm" flex={1}>
+          {text}
+        </Text>
+        {ctas}
+      </Flex>
+    </Card>
+  );
+};
 
 const GetStarted: FunctionComponent = () => (
   <Box bgColor="gray.50" pt={16} pb={{ base: 16, lg: 24 }}>
@@ -88,10 +103,13 @@ const GetStarted: FunctionComponent = () => (
         Trust for Data-in-Motion
       </Heading>
       <Text maxW="2xl" fontSize="lg" textAlign="center" mb={6}>
-        Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To trust data-in-motion, applications need end-to-end guarantees of data integrity, authenticity, and privacy.
+        Modern applications are distributed and have an unwieldy number of interconnections that
+        must trustfully exchange data. To trust data-in-motion, applications need end-to-end
+        guarantees of data integrity, authenticity, and privacy.
       </Text>
       <Text maxW="2xl" fontSize="lg" textAlign="center" mb={18}>
-        Ockam empowers you with simple tools to add these controls and guarantees to any application.
+        Ockam empowers you with simple tools to add these controls and guarantees to any
+        application.
       </Text>
 
       <SimpleGrid
@@ -101,7 +119,7 @@ const GetStarted: FunctionComponent = () => (
         px={{ base: 0, lg: 6 }}
       >
         {GET_STARTED_CARDS.map((card, index) => (
-          <Transition key={card.title} delay={(index+1) * 150} duration={300}>
+          <Transition key={card.title} delay={(index + 1) * 150} duration={300}>
             <GetStartedCard {...card} />
           </Transition>
         ))}
