@@ -81,7 +81,9 @@ ockam project addon configure influx-db \
 Before a client can connect to a project, an enrollment token must be generated for it by an authorized entity:
 
 ```bash
-export VEHICLE_TOKEN=$(ockam project enroll --attribute service=connected-vehicle)
+export VEHICLE_TOKEN=$( \
+  ockam project enroll \
+  --attribute service=connected-vehicle )
 ```
 
 Next we need to create a new identity for our client, as it's to this identity that the leased InfluxDB token will be issued:
@@ -140,7 +142,9 @@ ockam project addon configure influx-db \
 As before we will generate a token to allow this person to enroll, and then create and enroll them:
 
 ```bash
-export USER_TOKEN=$(ockam project enroll --attribute service=data-user)
+export USER_TOKEN=$( \
+  ockam project enroll \
+  --attribute service=data-user)
 ```
 
 ```bash
