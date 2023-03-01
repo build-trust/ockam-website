@@ -144,3 +144,8 @@ pre[class*="language-"] {
 .token.attr-value {
 	color: #F9EE98;
 }
+
+code[class*="language-bash"]::before, 
+code[class*="language-shell"]::before {
+	content: "$ ";
+}
