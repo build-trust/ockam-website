@@ -19,6 +19,7 @@ const copyClicked = (event: MouseEvent): void => {
   } else {
     codeText = el.closest('code')?.innerText;
   }
+  if (!codeText) codeText = '';
   copyToClipboard(codeText);
 };
 
