@@ -4,6 +4,10 @@
  * @author Pranay Chauhan (@PranayChauhan2516)
  */
 
+div.remark-highlight {
+	margin-top: calc(var(--chakra-space-6) * -1);
+}
+
 code[class*="language-"],
 pre[class*="language-"] {
 	color: #839496;
@@ -26,13 +30,12 @@ pre[class*="language-"] {
 	hyphens: none;
 
 	font-size: 16px;
-	margin: 1em 0.5em;
 }
 
 /* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
-	margin: .5em 0;
+	margin: .5em 0 2em;
 	overflow: auto;
 	border-radius: 0.3em;
 }
@@ -145,7 +148,16 @@ pre[class*="language-"] {
 	color: #F9EE98;
 }
 
-code[class*="language-bash"]::before, 
-code[class*="language-shell"]::before {
+pre[class*="language-bash"], 
+pre[class*="language-shell"] {
+	padding-left: 2em;
+}
+pre[class*="language-bash"]::before, 
+pre[class*="language-shell"]::before {
 	content: "$ ";
+	margin: -1em;
+}
+code[class*="language-bash"], 
+codepre[class*="language-shell"] {
+	padding-left: 0.8em;
 }
