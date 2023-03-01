@@ -5,7 +5,7 @@ import StyleGuideResourceItem from '@root/components/StyleGuideResourceItem';
 import Paragraph from './Paragraph';
 import headingsComponents from './Headings';
 import CodeInline from './CodeInline';
-import CodeBlock from './CodeBlock';
+// import CodeBlock from './CodeBlock';
 import Pre from './Pre';
 import Link from './Link';
 import Blockquote from './Blockqute';
@@ -21,7 +21,6 @@ import AspectRatio from './AspectRatio';
 export default {
   p: Paragraph,
   pre: Pre,
-  code: CodeBlock,
   inlineCode: CodeInline,
   strong: Strong,
   a: Link,
