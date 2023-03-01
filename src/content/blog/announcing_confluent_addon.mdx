@@ -1,0 +1,216 @@
+---
+title: 'Announcing the Confluent add-on for Ockam Orchestrator'
+date: '2023-03-1'
+description: 'Trust for data-in-motion through Confluent Cloud'
+author: 'Glenn Gillen'
+authorAvatar: /blog/glenn-gillen.jpg
+image: /blog/announcing_confluent_addon/ockam-and-confluent.png
+---
+
+The Confluent add-on for Ockam Orchestrator enables tamper-proof and end-to-end encrypted message streams through Confluent Cloud, with zero-code changes. The drop-in solution enables companies to exceed common security and compliance requirements without the need for costly rearchitecture or development work. 
+
+Typical security features in a Kafka deployment involved using a combination of authentication and Transport Layer Security (TLS), among other things, to protect data moving into and out of Kafka topics. While they do provide benefits for securing data in transit, they don't provider a complete solution to securing data as it travels _through_ Kafka. The Kafka broker will be able to temporarily see the plaintext data. Encrypting communication both into and out of your Kafka broker combined with encryption of data at rest won't be sufficient projection from a data breach if the Kafka broker itself is compromised, as the plaintext data is at least temporarily available in memory whenever the broker is handling it.
+
+The Confluent add-on for Ockam solves these addresses these problems, while providing additional risk mitigating benefits and data integrity assurances.
+
+## Secure your data-in-motion
+
+<video controls>
+  <source src="/blog/announcing_confluent_addon/intro.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+Your team has decided that integrating a stream processing platform into your systems is the best way to meet both the scaling and agility needs of your business, and Apache Kafka was the obvious choice for the platform to use. You've also decided to take advantage of using an experienced managed platform in Confluent Cloud so that your team can focus on adding value rather than running infrastructure. The development is complete, the team has a working solution where producers can send data to Confluent Cloud, and consumers are able to receive it on the other side. Communication between your producers, consumers, and Confluent Cloud is encrypted and secure using Transport Layer Security (TLS) so you're about to proceed with moving things into production usage.
+
+A security and compliance review has surfaced a problem. While _you_ trust Confluent Cloud, the increased focus on reducing supply-chain risk means that having data move through their systems unencrypted no longer meets your security requirements. How do you mitigate the risk to your business should some other vendor in your supply chain has a security breach? You need to be able to ensure that both:
+
+1. There is no possibility for a third-party to read the data while it's in transit
+2. There is no possibility for a third-party to modify the data while it's in transit
+
+Without solutions to both of these there is a risk that a security breach in your own supply-chain can not only expose your sensitive data, but cause unexpected downstream escalations of their own.
+
+## Integrate with no code changes
+
+Let me take you through a complete working example of how, in just a few minutes, you can configure and integrate an entire end-to-end solution that ensures that your data is always encrypted and tamper-proof while in motion through Kafka and Confluent.
+
+### Initial setup of Ockam
+
+If you’ve previously setup Ockam you can skip this section and move straight to the two examples below.
+
+```bash
+brew install build-trust/ockam/ockam
+```
+
+_(if you’re not using brew for package management we have [installation instructions for other systems](https://docs.ockam.io/reference/command#install) in our documentation)_
+
+Once installed you need to enroll your local identity with Ockam Orchestrator, run the command below and follow the instructions provided:
+
+```bash
+ockam enroll
+```
+
+### Configure the Confluent add-on
+
+We're assuming here that you've already got a working cluster on Confluent Cloud, so the first step is to configure you Ockam project to use the Confluent add-on by pointing it to your bootstrap server address:
+
+```bash
+ockam project addon configure confluent \
+  --bootstrap-server YOUR_CONFLUENT_CLOUD_BOOTSTRAP_SERVER_ADDRESS
+```
+
+We'll then need to save our Ockam project configuration so we can use it later to register our producers and consumer, so save the output to a file name `project.json`:
+
+```bash
+ockam project information default --output json > project.json
+```
+
+As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into you project by issuing unique one-time use enrollment tokens. We'll start by creating one for our consumer:​
+
+```bash
+ockam project enroll --attribute role=member > consumer.token
+```
+
+... and then one for the producer:
+
+```bash
+ockam project enroll --attribute role=member > producer1.token
+```
+
+The last configuration file we need to generate is `kafka.config`, which will be where you store the username and password you use to access your cluster on Confluent Cloud:
+
+```bash
+cat > kafka.config <<EOF
+request.timeout.ms=30000
+security.protocol=SASL_PLAINTEXT
+sasl.mechanism=PLAIN
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
+        username="YOUR_CONFLUENT_CLOUD_USER_NAME" \
+        password="YOUR_CONFLUENT_CLOUD_PASSWORD";
+EOF
+```
+
+### Configure consumers to receive encrypted messages
+
+On your consumer node you'll start by creating a new identity (you'll need the Ockam Command installed, so repeat the install instructions if you're doing this on a separate host):
+
+```bash
+ockam identity create consumer
+```
+
+Copy the `project.json` and `consumer.token` files from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
+
+```bash
+ockam project authenticate \
+  --project-path project.json \
+  --identity consumer \
+  --token $(cat consumer.token)
+```
+
+An Ockam node is a way to connect securely connect different services to each other, so we'll create one here that we'll use to communicate through the Confluent Cloud cluster using the identity we just created:
+
+```bash 
+ockam node create consumer \
+  --project project.json 
+  --identity consumer
+```
+
+Once that completes we can now expose our secure channel on `localhost`/`127.0.0.1` on port `4000`:
+
+```bash
+ockam service start kafka-consumer \
+  --node consumer \
+  --project-route /project/default \
+  --bootstrap-server-ip 127.0.0.1 \
+  --bootstrap-server-port 4000 \
+  --brokers-port-range 4001-4100
+```
+
+Copy the `kafka.config` file across, and use it to create a new topic that we'll use for sending messages between the producer and consumer in this demo (in this case we've called the topic `m4`)
+
+```bash
+kafka-topics.sh \
+  --bootstrap-server localhost:4000 \
+  --command-config kafka.config \
+  --create \
+  --topic m4 \
+  --partitions 3
+```
+
+The final step is to start our consumer script, pointing it to `localhost:4000` as our bootstrap server:
+
+```bash
+kafka-console-consumer.sh \
+  --topic m4 \
+  --bootstrap-server localhost:4000 \
+  --consumer.config kafka.config
+```
+
+The consumer code will push all communication into the Ockam node process that is running on the local host. That local Ockam process will automatically manage the generation of cryptographic keys, establishing a secure channel for communication with any producer nodes, and then subsequently receiving, decrypting, and forwarding on any messages that are received by the broker running on our Confluent Cloud cluster.
+
+### Send encrypted messages from multiple producers
+
+To have messages for our consumer to process, we need to have something producing them. We'll go through a very similar process now but instead create the parts necessary for a producer. We start once again by creating an identity on the producer's host (again, install the Ockam Command on that host if required):
+
+```
+ockam identity create producer1
+```
+
+Copy over the `project.json` and `producer1.token` files from the earlier section and use it to authneticate and enroll into our Ockam project:
+
+```bash
+ockam project authenticate \
+  --project-path project.json \
+  --identity producer1  \
+  --token $(cat producer1.token)
+```
+
+Create a node and link it to both the project and identity we've created:
+
+```bash
+ockam node create producer1 \
+  --project project.json \
+  --identity producer1
+```
+
+And expose our secure channel on port `5000` so we can start sending messages through Confluent Cloud:
+
+```bash  
+ockam service start kafka-producer \
+  --node producer1 \
+  --project-route /project/default \
+  --bootstrap-server-ip 127.0.0.1 \
+  --bootstrap-server-port 5000 \
+  --brokers-port-range 5001-5100
+```
+
+Make sure to copy the `kafka.config` file across, and start your producer:
+
+```bash
+kafka-console-producer.sh \
+  --topic m4 \
+  --bootstrap-server localhost:5000 \
+  --producer.config kafka.config
+```
+
+Your existing producer code will now be running, communicating with the broker via the secure tunnel we've created that is listening on port `5000`, and sending messages through to the consumer that was setup in the previous step. However all message payloads will be transparently encrypted as they enter the node on the producer, and not decrypted until they exit the consumer node. At no point in transit can the broker see the plaintext message payload that was initially sent by the producer.
+
+To take this example further you could repeat this step for _N_ number of producers by generating a new enrollment token for each, and then repeating the steps in this section.
+
+## End-to-end encrypted message streams
+
+An example that only takes a few minutes to implement means it can be easy to miss a number of the important improvements to security and integrity that comes from this approach:
+
+* **Unique keys per identity**: each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
+
+* **Tamper-proof data transfer**: by pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorized producers can write to a topic ensuring that the data in your topic is highly trustworthy.  If you have even more stringent requirements you can take control of your credential authority and enforce granular authorization policies.
+
+* **Reduced exposure window**: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys provides means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralized shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimizes the risk to future data using automatically rotating keys.
+
+All these benefits are possible, today, with no code changes and minimal configuration change to existing deployments. 
+
+## Get started
+
+If you’ve not already followed the example in this guide, you can [get started using Ockam](https://docs.ockam.io/) for free by following the instructions in our documentation. If you’d like to talk specifically about this or other potential use cases for Ockam, the team would be more than happy to [chat with you](https://www.ockam.io/contact/form). Alternatively you can join
+us, and an ever growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).
+
+
