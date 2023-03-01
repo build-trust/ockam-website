@@ -6,6 +6,7 @@
 
 div.remark-highlight {
 	margin-top: calc(var(--chakra-space-6) * -1);
+	position: relative;
 }
 
 code[class*="language-"],
