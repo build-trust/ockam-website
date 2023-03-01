@@ -1,5 +1,5 @@
 ---
-title: 'Announcing the InfluxDB add-on for Ockam'
+title: 'Announcing the InfluxDB add-on for Ockam Orchestrator'
 category: 'Announcements'
 date: '2023-03-1'
 description: 'Automated token management for InfluxDB Cloud'
@@ -11,13 +11,13 @@ featuredOrder: 1
 
 ## Automated token management for InfluxDB Cloud
 
-Today we’re excited to announce the Ockam add-on for InfluxDB. Through the use of the add-on, customers that are using InfluxDB Cloud can use Ockam to improve their security posture by automatically granting uniquely identifiable, least privilege, time-limited credentials for any client that needs to connect to InfluxDB cloud.
+Today we’re excited to announce the InfluxDB add-on for Ockam Orchestrator. Through the use of the add-on, customers that are using InfluxDB Cloud can use Ockam to improve their security posture by automatically granting uniquely identifiable, least privilege, time-limited credentials for any client that needs to connect to InfluxDB cloud.
 
 ## The problem with managing access at scale
 
 Managing client access credentials for thousands of discrete clients can be a challenge for customers at scale. Issuing unique credentials to each client can be such an operational burden that we’ve seen some companies opt to have a single credential that is shared across all their client services and devices. This trade-off though comes with an increase in risk: any one of those thousands of clients could potentially expose the same secrets used by the whole fleet. It also increases the operational burden of remediation when one of those credentials is exposed: you’re now scrambling to work out how to revoke and deploy new credentials to your entire fleet all at once. Instead industry best-practice would recommend regularly auditing and rotating those credentials to reduce the risk to the business. That regular revocation and rotation results in an on-going operational complexity that only continues to increase as the number of clients grows. 
 
-The InfluxDB add-on for Ockam is a drop-in solution that works with any InfluxDB client. It allows an organization to define a standardized policy that defines uniquely identifiable, least privilege, time-limited credentials appropriate for their use case. Each client can then request its own credential which, if granted, can then be used wherever existing InfluxDB credentials are used. The time-limited nature means that when the lease period expires the credential is automatically revoked, and the client can request a new one to continue communicating.
+The InfluxDB add-on for Ockam Orchestrator is a drop-in solution that works with any InfluxDB client. It allows an organization to define a standardized policy that defines uniquely identifiable, least privilege, time-limited credentials appropriate for their use case. Each client can then request its own credential which, if granted, can then be used wherever existing InfluxDB credentials are used. The time-limited nature means that when the lease period expires the credential is automatically revoked, and the client can request a new one to continue communicating.
 
 Let’s take a look at just a couple of examples of what’s now possible, and how to achieve it. 
 
@@ -29,9 +29,9 @@ If you’ve previously setup Ockam you can skip this section and move straight t
 brew install build-trust/ockam/ockam
 ```
 
-_(if you’re not using brew for package management we have [installation instructions for other systems](https://docs.ockam.io/#install) in our documentation)_
+_(if you’re not using brew for package management we have [installation instructions for other systems](https://docs.ockam.io/reference/command#install) in our documentation)_
 
-Once installed you need to enroll your local node with Ockam Orchestrator, run the command below and follow the instructions provided:
+Once installed you need to enroll your local identity with Ockam Orchestrator, run the command below and follow the instructions provided:
 
 ```bash
 ockam enroll
@@ -86,7 +86,7 @@ export VEHICLE_TOKEN=$( \
   --attribute service=connected-vehicle )
 ```
 
-Next we need to create a new identity for our client, as it's to this identity that the leased InfluxDB token will be issued:
+Next we need to create a new identity for our client, as it's to this identity that the leased InfluxDB token will be issued. In a production environment you would run these next 3 steps on your intended your intended client, in our case the connected vehicle, but for demo purposes we'll run them all from the same machine:
 
 ```bash
 ockam identity create connected-vehicle
