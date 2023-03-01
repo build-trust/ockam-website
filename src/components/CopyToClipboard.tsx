@@ -13,10 +13,8 @@ const copyToClipboard = (codeText: string): void => {
 
 const copyClicked = (event: MouseEvent): void => {
   const el = event.target as HTMLElement;
-  let codeText;
-  if (el.dataset.code) {
-    codeText = el.dataset.code;
-  } else {
+  let codeText = (el.closest('Button[data-code]') as HTMLElement)?.dataset.code;
+  if (!codeText) {
     codeText = el.closest('code')?.innerText;
   }
   if (!codeText) codeText = '';
