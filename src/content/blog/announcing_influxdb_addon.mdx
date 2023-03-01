@@ -27,7 +27,7 @@ If you’ve previously setup Ockam you can skip this section and move straight t
 brew install build-trust/ockam/ockam
 ```
 
-_(if you’re not using brew for package management we have installation instructions for other systems in our documentation)_
+_(if you’re not using brew for package management we have [installation instructions for other systems](https://docs.ockam.io/#install) in our documentation)_
 
 Once installed you need to enroll your local node with Ockam Orchestrator, run the command below and follow the instructions provided:
 
@@ -37,7 +37,7 @@ ockam enroll
 
 ### Enroll clients at scale
 
-Log in to your InfluxDB Cloud Dashboard and get the Cluster URL (Host Name) and Organization ID from your Organization settings page, then generate a new All Access API token (Load Data > API Tokens > Generate API Token > All Access API Token). Take those three values and insert them into the appropriate environment variables below so we can use them later:
+Log in to your [InfluxDB Cloud Dashboard](https://cloud2.influxdata.com/) and get the Cluster URL (Host Name) and Organization ID from your Organization settings page, then generate a new All Access API token (Load Data > API Tokens > Generate API Token > All Access API Token). Take those three values and insert them into the appropriate environment variables below so we can use them later:
 
 ```bash
 export INFLUXDB_ADMIN_TOKEN="infludb-cloud-token-here"
@@ -79,29 +79,29 @@ ockam project addon configure influx-db \
 Before a client can connect to a project, an enrollment token must be generated for it by an authorized entity:
 
 ```bash
-export SENSOR_TOKEN=$(ockam project enroll --attribute service=iot-sensor)
+export VEHICLE_TOKEN=$(ockam project enroll --attribute service=connected-vehicle)
 ```
 
 Next we need to create a new identity for our client, as it's to this identity that the leased InfluxDB token will be issued:
 
 ```bash
-ockam identity create iot-sensor
+ockam identity create connected-vehicle
 ```
 
 Identity created, we can authenticate to our project (using the JSON configuration file we created earlier) and the enrolment token SENSOR_TOKEN we saved at the start of this section:
 
 ```bash
 ockam project authenticate \
-  --identity iot-sensor \
+  --identity connected-vehicle \
   --project-path project.json \
-  --token $SENSOR_TOKEN
+  --token $VEHCILE_TOKEN
 ```
 
 We've arrived at the big moment, time to request a new lease:
 
 ```bash
 ockam lease create \
-  --identity iot-sensor \
+  --identity connected-vehiclez \
   --project-path project.json
 ```
 
@@ -166,4 +166,4 @@ You’ve hopefully seen from these examples that in just a few minutes you can g
 
 ## Get started
 
-If you’ve not already followed the example in this guide, you can get started using Ockam for free by following the instructions in our documentation. If you’d like to talk specifically about this or other potential use cases for Ockam, the team would be more than happy to chat with you.
+If you’ve not already followed the example in this guide, you can [get started using Ockam](https://docs.ockam.io/) for free by following the instructions in our documentation. If you’d like to talk specifically about this or other potential use cases for Ockam, the team would be more than happy to [chat with you](https://www.ockam.io/contact/form).
