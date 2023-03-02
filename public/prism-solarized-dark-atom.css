@@ -47,9 +47,11 @@ pre[class*="language-"] {
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .1em;
+:not(pre) > code {
+	padding: .3em;
 	border-radius: .3em;
+	font-size: 0.8em;
+	background-image: linear-gradient(142.21deg, rgba(79, 218, 184, 0.5) 4.44%, rgba(82, 199, 234, 0.5) 94.64%);
 }
 
 .token.comment,
