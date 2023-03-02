@@ -1,0 +1,242 @@
+WEBVTT
+
+00:00:02.940 --> 00:00:06.810
+Today we're going to talk about
+how to secure data through Kafka.
+
+00:00:07.950 --> 00:00:11.130
+Let's say your team has decided
+that integrating a stream processing
+
+00:00:11.130 --> 00:00:14.940
+platform into your system is the
+best way to meet both the scaling
+
+00:00:15.030 --> 00:00:16.800
+and agility needs of your business.
+
+00:00:17.730 --> 00:00:21.080
+And Apache Kafka was the obvious
+choice as the platform to use.
+
+00:00:22.590 --> 00:00:26.939
+You've also decided to take advantage
+of the years of specialized experience
+
+00:00:27.000 --> 00:00:30.900
+in running Kafka at scale that you get
+from using Confluent Cloud, thereby
+
+00:00:30.900 --> 00:00:34.830
+allowing your team to focus on adding
+value rather than running infrastructure.
+
+00:00:35.865 --> 00:00:37.035
+The development is complete.
+
+00:00:37.305 --> 00:00:40.015
+The team has a working solution
+where producers can send
+
+00:00:40.035 --> 00:00:43.275
+data to Confluent Cloud, and
+consumers are able to receive it.
+
+00:00:43.394 --> 00:00:47.385
+On the other side, communication
+between your producers and Confluent
+
+00:00:47.390 --> 00:00:51.525
+Cloud is encrypted in transit using
+transport layer security, and messages
+
+00:00:51.525 --> 00:00:55.665
+being sent from Confluent Cloud to your
+consumers are also encrypted in transit.
+
+00:00:58.364 --> 00:01:02.205
+Things are working great, and
+so you're about to proceed with
+
+00:01:02.205 --> 00:01:04.085
+moving everything into production.
+
+00:01:05.550 --> 00:01:09.870
+But a security and compliance
+review has surfaced a problem.
+
+00:01:10.530 --> 00:01:15.300
+While you trust Confluent Cloud, the
+increased focus on reducing supply chain
+
+00:01:15.300 --> 00:01:20.670
+risk means having data moved through their
+systems unencrypted no longer meets your
+
+00:01:20.675 --> 00:01:22.620
+organization's security requirements.
+
+00:01:23.759 --> 00:01:28.050
+And that's because while data is encrypted
+in transit, it's not encrypted for the
+
+00:01:28.050 --> 00:01:30.449
+entire time it's in motion through Kafka.
+
+00:01:31.199 --> 00:01:35.399
+Encryption and decryption is happening
+at the transport layer, meaning
+
+00:01:35.399 --> 00:01:38.910
+that your message is decrypted at
+wherever the edge termination occurs.
+
+00:01:39.750 --> 00:01:42.630
+That could be on the provisioned
+cluster, a load balancer,
+
+00:01:42.634 --> 00:01:46.839
+or a cdn, and those aren't
+implementation decisions you control.
+
+00:01:48.315 --> 00:01:51.855
+But even if they were, the
+Kafka broker is still able to
+
+00:01:51.855 --> 00:01:53.385
+read the message in plain text.
+
+00:01:54.105 --> 00:01:58.035
+So if the broker itself is ever
+compromised, then the plain text data is
+
+00:01:58.035 --> 00:02:02.625
+at least temporarily available in memory
+whenever it is handling your messages.
+
+00:02:03.855 --> 00:02:07.485
+So how do you mitigate the risk to your
+business should some other vendor in
+
+00:02:07.485 --> 00:02:09.704
+your supply chain have a security breach?
+
+00:02:10.755 --> 00:02:13.225
+You need to be able to ensure two things.
+
+00:02:14.035 --> 00:02:14.625
+Number one:
+
+00:02:15.385 --> 00:02:20.010
+there is no possibility for a third party
+to read the data while it's in transit.
+
+00:02:20.459 --> 00:02:23.790
+And number two, that there's no
+possibility for a third party to
+
+00:02:23.795 --> 00:02:25.980
+modify the data while it's in transit.
+
+00:02:28.470 --> 00:02:32.040
+Without solutions to both of these,
+there is a risk that a security
+
+00:02:32.045 --> 00:02:35.940
+breach in your own supply chain
+can not only expose your sensitive
+
+00:02:35.940 --> 00:02:40.170
+data, but it can cause unexpected
+downstream escalations of their own.
+
+00:02:41.359 --> 00:02:45.900
+Ockam simplifies this by pushing
+cryptographic key generation out to the
+
+00:02:45.900 --> 00:02:49.950
+edges of the system where authenticated
+encryption and decryption occurs.
+
+00:02:50.760 --> 00:02:54.690
+Producer and consumer are able to
+establish a mutually trusted, secure
+
+00:02:54.690 --> 00:02:59.310
+channel between each other, and by
+pushing the control of the keys to
+
+00:02:59.310 --> 00:03:03.030
+the edges of the system, no other
+parties in the supply chain are able
+
+00:03:03.030 --> 00:03:05.510
+to read or modify the data in transit.
+
+00:03:06.800 --> 00:03:10.545
+You can be assured that the data you
+receive at the consumer is exactly
+
+00:03:10.575 --> 00:03:12.265
+what was sent by your producers.
+
+00:03:13.704 --> 00:03:17.325
+Ockam Secure channels also
+regularly rotate authentication
+
+00:03:17.325 --> 00:03:18.615
+keys and session secrets.
+
+00:03:19.545 --> 00:03:22.665
+That means that if one of those
+session secrets was exposed, your
+
+00:03:22.665 --> 00:03:27.315
+total exposure window is limited to the
+small duration that secret was in use.
+
+00:03:30.885 --> 00:03:35.970
+With centralized shared key distribution
+approaches, there is the risk that all
+
+00:03:35.970 --> 00:03:41.130
+the current and historical data can no
+longer be trusted after a breach because
+
+00:03:41.130 --> 00:03:43.140
+it may have been tampered with or stolen.
+
+00:03:44.290 --> 00:03:48.300
+Ockam's approach eliminates the risk
+of compromised historical data and
+
+00:03:48.300 --> 00:03:52.620
+minimizes the risk to future data
+by automatically rotating keys.
+
+00:03:54.690 --> 00:03:56.430
+So that's a few unique benefits.
+
+00:03:57.150 --> 00:04:01.200
+One: unique cryptographic keys
+for every identity in your.
+
+00:04:02.355 --> 00:04:04.845
+Two: tamper-proof data in motion.
+
+00:04:05.415 --> 00:04:09.555
+And three: a reduced exposure window
+if a session secret is compromised.
+
+00:04:11.174 --> 00:04:15.285
+And all of that is possible with
+no code changes, and configuration
+
+00:04:15.285 --> 00:04:19.094
+updates that can be applied within
+minutes to existing deployments.
+
+00:04:20.865 --> 00:04:24.195
+Get started today with the Confluent
+add-on for Ockam Orchestrator.
+
