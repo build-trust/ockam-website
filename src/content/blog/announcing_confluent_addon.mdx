@@ -12,13 +12,18 @@ featuredOrder: 1
 
 The Confluent add-on for Ockam Orchestrator enables tamper-proof and end-to-end encrypted message streams through Confluent Cloud, with zero-code changes. The drop-in solution enables companies to exceed common security and compliance requirements without the need for costly rearchitecture or development work. 
 
-Typical security features in a Kafka deployment involves using a combination of authentication and Transport Layer Security (TLS), among other things, to protect data moving into and out of Kafka topics. While they do provide benefits for securing data in transit, they don't provide a complete solution to securing data as it travels _through_ Kafka. The Kafka broker will be able to temporarily see the plaintext data. Encrypting communication both into and out of your Kafka broker combined with encryption of data at rest won't be sufficient protection from a data breach if the Kafka broker or the infrastructure it is running on is compromised, as the plaintext data and the keys to decrypt the data at rest is at least temporarily available in memory whenever the broker is handling it.
+Kafka deployments typically combine authentication tokens and Transport Layer Security (TLS) to protect data moving into and out of Kafka topics. While this does secure data in transit over the Internet, it doesn't provide a complete solution to securing data as it travels _through_ Kafka. The Kafka broker will be able to temporarily see the plaintext data.
+
+Encrypting communication both into and out of your Kafka broker combined with encryption of data at rest, inside Kafka, won't be sufficient protection from a data breach if the Kafka broker or the infrastructure it is running on is compromised, as the plaintext data and the keys to decrypt the data are available in memory.
+Ockam solves these problems, while providing additional risk mitigating benefits and data integrity assurances, via the Confluent add-on for Ockam Orchestrator.
 
 The Confluent add-on for Ockam solves these problems, while providing additional risk mitigating benefits and data integrity assurances.
 
 ## Trust your data-in-motion
 
 <Video src="/blog/announcing_confluent_addon/intro.mp4" track="/blog/announcing_confluent_addon/intro.vtt" />
+
+<br/>
 
 Your team has decided that integrating a stream processing platform into your systems is the best way to meet both the scale and agility needs of your business, and Apache Kafka was the obvious choice for the platform to use. You've also decided to take advantage of using an experienced managed platform in Confluent Cloud so that your team can focus on adding value rather than running infrastructure. The development is complete, the team has a working solution where producers can send data to Confluent Cloud, and consumers are able to receive it on the other side. Communication between your producers, consumers, and Confluent Cloud is encrypted and secure using Transport Layer Security (TLS) so you're about to proceed with moving things into production usage.
 
@@ -146,7 +151,7 @@ kafka-console-consumer.sh \
   --consumer.config kafka.config
 ```
 
-The consumer code will push all communication into the Ockam node process that is running on the local host. That local Ockam process will automatically manage the generation of cryptographic keys, establishing a secure channel for communication with any producer nodes, and then subsequently receiving, decrypting, and forwarding on any messages that are received by the broker running on our Confluent Cloud cluster.
+The consumer code will push all communication into the Ockam node process that is running on the local host. That local Ockam process will automatically manage the generation of cryptographic keys, establishing a secure channel for communication with any producer nodes, and then subsequently receiving, decrypting, and forwarding on any messages that are received from the broker running on our Confluent Cloud cluster.
 
 ### Send encrypted messages from multiple producers
 
@@ -205,11 +210,11 @@ If you look at the encrypted messages inside Confluent Cloud, they will render a
 
 An example that only takes a few minutes to implement means it can be easy to miss a number of the important improvements to security and integrity that comes from this approach:
 
-* **Unique keys per identity**: each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
+* <b>Unique keys per identity</b>: each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
 
-* **Tamper-proof data transfer**: by pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorized producers can write to a topic ensuring that the data in your topic is highly trustworthy.  If you have even more stringent requirements you can take control of your credential authority and enforce granular authorization policies.
+* <b>Tamper-proof data transfer</b>: by pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorized producers can write to a topic ensuring that the data in your topic is highly trustworthy.  If you have even more stringent requirements you can take control of your credential authority and enforce granular authorization policies.
 
-* **Reduced exposure window**: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralized shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimizes the risk to future data using automatically rotating keys.
+* <b>Reduced exposure window</b>: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralized shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimizes the risk to future data using automatically rotating keys.
 
 All these benefits are possible, today, with no code changes and minimal configuration change to existing deployments. 
 
@@ -217,6 +222,4 @@ All these benefits are possible, today, with no code changes and minimal configu
 
 * If you haven't already followed the example in this guide, you can [get started using Ockam](https://docs.ockam.io/) for free by following the instructions in our documentation. 
 * If you’d like to talk specifically about this or other potential use cases for Ockam, the team would be more than happy to [chat with you](https://www.ockam.io/contact/form). 
-* Alternatively you can join us, and an ever growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds).
-
-
+* Alternatively you can join us, and an ever growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds) or on [Github](https://github.com/build-trust/ockam).
