@@ -10,29 +10,132 @@ import {
   Heading,
   Link as ChakraLink,
   Text,
-  Icon,
-  HStack,
   useTheme,
+  VStack,
 } from '@chakra-ui/react';
 
 import LogoGray from '@assets/logo-gray.svg';
 import { LINKEDIN, TWITTER, DISCUSSION, BUILD_DEMO } from '@consts/externalResources';
-import { CONTACT_PAGE_PATH, STYLE_GUIDE_PATH } from '@consts/paths';
+import {
+  CONTACT_PAGE_PATH,
+  MISSION_AND_VISION_PATH,
+  STYLE_GUIDE_PATH,
+  TEAM_PATH,
+} from '@consts/paths';
 
 const NAV = [
   {
-    name: 'Style Guide',
-    href: STYLE_GUIDE_PATH,
-    isExternal: false,
+    heading: 'Learn',
+    links: [
+      {
+        name: 'Get started',
+        href: 'https://docs.ockam.io/#quick-start',
+        isExternal: true,
+      },
+      {
+        name: 'Ockam Command',
+        href: 'https://docs.ockam.io/reference/command',
+        isExternal: true,
+      },
+      {
+        name: 'Programming libraries',
+        href: 'https://docs.ockam.io/reference/libraries',
+        isExternal: true,
+      },
+      {
+        name: 'Cryptographic & messaging protocols',
+        href: 'https://docs.ockam.io/reference/protocols',
+        isExternal: true,
+      },
+      {
+        name: 'Documentation',
+        href: 'https://docs.ockam.io/readme/secure-by-design',
+        isExternal: true,
+      },
+      {
+        name: 'Secure-by-design applications',
+        href: 'https://docs.ockam.io/readme/secure-by-design',
+        isExternal: true,
+      },
+      {
+        name: 'Virtual adjacency',
+        href: 'https://docs.ockam.io/readme/virtually-adjacent',
+        isExternal: true,
+      },
+      {
+        name: 'Zero trust software',
+        href: 'https://docs.ockam.io/readme/secure-by-design#zero-implicit-trust',
+        isExternal: true,
+      },
+    ],
   },
+
   {
-    name: 'Support',
-    href: CONTACT_PAGE_PATH,
-    isExternal: false,
+    heading: 'Use cases',
+    links: [
+      {
+        name: 'Kafka end-to-end encryption',
+        href: 'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
+        isExternal: true,
+      },
+      {
+        name: 'Okta / Auth0 ABAC',
+        href: 'https://docs.ockam.io/guides/use-cases/apply-fine-grained-permissions-with-attribute-based-access-control-abac',
+        isExtenal: true,
+      },
+      {
+        name: 'Confluent Cloud compliance',
+        href: 'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
+        isExternal: true,
+      },
+      {
+        name: 'InfluxDB token management',
+        href: 'https://docs.ockam.io/guides/use-cases/influxdb-cloud-token-management',
+        isExternal: true,
+      },
+      {
+        name: 'Configure Telegraf with InfluxDB',
+        href: 'https://docs.ockam.io/guides/examples/telegraf-+-influxdb',
+        isExternal: true,
+      },
+      {
+        name: 'Database protection',
+        href: 'https://docs.ockam.io/guides/use-cases/secure-database-access',
+        isExternal: true,
+      },
+    ],
   },
-  { ...DISCUSSION, isExternal: true },
+
+  {
+    heading: 'Company',
+    links: [
+      { name: 'Open roles', href: `${TEAM_PATH}#open-roles`, isExternal: false },
+      { name: 'Our mission & values', href: MISSION_AND_VISION_PATH, isExternal: false },
+      { name: 'The team', href: TEAM_PATH, isExternal: false },
+      { name: 'Team handbook', href: '/blog/team_handbook', isExternal: false },
+      {
+        name: 'Style Guide',
+        href: STYLE_GUIDE_PATH,
+        isExternal: false,
+      },
+    ],
+  },
+
+  {
+    heading: 'Contact',
+    links: [
+      { ...DISCUSSION, isExternal: true },
+      { name: 'Build Trust community Discord', href: '', isExternal: true },
+      {
+        name: 'Support',
+        href: CONTACT_PAGE_PATH,
+        isExternal: false,
+      },
+      { ...LINKEDIN, isExternal: true },
+      { ...TWITTER, isExternal: true },
+    ],
+  },
 ];
-const SOCIALS = [LINKEDIN, TWITTER];
 
 const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
   const { gradients } = useTheme();
@@ -72,65 +175,50 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
         pb={{ base: 10, lg: 20 }}
         pt={6}
         w="full"
-        align="center"
+        align={{ base: 'center', lg: 'flex-start' }}
       >
-        <Flex align="center" direction={{ base: 'column', lg: 'row' }} order={{ base: 1, lg: 0 }}>
-          <Box
-            as={LogoGray}
-            w={{ base: '7.875rem', lg: '9.625rem' }}
-            h={{ base: '2.25rem', lg: '2.75rem' }}
+        {NAV.map((section) => (
+          <VStack
+            align={{ base: 'center', lg: 'flex-start' }}
+            verticalAlign="top"
+            mx={6}
             mb={{ base: 6, lg: 0 }}
-            mr={{ base: 0, lg: 8 }}
-          />
-
-          <Text opacity="0.8" fontSize={{ base: 'lg', lg: 'md' }}>
-            © 2022 Ockam.io All Rights Reserved
-          </Text>
-        </Flex>
-
-        <Flex
-          direction={{ base: 'column', lg: 'row' }}
-          flex={1}
-          align="center"
-          justify="flex-end"
-          mb={{ base: 12, lg: 0 }}
-        >
-          <Flex mb={{ base: 4, lg: 0 }}>
-            {NAV.map((link) => (
+          >
+            <Heading as="h4" maxWidth="md" fontSize="sm" color="gray.500">
+              {section.heading}
+            </Heading>
+            {section.links.map((link) => (
               <ChakraLink
                 key={link.name}
                 href={link.href}
+                mt={0}
                 {...(link.isExternal ? { isExternal: true } : { passHref: true, as: NextLink })}
               >
                 <Text
                   as={link.isExternal ? 'span' : 'a'}
                   _hover={{ textDecoration: 'underline' }}
                   opacity={0.8}
-                  mr={6}
+                  fontSize="sm"
                 >
                   {link.name}
                 </Text>
               </ChakraLink>
             ))}
-          </Flex>
+          </VStack>
+        ))}
+      </Flex>
+      <Flex align="center" direction={{ base: 'column', lg: 'column' }} order={{ base: 1, lg: 0 }}>
+        <Box
+          as={LogoGray}
+          w={{ base: '7.875rem', lg: '9.625rem' }}
+          h={{ base: '2.25rem', lg: '2.75rem' }}
+          mb={{ base: 6, lg: 2 }}
+          mr={{ base: 0, lg: 0 }}
+        />
 
-          <HStack spacing={5}>
-            {SOCIALS.map((social) => (
-              <ChakraLink key={social.href} href={social.href} isExternal>
-                <Icon
-                  as={social.icon}
-                  alt={`${social.name} link`}
-                  w={6}
-                  h={6}
-                  display="block"
-                  color="gray.500"
-                  _hover={{ color: 'gray.300' }}
-                  transition="all 400ms ease-in-out"
-                />
-              </ChakraLink>
-            ))}
-          </HStack>
-        </Flex>
+        <Text opacity="0.8" fontSize={{ base: 'md', lg: 'md' }}>
+          © {new Date().getFullYear()} Ockam.io All Rights Reserved
+        </Text>
       </Flex>
     </Container>
   );
