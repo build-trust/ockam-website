@@ -181,6 +181,7 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
           <VStack
             align={{ base: 'center', lg: 'flex-start' }}
             verticalAlign="top"
+            key={section.heading}
             mx={6}
             mb={{ base: 6, lg: 0 }}
           >
