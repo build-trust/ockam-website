@@ -1,4 +1,5 @@
 import { MDXRemoteProps } from 'next-mdx-remote';
+import { Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
 
 import StyleGuideResourceItem from '@root/components/StyleGuideResourceItem';
 
@@ -38,4 +39,8 @@ export default {
   AspectRatio,
   StyleGuideResourceItem,
   Video,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } as MDXRemoteProps['components'];

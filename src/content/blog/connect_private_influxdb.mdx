@@ -18,7 +18,13 @@ Today I'm going to take you through a third choice. It'll only take a few minute
 
 ## Initial setup 
 
+<Alert status='info' variant="left-accent">
+  <AlertIcon />
+  <AlertDescription>Link to Docker</AlertDescription>
+</Alert>
+
 To simulate an end-to-end example of a client sending data into InfluxDB we're going to start a Telegraf instance, have it emit CPU events to InfluxDB, and then change the way those two connect to show how we'd connect them across different hosts or networks. For the sake of this example though, we'll be running everything on a single machine.
+
 
 ### Ockam
 
@@ -207,6 +213,13 @@ That's it! The listener on localhost port `8087` is now forwarding all traffic t
 
 ### Update the existing configuration to use the secure connection
 
+<Alert status='info' variant="left-accent">
+  <AlertIcon />
+  <AlertDescription>
+    This example created the TCP inlet on port `8087` primarily because the influxd service was running on the same host and already bound to port `8086`. In a production deployment where Telegraf and InfluxDB are on separate hosts the TCP inlet could listen on port `8086` and this default configuration would not need to change.
+  </AlertDescription>
+</Alert>
+
 While this is a simplified example running on a single host, the following instructions are the same irrespective of your deployment. Once the `influxdb` and `telegraf` nodes are enrolled and running, the only change you need to make is to update your telegraf.conf to point to the local listening port:
 
 ```toml
@@ -214,9 +227,7 @@ While this is a simplified example running on a single host, the following instr
   urls = ["http://127.0.0.1:8087"]
 ```
     
-Restart the Telegraf service, and we can then check that it's still storing data by using the same command we used earlier.
-
-> This example created the TCP inlet on port 8087 primarily because the influxd service was running on the same host and already bound to port 8086. In a production deployment where Telegraf and InfluxDB are on separate hosts the TCP inlet could listen on port 8086 and this default configuration would not need to change.
+Restart the Telegraf service, and we can then check that it's still storing data by using the same command we used earlier.z
 
 ## Securely connected clients, and more...
 
