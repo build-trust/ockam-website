@@ -6,8 +6,8 @@ description: 'Allow clients to read and write to an InfluxDB database that is on
 author: 'Glenn Gillen'
 authorAvatar: /blog/glenn-gillen.jpg
 isFeatured: true
-featuredOrder: 3
-image: /blog/announcing-influx-addon/ockam-influxdata.png
+featuredOrder: 2
+image: /blog/connect_private_influxdb/ockam-influxdata.png
 ---
 
 InfluxDB has become a popular way for sensors and services to store time-series data, and InfluxData makes that quick and easy thanks to InfluxCloud. Some of the customers we've spoken to aren't storing everything in a managed cloud service though. Sometimes they've specific businss, regulatory, or compliance reasons to store the data themselves in their own data center. Other times they're using multiple outputs in Telegraf to send data to _both_ InfluxDB Cloud as part of their disaster recovery plan. 
@@ -18,9 +18,8 @@ Today I'm going to take you through a third choice. It'll only take a few minute
 
 ## Initial setup 
 
-<Alert status='info' variant="left-accent">
-  <AlertIcon />
-  <AlertDescription>Link to Docker</AlertDescription>
+<Alert status='info'>
+  If you'd like to jump straight into a working example of this, we have available on GitHub an [InfluxDB + Telegraf + Ockam demo for Docker](https://github.com/build-trust/demo-influxdb-telegraf) that you can run locally with Docker Compose. It uses the official Docker images for InfluxDB and Telegraf, with changes to the startup scripts so each service uses Ockam to establish a connection. Full instructions on how to run it are included in the `README`.
 </Alert>
 
 To simulate an end-to-end example of a client sending data into InfluxDB we're going to start a Telegraf instance, have it emit CPU events to InfluxDB, and then change the way those two connect to show how we'd connect them across different hosts or networks. For the sake of this example though, we'll be running everything on a single machine.
@@ -213,11 +212,8 @@ That's it! The listener on localhost port `8087` is now forwarding all traffic t
 
 ### Update the existing configuration to use the secure connection
 
-<Alert status='info' variant="left-accent">
-  <AlertIcon />
-  <AlertDescription>
-    This example created the TCP inlet on port `8087` primarily because the influxd service was running on the same host and already bound to port `8086`. In a production deployment where Telegraf and InfluxDB are on separate hosts the TCP inlet could listen on port `8086` and this default configuration would not need to change.
-  </AlertDescription>
+<Alert status='info'>
+  This example created the TCP inlet on port `8087` primarily because the influxd service was running on the same host and already bound to port `8086`. In a production deployment where Telegraf and InfluxDB are on separate hosts the TCP inlet could listen on port `8086` and this default configuration would not need to change.
 </Alert>
 
 While this is a simplified example running on a single host, the following instructions are the same irrespective of your deployment. Once the `influxdb` and `telegraf` nodes are enrolled and running, the only change you need to make is to update your telegraf.conf to point to the local listening port:
