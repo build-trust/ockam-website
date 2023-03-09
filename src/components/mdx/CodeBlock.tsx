@@ -1,6 +1,20 @@
-import { Code, CodeProps } from '@chakra-ui/react';
+import { HTMLAttributes } from 'react';
 
-// @todo add some kind of syntax highlighter
-const CodeBlock = (props: CodeProps): JSX.Element => <Code mb={6} {...props} />;
+import CopyToClipboard from '@components/CopyToClipboard';
+
+const CodeBlock = ({ children, ...props }: HTMLAttributes<HTMLElement>): JSX.Element => {
+  const button = props.className ? (
+    <CopyToClipboard position="absolute" top={5} right={5} />
+  ) : (
+    <></>
+  );
+
+  return (
+    <code {...props}>
+      {children}
+      {button}
+    </code>
+  );
+};
 
 export default CodeBlock;

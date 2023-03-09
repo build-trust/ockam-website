@@ -17,6 +17,8 @@ import ListItem from './ListItem';
 import LinkedImage from './LinkedImage';
 import Table, { tableIntegralComponents } from './Table';
 import AspectRatio from './AspectRatio';
+import Video from './Video';
+import Alert from './Alert';
 
 export default {
   p: Paragraph,
@@ -36,4 +38,6 @@ export default {
   ...headingsComponents,
   AspectRatio,
   StyleGuideResourceItem,
+  Video,
+  Alert,
 } as MDXRemoteProps['components'];

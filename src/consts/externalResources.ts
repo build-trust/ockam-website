@@ -34,12 +34,17 @@ export const DISCUSSION = {
   href: 'https://github.com/build-trust/ockam/discussions',
 };
 
+export const DISCORD = {
+  name: 'Discord',
+  href: 'https://discord.gg/RAbjRr3kds',
+};
+
 export const DOCS = {
   name: 'docs.ockam.io',
   href: 'https://docs.ockam.io',
 };
 
-export const BUILD_DEMO = { href: 'https://docs.ockam.io/use-cases' };
+export const BUILD_DEMO = { href: 'https://docs.ockam.io/#quick-start' };
 
 export default [
   CONTACT,
@@ -50,6 +55,7 @@ export default [
   GITHUB_REPO_OCKAM,
   SUPPORT,
   DISCUSSION,
+  DISCORD,
   BUILD_DEMO,
   DOCS,
 ];

@@ -20,5 +20,6 @@ module.exports = {
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
     'prefer-arrow-callback': 'off',
     'no-restricted-exports': 'warn',
+    'react/jsx-no-useless-fragment': 'off',
   },
 };

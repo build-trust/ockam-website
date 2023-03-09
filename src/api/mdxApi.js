@@ -5,6 +5,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import orderBy from 'lodash/orderBy';
 import RemarkGFM from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
+import RemarkPrism from 'remark-prism';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guide');
@@ -41,7 +42,7 @@ export const getPostBySlug = async (slug) => {
   const mdxSource = await serialize(content, {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
-      remarkPlugins: [RemarkGFM],
+      remarkPlugins: [RemarkGFM, RemarkPrism],
       rehypePlugins: [RehypeSlug],
     },
     scope: data,

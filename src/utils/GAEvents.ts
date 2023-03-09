@@ -1,10 +1,11 @@
-import { event } from "nextjs-google-analytics";
+import { event } from 'nextjs-google-analytics';
 
 const ACTIONS = {
   REDIRECT_TO_OCKAM_GITHUB: 'Redirect to ockam github repo',
   REDIRECT_TO_OCKAM_START_BUILDING: 'Redirect to ockam start building docs',
   REDIRECT_TO_OCKAM_TWITTER: 'Redirect to ockam twitter',
   NAVIGATE_TO_OKCAM_ORCHESTRATOR: 'Redirect to ockam orchestrator',
+  REDIRECT_TO_OCKAM_DISCORD: 'Redirect to ockam discord',
 };
 
 const CATEGORIES = {
@@ -16,27 +17,34 @@ const LABELS = {
 };
 
 class GAEvents {
-  static outboundGithubLink():void {
-    event(ACTIONS.REDIRECT_TO_OCKAM_GITHUB,{
+  static outboundGithubLink(): void {
+    event(ACTIONS.REDIRECT_TO_OCKAM_GITHUB, {
       category: CATEGORIES.OUTBOUND_LINKS,
       label: LABELS.LETS_BUILD_TRUST_SECTION,
     });
   }
 
-  static outboundStartBuildingLink():void {
+  static outboundDiscordLink(): void {
+    event(ACTIONS.REDIRECT_TO_OCKAM_DISCORD, {
+      category: CATEGORIES.OUTBOUND_LINKS,
+      label: LABELS.LETS_BUILD_TRUST_SECTION,
+    });
+  }
+
+  static outboundStartBuildingLink(): void {
     event(ACTIONS.REDIRECT_TO_OCKAM_START_BUILDING, {
       category: CATEGORIES.OUTBOUND_LINKS,
       label: LABELS.LETS_BUILD_TRUST_SECTION,
     });
   }
 
-  static outboundTwitterLink():void {
+  static outboundTwitterLink(): void {
     event(ACTIONS.REDIRECT_TO_OCKAM_TWITTER, {
       category: CATEGORIES.OUTBOUND_LINKS,
     });
   }
 
-  static outboundOrchestratorLink():void {
+  static outboundOrchestratorLink(): void {
     event(ACTIONS.NAVIGATE_TO_OKCAM_ORCHESTRATOR, {
       category: CATEGORIES.OUTBOUND_LINKS,
       label: LABELS.LETS_BUILD_TRUST_SECTION,

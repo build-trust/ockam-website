@@ -9,24 +9,40 @@ import Transition from '@root/components/Transition/Transition';
 const CODE_TEXT = `# Install Ockam Command
 brew install ockam
 # If you don't use Homebrew, look for alternate ways to install here:
-# https://docs.ockam.io/ockam-open-source#get-started
+# https://docs.ockam.io/#install
 
-ockam node create relay
+# Check that everything was installed correctly by enrolling with Ockam Orchestrator.
+#
+# This will create a Space and Project for you in the Orchestrator and provision an
+# End-to-End Encrypted Cloud Relay service in your \`default\` project at \`/project/default\`.
+ockam enroll
+ockam project information --output json > default-project.json
 
 # -- APPLICATION SERVICE --
 
+# Start an application service, listening on a local ip and port, that clients would access
+# through the cloud encrypted relay. We'll use a simple http server for this first example but
+# this could be any other application service.
 python3 -m http.server --bind 127.0.0.1 5000
 
-ockam node create server_sidecar
-ockam tcp-outlet create --at /node/server_sidecar --from /service/outlet --to 127.0.0.1:5000
-ockam forwarder create server_sidecar --at /node/relay --to /node/server_sidecar
+# In a new terminal window, setup an ockam node, called \`s\`, as a sidecar next to the 
+# application service. Then create a tcp outlet, on the \`s\` node, to send raw tcp traffic to the
+# service. Finally create a forwarder in your default Orchestrator project.
+ockam node create s --project default-project.json
+ockam tcp-outlet create --at /node/s --from /service/outlet --to 127.0.0.1:5000
+ockam forwarder create s --at /project/default --to /node/s
 
 # -- APPLICATION CLIENT --
 
-ockam node create client_sidecar
-ockam secure-channel create --from /node/client_sidecar --to /node/relay/service/forward_to_server_sidecar/service/api \\
-    | ockam tcp-inlet create --at /node/client_sidecar --from 127.0.0.1:7000 --to -/service/outlet
+# Setup an ockam node, called \`c\`, as a sidecar next to our application client. Then create an
+# end-to-end encrypted secure channel with s, through the cloud relay. Finally, tunnel traffic
+# from a local tcp inlet through this end-to-end secure channel.
+ockam node create c --project default-project.json
+ockam secure-channel create --from /node/c --to /project/default/service/forward_to_s/service/api \\
+  | ockam tcp-inlet create --at /node/c --from 127.0.0.1:7000 --to -/service/outlet
 
+# Access the application service, that may be in a remote private network though the end-to-end
+# encrypted secure channel, via your private and encrypted cloud relay.
 curl --head 127.0.0.1:7000`;
 
 const TITLE = 'Powerful Protocols, Made Simple';

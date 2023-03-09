@@ -14,7 +14,7 @@ import CodeOneImage from '@assets/images/code1.png';
 const CODE_TEXT = `# Install Ockam Command
 brew install ockam
 # If you don't use Homebrew, look for alternate ways to install here:
-# https://docs.ockam.io/ockam-open-source#get-started
+# https://docs.ockam.io/#install
 
 # Create Two Ockam Nodes - n1 and n2
 ockam node create n1
