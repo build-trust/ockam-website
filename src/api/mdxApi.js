@@ -6,6 +6,7 @@ import orderBy from 'lodash/orderBy';
 import RemarkGFM from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
 import RemarkPrism from 'remark-prism';
+import RehypeKeywordLinks from '@root/utils/keywordLinks';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guide');
@@ -43,7 +44,32 @@ export const getPostBySlug = async (slug) => {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [RemarkGFM, RemarkPrism],
-      rehypePlugins: [RehypeSlug],
+      rehypePlugins: [
+        RehypeSlug,
+        [
+          RehypeKeywordLinks,
+          {
+            keywords: [
+              { keyword: 'secure-by-design', url: 'https://docs.ockam.io/readme/secure-by-design' },
+              { keyword: 'secure by design', url: 'https://docs.ockam.io/readme/secure-by-design' },
+              {
+                keyword: 'virtually adjacent',
+                url: 'https://docs.ockam.io/readme/virtually-adjacent',
+              },
+              {
+                keyword: 'virtual adjacency',
+                url: 'https://docs.ockam.io/readme/virtually-adjacent',
+              },
+              { keyword: 'cryptographic keys', url: 'https://docs.ockam.io/reference/protocols' },
+              {
+                keyword: 'zero trust',
+                url: 'https://docs.ockam.io/readme/secure-by-design#zero-implicit-trust',
+              },
+            ],
+          },
+        ],
+      ],
+      remarkRehypeOptions: { fragment: true },
     },
     scope: data,
   });
