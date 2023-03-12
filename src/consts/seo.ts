@@ -15,3 +15,21 @@ export const KEYS = {
 
   canonicalUrl: 'canonicalUrl',
 };
+
+export const KEYWORDS = [
+  { keyword: 'secure-by-design', url: 'https://docs.ockam.io/readme/secure-by-design' },
+  { keyword: 'secure by design', url: 'https://docs.ockam.io/readme/secure-by-design' },
+  {
+    keyword: 'virtually adjacent',
+    url: 'https://docs.ockam.io/readme/virtually-adjacent',
+  },
+  {
+    keyword: 'virtual adjacency',
+    url: 'https://docs.ockam.io/readme/virtually-adjacent',
+  },
+  { keyword: 'cryptographic keys', url: 'https://docs.ockam.io/reference/protocols' },
+  {
+    keyword: 'zero trust',
+    url: 'https://docs.ockam.io/readme/secure-by-design#zero-implicit-trust',
+  },
+];
