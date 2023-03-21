@@ -160,9 +160,14 @@ export OCKAM_TELEGRAF_TOKEN=$( \
 Now we can create a node for our InfluxDB service:
 
 ```bash
+ockam identity create influxdb
+
+ockam project authenticate --identity influxdb \
+  --token $OCKAM_INFLUXDB_TOKEN --project-path project.json
+
 ockam node create influxdb \
   --project project.json \
-  --enrollment-token $OCKAM_INFLUXDB_TOKEN
+  --identity influxdb
 
 ockam policy set \
   --at influxdb \
@@ -189,9 +194,12 @@ There's a few things that have happened in those commands, so let's quickly unpa
 It's now time to establish the other side of this connection by creating the corresponding client node for Telegraf:
 
 ```bash
+ockam identity create telegraf
+ockam project authenticate --identity telegraf \
+  --token $OCKAM_TELEGRAF_TOKEN --project-path project.json
 ockam node create telegraf \
   --project project.json \
-  --enrollment-token $OCKAM_TELEGRAF_TOKEN
+  --identity telegraf
 ockam policy set \
   --at telegraf \
   --resource tcp-inlet \
