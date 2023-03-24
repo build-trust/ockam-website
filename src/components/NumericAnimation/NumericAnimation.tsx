@@ -11,7 +11,6 @@ type NumericAnimationProps = {
 
 const AnimatedContainer = styled(animated.div)`
   position: relative;
-  width: 100%;
   height: 120px;
   overflow: auto;
   overflow-y: hidden;
