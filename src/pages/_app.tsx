@@ -27,6 +27,8 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
     pageProps: { session, ...pageProps },
   } = props;
   const { getLayout = (page: ReactElement): ReactNode => page } = Component;
+  const isBrowser = typeof window !== 'undefined';
+  const [initialRouteTracked, setInitialRouteTracked] = useState(false);
 
   const { pathname, events } = useRouter();
   const canonicalUrl = useMemo(
@@ -36,11 +38,16 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   const ogImageUrl = `${CONFIG.app.rootUrl}${defaultOgImage.src}`;
 
   useEffect(() => {
+    if (isBrowser && !initialRouteTracked && window.location.search === '') {
+      setInitialRouteTracked(true);
+      // @ts-ignore window.analytics undefined below
+      window.analytics.page(window.location.href);
+    }
     events.on('routeChangeComplete', (url) => {
       // @ts-ignore window.analytics undefined below
       window.analytics.page(url);
     });
-  }, [events]);
+  }, [events, isBrowser, initialRouteTracked]);
 
   return (
     <>
