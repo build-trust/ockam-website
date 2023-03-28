@@ -4,8 +4,9 @@ import { AppProps } from 'next/app';
 import NextNprogress from 'nextjs-progressbar';
 import 'focus-visible/dist/focus-visible';
 import { useRouter } from 'next/router';
-import { GoogleAnalytics } from "nextjs-google-analytics";
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 
+import RedditPixel from '@root/utils/RedditPixel';
 import defaultOgImage from '@assets/images/open-graphs/default.png';
 import CONFIG from '@config';
 import { KEYS } from '@consts/seo';
@@ -28,7 +29,10 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   const { getLayout = (page: ReactElement): ReactNode => page } = Component;
 
   const { pathname, events } = useRouter();
-  const canonicalUrl = useMemo(() => clearTrailingSlashes(CONFIG.app.rootUrl + pathname), [pathname]);
+  const canonicalUrl = useMemo(
+    () => clearTrailingSlashes(CONFIG.app.rootUrl + pathname),
+    [pathname]
+  );
   const ogImageUrl = `${CONFIG.app.rootUrl}${defaultOgImage.src}`;
 
   useEffect(() => {
@@ -62,6 +66,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
+      <RedditPixel />
       <StylesProvider>
         <MobileNavbarProvider>
           <NextNprogress color={theme.colors.brand[500]} height={3} />
