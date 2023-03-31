@@ -12,66 +12,54 @@ import {
 } from '@chakra-ui/react';
 
 import GitHubIcon from '@assets/icons/github.svg';
-import CloudIcon from '@assets/icons/cloud.svg';
 import DeveloperIcon from '@assets/icons/developer.svg';
 import LockIcon from '@assets/icons/lock.svg';
-import DesignIcon from '@assets/icons/design.svg';
 import LeftIcon from '@assets/icons/left.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import { DOCS } from '@consts/externalResources';
 
-const TITLE = 'Built for developers, by developers';
+const TITLE = 'Built for Developers, by Developers';
 const DESCRIPTIONS = [
-  'It is hard to build and scale an application that makes identity driven trust decisions. We created simple, composable building blocks so you can easily deliver secure and private applications to your customers.'
+  'Ockam is a suite of tools, programming libraries, and managed cloud services that orchestrate end-to-end encryption, cryptographic identities, mutual authentication, and authorization policies between distributed applications...at massive scale.'
 ];
 
 const FEATURES = [
   {
-    icon: DesignIcon,
-    title: 'Secure By Design',
-    texts: [
-      'Secure By Design applications minimize their vulnerability surface and embrace the principle of least privilege.',
-      'Ockam’s end-to-end secure channels guarantee application layer data integrity and authenticity for all data-in-motion. This enables a deny-by-default security posture that minimizes an application’s vulnerability surface and brings true control over every access decision.',
-    ],
-  },
-  {
     icon: LockIcon,
-    title: 'Zero Trust',
+    title: 'End-to-end Encryption',
     texts: [
-      'Modern applications operate in untrusted networks and increasingly rely on third-party services and infrastructure. This creates exponential growth in their vulnerability surface.',
-      'Ockam gives you the tools to eliminate implicit trust in networks, services, and infrastructure. Applications get provable cryptographic identities to authenticate and authorize every access decision.',
+      'Across networks, clouds, and boundaries',
+      'For enterprise messaging and event streams',
+      'For any TCP protocol',
+      'Elastic relays',
     ],
   },
   {
     icon: LeftIcon,
-    title: 'Shift Left',
+    title: 'Application Layer Trust',
     texts: [
-      'Software cannot be secured from the outside. Ockam provides powerful building blocks to shift security left and make it an integral part of application design and development.',
-      'Application layer trust guarantees along with tools to manage keys, credentials and authorization policies give you granular control on the security and privacy properties of your application.'
-    ],
-  },
-  {
-    icon: DeveloperIcon,
-    title: 'Developer First',
-    texts: [
-      'Application security is easiest and most cost-effective to solve at the source. Developer-first application layer security is the only viable approach to scalable secure applications.',
-      'Ockam makes it easy to securely manage the lifecycle of keys, identities, and credentials. We give you simple tools to authenticate and authorize using attribute-based credentials and policies.',
+      'Crypographic identities and authentication - everywhere',
+      'Managed credential authorities and ABAC',
+      'Enrollment protocols that bootstrap',
+      'BYO identity providers and access control policies',
+
     ],
   },
   {
     icon: GitHubIcon,
-    title: 'Open Source',
+    title: 'Open and Adaptable',
     texts: [
-      'Ockam’s protocols become ever more secure through transparency, community feedback, and scrutiny.',
-      'Add-ons can be built by anyone to create new hardware key vaults or cloud service connectors.',
+      'Open Source',
+      'Add-ons for Confluent, InfluxData, Okta, KMS, UDP and more',
     ],
   },
   {
-    icon: CloudIcon,
-    title: 'Cloud Native',
+    icon: DeveloperIcon,
+    title: 'Developer Experience',
     texts: [
-      'Ockam Orchestrator is built for enterprise scale.',
-      'Add-ons are ready-made connectors to your hosted authentication, database, and message broker services.',
+      'Tools and Packages',
+      'SLAs',
+      'Support',
     ],
   },
 ];
@@ -141,7 +129,7 @@ const Features: FunctionComponent = () => (
       </Flex>
 
       <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3 }}
+        columns={{ base: 1, md: 2, lg: 2 }}
         spacingX={{ base: 8, md: 20, lg: 24 }}
         spacingY={{ base: 8, md: 12, lg: 16 }}
       >
