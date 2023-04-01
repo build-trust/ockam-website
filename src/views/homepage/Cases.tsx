@@ -14,11 +14,11 @@ const TEXTS = ['Ockam can, and should, be used between every application, everyw
 
 const CASES_CARDS = [
   {
-    image: CasesOneImage,
-    title: 'Orchestrate at Scale',
+    image: CasesThreeImage,
+    title: 'Virtually-adjacent Data',
     texts: [
-      'Modern applications are made up of an unmanageable number of ephemeral microservices. They are distributed, multi-cloud, and rely upon dozens of cloud marketplace services. With so many endpoints that need to interoperate, it’s become impossible to manage.',
-      'Ockam’s key generation and handshake protocols allow for dynamic, massive-scale orchestrations across complex network topologies.',
+      'Create secure communication with private databases from anywhere.',
+      'No longer do you need to expose your data to the public internet with service ports.',
     ],
     actionHref: 'https://docs.ockam.io/guides/use-cases',
     actionText: 'Learn more',
@@ -26,22 +26,21 @@ const CASES_CARDS = [
   },
   {
     image: CasesTwoImage,
-    title: 'Get Out of the Middle',
+    title: 'Secure-by-design Messaging',
     texts: [
-      'You are building an app that moves data from over-there to over-there. Perhaps it’s a message service like Kafka or RabbitMQ?',
-      'You don’t want to be liable for data that moves through your service; Particularly if its HIPAA or PCI protected data!',
-      'Ockam’s end-to-end encryption originates at the data-source and terminates at the data-target , so your app-in-the-middle can not decipher data-in-motion. ',
+      'Guarantee data authenticity and integrity of events from producers all-the-way to end consumers.',
+      'End-to-end encrypt data-in-motion through Kafka.',
     ],
     actionHref: 'https://docs.ockam.io/guides/use-cases',
     actionText: 'Learn more',
     isExternal: true,
   },
   {
-    image: CasesThreeImage,
-    title: 'Trust Anything, Anywhere',
+    image: CasesOneImage,
+    title: 'Developer-first authorization',
     texts: [
-      'If you access data in a VPC, you are exposing your applications to threats by exposing your VPC to the internet.',
-      'Ockam’s inlets and outlets create topologies that eliminate threats from the internet for applications in VPCs. Effectively, your data can move from from VPC to VPC without exposing either application to the internet. Virtually, the applications are running next to each other in the same environment.',
+      'Authenticate and authorize every access decision.',
+      'Add identity-driven controls to enforce enterprise policies everywhere.',
     ],
     actionHref: 'https://docs.ockam.io/guides/use-cases',
     actionText: 'Learn more',
