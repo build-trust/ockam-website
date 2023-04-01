@@ -1,15 +1,25 @@
 import { FunctionComponent } from 'react';
-import { Box, Container, Heading, List, ListItem, ListIcon, useTheme, Text, Flex } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Heading,
+  List,
+  ListItem,
+  ListIcon,
+  useTheme,
+  Text,
+  Flex,
+} from '@chakra-ui/react';
 import Image from 'next/image';
 
 import ControlIcon from '@assets/icons/control.svg';
 import PrivacyIcon from '@assets/icons/privacy.svg';
 import IntegrityIcon from '@assets/icons/integrity.svg';
 import AuthenticityIcon from '@assets/icons/authenticity.svg';
-import HeroLinearGradient from '@assets//images/hero-linear-gradient.png'
+import HeroLinearGradient from '@assets//images/hero-linear-gradient.png';
 import CopyToClipboard from '@components/CopyToClipboard';
 import CodeOneImage from '@assets/images/code1.png';
-
+import Messenger from '@root/components/Messenger';
 
 const CODE_TEXT = `# Install Ockam Command
 brew install ockam
@@ -35,23 +45,18 @@ const SUBHEADING_TEXTS = [
   { icon: ControlIcon, text: 'Control' },
 ];
 
-
 const Hero: FunctionComponent = () => {
   const { gradients } = useTheme();
 
   return (
-    <Box
-      bgImage={HeroLinearGradient.src}
-      bgPosition="center bottom"
-      bgRepeat="no-repeat"
-    >
+    <Box bgImage={HeroLinearGradient.src} bgPosition="center bottom" bgRepeat="no-repeat">
       <Container
         variant="section"
-        pb={{ base: 10, lg: 16  }}
+        pb={{ base: 10, lg: 16 }}
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
-        height={{ base: "calc(100vh - 108px)", lg: "50rem" }}
+        height={{ base: 'calc(100vh - 108px)', lg: '50rem' }}
       >
         <Box>
           <Heading as="h1" size="h1" fontWeight="extrabold" textAlign="center">
@@ -60,6 +65,7 @@ const Hero: FunctionComponent = () => {
               Trust
             </Box>
           </Heading>
+          <Messenger />
           <List
             mt={{ base: 8, lg: 10 }}
             display="flex"
@@ -86,12 +92,12 @@ const Hero: FunctionComponent = () => {
           </List>
         </Box>
 
-
-
         <Text maxW="2xl" fontSize="lg" textAlign="center">
-          Ockam is a suite of open source tools, programming libraries, and managed cloud services to orchestrate end-to-end encryption, mutual authentication, key management, credential management, and authorization policy enforcement – at massive scale.
+          Ockam is a suite of open source tools, programming libraries, and managed cloud services
+          to orchestrate end-to-end encryption, mutual authentication, key management, credential
+          management, and authorization policy enforcement – at massive scale.
         </Text>
-        <Flex maxW="46rem"  boxShadow="xl">
+        <Flex maxW="46rem" boxShadow="xl">
           <Box position="relative" fontSize={0} zIndex={0}>
             <CopyToClipboard position="absolute" bottom={5} right={5} codeText={CODE_TEXT} />
             <Image src={CodeOneImage} alt="Code block 1" placeholder="blur" priority />
@@ -99,7 +105,6 @@ const Hero: FunctionComponent = () => {
         </Flex>
       </Container>
     </Box>
-
   );
 };
 
