@@ -22,26 +22,22 @@ import CTALink from '@components/CTALink';
 
 const TITLE = 'Ockam is for Everyone';
 const TEXTS = [
-  'We built Ockam with all builders in mind. We have two different configurations for you to choose from:',
+  'Regardless of your environments or the scale of your deployments, we have a tool or service to suit your needs. If you find that we don\'t, contact us!',
 ];
 
 const CARDS = [
   {
     icon: PackagesIcon,
-    title: 'Open Source',
+    title: 'Ockam Tools',
     text: 'The Tools for Builders',
-    descriptions: [
-      'Ockam Open Source can be used for small scale projects, with simple architectures, that can be manually configured. ',
-      'Ockam Open Source has all of the Ockam protocols, tools, and programming libraries that a developer needs to Build Trust. ',
-    ],
+//    descriptions: [
+//      'Optional text here ',
+//    ],
     items: [
-      { text: 'Scale: Manually configurable', icon: ArrowIcon },
-      { text: 'Key generation and storage', icon: ArrowIcon },
-      { text: 'Secure Channels', icon: ArrowIcon },
-      { text: 'End-to-end encrypted messaging', icon: ArrowIcon },
-      { text: 'Ready-to-use Packages', icon: ArrowIcon },
-      { text: 'Community Supported', icon: ArrowIcon },
-      { text: 'Apache 2 License', icon: ArrowIcon },
+      { text: 'Command Line Interfaces', icon: ArrowIcon },
+      { text: 'Rust Crates', icon: ArrowIcon },
+      { text: 'Containers', icon: ArrowIcon },
+      { text: 'Binary clients', icon: ArrowIcon },
     ],
     link: {
       label: 'Get Started',
@@ -52,16 +48,13 @@ const CARDS = [
     icon: CloudIcon,
     title: 'Orchestrator',
     text: 'The Service for Enterprises',
-    descriptions: [
-      'Ockam Orchestrator is a fully-managed cloud service that includes all of the features and tools of Ockam Open Source. Orchestrator also has all of the features that you need to collaborate with your team, to integrate with automated infrastructure, to connect with data-layer stores and message brokers, and to facilitate massive scale throughput. ',
-    ],
+//    descriptions: [
+//      'optional text here',
+//    ],
     items: [
-      { text: 'Scale: Automation-required', icon: ArrowIcon },
-      { text: 'Key policy management', icon: ArrowIcon },
-      { text: 'Add-on connectors to data services', icon: ArrowIcon },
-      { text: 'Attribute Based Access Controls (ABAC)', icon: ArrowIcon },
-      { text: 'Message delivery guarantees', icon: ArrowIcon },
-      { text: 'Enterprise-grade support', icon: ArrowIcon },
+      { text: 'Scale automation', icon: ArrowIcon },
+      { text: 'Team collaboration', icon: ArrowIcon },
+      { text: 'Add-on connectors', icon: ArrowIcon },
       { text: 'AWS Marketplace', icon: ArrowIcon },
     ],
     link: {
