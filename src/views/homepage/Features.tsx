@@ -26,17 +26,17 @@ const DESCRIPTIONS = [
 const FEATURES = [
   {
     icon: LockIcon,
-    title: 'End-to-end Encryption',
+    title: 'End-to-End Encryption for Data-in-Motion',
     texts: [
-      'Across networks, clouds, and boundaries',
+      'Across networks, clouds, and protocols',
       'For enterprise messaging and event streams',
-      'For any TCP protocol',
-      'Elastic relays',
+      'For any TCP based protocol',
+      'Elastic Relay Service',
     ],
   },
   {
     icon: LeftIcon,
-    title: 'Application Layer Trust',
+    title: 'Trust at the Application Layer',
     texts: [
       'Crypographic identities and authentication - everywhere',
       'Managed credential authorities and ABAC',
@@ -58,8 +58,7 @@ const FEATURES = [
     title: 'Developer Experience',
     texts: [
       'Tools and Packages',
-      'SLAs',
-      'Support',
+      'SLAs and Support',
     ],
   },
 ];
