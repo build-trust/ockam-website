@@ -3,14 +3,14 @@ import Image, { StaticImageData } from 'next/image';
 import { Box, Flex, Container, Text, Heading, SimpleGrid, Center } from '@chakra-ui/react';
 
 import Card from '@components/Card';
-import CasesOneImage from '@assets/images/cases1.png';
-import CasesTwoImage from '@assets/images/cases2.png';
-import CasesThreeImage from '@assets/images/cases3.png';
+import CasesOneImage from '@assets/images/influxdata.png';
+import CasesTwoImage from '@assets/images/confleunt.png';
+import CasesThreeImage from '@assets/images/okta.png';
 import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
 
 const TITLE = 'How is Ockam Used?';
-const TEXTS = ['Ockam can, and should, be used between every application, everywhere.'];
+const TEXTS = ['Ockam can, and should, be used to move data, messages, and event between every application - everywhere.'];
 
 const CASES_CARDS = [
   {
