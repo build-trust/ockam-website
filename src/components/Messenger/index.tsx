@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { Avatar as ChakraAvatar } from '@chakra-ui/react';
 import styled, { keyframes, css } from 'styled-components';
 
