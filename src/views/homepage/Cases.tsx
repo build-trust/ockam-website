@@ -4,7 +4,7 @@ import { Box, Flex, Container, Text, Heading, SimpleGrid, Center } from '@chakra
 
 import Card from '@components/Card';
 import CasesOneImage from '@assets/images/influxdata.png';
-import CasesTwoImage from '@assets/images/confleunt.png';
+import CasesTwoImage from '@assets/images/confluent.png';
 import CasesThreeImage from '@assets/images/okta.png';
 import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
@@ -14,7 +14,7 @@ const TEXTS = ['Ockam can, and should, be used to move data, messages, and event
 
 const CASES_CARDS = [
   {
-    image: CasesThreeImage,
+    image: CasesOneImage,
     title: 'Virtually-adjacent Data',
     texts: [
       'Create secure communication with private databases from anywhere.',
@@ -36,7 +36,7 @@ const CASES_CARDS = [
     isExternal: true,
   },
   {
-    image: CasesOneImage,
+    image: CasesThreeImage,
     title: 'Developer-first authorization',
     texts: [
       'Authenticate and authorize every access decision.',
