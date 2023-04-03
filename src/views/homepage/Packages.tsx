@@ -30,9 +30,6 @@ const CARDS = [
     icon: PackagesIcon,
     title: 'Ockam Tools',
     text: 'The Tools for Builders',
-//    descriptions: [
-//      'Optional text here ',
-//    ],
     items: [
       { text: 'Command Line Interfaces', icon: ArrowIcon },
       { text: 'Rust Crates', icon: ArrowIcon },
@@ -48,13 +45,10 @@ const CARDS = [
     icon: CloudIcon,
     title: 'Orchestrator',
     text: 'The Service for Enterprises',
-//    descriptions: [
-//      'optional text here',
-//    ],
     items: [
-      { text: 'Scale automation', icon: ArrowIcon },
-      { text: 'Team collaboration', icon: ArrowIcon },
-      { text: 'Add-on connectors', icon: ArrowIcon },
+      { text: 'Elastic Scale', icon: ArrowIcon },
+      { text: 'Team Collaboration', icon: ArrowIcon },
+      { text: 'Add-on Connectors', icon: ArrowIcon },
       { text: 'AWS Marketplace', icon: ArrowIcon },
     ],
     link: {
@@ -68,7 +62,6 @@ type CardGridItemProps = {
   icon: FunctionComponent<SVGAttributes<SVGElement>>;
   title: string;
   text: string;
-  descriptions: string[];
   items: Array<{
     text: string;
     icon: FunctionComponent<SVGAttributes<SVGElement>>;
@@ -84,7 +77,6 @@ const CardGridItem: FunctionComponent<CardGridItemProps> = ({
   icon,
   title,
   text,
-  descriptions,
   items,
   columnOrder,
   link,
@@ -114,19 +106,6 @@ const CardGridItem: FunctionComponent<CardGridItemProps> = ({
           <Text mb={4} fontWeight="regular" color="brand.900" fontSize={{ base: 'sm', lg: 'md' }}>
             {text}
           </Text>
-
-          {descriptions.map((descriptionText) => (
-            <Text
-              key={descriptionText}
-              fontSize="sm"
-              color="gray.500"
-              lineHeight={1.5}
-              _notLast={{ mb: 4 }}
-              _last={{ mb: 8 }}
-            >
-              {descriptionText}
-            </Text>
-          ))}
         </Flex>
       </Flex>
     </GridItem>
