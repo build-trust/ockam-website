@@ -97,7 +97,7 @@ const GetStartedCard: FunctionComponent<GetStartedCardProps> = ({ icon, title, t
 };
 
 const GetStarted: FunctionComponent = () => (
-  <Box bgColor="gray.50" pt={16} pb={{ base: 16, lg: 24 }}>
+  <Box bgColor="gray.50" pt={16} pb={{ base: 16, lg: 24 }} zIndex={2}>
     <Container variant="section">
       <Heading as="h3" size="h3" mb={8} lineHeight={1.3} maxW={{ lg: '31rem' }} alignSelf="center">
         Trust for Data-in-Motion

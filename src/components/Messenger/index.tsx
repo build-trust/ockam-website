@@ -1,4 +1,5 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { Avatar as ChakraAvatar } from '@chakra-ui/react';
 import styled, { keyframes, css } from 'styled-components';
 
@@ -24,6 +25,7 @@ const Messenger = styled.div`
   margin: 0 auto;
   flex-wrap: nowrap;
   position: relative;
+  box-shadow: 0 0 200px 10px #52c7ea;
 `;
 
 const Heading = styled.div`
@@ -51,6 +53,7 @@ const Messages = styled.div`
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
+  color: #333;
 `;
 
 const MessageContainer = styled.div`
@@ -72,6 +75,7 @@ const Sender = styled.div`
   width: 100%;
   padding: 0 45px;
   order: 1;
+  color: #333;
 `;
 const OckamSender = styled(Sender)`
   text-align: right;
@@ -84,6 +88,7 @@ const Message = styled.div`
   flex-basis: fit-content;
   align-self: flex-start;
   order: 3;
+  color: #333;
 `;
 const Notice = styled.div`
   ${fadeTransition}
@@ -92,6 +97,7 @@ const Notice = styled.div`
   margin: 2px 10px;
   font-style: italic;
   align-self: center;
+  color: #333;
 `;
 const OckamMessage = styled(Message)`
   background-image: linear-gradient(142.21deg, #4fdab8 4.44%, #52c7ea 94.64%);
@@ -149,7 +155,7 @@ const generateLine = (
   if (line.sender) {
     if (line.sender === 'ockam') {
       e = (
-        <OckamMessageContainer>
+        <OckamMessageContainer key={`line-${idx}`}>
           <OckamSender>{pts[line.sender].shortname}</OckamSender>
           <Avatar
             borderColor="black"
@@ -165,7 +171,7 @@ const generateLine = (
       );
     } else {
       e = (
-        <MessageContainer>
+        <MessageContainer key={`line-${idx}`}>
           <Sender>{pts[line.sender].shortname}</Sender>
           <Avatar
             borderColor="#000000"
@@ -181,11 +187,11 @@ const generateLine = (
       );
     }
   } else if (line.notice) {
-    e = <Notice>{line.notice}</Notice>;
+    e = <Notice key={`line-${idx}`}>{line.notice}</Notice>;
   } else if (line.invite) {
     invitedParticipants.push(line.invite);
     setInvitedParticipants(invitedParticipants);
-    e = <Notice>{pts[line.invite].name} has been invited to the group</Notice>;
+    e = <Notice key={`line-${idx}`}>{pts[line.invite].name} has been invited to the group</Notice>;
   }
   const el = <Row key={`message-${idx}`}>{e}</Row>;
   return el;
@@ -193,22 +199,32 @@ const generateLine = (
 
 const MessengerMock: FC = () => {
   const [scriptLine, setScriptLine] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const [displayedLines, setDisplayedLines] = useState<JSX.Element[]>([]);
   const [invitedParticipants, setInvitedParticipants] = useState<string[]>(['ockam']);
+  const { ref } = useInView({
+    /* Optional options */
+    threshold: 0.05,
+    onChange: (inView) => {
+      setIsVisible(inView);
+    },
+  });
 
   useEffect(() => {
-    if (script.length > scriptLine) {
-      const curr = displayedLines;
-      const line = script[scriptLine];
-      curr.push(
-        generateLine(line, scriptLine, participants, invitedParticipants, setInvitedParticipants)
-      );
-      setDisplayedLines(curr);
-      setTimeout(() => {
-        setScriptLine(scriptLine + 1);
-      }, fadeTransitionTimeMs);
+    if (isVisible) {
+      if (script.length > scriptLine) {
+        const curr = displayedLines;
+        const line = script[scriptLine];
+        curr.push(
+          generateLine(line, scriptLine, participants, invitedParticipants, setInvitedParticipants)
+        );
+        setDisplayedLines(curr);
+        setTimeout(() => {
+          setScriptLine(scriptLine + 1);
+        }, fadeTransitionTimeMs);
+      }
     }
-  }, [scriptLine, invitedParticipants, displayedLines]);
+  }, [scriptLine, invitedParticipants, displayedLines, isVisible]);
 
   const displayParticipants = (): JSX.Element[] => {
     const middleIdx = Math.ceil(invitedParticipants.length / 2);
@@ -216,6 +232,7 @@ const MessengerMock: FC = () => {
       if (i === 'ockam') {
         return (
           <Avatar
+            key={`avatar-${participants[i].shortname}`}
             src={participants[i].avatar}
             name={participants[i].shortname}
             style={{ order: middleIdx }}
@@ -225,6 +242,7 @@ const MessengerMock: FC = () => {
       const order = idx > middleIdx ? idx + 1 : idx;
       return (
         <Avatar
+          key={`avatar-${participants[i].shortname}`}
           src={participants[i].avatar}
           name={participants[i].shortname}
           style={{ order }}
@@ -235,7 +253,7 @@ const MessengerMock: FC = () => {
   };
 
   return (
-    <Messenger>
+    <Messenger ref={ref}>
       <Heading>{displayParticipants()}</Heading>
       <Messages>{displayedLines.map((el) => el)}</Messages>
     </Messenger>
