@@ -10,7 +10,7 @@ import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
 
 const TITLE = 'How is Ockam Used?';
-const TEXTS = ['Ockam can, and should, be used to move data, messages, and event between every application - everywhere.'];
+const TEXTS = ['Ockam can, and should, be used to move data, messages, and events between every application - everywhere.'];
 
 const CASES_CARDS = [
   {
@@ -67,7 +67,7 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
 }) => (
   <Card p={6} height="100%">
     <Center pb={6} mb={6} borderBottom="1px" borderColor="gray.200">
-      <Image src={image} alt={`${title} image`} width={313} height={171} placeholder="blur" />
+      <Image src={image} alt={`${title} image`} width={313} height={170} placeholder="blur" />
     </Center>
 
     <Box>
