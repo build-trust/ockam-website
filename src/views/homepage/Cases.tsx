@@ -37,7 +37,7 @@ const CASES_CARDS = [
   },
   {
     image: CasesThreeImage,
-    title: 'Developer-First Authorization',
+    title: 'Developer-First Authentication',
     texts: [
       'Authenticate and authorize every access decision.',
       'Add identity-driven controls to enforce enterprise policies everywhere.',
