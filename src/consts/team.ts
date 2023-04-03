@@ -139,6 +139,15 @@ export const MEMBERS = enhanceTeamMembers([
     description: 'Addicted to building world class tools for developers',
   },
   {
+    name: 'Shane',
+    surname: 'Sveller',
+    position: 'Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'US',
+    photo: 'shane-sveller.png',
+    description: 'Obsessed with reproducible and declarative software'
+  },
+  {
     name: 'Maryanna',
     surname: 'Saenko',
     position: 'Board Member',
@@ -209,5 +218,5 @@ export const MEMBERS = enhanceTeamMembers([
     country: 'US',
     photo: 'brian-mullen.png',
     description: 'CMO at InfluxData',
-  },
+  }
 ]);
