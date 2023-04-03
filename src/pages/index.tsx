@@ -8,8 +8,6 @@ import MainLayout from '@layouts/MainLayout';
 import {
   Hero,
   GetStarted,
-  Tools,
-  Infrastructure,
   Features,
   Cases,
   Packages,
@@ -59,8 +57,6 @@ const HomePage: NextPageWithLayout<HomePageProps> = ({ stars, contributors, down
   <Box pt={{ base: 10, lg: 20 }}>
     <Hero />
     <GetStarted />
-    <Tools />
-    <Infrastructure />
     <Features />
     <Cases />
     <Packages />
