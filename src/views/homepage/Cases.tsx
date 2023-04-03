@@ -15,7 +15,7 @@ const TEXTS = ['Ockam can, and should, be used to move data, messages, and event
 const CASES_CARDS = [
   {
     image: CasesOneImage,
-    title: 'Virtually-adjacent Data',
+    title: 'Virtually-Adjacent Data',
     texts: [
       'Create secure communication with private databases from anywhere.',
       'No longer do you need to expose your data to the public internet with service ports.',
@@ -26,7 +26,7 @@ const CASES_CARDS = [
   },
   {
     image: CasesTwoImage,
-    title: 'Secure-by-design Messaging',
+    title: 'Secure-by-Design Messaging',
     texts: [
       'Guarantee data authenticity and integrity of events from producers all-the-way to end consumers.',
       'End-to-end encrypt data-in-motion through Kafka.',
@@ -37,7 +37,7 @@ const CASES_CARDS = [
   },
   {
     image: CasesThreeImage,
-    title: 'Developer-first authorization',
+    title: 'Developer-First Authorization',
     texts: [
       'Authenticate and authorize every access decision.',
       'Add identity-driven controls to enforce enterprise policies everywhere.',
