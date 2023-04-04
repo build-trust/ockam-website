@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { Avatar as ChakraAvatar } from '@chakra-ui/react';
 import styled, { keyframes, css } from 'styled-components';
 
-const fadeTransitionTimeMs = 1800;
+const fadeTransitionTimeMs = 2000;
 
 const fadeIn = keyframes`
     from { opacity: 0%; }
@@ -89,6 +89,7 @@ const Message = styled.div`
   align-self: flex-start;
   order: 3;
   color: #333;
+  max-width: calc(100% - 50px);
 `;
 const Notice = styled.div`
   ${fadeTransition}
@@ -126,23 +127,82 @@ const participants: Participant = {
   kafka: { name: 'Message Bus (Kafka)', avatar: '/messenger/logo.kafka.png', shortname: 'Kafka' },
   apache: { name: 'Web Server (Apache)', avatar: '/messenger/logo.apache.png', shortname: 'Web' },
   iot: { name: 'Sensor (IoT)', avatar: '/messenger/logo.iot.png', shortname: 'IoT' },
+  influx: { name: 'InfluxDB', avatar: '/messenger/logo.influx.png', shortname: 'InfluxDB' },
+  confluent: {
+    name: 'Confluent Cloud',
+    avatar: '/messenger/logo.confluent.png',
+    shortname: 'Confluent',
+  },
+  producer: { name: 'Kafka Producer', avatar: '/messenger/logo.kafka.png', shortname: 'Producer' },
+  consumer: { name: 'Kafka Consumer', avatar: '/messenger/logo.kafka.png', shortname: 'Consumer' },
 };
 
 type ScriptLine = {
   [key: string]: string;
 };
 
-const script: ScriptLine[] = [
+const influxScript: ScriptLine[] = [
+  { invite: 'influx' },
+  { sender: 'influx', message: 'Yo?' },
+  { sender: 'ockam', message: "1 sec, I've got an IoT sensor that wants to send you data..." },
+  { sender: 'influx', message: "But I'm in a private on-prem network" },
+  { sender: 'ockam', message: "That's not going to be a problem" },
+  { invite: 'iot' },
+  { sender: 'iot', message: 'Hey @Influx 👋' },
+  { sender: 'influx', message: "Hi @IoT 👋 We're connected. It worked! Send me what you've got" },
+  { sender: 'ockam', message: "Let's goooo!!! Set your data free 🙌" },
+];
+
+const confluentScript: ScriptLine[] = [
+  { invite: 'producer' },
+  { sender: 'producer', message: 'Hey @Ockam, I need send some data to a Kafka consumer' },
+  { sender: 'ockam', message: 'No problem, let me add them...' },
+  { sender: 'producer', message: 'Wait...' },
+  {
+    sender: 'producer',
+    message:
+      "It contains Personally Identifiable Information (PII), I don't want to send it through Confluent Cloud like we normally do",
+  },
+  { sender: 'ockam', message: 'I see!' },
+  {
+    sender: 'ockam',
+    message:
+      "It's fine though, I'll set it up so it's encrypted before it leaves you and only the consumer can decrypt it",
+  },
+  { invite: 'confluent' },
+  { invite: 'consumer' },
+  { sender: 'ockam', message: 'You all ready?' },
+  { sender: 'consumer', message: "Yep, let's do this" },
+  { sender: 'confluent', message: '🙈' },
+  { sender: 'producer', message: '@Consumer sent! You get it?' },
+  { sender: 'consumer', message: "Got it! Woah, I didn't even have to change any code!!" },
+  { sender: 'confluent', message: "And I couldn't see it 😅" },
+  { sender: 'ockam', message: "Let's goooo!!! Set your data free 🙌" },
+];
+
+const dbAdjacentScript: ScriptLine[] = [
   { invite: 'postgres' },
   { sender: 'postgres', message: 'Yo?' },
   { sender: 'ockam', message: '1 sec, the web server wanted to connect with you...' },
+  {
+    sender: 'postgres',
+    message: "Where are they? I'm in a private subnet. They probably won't be able to reach me",
+  },
+  {
+    sender: 'ockam',
+    message:
+      "That's why I'm here! I'm going to connect the two of you directly, rather than connecting or opening up networks",
+  },
   { invite: 'apache' },
   { sender: 'apache', message: '@postgres hey, can I quickly scan the users table?' },
   { sender: 'postgres', message: 'you got it!' },
-  { invite: 'kafka' },
-  { invite: 'iot' },
-  { sender: 'kafka', message: 'Sup?' },
+  { sender: 'apache', message: 'It worked! That was easy' },
+  { sender: 'ockam', message: "Let's goooo!!! Set your data free 🙌" },
 ];
+const scripts = [influxScript, confluentScript, dbAdjacentScript];
+
+const script: ScriptLine[] =
+  scripts[Math.min(Math.floor(Math.random() * scripts.length), scripts.length - 1)];
 
 const generateLine = (
   line: ScriptLine,
@@ -204,7 +264,7 @@ const MessengerMock: FC = () => {
   const [invitedParticipants, setInvitedParticipants] = useState<string[]>(['ockam']);
   const { ref } = useInView({
     /* Optional options */
-    threshold: 0.05,
+    threshold: 0.3,
     onChange: (inView) => {
       setIsVisible(inView);
     },

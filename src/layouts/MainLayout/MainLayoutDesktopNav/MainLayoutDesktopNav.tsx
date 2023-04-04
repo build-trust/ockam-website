@@ -65,6 +65,7 @@ const MainLayoutDesktopNav: FunctionComponent = () => (
       justify="center"
       w="full"
       flexWrap="wrap"
+      zIndex={1}
       pl={{ lg: 8, xl: 16 }}
     >
       {NAV_MENU_ITEMS.map(({ icon, ...item }) => {

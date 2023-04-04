@@ -1,35 +1,32 @@
 import { FunctionComponent } from 'react';
-import { Box, Container, Heading, Text, useTheme } from '@chakra-ui/react';
+import { Box, Button, Container, Heading, useTheme } from '@chakra-ui/react';
 import styled from 'styled-components';
 
 import Messenger from '@root/components/Messenger';
 import RotatingText from '@root/components/RotatingText';
 
 const HeroBox = styled(Box)`
-  background: #111;
-  background-image: linear-gradient(0deg, rgba(60 '', 40, 40), rgb(10, 10, 10));
+  &:before {
+    content: '';
+    background: rgb(10, 10, 10);
+    background-image: linear-gradient(0deg, rgb(40, 40, 40), rgb(10, 10, 10));
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
   color: white;
   overflow: hidden;
-`;
-
-const FlashBox = styled(Box)`
-  // &:before {
-  //   background-image: radial-gradient(circle at center, #4FDAB8 4.44%, #52C7EA 50%, rgba(0,0,0,0) 95%);
-  //   width: 100%;
-  //   height: 100%;
-  //   position: absolute;
-  //   content: "";
-  // }
-
-  margin: 100px;
   position: relative;
 `;
+
 const Hero: FunctionComponent = () => {
   const { gradients } = useTheme();
 
   return (
     <HeroBox>
-      {/* <Box bgImage={HeroLinearGradient.src} bgPosition="center bottom" bgRepeat="no-repeat"> */}
       <Container
         variant="section"
         pt={{ base: 10, lg: 16 }}
@@ -39,25 +36,26 @@ const Hero: FunctionComponent = () => {
         justifyContent="space-between"
       >
         <Box>
-          <Heading as="h1" size="h1" fontWeight="extrabold" textAlign="center" color="white">
+          <Heading
+            as="h1"
+            size="h1"
+            fontWeight="extrabold"
+            textAlign="center"
+            color="white"
+            my={16}
+          >
             Build{' '}
             <Box as="span" bgImage={gradients.primary} bgClip="text">
               Trust
             </Box>
           </Heading>
-          <br />
-          <br />
-          <Text color="white" align="center">
-            Ockam is a suite of open source tools, programming libraries, and managed cloud services
-            to orchestrate end-to-end encryption, mutual authentication, key management, credential
-            management, and authorization policy enforcement – at massive scale.
-          </Text>
-          <FlashBox>
+
+          <Box>
             <Heading as="h1" size="h2" fontWeight="extrabold" textAlign="center" color="white">
               What if connecting{' '}
               <RotatingText
                 interval={3000}
-                delay={0}
+                delay={4000}
                 words={['Kafka', 'InfluxDB', 'services', 'devices', 'anything', 'everything']}
                 styles={{
                   backgroundImage: gradients.primary,
@@ -69,8 +67,8 @@ const Hero: FunctionComponent = () => {
               &nbsp;was as
               <br />
               <RotatingText
-                interval={3000}
-                delay={1500}
+                interval={4000}
+                delay={8000}
                 words={['secure', 'simple', 'trusted']}
                 styles={{
                   backgroundImage: gradients.primary,
@@ -83,18 +81,64 @@ const Hero: FunctionComponent = () => {
             </Heading>
             <br />
             <br />
-          </FlashBox>
-          <Heading as="h2" size="h2" textAlign="center" color="white">
+          </Box>
+
+          <Box textAlign="center" my={20}>
+            <Button
+              mx={6}
+              color="rgb(40, 40, 40)"
+              border="1px solid white"
+              _hover={{
+                backgroundColor: 'rgb(10, 10, 10)',
+                color: 'white',
+              }}
+            >
+              Start Building
+            </Button>
+            <Button
+              position="relative"
+              borderWidth={2}
+              borderStyle="solid"
+              borderColor="transparent"
+              backgroundColor="rgb(10, 10, 10)"
+              backgroundClip="padding-box"
+              _before={{
+                content: "''",
+                backgroundImage: gradients.primary,
+                borderRadius: '4px',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: -1,
+                margin: '-2px',
+                boxShadow: '0 0 50px 0px #52c7ea',
+              }}
+              _hover={{
+                backgroundImage: gradients.primary,
+                borderColor: 'rgb(10, 10, 10)',
+                color: 'rgb(10, 10, 10)',
+              }}
+              _active={{
+                backgroundImage: `${gradients.primary}`,
+                color: 'white',
+                boxShadow: '0 0 60px 10px #52c7ea',
+              }}
+              _focus={{
+                backgroundImage: `${gradients.primary}`,
+                color: 'white',
+                boxShadow: '0 0 60px 10px #52c7ea',
+              }}
+            >
+              Get a Demo
+            </Button>
+          </Box>
+
+          <Heading as="h3" size="h3" textAlign="center" color="white" my={40}>
             Tools for developers to Build Trust for data-in-motion
           </Heading>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+
           <Messenger />
         </Box>
       </Container>
