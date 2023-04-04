@@ -15,7 +15,7 @@ const TEXTS = ['Ockam can, and should, be used to move data, messages, and event
 const CASES_CARDS = [
   {
     image: CasesOneImage,
-    title: 'Virtually-Adjacent Data',
+    title: 'Virtually-Adjacent Databases',
     texts: [
       'Create secure communication with private databases from anywhere.',
       'No longer do you need to expose your data to the public internet with service ports.',

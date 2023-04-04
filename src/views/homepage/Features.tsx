@@ -18,22 +18,13 @@ import LeftIcon from '@assets/icons/left.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import { DOCS } from '@consts/externalResources';
 
-const TITLE = 'Built for Developers, by Developers';
+const TITLE = 'Connect Applications, not Networks';
 const DESCRIPTIONS = [
-  'Ockam is a suite of tools, programming libraries, and managed cloud services that orchestrate end-to-end encryption, cryptographic identities, mutual authentication, and authorization policies between distributed applications...at massive scale.'
+  'Run Ockam at each of your applications to create a secure communication channel directly with all of your other apps.',
+  'Finally, you can forget about about infrastructure\'s networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, CAs, tokens, and <a bunch of other things you didn\'t get into this gig to deal with in the first place>'
 ];
 
 const FEATURES = [
-  {
-    icon: LockIcon,
-    title: 'End-to-End Encryption for Data-in-Motion',
-    texts: [
-      'Across networks, clouds, and protocols',
-      'For enterprise messaging and event streams',
-      'For any TCP based protocol',
-      'Elastic Relay Service',
-    ],
-  },
   {
     icon: LeftIcon,
     title: 'Trust at the Application Layer',
@@ -42,7 +33,16 @@ const FEATURES = [
       'Managed credential authorities and ABAC',
       'Enrollment protocols that bootstrap',
       'BYO identity providers and access control policies',
-
+    ],
+  }, 
+  {
+    icon: LockIcon,
+    title: 'End-to-End Encryption for Data-in-Motion',
+    texts: [
+      'Through networks, clouds, and protocols',
+      'Over enterprise messaging and event streams',
+      'For existing and new infrastructure',
+      'Built for high-thoughput, low-latency, and high-availability',
     ],
   },
   {

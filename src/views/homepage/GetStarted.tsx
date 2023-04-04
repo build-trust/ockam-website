@@ -15,7 +15,7 @@ const GET_STARTED_CARDS = [
   {
     icon: GitHubIcon,
     title: 'Community',
-    text: 'Join our Open Source community, start a discussion, or file an issue - or just say Hello.',
+    text: 'Join our Open Source community',
     link: [
       {
         text: 'GitHub Discussions',
@@ -34,9 +34,9 @@ const GET_STARTED_CARDS = [
   {
     icon: BuildingIcon,
     title: 'Builders',
-    text: 'Let’s build an application, together, in this step-by-step guide to Ockam.',
+    text: 'Let’s build an application in a step-by-step guide',
     link: {
-      text: 'User Guide',
+      text: 'Show me the code',
       href: BUILD_DEMO.href,
       isExternal: true,
       onClick: GAEvents.outboundStartBuildingLink,
@@ -45,7 +45,7 @@ const GET_STARTED_CARDS = [
   {
     icon: CloudIcon,
     title: 'Companies',
-    text: 'Sign up for Ockam Orchestrator and Build Trust across all of your applications and services.',
+    text: 'Purchase Ockam for your company with your AWS account',
     link: {
       text: 'AWS Marketplace',
       isExternal: true,
