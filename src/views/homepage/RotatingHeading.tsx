@@ -34,6 +34,7 @@ const RotatingHeading: FC = () => {
             color: 'transparent',
           }}
         />{' '}
+        <br />
         was as{' '}
         <RotatingText
           interval={4000}
@@ -46,7 +47,9 @@ const RotatingHeading: FC = () => {
             color: 'transparent',
           }}
         />{' '}
-        as a conversation&nbsp;with your&nbsp;friends?
+        as a conversation
+        <br />
+        with your&nbsp;friends?
       </Heading>
     </Box>
   );
