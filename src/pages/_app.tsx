@@ -5,6 +5,7 @@ import NextNprogress from 'nextjs-progressbar';
 import 'focus-visible/dist/focus-visible';
 import { useRouter } from 'next/router';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
+import Script from 'next/script';
 
 import RedditPixel from '@root/utils/RedditPixel';
 import defaultOgImage from '@assets/images/open-graphs/default.png';
@@ -73,6 +74,11 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
+      <Script
+        async
+        src="https://tag.clearbitscripts.com/v1/pk_29cb8603dd5cf9cfebe03cb5cdb56049/tags.js"
+        referrerPolicy="strict-origin-when-cross-origin"
+      />
       <RedditPixel />
       <StylesProvider>
         <MobileNavbarProvider>
