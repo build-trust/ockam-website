@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 import Messenger from '@root/components/Messenger';
-import RotatingText from '@root/components/RotatingText';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 import { BUILD_DEMO } from '@root/consts/externalResources';
+
+import RotatingHeading from './RotatingHeading';
 
 const HeroBox = styled(Box)`
   &:before {
@@ -108,51 +109,7 @@ const Hero: FunctionComponent = () => {
               </Button>
             </Link>
           </Box>
-          <Box my={30}>
-            <Heading
-              as="h1"
-              size={{ base: 'md', lg: 'h2' }}
-              fontWeight="extrabold"
-              textAlign="center"
-              color="white"
-            >
-              What if connecting{' '}
-              <RotatingText
-                interval={3000}
-                delay={4000}
-                words={[
-                  'Kafka',
-                  'InfluxDB',
-                  'services',
-                  'devices',
-                  'applications',
-                  'anything',
-                  'everything',
-                ]}
-                styles={{
-                  backgroundImage: gradients.primary,
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                }}
-              />{' '}
-              was as{' '}
-              <RotatingText
-                interval={4000}
-                delay={8000}
-                words={['secure', 'simple', 'trusted', 'private']}
-                styles={{
-                  backgroundImage: gradients.primary,
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                }}
-              />{' '}
-              as a conversation&nbsp;with your&nbsp;friends?
-            </Heading>
-            <br />
-            <br />
-          </Box>
+          <RotatingHeading />
 
           <Messenger />
         </Box>
