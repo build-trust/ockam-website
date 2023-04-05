@@ -35,13 +35,35 @@ const MessengerMock: FC = () => {
     spoken: [],
   });
   const [isVisible, setIsVisible] = useState(false);
+  const [isPlayable, setIsPlayable] = useState(false);
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = (): void => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
 
   const { ref } = useInView({
-    threshold: 0.5,
+    threshold: 0.65,
     onChange: (inView) => {
       setIsVisible(inView);
     },
   });
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isVisible && scrollPosition > 300) {
+      setIsPlayable(true);
+    } else {
+      setIsPlayable(false);
+    }
+  }, [scrollPosition, isVisible]);
 
   const invited = performance.invited || [];
   const scriptLine = performance.scriptLine || 0;
@@ -115,7 +137,7 @@ const MessengerMock: FC = () => {
     });
   };
   useEffect(() => {
-    if (isVisible) {
+    if (isPlayable) {
       if (script.length > scriptLine) {
         if (scriptLine + 1 > (performance.spoken?.length || 0)) {
           const line = script[scriptLine];
@@ -137,7 +159,7 @@ const MessengerMock: FC = () => {
         }, 10000);
       }
     }
-  }, [performance, isVisible, scriptLine, generateLine, participants, script]);
+  }, [performance, isPlayable, scriptLine, generateLine, participants, script]);
 
   const displayParticipants = (): JSX.Element[] => {
     const middleIdx = Math.ceil(invited.length / 2);
