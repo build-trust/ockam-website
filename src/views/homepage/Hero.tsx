@@ -148,7 +148,7 @@ const Hero: FunctionComponent = () => {
                   color: 'transparent',
                 }}
               />{' '}
-              as a conversation with your&nbsp;friends?
+              as a conversation&nbsp;with your&nbsp;friends?
             </Heading>
             <br />
             <br />
