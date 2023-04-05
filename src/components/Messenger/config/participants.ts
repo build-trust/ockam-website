@@ -25,6 +25,11 @@ const participants: Participant = {
   producer: { name: 'Kafka Producer', avatar: '/messenger/logo.kafka.png', shortname: 'Producer' },
   consumer: { name: 'Kafka Consumer', avatar: '/messenger/logo.kafka.png', shortname: 'Consumer' },
   app: { name: 'Application', avatar: '', shortname: 'App' },
+  meter: { name: 'Smart Power Meter (IoT)', avatar: '', shortname: 'Smart Meter' },
+  battery: { name: 'Smart Battery (IoT)', avatar: '', shortname: 'Smart Battery' },
+  inverter: { name: 'Inverter (IoT)', avatar: '', shortname: 'Inverter' },
+  pv: { name: 'Photovoltaic Panels (IoT)', avatar: '', shortname: 'PV' },
+  utility: { name: 'Electricity Grid Provider', avatar: '', shortname: 'Power Grid' },
 };
 
 export type { ParticipantDetails, Participant };

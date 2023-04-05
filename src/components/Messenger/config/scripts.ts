@@ -108,6 +108,36 @@ const lotsOfThingsScript: ScriptLine[] = [
       'A few more for you @Ockam. I need the production database, and some of the fleet of IoT devices',
   },
   { sender: 'ockam', message: "Yeeaahh... let's really get this party started!" },
+  { invite: 'postgres' },
+  { invite: 'meter' },
+  { invite: 'battery' },
+  { invite: 'inverter' },
+  { invite: 'pv' },
+  { invite: 'utility' },
+  { sender: 'inverter', message: "You're all here! 👋" },
+  {
+    sender: 'utility',
+    message:
+      "Hey all, we've got exceptionally high demand on the grid right now and a power station is offline",
+  },
+  { sender: 'app', message: '@PV can you send excess solar back in?' },
+  { sender: 'pv', message: '@Battery how you looking?' },
+  {
+    sender: 'battery',
+    message: "I'm fully charged 🔋 We can comfortably send in any excess solar",
+  },
+  { sender: 'pv', message: '@Inverter you know what to do then!' },
+  { sender: 'inverter', message: "Roger 🙏. @Utility it's on its way" },
+  { sender: 'utility', message: "That's a huge help, thank you!" },
+  {
+    sender: 'confluent',
+    message: "There's some events coming through now, I still can't see what they are though 🙈",
+  },
+  { sender: 'consumer', message: 'Yep, IoT data has arrived here' },
+  { sender: 'influx', message: 'Here too' },
+  { sender: 'postgres', message: '👍' },
+  { sender: 'app', message: 'Thanks everyone!' },
+  { sender: 'ockam', message: 'Just happy to be able to bring you all together 😁' },
 ];
 const scripts = [influxScript, confluentScript, dbAdjacentScript, lotsOfThingsScript];
 
