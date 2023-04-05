@@ -10,6 +10,7 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
+import styled from 'styled-components';
 
 import GitHubIcon from '@assets/icons/github.svg';
 import DeveloperIcon from '@assets/icons/developer.svg';
@@ -20,8 +21,7 @@ import { DOCS } from '@consts/externalResources';
 
 const TITLE = 'Connect Applications, not Networks';
 const DESCRIPTIONS = [
-  'Run Ockam at each of your applications to create a secure communication channel directly with all of your other apps.',
-  'Finally, you can forget about about infrastructure\'s networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, CAs, tokens, and <a bunch of other things you didn\'t get into this gig to deal with in the first place>'
+  "Finally, you can forget about networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, CAs, tokens, and <a bunch of other things you didn't get into this gig to deal with in the first place>",
 ];
 
 const FEATURES = [
@@ -34,7 +34,7 @@ const FEATURES = [
       'Enrollment protocols that bootstrap',
       'BYO identity providers and access control policies',
     ],
-  }, 
+  },
   {
     icon: LockIcon,
     title: 'End-to-End Encryption for Data-in-Motion',
@@ -48,18 +48,12 @@ const FEATURES = [
   {
     icon: GitHubIcon,
     title: 'Open and Adaptable',
-    texts: [
-      'Open Source',
-      'Add-ons for Confluent, InfluxData, Okta, KMS, UDP and more',
-    ],
+    texts: ['Open Source', 'Add-ons for Confluent, InfluxData, Okta, KMS, UDP and more'],
   },
   {
     icon: DeveloperIcon,
     title: 'Developer Experience',
-    texts: [
-      'Tools and Packages',
-      'SLAs and Support',
-    ],
+    texts: ['Tools and Packages', 'SLAs and Support'],
   },
 ];
 
@@ -91,6 +85,20 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts }) => (
   </Flex>
 );
 
+const NoBr = styled.span`
+  white-space: nowrap;
+`;
+const noWidows = (str: string): JSX.Element => {
+  const lastIndex = str.lastIndexOf(' ');
+  const sndLastIndex = str.lastIndexOf(' ', lastIndex - 1);
+  const endWords = <NoBr>{str.substring(sndLastIndex + 1)}</NoBr>;
+  const el = (
+    <>
+      {str.substring(0, sndLastIndex)} {endWords}
+    </>
+  );
+  return el;
+};
 const Features: FunctionComponent = () => (
   <Box bgColor="gray.50" pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 24 }}>
     <Container variant="section">
@@ -104,7 +112,7 @@ const Features: FunctionComponent = () => (
       >
         <Box alignSelf="flex-start" w="full" maxW="2.5xl">
           <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }}>
-            {TITLE}
+            {noWidows(TITLE)}
           </Heading>
 
           {DESCRIPTIONS.map((text) => (

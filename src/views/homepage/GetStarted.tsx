@@ -105,11 +105,11 @@ const GetStarted: FunctionComponent = () => (
       <Text maxW="2xl" fontSize="lg" textAlign="center" mb={6}>
         Modern applications are distributed and have an unwieldy number of interconnections that
         must trustfully exchange data. To trust data-in-motion, applications need end-to-end
-        guarantees of data integrity, authenticity, and privacy.
+        guarantees of data integrity, authenticity, and&nbsp;privacy.
       </Text>
       <Text maxW="2xl" fontSize="lg" textAlign="center" mb={18}>
-        Ockam empowers you with simple tools to add these controls and guarantees to any
-        application.
+        Ockam empowers you with simple developer tools to add data guarantees to
+        any&nbsp;application.
       </Text>
 
       <SimpleGrid

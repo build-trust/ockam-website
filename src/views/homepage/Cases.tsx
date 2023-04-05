@@ -10,7 +10,9 @@ import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
 
 const TITLE = 'How is Ockam Used?';
-const TEXTS = ['Ockam can, and should, be used to move data, messages, and events between every application - everywhere.'];
+const TEXTS = [
+  'Run Ockam at each of your applications to create a secure communication channel directly with all of your other apps.',
+];
 
 const CASES_CARDS = [
   {
