@@ -41,7 +41,7 @@ const Hero: FunctionComponent = () => {
         <Box>
           <Heading
             as="h1"
-            size="h1"
+            size={{ base: '3xl', lg: 'h1' }}
             fontWeight="extrabold"
             textAlign="center"
             color="white"
@@ -109,7 +109,13 @@ const Hero: FunctionComponent = () => {
             </Link>
           </Box>
           <Box my={30}>
-            <Heading as="h1" size="h2" fontWeight="extrabold" textAlign="center" color="white">
+            <Heading
+              as="h1"
+              size={{ base: 'md', lg: 'h2' }}
+              fontWeight="extrabold"
+              textAlign="center"
+              color="white"
+            >
               What if connecting{' '}
               <RotatingText
                 interval={3000}
@@ -129,9 +135,8 @@ const Hero: FunctionComponent = () => {
                   backgroundClip: 'text',
                   color: 'transparent',
                 }}
-              />
-              &nbsp;was as
-              <br />
+              />{' '}
+              was as{' '}
               <RotatingText
                 interval={4000}
                 delay={8000}
@@ -142,8 +147,8 @@ const Hero: FunctionComponent = () => {
                   backgroundClip: 'text',
                   color: 'transparent',
                 }}
-              />
-              &nbsp;as a conversation with your friends?
+              />{' '}
+              as a conversation with your&nbsp;friends?
             </Heading>
             <br />
             <br />

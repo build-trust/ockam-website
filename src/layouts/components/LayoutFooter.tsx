@@ -166,7 +166,9 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
             colorScheme="avocado"
             color="black"
             size="lg"
-            m={8}
+            display={{ base: 'block', lg: 'inline-block' }}
+            mr={{ base: 0, lg: 8 }}
+            my={{ base: 2, lg: 0 }}
           >
             Start Building
           </Button>
@@ -177,6 +179,9 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
             colorScheme="avocado"
             color="black"
             size="lg"
+            display={{ base: 'block', lg: 'inline-block' }}
+            mr={{ base: 0, lg: 0 }}
+            my={{ base: 2, lg: 0 }}
           >
             Get a Demo
           </Button>

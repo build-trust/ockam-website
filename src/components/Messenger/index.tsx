@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { Box } from '@chakra-ui/react';
 
 import { randomScript, ScriptLine } from './config/scripts';
 import Participants, { Participant } from './config/participants';
@@ -165,10 +166,12 @@ const MessengerMock: FC = () => {
   };
 
   return (
-    <Messenger ref={ref}>
-      <Heading>{displayParticipants()}</Heading>
-      <Messages>{displayedLines.map((el) => el)}</Messages>
-    </Messenger>
+    <Box width={{ base: 400, lg: 600 }} margin="0 auto">
+      <Messenger ref={ref}>
+        <Heading>{displayParticipants()}</Heading>
+        <Messages>{displayedLines.map((el) => el)}</Messages>
+      </Messenger>
+    </Box>
   );
 };
 export default MessengerMock;

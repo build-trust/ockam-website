@@ -17,7 +17,6 @@ const Messenger = styled.div`
   flex-direction: column;
   background: white;
   height: 400px;
-  width: 600px;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin: 0 auto;
