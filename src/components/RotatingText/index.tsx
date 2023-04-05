@@ -26,9 +26,9 @@ const AnimatedContainer = styled(animated.div)`
   overflow-y: hidden;
   display: inline-block;
   font-size: 1em;
-  height: 45px;
+  height: 1.2em;
   vertical-align: middle;
-  line-height: 40px;
+  line-height: 1em;
 `;
 
 type Props = {

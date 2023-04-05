@@ -188,7 +188,7 @@ const MessengerMock: FC = () => {
   };
 
   return (
-    <Box width={{ base: 400, lg: 600 }} margin="0 auto">
+    <Box width={{ base: 380, lg: 600 }} margin="0 auto">
       <Messenger ref={ref}>
         <Heading>{displayParticipants()}</Heading>
         <Messages>{displayedLines.map((el) => el)}</Messages>
