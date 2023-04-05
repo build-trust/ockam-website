@@ -73,8 +73,8 @@ const dbAdjacentScript: ScriptLine[] = [
   { sender: 'postgres', message: 'Actually, are they even in the same network?' },
   { sender: 'ockam', message: "It's already done" },
   { sender: 'apache', message: 'Hey @Postgres 👋' },
-  { sender: 'postgres', message: 'Oh, you can already talk to me!' },
-  { sender: 'postgres', message: "And it's encrypted!!" },
+  { sender: 'postgres', message: 'Oh, you can already talk to me!?' },
+  { sender: 'postgres', message: "And it's encrypted!" },
   { sender: 'ockam', message: "Let's goooo!!! Set your data free 🙌" },
 ];
 
