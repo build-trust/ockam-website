@@ -7,7 +7,6 @@ import RemarkGFM from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
 import RemarkPrism from 'remark-prism';
 import RehypeKeywordLinks from '@root/utils/keywordLinks';
-import { KEYWORDS } from '@root/consts/seo';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guide');
@@ -45,15 +44,7 @@ export const getPostBySlug = async (slug) => {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [RemarkGFM, RemarkPrism],
-      rehypePlugins: [
-        RehypeSlug,
-        [
-          RehypeKeywordLinks,
-          {
-            keywords: KEYWORDS,
-          },
-        ],
-      ],
+      rehypePlugins: [RehypeSlug],
       remarkRehypeOptions: { fragment: true },
     },
     scope: data,
