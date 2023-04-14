@@ -71,7 +71,7 @@ EOF
 To save you having to unpack all of that: it's an InfluxDB permission definition (in JSON format) that only grants the ability to write to a specific bucket on a specific Org. Clients with this permission will be unable to read any data, modify permissions, etc.
 
 ```bash
-ockam project addon configure influx-db \
+ockam project addon configure influxdb \
   --endpoint-url $INFLUXDB_ENDPOINT_URL \
   --token $INFLUXDB_ADMIN_TOKEN \
   --org-id $INFLUXDB_ORG_ID \

@@ -166,10 +166,10 @@ ockam project authenticate --identity influxdb \
   --token $OCKAM_INFLUXDB_TOKEN --project-path project.json
 
 ockam node create influxdb \
-  --project project.json \
+  --project-path project.json \
   --identity influxdb
 
-ockam policy set \
+ockam policy create \
   --at influxdb \
   --resource tcp-outlet \
   --expression '(= subject.component "telegraf")'
@@ -198,9 +198,9 @@ ockam identity create telegraf
 ockam project authenticate --identity telegraf \
   --token $OCKAM_TELEGRAF_TOKEN --project-path project.json
 ockam node create telegraf \
-  --project project.json \
+  --project-path project.json \
   --identity telegraf
-ockam policy set \
+ockam policy create \
   --at telegraf \
   --resource tcp-inlet \
   --expression '(= subject.component "influxdb")'
