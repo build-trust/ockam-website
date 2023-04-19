@@ -15,7 +15,6 @@ The Confluent add-on for Ockam Orchestrator enables tamper-proof and end-to-end 
 Kafka deployments typically combine authentication tokens and Transport Layer Security (TLS) to protect data moving into and out of Kafka topics. While this does secure data in transit over the Internet, it doesn't provide a complete solution to securing data as it travels _through_ Kafka. The Kafka broker will be able to temporarily see the plaintext data.
 
 Encrypting communication both into and out of your Kafka broker combined with encryption of data at rest, inside Kafka, won't be sufficient protection from a data breach if the Kafka broker or the infrastructure it is running on is compromised, as the plaintext data and the keys to decrypt the data are available in memory.
-Ockam solves these problems, while providing additional risk mitigating benefits and data integrity assurances, via the Confluent add-on for Ockam Orchestrator.
 
 The Confluent add-on for Ockam solves these problems, while providing additional risk mitigating benefits and data integrity assurances.
 
@@ -120,7 +119,7 @@ ockam node create consumer \
   --identity consumer
 ```
 
-Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootsrtap server and brokers have become virtually adjacent on `localhost:4000`:
+Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootstrap server and brokers have become virtually adjacent on `localhost:4000`:
 
 ```bash
 ockam service start kafka-consumer \
