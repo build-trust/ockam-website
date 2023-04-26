@@ -63,22 +63,15 @@ ockam project addon configure confluent \
   --bootstrap-server YOUR_CONFLUENT_CLOUD_BOOTSTRAP_SERVER_ADDRESS
 ```
 
-We'll then need to save our Ockam project configuration so we can use it later to register our producers and consumer, so save the output to a file name `project.json`:
-
-```bash
-ockam project information default --output json > project.json
-```
-
 As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tokens. We'll start by creating one for our consumer:​
 
 ```bash
-ockam project enroll --project-path project.json --attribute role=member > consumer.token
+ockam project enroll --attribute role=member > consumer.token
 ```
-
 ... and then one for the first producer:
 
 ```bash
-ockam project enroll --project-path project.json --attribute role=member > producer1.token
+ockam project enroll --attribute role=member > producer1.token
 ```
 
 The last configuration file we need to generate is `kafka.config`, which will be where you store the username and password you use to access your cluster on Confluent Cloud:
@@ -102,32 +95,24 @@ On your consumer node you'll start by creating a new identity (you'll need the O
 ockam identity create consumer
 ```
 
-Copy the `project.json` and `consumer.token` files from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
+Copy the `consumer.token` file from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
 
 ```bash
-ockam project authenticate \
-  --project-path project.json \
-  --identity consumer \
-  --token $(cat consumer.token)
+ockam project authenticate consumer.token \
+  --identity consumer
 ```
 
 An Ockam node is a way to connect securely connect different services to each other, so we'll create one here that we'll use to communicate through the Confluent Cloud cluster using the identity we just created:
 
 ```bash 
 ockam node create consumer \
-  --project-path project.json \
   --identity consumer
 ```
 
 Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootstrap server and brokers have become virtually adjacent on `localhost:4000`:
 
 ```bash
-ockam service start kafka-consumer \
-  --node consumer \
-  --project-route /project/default \
-  --bootstrap-server-ip 127.0.0.1 \
-  --bootstrap-server-port 4000 \
-  --brokers-port-range 4001-4100
+ockam kafka-consumer create --node consumer
 ```
 
 Copy the `kafka.config` file across, and use it to create a new topic that we'll use for sending messages between the producer and consumer in this demo (in this case we've called the topic `demo-topic`)
@@ -160,32 +145,24 @@ To have messages for our consumer to process, we need to have something producin
 ockam identity create producer1
 ```
 
-Copy over the `project.json` and `producer1.token` files from the earlier section and use it to authenticate and enroll into our Ockam project:
+Copy over the `producer1.token` file from the earlier section and use it to authenticate and enroll into our Ockam project:
 
 ```bash
-ockam project authenticate \
-  --project-path project.json \
-  --identity producer1 \
-  --token $(cat producer1.token)
+ockam project authenticate producer1.token \
+  --identity producer1
 ```
 
 Create a node and link it to both the project and identity we've created:
 
 ```bash
 ockam node create producer1 \
-  --project-path project.json \
   --identity producer1
 ```
 
 And expose our Kafka bootstrap server on port `5000` so we can start sending messages through Confluent Cloud:
 
 ```bash  
-ockam service start kafka-producer \
-  --node producer1 \
-  --project-route /project/default \
-  --bootstrap-server-ip 127.0.0.1 \
-  --bootstrap-server-port 5000 \
-  --brokers-port-range 5001-5100
+ockam kafka-producer create --node producer1
 ```
 
 Make sure to copy the `kafka.config` file across, and start your producer:

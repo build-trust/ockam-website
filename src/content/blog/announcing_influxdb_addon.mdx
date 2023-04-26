@@ -49,12 +49,6 @@ export INFLUXDB_ENDPOINT_URL="https://your-cluser-url-here"
 export INFLUXDB_BUCKET="bucket-name-here"
 ```
 
-Next we'll save project information to a JSON file so that we can use it later when registering our client nodes:
-
-```bash
-ockam project information --output json default > project.json
-```
-
 Now it's time to integrate Ockam and InfluxDB Cloud! We'll do that by configuring the add-on to use the configuration settings we exported early, in addition to defining a default set of permissions each future lease request should be granted. 
 
 ```bash
@@ -93,21 +87,18 @@ Next we need to create a new identity for our client, as it's to this identity t
 ockam identity create connected-vehicle
 ```
 
-Identity created, we can authenticate to our project (using the JSON configuration file we created earlier) and the enrolment token SENSOR_TOKEN we saved at the start of this section:
+Identity created, we can authenticate to our project using the enrolment token SENSOR_TOKEN we saved at the start of this section:
 
 ```bash
-ockam project authenticate \
-  --identity connected-vehicle \
-  --project-path project.json \
-  --token $VEHCILE_TOKEN
+ockam project authenticate $VEHCILE_TOKEN \
+  --identity connected-vehicle
 ```
 
 We've arrived at the big moment, time to request a new lease:
 
 ```bash
 ockam lease create \
-  --identity connected-vehiclez \
-  --project-path project.json
+  --identity connected-vehicle
 ```
 
 In the output you'll see not just the token you created but when it expires, which should be 15 minutes from the time it was created (we set the max TTL to 900 seconds in the original ockam addon configure command).
@@ -153,18 +144,15 @@ ockam identity create alice
 ```
 
 ```bash
-ockam project authenticate \
-  --identity alice \
-  --project-path project.json \
-  --token $USER_TOKEN
+ockam project authenticate $USER_TOKEN \
+  --identity alice
 ```
 
 Now any time this person needs to request access to query InfluxDB Cloud they can request a new set of credentials by running:
 
 ```bash
 ockam lease create \
-  --identity alice \
-  --project-path project.json
+  --identity alice
 ```
 
 ## Unique, time-limited, and least privilege access
