@@ -145,7 +145,27 @@ export const MEMBERS = enhanceTeamMembers([
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
     photo: 'shane-sveller.png',
-    description: 'Obsessed with reproducible and declarative software'
+    description: 'Obsessed with reproducible and declarative software',
+  },
+  {
+    name: 'Talita',
+    surname: 'Rodrigues',
+    position: 'Applied Cryptographer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'BR',
+    photo: 'talita-rodrigues.png',
+    description:
+      'Have this rule of not visiting two countries more than one time until I visit 55 countries at least.',
+  },
+  {
+    name: 'Ryan',
+    surname: 'Huber',
+    position: 'Developer Advocate',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'US',
+    photo: 'ryan-huber.png',
+    description:
+      'Teaching his young kids how to golf so he can spend future weekends on the course guilt free.',
   },
   {
     name: 'Maryanna',
@@ -219,22 +239,4 @@ export const MEMBERS = enhanceTeamMembers([
     photo: 'brian-mullen.png',
     description: 'CMO at InfluxData',
   },
-  {
-    name: 'Talita',
-    surname: 'Rodrigues',
-    position: 'Applied Cryptographer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'BR',
-    photo: 'talita-rodrigues.png',
-    description: 'Have this rule of not visiting two countries more than one time until I visit 55 countries at least.',
-  },
-  {
-    name: 'Ryan',
-    surname: 'Huber',
-    position: 'Developer Advocate',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'ryan-huber.png',
-    description: 'Teaching his young kids how to golf so he can spend future weekends on the course guilt free.',
-  }
 ]);
