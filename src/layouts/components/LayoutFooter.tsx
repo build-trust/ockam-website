@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 
 import LogoGray from '@assets/logo-gray.svg';
-import { LINKEDIN, TWITTER, DISCUSSION, BUILD_DEMO } from '@consts/externalResources';
+import { LINKEDIN, TWITTER, DISCUSSION, BUILD_DEMO, DISCORD } from '@consts/externalResources';
 import {
   CONTACT_FORM_PATH,
   CONTACT_PAGE_PATH,
@@ -126,7 +126,7 @@ const NAV = [
     heading: 'Contact',
     links: [
       { ...DISCUSSION, isExternal: true },
-      { name: 'Build Trust community Discord', href: '', isExternal: true },
+      { name: 'Build Trust community Discord', href: DISCORD.href, isExternal: true },
       {
         name: 'Support',
         href: CONTACT_PAGE_PATH,
