@@ -6,6 +6,7 @@ import 'focus-visible/dist/focus-visible';
 import { useRouter } from 'next/router';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 import Script from 'next/script';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import RedditPixel from '@root/utils/RedditPixel';
 import defaultOgImage from '@assets/images/open-graphs/default.png';
@@ -51,7 +52,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   }, [events, isBrowser, initialRouteTracked]);
 
   return (
-    <>
+    <UserProvider>
       <Head>
         <title key={KEYS.title}>{CONFIG.app.title}</title>
         <meta name="description" content={CONFIG.app.description} key={KEYS.description} />
@@ -88,7 +89,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
         </MobileNavbarProvider>
         <GoogleAnalytics trackPageViews />
       </StylesProvider>
-    </>
+    </UserProvider>
   );
 };
 
