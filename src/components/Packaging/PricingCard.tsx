@@ -2,7 +2,6 @@ import {
   ComponentWithAs,
   Flex,
   Heading,
-  Icon,
   List,
   ListIcon,
   ListItem,
@@ -15,9 +14,10 @@ import { ElementType, ReactElement } from 'react';
 import Card, { CardProps } from './Card';
 
 type Feature = {
-  icon: ComponentWithAs<'svg'>;
-  text: string;
+  icon?: ComponentWithAs<'svg'>;
+  name: string;
   has?: boolean;
+  limits?: string;
 };
 export interface PricingCardData {
   features: Feature[];
@@ -29,7 +29,7 @@ export interface PricingCardData {
 
 interface PricingCardProps extends CardProps {
   data: PricingCardData;
-  icon: ElementType;
+  icon?: ElementType;
   button: ReactElement;
 }
 
@@ -95,10 +95,17 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
   const { features, price, priceUnit, priceInterval, name } = data;
   const accentColor = useColorModeValue('avocado.600', 'avocado.200');
   const absentColor = 'red';
+
+  const featureName = (feature: Feature): string => {
+    if (feature.limits) {
+      return `${feature.name}: ${feature.limits}`;
+    }
+    return feature.name;
+  };
+
   return (
-    <Card rounded={{ sm: 'xl' }} {...rest} isPopular={isPopular} border="1px solid #eee">
-      <VStack spacing={6} h={20}>
-        <Icon aria-hidden as={icon} fontSize="4xl" color={accentColor} />
+    <Card {...rest} isPopular={isPopular}>
+      <VStack spacing={6} h={16}>
         <Heading size="md" fontWeight="extrabold">
           {name}
         </Heading>
@@ -107,14 +114,14 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
       {button}
       <List spacing="1" mb="8" maxW="28ch" mx="auto" fontSize="xs">
         {features.map((feature) => (
-          <ListItem fontWeight="medium" key={`${name}-${feature.text}`}>
+          <ListItem fontWeight="medium" key={`${name}-${feature.name}`}>
             <ListIcon
               fontSize="xs"
               as={feature.icon}
               marginEnd={2}
               color={feature.has ? accentColor : absentColor}
             />
-            <span dangerouslySetInnerHTML={{ __html: feature.text }} />
+            <span dangerouslySetInnerHTML={{ __html: featureName(feature) }} />
           </ListItem>
         ))}
       </List>

@@ -7,7 +7,7 @@ import { GITHUB_REPO_OCKAM, DOCS } from '@consts/externalResources';
 export const NAV_MENU_ITEMS = [
   { text: 'Features', href: '/#features', isExternal: false },
   { text: 'Use Cases', href: '/#use-cases', isExternal: false },
-  { text: 'Pricing', href: '/#pricing', isExternal: false },
+  { text: 'Pricing', href: '/pricing', isExternal: false },
   {
     text: 'Team',
     children: [

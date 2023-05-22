@@ -5,12 +5,12 @@ const CardBadge = (props: FlexProps): JSX.Element => {
   const accentColor = useColorModeValue('avocado.600', 'avocado.200');
   return (
     <Flex
-      bg={accentColor}
+      borderBottom={accentColor}
       position="absolute"
-      right={-20}
-      top={6}
+      right={0}
+      top={0}
       width="240px"
-      transform="rotate(45deg)"
+      transform="rotate(0deg)"
       py={2}
       justifyContent="center"
       alignItems="center"
