@@ -66,12 +66,12 @@ ockam project addon configure confluent \
 As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tokens. We'll start by creating one for our consumer:​
 
 ```bash
-ockam project enroll --attribute role=member > consumer.token
+ockam project ticket --attribute role=member > consumer.ticket
 ```
 ... and then one for the first producer:
 
 ```bash
-ockam project enroll --attribute role=member > producer1.token
+ockam project ticket --attribute role=member > producer1.ticket
 ```
 
 The last configuration file we need to generate is `kafka.config`, which will be where you store the username and password you use to access your cluster on Confluent Cloud:
@@ -95,10 +95,10 @@ On your consumer node you'll start by creating a new identity (you'll need the O
 ockam identity create consumer
 ```
 
-Copy the `consumer.token` file from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
+Copy the `consumer.ticket` file from the previous section, and then use them to authenticate and enroll this identity into your Ockam project:
 
 ```bash
-ockam project authenticate consumer.token \
+ockam project enroll consumer.ticket \
   --identity consumer
 ```
 
@@ -145,10 +145,10 @@ To have messages for our consumer to process, we need to have something producin
 ockam identity create producer1
 ```
 
-Copy over the `producer1.token` file from the earlier section and use it to authenticate and enroll into our Ockam project:
+Copy over the `producer1.ticket` file from the earlier section and use it to authenticate and enroll into our Ockam project:
 
 ```bash
-ockam project authenticate producer1.token \
+ockam project enroll producer1.ticket \
   --identity producer1
 ```
 

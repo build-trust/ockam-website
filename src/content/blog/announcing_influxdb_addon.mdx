@@ -43,7 +43,7 @@ ockam enroll
 Log in to your [InfluxDB Cloud Dashboard](https://cloud2.influxdata.com/) and get the Cluster URL (Host Name) and Organization ID from your Organization settings page, then generate a new All Access API token (Load Data > API Tokens > Generate API Token > All Access API Token). Take those three values and insert them into the appropriate environment variables below so we can use them later:
 
 ```bash
-export INFLUXDB_ADMIN_TOKEN="infludb-cloud-token-here"
+export INFLUXDB_ADMIN_TICKET="infludb-cloud-token-here"
 export INFLUXDB_ORG_ID="influxdb-org-id-here"
 export INFLUXDB_ENDPOINT_URL="https://your-cluser-url-here"
 export INFLUXDB_BUCKET="bucket-name-here"
@@ -67,7 +67,7 @@ To save you having to unpack all of that: it's an InfluxDB permission definition
 ```bash
 ockam project addon configure influxdb \
   --endpoint-url $INFLUXDB_ENDPOINT_URL \
-  --token $INFLUXDB_ADMIN_TOKEN \
+  --token $INFLUXDB_ADMIN_TICKET \
   --org-id $INFLUXDB_ORG_ID \
   --permissions "$INFLUXDB_LEASE_PERMISSIONS" \
   --max-ttl 900
@@ -76,8 +76,8 @@ ockam project addon configure influxdb \
 Before a client can connect to a project, an enrollment token must be generated for it by an authorized entity:
 
 ```bash
-export VEHICLE_TOKEN=$( \
-  ockam project enroll \
+export VEHICLE_TICKET=$( \
+  ockam project ticket \
   --attribute service=connected-vehicle )
 ```
 
@@ -87,10 +87,10 @@ Next we need to create a new identity for our client, as it's to this identity t
 ockam identity create connected-vehicle
 ```
 
-Identity created, we can authenticate to our project using the enrolment token SENSOR_TOKEN we saved at the start of this section:
+Identity created, we can authenticate to our project using the enrolment token SENSOR_TICKET we saved at the start of this section:
 
 ```bash
-ockam project authenticate $VEHCILE_TOKEN \
+ockam project enroll $VEHCILE_TICKET \
   --identity connected-vehicle
 ```
 
@@ -125,7 +125,7 @@ Next we’ll configure the add-on, but this time we’ll set the time-to-live (T
 ```bash
 ockam project addon configure influx-db \
   --endpoint-url $INFLUXDB_ENDPOINT_URL \
-  --token $INFLUXDB_ADMIN_TOKEN \
+  --token $INFLUXDB_ADMIN_TICKET \
   --org-id $INFLUXDB_ORG_ID \
   --permissions "$INFLUXDB_LEASE_PERMISSIONS" \
   --max-ttl 604800
@@ -134,8 +134,8 @@ ockam project addon configure influx-db \
 As before we will generate a token to allow this person to enroll, and then create and enroll them:
 
 ```bash
-export USER_TOKEN=$( \
-  ockam project enroll \
+export USER_TICKET=$( \
+  ockam project ticket \
   --attribute service=data-user)
 ```
 
@@ -144,7 +144,7 @@ ockam identity create alice
 ```
 
 ```bash
-ockam project authenticate $USER_TOKEN \
+ockam project enroll $USER_TICKET \
   --identity alice
 ```
 
