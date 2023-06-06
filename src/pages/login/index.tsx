@@ -26,7 +26,7 @@ const LoginPage = ({ installInstructions }: Props): JSX.Element => {
   if (error) return <div>{error.message}</div>;
 
   if (!user) {
-    router.push('/api/auth/logout');
+    router.push('/api/auth/login');
     return <></>;
   }
 
