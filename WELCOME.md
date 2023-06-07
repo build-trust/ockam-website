@@ -13,7 +13,37 @@ Be sure to familiarize yourself with Ockam’s [guidelines for contribution](htt
 
 ### Add yourself as contributor
 
-1. You will need to sign your commit with a GPG key. Here is the guide how to add GPG key to your github account  (https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
+1. You will need to sign your commit with a GPG key.
+    1. Please follow this
+      [guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
+      to create a new GPG key & add it's public key block to your github account.
+        - Note: On Linux the `gpg` command is probably already on your computer, so you
+          might not need to install the GPG command line tools. Also on Linux the files
+          are saved to the `~/.gnupg/` folder.
+        - Note: when following the instructions above make sure to use the correct email
+          address that matches one in your github account (you will use this email to sign
+          the commits).
+    2. Once you have created your GPG key, Ockam requires that all commits be signed w/
+      GPG keys. So you have to let your `git` command know that you would like to use your
+      new GPG key (that you created above). Here's a
+      [guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key#telling-git-about-your-gpg-key)
+      on how to do this; the instructions below are a summary of this guide.
+        - You will first have to get your GPG key using:
+          `gpg --list-secret-keys --keyid-format=long`.
+        - Configure settings for `git` to to use GPG to sign commits w/ the right key:
+           - globally: `git config --global user.signingkey <MY_KEY>`
+           - or locally for just one repo: `git config user.signingkey <MY_KEY>`
+        - Optionally you can tell `git` to sign your commits using this key by default
+          using:
+            - globally: `git config --global commit.gpgsign true`
+            - or locally for just one repo: `git config commit.gpgsign true`.
+        - Make sure that the email that you're using to make commits to the repo
+          is matching the one in your GPG key and your github account. You can change that
+          using this command if you have many different emails in github:
+            - globally: `git config --global user.email "<YOUR_EMAIL>"`
+            - or locally for just one repo: `git config user.email "<YOUR_EMAIL>"`.
+        - Finally, when making commits, be sure to use this command so that your commits
+          are signed with your GPG key: `git commit -S -m "<COMMIT_MSG>"`
 2. Fork the contributors repository from https://github.com/build-trust/ockam-contributors
 3. Create a new feature branch under your forked repo and add your Name, Github Username, Email, and “Yes” for CLA under “CONTRIBUTORS.csv” at the end of the list
 4. Create a Pull Request across your feature branch from the fork and origin Ockam contributors repository and wait for approval
@@ -24,11 +54,11 @@ Be sure to familiarize yourself with Ockam’s [guidelines for contribution](htt
 ### Get privileges to Ockam’s GitHub repos
 
 1. Provide your github username to an Ockam Github Administrator
-2. Accept the [github organization invitation](https://github.com/settings/organizations). 
+2. Accept the [github organization invitation](https://github.com/settings/organizations).
 
 ### Add yourself to the team page
 
-1. Go to the[ repository website](https://github.com/build-trust/ockam-website)
+1. Go to the [repository website](https://github.com/build-trust/ockam-website)
 2. Navigate to “[branches](https://github.com/build-trust/ockam-website/branches)”
 3. Click on "New branch", enter a name, choose "develop" as branch source
 4. On the repository website click on main branch name (“develop”) and switch to your newly created branch
@@ -60,6 +90,11 @@ Be sure to familiarize yourself with Ockam’s [guidelines for contribution](htt
 
     */
 ```
+
+> Note: If you have more than one email address with your github.com account, then make
+> sure that the primary for this commit is the one that you added to “CONTRIBUTORS.csv”
+> file above. Otherwise, the verified commit will fail because the email address
+> associated with it won’t match the one you provided to the “CONTRIBUTORS.csv” file.
 
 1. Commit change directly to your branch
 2. Navigate to "[Pull Requests](https://github.com/build-trust/ockam-website/pulls)" and you should see a prompt saying that your created branch had recent pushes, click on "Compare & pull request", enter the title and the description (if needed), click on "Create pull request" and wait for the approval
