@@ -168,6 +168,16 @@ export const MEMBERS = enhanceTeamMembers([
       'Teaching his young kids how to golf so he can spend future weekends on the course guilt free.',
   },
   {
+    name: 'Nazmul',
+    surname: 'Idris',
+    position: 'Software Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'US',
+    photo: 'nazmul-idris.png',
+    description:
+      'Loves driving fast cars, Rust, developer experience, open source, community, empathy, empowerment',
+  },
+  {
     name: 'Maryanna',
     surname: 'Saenko',
     position: 'Board Member',
@@ -238,14 +248,5 @@ export const MEMBERS = enhanceTeamMembers([
     country: 'US',
     photo: 'brian-mullen.png',
     description: 'CMO at InfluxData',
-  },
-  {
-    name: 'Nazmul',
-    surname: 'Idris',
-    position: 'Software Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'nazmul-idris.png',
-    description: 'Loves driving fast cars, Rust, developer experience, open source, community, empathy, empowerment',
   },
 ]);
