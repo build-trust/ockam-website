@@ -3,7 +3,6 @@ import { Box, Button, Container, Heading, useTheme } from '@chakra-ui/react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import Messenger from '@root/components/Messenger';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 import { BUILD_DEMO } from '@root/consts/externalResources';
 
@@ -110,8 +109,6 @@ const Hero: FunctionComponent = () => {
             </Link>
           </Box>
           <RotatingHeading />
-
-          <Messenger />
         </Box>
       </Container>
     </HeroBox>

@@ -13,7 +13,7 @@ const RotatingHeading: FC = () => {
         fontWeight="extrabold"
         textAlign="center"
         color="white"
-        lineHeight={{ base: 1, lg: 2 }}
+        lineHeight={{ base: 1, lg: 1.2 }}
       >
         What if connecting{' '}
         <RotatingText
