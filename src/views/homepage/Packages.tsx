@@ -16,11 +16,13 @@ import {
   ListItem,
   List,
   useTheme,
+  Link,
 } from '@chakra-ui/react';
 import { HiBadgeCheck as Check } from 'react-icons/hi';
 
 import ActionButton from '@components/Packaging/ActionButton';
 import PricingCard from '@components/Packaging/PricingCard';
+import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 type Cta = {
   text: string;
@@ -55,7 +57,7 @@ const TIERS: Tier[] = [
     isPopular: true,
     cta: {
       text: 'Get started →',
-      url: '',
+      url: 'https://docs.ockam.io/#install',
     },
   },
 
@@ -66,7 +68,7 @@ const TIERS: Tier[] = [
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
-      url: '',
+      url: 'https://docs.ockam.io/#install',
     },
   },
 
@@ -77,7 +79,7 @@ const TIERS: Tier[] = [
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
-      url: '',
+      url: 'https://docs.ockam.io/#install',
     },
   },
 
@@ -87,7 +89,7 @@ const TIERS: Tier[] = [
     price: 'Talk to sales',
     cta: {
       text: 'Talk to sales →',
-      url: '',
+      url: `${CONTACT_FORM_PATH}`,
     },
   },
 
@@ -97,7 +99,7 @@ const TIERS: Tier[] = [
     price: 'Talk to sales',
     cta: {
       text: 'Talk to sales →',
-      url: '',
+      url: `${CONTACT_FORM_PATH}`,
     },
   },
 ];
@@ -388,7 +390,7 @@ const Packages: FunctionComponent = () => {
               flexDirection="column"
               previousTier={TIERS[TIERS.findIndex((tier: Tier) => tier.name === card.name) - 1]}
               button={
-                <ActionButton variant="outline" borderWidth="2px" mt={2} mb={8}>
+                <ActionButton variant="outline" borderWidth="2px" mt={2} mb={8} href={card.cta.url}>
                   {card.cta.text}
                 </ActionButton>
               }
@@ -423,6 +425,7 @@ const Packages: FunctionComponent = () => {
         <Flex w="full" mt={2} flexDirection={{ base: 'column-reverse', lg: 'row' }}>
           <Box flexGrow={0.5} width={{ base: '100%', lg: '50%' }} position="relative">
             <ActionButton
+              href={TIERS.find((tier) => tier.name === 'Platform')?.cta.url}
               variant="solid"
               colorScheme="whiteAlpha"
               borderWidth="2px"
@@ -508,7 +511,9 @@ const Packages: FunctionComponent = () => {
               <Tr>
                 <Th />
                 {TIERS.map((tier) => (
-                  <Th>{tier.cta.text}</Th>
+                  <Th>
+                    <Link href={tier.cta.url}>{tier.cta.text}</Link>
+                  </Th>
                 ))}
               </Tr>
             </Tfoot>
