@@ -425,7 +425,7 @@ const Packages: FunctionComponent = () => {
         <Flex w="full" mt={2} flexDirection={{ base: 'column-reverse', lg: 'row' }}>
           <Box flexGrow={0.5} width={{ base: '100%', lg: '50%' }} position="relative">
             <ActionButton
-              href={TIERS.find((tier) => tier.name === 'Platform')?.cta.url}
+              href={TIERS.find((tier) => tier.name === 'Platform')?.cta.url || ''}
               variant="solid"
               colorScheme="whiteAlpha"
               borderWidth="2px"
