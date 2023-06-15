@@ -5,14 +5,7 @@ import githubApi from '@api/githubApi';
 import cratesApi from '@api/cratesApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
-import {
-  Hero,
-  GetStarted,
-  Features,
-  Cases,
-  Packages,
-  Stats,
-} from '@views/homepage';
+import { Hero, GetStarted, Features, Cases, Stats } from '@views/homepage';
 import CONFIG from '@config';
 
 type HomePageProps = {
@@ -56,10 +49,9 @@ export async function getStaticProps(): Promise<{ props: HomePageProps; revalida
 const HomePage: NextPageWithLayout<HomePageProps> = ({ stars, contributors, downloads }) => (
   <Box pt={{ base: 10, lg: 10 }}>
     <Hero />
-    <GetStarted />
     <Features />
     <Cases />
-    <Packages />
+    <GetStarted />
     {stars && contributors && downloads && (
       <Stats stars={stars} contributors={contributors} downloads={downloads} />
     )}
