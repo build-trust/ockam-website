@@ -43,28 +43,29 @@ This made C an obvious candidate. It can be compiled for 99% of computers and
 pretty much run everywhere (once you figure out how to deal with all the target
 specific toolchains). And all other popular languages can call C libraries
 through some form of a native function interface - so we could later provide
-language idiomatic wrappers for every other language: Typescript, Python etc.
+language idiomatic wrappers for every other language: Typescript, Python, Elixir, Java etc.
 
 The idea was we’ll keep the core of our communication centric protocols 
 decoupled from any hardware specific behavior and have pluggable adapters for 
 hardware we want to support. For example, there would be adapters to store 
 secret keys in various HSMs, apaptors for various trasport protocols etc.
 
-We imagined we’d build our core as a C library. This would be embeddable in
-most other languages and it would run everywhere with help of some simple hardware
-adapters.
+Our plan was to implement our core protocols as a C library. We would then wrap
+this C library with wrappers for other languages and run everywhere with help of
+some pluggable hardware adapters.
 
 ## Simple and Safe Interfaces
 
 But, we also care deeply about simplicity - it's in our name. We want Ockam to
 be simple to use, simple to build, simple to maintain.
 
-At Ockam’s core is a stack of cryptographic and message based protocols like
-Ockam Secure Channels and Ockam Routing. These are asynchronous, multi-step,
-stateful communication protocols and we wanted to abstract away all of the details
-of these protocols from application developers. We impagined the user experience
-to be a single one-line function call to create an end-to-end authenticated and
-encrypted secure channel.
+At Ockam’s core is a layered stack of cryptographic and message based protocols
+like Ockam [Secure Channels](https://docs.ockam.io/reference/command/secure-channels)
+and Ockam [Routing](https://docs.ockam.io/reference/command/routing). These are
+asynchronous, multi-step, stateful communication protocols and we wanted to abstract
+away all of the details of these protocols from application developers. We impagined
+the user experience to be a single one-line function call to create an end-to-end
+authenticated and encrypted secure channel.
 
 Cryptography related code also tends to have a lot of footguns, one little
 misstep and your system becomes insecure. So simplicity isn't just an aesthetic
@@ -102,7 +103,10 @@ line function that someone can call to create an end-to-end encrypted secure cha
 {:ok, channel} = Ockam.SecureChannel.create(route, vault, keypair)
 ```
 
-This is exactly what we wanted in our interface.
+An application developer would invoke this simple function and multiple concurrent
+actors would run the underlying layers of stateful protocols. The function would
+return when the channel is established or if there is an error. This is exactly
+what we wanted in our interface. 
 
 But Elixir isn’t like C. It doesn’t run that well on small/constrained computers 
 and it's not a good choice for being wrapped in language-specific idiomatic wrappers.
@@ -126,7 +130,7 @@ computers - likely not everything that C can target with GCC and various
 proprietary GCC forks - but still a large subset and there’s work ongoing to 
 make Rust compile with GCC.
 
-### Strong typing and powerful type system
+### Strong typing and a powerful type system
 
 Rust’s type system allows us to turn invariants into compile-time errors. This 
 reduces the set of possible mistakes that can be shipped to production by making 
