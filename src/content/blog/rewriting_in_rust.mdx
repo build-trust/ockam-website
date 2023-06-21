@@ -12,14 +12,13 @@ featuredOrder: 1
 
 In the early days of Ockam we were developing a C library. This is the story
 of why, many months in, we decided to abandon tens of thousands of lines of C
-and rewrite everything in Rust.
+and rewrite in Rust.
 
-Before we begin, I was in a recorded webinar this week together with Paul Dix,
-the CTO of InfluxData, where we both discussed InfluxDB's and Ockam's rewrites in
-Rust. Why the two open source projects chose to re-write, why we chose Rust,
-lessons we learnt along the way and more. Checkout
-[the recording](https://www.influxdata.com/resources/meet-the-founders-an-open-discussion-about-rewriting-using-rust/)
-. It was a fun and insightful discussion.
+Before we begin, I was in a [recorded webinar](https://www.influxdata.com/resources/meet-the-founders-an-open-discussion-about-rewriting-using-rust/) this week together with Paul Dix,
+the CTO of InfluxData, where we both discussed InfluxDB’s and Ockam’s rewrites in
+Rust. Why the two open source projects chose to re-write, why we chose Rust as 
+our new language, lessons we learnt along the way and more. Do checkout
+[the recording](https://www.influxdata.com/resources/meet-the-founders-an-open-discussion-about-rewriting-using-rust/). It was an insightful discussion.
 
 Ockam enables developers to build applications that can trust data-in-motion.
 We give you simple tools to add end-to-end encrypted and mutually authenticated
@@ -41,32 +40,35 @@ wanted Ockam to be usable in any type of application - regardless of the languag
 that application is built in.
 
 This made C an obvious candidate. It can be compiled for 99% of computers and
-pretty much run everywhere. And all other popular languages can call C libraries
+pretty much run everywhere (once you figure out how to deal with all the target
+specific toolchains). And all other popular languages can call C libraries
 through some form of a native function interface - so we could later provide
-language idiomatic wrappers for typescript, python, and every other language.
+language idiomatic wrappers for every other language: Typescript, Python etc.
 
 The idea was we’ll keep the core of our communication centric protocols 
 decoupled from any hardware specific behavior and have pluggable adapters for 
-any hardware we want to support. For example, there would be adapters to store 
-secret keys in various HSMs. We imagined we’d build our core protocols as a C 
-library. This would be embeddable in most other languages and it would run 
-everywhere with help of some simple hardware adapters.
+hardware we want to support. For example, there would be adapters to store 
+secret keys in various HSMs, apaptors for various trasport protocols etc.
 
-## Safe and Simple Interfaces
+We imagined we’d build our core as a C library. This would be embeddable in
+most other languages and it would run everywhere with help of some simple hardware
+adapters.
 
-But, we are also about simplicity - it's in our name. We want Ockam to be
-simple to use, simple to build, simple to maintain.
+## Simple and Safe Interfaces
+
+But, we also care deeply about simplicity - it's in our name. We want Ockam to
+be simple to use, simple to build, simple to maintain.
 
 At Ockam’s core is a stack of cryptographic and message based protocols like
 Ockam Secure Channels and Ockam Routing. These are asynchronous, multi-step,
 stateful communication protocols and we wanted to abstract away all of the details
 of these protocols from application developers. We impagined the user experience
-to be a single one-line function call to create an end-to-end encrypted secure
-channel.
+to be a single one-line function call to create an end-to-end authenticated and
+encrypted secure channel.
 
-Cryptography related code tends to have a lot of footguns, one little misstep
-and your system becomes insecure. So simplicity isn't just an aesthetic ideal
-for us, we think it's a crucial requirement to ensure that we can empower
+Cryptography related code also tends to have a lot of footguns, one little
+misstep and your system becomes insecure. So simplicity isn't just an aesthetic
+ideal for us, we think it's a crucial requirement to ensure that we can empower
 everyone to build secure systems. Knowing the nitti-gritty of every protocol
 involved should not be nessisary. We wanted to hide these footguns away and
 provide developer interfaces that are easy to use correctly and
@@ -77,17 +79,23 @@ That’s where C was severely lacking.
 ## The Elixir Prototype 
 
 Our attempts at explosing safe and simple interfaces, in C, were not
-successful. App devs would need to know too much detail about protocol state
-and state transitions.
+successful. In every iteration, we found that app devs would need to know too
+much detail about protocol state and state transitions.
 
-So around that time I wrote a prototype of creating an Ockam Secure Channel 
-over Ockam Routing in Elixir. Elixir programs run on BEAM, the Erlang Virtual Machine.
-BEAM provides Erlang Processes. Erlang Processes are lightweight stateful
-concurrent actors. Since actors can run concurrently while maintaining internal
-state, it became easy to run a concurrent stack of stateful protocols -
-Ockam Transports + Ockam Routing + Ockam Secure Channels.
+Around that time I wrote a
+[prototype](https://github.com/build-trust/ockam/blob/develop/examples/elixir/get_started/06-secure-channel-over-two-transport-hops-initiator.exs#L16) of creating an Ockam
+[Secure Channel](https://docs.ockam.io/reference/command/secure-channels) 
+over Ockam [Routing](https://docs.ockam.io/reference/command/routing) in Elixir.
 
-I was able to hide all the complex state acorss layers and create a simple one
+Elixir programs run on BEAM, the Erlang Virtual Machine. BEAM provides Erlang
+Processes. Erlang Processes are lightweight stateful concurrent actors. Since actors
+can run concurrently while maintaining internal state, it became easy to run a
+concurrent stack of stateful protocols - Ockam
+[Transports](https://docs.ockam.io/reference/command/routing) +
+Ockam [Routing](https://docs.ockam.io/reference/command/routing) +
+Ockam [Secure Channels](https://docs.ockam.io/reference/command/secure-channels).
+
+I was able to hide all the stateful layers and create a simple one
 line function that someone can call to create an end-to-end encrypted secure channel.
 
 ```elixir
@@ -97,33 +105,34 @@ line function that someone can call to create an end-to-end encrypted secure cha
 This is exactly what we wanted in our interface.
 
 But Elixir isn’t like C. It doesn’t run that well on small/constrained computers 
-and it's not a good choice for being wrapped in language idiomatic wrappers. So 
-we knew we wanted to implement lightweight actors but we also knew C would not 
-make that easy. This is when I started digging into Rust and very quickly 
-encountered a few things that made Rust very attractive.
+and it's not a good choice for being wrapped in language-specific idiomatic wrappers.
 
-## The reasons for Rust 
+## Exploring Rust 
 
-### C compatible interfaces
+At this point we knew we wanted to implement lightweight actors but we also knew
+C would not make that easy. This is when I started digging into Rust and very quickly 
+encountered a few things that made Rust very attractive:
+
+### Compatability with the C calling convention
 
 Rust libraries can export an interface that is compatible with the C calling 
 convention. Which means that any language or runtime that can call a C library 
 can also call a Rust library with no change. 
 
-### LLVM compilation
+### Support for lots of targets
 
 Rust compiles using LLVM which means that it can target a very large number of 
 computers - likely not everything that C can target with GCC and various 
 proprietary GCC forks - but still a large subset and there’s work ongoing to 
 make Rust compile with GCC.
 
-### Type system
+### Strong typing and powerful type system
 
 Rust’s type system allows us to turn invariants into compile-time errors. This 
 reduces the set of possible mistakes that can be shipped to production by making 
 them easier to catch at build time.
 
-### Memory safety the borrow checker
+### Memory safety and the borrow checker
 
 Rust’s borrow checker can eliminate the possibility of buffer overflows, 
 use-after-free, and other memory safety errors. An attack vector that is known 
@@ -131,7 +140,7 @@ to cause 60-70% of high-severity vulnerabilities in large C or C++ codebases.
 Rust provides this safety without the performance costs of garbage collection at 
 runtime. 
 
-### async/await and pluggable async runtimes
+### Async/await and pluggable async runtimes
 
 And finally the most interesting part - the `async/await` abstraction in Rust. 
 This meant that a lot of the hard work to have an actor abstraction had already 
