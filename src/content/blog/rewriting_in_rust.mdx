@@ -200,7 +200,7 @@ let channel = node.create_secure_channel(&identity, route, options).await?;
 
 It creates an [authenticated and encrypted channel]((https://docs.ockam.io/reference/libraries/rust/secure-channels))
 over arbitary multi-hop, multi-protocol routes that can span across private networks
-and clouds. We are able to hides all the underlying complexity and footguns behind
+and clouds. We are able to hide all the underlying complexity and footguns behind
 this simple and safe function call. The code remains the same regardless of how you use it -
 on [scalable](https://github.com/build-trust/ockam/blob/develop/examples/rust/get_started/examples/05-secure-channel-over-two-transport-hops-initiator.rs)
 servers or [tiny](https://github.com/build-trust/ockam/blob/develop/examples/rust/get_started/examples/05-secure-channel-over-two-transport-hops-initiator.rs) microcontrollers.
