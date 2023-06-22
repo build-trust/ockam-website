@@ -48,7 +48,7 @@ language idiomatic wrappers for every other language: Typescript, Python, Elixir
 The idea was we’ll keep the core of our communication centric protocols 
 decoupled from any hardware specific behavior and have pluggable adapters for 
 hardware we want to support. For example, there would be adapters to store 
-secret keys in various HSMs, apaptors for various trasport protocols etc.
+secret keys in various HSMs, adaptors for various transport protocols etc.
 
 Our plan was to implement our core as a C library. We would then wrap
 this C library with wrappers for other languages and run everywhere with help of pluggable hardware adapters.
@@ -62,22 +62,22 @@ At Ockam’s core is a layered stack of cryptographic and message based protocol
 like Ockam [Secure Channels](https://docs.ockam.io/reference/command/secure-channels)
 and Ockam [Routing](https://docs.ockam.io/reference/command/routing). These are
 asynchronous, multi-step, stateful communication protocols and we wanted to abstract
-away all of the details of these protocols from application developers. We impagined
+away all of the details of these protocols from application developers. We imagined
 the user experience to be a single one-line function call to create an end-to-end
 authenticated and encrypted secure channel.
 
 Cryptography related code also tends to have a lot of footguns, one little
 misstep and your system becomes insecure. So simplicity isn't just an aesthetic
 ideal for us, we think it's a crucial requirement to ensure that we can empower
-everyone to build secure systems. Knowing the nitti-gritty of every protocol
-involved should not be nessisary. We wanted to hide these footguns away and
+everyone to build secure systems. Knowing the nitty-gritty of every protocol
+involved should not be necessary. We wanted to hide these footguns away and
 provide developer interfaces that are easy to use correctly and
 impossible/difficult to use in a way that will shoot your application in the foot.
 
 That’s where C was severely lacking.
 
-Our attempts at explosing safe and simple interfaces, in C, were not
-successful. In every iteration, we found that application devevelopers would need
+Our attempts at exposing safe and simple interfaces, in C, were not
+successful. In every iteration, we found that application developers would need
 to know too much detail about protocol state and state transitions. 
 
 ## The Elixir Prototype 
@@ -97,7 +97,7 @@ Ockam [Secure Channels](https://docs.ockam.io/reference/command/secure-channels)
 
 I was able to hide all the stateful layers and create a simple one
 line function that someone can call to create an end-to-end encrypted secure channel
-over a varity of multi-hop, multi-protocol routes.
+over a variety of multi-hop, multi-protocol routes.
 
 ```elixir
 {:ok, channel} = Ockam.SecureChannel.create(route, vault, keypair)
@@ -117,7 +117,7 @@ At this point we knew we wanted to implement lightweight actors but we also knew
 C would not make that easy. This is when I started digging into Rust and very quickly 
 encountered a few things that made Rust very attractive:
 
-### Compatability with the C calling convention
+### Compatibility with the C calling convention
 
 Rust libraries can export an interface that is compatible with C's calling 
 convention. Which means that any language or runtime that can statically or dynamically
@@ -140,33 +140,40 @@ of our requirement of being able to run everywhere.
 Rust’s type system allows us to turn invariants into compile-time errors. This 
 reduces the set of possible mistakes that can be shipped to production by making 
 them easier to catch at development time. Our team and the user of our Rust library
-become less likely to ship behavoural bugs or security vulnerabilities to production.
+become less likely to ship behavioral bugs or security vulnerabilities to production.
 
 ### Memory safety and the borrow checker
 
-Rust’s memory safety fatures can eliminate the possibility of use-after-frees, double
-frees, overflows, out-of-bounds acess, data races and many other common mistakes that is known 
-to cause 60-70% of high-severity vulnerabilities in large C or C++ codebases. Rust
-provides this safety without the runtime performance costs of a garbage collected language
-like Java or Go. 
+Rust’s memory safety features eliminate the possibility of use-after-frees, double
+frees, overflows, out-of-bounds access, data races and many other common mistakes that
+is known to cause 60-70% of high-severity vulnerabilities in large C or C++ codebases.
+Rust provides this safety at compile time without incurring the performance
+costs of safely managing memory at runtime using a garbage collector. This gives Rust
+a serious advantage to write code that needs to be highly performant, run in constrained
+environments, and be highly secure.
 
 ### Async/await and pluggable async runtimes
 
-And finally the most interesting part - the `async/await` abstraction in Rust. 
-This meant that a lot of the hard work to have an actor abstraction had already 
-been done. `async/await` in rust has one significant difference from 
-`async/await` you may have encountered in other languages like Javascript. 
+The final piece that convinced me that Rust is a great fit for Ockam was `async/await`.
 
-In Javascript the browser or nodejs picks the way they will run async functions. 
-But in Rust you can plugin a mechanism of your own choice. These are called 
-async runtimes. And these mechanisms can be optimized for the capabilities of 
-the computer your program will run on. For example the most popular async 
-runtime Tokio is optimized for high performance and scalability on big cloud 
-machines. But you can also have an async runtime that is optimized for tiny 
-machines. This is how we were able to get Ockam Worker, our actor 
-implementation, to work scalably on big computer and at the same time optimally 
-on tiny microcontrollers.
+We had already identified that we need lightweight actors to create a simple and safe
+interface Ockam's stack of protocols. `async/await` meant that a lot of the hard work
+to create actors had already been done in projects like tokio and async-std. We could
+build Ockam's actor implementation on this foundation.
 
-```
-let channel = node.create_secure_channel(&alice, route, SecureChannelOptions::new()).await?;
-```
+Another important aspect that stood out was that `async/await` in rust has one
+significant difference from `async/await` in other languages like Javascript. 
+
+In Javascript a browser engine or nodejs picks the way it will run async
+functions. But in Rust you can plugin a mechanism of your own choice. These are
+called async runtimes - tokio is a popular example of such a runtime that is
+optimized for highly scalable systems. But we don't always have to use tokio, we
+can instead chose an async runtime optimized for tiny embedded devices or microcontrollers.
+
+This meant that Ockam's actor implementation, which we later called Ockam [Workers](https://docs.ockam.io/reference/libraries/rust/nodes),
+if we base it on Rust's `async/await` can present exactly the same interface to our users
+regardless of where it is running - big computers or tiny computers. All our protocol
+interfaces that would sit on top of Ockam Workers can also present the exact same simple
+interface - regardless of where they are running.
+
+This sealed the deal and I was convinced we should re-write Ockam in Rust. 
