@@ -50,9 +50,8 @@ decoupled from any hardware specific behavior and have pluggable adapters for
 hardware we want to support. For example, there would be adapters to store 
 secret keys in various HSMs, apaptors for various trasport protocols etc.
 
-Our plan was to implement our core protocols as a C library. We would then wrap
-this C library with wrappers for other languages and run everywhere with help of
-some pluggable hardware adapters.
+Our plan was to implement our core as a C library. We would then wrap
+this C library with wrappers for other languages and run everywhere with help of pluggable hardware adapters.
 
 ## Simple and Safe Interfaces
 
@@ -77,11 +76,11 @@ impossible/difficult to use in a way that will shoot your application in the foo
 
 That’s where C was severely lacking.
 
-## The Elixir Prototype 
-
 Our attempts at explosing safe and simple interfaces, in C, were not
-successful. In every iteration, we found that app devs would need to know too
-much detail about protocol state and state transitions.
+successful. In every iteration, we found that application devevelopers would need
+to know too much detail about protocol state and state transitions. 
+
+## The Elixir Prototype 
 
 Around that time I wrote a
 [prototype](https://github.com/build-trust/ockam/blob/develop/examples/elixir/get_started/06-secure-channel-over-two-transport-hops-initiator.exs#L16) of creating an Ockam
@@ -97,7 +96,8 @@ Ockam [Routing](https://docs.ockam.io/reference/command/routing) +
 Ockam [Secure Channels](https://docs.ockam.io/reference/command/secure-channels).
 
 I was able to hide all the stateful layers and create a simple one
-line function that someone can call to create an end-to-end encrypted secure channel.
+line function that someone can call to create an end-to-end encrypted secure channel
+over a varity of multi-hop, multi-protocol routes.
 
 ```elixir
 {:ok, channel} = Ockam.SecureChannel.create(route, vault, keypair)
@@ -106,12 +106,12 @@ line function that someone can call to create an end-to-end encrypted secure cha
 An application developer would invoke this simple function and multiple concurrent
 actors would run the underlying layers of stateful protocols. The function would
 return when the channel is established or if there is an error. This is exactly
-what we wanted in our interface. 
+what we wanted in our interface.
 
 But Elixir isn’t like C. It doesn’t run that well on small/constrained computers 
 and it's not a good choice for being wrapped in language-specific idiomatic wrappers.
 
-## Exploring Rust 
+## Exploring Rust
 
 At this point we knew we wanted to implement lightweight actors but we also knew
 C would not make that easy. This is when I started digging into Rust and very quickly 
@@ -119,30 +119,36 @@ encountered a few things that made Rust very attractive:
 
 ### Compatability with the C calling convention
 
-Rust libraries can export an interface that is compatible with the C calling 
-convention. Which means that any language or runtime that can call a C library 
-can also call a Rust library with no change. 
+Rust libraries can export an interface that is compatible with C's calling 
+convention. Which means that any language or runtime that can statically or dynamically
+link and call functions in a C library can also link and call functions in a Rust library
+- in the exact same way. Since most languages support native functions in C, they also already
+support native functions in Rust. This made Rust equal to C from the perspective of our
+requirement of having language specific wrappers around our core library.
 
 ### Support for lots of targets
 
 Rust compiles using LLVM which means that it can target a very large number of 
-computers - likely not everything that C can target with GCC and various 
-proprietary GCC forks - but still a large subset and there’s work ongoing to 
-make Rust compile with GCC.
+computers. This set is likely not as big as everything that C can target with GCC
+and various proprietary GCC forks but is still a very large subset and there’s work
+ongoing to make Rust compile with GCC. With growing support of new LLVM targets
+and potential GCC support in Rust, it seemed like a good bet from the perspective
+of our requirement of being able to run everywhere.
 
 ### Strong typing and a powerful type system
 
 Rust’s type system allows us to turn invariants into compile-time errors. This 
 reduces the set of possible mistakes that can be shipped to production by making 
-them easier to catch at build time.
+them easier to catch at development time. Our team and the user of our Rust library
+become less likely to ship behavoural bugs or security vulnerabilities to production.
 
 ### Memory safety and the borrow checker
 
-Rust’s borrow checker can eliminate the possibility of buffer overflows, 
-use-after-free, and other memory safety errors. An attack vector that is known 
-to cause 60-70% of high-severity vulnerabilities in large C or C++ codebases. 
-Rust provides this safety without the performance costs of garbage collection at 
-runtime. 
+Rust’s memory safety fatures can eliminate the possibility of use-after-frees, double
+frees, overflows, out-of-bounds acess, data races and many other common mistakes that is known 
+to cause 60-70% of high-severity vulnerabilities in large C or C++ codebases. Rust
+provides this safety without the runtime performance costs of a garbage collected language
+like Java or Go. 
 
 ### Async/await and pluggable async runtimes
 
