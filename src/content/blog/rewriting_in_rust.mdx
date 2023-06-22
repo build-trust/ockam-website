@@ -171,10 +171,44 @@ called async runtimes - tokio is a popular example of such a runtime that is
 optimized for highly scalable systems. But we don't always have to use tokio, we
 can instead chose an async runtime optimized for tiny embedded devices or microcontrollers.
 
-This meant that Ockam's actor implementation, which we later called Ockam [Workers](https://docs.ockam.io/reference/libraries/rust/nodes),
+This meant that Ockam's actor implementation, which we later called Ockam
+[Workers](https://docs.ockam.io/reference/libraries/rust/nodes),
 if we base it on Rust's `async/await` can present exactly the same interface to our users
 regardless of where it is running - big computers or tiny computers. All our protocol
 interfaces that would sit on top of Ockam Workers can also present the exact same simple
 interface - regardless of where they are running.
 
-This sealed the deal and I was convinced we should re-write Ockam in Rust. 
+At this point we were convinced we should re-write Ockam in Rust.
+
+In the [webinar](https://www.influxdata.com/resources/meet-the-founders-an-open-discussion-about-rewriting-using-rust/) conversation,
+that I mentioned earlier, Paul Dix and I discussed what the transition looked
+like for our teams at Ockam and InfluxDB after each project had decided to switch
+to Rust. We discussed how InfluxDB moved from Go to Rust and how Ockam moved from
+C to Rust. In case you're interested, in that part of our journey go listen to the
+[recording](https://www.influxdata.com/resources/meet-the-founders-an-open-discussion-about-rewriting-using-rust/).
+
+Many iterations later, anyone can now
+[use the Ockam crate in rust](https://docs.ockam.io/reference/libraries/rust/secure-channels)
+to create an end-to-end encrypted and mutually authenticated secure channel
+with a simple function call.
+
+Here’s that one single line, we had imagined when we started:
+
+```rust
+let channel = node.create_secure_channel(&identity, route, options).await?;
+```
+
+It creates an [authenticated and encrypted channel]((https://docs.ockam.io/reference/libraries/rust/secure-channels))
+over arbitary multi-hop, multi-protocol routes that can span across private networks
+and clouds. We are able to hides all the underlying complexity and footguns behind
+this simple and safe function call. The code remains the same regardless of how you use it -
+on [scalable](https://github.com/build-trust/ockam/blob/develop/examples/rust/get_started/examples/05-secure-channel-over-two-transport-hops-initiator.rs)
+servers or [tiny](https://github.com/build-trust/ockam/blob/develop/examples/rust/get_started/examples/05-secure-channel-over-two-transport-hops-initiator.rs) microcontrollers.
+
+To learn more checkout [Ockam on Github](https://github.com/build-trust/ockam) or
+try the step-by-step walk throughs of the [Ockam Rust library](https://docs.ockam.io/reference/libraries/rust) and [Ockam Command](https://docs.ockam.io/reference/command).
+
+If you've been part of a project that was rewritten in Rust? Come share your team's story
+with us on our [discord server](https://discord.gg/bewvnm6zqS).
+
+We're also hiring for both Rust and Elixir roles, come [join our passionate team of builders](https://www.ockam.io/team).
