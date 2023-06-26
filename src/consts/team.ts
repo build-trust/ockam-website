@@ -177,6 +177,15 @@ export const MEMBERS = enhanceTeamMembers([
     description:
       'Loves driving fast cars, Rust, developer experience, open source, community, empathy, empowerment',
   },
+    {	
+    name: 'Alan',
+    surname: 'Snow',
+    position: 'Staff Platform Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'US',
+    photo: 'alan-snow.png',
+    description: 'Enjoys life by spending time with family, running, and learning about technology.',
+  },
   {
     name: 'Maryanna',
     surname: 'Saenko',
