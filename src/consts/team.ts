@@ -103,15 +103,6 @@ export const MEMBERS = enhanceTeamMembers([
     description: 'Loves swimming in the oceans, hiking in the mountains and gazing at the stars',
   },
   {
-    name: 'Chris',
-    surname: 'Oakley',
-    position: 'Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'chris-oakley.png',
-    description: 'Most often found somewhere on top of a mountain',
-  },
-  {
     name: 'Eric',
     surname: 'Torreborre',
     position: 'Engineer',
@@ -177,14 +168,15 @@ export const MEMBERS = enhanceTeamMembers([
     description:
       'Loves driving fast cars, Rust, developer experience, open source, community, empathy, empowerment',
   },
-    {	
+  {
     name: 'Alan',
     surname: 'Snow',
     position: 'Staff Platform Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
     photo: 'alan-snow.png',
-    description: 'Enjoys life by spending time with family, running, and learning about technology.',
+    description:
+      'Enjoys life by spending time with family, running, and learning about technology.',
   },
   {
     name: 'Maryanna',
