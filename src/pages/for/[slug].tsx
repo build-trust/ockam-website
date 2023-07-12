@@ -71,7 +71,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ source, frontMatter }) => 
         mx="auto"
       >
         <MDXRemote {...source} components={mdxComponents} />
-        <Heading>Speak to our sales team today!</Heading>
+        <Heading id="contact">Speak to our sales team today!</Heading>
         <ContactForm />
       </Flex>
     </Box>

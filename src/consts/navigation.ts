@@ -5,7 +5,13 @@ import { GITHUB_REPO_OCKAM, DOCS } from '@consts/externalResources';
 
 // eslint-disable-next-line import/prefer-default-export
 export const NAV_MENU_ITEMS = [
-  { text: 'Features', href: '/#features', isExternal: false, onLandingPage: true },
+  {
+    text: 'Features',
+    href: '/#features',
+    isExternal: false,
+    onLandingPage: true,
+    landingPageHref: '#features',
+  },
   { text: 'Use Cases', href: '/#use-cases', isExternal: false },
   { text: 'Pricing', href: '/pricing', isExternal: false, onLandingPage: true },
   {
