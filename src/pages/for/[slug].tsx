@@ -1,10 +1,10 @@
 import { ReactElement, ReactNode } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import path from 'path';
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { generateSlugFromPath, getPageBySlug, pageFilePaths } from '@api/mdxApi';
-// import mdxComponents from '@components/mdx';
+import mdxComponents from '@components/mdx';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import LandingLayout from '@layouts/LandingLayout';
 import { Hero } from '@views/homepage';
@@ -45,7 +45,7 @@ type PageProps = {
   source: MDXRemoteSerializeResult;
   frontMatter: { [key: string]: string | number | boolean };
 };
-const LandingPage: NextPageWithLayout<PageProps> = ({ frontMatter }) => {
+const LandingPage: NextPageWithLayout<PageProps> = ({ source, frontMatter }) => {
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const text = frontMatter?.hero_text as string;
   const subtext = frontMatter?.subtext as string;
@@ -54,7 +54,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ frontMatter }) => {
     <Box pt={{ base: 10, lg: 10 }}>
       <SEOHead title={title} />
       <Hero text={text} subtext={subtext} />
-      {/* <MDXRemote {...source} components={mdxComponents} /> */}
+
       {/* <Features />
       <Cases />
       <GetStarted /> */}
@@ -66,8 +66,11 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ frontMatter }) => {
         justify={{ base: 'center', lg: 'center' }}
         align="center"
         gap={{ base: 0, lg: 10 }}
+        maxW={{ base: '3xl', lg: '3xl' }}
         direction="column"
+        mx="auto"
       >
+        <MDXRemote {...source} components={mdxComponents} />
         <Heading>Speak to our sales team today!</Heading>
         <ContactForm />
       </Flex>
