@@ -30,22 +30,26 @@ export const getStaticPaths = async (): Promise<{
     fallback: false,
   };
 };
+
+type PageProps = {
+  slug: string;
+  source: MDXRemoteSerializeResult;
+  frontMatter: { [key: string]: string | number | boolean };
+};
+
 export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: PageProps }> => {
   const { source, frontMatter } = await getPageBySlug(LANDING_PAGE_PATH, params.slug);
-
+  const { slug } = params;
   return {
     props: {
+      slug,
       source,
       frontMatter,
     },
   };
 };
 
-type PageProps = {
-  source: MDXRemoteSerializeResult;
-  frontMatter: { [key: string]: string | number | boolean };
-};
-const LandingPage: NextPageWithLayout<PageProps> = ({ source, frontMatter }) => {
+const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter }) => {
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const text = frontMatter?.hero_text as string;
   const subtext = frontMatter?.subtext as string;
@@ -72,7 +76,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ source, frontMatter }) => 
       >
         <MDXRemote {...source} components={mdxComponents} />
         <Heading id="contact">Speak to our sales team today!</Heading>
-        <ContactForm />
+        <ContactForm landingPage={slug} />
       </Flex>
     </Box>
   );

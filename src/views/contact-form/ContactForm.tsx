@@ -78,14 +78,19 @@ const FIELDS = [
   },
 ];
 
+type Props = {
+  landingPage?: string;
+};
 // TODO Types for react-hook-form - inputs, errors;
-const ContactForm: FunctionComponent = () => {
+const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
   const {
     register,
     formState: { errors, isSubmitting },
     setValue,
     trigger,
   } = useForm();
+
+  const attribution = landingPage || 'general';
 
   const contactFormRef = useRef<HTMLFormElement>(null);
 
@@ -150,7 +155,11 @@ const ContactForm: FunctionComponent = () => {
           ))}
 
           <input type="hidden" value={CONFIG.salesforce.oid} {...register('oid')} />
-          <input type="hidden" value={CONFIG.salesforce.returnUrl} {...register('retURL')} />
+          <input
+            type="hidden"
+            value={`${CONFIG.salesforce.returnUrl}&landingPage=${attribution}`}
+            {...register('retURL')}
+          />
           <input type="hidden" value={CONFIG.salesforce.leadSource} {...register('lead_source')} />
           <input type="hidden" value={CONFIG.salesforce.debug} {...register('debug')} />
           <input type="hidden" value={CONFIG.salesforce.debugEmail} {...register('debugEmail')} />
