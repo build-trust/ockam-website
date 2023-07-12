@@ -74,19 +74,19 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts, text }) 
   const useIcon = typeof icon === 'string' ? IconLookup[icon] : icon;
 
   const displayText = (): JSX.Element | JSX.Element[] => {
+    if (texts && texts?.length > 0) {
+      return texts.map((t) => (
+        <Text key={t} fontSize="sm" mb={{ base: 4, lg: 2 }} _last={{ mb: { lg: 0 } }}>
+          {t}
+        </Text>
+      ));
+    }
     if (text) {
       return (
         <Text key={`${title}-0`} fontSize="sm" mb={{ base: 4, lg: 2 }} _last={{ mb: { lg: 0 } }}>
           {text}
         </Text>
       );
-    }
-    if (texts) {
-      return texts.map((t) => (
-        <Text key={t} fontSize="sm" mb={{ base: 4, lg: 2 }} _last={{ mb: { lg: 0 } }}>
-          {text}
-        </Text>
-      ));
     }
     return <></>;
   };
