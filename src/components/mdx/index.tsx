@@ -1,6 +1,8 @@
 import { MDXRemoteProps } from 'next-mdx-remote';
+import { SimpleGrid } from '@chakra-ui/react';
 
 import StyleGuideResourceItem from '@root/components/StyleGuideResourceItem';
+import { Feature } from '@root/views/homepage/Features';
 
 import Paragraph from './Paragraph';
 import headingsComponents from './Headings';
@@ -40,4 +42,6 @@ export default {
   StyleGuideResourceItem,
   Video,
   Alert,
+  Feature,
+  SimpleGrid,
 } as MDXRemoteProps['components'];

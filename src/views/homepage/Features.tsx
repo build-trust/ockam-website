@@ -11,6 +11,8 @@ import {
   Link,
 } from '@chakra-ui/react';
 import styled from 'styled-components';
+import { IconType } from 'react-icons';
+import { HiFingerPrint, HiShieldCheck, HiClock } from 'react-icons/hi';
 
 import GitHubIcon from '@assets/icons/github.svg';
 import DeveloperIcon from '@assets/icons/developer.svg';
@@ -23,7 +25,11 @@ const TITLE = 'Connect Applications, not Networks';
 const DESCRIPTIONS = [
   "Finally, you can forget about networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, CAs, tokens, and <a bunch of other things you didn't get into this gig to deal with in the first place>",
 ];
-
+const IconLookup: { [key: string]: IconType } = {
+  fingerprint: HiFingerPrint,
+  shieldcheck: HiShieldCheck,
+  clock: HiClock,
+};
 const FEATURES = [
   {
     icon: LeftIcon,
@@ -58,32 +64,49 @@ const FEATURES = [
 ];
 
 type FeatureProps = {
-  icon: FunctionComponent<SVGAttributes<SVGElement>>;
+  icon?: FunctionComponent<SVGAttributes<SVGElement>> | string;
   title: string;
-  texts: string[];
+  texts?: string[];
+  text?: string;
 };
 
-const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts }) => (
-  <Flex>
-    <Box flex={0} mr={5}>
-      <GreenIconWrapper>
-        <Icon as={icon} color="white" w={6} h={6} />
-      </GreenIconWrapper>
-    </Box>
+const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts, text }) => {
+  const useIcon = typeof icon === 'string' ? IconLookup[icon] : icon;
 
-    <Box>
-      <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
-        {title}
-      </Text>
-
-      {texts.map((text) => (
-        <Text key={text} fontSize="sm" mb={{ base: 4, lg: 2 }} _last={{ mb: { lg: 0 } }}>
+  const displayText = (): JSX.Element | JSX.Element[] => {
+    if (text) {
+      return (
+        <Text key={`${title}-0`} fontSize="sm" mb={{ base: 4, lg: 2 }} _last={{ mb: { lg: 0 } }}>
           {text}
         </Text>
-      ))}
-    </Box>
-  </Flex>
-);
+      );
+    }
+    if (texts) {
+      return texts.map((t) => (
+        <Text key={t} fontSize="sm" mb={{ base: 4, lg: 2 }} _last={{ mb: { lg: 0 } }}>
+          {text}
+        </Text>
+      ));
+    }
+    return <></>;
+  };
+  return (
+    <Flex>
+      <Box flex={0} mr={5}>
+        <GreenIconWrapper>
+          <Icon as={useIcon} color="white" w={6} h={6} />
+        </GreenIconWrapper>
+      </Box>
+
+      <Box>
+        <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
+          {title}
+        </Text>
+        {displayText()}
+      </Box>
+    </Flex>
+  );
+};
 
 const NoBr = styled.span`
   white-space: nowrap;
@@ -99,6 +122,7 @@ const noWidows = (str: string): JSX.Element => {
   );
   return el;
 };
+
 const Features: FunctionComponent = () => (
   <Box bgColor="gray.50" pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 24 }}>
     <Container variant="section">
@@ -147,5 +171,5 @@ const Features: FunctionComponent = () => (
     </Container>
   </Box>
 );
-
+export { Feature };
 export default Features;
