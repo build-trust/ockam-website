@@ -27,8 +27,9 @@ const HeroBox = styled(Box)`
 type Props = {
   text?: string;
   subtext?: string;
+  landingPage?: boolean;
 };
-const Hero: FunctionComponent<Props> = ({ text, subtext }) => {
+const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
   const { gradients } = useTheme();
 
   const heroText = (): JSX.Element => {
@@ -73,6 +74,67 @@ const Hero: FunctionComponent<Props> = ({ text, subtext }) => {
     if (text?.length > 40) return { base: 1, lg: 1.2 };
     return standard;
   };
+
+  const ctas = (): JSX.Element => {
+    if (landingPage) return <></>;
+    return (
+      <Box textAlign="center" my={14}>
+        <Link href={BUILD_DEMO.href} passHref>
+          <Button
+            mx={6}
+            color="rgb(40, 40, 40)"
+            border="1px solid white"
+            _hover={{
+              backgroundColor: 'rgb(10, 10, 10)',
+              color: 'white',
+            }}
+          >
+            Start Building
+          </Button>
+        </Link>
+        <Link href={CONTACT_FORM_PATH} passHref>
+          <Button
+            position="relative"
+            borderWidth={1}
+            borderStyle="solid"
+            borderColor="transparent"
+            backgroundColor="rgb(10, 10, 10)"
+            backgroundClip="padding-box"
+            _before={{
+              content: "''",
+              backgroundImage: gradients.primary,
+              borderRadius: '4px',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: -1,
+              margin: '-1px',
+              boxShadow: '0 0 50px 0px #52c7ea',
+            }}
+            _hover={{
+              backgroundImage: gradients.primary,
+              borderColor: 'rgb(10, 10, 10)',
+              color: 'rgb(10, 10, 10)',
+            }}
+            _active={{
+              backgroundImage: `${gradients.primary}`,
+              color: 'white',
+              boxShadow: '0 0 60px 10px #52c7ea',
+            }}
+            _focus={{
+              backgroundImage: `${gradients.primary}`,
+              color: 'white',
+              boxShadow: '0 0 60px 10px #52c7ea',
+            }}
+          >
+            Get a Demo
+          </Button>
+        </Link>
+      </Box>
+    );
+  };
   return (
     <HeroBox>
       <Container
@@ -95,62 +157,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext }) => {
           >
             {heroText()}
           </Heading>
-
-          <Box textAlign="center" my={14}>
-            <Link href={BUILD_DEMO.href} passHref>
-              <Button
-                mx={6}
-                color="rgb(40, 40, 40)"
-                border="1px solid white"
-                _hover={{
-                  backgroundColor: 'rgb(10, 10, 10)',
-                  color: 'white',
-                }}
-              >
-                Start Building
-              </Button>
-            </Link>
-            <Link href={CONTACT_FORM_PATH} passHref>
-              <Button
-                position="relative"
-                borderWidth={1}
-                borderStyle="solid"
-                borderColor="transparent"
-                backgroundColor="rgb(10, 10, 10)"
-                backgroundClip="padding-box"
-                _before={{
-                  content: "''",
-                  backgroundImage: gradients.primary,
-                  borderRadius: '4px',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  zIndex: -1,
-                  margin: '-1px',
-                  boxShadow: '0 0 50px 0px #52c7ea',
-                }}
-                _hover={{
-                  backgroundImage: gradients.primary,
-                  borderColor: 'rgb(10, 10, 10)',
-                  color: 'rgb(10, 10, 10)',
-                }}
-                _active={{
-                  backgroundImage: `${gradients.primary}`,
-                  color: 'white',
-                  boxShadow: '0 0 60px 10px #52c7ea',
-                }}
-                _focus={{
-                  backgroundImage: `${gradients.primary}`,
-                  color: 'white',
-                  boxShadow: '0 0 60px 10px #52c7ea',
-                }}
-              >
-                Get a Demo
-              </Button>
-            </Link>
-          </Box>
+          {ctas()}
           <RotatingHeading text={subtext} />
         </Box>
       </Container>

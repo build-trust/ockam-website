@@ -53,7 +53,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ source, frontMatter }) => 
   return (
     <Box pt={{ base: 10, lg: 10 }}>
       <SEOHead title={title} />
-      <Hero text={text} subtext={subtext} />
+      <Hero text={text} subtext={subtext} landingPage />
 
       {/* <Features />
       <Cases />
