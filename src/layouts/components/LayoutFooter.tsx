@@ -75,6 +75,11 @@ const NAV = [
     heading: 'Use cases',
     links: [
       {
+        name: 'Secure Kafka within financial services',
+        href: '/for/kafka-financial-services',
+        isExternal: false,
+      },
+      {
         name: 'Kafka end-to-end encryption',
         href: 'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
         isExternal: true,
