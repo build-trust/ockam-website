@@ -149,7 +149,7 @@ const MainLayoutDesktopNav: FunctionComponent<NavProps> = ({ landingPage }) => {
         })}
       </Flex>
 
-      <MainLayoutCtaButtons landingPage />
+      <MainLayoutCtaButtons landingPage={landingPage} />
     </>
   );
 };
