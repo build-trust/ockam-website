@@ -138,9 +138,56 @@ const NAV = [
   },
 ];
 
-const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
+interface Props extends BoxProps {
+  landingPage?: boolean;
+}
+const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) => {
   const { gradients } = useTheme();
 
+  const contentLinks = (): JSX.Element => {
+    if (landingPage) return <></>;
+    const links = (
+      <Flex
+        direction={{ base: 'column', lg: 'row' }}
+        pb={{ base: 10, lg: 20 }}
+        pt={6}
+        w="full"
+        align={{ base: 'center', lg: 'flex-start' }}
+      >
+        {NAV.map((section) => (
+          <VStack
+            align={{ base: 'center', lg: 'flex-start' }}
+            verticalAlign="top"
+            key={section.heading}
+            mx={6}
+            mb={{ base: 6, lg: 0 }}
+          >
+            <Heading as="h4" maxWidth="md" fontSize="sm" color="gray.500">
+              {section.heading}
+            </Heading>
+            {section.links.map((link) => (
+              <ChakraLink
+                key={link.name}
+                href={link.href}
+                mt={0}
+                {...(link.isExternal ? { isExternal: true } : { passHref: true, as: NextLink })}
+              >
+                <Text
+                  as={link.isExternal ? 'span' : 'a'}
+                  _hover={{ textDecoration: 'underline' }}
+                  opacity={0.8}
+                  fontSize="sm"
+                >
+                  {link.name}
+                </Text>
+              </ChakraLink>
+            ))}
+          </VStack>
+        ))}
+      </Flex>
+    );
+    return links;
+  };
   return (
     <Container as="footer" variant="section" {...restProps}>
       <Flex
@@ -188,44 +235,7 @@ const LayoutFooter: FunctionComponent<BoxProps> = ({ ...restProps }) => {
         </Box>
       </Flex>
 
-      <Flex
-        direction={{ base: 'column', lg: 'row' }}
-        pb={{ base: 10, lg: 20 }}
-        pt={6}
-        w="full"
-        align={{ base: 'center', lg: 'flex-start' }}
-      >
-        {NAV.map((section) => (
-          <VStack
-            align={{ base: 'center', lg: 'flex-start' }}
-            verticalAlign="top"
-            key={section.heading}
-            mx={6}
-            mb={{ base: 6, lg: 0 }}
-          >
-            <Heading as="h4" maxWidth="md" fontSize="sm" color="gray.500">
-              {section.heading}
-            </Heading>
-            {section.links.map((link) => (
-              <ChakraLink
-                key={link.name}
-                href={link.href}
-                mt={0}
-                {...(link.isExternal ? { isExternal: true } : { passHref: true, as: NextLink })}
-              >
-                <Text
-                  as={link.isExternal ? 'span' : 'a'}
-                  _hover={{ textDecoration: 'underline' }}
-                  opacity={0.8}
-                  fontSize="sm"
-                >
-                  {link.name}
-                </Text>
-              </ChakraLink>
-            ))}
-          </VStack>
-        ))}
-      </Flex>
+      {contentLinks()}
       <Flex align="center" direction={{ base: 'column', lg: 'column' }} order={{ base: 1, lg: 0 }}>
         <Box
           as={LogoGray}

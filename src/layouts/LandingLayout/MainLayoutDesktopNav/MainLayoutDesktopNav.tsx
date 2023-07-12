@@ -17,7 +17,7 @@ import NextLink from 'next/link';
 
 import { NAV_MENU_ITEMS } from '@consts/navigation';
 
-import MainLayoutCtaButtons from '../MainLayoutCtaButtons';
+import MainLayoutCtaButtons from '../LandingLayoutCtaButtons';
 
 const activeMenuItemStyle = {
   textDecoration: 'none',
@@ -57,10 +57,7 @@ const NavMenuItem = forwardRef<ButtonProps, 'div'>((props, ref) => (
   />
 ));
 
-type NavProps = {
-  landingPage?: boolean;
-};
-const MainLayoutDesktopNav: FunctionComponent<NavProps> = ({ landingPage }) => (
+const MainLayoutDesktopNav: FunctionComponent = () => (
   <>
     <Flex
       display={{ base: 'none', lg: 'flex' }}
@@ -73,7 +70,7 @@ const MainLayoutDesktopNav: FunctionComponent<NavProps> = ({ landingPage }) => (
     >
       {NAV_MENU_ITEMS.map(({ icon, ...item }) => {
         const isDropdown = !!item.children;
-        if (landingPage && !item.onLandingPage) return true;
+
         if (isDropdown) {
           return (
             <Menu key={item.text} placement="bottom" autoSelect={false}>

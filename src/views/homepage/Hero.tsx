@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box, Button, Container, Heading, useTheme } from '@chakra-ui/react';
+import { Box, Button, Container, Heading, ResponsiveValue, useTheme } from '@chakra-ui/react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
@@ -24,10 +24,55 @@ const HeroBox = styled(Box)`
   overflow: hidden;
   position: relative;
 `;
-
-const Hero: FunctionComponent = () => {
+type Props = {
+  text?: string;
+  subtext?: string;
+};
+const Hero: FunctionComponent<Props> = ({ text, subtext }) => {
   const { gradients } = useTheme();
 
+  const heroText = (): JSX.Element => {
+    if (!text) {
+      return (
+        <>
+          Build{' '}
+          <Box as="span" bgImage={gradients.primary} bgClip="text">
+            Trust
+          </Box>
+        </>
+      );
+    }
+    return (
+      <>
+        {text.split(/(_\w.*?\w_)/).map((string) => {
+          const highlight = string.match(/^_(\w.*?\w)_$/);
+          if (highlight) {
+            return (
+              <Box as="span" bgImage={gradients.primary} bgClip="text">
+                {highlight[1]}
+              </Box>
+            );
+          }
+          return string;
+        })}
+      </>
+    );
+  };
+
+  const calculatedHeadingSize = ():
+    | ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>
+    | undefined => {
+    const standard = { base: '3xl', lg: 'h1' };
+    if (!text) return standard;
+    if (text?.length > 40) return { base: '3xl', lg: '4xl' };
+    return standard;
+  };
+  const calculatedLineHeight = (): ResponsiveValue<number> => {
+    const standard = { base: 1, lg: 1 };
+    if (!text) return standard;
+    if (text?.length > 40) return { base: 1, lg: 1.2 };
+    return standard;
+  };
   return (
     <HeroBox>
       <Container
@@ -41,16 +86,14 @@ const Hero: FunctionComponent = () => {
         <Box>
           <Heading
             as="h1"
-            size={{ base: '3xl', lg: 'h1' }}
+            size={calculatedHeadingSize()}
             fontWeight="extrabold"
             textAlign="center"
             color="white"
             my={16}
+            lineHeight={calculatedLineHeight()}
           >
-            Build{' '}
-            <Box as="span" bgImage={gradients.primary} bgClip="text">
-              Trust
-            </Box>
+            {heroText()}
           </Heading>
 
           <Box textAlign="center" my={14}>
@@ -108,7 +151,7 @@ const Hero: FunctionComponent = () => {
               </Button>
             </Link>
           </Box>
-          <RotatingHeading />
+          <RotatingHeading text={subtext} />
         </Box>
       </Container>
     </HeroBox>

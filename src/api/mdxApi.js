@@ -11,31 +11,39 @@ import RehypeKeywordLinks from '@root/utils/keywordLinks';
 export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guide');
 
-// postFilePaths is the list of all mdx files inside the POSTS_PATH directory
-export const postFilePaths = fs.readdirSync(POSTS_PATH).filter((path) => /\.mdx?$/.test(path));
-
 export const styleGuideFilePaths = fs
   .readdirSync(STYLE_GUIDE_PATH)
   .filter((path) => /\.mdx?$/.test(path));
 
 export const generateSlugFromPath = (path) => path.replace(/\.mdx?$/, '');
 export const generatePathFromSlug = (slug) => `${slug}.mdx`;
-export const getAllPosts = () => {
-  const posts = postFilePaths.map((filePath) => {
-    const source = fs.readFileSync(path.join(POSTS_PATH, filePath));
-    const { content, data } = matter(source);
 
+export const pageFilePaths = (folder) => {
+  return fs.readdirSync(folder).filter((path) => /\.mdx?$/.test(path));
+};
+// postFilePaths is the list of all mdx files inside the POSTS_PATH directory
+export const postFilePaths = pageFilePaths(POSTS_PATH);
+
+export const getAllPagesForFolder = (folder) => {
+  const filePaths = fs.readdirSync(folder).filter((path) => /\.mdx?$/.test(path));
+  const pages = filePaths.map((filePath) => {
+    const source = fs.readFileSync(path.join(folder, filePath));
+    const { content, data } = matter(source);
     return {
       content,
       data,
       filePath,
     };
   });
-  return orderBy(posts, ['data.date'], ['desc']);
+  return orderBy(pages, ['data.date'], ['desc']);
 };
 
-export const getPostBySlug = async (slug) => {
-  const postFilePath = path.join(POSTS_PATH, generatePathFromSlug(slug));
+export const getAllPosts = () => {
+  return getAllPagesForFolder(POSTS_PATH);
+};
+
+export const getPageBySlug = async (folder, slug) => {
+  const postFilePath = path.join(folder, generatePathFromSlug(slug));
   const source = fs.readFileSync(postFilePath);
 
   const { content, data } = matter(source);
@@ -55,6 +63,9 @@ export const getPostBySlug = async (slug) => {
     source: mdxSource,
     frontMatter: data,
   };
+};
+export const getPostBySlug = async (slug) => {
+  return getPageBySlug(POSTS_PATH, slug);
 };
 
 export const getStyleGuideSections = async () => {

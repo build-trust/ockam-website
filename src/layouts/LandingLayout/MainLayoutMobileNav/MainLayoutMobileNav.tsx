@@ -1,13 +1,10 @@
 import { FunctionComponent } from 'react';
 
-import MainLayoutCtaButtons from '../MainLayoutCtaButtons';
+import MainLayoutCtaButtons from '../LandingLayoutCtaButtons';
 
 import MainLayoutMobileNavMenu from './MainLayoutMobileNavMenu';
 
-type NavProps = {
-  landingPage?: boolean;
-};
-const MainLayoutMobileNav: FunctionComponent<NavProps> = () => (
+const MainLayoutMobileNav: FunctionComponent = () => (
   <>
     <MainLayoutMobileNavMenu />
 
