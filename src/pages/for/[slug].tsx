@@ -101,6 +101,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
         maxW={{ base: '3xl', lg: '3xl' }}
         direction="column"
         mx="auto"
+        id="why"
       >
         <MDXRemote {...source} components={mdxComponents} />
         {displayFeatures()}

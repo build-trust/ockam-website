@@ -76,7 +76,52 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
   };
 
   const ctas = (): JSX.Element => {
-    if (landingPage) return <></>;
+    if (landingPage) {
+      return (
+        <Box textAlign="center" my={14}>
+          <Link href="#why" passHref>
+            <Button
+              position="relative"
+              borderWidth={1}
+              borderStyle="solid"
+              borderColor="transparent"
+              backgroundColor="rgb(10, 10, 10)"
+              backgroundClip="padding-box"
+              _before={{
+                content: "''",
+                backgroundImage: gradients.primary,
+                borderRadius: '4px',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: -1,
+                margin: '-1px',
+                boxShadow: '0 0 50px 0px #52c7ea',
+              }}
+              _hover={{
+                backgroundImage: gradients.primary,
+                borderColor: 'rgb(10, 10, 10)',
+                color: 'rgb(10, 10, 10)',
+              }}
+              _active={{
+                backgroundImage: `${gradients.primary}`,
+                color: 'white',
+                boxShadow: '0 0 60px 10px #52c7ea',
+              }}
+              _focus={{
+                backgroundImage: `${gradients.primary}`,
+                color: 'white',
+                boxShadow: '0 0 60px 10px #52c7ea',
+              }}
+            >
+              Tell me more
+            </Button>
+          </Link>
+        </Box>
+      );
+    }
     return (
       <Box textAlign="center" my={14}>
         <Link href={BUILD_DEMO.href} passHref>
