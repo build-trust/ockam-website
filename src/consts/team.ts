@@ -29,25 +29,6 @@ export const MEMBERS = enhanceTeamMembers([
     bgColor: colors.extras.iceCold,
   },
   {
-    name: 'Sabeen',
-    surname: 'Syed',
-    position: 'VP of Engineering',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'sabeen-syed.png',
-    description:
-      'Enjoys reading historical fiction, playing board games and running after her 4 kids',
-  },
-  {
-    name: 'Daniil',
-    surname: 'Fedotov',
-    position: 'Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'CA',
-    photo: 'daniil-fedotov.png',
-    description: 'Is playing his bagpipes in Canada',
-  },
-  {
     name: 'Michael',
     surname: 'Uti',
     position: 'Engineer',
@@ -169,16 +150,6 @@ export const MEMBERS = enhanceTeamMembers([
       'Loves driving fast cars, Rust, developer experience, open source, community, empathy, empowerment',
   },
   {
-    name: 'Alan',
-    surname: 'Snow',
-    position: 'Staff Platform Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'alan-snow.png',
-    description:
-      'Enjoys life by spending time with family, running, and learning about technology.',
-  },
-  {
     name: 'Maryanna',
     surname: 'Saenko',
     position: 'Board Member',
@@ -204,15 +175,6 @@ export const MEMBERS = enhanceTeamMembers([
     country: 'US',
     photo: 'fergal-donoher.png',
     description: 'SVP at Flex',
-  },
-  {
-    name: 'Patricia',
-    surname: 'Muoio',
-    position: 'Board Member',
-    categories: [CATEGORIES.BOARD_OF_DIRECTORS],
-    country: 'US',
-    photo: 'patricia-muoio.png',
-    description: 'Partner at SineWave Ventures',
   },
   {
     name: 'Joanna',
