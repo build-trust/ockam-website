@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
 import path from 'path';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
@@ -10,6 +10,7 @@ import LandingLayout from '@layouts/LandingLayout';
 import { Hero } from '@views/homepage';
 import SEOHead from '@root/components/SEOHead';
 import { ContactForm } from '@views/contact-form';
+import { Feature } from '@root/views/homepage/Features';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
 
@@ -49,11 +50,38 @@ export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: P
   };
 };
 
+type FrontmatterFeature = {
+  icon: string;
+  title: string;
+  text: string;
+};
 const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter }) => {
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const text = frontMatter?.hero_text as string;
   const subtext = frontMatter?.subtext as string;
+  const features: FrontmatterFeature[] =
+    (frontMatter?.features as unknown as FrontmatterFeature[]) || [];
 
+  const displayFeatures = (): JSX.Element => {
+    if (Array.isArray(features) && features.length < 1) return <></>;
+    return (
+      <SimpleGrid
+        id="features"
+        columns={{ base: 1, md: 1, lg: 1 }}
+        spacingX={{ base: 8, md: 20, lg: 24 }}
+        spacingY={{ base: 8, md: 12, lg: 12 }}
+      >
+        {features.map((feature) => (
+          <Feature
+            key={feature.title}
+            icon={feature.icon}
+            title={feature.title}
+            text={feature.text}
+          />
+        ))}
+      </SimpleGrid>
+    );
+  };
   return (
     <Box pt={{ base: 10, lg: 10 }}>
       <SEOHead title={title} />
@@ -75,6 +103,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
         mx="auto"
       >
         <MDXRemote {...source} components={mdxComponents} />
+        {displayFeatures()}
         <Heading id="contact">Speak to our sales team today!</Heading>
         <ContactForm landingPage={slug} />
       </Flex>
