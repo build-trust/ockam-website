@@ -79,6 +79,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
         src="https://tag.clearbitscripts.com/v1/pk_29cb8603dd5cf9cfebe03cb5cdb56049/tags.js"
         referrerPolicy="strict-origin-when-cross-origin"
       />
+      <Script async defer src="https://buttons.github.io/buttons.js" />
       <RedditPixel />
       <StylesProvider>
         <MobileNavbarProvider>

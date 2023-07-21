@@ -1,3 +1,5 @@
+import { HiStar } from 'react-icons/hi';
+
 import LinkedinIcon from '@assets/icons/linkedin.svg';
 import TwitterIcon from '@assets/icons/twitter.svg';
 import GitHubIcon from '@assets/icons/github.svg';
@@ -22,7 +24,7 @@ export const TWITTER = {
 };
 
 export const GITHUB = { name: 'GitHub', href: 'https://github.com/build-trust', icon: GitHubIcon };
-export const GITHUB_REPO_OCKAM = { href: 'https://github.com/build-trust/ockam', icon: GitHubIcon };
+export const GITHUB_REPO_OCKAM = { href: 'https://github.com/build-trust/ockam', icon: HiStar };
 
 export const SUPPORT = {
   name: 'Support',
