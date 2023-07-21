@@ -11,7 +11,7 @@ const MainLayoutCtaButtons: FunctionComponent<Props> = ({ landingPage }) => {
   const buttonsSize = useBreakpointValue({ base: 'lg', lg: 'md' });
   const contactHref = landingPage ? '#contact' : CONTACT_FORM_PATH;
   const gitHubCTA = (): JSX.Element => (
-    <Box mt="0">
+    <Box mt="2">
       <a
         className="github-button"
         href="https://github.com/build-trust/ockam"
