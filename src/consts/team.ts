@@ -104,7 +104,7 @@ export const MEMBERS = enhanceTeamMembers([
   {
     name: 'Glenn',
     surname: 'Gillen',
-    position: 'Director of Product',
+    position: 'VP of Product / GTM',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'AU',
     photo: 'glenn-gillen.png',
