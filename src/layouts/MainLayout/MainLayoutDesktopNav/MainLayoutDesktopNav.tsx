@@ -79,7 +79,7 @@ const MainLayoutDesktopNav: FunctionComponent<NavProps> = ({ landingPage }) => {
         zIndex={1}
         pl={{ lg: 8, xl: 16 }}
       >
-        {NAV_MENU_ITEMS.map(({ icon, ...item }) => {
+        {NAV_MENU_ITEMS.map(({ ...item }) => {
           const isDropdown = !!item.children;
           if (landingPage && !item.onLandingPage) return true;
 
@@ -90,7 +90,6 @@ const MainLayoutDesktopNav: FunctionComponent<NavProps> = ({ landingPage }) => {
                   as={NavMenuItem}
                   rightIcon={<ChevronDownIcon w={6} h={6} color="inherit!important" />}
                 >
-                  {icon && <Icon as={icon} {...iconStyles} />}
                   {item.text}
                 </MenuButton>
 
@@ -141,7 +140,6 @@ const MainLayoutDesktopNav: FunctionComponent<NavProps> = ({ landingPage }) => {
                 : { passHref: true })}
             >
               <NavMenuItem {...(item.isExternal ? { as: 'span' } : { as: 'a' })}>
-                {icon && <Icon as={icon} {...iconStyles} />}
                 {item.text}
               </NavMenuItem>
             </Box>
