@@ -1,0 +1,29 @@
+---
+title: Better than TLS/SSL encryption for InfluxDB
+hero_text: Your _private data_ needs a database that _stays private_
+subtext: Data connectivity, security, and credential management for InfluxDB that's so simple it's deployed in minutes
+features:
+  - icon: lock
+    title: Private databases stay private 
+    text: Your InfluxDB hasn't had its port exposed to the public internet, and so there is no route for third-parties to access your server.
+  - icon: key
+    title: Encrypted in transit
+    text: The secure channel that is established between your nodes is encrypted end-to-end. Each node generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
+  - icon: fingerprint
+    title: Identity & Attribute Based Access Control
+    text: Authorization to even establish a route to the InfluxDB database is tied to the unique identity of the client requesting access, which is both more flexible in terms of supporting modern and often dynamic deployment approaches and also more clearly aligns with your intentions around access control. If the client is able to establish trust that they are who they say they are then they are able to route their packets to the database. Contrast that to historical approaches with _permanent_ access decisions based on assumptions about the remote network (e.g. is this request coming from an IP addess we have pre-authorized?). This is in addition to the authentication and authorization controls on the InfluxDB database itself which will continue to work as they always have.
+  - icon: shieldcheck
+    title: Secure-by-design
+    text: The combination of all of the above means that the only way to access the InfluxDB database is over a secure channel, which means all communication is encrypted in transit irrespective of any misconfiguration at either end (e.g., HTTP/TLS not being enabled). And because each node exchanges credentials with each other rather than sharing a common certificate or shared encryption key you can also be sure that no other parties in the supply-chain are able to modify the data in transit. The data you receive at the consumer is exactly what was sent by your clients. And that only authorized clients can write to InfluxDB, ensuring that the data in your topic is highly trustworthy. 
+  - icon: transparentcube
+    title: Reduced vulnerability surface area
+    text: Ockam simplifies client access concerns by exposing all remote services as local services. We call this virtual adjacency. When all remote components of an application become virtually adjacent to every other component, then the security and trust complexity of the entire network, the entire infrastructure, the entire internet is completely abstracted away. All third party intermediaries are removed from the app's vulnerability surface.
+---
+
+# You don't need to choose the lesser of two painful options
+
+The value of a time series database like InfluxDB is that you can collect a lot of data, from a lot of places. But each new device or service means a network layer configuration update to allow it to write to InfluxDB: a new IP address to allow, updates to NACls and security groups. Or maybe you're managing access via a VPN instead and so you need to grant each service access to the VPN first. Multiply that network administration overhead across dozens, let alone thousands, of services and you've quickly got a situation where maintaining the tight network controls becomes unsustainable. You might be tempted to instead just put your private/on-prem InfluxDB server onto the internet with a public IP address. But if we've learnt anything over the past decade it is that databases should not be directly accessible from the public internet if you want the data in them to stay private.
+
+# A simpler design, with a reduced vulnerability surface
+
+Ockam's approach to building secure systems means that your private InfluxDB database can stay private. You don't need to make any firewall changes, no application code changes, no infrastructure changes. Clients can attempt to establish a connection from anywhere and, if they pass your access control policy, will be granted the ability to establish a secure communication channel directly to your private database. Whether you're an embedded device manufacturer trying to send telemetry from devices all around the world, an organization with industrial IoT usage that's trying to connect sensors from OT networks across multiple sites, a cloud-first development team with a globally distributed microservices architecture... or anything in between... Ockam is a drop-in solution that can securely connect your systems in just minutes, and provides not just data encryption and privacy benefits but data integrity and authenticity for all messages that pass through the system too.

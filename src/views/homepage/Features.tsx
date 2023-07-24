@@ -12,7 +12,17 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import { IconType } from 'react-icons';
-import { HiFingerPrint, HiHeart, HiShieldCheck, HiClock, HiBan, HiGlobeAlt } from 'react-icons/hi';
+import {
+  HiFingerPrint,
+  HiHeart,
+  HiShieldCheck,
+  HiClock,
+  HiBan,
+  HiGlobeAlt,
+  HiLockClosed,
+  HiKey,
+  HiCubeTransparent,
+} from 'react-icons/hi';
 
 import GitHubIcon from '@assets/icons/github.svg';
 import DeveloperIcon from '@assets/icons/developer.svg';
@@ -32,6 +42,9 @@ const IconLookup: { [key: string]: IconType } = {
   heart: HiHeart,
   ban: HiBan,
   globe: HiGlobeAlt,
+  lock: HiLockClosed,
+  key: HiKey,
+  transparentcube: HiCubeTransparent,
 };
 const FEATURES = [
   {
