@@ -80,6 +80,11 @@ const NAV = [
         isExternal: false,
       },
       {
+        name: 'Chief Information Security Offices (CISOs)',
+        href: '/for/CISOs',
+        isExternal: false,
+      },
+      {
         name: 'Kafka end-to-end encryption',
         href: 'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
         isExternal: true,
@@ -108,6 +113,11 @@ const NAV = [
         name: 'Database protection',
         href: 'https://docs.ockam.io/guides/use-cases/secure-database-access',
         isExternal: true,
+      },
+      {
+        name: 'Enterprise Architects',
+        href: '/for/architects',
+        isExternal: false,
       },
     ],
   },
@@ -148,6 +158,10 @@ interface Props extends BoxProps {
 }
 const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) => {
   const { gradients } = useTheme();
+  const contactFormPath = (): string => {
+    if (landingPage) return '#contact';
+    return CONTACT_FORM_PATH;
+  };
 
   const contentLinks = (): JSX.Element => {
     if (landingPage) return <></>;
@@ -226,8 +240,7 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
           </Button>
           <Button
             as="a"
-            href={CONTACT_FORM_PATH}
-            target="_blank"
+            href={contactFormPath()}
             colorScheme="avocado"
             color="black"
             size="lg"
