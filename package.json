@@ -30,8 +30,7 @@
     "url": "git+https://github.com/masterborn/"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.1.0",
-    "@auth0/nextjs-auth0": "^2.6.0",
+    "@auth0/auth0-spa-js": "^2.1.1",
     "@chakra-ui/anatomy": "2.0.1",
     "@chakra-ui/icons": "2.0.2",
     "@chakra-ui/react": "2.4.2",
