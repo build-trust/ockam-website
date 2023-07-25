@@ -51,7 +51,7 @@ const FEATURES = [
     icon: LeftIcon,
     title: 'Trust at the Application Layer',
     texts: [
-      'Crypographic identities and authentication - everywhere',
+      'Cryptographic identities and authentication - everywhere',
       'Managed credential authorities and ABAC',
       'Enrollment protocols that bootstrap',
       'BYO identity providers and access control policies',
