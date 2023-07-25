@@ -10,8 +10,14 @@ type Props = {
   children: React.ReactNode;
 };
 
+type User = {
+  email?: string;
+  avatar?: string;
+};
+
 const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, children }) => {
   const router = useRouter();
+
   const { publicRuntimeConfig } = getConfig();
   const auth0 = useMemo(
     () =>
@@ -34,12 +40,16 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
   }, [auth0]);
 
   const login = useCallback(async () => {
-    console.log('logging in...');
     await auth0.loginWithRedirect();
   }, [auth0]);
 
   const callbackResult = useCallback(async () => {
     await auth0.handleRedirectCallback();
+    const user = await auth0.getUser();
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('email', user?.email as string);
+      window.sessionStorage.setItem('avatar', user?.picture as string);
+    }
   }, [auth0]);
 
   const logout = useCallback(async () => {
@@ -47,7 +57,9 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
   }, [auth0]);
 
   useEffect(() => {
-    const path = router.asPath;
+    const path = router.asPath.replace(/\?.*/, '');
+
+    console.log('path: ', path);
     switch (path) {
       case loginPath:
         login();
@@ -69,5 +81,18 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
 
   return <>{children}</>;
 };
+
+// eslint-disable-next-line consistent-return
+const currentUser = (): User | void => {
+  if (typeof window !== 'undefined') {
+    const email = window.sessionStorage.getItem('email') as string | undefined;
+    const avatar = window.sessionStorage.getItem('avatar') as string | undefined;
+    return { email, avatar };
+  }
+};
+
+const isLoggedIn = (): boolean => !!currentUser();
+
+export { currentUser, isLoggedIn };
 
 export default Auth;
