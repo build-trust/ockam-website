@@ -46,7 +46,7 @@ export const DOCS = {
   href: 'https://docs.ockam.io',
 };
 
-export const BUILD_DEMO = { href: 'https://docs.ockam.io/#quick-start' };
+export const BUILD_DEMO = { href: '/download' };
 
 export default [
   CONTACT,
