@@ -95,6 +95,6 @@ const currentUser = (): User | void => {
 
 const isLoggedIn = (): boolean => !!currentUser();
 
-export { currentUser, isLoggedIn, User };
-
+export type { User };
+export { currentUser, isLoggedIn };
 export default Auth;
