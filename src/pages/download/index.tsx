@@ -26,6 +26,7 @@ import { MainLayout } from '@root/layouts';
 import SEOHead from '@components/SEOHead';
 import { currentUser, User } from '@root/components/Auth';
 import CodeInline from '@root/components/mdx/CodeInline';
+import CodeBlock from '@root/components/mdx/CodeBlock';
 
 const components = {
   h1: Heading,
