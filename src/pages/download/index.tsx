@@ -15,6 +15,8 @@ import {
   useSteps,
   Button,
   Link,
+  ListItem,
+  UnorderedList,
 } from '@chakra-ui/react';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
@@ -66,7 +68,7 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
             </Heading>
 
             <Text mb="10">
-              Now that you&apos;ve created your accound you need to download and install Ockam
+              Now that you&apos;ve created your account you need to download and install Ockam
               Command to your local machine:
             </Text>
             <MDXRemote {...install} components={components} />
@@ -85,6 +87,18 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
               <CodeInline>enroll</CodeInline> command:
             </Text>
             <MDXRemote {...enroll} components={components} />
+            <Text mb="10">
+              Once you&apos;ve enrolled you will now have a space for you to host your projects, as
+              well as a default project for you within this space. In addition you will also have
+              generated a unique cryptographically provable identity and saves the corresponding key
+              in a vault. This identity is issued a membership credential that will be used to
+              manage the resources in your project.
+              <br />
+              <br />
+              Don&apos;t worry if some of this doesn&apos;t make sense yet! Our job is to simplify
+              all these complexities away, but we know some of you are curious to know how the magic
+              happens.
+            </Text>
           </Box>
         );
         break;
@@ -95,13 +109,35 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
               Deploy
             </Heading>
 
-            <Text mb="10">
-              Now you can take a look at the various{' '}
+            <Text mb="4">
+              Now you&apos;re ready to build! Now you can take a look at the various{' '}
               <Link href="https://docs.ockam.io/guides/use-cases" color="brand.500">
                 Ockam use cases
               </Link>{' '}
-              and follow one of associated example guides to how to implement it.
+              and follow one of associated example guides to how to implement it. Also make sure you
+              connect with us to stay updated on the latest changes or to get any help you may need:
             </Text>
+            <UnorderedList spacing="2">
+              <ListItem>
+                <Link color="brand.600" href="https://discord.gg/RAbjRr3kds">
+                  👾 Discord
+                </Link>{' '}
+                - Join us at the Build Trust server, full of people interested in building systems
+                that are secure-by-design
+              </ListItem>
+              <ListItem>
+                <Link color="brand.600" href="https://github.com/build-trust/ockam/discussions">
+                  💬 Discussions
+                </Link>{' '}
+                - Come and introduce yourself, ask for help, etc.
+              </ListItem>
+              <ListItem>
+                <Link color="brand.600" href="https://github.com/build-trust/ockam">
+                  ⭐️ Star us on GitHub! ⭐️️
+                </Link>{' '}
+                - Share the 💙, see updates in your feed, help others discover Ockam
+              </ListItem>
+            </UnorderedList>
           </Box>
         );
         break;
@@ -180,8 +216,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   // MDX text - can be from a local file, database, anywhere
   const install = `
   \`\`\`sh
-  curl --proto '=https' --tlsv1.2 -sSf \\ 
-      https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | bash
+  curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash
   \`\`\`
   `;
 
