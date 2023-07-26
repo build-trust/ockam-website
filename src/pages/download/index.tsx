@@ -51,6 +51,10 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
     index: 1,
     count: steps.length,
   });
+  useEffect(() => {
+    // @ts-ignore window.analytics undefined below
+    window.analytics.track(`Download - Step ${activeStep + 1}`);
+  }, [activeStep]);
 
   const displayStep = (step: number): ReactElement => {
     switch (step) {
