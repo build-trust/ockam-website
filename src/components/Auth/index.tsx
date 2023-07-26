@@ -1,4 +1,5 @@
 import { Auth0Client } from '@auth0/auth0-spa-js';
+import { useToast } from '@chakra-ui/react';
 import getConfig from 'next/config';
 import { useRouter } from 'next/router';
 import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
@@ -18,6 +19,7 @@ type User = {
 
 const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, children }) => {
   const router = useRouter();
+  const toast = useToast();
 
   const { publicRuntimeConfig } = getConfig();
   const auth0 = useMemo(
@@ -57,8 +59,15 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
 
   const logout = useCallback(async () => {
     await auth0.logout();
-    router.replace('/');
-  }, [auth0, router]);
+    toast({
+      position: 'top',
+      title: 'You have been logged out.',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      onCloseComplete: () => router.replace('/', undefined, { shallow: true }),
+    });
+  }, [auth0, router, toast]);
 
   useEffect(() => {
     const path = router.asPath.replace(/\?.*/, '');
