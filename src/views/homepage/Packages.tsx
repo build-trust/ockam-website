@@ -57,7 +57,7 @@ const TIERS: Tier[] = [
     isPopular: true,
     cta: {
       text: 'Get started →',
-      url: 'https://docs.ockam.io/#install',
+      url: '/download',
     },
   },
 
@@ -68,7 +68,7 @@ const TIERS: Tier[] = [
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
-      url: 'https://docs.ockam.io/#install',
+      url: '/download',
     },
   },
 
@@ -79,7 +79,7 @@ const TIERS: Tier[] = [
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
-      url: 'https://docs.ockam.io/#install',
+      url: '/download',
     },
   },
 
