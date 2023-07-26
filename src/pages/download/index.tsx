@@ -20,11 +20,12 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import RemarkGFM from 'remark-gfm';
 import RemarkPrism from 'remark-prism';
+import { useRouter } from 'next/router';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { MainLayout } from '@root/layouts';
 import SEOHead from '@components/SEOHead';
-import { currentUser, User } from '@root/components/Auth';
+import { currentUser, isLoggedIn, User } from '@root/components/Auth';
 import CodeInline from '@root/components/mdx/CodeInline';
 import CodeBlock from '@root/components/mdx/CodeBlock';
 
@@ -47,15 +48,19 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
     { title: 'Deploy', description: 'Create a secure channel' },
   ];
   const { activeStep, setActiveStep } = useSteps({
-    index: 2,
+    index: 1,
     count: steps.length,
   });
 
   const displayStep = (step: number): ReactElement => {
     switch (step) {
-      case 2:
+      case 1:
         return (
           <Box>
+            <Heading as="h2" size="lg" mb="4">
+              Download
+            </Heading>
+
             <Text mb="10">
               Now that you&apos;ve created your accound you need to download and install Ockam
               Command to your local machine:
@@ -64,9 +69,13 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
           </Box>
         );
         break;
-      case 3:
+      case 2:
         return (
           <Box>
+            <Heading as="h2" size="lg" mb="4">
+              Enroll
+            </Heading>
+
             <Text>
               Next you need to authenticate the Ockam Command app, you do this via the{' '}
               <CodeInline>enroll</CodeInline> command:
@@ -75,11 +84,11 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
           </Box>
         );
         break;
-      case 4:
+      case 3:
         return (
           <Box>
             <Heading as="h2" size="lg" mb="4">
-              Success
+              Deploy
             </Heading>
 
             <Text mb="10">
@@ -120,7 +129,7 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
         ))}
       </Stepper>
       {displayStep(activeStep)}
-      {activeStep < steps.length && (
+      {activeStep < steps.length - 1 && (
         <Button colorScheme="avocado" mb="8" onClick={(): void => setActiveStep(activeStep + 1)}>
           I&apos;ve completed this step
         </Button>
@@ -137,11 +146,13 @@ interface StaticProps {
   props: Props;
 }
 const DownloadPage: NextPageWithLayout<Props> = ({ install, enroll }) => {
+  const router = useRouter();
   const [user, setUser] = useState<User>({});
 
   useEffect(() => {
+    if (!isLoggedIn()) router.replace('/auth/login');
     setUser(currentUser() || {});
-  }, [setUser]);
+  }, [setUser, router]);
   return (
     <Box pt={{ base: 10, lg: 10 }}>
       <SEOHead subTitle="Download Ockam - Get started for free" />

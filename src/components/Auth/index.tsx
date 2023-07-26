@@ -57,7 +57,8 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
 
   const logout = useCallback(async () => {
     await auth0.logout();
-  }, [auth0]);
+    router.replace('/');
+  }, [auth0, router]);
 
   useEffect(() => {
     const path = router.asPath.replace(/\?.*/, '');
