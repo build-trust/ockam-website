@@ -8,7 +8,7 @@ import SEOHead from '@root/components/SEOHead';
 
 const PricingPage: NextPageWithLayout = () => (
   <Box pt={{ base: 10, lg: 10 }}>
-    <SEOHead subTitle="Pricing & Packages - Get started for free" />
+    <SEOHead title="Pricing & Packages - Get started for free" />
     <Packages />
   </Box>
 );

@@ -155,7 +155,7 @@ const DownloadPage: NextPageWithLayout<Props> = ({ install, enroll }) => {
   }, [setUser, router]);
   return (
     <Box pt={{ base: 10, lg: 10 }}>
-      <SEOHead subTitle="Download Ockam - Get started for free" />
+      <SEOHead title="Download Ockam - Get started for free" />
       <Instructions email={user.email} install={install} enroll={enroll} />
     </Box>
   );
