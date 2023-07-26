@@ -13,6 +13,7 @@ type Props = {
 type User = {
   email?: string;
   avatar?: string;
+  userId?: string;
 };
 
 const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, children }) => {
@@ -49,8 +50,10 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
     if (typeof window !== 'undefined') {
       window.sessionStorage.setItem('email', user?.email as string);
       window.sessionStorage.setItem('avatar', user?.picture as string);
+      window.sessionStorage.setItem('userId', user?.sub as string);
     }
-  }, [auth0]);
+    router.replace('/download');
+  }, [auth0, router]);
 
   const logout = useCallback(async () => {
     await auth0.logout();
@@ -58,8 +61,6 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
 
   useEffect(() => {
     const path = router.asPath.replace(/\?.*/, '');
-
-    console.log('path: ', path);
     switch (path) {
       case loginPath:
         login();
@@ -87,12 +88,13 @@ const currentUser = (): User | void => {
   if (typeof window !== 'undefined') {
     const email = window.sessionStorage.getItem('email') as string | undefined;
     const avatar = window.sessionStorage.getItem('avatar') as string | undefined;
-    return { email, avatar };
+    const userId = window.sessionStorage.getItem('userId') as string | undefined;
+    return { email, avatar, userId };
   }
 };
 
 const isLoggedIn = (): boolean => !!currentUser();
 
-export { currentUser, isLoggedIn };
+export { currentUser, isLoggedIn, User };
 
 export default Auth;
