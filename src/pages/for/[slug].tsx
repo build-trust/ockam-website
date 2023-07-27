@@ -1,7 +1,8 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
 import path from 'path';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import Link from 'next/link';
 
 import { generateSlugFromPath, getPageBySlug, pageFilePaths } from '@api/mdxApi';
 import mdxComponents from '@components/mdx';
@@ -11,6 +12,7 @@ import { Hero } from '@views/homepage';
 import SEOHead from '@root/components/SEOHead';
 import { ContactForm } from '@views/contact-form';
 import { Feature } from '@root/views/homepage/Features';
+import { BUILD_DEMO } from '@root/consts/externalResources';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
 
@@ -105,7 +107,30 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
       >
         <MDXRemote {...source} components={mdxComponents} />
         {displayFeatures()}
-        <Heading id="contact">Speak to our sales team today!</Heading>
+
+        <Heading mx="auto" mt="16" id="contact">
+          It&apos;s time to&hellip;
+        </Heading>
+        <Box my="16">
+          <Link href={BUILD_DEMO.href} passHref>
+            <Button
+              mx={0}
+              colorScheme="avocado"
+              color="rgb(40, 40, 40)"
+              border="1px solid white"
+              _hover={{
+                backgroundColor: 'rgb(10, 10, 10)',
+                color: 'white',
+              }}
+              py={6}
+              px={30}
+              size="lg"
+            >
+              Start Building
+            </Button>
+          </Link>
+        </Box>
+        <Heading>&hellip; or, speak to our sales team today!</Heading>
         <ContactForm landingPage={slug} />
       </Flex>
     </Box>
