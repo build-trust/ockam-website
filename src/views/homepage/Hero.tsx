@@ -91,6 +91,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
             <Button
               position="relative"
               borderWidth={1}
+              color="white"
               borderStyle="solid"
               borderColor="transparent"
               backgroundColor="rgb(10, 10, 10)"
