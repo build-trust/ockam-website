@@ -148,6 +148,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
         <Link href={CONTACT_FORM_PATH} passHref>
           <Button
             position="relative"
+            color="white"
             borderWidth={1}
             borderStyle="solid"
             borderColor="transparent"
