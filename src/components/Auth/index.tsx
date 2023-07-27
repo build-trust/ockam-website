@@ -17,6 +17,17 @@ type User = {
   userId?: string;
 };
 
+// eslint-disable-next-line consistent-return
+const currentUser = (): User | void => {
+  if (typeof window !== 'undefined') {
+    const email = window.sessionStorage.getItem('email') as string | undefined;
+    const avatar = window.sessionStorage.getItem('avatar') as string | undefined;
+    const userId = window.sessionStorage.getItem('userId') as string | undefined;
+    return { email, avatar, userId };
+  }
+};
+const isLoggedIn = (): boolean => !!currentUser() && !!currentUser()?.userId;
+
 const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, children }) => {
   const router = useRouter();
   const toast = useToast();
@@ -36,6 +47,7 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
 
   const checkLoggedIn = useCallback(async () => {
     try {
+      if (isLoggedIn()) return;
       await auth0.getTokenSilently();
     } catch (e) {
       /* Do nothing */
@@ -58,6 +70,11 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
   }, [auth0, router]);
 
   const logout = useCallback(async () => {
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.removeItem('email');
+      window.sessionStorage.removeItem('avatar');
+      window.sessionStorage.removeItem('userId');
+    }
     await auth0.logout();
     toast({
       position: 'top',
@@ -92,18 +109,6 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
 
   return <>{children}</>;
 };
-
-// eslint-disable-next-line consistent-return
-const currentUser = (): User | void => {
-  if (typeof window !== 'undefined') {
-    const email = window.sessionStorage.getItem('email') as string | undefined;
-    const avatar = window.sessionStorage.getItem('avatar') as string | undefined;
-    const userId = window.sessionStorage.getItem('userId') as string | undefined;
-    return { email, avatar, userId };
-  }
-};
-
-const isLoggedIn = (): boolean => !!currentUser();
 
 export type { User };
 export { currentUser, isLoggedIn };
