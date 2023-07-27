@@ -190,8 +190,6 @@ const DownloadPage: NextPageWithLayout<Props> = ({ install, enroll }) => {
   const [user, setUser] = useState<User>({});
 
   useEffect(() => {
-    console.log('logged in: ', isLoggedIn());
-    console.log('current user: ', currentUser());
     if (!isLoggedIn()) router.replace('/auth/login');
     setUser(currentUser() || {});
   }, [setUser, router]);
