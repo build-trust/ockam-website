@@ -51,7 +51,6 @@ export const getPageBySlug = async (folder, slug) => {
   const mdxSource = await serialize(content, {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
-      development: false,
       remarkPlugins: [RemarkGFM, RemarkPrism],
       rehypePlugins: [RehypeSlug],
       remarkRehypeOptions: { fragment: true },
