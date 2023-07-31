@@ -7,10 +7,10 @@ authorAvatar: /blog/mrinal-wadhwa-1.jpg
 image: /blog/announcing_confluent_addon/ockam-and-confluent.png
 category: 'Announcements'
 isFeatured: true
-featuredOrder: 2
+featuredOrder: 4
 ---
 
-The Confluent add-on for Ockam Orchestrator enables tamper-proof and end-to-end encrypted message streams through Confluent Cloud, with zero-code changes. The drop-in solution enables companies to exceed common security and compliance requirements without the need for costly rearchitecture or development work. 
+The Confluent add-on for Ockam Orchestrator enables tamper-proof and end-to-end encrypted message streams through Confluent Cloud, with zero-code changes. The drop-in solution enables companies to exceed common security and compliance requirements without the need for costly rearchitecture or development work.
 
 Kafka deployments typically combine authentication tokens and Transport Layer Security (TLS) to protect data moving into and out of Kafka topics. While this does secure data in transit over the Internet, it doesn't provide a complete solution to securing data as it travels _through_ Kafka. The Kafka broker will be able to temporarily see the plaintext data.
 
@@ -104,7 +104,7 @@ ockam project enroll consumer.ticket \
 
 An Ockam node is a way to connect securely connect different services to each other, so we'll create one here that we'll use to communicate through the Confluent Cloud cluster using the identity we just created:
 
-```bash 
+```bash
 ockam node create consumer \
   --identity consumer
 ```
@@ -161,7 +161,7 @@ ockam node create producer1 \
 
 And expose our Kafka bootstrap server on port `5000` so we can start sending messages through Confluent Cloud:
 
-```bash  
+```bash
 ockam kafka-producer create --node producer1
 ```
 
@@ -192,10 +192,10 @@ An example that only takes a few minutes to implement means it can be easy to mi
 
 * <b>Reduced exposure window</b>: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralized shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimizes the risk to future data using automatically rotating keys.
 
-All these benefits are possible, today, with no code changes and minimal configuration change to existing deployments. 
+All these benefits are possible, today, with no code changes and minimal configuration change to existing deployments.
 
 ## Next steps
 
-* If you haven't already followed the example in this guide, you can [get started using Ockam](https://docs.ockam.io/) for free by following the instructions in our documentation. 
-* If you’d like to talk specifically about this or other potential use cases for Ockam, the team would be more than happy to [chat with you](https://www.ockam.io/contact/form). 
+* If you haven't already followed the example in this guide, you can [get started using Ockam](https://docs.ockam.io/) for free by following the instructions in our documentation.
+* If you’d like to talk specifically about this or other potential use cases for Ockam, the team would be more than happy to [chat with you](https://www.ockam.io/contact/form).
 * Alternatively you can join us, and an ever growing community of developers who want to build trust by making applications that are secure-by-design, in the [Build Trust Discord server](https://discord.gg/RAbjRr3kds) or on [Github](https://github.com/build-trust/ockam).

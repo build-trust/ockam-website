@@ -1,13 +1,13 @@
-import { FunctionComponent, useMemo } from 'react';
 import { Box, Flex, Heading, useTheme } from '@chakra-ui/react';
+import { FunctionComponent, useMemo } from 'react';
 
+import PlaceholderBlogPostBlue from '@assets/images/placeholders/placeholder-blog-post-blue.png';
+import PlaceholderBlogPostGreen from '@assets/images/placeholders/placeholder-blog-post-green.png';
+import PlaceholderBlogPostSilver from '@assets/images/placeholders/placeholder-blog-post-silver.png';
+import AuthorSignature from '@components/AuthorSignature';
 import ImageWithPlaceholder from '@components/ImageWithPlaceholder';
 import { BlogPostData } from '@typings/BlogPost';
-import PlaceholderBlogPostGreen from '@assets/images/placeholders/placeholder-blog-post-green.png';
-import PlaceholderBlogPostBlue from '@assets/images/placeholders/placeholder-blog-post-blue.png';
-import PlaceholderBlogPostSilver from '@assets/images/placeholders/placeholder-blog-post-silver.png';
 import getRandomImage from '@utils/getRandomImage';
-import AuthorSignature from '@components/AuthorSignature';
 
 import CategoryBadge from './components/CategoryBadge';
 
@@ -66,7 +66,7 @@ const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
           (max-width: ${breakpoints.lg}) 66vw,
           (max-width: ${breakpoints['1.5xl']}) 50vw,
           50vw`}
-          layout="responsive"
+          layout="intrinsic"
           placeholderImg={placeholderImg}
           alt={title}
         />

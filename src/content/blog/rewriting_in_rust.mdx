@@ -8,7 +8,7 @@ authorAvatar: /blog/mrinal-wadhwa-1.jpg
 image: /blog/rewriting_in_rust/rewrite-from-c-to-rust.png
 category: 'Learning'
 isFeatured: true
-featuredOrder: 1
+featuredOrder: 3
 ---
 
 In the early days of Ockam we were developing a C library. This is the story
@@ -17,7 +17,7 @@ and rewrite in Rust.
 
 Before we begin, I was in a [recorded webinar](https://www.influxdata.com/resources/meet-the-founders-an-open-discussion-about-rewriting-using-rust/) this week together with Paul Dix,
 the CTO of InfluxData, where we both discussed InfluxDB’s and Ockam’s rewrites in
-Rust. Why the two open source projects chose to re-write, why we chose Rust as 
+Rust. Why the two open source projects chose to re-write, why we chose Rust as
 our new language, lessons we learnt along the way and more. Do checkout
 [the recording](https://www.influxdata.com/resources/meet-the-founders-an-open-discussion-about-rewriting-using-rust/). It was an insightful discussion.
 
@@ -33,7 +33,7 @@ We also make the hard parts super easy to scale - bootstrap trust relationships,
 safely manage keys, rotate/revoke short-lived credentials, enforce
 attribute-based authorization policies etc. The end result is - you can build
 apps that have granular control over every trust and access decision - apps that
-are private and secure-by-design. 
+are private and secure-by-design.
 
 In 2019, we started building all of this in C. We wanted Ockam to run
 everywhere - from constrained edge devices to powerful cloud servers. We also
@@ -46,9 +46,9 @@ specific toolchains). And all other popular languages can call C libraries
 through some form of a native function interface - so we could later provide
 language idiomatic wrappers for every other language: Typescript, Python, Elixir, Java etc.
 
-The idea was we’ll keep the core of our communication centric protocols 
-decoupled from any hardware specific behavior and have pluggable adapters for 
-hardware we want to support. For example, there would be adapters to store 
+The idea was we’ll keep the core of our communication centric protocols
+decoupled from any hardware specific behavior and have pluggable adapters for
+hardware we want to support. For example, there would be adapters to store
 secret keys in various HSMs, adaptors for various transport protocols etc.
 
 Our plan was to implement our core as a C library. We would then wrap
@@ -79,13 +79,13 @@ That’s where C was severely lacking.
 
 Our attempts at exposing safe and simple interfaces, in C, were not
 successful. In every iteration, we found that application developers would need
-to know too much detail about protocol state and state transitions. 
+to know too much detail about protocol state and state transitions.
 
-## The Elixir Prototype 
+## The Elixir Prototype
 
 Around that time I wrote a
 [prototype](https://github.com/build-trust/ockam/blob/develop/examples/elixir/get_started/06-secure-channel-over-two-transport-hops-initiator.exs#L16) of creating an Ockam
-[Secure Channel](https://docs.ockam.io/reference/command/secure-channels) 
+[Secure Channel](https://docs.ockam.io/reference/command/secure-channels)
 over Ockam [Routing](https://docs.ockam.io/reference/command/routing) in Elixir.
 
 Elixir programs run on BEAM, the Erlang Virtual Machine. BEAM provides Erlang
@@ -109,18 +109,18 @@ actors would run the underlying layers of stateful protocols. The function would
 return when the channel is established or if there is an error. This is exactly
 what we wanted in our interface.
 
-But Elixir isn’t like C. It doesn’t run that well on small/constrained computers 
+But Elixir isn’t like C. It doesn’t run that well on small/constrained computers
 and it's not a good choice for being wrapped in language-specific idiomatic wrappers.
 
 ## Exploring Rust
 
 At this point we knew we wanted to implement lightweight actors but we also knew
-C would not make that easy. This is when I started digging into Rust and very quickly 
+C would not make that easy. This is when I started digging into Rust and very quickly
 encountered a few things that made Rust very attractive:
 
 ### Compatibility with the C calling convention
 
-Rust libraries can export an interface that is compatible with C's calling 
+Rust libraries can export an interface that is compatible with C's calling
 convention. Which means that any language or runtime that can statically or dynamically
 link and call functions in a C library can also link and call functions in a Rust library -
 in the exact same way. Since most languages support native functions in C, they also already
@@ -129,7 +129,7 @@ requirement of having language specific wrappers around our core library.
 
 ### Support for lots of targets
 
-Rust compiles using LLVM which means that it can target a very large number of 
+Rust compiles using LLVM which means that it can target a very large number of
 computers. This set is likely not as big as everything that C can target with GCC
 and various proprietary GCC forks but is still a very large subset and there’s work
 ongoing to make Rust compile with GCC. With growing support of new LLVM targets
@@ -138,8 +138,8 @@ of our requirement of being able to run everywhere.
 
 ### Strong typing and a powerful type system
 
-Rust’s type system allows us to turn invariants into compile-time errors. This 
-reduces the set of possible mistakes that can be shipped to production by making 
+Rust’s type system allows us to turn invariants into compile-time errors. This
+reduces the set of possible mistakes that can be shipped to production by making
 them easier to catch at development time. Our team and the user of our Rust library
 become less likely to ship behavioral bugs or security vulnerabilities to production.
 
@@ -163,7 +163,7 @@ to create actors had already been done in projects like tokio and async-std. We 
 build Ockam's actor implementation on this foundation.
 
 Another important aspect that stood out was that `async/await` in rust has one
-significant difference from `async/await` in other languages like Javascript. 
+significant difference from `async/await` in other languages like Javascript.
 
 In Javascript a browser engine or nodejs picks the way it will run async
 functions. But in Rust you can plugin a mechanism of your own choice. These are

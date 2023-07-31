@@ -5,8 +5,6 @@ date: '2023-03-1'
 description: 'Automated token management for InfluxDB Cloud'
 author: 'Glenn Gillen'
 authorAvatar: /blog/glenn-gillen.jpg
-isFeatured: true
-featuredOrder: 4
 image: /blog/announcing-influx-addon/ockam-influxdata.png
 ---
 
@@ -16,11 +14,11 @@ Today we’re excited to announce the InfluxDB add-on for Ockam Orchestrator. Th
 
 ## The problem with managing access at scale
 
-Managing client access credentials for thousands of discrete clients can be a challenge for customers at scale. Issuing unique credentials to each client can be such an operational burden that we’ve seen some companies opt to have a single credential that is shared across all their client services and devices. This trade-off though comes with an increase in risk: any one of those thousands of clients could potentially expose the same secrets used by the whole fleet. It also increases the operational burden of remediation when one of those credentials is exposed: you’re now scrambling to work out how to revoke and deploy new credentials to your entire fleet all at once. Instead industry best-practice would recommend regularly auditing and rotating those credentials to reduce the risk to the business. That regular revocation and rotation results in an on-going operational complexity that only continues to increase as the number of clients grows. 
+Managing client access credentials for thousands of discrete clients can be a challenge for customers at scale. Issuing unique credentials to each client can be such an operational burden that we’ve seen some companies opt to have a single credential that is shared across all their client services and devices. This trade-off though comes with an increase in risk: any one of those thousands of clients could potentially expose the same secrets used by the whole fleet. It also increases the operational burden of remediation when one of those credentials is exposed: you’re now scrambling to work out how to revoke and deploy new credentials to your entire fleet all at once. Instead industry best-practice would recommend regularly auditing and rotating those credentials to reduce the risk to the business. That regular revocation and rotation results in an on-going operational complexity that only continues to increase as the number of clients grows.
 
 The InfluxDB add-on for Ockam Orchestrator is a drop-in solution that works with any InfluxDB client. It allows an organization to define a standardized policy that defines uniquely identifiable, least privilege, time-limited credentials appropriate for their use case. Each client can then request its own credential which, if granted, can then be used wherever existing InfluxDB credentials are used. The time-limited nature means that when the lease period expires the credential is automatically revoked, and the client can request a new one to continue communicating.
 
-Let’s take a look at just a couple of examples of what’s now possible, and how to achieve it. 
+Let’s take a look at just a couple of examples of what’s now possible, and how to achieve it.
 
 ## Initial setup of Ockam
 
@@ -49,13 +47,13 @@ export INFLUXDB_ENDPOINT_URL="https://your-cluser-url-here"
 export INFLUXDB_BUCKET="bucket-name-here"
 ```
 
-Now it's time to integrate Ockam and InfluxDB Cloud! We'll do that by configuring the add-on to use the configuration settings we exported early, in addition to defining a default set of permissions each future lease request should be granted. 
+Now it's time to integrate Ockam and InfluxDB Cloud! We'll do that by configuring the add-on to use the configuration settings we exported early, in addition to defining a default set of permissions each future lease request should be granted.
 
 ```bash
 read -r -d '' INFLUXDB_LEASE_PERMISSIONS <<- EOF
-[{"action": "write", 
+[{"action": "write",
   "resource": {
-    "type": "buckets", 
+    "type": "buckets",
     "name": "$INFLUXDB_BUCKET",
     "orgID": "$INFLUXDB_ORG_ID"
 }}]
@@ -109,9 +107,9 @@ What if we wanted to grant someone from our data science or operations teams acc
 
 ```bash
 read -r -d '' INFLUXDB_LEASE_PERMISSIONS <<- EOF
-[{"action": "read", 
+[{"action": "read",
   "resource": {
-    "type": "buckets", 
+    "type": "buckets",
     "name": "$INFLUXDB_BUCKET",
     "orgID": "$INFLUXDB_ORG_ID"
 }}]
