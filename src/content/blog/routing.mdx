@@ -2,7 +2,7 @@
 title: 'Ockam Routing'
 category: 'Learning'
 date: '2023-07-31'
-description: 'How to use Ockam routing (with the Rust API) and its benefits'
+description: 'How to use Ockam Routing (with the Rust library) and its benefits'
 author: 'Nazmul Idris'
 authorAvatar: /blog/nazmul-idris-blog-profile-image.png
 isFeatured: true
@@ -18,19 +18,19 @@ guarantee authenticity, integrity, and confidentiality of all data-in-motion at 
 application layer.
 
 One of the key features that makes this possible is
-[Ockam routing](https://docs.ockam.io/reference/command/routing#routing).
+[Ockam Routing](https://docs.ockam.io/reference/command/routing#routing).
 Routing allows us to create secure channels over multi-hop, multi-protocol routes which
 can span various network topologies (servers behind NAT firewalls with no external ports
 open, etc) and transport protocols (TCP, UDP, WebSockets, BLE, etc).
 
-In this blog post we will explore the Ockam Rust API and see how routing works in Ockam.
+In this blog post we will explore the Ockam Rust Library and see how routing works in Ockam.
 We will work with Rust code and look at some code examples that demonstrate the simple
 case, and more advanced use cases.
 
 ## Mitigating risk
 
 Before we get started, let's quickly discuss the pitfalls of using existing approaches to
-secure applications. Security is not something that most of us think about when we are
+securing communications within applications. Security is not something that most of us think about when we are
 building systems and are focused on getting things working and shipping.
 
 Traditional secure communication implementations are typically tightly coupled with
@@ -51,27 +51,27 @@ In other words using traditional secure communication implementations you may be
 the doors to losing trust in the data that your apps are working on. Here are some aspects
 of your apps that may be at risk:
 
-1. Lack of trust in the data your app recieves from some other entity.
+1. Lack of trust in the data your app receives.
    - Who sent it to my app?
    - Is it actually the data they sent my app?
    - Missing authentication, data integrity.
-2. Lack of trust in the data your app sends to some other entity.
-   - Who do I sent the data to?
-   - Will they be able to see it along w/ anyone else?
+2. Lack of trust in the data your app sends.
+   - Who am I sending the data to?
+   - Would someone else, other than them, be able to see it?
 
 ## Our journey
 
 In this blog post we will create two examples of Ockam nodes communicating with each other
-using Ockam routing and Ockam transports. We will use the Rust API to create these Ockam
-nodes and setup the Ockam routing orchestration. Ockam routing and transports enable other
+using Ockam Routing and Ockam Transports. We will use the Rust library to create these Ockam
+nodes and setup routing. Ockam Routing and transports enable other
 Ockam protocols to provide end-to-end guarantees like trust, security, privacy, reliable
 delivery, and ordering at the application layer.
 
-- *Ockam routing*: is a simple and lightweight message-based protocol that makes it possible to
+- *Ockam Routing*: is a simple and lightweight message-based protocol that makes it possible to
   bidirectionally exchange messages over a large variety of communication topologies: TCP ->
   TCP or TCP -> TCP -> TCP or BLE -> UDP -> TCP or BLE -> TCP -> TCP or TCP -> Kafka -> TCP
   or any other topology you can imagine.
-- *Ockam transports*: adapt Ockam routing to various transport protocols.
+- *Ockam Transports*: adapt Ockam Routing to various transport protocols.
 
 An Ockam node is any running application that can communicate with other applications
 using various Ockam protocols like
@@ -79,20 +79,16 @@ using various Ockam protocols like
 Secure Channels, etc.
 
 An Ockam node can be defined as any independent process which provides an API supporting
-the Ockam routing protocol. We can create Ockam nodes using the
+the Ockam Routing protocol. We can create Ockam nodes using the
 [Ockam command line interface (CLI)](https://docs.ockam.io/reference/command) (`ockam` command)
 or using various Ockam programming libraries like our Rust and Elixir libraries. We will
-be using the Rust API in this blog post.
-
-When a worker is started on a [node](#node), it is given one or more addresses. The node
-maintains a mailbox for each address and whenever a message arrives for a specific address
-it delivers that message to the corresponding registered worker.
+be using the Rust library in this blog post.
 
 ## Let's dive in
 
 <Alert status='info'>
   To get started please follow
-  [this guide](https://docs.ockam.io/reference/libraries/rust) to get the Rust toolchain setup
+  [this guide](https://docs.ockam.io/reference/libraries/rust#introduction) to get the Rust toolchain setup
   on your machine along with an empty project.
   1. The empty project is named `hello_ockam`.
   2. This will be the starting point for all our examples in this blog post.
@@ -106,8 +102,12 @@ back. There are no TCP transports involved and all the messages are being passed
 forth inside the same node. This will give us a feel for building wokers and routing at a
 basic level.
 
+When a worker is started on a node, it is given one or more addresses. The node
+maintains a mailbox for each address and whenever a message arrives for a specific address
+it delivers that message to the corresponding registered worker.
+
 <Alert status='info'>
-  For more information on creating nodes and workers using the Rust API, please refer to this
+  For more information on creating nodes and workers using the Rust library, please refer to this
   [guide](https://docs.ockam.io/reference/libraries/rust/nodes).
 </Alert>
 
@@ -383,7 +383,7 @@ in between the hops. Instead of passing messages around between workers in the s
 we will spawn multiple nodes. Then we will have a few TCP transports (TCP socket client
 and listener combos) that will connect the nodes.
 
-An Ockam transport is a plugin for Ockam routing. It moves Ockam routing messages using a
+An Ockam transport is a plugin for Ockam Routing. It moves Ockam Routing messages using a
 specific transport protocol like TCP, UDP, WebSockets, Bluetooth, etc.
 
 We will have three nodes:
@@ -684,9 +684,9 @@ our message through them 🚀.
 
 ## Next steps
 
-Ockam routing and transports are extremely powerful and flexible. They are one of the
+Ockam Routing and transports are extremely powerful and flexible. They are one of the
 key features that enables Ockam Secure Channels to be implemented. By layering Ockam
-Secure Channels and other protocols over Ockam routing, we can provide end-to-end
+Secure Channels and other protocols over Ockam Routing, we can provide end-to-end
 guarantees over arbitrary transport topologies that span many networks and clouds.
 
 In a future blog post we will be covering [Ockam Secure
@@ -695,4 +695,4 @@ used to provide end-to-end guarantees over arbitrary transport topologies. So st
 
 In the meantime here are some good jumping off points to learn more about Ockam:
 - [Run the Rust examples in the `ockam` repo](https://github.com/build-trust/ockam/tree/develop/examples/rust).
-- [Deep dive into Ockam routing](https://docs.ockam.io/reference/libraries/rust/routing).
+- [Deep dive into Ockam Routing](https://docs.ockam.io/reference/libraries/rust/routing).
