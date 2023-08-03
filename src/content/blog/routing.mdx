@@ -99,7 +99,7 @@ be using the Rust library in this blog post.
 For our first example, we will create a simple Ockam node that will send a message over
 some hops (in the same node) to a worker (in the same node) that just echoes the message
 back. There are no TCP transports involved and all the messages are being passed back and
-forth inside the same node. This will give us a feel for building wokers and routing at a
+forth inside the same node. This will give us a feel for building workers and routing at a
 basic level.
 
 When a worker is started on a node, it is given one or more addresses. The node
@@ -117,7 +117,7 @@ and see if we can get it echoed back.
 
 Before we begin let's consider routing. When we send a message inside of a node it
 carries with it 2 metadata fields, `onward_route` and `return_route`, where a `route` is
-simply a list of `adresses`. Each worker gets an `address` in a node.
+simply a list of `addresses`. Each worker gets an `address` in a node.
 
 So, if we wanted to send a message from the `app` address to the `echoer` address, with 3
 hops in the middle, we can build a route like the following.
