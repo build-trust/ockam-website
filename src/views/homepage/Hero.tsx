@@ -1,18 +1,17 @@
-import { FunctionComponent } from 'react';
 import {
   Box,
   Button,
   Container,
   Heading,
-  Link as ChakraLink,
   ResponsiveValue,
   useTheme,
 } from '@chakra-ui/react';
-import styled from 'styled-components';
 import Link from 'next/link';
+import { FunctionComponent } from 'react';
+import styled from 'styled-components';
 
-import { CONTACT_FORM_PATH } from '@root/consts/paths';
 import { BUILD_DEMO } from '@root/consts/externalResources';
+import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import RotatingHeading from './RotatingHeading';
 
@@ -135,9 +134,11 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
       <Box textAlign="center" my={14}>
         <Link href={BUILD_DEMO.href} passHref>
           <Button
-            mx={6}
             color="rgb(40, 40, 40)"
             border="1px solid white"
+            mb={{ base: 5, sm: 0 }}
+            ml={{ base: 2.5, sm: 3 }}
+            mr={{ base: 2.5, sm: 3 }}
             _hover={{
               backgroundColor: 'rgb(10, 10, 10)',
               color: 'white',
@@ -155,6 +156,9 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
             borderColor="transparent"
             backgroundColor="rgb(10, 10, 10)"
             backgroundClip="padding-box"
+            mb={{ base: 5, sm: 0 }}
+            ml={{ base: 2.5, sm: 3 }}
+            mr={{ base: 2.5, sm: 3 }}
             _before={{
               content: "''",
               backgroundImage: gradients.primary,
@@ -210,9 +214,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
             my={16}
             lineHeight={calculatedLineHeight()}
           >
-            <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>
-              {heroText()}
-            </ChakraLink>
+            {heroText()}
           </Heading>
           {ctas()}
           <RotatingHeading text={subtext} />

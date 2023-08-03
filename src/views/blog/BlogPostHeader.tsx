@@ -67,6 +67,7 @@ const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
           (max-width: ${breakpoints['1.5xl']}) 50vw,
           50vw`}
           layout="intrinsic"
+          objectFit="contain"
           placeholderImg={placeholderImg}
           alt={title}
         />

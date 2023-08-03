@@ -47,7 +47,7 @@ export async function getStaticProps(): Promise<{ props: HomePageProps; revalida
 }
 
 const HomePage: NextPageWithLayout<HomePageProps> = ({ stars, contributors, downloads }) => (
-  <Box pt={{ base: 10, lg: 10 }}>
+  <Box pt={{ base: 0 }}>
     <Hero />
     <Features />
     <Cases />
