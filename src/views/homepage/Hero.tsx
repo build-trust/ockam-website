@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Heading,
+  Link as ChakraLink,
   ResponsiveValue,
   useTheme,
 } from '@chakra-ui/react';
@@ -214,7 +215,9 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
             my={16}
             lineHeight={calculatedLineHeight()}
           >
-            {heroText()}
+            <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>
+              {heroText()}
+            </ChakraLink>
           </Heading>
           {ctas()}
           <RotatingHeading text={subtext} />
