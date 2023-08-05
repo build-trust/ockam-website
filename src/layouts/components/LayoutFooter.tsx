@@ -129,6 +129,8 @@ const NAV = [
       { name: 'Our mission & values', href: MISSION_AND_VISION_PATH, isExternal: false },
       { name: 'The team', href: TEAM_PATH, isExternal: false },
       { name: 'Team handbook', href: '/blog/team_handbook', isExternal: false },
+      { name: 'Compliance & audit reports', href: 'https://audits.ockam.io/', isExternal: true },
+      { name: 'Orchestrator status', href: 'https://status.ockam.io/', isExternal: true },
       {
         name: 'Style Guide',
         href: STYLE_GUIDE_PATH,
