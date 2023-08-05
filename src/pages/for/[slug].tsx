@@ -3,6 +3,7 @@ import { Box, Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
 import path from 'path';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Link from 'next/link';
+import styled from 'styled-components';
 
 import { generateSlugFromPath, getPageBySlug, pageFilePaths } from '@api/mdxApi';
 import mdxComponents from '@components/mdx';
@@ -13,9 +14,15 @@ import SEOHead from '@root/components/SEOHead';
 import { ContactForm } from '@views/contact-form';
 import { Feature } from '@root/views/homepage/Features';
 import { BUILD_DEMO } from '@root/consts/externalResources';
+import Paragraph from '@root/components/mdx/Paragraph';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
 
+const SubButton = styled.span`
+  display: block;
+  font-size: 66%;
+  padding-top: 5px;
+`;
 type ParamsType = {
   params: { slug: string };
 };
@@ -118,6 +125,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
               colorScheme="avocado"
               color="rgb(40, 40, 40)"
               border="1px solid white"
+              flexDirection="column"
               _hover={{
                 backgroundColor: 'rgb(10, 10, 10)',
                 color: 'white',
@@ -127,10 +135,12 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
               size="lg"
             >
               Start Building
+              <SubButton>(for free!)</SubButton>
             </Button>
           </Link>
         </Box>
-        <Heading>&hellip; or, speak to our sales team today!</Heading>
+        <Heading>&hellip; or, ask our team a question</Heading>
+        <Paragraph>We aim to get back to you within one business day.</Paragraph>
         <ContactForm landingPage={slug} />
       </Flex>
     </Box>
