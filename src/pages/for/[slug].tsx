@@ -140,7 +140,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
           </Link>
         </Box>
         <Heading>&hellip; or, ask our team a question</Heading>
-        <Paragraph>We aim to get back to you within one business day.</Paragraph>
+        <Paragraph>We&apos; get back to you within one business day.</Paragraph>
         <ContactForm landingPage={slug} />
       </Flex>
     </Box>
