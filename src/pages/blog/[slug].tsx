@@ -77,7 +77,7 @@ export const getStaticProps = async ({
   params,
 }: ParamsType): Promise<{ props: BlogPostPageProps }> => {
   const { source, frontMatter } = await getPostBySlug(params.slug);
-  const posts = getAllPosts() as BlogPost[];
+  const posts = getAllPosts(true) as BlogPost[];
   const postsWithSlug = posts.map((post) => ({
     ...post,
     slug: generateSlugFromPath(post.filePath),
