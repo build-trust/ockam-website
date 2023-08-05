@@ -169,7 +169,14 @@ const Features: FunctionComponent = () => (
           _hover={{ textDecoration: 'none' }}
           mt={{ base: 8, md: 0 }}
         >
-          <Button as="span" colorScheme="avocado" color="black" size="lg">
+          <Button as="span" colorScheme="avocado" color="black" size="lg" 
+            sx={{
+              '&:hover': {
+                backgroundColor: 'black',
+                color: '#4fdab8',
+              },
+            }}
+            >
             Learn More
           </Button>
         </Link>
