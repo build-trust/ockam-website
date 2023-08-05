@@ -24,11 +24,12 @@ export const pageFilePaths = (folder) => {
 // postFilePaths is the list of all mdx files inside the POSTS_PATH directory
 export const postFilePaths = pageFilePaths(POSTS_PATH);
 
-export const getAllPagesForFolder = (folder) => {
+export const getAllPagesForFolder = (folder, noContent) => {
   const filePaths = fs.readdirSync(folder).filter((path) => /\.mdx?$/.test(path));
   const pages = filePaths.map((filePath) => {
     const source = fs.readFileSync(path.join(folder, filePath));
     const { content, data } = matter(source);
+    if (noContent) return { data, filePath };
     return {
       content,
       data,
@@ -38,8 +39,8 @@ export const getAllPagesForFolder = (folder) => {
   return orderBy(pages, ['data.date'], ['desc']);
 };
 
-export const getAllPosts = () => {
-  return getAllPagesForFolder(POSTS_PATH);
+export const getAllPosts = (noContent) => {
+  return getAllPagesForFolder(POSTS_PATH, noContent);
 };
 
 export const getPageBySlug = async (folder, slug) => {

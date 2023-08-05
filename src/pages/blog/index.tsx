@@ -10,18 +10,18 @@ import { BlogPageHeader, BlogPageBody } from '@views/blog';
 type BlogPageProps = { posts: BlogPost[] };
 
 const BlogPage: NextPageWithLayout<BlogPageProps> = ({ posts }) => (
-    <BlogLayout blogPosts={posts}>
-      <Box w="full" pt={{ base: 10, lg: 8 }}>
+  <BlogLayout blogPosts={posts}>
+    <Box w="full" pt={{ base: 10, lg: 8 }}>
       <SEOHead subTitle="Blog" />
 
       <BlogPageHeader />
       <BlogPageBody />
     </Box>
-    </BlogLayout>
-  );
+  </BlogLayout>
+);
 
 export function getStaticProps(): { props: BlogPageProps } {
-  const posts = getAllPosts() as BlogPost[];
+  const posts = getAllPosts(true) as BlogPost[];
   return { props: { posts } };
 }
 
