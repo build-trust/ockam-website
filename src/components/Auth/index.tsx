@@ -104,7 +104,7 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
   }, [router, login, loginPath, logoutPath, logout, callbackPath, callbackResult]);
 
   useEffect(() => {
-    checkLoggedIn().catch(console.error);
+    checkLoggedIn().catch();
   }, [checkLoggedIn]);
 
   return <>{children}</>;
