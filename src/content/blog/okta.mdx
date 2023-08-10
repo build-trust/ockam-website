@@ -181,7 +181,7 @@ brew install build-trust/ockam/ockam
 
 Otherwise, you can download our latest architecture specific pre-compiled binary by running:
 
-```shell
+```bash
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/build-trust/ockam/develop/install.sh | sh
 ```
 
@@ -213,7 +213,7 @@ Next we generate two one-time-use enrollment tokens to enable Machine 1 and 2 to
 and get credentials. Notice how we specify the attributes to attest for these two
 machines: `city` and `application`.
 
-```
+```bash
 m1_token=$(ockam project ticket --attribute application="Smart Factory" --attribute city="San Francisco")
 m2_token=$(ockam project ticket --attribute application="Smart Factory" --attribute city="New York")
 ```
@@ -223,7 +223,7 @@ m2_token=$(ockam project ticket --attribute application="Smart Factory" --attrib
 We'll represent the application service on Machine 1 with a simple http server listening
 on port `5000` but this could be any application service:
 
-```
+```bash
 python3 -m http.server --bind 127.0.0.1 5000
 ```
 
@@ -246,7 +246,7 @@ application service. This policy says to allow requests if the subject (the enti
 requesting access) is part of the same application or if the subject is a Field Engineer
 based in San Francisco.
 
-```
+```js
 (or (= subject.application "Smart Factory")
     (and (= subject.department "Field Engineering") (= subject.city "San Francisco")))
 ```
@@ -260,7 +260,7 @@ mention of Alice here, only a department and a city.
 We'll represent the application service on Machine 2 with a simple http server listening
 on port `6000` but this could be any application service:
 
-```
+```bash
 python3 -m http.server --bind 127.0.0.1 6000
 ```
 
@@ -283,7 +283,7 @@ traffic to our application service. This policy says to allow requests if the su
 entity requesting access) is part of the same application or if the subject is a Field
 Engineer based in New York.
 
-```
+```js
 (or (= subject.application "Smart Factory")
     (and (= subject.department "Field Engineering") (= subject.city "New York")))
 ```
@@ -313,7 +313,7 @@ administrator specified those two attributes when enabling the Okta Add-On.
 Alice's `city` in Okta is "San Francisco". Her request to access Machine 1 in San
 Francisco is allowed.
 
-```
+```bash
 ockam tcp-inlet create --at /node/alice --from 127.0.0.1:8000 \
   --to /project/default/service/forward_to_m1/secure/api/service/outlet
 curl --head 127.0.0.1:8000
@@ -321,7 +321,7 @@ curl --head 127.0.0.1:8000
 
 Her request to access Machine 2 in New York is denied.
 
-```
+```bash
 ockam tcp-inlet create --at /node/alice --from 127.0.0.1:9000 \
   --to /project/default/service/forward_to_m2/secure/api/service/outlet
 curl --head 127.0.0.1:9000
