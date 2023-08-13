@@ -16,6 +16,11 @@ const nextConfig = {
   },
   redirects: async () => [
     {
+      source: '/learn/guides/team/values_and_virtues_on_the_Ockam_Team',
+      destination: '/mission',
+      permanent: true,
+    },
+    {
       source: '/learn/how-to-guides/high-performance-team/engineering_levels',
       destination: '/blog/levels_ladder',
       permanent: true,
