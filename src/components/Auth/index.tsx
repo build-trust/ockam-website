@@ -27,11 +27,27 @@ const currentUser = (): User | void => {
   }
 };
 const isLoggedIn = (): boolean => !!currentUser() && !!currentUser()?.userId;
-const trackSignup = (): void => {
+const trackSignup = (user: User): void => {
   const signup = window.sessionStorage.getItem('signup') as string | undefined;
   if (signup !== '1') {
     // @ts-ignore window.analytics undefined below
     window.analytics.track(`Signup`);
+    // @ts-ignore window.rdt undefined below
+    if (window.rdt) {
+      // @ts-ignore window.rdt undefined below
+      window.rdt('track', 'Signup', {
+        currency: 'USD',
+        transactionId: user.userId,
+        value: 100,
+        products: [
+          {
+            id: 'ockam-web',
+            name: 'Ockam Web Authenticate',
+            category: 'product category 1',
+          },
+        ],
+      });
+    }
     window.sessionStorage.setItem('signup', '1');
   }
 };
@@ -41,7 +57,7 @@ const identify = (): void => {
     if (user) {
       // @ts-ignore window.analytics undefined below
       window.analytics.identify(user.userId, { email: user.email });
-      trackSignup();
+      trackSignup(user);
     }
   }
 };
