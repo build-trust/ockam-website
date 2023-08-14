@@ -27,7 +27,24 @@ const currentUser = (): User | void => {
   }
 };
 const isLoggedIn = (): boolean => !!currentUser() && !!currentUser()?.userId;
-
+const trackSignup = (): void => {
+  const signup = window.sessionStorage.getItem('signup') as string | undefined;
+  if (signup !== '1') {
+    // @ts-ignore window.analytics undefined below
+    window.analytics.track(`Signup`);
+    window.sessionStorage.setItem('signup', '1');
+  }
+};
+const identify = (): void => {
+  if (isLoggedIn()) {
+    const user = currentUser();
+    if (user) {
+      // @ts-ignore window.analytics undefined below
+      window.analytics.identify(user.userId, { email: user.email });
+      trackSignup();
+    }
+  }
+};
 const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, children }) => {
   const router = useRouter();
   const toast = useToast();
@@ -111,5 +128,5 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
 };
 
 export type { User };
-export { currentUser, isLoggedIn };
+export { currentUser, isLoggedIn, identify };
 export default Auth;

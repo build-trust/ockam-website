@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 import Script from 'next/script';
 
-import Auth, { isLoggedIn, currentUser } from '@root/components/Auth';
+import Auth, { identify } from '@root/components/Auth';
 import RedditPixel from '@root/utils/RedditPixel';
 import defaultOgImage from '@assets/images/open-graphs/default.png';
 import CONFIG from '@config';
@@ -42,20 +42,12 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   useEffect(() => {
     if (isBrowser && !initialRouteTracked && window.location.search === '') {
       setInitialRouteTracked(true);
-      if (isLoggedIn()) {
-        const user = currentUser();
-        // @ts-ignore window.analytics undefined below
-        if (user) window.analytics.identify(user.userId, { email: user.email });
-      }
+      identify();
       // @ts-ignore window.analytics undefined below
       window.analytics.page(window.location.href);
     }
     events.on('routeChangeComplete', (url) => {
-      if (isLoggedIn()) {
-        const user = currentUser();
-        // @ts-ignore window.analytics undefined below
-        if (user) window.analytics.identify(user.userId, { email: user.email });
-      }
+      identify();
       // @ts-ignore window.analytics undefined below
       window.analytics.page(url);
     });
