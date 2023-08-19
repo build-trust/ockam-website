@@ -1,0 +1,268 @@
+---
+title: 'Secure database access from web apps'
+category: 'Learning'
+date: '2023-08-18'
+description: 'How to use Ockam Command to secure services'
+author: 'Nazmul Idris'
+authorAvatar: /blog/nazmul-idris-blog-profile-image.png
+isFeatured: true
+featuredOrder: 0
+image: /blog/basic-web-app/hero.svg
+---
+
+[Ockam](https://github.com/build-trust/ockam) is a suite of programming libraries, command
+line tools, and managed cloud services to orchestrate end-to-end encryption, mutual
+authentication, key management, credential management, and authorization policy
+enforcement &mdash; all at massive scale. Ockam's end-to-end
+[secure channels](https://docs.ockam.io/reference/command/secure-channels) guarantee authenticity,
+integrity, and confidentiality of all data-in-motion at the application layer.
+
+Whether you're using a relational database, NoSQL, graph database, or something similar
+you're probably storing data that you don't want to be directly accessible by people who
+you don't want to have access to it. Let's say you place your database inside a private
+subnet following best practices. While this does an effective job of sealing it off from
+the rest of the Internet, the trade-off is the overhead of granting exceptions to that
+policy.
+
+With Ockam you don't have to get network administrators to update network access control
+lists, security groups, or route tables to allow other machines to open a connection to
+the database. Ockam allows fine grained control to be applied via [Attribute-Based Access
+Control](https://docs.ockam.io/guides/examples/abac). And to restrict who can access the
+database you can even [integrate with an external identity
+provider](https://docs.ockam.io/guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials)
+like [Okta](https://www.okta.com/).
+
+In this blog post we will show you how you can use the Ockam command line interface,
+[`ockam`](https://docs.ockam.io/#install), to connect a traditional web app to a Postgres
+database, with minimal / no code changes. We are going to take a very basic Python Flask
+app that simply increments a counter in a Postgres database, and move the connection
+between the application and database to be through an Ockam secure channel.
+
+## Our journey
+
+Before we get started, let's take a look at at the steps that we are going to perform in
+this blog post.
+
+![Our journey](/blog/basic-web-app/our-journey.svg)
+
+1. Install the Ockam application and create an Ockam project using `ockam enroll`. This is
+   the first [prerequisite](#prerequisites).
+2. Set up the PostgreSQL database. This is the second [prerequisite](#prerequisites).
+   Also, configure an Ockam
+   ["outlet"](https://docs.ockam.io/reference/command/advanced-routing) to the database
+   server. We will learn more about this in the ["Connecting the
+   database"](#connecting-the-database) section below.
+3. Set up the web app (Python Flask). This is the third [prerequisite](#prerequisites).
+   Also configure an Ockam
+   ["inlet"](https://docs.ockam.io/reference/command/advanced-routing) from the Python
+   app. We will learn more about this in the ["Connecting the web
+   app"](#connecting-the-web-app) section below.
+
+## Prerequisites
+
+In order to follow along, please make sure to install all the prerequisites on a machine
+where you plan on carrying out the steps below.
+
+1. [Ockam Command](../../#install)
+
+   - After successfully installing this prerequisite (using [`brew`](https://brew.sh/) and
+   `brew install build-trust/ockam/ockam`), you will be able to run the `ockam` CLI app
+   in your terminal.
+
+2. [Python](https://www.python.org/downloads/), and libraries: [Flash](https://github.com/pallets/flask/), [psycopg2](https://github.com/psycopg/psycopg2)
+
+   - After successfully installing Python (using [`brew`](https://brew.sh/) and `brew install
+   python`), you will be able to run the `python3` command in your terminal.
+   - Instructions on how to get the dependencies (`Flask`, `psycopg2`) are provided in the
+   [Python Code](basic-web-app.md#python-code) section below.
+
+3. [Postgresql](https://www.postgresql.org/)
+
+   - After successfully installing this prerequisite (using [`brew`](https://brew.sh/) and
+   `brew install postgresql@15`), you will be able to run the Postgres database server on
+   your machine on the default port of `5432`.  Please make sure to follow `brew`'s
+   instructions on adding PostgreSQL to your path.
+   - Make sure to run the PostgreSQL server using `brew services start postgresql@15`.
+   - Then set a new password for the database user `postgres`. Set this password
+   to be `password` (the Python Code below uses `postgres:password@localhost` as the
+   connection string for the db driver). The following directions can help you set this
+   up on Linux or macOS:
+      * In a terminal, login to the database locally as the `postgres` user: `sudo -u
+         postgres psql --username postgres --password --dbname template1`
+      * Then type the following in the REPL: `ALTER USER postgres PASSWORD 'password';`,
+         and finally type `exit`.
+      * You can learn more about this [here](https://stackoverflow.com/a/12721095/2085356).
+
+## The Web App - Python Code
+
+The web app (written in Python using Flask) increments a counter in a Postgres database
+and it fits in a single file. To start, create `main.py` file on your machine and copy and
+paste the following code into it.
+
+```python
+import os
+import psycopg2
+from flask import Flask
+
+CREATE_TABLE = (
+    "CREATE TABLE IF NOT EXISTS events (id SERIAL PRIMARY KEY, name TEXT);"
+)
+
+INSERT_RETURN_ID = "INSERT INTO events (name) VALUES (%s) RETURNING id;"
+
+app = Flask(__name__)
+pg_port = os.environ['APP_PG_PORT'] # 5432 is the default port
+url = "postgres://postgres:password@localhost:%s/"%pg_port
+connection = psycopg2.connect(url)
+
+@app.route("/")
+def hello_world():
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute(CREATE_TABLE)
+            cursor.execute(INSERT_RETURN_ID, ("",))
+            id = cursor.fetchone()[0]
+    return "I've been visited {} times".format(id), 201
+```
+
+In this script, we establish our connection to the database using
+`"postgres://postgres:password@localhost:%s/"%pg_port`, where `pg_port` gets its value
+from the environment variable `APP_PG_PORT`. When we run the script (instructions are
+shown below) we will set the environment variable `APP_PG_PORT` to `5432` so at this point
+it's simply pointing to `localhost` on port `5432`.
+
+<Alert status='info'>
+   Make a note of the `pg_port` variable. In production the port is typically loaded from an
+   environment variable and not hardcoded into the source. But for this exercise we are
+   setting the value in the script itself. We will change this value in the next steps when
+   we bring Ockam into the mix.
+</Alert>
+
+Before doing any Ockam related tasks, run the Python script now by following the
+instructions below:
+
+1. You need to add following Python dependencies by running the following.
+
+```bash
+# Install flask.
+pip3 install flask
+# Install psycopg2.
+pip3 install psycopg2-binary
+```
+
+2. To run this `Flask` app (`main.py`) run the following.
+
+```bash
+export APP_PG_PORT=5432
+flask --app main run
+```
+
+3. To see it running in a web browser open this URL:
+   [`http://localhost:5000/`](http://localhost:5000/).
+
+If you're running a local Postgres instance then starting this Flask app will now show you
+how many times you've visited it, storing each new visit in the database 🎉.
+
+## Install Ockam
+
+We will leave the database running on the default port and then do the following.
+
+1. Add Ockam to the mix.
+2. Update our `APP_PG_PORT` environment variable so that it connects to a new port (not
+   the default one of `5432` where the Postgres database server is running).
+
+The first thing we are going to do is run `ockam enroll`. Make sure that you've installed
+the Ockam CLI by following the [prerequisites](#prerequisites) section above.
+
+In a terminal window, run the following command and follow the prompts to complete
+enrolling into Ockam Orchestrator.
+
+```bash
+ockam enroll
+```
+
+This command does the following:
+
+- It checks that everything was installed correctly by enrolling with Ockam Orchestrator.
+- It creates a Space and Project for you in Ockam Orchestrator and provisions an
+  End-to-End Encrypted Cloud Relay service in your `default` project at
+  `/project/default`.
+
+## Connecting the database
+
+Next, let's setup a `tcp-outlet` that allows us to send raw TCP traffic to the PostgreSQL
+server on port `5432`. We will create its corresponding `tcp-inlet` in the [next
+section](#connecting-the-web-app).
+
+Note that we are using an environment variable called `PG_PORT`
+here and not `APP_PG_PORT` which is used in our `main.py` script. And then let's create a
+relay in our default Orchestrator project.
+
+```bash
+export PG_PORT=5432
+ockam tcp-outlet create --to $PG_PORT
+ockam relay create
+```
+
+<Alert status='info'>
+   Relays make it possible to establish end-to-end protocols with services operating in a
+   remote private networks, without requiring a remote service to expose listening ports to
+   an outside hostile network like the Internet.
+</Alert>
+
+## Connecting the web app
+
+Finally, let's setup a a local `tcp-inlet` to allow raw TCP traffic to be received on port
+`5433` before it is forwarded.
+
+```bash
+export OCKAM_PORT=5433
+ockam tcp-inlet create --from $OCKAM_PORT
+```
+
+<Alert status='info'>
+A TCP inlet is a way to define where a node should be listening for connections, and where
+it should forward that traffic to. An inlet and outlet work together to form a portal.
+</Alert>
+
+Start your web app again using the following command. And connect to this URL again from
+your web browser `http://localhost:5000/` to see it running.
+
+```bash
+export APP_PG_PORT=$OCKAM_PORT
+flask --app main run
+```
+
+1. Note that we have changed the `$APP_PG_PORT` to the same value as `$OCKAM_PORT`
+   (`5433`). Our `main.py` script no longer longer has a direct connection to the unsecure
+   database server (on port `5432`). It now goes through the secure channel 🔐.
+2. The counter will continue incrementing just as it did before, with zero code changes to
+   your application. But the web app is now communicating with the database through an Ockam
+   secure channel 🎉.
+
+## Multiple machines
+
+You can also extend this example by moving the Postgres service into a Docker container
+or to an entirely different machine. Once the nodes are registered the demo will continue
+to work, with no application code changes and no need to expose the Postgres ports
+directly to the Internet.
+
+Also you can run the web app and the database on different machines.
+
+1. You would have to change the `localhost` in the `main.py` script to the IP address of
+   the machine where the database is running.
+2. You would need to run `ockam enroll` on both machines (the web app machine and the
+   database server machine).
+
+## Other commands to explore
+
+Now that you've completed this example, here are some commands for you to try and see what
+they do. You can always look up the details on what they do in the
+[manual](https://command.ockam.io/manual/). As you try each of these, please keep an eye
+out for things you may have created in this exercise.
+
+* Try `ockam node list`. Do you see the nodes that you created in this exercise?
+* Try `ockam node --help`. These are shorter examples for you to get familiar with commands.
+* Try `ockam node show web`. Do you see the `tcp-inlet` that you created in this exercise?
+* Try `ockam node show db`. Do you see the `tcp-outlet` that you created in this exercise?
+* Try `ockam identity list`. Do you see the identities you created in this exercise?
