@@ -35,7 +35,7 @@ const trackSignup = (user: User): void => {
     // @ts-ignore window.rdt undefined below
     if (window.rdt) {
       // @ts-ignore window.rdt undefined below
-      window.rdt('track', 'Signup', {
+      window.rdt('track', 'SignUp', {
         currency: 'USD',
         transactionId: user.userId,
         value: 100,
