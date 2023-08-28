@@ -18,7 +18,8 @@
     "prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
     "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
     "prepare:hooks": "husky install",
-    "grammar:alex": "alex --diff src/content/**/*.mdx"
+    "grammar:alex": "alex --diff src/content/**/*.mdx",
+    "grammar:write-good": "write-good src/content/**/*.mdx"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -94,7 +95,8 @@
     "lint-staged": "12.4.2",
     "next-sitemap": "3.1.10",
     "prettier": "2.6.2",
-    "typescript": "4.7.2"
+    "typescript": "4.7.2",
+    "write-good": "^1.0.8"
   },
   "peerDependencies": {
     "@masterborn/eslint-config": "0.0.14"
