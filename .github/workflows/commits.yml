@@ -250,8 +250,8 @@ jobs:
 
       - name: Lint insensitive & inconsiderate writing
         run: |
-          npm run grammar:alex 
+          alex src/content/**/*.mdx
 
       - name: Lint grammar
         run: |
-          npm run grammar:vale
+          vale src/content/**/*.mdx
