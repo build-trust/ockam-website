@@ -26,6 +26,10 @@
     "*.{ts,tsx,js,jsx}": [
       "eslint --cache --fix",
       "prettier --write"
+    ],
+    "*.{md,mdx}": [
+      "alex --diff",
+      "vale"
     ]
   },
   "repository": {
