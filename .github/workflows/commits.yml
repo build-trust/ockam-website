@@ -245,6 +245,9 @@ jobs:
             exit 1
           fi
       
+      - name: Install grammar linters
+        run: npm install -g @ocular-d/vale-bin alex
+
       - name: Lint insensitive & inconsiderate writing
         run: |
           npm run grammar:alex 
