@@ -244,3 +244,11 @@ jobs:
             echo "$unverified"
             exit 1
           fi
+      
+      - name: Lint insensitive & inconsiderate writing
+        run: |
+          npm run grammar:alex 
+
+      - name: Lint grammar
+        run: |
+          npm run grammar:vale
