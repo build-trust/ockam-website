@@ -18,6 +18,7 @@
     "prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
     "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
     "prepare:hooks": "husky install",
+    "grammar:setup": "vale sync",
     "grammar:alex": "alex --diff src/content/**/*.mdx",
     "grammar:write-good": "write-good src/content/**/*.mdx",
     "grammar:vale": "vale src/content/**/*.mdx"
