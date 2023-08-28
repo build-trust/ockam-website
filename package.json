@@ -20,7 +20,6 @@
     "prepare:hooks": "husky install",
     "grammar:setup": "vale sync",
     "grammar:alex": "alex --diff src/content/**/*.mdx",
-    "grammar:write-good": "write-good src/content/**/*.mdx",
     "grammar:vale": "vale src/content/**/*.mdx"
   },
   "lint-staged": {
@@ -98,8 +97,7 @@
     "lint-staged": "12.4.2",
     "next-sitemap": "3.1.10",
     "prettier": "2.6.2",
-    "typescript": "4.7.2",
-    "write-good": "^1.0.8"
+    "typescript": "4.7.2"
   },
   "peerDependencies": {
     "@masterborn/eslint-config": "0.0.14"
