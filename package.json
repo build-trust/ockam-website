@@ -20,7 +20,8 @@
     "prepare:hooks": "husky install",
     "grammar:setup": "vale sync",
     "grammar:alex": "alex --diff src/content/**/*.mdx",
-    "grammar:vale": "vale src/content/**/*.mdx"
+    "grammar:vale": "vale src/content/**/*.mdx",
+    "grammar": "npm run grammar:alex && npm run grammar:vale"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
