@@ -1,0 +1,7 @@
+extends: existence
+message: Consider replacing '%s' with 'for example'
+level: warning
+ignorecase: true
+tokens:
+  - '\be\.g\b'
+  - '\be\.g.\b'
