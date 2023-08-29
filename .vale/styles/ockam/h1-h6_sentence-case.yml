@@ -9,4 +9,5 @@ scope:
   - heading.h5
   - heading.h6
 match: $sentence
+style: Chicago
 exceptions:
