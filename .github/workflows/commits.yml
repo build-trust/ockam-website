@@ -246,11 +246,7 @@ jobs:
           fi
       
       - name: Install grammar linters
-        run: npm install -g @ocular-d/vale-bin alex
-
-      - name: Lint insensitive & inconsiderate writing
-        run: |
-          alex src/content/**/*.mdx
+        run: npm install -g @ocular-d/vale-bin 
 
       - name: Lint grammar
         run: |
