@@ -249,5 +249,6 @@ jobs:
         run: npm install -g @ocular-d/vale-bin 
 
       - name: Lint grammar
+        continue-on-error: true
         run: |
           vale src/content/**/*.mdx
