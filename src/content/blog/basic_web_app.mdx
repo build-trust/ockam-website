@@ -10,6 +10,14 @@ featuredOrder: 0
 image: /blog/basic-web-app/hero.svg
 ---
 
+In this blog post we will explore the Ockam command line interface,
+[`ockam`](https://docs.ockam.io/#install) and see how we can connect a traditional web app
+to a PostgreSQL database, with minimal / no code changes. We will create a very basic Python
+Flask app that simply increments a counter in a PostgreSQL database. Then we will move the
+connection between the application and database through an Ockam secure channel.
+
+## What is Ockam
+
 [Ockam](https://github.com/build-trust/ockam) is a suite of Rust libraries, command line
 tools, and managed cloud services for orchestrating end-to-end encryption, mutual
 authentication, key management, credential management, and authorization policy
@@ -29,12 +37,6 @@ security groups, or route tables. Ockam applies fine grained control to your ser
 even [integrate with an external identity
 provider](https://docs.ockam.io/guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials)
 like [Okta](https://www.okta.com/) to restrict who can access your services.
-
-In this blog post we will explore the Ockam command line interface,
-[`ockam`](https://docs.ockam.io/#install) and see how we can connect a traditional web app
-to a PostgreSQL database, with minimal / no code changes. We will create a very basic Python
-Flask app that simply increments a counter in a PostgreSQL database. Then we will move the
-connection between the application and database through an Ockam secure channel.
 
 ## Our journey
 
