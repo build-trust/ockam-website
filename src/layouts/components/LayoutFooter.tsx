@@ -151,6 +151,7 @@ const NAV = [
       },
       { ...LINKEDIN, isExternal: true },
       { ...TWITTER, isExternal: true },
+      { name: 'Newsletter - The Razor', href: '/the-razor', isExternal: false },
     ],
   },
 ];
