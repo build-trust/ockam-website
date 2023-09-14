@@ -238,6 +238,12 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
             display={{ base: 'block', lg: 'inline-block' }}
             mr={{ base: 0, lg: 8 }}
             my={{ base: 2, lg: 0 }}
+            sx={{
+              '&:hover': {
+                backgroundColor: 'black',
+                color: '#4fdab8',
+              },
+            }}
           >
             Start Building
           </Button>
@@ -250,6 +256,12 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
             display={{ base: 'block', lg: 'inline-block' }}
             mr={{ base: 0, lg: 0 }}
             my={{ base: 2, lg: 0 }}
+            sx={{
+              '&:hover': {
+                backgroundColor: 'black',
+                color: '#4fdab8',
+              },
+            }}
           >
             Get a Demo
           </Button>
