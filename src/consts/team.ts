@@ -112,6 +112,15 @@ export const MEMBERS = enhanceTeamMembers([
     description: 'A recent graduate that is an ace with GitHub actions',
   },
   {
+    name: 'Sanjeev',
+    surname: 'Nithyanandam',
+    position: 'Senior Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'CA',
+    photo: 'sanjeev-nithyanandam.png',
+    description: 'Adventurer who loves biking, hiking and exploring new experiences, all while savoring delicious food along the way',
+  },
+  {
     name: 'Maryanna',
     surname: 'Saenko',
     position: 'Board Member',
@@ -173,14 +182,5 @@ export const MEMBERS = enhanceTeamMembers([
     country: 'US',
     photo: 'brian-mullen.png',
     description: 'CMO at InfluxData',
-  },
-  {
-    name: 'Sanjeev',
-    surname: 'Nithyanandam',
-    position: 'Senior Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'CA',
-    photo: 'sanjeev-nithyanandam.png',
-    description: 'Adventurer who loves biking, hiking and exploring new experiences, all while savoring delicious food along the way',
   },
 ]);
