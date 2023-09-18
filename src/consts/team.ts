@@ -174,4 +174,13 @@ export const MEMBERS = enhanceTeamMembers([
     photo: 'brian-mullen.png',
     description: 'CMO at InfluxData',
   },
+  {
+    name: 'Sanjeev',
+    surname: 'Nithyanandam',
+    position: 'Senior Engineer',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'CA',
+    photo: 'sanjeev-nithyanandam.png',
+    description: 'Adventurer who loves biking, hiking and exploring new experiences, all while savoring delicious food along the way',
+  },
 ]);
