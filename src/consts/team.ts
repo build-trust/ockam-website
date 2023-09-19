@@ -174,4 +174,13 @@ export const MEMBERS = enhanceTeamMembers([
     photo: 'brian-mullen.png',
     description: 'CMO at InfluxData',
   },
+    {
+        name: 'Chris',
+        surname: 'McNeill',
+        position: 'Account Executive',
+        categories: [CATEGORIES.FULL_TIME_MEMBERS],
+        country: 'US',
+        photo: 'chris-mcneill.png',
+        description: 'Loves big dogs, beach fishing, and restoring cars.',
+    },
 ]);
