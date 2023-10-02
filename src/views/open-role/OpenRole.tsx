@@ -70,6 +70,16 @@ const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
     </Button>
   );
 
+  const boxStyles = {
+    a: {
+      color: '#52C7EA',
+      _hover: {
+        color: '#36A7C9',
+        textDecoration: 'underline',
+      },
+    },
+  };
+
   return (
     <Container variant="section" alignItems="flex-start">
       <Box maxW="3xl" pb={16} pt={isBelowSmallLaptop ? 0 : 12}>
@@ -110,7 +120,7 @@ const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
         {openRole.lists.map(DetailsList)}
 
         <Box fontSize={{ lg: 'lg' }} color="gray.500" lineHeight={1.4}>
-          <Box dangerouslySetInnerHTML={{ __html: openRole.additional }} />
+          <Box sx={boxStyles} dangerouslySetInnerHTML={{ __html: openRole.additional }} />
         </Box>
 
         <Box maxW="md" h="1px" bgColor="gray.200" my={{ base: 10, lg: 20 }} />
