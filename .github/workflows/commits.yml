@@ -113,7 +113,7 @@ jobs:
       - name: Get Contributors List
         run: |
           curl --proto '=https' --tlsv1.2 --silent --show-error --fail \
-            https://raw.githubusercontent.com/build-trust/ockam-contributors/main/CONTRIBUTORS.csv \
+            https://raw.githubusercontent.com/build-trust/ockam/develop/.github/CONTRIBUTORS.csv \
             > CONTRIBUTORS.csv
 
       - name: Split Contributors List
@@ -159,8 +159,9 @@ jobs:
               2. To accept the CLA, please send a different pull request to our
               [contributors repository](https://github.com/build-trust/ockam-contributors) indicating
               that you accept the CLA by adding your Git/Github details in a row at the end of the
-              [CONTRIBUTORS.csv](https://github.com/build-trust/ockam-contributors/blob/main/CONTRIBUTORS.csv)
-              file.
+              [CONTRIBUTORS.csv](https://github.com/build-trust/ockam/blob/develop/.github/CONTRIBUTORS.csv)
+              file. The easiest way to do this is to [edit the CONTRIBUTORS.csv](https://github.com/build-trust/ockam/edit/develop/.github/CONTRIBUTORS.csv) 
+              file in the github web UI and create a PR, this will mark the commit as verified.
 
               We look forward to merging your first contribution!
             "
@@ -205,8 +206,9 @@ jobs:
                 2. To accept the CLA, please send a different pull request to our
                 [contributors repository](https://github.com/build-trust/ockam-contributors) indicating
                 that you accept the CLA by adding your Git/Github details in a row at the end of the
-                [CONTRIBUTORS.csv](https://github.com/build-trust/ockam-contributors/blob/main/CONTRIBUTORS.csv)
-                file.
+                [CONTRIBUTORS.csv](https://github.com/build-trust/ockam/blob/develop/.github/CONTRIBUTORS.csv)
+                file. The easiest way to do this is to [edit the CONTRIBUTORS.csv](https://github.com/build-trust/ockam/edit/develop/.github/CONTRIBUTORS.csv) 
+                file in the github web UI and create a PR, this will mark the commit as verified.
 
                 We look forward to merging your contribution!
               "
