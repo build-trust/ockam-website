@@ -8,7 +8,6 @@ export const globalStyles = {
     width: '100%',
     height: '100%',
   },
-
   '*': {
     WebkitFontSmoothing: 'antialiased',
     boxSizing: 'border-box',

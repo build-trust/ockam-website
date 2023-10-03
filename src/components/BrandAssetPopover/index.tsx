@@ -8,7 +8,17 @@ import {
   PopoverBody,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import styled from 'styled-components';
 
+const BrandColorLink = styled(Link)`
+  text-decoration: none;
+  color: #51cbdd;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 type BrandAssetHelperProps = {
   isOpen: boolean | undefined;
   onClose(): void;
@@ -29,12 +39,7 @@ const BrandAssetPopover = (props: BrandAssetHelperProps): JSX.Element | null => 
         <PopoverHeader>Looking for our logo?</PopoverHeader>
         <PopoverBody>
           You can find our logo and the rest of our brand assets over in the{' '}
-          <Link
-            href="/style-guide"
-            style={{ fontWeight: 'bold', color: '#51cbdd', textDecoration: 'underline' }}
-          >
-            style guide
-          </Link>
+          <BrandColorLink href="/style-guide">style guide</BrandColorLink>
         </PopoverBody>
       </PopoverContent>
     </Popover>
