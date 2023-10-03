@@ -1,5 +1,5 @@
 import { ImageResponse } from '@vercel/og';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 // eslint-disable-next-line @next/next/no-server-import-in-page
 import { NextRequest } from 'next/server';
 
