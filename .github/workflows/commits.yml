@@ -154,10 +154,10 @@ jobs:
 
               Before we can merge, please accept our Contributor License Agreement (CLA).
 
-              1. Read the CLA at: https://www.ockam.io/learn/how-to-guides/contributing/cla
+              1. Read the CLA at: https://github.com/build-trust/.github/blob/main/CLA.md
 
               2. To accept the CLA, please send a different pull request to our
-              [contributors repository](https://github.com/build-trust/ockam-contributors) indicating
+              [ockam repository](https://github.com/build-trust/ockam) indicating
               that you accept the CLA by adding your Git/Github details in a row at the end of the
               [CONTRIBUTORS.csv](https://github.com/build-trust/ockam/blob/develop/.github/CONTRIBUTORS.csv)
               file. The easiest way to do this is to [edit the CONTRIBUTORS.csv](https://github.com/build-trust/ockam/edit/develop/.github/CONTRIBUTORS.csv) 
@@ -201,10 +201,10 @@ jobs:
               echo "
                 Before we can merge, please accept our Contributor License Agreement (CLA).
 
-                1. Read the CLA at: https://www.ockam.io/learn/how-to-guides/contributing/cla
+                1. Read the CLA at: https://github.com/build-trust/.github/blob/main/CLA.md
 
                 2. To accept the CLA, please send a different pull request to our
-                [contributors repository](https://github.com/build-trust/ockam-contributors) indicating
+                [ockam repository](https://github.com/build-trust/ockam) indicating
                 that you accept the CLA by adding your Git/Github details in a row at the end of the
                 [CONTRIBUTORS.csv](https://github.com/build-trust/ockam/blob/develop/.github/CONTRIBUTORS.csv)
                 file. The easiest way to do this is to [edit the CONTRIBUTORS.csv](https://github.com/build-trust/ockam/edit/develop/.github/CONTRIBUTORS.csv) 
@@ -218,9 +218,10 @@ jobs:
 
       - name: Get Developers List
         run: |
-          curl --proto '=https' --tlsv1.2 --silent --show-error --fail \
-            https://raw.githubusercontent.com/build-trust/ockam-contributors/main/DEVELOPERS.csv \
-            > DEVELOPERS.csv
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /orgs/build-trust/members | jq -r '.[].login' > DEVELOPERS.csv
 
       - name: Check all commits in are Verified by Github (Pull Request)
         if: github.event_name == 'pull_request'
