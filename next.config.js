@@ -6,6 +6,9 @@ const { redirectJobs, redirectDocs } = require('./lib/redirects');
 const withSvgr = require('next-svgr');
 
 const nextConfig = {
+  experimental: {
+    forceSwcTransforms: true,
+  },
   images: { formats: ['image/webp'] },
   publicRuntimeConfig: {
     auth0: {
