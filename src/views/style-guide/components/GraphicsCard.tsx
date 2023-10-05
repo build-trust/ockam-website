@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { FunctionComponent } from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { TGraphicsContent } from '@root/typings/StyleGuide';
 import { downloadOptions } from '@root/consts/styleGuide/logos';

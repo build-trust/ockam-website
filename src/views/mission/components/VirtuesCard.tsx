@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from 'next/image';
+import Image, { StaticImageData } from 'next/legacy/image';
 import { Box, Flex, FlexProps, Heading, Text } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
 

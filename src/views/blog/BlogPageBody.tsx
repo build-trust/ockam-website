@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Box, Center, Grid, GridItem, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import EmptySearchImage from '@assets/images/empty-search.png';
 import { useBlogPostsContext } from '@contextProviders/BlogPostsProvider';

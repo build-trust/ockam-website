@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { chakra, Box, Container, Flex, Heading, SimpleGrid, Text, Icon } from '@chakra-ui/react';
 import { ArrowDownIcon } from '@chakra-ui/icons';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import QuoteIcon from '@assets/icons/quote.svg';
 import MatthewGregoryImage from '@assets/images/matthew-gregory.png';

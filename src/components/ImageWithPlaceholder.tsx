@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import Image, { ImageProps, StaticImageData } from 'next/image';
+import Image, { ImageProps, StaticImageData } from 'next/legacy/image';
 
 type ImageWithPlaceholderProps = {
   placeholderImg: string | StaticImageData;

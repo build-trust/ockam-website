@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Container, Box, Heading, Flex } from '@chakra-ui/react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import FutureVenturesImage from '@assets/images/investors/future-ventures.png';
 import CraftImage from '@assets/images/investors/craft.png';

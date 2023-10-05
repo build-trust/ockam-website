@@ -55,7 +55,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardProps> = ({ post }) => {
 
             <ImageWithPlaceholder
               src={image}
-              fill
+              layout="fill"
               objectFit="contain"
               placeholderImg={placeholderImg}
               alt={title}

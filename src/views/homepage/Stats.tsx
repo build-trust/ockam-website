@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { chakra, Container, SimpleGrid, Box, Flex, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import StarsImage from '@assets/images/stars.png';
 import ContributorsImage from '@assets/images/contributors.png';
@@ -22,7 +22,6 @@ const getValueFormat = (fullValue: number): string | number =>
     : '';
 
 const Stats: FunctionComponent<StatsProps> = ({ stars, contributors, downloads }) => {
-
   const STATS = [
     {
       value: getValue(stars),

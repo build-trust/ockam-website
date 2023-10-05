@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import Image, { StaticImageData } from 'next/legacy/image';
 import { Box, Flex, Container, Text, Heading, SimpleGrid, Center } from '@chakra-ui/react';
 
 import Card from '@components/Card';

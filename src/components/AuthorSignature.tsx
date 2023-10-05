@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Flex, Heading, FlexProps, Box, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { MEMBERS } from '@consts/team';
 
@@ -37,7 +37,7 @@ const AuthorSignature: FunctionComponent<AuthorSignatureProps> = ({
         borderWidth="1px"
         borderStyle="solid"
       >
-        <Image src={authorAvatar} fill objectFit="contain" sizes="48px" alt={author} />
+        <Image src={authorAvatar} layout="fill" objectFit="contain" sizes="48px" alt={author} />
       </Box>
 
       <Box ml={5}>
