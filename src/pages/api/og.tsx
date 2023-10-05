@@ -7,8 +7,12 @@ export const config = {
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export default function handler(request: NextRequest) {
+export default async function handler(request: NextRequest) {
   try {
+    const fontData = await fetch(
+      new URL('../../assets/fonts/Inter-Black.ttf', import.meta.url)
+    ).then((res) => res.arrayBuffer());
+
     const { searchParams } = new URL(request.url);
 
     // ?title=<title>
@@ -19,7 +23,7 @@ export default function handler(request: NextRequest) {
       (
         <div
           style={{
-            backgroundColor: 'black',
+            backgroundColor: '#ECFDF9',
             backgroundSize: '150px 150px',
             height: '100%',
             width: '100%',
@@ -33,26 +37,11 @@ export default function handler(request: NextRequest) {
         >
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              justifyItems: 'center',
-            }}
-          >
-            <img
-              alt="Vercel"
-              height={200}
-              src="data:image/svg+xml,%3Csvg width='116' height='100' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M57.5 0L115 100H0L57.5 0z' /%3E%3C/svg%3E"
-              style={{ margin: '0 30px' }}
-              width={232}
-            />
-          </div>
-          <div
-            style={{
               fontSize: 60,
+              fontFamily: '"Helvetica"',
               fontStyle: 'normal',
               letterSpacing: '-0.025em',
-              color: 'white',
+              color: '#0A1A2B',
               marginTop: 30,
               padding: '0 120px',
               lineHeight: 1.4,
@@ -66,6 +55,13 @@ export default function handler(request: NextRequest) {
       {
         width: 1200,
         height: 630,
+        fonts: [
+          {
+            name: 'Inter',
+            data: fontData,
+            style: 'normal',
+          },
+        ],
       }
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
