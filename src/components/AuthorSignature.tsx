@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 import { MEMBERS } from '@consts/team';
 
-
 type AuthorSignatureProps = {
   author: string;
   authorAvatar: string;
@@ -38,15 +37,7 @@ const AuthorSignature: FunctionComponent<AuthorSignatureProps> = ({
         borderWidth="1px"
         borderStyle="solid"
       >
-        <Image
-          src={authorAvatar}
-          layout="fill"
-          objectFit="contain"
-          width={48}
-          height={48}
-          sizes="48px"
-
-        />
+        <Image src={authorAvatar} fill objectFit="contain" sizes="48px" alt={author} />
       </Box>
 
       <Box ml={5}>

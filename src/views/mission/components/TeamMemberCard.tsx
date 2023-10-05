@@ -15,7 +15,7 @@ type TeamMemberCardProps = {
   description: string;
   photo: string;
   country: string;
-  bgColor?: string,
+  bgColor?: string;
 };
 
 const IMG_SIZES = {
@@ -56,7 +56,7 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
           src={`/team/${photo}`}
           alt={`${name} photo`}
           placeholderImg={placeholderImg}
-          layout="fill"
+          fill
           objectFit="cover"
         />
       </Box>
