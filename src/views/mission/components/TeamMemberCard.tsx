@@ -56,7 +56,7 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
           src={`/team/${photo}`}
           alt={`${name} photo`}
           placeholderImg={placeholderImg}
-          fill
+          layout="fill"
           objectFit="cover"
         />
       </Box>
