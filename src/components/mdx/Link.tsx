@@ -4,7 +4,7 @@ import { Link as ChakraLink, LinkProps as ChakraLinkProps } from '@chakra-ui/rea
 type LinkProps = NextLinkProps & Pick<ChakraLinkProps, 'children'>;
 
 const Link = ({ children, as, href, ...restProps }: LinkProps): JSX.Element => (
-  <NextLink as={as} href={href} passHref {...restProps}>
+  <NextLink as={as} href={href} passHref {...restProps} legacyBehavior>
     <ChakraLink
       textDecoration="underline"
       _hover={{

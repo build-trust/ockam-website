@@ -45,7 +45,7 @@ const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
       <Container variant="section" display="flex" w="full">
         <Flex w="full" alignItems="center">
           <BrandAssetPopover isOpen={isOpen} onClose={onClose} />
-          <Link href={HOME_PATH} passHref>
+          <Link href={HOME_PATH} passHref legacyBehavior>
             <Box as="a" flex={0} pr={{ base: 2, xl: 4 }} maxW="11rem" h="auto">
               <Box
                 as={LogoDark}

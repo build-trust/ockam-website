@@ -20,7 +20,7 @@ const BlogLayoutSidebarSeeAllArticles: FunctionComponent<
 
   return (
     <AccordionItem w="full" py={3} borderTop="none" onClick={handleOnClick}>
-      <Link href={BLOG_PATH} passHref>
+      <Link href={BLOG_PATH} passHref legacyBehavior>
         <ChakraLink
           display="flex"
           alignItems="center"

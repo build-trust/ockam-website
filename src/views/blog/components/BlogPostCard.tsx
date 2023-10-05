@@ -38,6 +38,7 @@ const BlogPostCard: FunctionComponent<BlogPostCardProps> = ({ post }) => {
       as={`${BLOG_PATH}/${filePath.replace(/\.mdx?$/, '')}`}
       href={`${BLOG_PATH}/[slug]`}
       passHref
+      legacyBehavior
     >
       <ChakraLink
         height="20px"

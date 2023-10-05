@@ -39,7 +39,7 @@ const LandingLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
     >
       <Container variant="section" display="flex" w="full">
         <Flex w="full" alignItems="center">
-          <Link href={HOME_PATH} passHref>
+          <Link href={HOME_PATH} passHref legacyBehavior>
             <Box as="a" flex={0} pr={{ base: 2, xl: 4 }} maxW="11rem" h="auto">
               <Box
                 as={LogoDark}

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { TEAM_PATH } from '@consts/paths';
 
 const OpenRolesButton: FunctionComponent = () => (
-  <Link href={`${TEAM_PATH}#open-roles`} passHref>
+  <Link href={`${TEAM_PATH}#open-roles`} passHref legacyBehavior>
     <Button as="a" size="lg" colorScheme="avocado" color="black">
       See the Open Roles
     </Button>

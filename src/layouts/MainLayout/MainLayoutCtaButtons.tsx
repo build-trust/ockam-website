@@ -45,7 +45,7 @@ const MainLayoutCtaButtons: FunctionComponent<Props> = ({ landingPage }) => {
   const buttons = (): JSX.Element => {
     if (landingPage) {
       return (
-        <Link href={contactHref} passHref>
+        <Link href={contactHref} passHref legacyBehavior>
           <Button as="a" variant="solid" colorScheme="avocado" size={buttonsSize} color="black">
             Get a Demo
           </Button>

@@ -22,6 +22,7 @@ const BlogLayoutSidebarPostLink: FunctionComponent<BlogLayoutSidebarPostLinkProp
       as={`${BLOG_PATH}/${post.filePath.replace(/\.mdx?$/, '')}`}
       href={`${BLOG_PATH}/[slug]`}
       passHref
+      legacyBehavior
     >
       <ChakraLink
         w={{ base: '100%', lg: 'fit-content' }}

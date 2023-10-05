@@ -7,7 +7,7 @@ const CustomHeading: FunctionComponent<HeadingProps> = ({ as, id, ...props }) =>
   if (id) {
     return (
       <Heading as={as} id={id} {...props}>
-        <NextLink href={`#${id}`} passHref>
+        <NextLink href={`#${id}`} passHref legacyBehavior>
           <ChakraLink
             _hover={{
               svg: {

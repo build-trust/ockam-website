@@ -53,7 +53,7 @@ const LayoutMobileHeader: FunctionComponent<LayoutMobileHeaderProps> = ({
       >
         <Flex w="full" px={4} py={4} alignItems="center">
           <BrandAssetPopover isOpen={isOpen} onClose={onClose} />
-          <Link href={HOME_PATH} passHref>
+          <Link href={HOME_PATH} passHref legacyBehavior>
             <Box as="a" flex={0} maxW="11rem" h="auto">
               <Box as={LogoDark} w="7.875rem" h="2.25rem" onContextMenu={handleLogoContextClick} />
             </Box>

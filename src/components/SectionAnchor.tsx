@@ -20,7 +20,7 @@ const SectionAnchor = ({ id, children, ...restProps }: SectionAnchorProps): JSX.
       />
     </Box>
 
-    <NextLink href={`#${id}`} passHref>
+    <NextLink href={`#${id}`} passHref legacyBehavior>
       <ChakraLink
         _hover={{
           textDecor: 'none',

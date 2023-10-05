@@ -13,7 +13,7 @@ const LandingLayoutCtaButtons: FunctionComponent = () => {
       align={{ base: 'stretch', lg: 'center' }}
       direction={{ base: 'column', lg: 'row' }}
     >
-      <Link href={CONTACT_FORM_PATH} passHref>
+      <Link href={CONTACT_FORM_PATH} passHref legacyBehavior>
         <Button as="a" variant="solid" colorScheme="avocado" size={buttonsSize} color="black">
           Get a Demo
         </Button>

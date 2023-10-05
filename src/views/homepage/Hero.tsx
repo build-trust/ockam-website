@@ -87,7 +87,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
     if (landingPage) {
       return (
         <Box textAlign="center" my={14}>
-          <Link href="#why" passHref>
+          <Link href="#why" passHref legacyBehavior>
             <Button
               position="relative"
               borderWidth={1}
@@ -133,7 +133,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
     }
     return (
       <Box textAlign="center" my={14}>
-        <Link href={BUILD_DEMO.href} passHref>
+        <Link href={BUILD_DEMO.href} passHref legacyBehavior>
           <Button
             color="rgb(40, 40, 40)"
             border="1px solid white"
@@ -148,7 +148,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
             Start Building
           </Button>
         </Link>
-        <Link href={CONTACT_FORM_PATH} passHref>
+        <Link href={CONTACT_FORM_PATH} passHref legacyBehavior>
           <Button
             position="relative"
             color="white"

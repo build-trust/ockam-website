@@ -29,10 +29,11 @@ const BrandAssetPopover = (props: BrandAssetHelperProps): JSX.Element | null => 
         <PopoverHeader>Looking for our logo?</PopoverHeader>
         <PopoverBody>
           You can find our logo and the rest of our brand assets over in the{' '}
-          <Link href="/style-guide">
-            <a style={{ fontWeight: 'bold', color: '#51cbdd', textDecoration: 'underline' }}>
-              style guide
-            </a>
+          <Link
+            href="/style-guide"
+            style={{ fontWeight: 'bold', color: '#51cbdd', textDecoration: 'underline' }}
+          >
+            style guide
           </Link>
         </PopoverBody>
       </PopoverContent>

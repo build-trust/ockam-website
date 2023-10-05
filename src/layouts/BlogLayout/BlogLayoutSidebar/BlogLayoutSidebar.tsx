@@ -32,7 +32,7 @@ const BlogLayoutSidebar: FunctionComponent<FlexProps> = (props) => {
       overflow="hidden"
       {...props}
     >
-      <Link href={HOME_PATH} passHref>
+      <Link href={HOME_PATH} passHref legacyBehavior>
         <ChakraLink>
           <Box as={LogoDark} w={175} h={50} />
         </ChakraLink>

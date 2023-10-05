@@ -19,7 +19,7 @@ type TOCItemProps = {
 } & ListItemProps;
 
 const TOCListItem = ({ heading, isActive, ...restProps }: TOCItemProps): JSX.Element => (
-  <NextLink id={heading.id} href={`#${heading.id}`} passHref>
+  <NextLink id={heading.id} href={`#${heading.id}`} passHref legacyBehavior>
     {/* @ts-ignore */}
     <ListItem as={ChakraLink} {...restProps} fontWeight={isActive ? 'bold' : 'medium'}>
       {heading.title}

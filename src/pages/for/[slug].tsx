@@ -119,7 +119,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
           It&apos;s time to&hellip;
         </Heading>
         <Box my="16">
-          <Link href={BUILD_DEMO.href} passHref>
+          <Link href={BUILD_DEMO.href} passHref legacyBehavior>
             <Button
               mx={0}
               colorScheme="avocado"

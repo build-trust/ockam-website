@@ -15,6 +15,7 @@ const OpenRoleCard: FunctionComponent<OpenRoleCardProps> = ({ text, categories, 
     as={`${OPEN_ROLE_PATH}/${generateSlug(text)}/${id}`}
     href={`${OPEN_ROLE_PATH}/[slug]/[roleId]`}
     passHref
+    legacyBehavior
   >
     <Card
       as="a"

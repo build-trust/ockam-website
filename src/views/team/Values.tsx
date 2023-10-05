@@ -71,7 +71,7 @@ const Values: FunctionComponent = () => (
         </Box>
       </Box>
 
-      <Link href={`${MISSION_AND_VISION_PATH}#virtues`} passHref>
+      <Link href={`${MISSION_AND_VISION_PATH}#virtues`} passHref legacyBehavior>
         <Button as="a" size="lg" colorScheme="avocado" color="black">
           Read more
         </Button>
