@@ -26,7 +26,7 @@ const Stats: FunctionComponent<StatsProps> = ({ stars, contributors, downloads }
     {
       value: getValue(stars),
       valueFormat: getValueFormat(stars),
-      title: 'Stars',
+      title: 'GitHub Stars',
       icon: StarsImage,
     },
     {
