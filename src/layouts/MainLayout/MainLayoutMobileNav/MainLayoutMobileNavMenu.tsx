@@ -31,7 +31,6 @@ const MainLayoutMobileNavMenu: FunctionComponent = () => (
       return (
         <AccordionItem
           key={item.text}
-          isFocusable={!!item.href}
           borderBottom="none"
           {...(index === 0 ? { borderTop: 'none' } : {})}
         >
@@ -52,7 +51,7 @@ const MainLayoutMobileNavMenu: FunctionComponent = () => (
           {item.children && (
             <AccordionPanel key={item.text} py={1} px={1}>
               {item.children.map((childItem) => (
-                <AccordionItem key={childItem.text} isFocusable border="none" cursor="pointer">
+                <AccordionItem key={childItem.text} border="none" cursor="pointer">
                   <Box
                     href={childItem.href}
                     as={item.isExternal ? ChakraLink : NextLink}
