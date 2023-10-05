@@ -17,8 +17,8 @@ type HomePageProps = {
 export async function getStaticProps(): Promise<{ props: HomePageProps; revalidate: number }> {
   try {
     const { data: repoContentsData } = await githubApi.reposService.getRepoContents(
-      'ockam-contributors',
-      '/CONTRIBUTORS.csv'
+      'ockam',
+      '/.github/CONTRIBUTORS.csv'
     );
 
     const { data: repoData } = await githubApi.reposService.getRepo('ockam');
