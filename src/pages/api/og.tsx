@@ -1,5 +1,4 @@
 import { ImageResponse } from '@vercel/og';
-import Image from 'next/legacy/image';
 // eslint-disable-next-line @next/next/no-server-import-in-page
 import { NextRequest } from 'next/server';
 
@@ -7,7 +6,8 @@ export const config = {
   runtime: 'edge',
 };
 
-export default function handler(request: NextRequest): Response {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export default function handler(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
 
@@ -39,7 +39,7 @@ export default function handler(request: NextRequest): Response {
               justifyItems: 'center',
             }}
           >
-            <Image
+            <img
               alt="Vercel"
               height={200}
               src="data:image/svg+xml,%3Csvg width='116' height='100' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M57.5 0L115 100H0L57.5 0z' /%3E%3C/svg%3E"
@@ -70,7 +70,6 @@ export default function handler(request: NextRequest): Response {
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
-    // console.log(`${e.message}`);
     return new Response(`Failed to generate the image`, {
       status: 500,
     });
