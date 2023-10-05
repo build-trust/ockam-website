@@ -194,12 +194,7 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
                 mt={0}
                 {...(link.isExternal ? { isExternal: true } : { passHref: true, as: NextLink })}
               >
-                <Text
-                  as={link.isExternal ? 'span' : 'a'}
-                  _hover={{ textDecoration: 'underline' }}
-                  opacity={0.8}
-                  fontSize="sm"
-                >
+                <Text _hover={{ textDecoration: 'underline' }} opacity={0.8} fontSize="sm">
                   {link.name}
                 </Text>
               </ChakraLink>

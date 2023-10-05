@@ -102,7 +102,7 @@ const MainLayoutDesktopNav: FunctionComponent<NavProps> = ({ landingPage }) => {
                       {...(childItem.isExternal ? { isExternal: true } : { passHref: true })}
                     >
                       <MenuItem
-                        {...(childItem.isExternal ? { as: 'span' } : { as: 'a' })}
+                        as="span"
                         color="brand.900"
                         _hover={{
                           bgColor: 'transparent',
@@ -139,9 +139,7 @@ const MainLayoutDesktopNav: FunctionComponent<NavProps> = ({ landingPage }) => {
                   }
                 : { passHref: true })}
             >
-              <NavMenuItem {...(item.isExternal ? { as: 'span' } : { as: 'a' })}>
-                {item.text}
-              </NavMenuItem>
+              <NavMenuItem as="span">{item.text}</NavMenuItem>
             </Box>
           );
         })}

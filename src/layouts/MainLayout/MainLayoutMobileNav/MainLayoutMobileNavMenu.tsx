@@ -17,7 +17,7 @@ const MainLayoutMobileNavMenu: FunctionComponent = () => (
     {NAV_MENU_ITEMS.map(({ ...item }, index) => {
       const CurrentButton = (
         <AccordionButton
-          {...(item.href ? { as: item.isExternal ? 'span' : 'a' } : {})}
+          {...(item.href ? { as: 'span' } : {})}
           fontWeight="medium"
           px={0}
           py={3}
@@ -58,12 +58,7 @@ const MainLayoutMobileNavMenu: FunctionComponent = () => (
                     as={item.isExternal ? ChakraLink : NextLink}
                     {...(item.isExternal ? { isExternal: true } : { passHref: true })}
                   >
-                    <AccordionButton
-                      as={item.isExternal ? 'span' : 'a'}
-                      p={3}
-                      fontWeight="regular"
-                      bgColor="gray.50"
-                    >
+                    <AccordionButton as="span" p={3} fontWeight="regular" bgColor="gray.50">
                       {childItem.text}
                     </AccordionButton>
                   </Box>
