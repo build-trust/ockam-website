@@ -4,6 +4,7 @@ import { AppProps } from 'next/app';
 import NextNprogress from 'nextjs-progressbar';
 import 'focus-visible/dist/focus-visible';
 import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 import Script from 'next/script';
 
@@ -32,7 +33,8 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   const isBrowser = typeof window !== 'undefined';
   const [initialRouteTracked, setInitialRouteTracked] = useState(false);
 
-  const { pathname, events } = useRouter();
+  const { events } = useRouter();
+  const pathname = usePathname();
   const canonicalUrl = useMemo(
     () => clearTrailingSlashes(CONFIG.app.rootUrl + pathname),
     [pathname]
