@@ -29,10 +29,18 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
   const description =
     (frontMatter?.metaDescription as string) || (frontMatter?.description as string) || '';
   const canonicalPath = `${BLOG_PATH}/${router.query.slug}`;
+  const image = (frontMatter?.image as string) || '';
+
+  const ogImage = `/api/og?title=${encodeURIComponent(title)}&img=${encodeURIComponent(image)}`;
 
   return (
     <BlogLayout blogPosts={posts}>
-      <SEOHead subTitle={title} description={description} canonicalPath={canonicalPath} />
+      <SEOHead
+        subTitle={title}
+        description={description}
+        canonicalPath={canonicalPath}
+        ogImageSrc={ogImage}
+      />
 
       <Flex
         direction="column"

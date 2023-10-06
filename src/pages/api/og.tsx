@@ -17,6 +17,7 @@ export default async function handler(request: NextRequest) {
 
     // ?title=<title>
     const hasTitle = searchParams.has('title');
+    const hasImg = searchParams.has('img');
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : 'My default title';
 
     return new ImageResponse(
@@ -31,25 +32,66 @@ export default async function handler(request: NextRequest) {
             textAlign: 'center',
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection: 'column',
+            flexDirection: 'row',
             flexWrap: 'nowrap',
+            position: 'relative',
           }}
         >
           <div
             style={{
               fontSize: 60,
-              fontFamily: '"Helvetica"',
+              fontFamily: '"Inter"',
               fontStyle: 'normal',
               letterSpacing: '-0.025em',
               color: '#0A1A2B',
-              marginTop: 30,
-              padding: '0 120px',
+              margin: '0',
+              padding: '30px',
               lineHeight: 1.4,
               whiteSpace: 'pre-wrap',
+              flexBasis: '50%',
+              textAlign: 'center',
+              textWrap: 'balance',
+              display: 'flex',
             }}
           >
             {title}
           </div>
+          {hasImg && (
+            <div
+              style={{
+                display: 'flex',
+                flexBasis: '50%',
+                borderRadius: '4px',
+                position: 'relative',
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt=""
+                width="100%"
+                decoding="async"
+                src={`https://www.ockam.io/${searchParams.get('img')}`}
+                style={{
+                  borderTopLeftRadius: 4,
+                  borderBottomLeftRadius: 4,
+                  borderLeft: '2px solid black',
+                  borderTop: '2px solid black',
+                  borderBottom: '2px solid black',
+                }}
+              />
+            </div>
+          )}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=""
+            width="70px"
+            src="https://www.ockam.io/style-guide/logo/vertical_logo_black.png"
+            style={{
+              position: 'absolute',
+              bottom: 10,
+              right: 10,
+            }}
+          />
         </div>
       ),
       {
