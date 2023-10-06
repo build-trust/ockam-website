@@ -19,6 +19,19 @@ export default async function handler(request: NextRequest) {
     const hasTitle = searchParams.has('title');
     const hasImg = searchParams.has('img');
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : 'My default title';
+    const headingStyles = {
+      fontSize: 60,
+      fontFamily: '"Inter"',
+      fontStyle: 'normal',
+      letterSpacing: '-0.025em',
+      color: '#0A1A2B',
+      margin: '0',
+      padding: '30px',
+      lineHeight: 1.4,
+      flexBasis: '50%',
+      textWrap: 'balance',
+      display: 'flex',
+    };
 
     return new ImageResponse(
       (
@@ -37,25 +50,7 @@ export default async function handler(request: NextRequest) {
             position: 'relative',
           }}
         >
-          <div
-            style={{
-              fontSize: 60,
-              fontFamily: '"Inter"',
-              fontStyle: 'normal',
-              letterSpacing: '-0.025em',
-              color: '#0A1A2B',
-              margin: '0',
-              padding: '30px',
-              lineHeight: 1.4,
-              whiteSpace: 'pre-wrap',
-              flexBasis: '50%',
-              textAlign: 'center',
-              textWrap: 'balance',
-              display: 'flex',
-            }}
-          >
-            {title}
-          </div>
+          <div style={headingStyles}>{title}</div>
           {hasImg && (
             <div
               style={{
