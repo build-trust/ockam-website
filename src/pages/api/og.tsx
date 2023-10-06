@@ -17,7 +17,7 @@ export default async function handler(request: NextRequest) {
 
     // ?title=<title>
     const hasTitle = searchParams.has('title');
-    const hasImg = searchParams.has('img');
+    const hasImg = searchParams.has('img') && searchParams.get('img')?.trim() !== '';
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : 'My default title';
     const headingStyles = {
       fontSize: 60,
@@ -32,6 +32,8 @@ export default async function handler(request: NextRequest) {
       textWrap: 'balance',
       display: 'flex',
     };
+
+    const headingWidth = hasImg ? '50%' : '100%';
 
     return new ImageResponse(
       (
@@ -55,7 +57,7 @@ export default async function handler(request: NextRequest) {
             <div
               style={{
                 display: 'flex',
-                flexBasis: '50%',
+                flexBasis: headingWidth,
                 borderRadius: '4px',
                 position: 'relative',
               }}

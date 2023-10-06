@@ -25,13 +25,16 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
   const router = useRouter();
   const blogPostBodyRef = useRef<HTMLDivElement | null>(null);
 
-  const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
+  const originalTitle = (frontMatter?.title as string) || '';
+  const title = (frontMatter?.metaTitle as string) || originalTitle;
   const description =
     (frontMatter?.metaDescription as string) || (frontMatter?.description as string) || '';
   const canonicalPath = `${BLOG_PATH}/${router.query.slug}`;
   const image = (frontMatter?.image as string) || '';
 
-  const ogImage = `/api/og?title=${encodeURIComponent(title)}&img=${encodeURIComponent(image)}`;
+  const ogImage = `/api/og?title=${encodeURIComponent(originalTitle)}&img=${encodeURIComponent(
+    image
+  )}`;
 
   return (
     <BlogLayout blogPosts={posts}>
