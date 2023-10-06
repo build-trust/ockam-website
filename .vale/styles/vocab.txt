@@ -11,3 +11,5 @@ autoscaling
 stdout
 const
 async
+subnet
+postgresql

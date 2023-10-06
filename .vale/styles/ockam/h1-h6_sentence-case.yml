@@ -11,3 +11,4 @@ scope:
 match: $sentence
 style: Chicago
 exceptions:
+ - Ockam

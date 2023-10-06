@@ -7,29 +7,29 @@ author: 'Nazmul Idris'
 authorAvatar: /blog/nazmul-idris-blog-profile-image.png
 isFeatured: true
 featuredOrder: 0
-image: /blog/basic-web-app/hero.svg
+image: /blog/basic-web-app/hero.png
 ---
 
 In this blog post we will explore the Ockam command line interface,
 [`ockam`](https://docs.ockam.io/#install) and see how we can connect a traditional web app
-to a PostgreSQL database, with minimal / no code changes. We will create a very basic Python
-Flask app that simply increments a counter in a PostgreSQL database. Then we will move the
+to a PostgreSQL database, with minimal / no code changes. We will create a basic Python
+Flask app that increments a counter in a PostgreSQL database. Then we will move the
 connection between the application and database through an Ockam secure channel.
 
-## What is Ockam
+## What's Ockam?
 
 [Ockam](https://github.com/build-trust/ockam) is a suite of Rust libraries, command line
 tools, and managed cloud services for orchestrating end-to-end encryption, mutual
 authentication, key management, credential management, and authorization policy
-enforcement — all on a massive scale. Ockam's end-to-end [secure
+enforcement &mdash; all on a massive scale. Ockam's end-to-end [secure
 channels](https://docs.ockam.io/reference/command/secure-channels) guarantee authenticity,
 integrity, and confidentiality of all data-in-motion at the application layer.
 
 If you store your data in a relational database, NoSQL, graph database, or something similar,
-that data is probably private. And you probably don't want to expose it to the Internet. So
-you can resolve this issue by placing it inside a private subnet. However, now you have to
+that data is probably private. And you probably don't want to expose it to the Internet. You 
+can resolve this issue by placing it inside a private subnet. However, now you have to
 manage network access control lists, security groups, or route tables to allow other
-machines to open a connection to the database. That is a lot of overhead.
+machines to open a connection to the database. That's a lot of overhead.
 
 With Ockam, network administrators don't have to update network access control lists,
 security groups, or route tables. Ockam applies fine grained control to your services via
@@ -74,7 +74,7 @@ In order to follow along, please make sure to install all the prerequisites list
    - Instructions on how to get the dependencies (`Flask`, `psycopg2`) are in the [Python
      Code](basic-web-app.md#python-code) section below.
 
-3. [Postgresql](https://www.postgresql.org/)
+3. [PostgreSQL](https://www.postgresql.org/)
 
    - Run `brew install postgresql@15` via [`brew`](https://brew.sh/). You'll then be able
      to run the PostgreSQL database server on your machine on the default port of `5432`.
@@ -91,7 +91,7 @@ In order to follow along, please make sure to install all the prerequisites list
         * You can learn more about this
           [here](https://stackoverflow.com/a/12721095/2085356).
 
-## The Web App - Python Code
+## The web app&mdash;python code
 
 The Python Flask web app increments a counter in a PostgreSQL database. The entire app
 fits in a single file. Create a `main.py` file on your machine and copy and paste the code
@@ -128,12 +128,12 @@ a connection to the database.
 - `pg_port` gets its value from the environment variable `APP_PG_PORT`.
 - We will set the environment variable `APP_PG_PORT` to `5432` before we run the Python
   script (instructions [below](#run-the-web-app)).
-- So the database connection string simply points to `localhost:5432`.
+- The database connection string  points to `localhost:5432`.
 
 <Alert status='info'>
 Please make a note of the `pg_port` Python variable and `APP_PG_PORT` environment
-variable. In production we usually load the port from an environment variable and it is
-not hardcoded in the source.
+variable. In production we usually load the port from an environment variable and it's
+not hard-coded in the source.
 </Alert>
 
 ### Run the web app
@@ -164,7 +164,7 @@ the PostgreSQL database 🎉.
 
 ## Install Ockam
 
-Now that we have set up our web app and database let's do this next:
+Now that we've set up our web app and database let's do this next:
 
 1. Add Ockam to the mix.
 2. Update our `APP_PG_PORT` environment variable so that it connects to a new port (not
@@ -215,7 +215,7 @@ hostile network like the Internet).
 ## Connect the web app
 
 Finally, let's setup a local `tcp-inlet` so we can receive raw TCP traffic on port
-`5433` before it is forwarded.
+`5433` before it's forwarded.
 
 ```bash
 export OCKAM_PORT=5433
@@ -225,7 +225,7 @@ ockam tcp-inlet create --from $OCKAM_PORT
 Notes:
 
 - The new environment variable `$OCKAM_PORT` points to a new port `5433`.
-- This is the port that the `tcp-inlet` will listen on. And it is different from the
+- This is the port that the `tcp-inlet` will listen on. And it's different from the
   default PostgreSQL port.
 
 <Alert status='info'>
@@ -242,8 +242,8 @@ flask --app main run
 
 Finally, connect to this URL again from your web browser `http://localhost:5000/`.
 
-1. We have changed the `$APP_PG_PORT` to the same value as `$OCKAM_PORT` (`5433`). Our web
-   app (`main.py` script) does not directly connect to the unsecure database server (on
+1. We've changed the `$APP_PG_PORT` to the same value as `$OCKAM_PORT` (`5433`). Our web
+   app (`main.py` script) doesn't directly connect to the insecure database server (on
    port `5432`). It now goes through the secure channel 🔐.
 2. The counter will continue to increment just as it did before, with zero code changes to
    your application. But the web app now communicates with the database through an Ockam
