@@ -137,8 +137,10 @@ export default async function handler(request: NextRequest) {
     const { searchParams } = new URL(request.url);
 
     const hasTitle = searchParams.has('title');
+    const hasImage = searchParams.has('img');
+    const hasFeatures = searchParams.has('features');
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : 'My default title';
-    const features = searchParams.has('features') ? searchParams.get('features')?.split('||') : [];
+    const features = hasFeatures ? searchParams.get('features')?.split('||') : [];
 
     return new ImageResponse(
       (
@@ -158,8 +160,8 @@ export default async function handler(request: NextRequest) {
           }}
         >
           <MainText title={title} />
-          <Thumbnail imagePath={searchParams.get('img')} />
-          <Features features={features} />
+          {hasImage && <Thumbnail imagePath={searchParams.get('img')} />}
+          {hasFeatures && <Features features={features} />}
           <Watermark />
         </div>
       ),
