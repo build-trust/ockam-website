@@ -12,3 +12,5 @@ match: $sentence
 style: Chicago
 exceptions:
  - Ockam
+ - Apache
+ - Kafka

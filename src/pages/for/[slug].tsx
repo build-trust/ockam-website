@@ -91,14 +91,16 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
       </SimpleGrid>
     );
   };
+
+  const feats = features.map((feature) => feature.title).join('||');
+  const ogImage = `/api/og?title=${encodeURIComponent(
+    text.replaceAll('_', '')
+  )}&template=landing&features=${encodeURIComponent(feats)}`;
+
   return (
     <Box pt={{ base: 10, lg: 10 }}>
-      <SEOHead title={title} />
+      <SEOHead title={title} ogImageSrc={ogImage} />
       <Hero text={text} subtext={subtext} landingPage />
-
-      {/* <Features />
-      <Cases />
-      <GetStarted /> */}
 
       <Flex
         w="full"

@@ -10,11 +10,18 @@ import {
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import crypto from 'crypto';
 
 import { BUILD_DEMO } from '@root/consts/externalResources';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import RotatingHeading from './RotatingHeading';
+
+const sha512 = (input: string): string => {
+  const hash = crypto.createHash('sha512');
+  hash.update(input);
+  return hash.digest('hex');
+};
 
 const HeroBox = styled(Box)`
   &:before {
@@ -55,9 +62,15 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
       <>
         {text.split(/(_\w.*?\w_)/).map((string) => {
           const highlight = string.match(/^_(\w.*?\w)_$/);
+
           if (highlight) {
             return (
-              <Box as="span" bgImage={gradients.primary} bgClip="text">
+              <Box
+                as="span"
+                bgImage={gradients.primary}
+                bgClip="text"
+                key={`highlight-${sha512(highlight[1])}`}
+              >
                 {highlight[1]}
               </Box>
             );
@@ -87,79 +100,16 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
     if (landingPage) {
       return (
         <Box textAlign="center" my={14}>
-          <Link href="#why" passHref legacyBehavior>
-            <Button
-              position="relative"
-              borderWidth={1}
-              color="white"
-              borderStyle="solid"
-              borderColor="transparent"
-              backgroundColor="rgb(10, 10, 10)"
-              backgroundClip="padding-box"
-              _before={{
-                content: "''",
-                backgroundImage: gradients.primary,
-                borderRadius: '4px',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: -1,
-                margin: '-1px',
-                boxShadow: '0 0 50px 0px #52c7ea',
-              }}
-              _hover={{
-                backgroundImage: gradients.primary,
-                borderColor: 'rgb(10, 10, 10)',
-                color: 'rgb(10, 10, 10)',
-              }}
-              _active={{
-                backgroundImage: `${gradients.primary}`,
-                color: 'white',
-                boxShadow: '0 0 60px 10px #52c7ea',
-              }}
-              _focus={{
-                backgroundImage: `${gradients.primary}`,
-                color: 'white',
-                boxShadow: '0 0 60px 10px #52c7ea',
-              }}
-            >
-              Tell me more
-            </Button>
-          </Link>
-        </Box>
-      );
-    }
-    return (
-      <Box textAlign="center" my={14}>
-        <Link href={BUILD_DEMO.href} passHref legacyBehavior>
           <Button
-            color="rgb(40, 40, 40)"
-            border="1px solid white"
-            mb={{ base: 5, sm: 0 }}
-            ml={{ base: 2.5, sm: 3 }}
-            mr={{ base: 2.5, sm: 3 }}
-            _hover={{
-              backgroundColor: 'rgb(10, 10, 10)',
-              color: 'white',
-            }}
-          >
-            Start Building
-          </Button>
-        </Link>
-        <Link href={CONTACT_FORM_PATH} passHref legacyBehavior>
-          <Button
+            as={Link}
+            href="#why"
             position="relative"
-            color="white"
             borderWidth={1}
+            color="white"
             borderStyle="solid"
             borderColor="transparent"
             backgroundColor="rgb(10, 10, 10)"
             backgroundClip="padding-box"
-            mb={{ base: 5, sm: 0 }}
-            ml={{ base: 2.5, sm: 3 }}
-            mr={{ base: 2.5, sm: 3 }}
             _before={{
               content: "''",
               backgroundImage: gradients.primary,
@@ -189,9 +139,73 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
               boxShadow: '0 0 60px 10px #52c7ea',
             }}
           >
-            Get a Demo
+            Tell me more
           </Button>
-        </Link>
+        </Box>
+      );
+    }
+    return (
+      <Box textAlign="center" my={14}>
+        <Button
+          as={Link}
+          href={BUILD_DEMO.href}
+          color="rgb(40, 40, 40)"
+          border="1px solid white"
+          mb={{ base: 5, sm: 0 }}
+          ml={{ base: 2.5, sm: 3 }}
+          mr={{ base: 2.5, sm: 3 }}
+          _hover={{
+            backgroundColor: 'rgb(10, 10, 10)',
+            color: 'white',
+          }}
+        >
+          Start Building
+        </Button>
+
+        <Button
+          as={Link}
+          href={CONTACT_FORM_PATH}
+          position="relative"
+          color="white"
+          borderWidth={1}
+          borderStyle="solid"
+          borderColor="transparent"
+          backgroundColor="rgb(10, 10, 10)"
+          backgroundClip="padding-box"
+          mb={{ base: 5, sm: 0 }}
+          ml={{ base: 2.5, sm: 3 }}
+          mr={{ base: 2.5, sm: 3 }}
+          _before={{
+            content: "''",
+            backgroundImage: gradients.primary,
+            borderRadius: '4px',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+            margin: '-1px',
+            boxShadow: '0 0 50px 0px #52c7ea',
+          }}
+          _hover={{
+            backgroundImage: gradients.primary,
+            borderColor: 'rgb(10, 10, 10)',
+            color: 'rgb(10, 10, 10)',
+          }}
+          _active={{
+            backgroundImage: `${gradients.primary}`,
+            color: 'white',
+            boxShadow: '0 0 60px 10px #52c7ea',
+          }}
+          _focus={{
+            backgroundImage: `${gradients.primary}`,
+            color: 'white',
+            boxShadow: '0 0 60px 10px #52c7ea',
+          }}
+        >
+          Get a Demo
+        </Button>
       </Box>
     );
   };

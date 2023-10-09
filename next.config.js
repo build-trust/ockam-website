@@ -9,6 +9,9 @@ const nextConfig = {
   experimental: {
     forceSwcTransforms: true,
   },
+  compiler: {
+    styledComponents: true,
+  },
   images: { formats: ['image/webp'] },
   publicRuntimeConfig: {
     auth0: {

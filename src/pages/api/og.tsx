@@ -1,9 +1,130 @@
 import { ImageResponse } from '@vercel/og';
 // eslint-disable-next-line @next/next/no-server-import-in-page
 import { NextRequest } from 'next/server';
+import { FC } from 'react';
 
 export const config = {
   runtime: 'edge',
+};
+
+type MainTextProps = {
+  title?: string;
+};
+const MainText: FC<MainTextProps> = ({ title }) => {
+  const headingStyles = {
+    fontSize: 60,
+    fontFamily: '"Inter"',
+    fontStyle: 'normal',
+    letterSpacing: '-0.025em',
+    color: '#0A1A2B',
+    margin: '0',
+    padding: '30px',
+    lineHeight: 1.4,
+    flexBasis: '50%',
+    textWrap: 'balance',
+    display: 'flex',
+  };
+
+  return <div style={headingStyles}>{title}</div>;
+};
+
+type ThumbnailProps = {
+  imagePath?: string | null;
+};
+const Thumbnail: FC<ThumbnailProps> = ({ imagePath }) => {
+  const containerStyles = {
+    display: 'flex',
+    flexBasis: '50%',
+  };
+
+  if (imagePath) {
+    return (
+      <div style={containerStyles}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=""
+          width="100%"
+          decoding="async"
+          src={`https://www.ockam.io/${imagePath}`}
+          style={{
+            borderTopLeftRadius: 12,
+            borderBottomLeftRadius: 12,
+            borderLeft: '4px solid #0A1A2B',
+            borderTop: '4px solid #0A1A2B',
+            borderBottom: '4px solid #0A1A2B',
+          }}
+        />
+      </div>
+    );
+  }
+  return <></>;
+};
+
+// eslint-disable-next-line @next/next/no-img-element
+const Watermark: FC = () => (
+  <img
+    alt=""
+    width="70px"
+    src="https://www.ockam.io/style-guide/logo/vertical_logo_black.png"
+    style={{
+      position: 'absolute',
+      bottom: 10,
+      right: 10,
+    }}
+  />
+);
+
+type FeaturesProps = {
+  features?: string[];
+};
+
+const Features: FC<FeaturesProps> = ({ features }) => {
+  const containerStyles = {
+    display: 'flex',
+    padding: '30px 15px 30px 30px',
+    width: '50%',
+    borderTopLeftRadius: 12,
+    borderBottomLeftRadius: 12,
+    borderLeft: '4px solid #0A1A2B',
+    borderTop: '4px solid #0A1A2B',
+    borderBottom: '4px solid #0A1A2B',
+    background: '#162535',
+    color: '#ECFDF9',
+    fontSize: 30,
+  };
+
+  const featureListStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: 20,
+  };
+
+  const featureStyles = {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '90%',
+    gap: 20,
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  };
+
+  if (!features) return <></>;
+  return (
+    <div style={containerStyles}>
+      <ul style={featureListStyles}>
+        {features.map((feature) => (
+          <li key={feature} style={featureStyles}>
+            <span style={{ flexBasis: '1em' }}>✅</span>
+            <span style={{ flexBasis: 'auto' }}>{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -15,25 +136,9 @@ export default async function handler(request: NextRequest) {
 
     const { searchParams } = new URL(request.url);
 
-    // ?title=<title>
     const hasTitle = searchParams.has('title');
-    const hasImg = searchParams.has('img') && searchParams.get('img')?.trim() !== '';
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : 'My default title';
-    const headingStyles = {
-      fontSize: 60,
-      fontFamily: '"Inter"',
-      fontStyle: 'normal',
-      letterSpacing: '-0.025em',
-      color: '#0A1A2B',
-      margin: '0',
-      padding: '30px',
-      lineHeight: 1.4,
-      flexBasis: '50%',
-      textWrap: 'balance',
-      display: 'flex',
-    };
-
-    const headingWidth = hasImg ? '50%' : '100%';
+    const features = searchParams.has('features') ? searchParams.get('features')?.split('||') : [];
 
     return new ImageResponse(
       (
@@ -52,43 +157,10 @@ export default async function handler(request: NextRequest) {
             position: 'relative',
           }}
         >
-          <div style={headingStyles}>{title}</div>
-          {hasImg && (
-            <div
-              style={{
-                display: 'flex',
-                flexBasis: headingWidth,
-                borderRadius: '4px',
-                position: 'relative',
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt=""
-                width="100%"
-                decoding="async"
-                src={`https://www.ockam.io/${searchParams.get('img')}`}
-                style={{
-                  borderTopLeftRadius: 4,
-                  borderBottomLeftRadius: 4,
-                  borderLeft: '2px solid black',
-                  borderTop: '2px solid black',
-                  borderBottom: '2px solid black',
-                }}
-              />
-            </div>
-          )}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt=""
-            width="70px"
-            src="https://www.ockam.io/style-guide/logo/vertical_logo_black.png"
-            style={{
-              position: 'absolute',
-              bottom: 10,
-              right: 10,
-            }}
-          />
+          <MainText title={title} />
+          <Thumbnail imagePath={searchParams.get('img')} />
+          <Features features={features} />
+          <Watermark />
         </div>
       ),
       {
@@ -105,6 +177,7 @@ export default async function handler(request: NextRequest) {
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
+    console.error(e);
     return new Response(`Failed to generate the image`, {
       status: 500,
     });

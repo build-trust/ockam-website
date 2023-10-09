@@ -2,6 +2,16 @@
 title: Secure Kafka for Financial Services
 hero_text: Can your _Kafka broker_ or provider _read your messages_?
 subtext: Meet the most stringent requirements while still using your existing Kafka system... within minutes!
+features:
+  - icon: fingerprint
+    title: Unique keys per identity
+    text: Each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
+  - icon: shieldcheck
+    title: Tamper-proof data transfer
+    text: By pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorised producers can write to a topic ensuring that the data in your topic is highly trustworthy.
+  - icon: clock
+    title: Reduced exposure window
+    text: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralised shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimises the risk to future data using automatically rotating keys.
 ---
 
 # Bank-grade data privacy, security, and compliance for Apache Kafka
@@ -11,17 +21,3 @@ in plaintext and readable while in the broker_. For topics that include PII,
 sensitive data, or just connect to core systems this approach can fall short
 of the stringent compliance and confidentiality requirements of many financial 
 services companies.
-
-<SimpleGrid id="features"
-    columns={{ base: 1, md: 1, lg: 1 }}
-    spacingX={{ base: 8, md: 20, lg: 24 }}
-    spacingY={{ base: 8, md: 12, lg: 12 }}
-    >
-    <Feature key="keys" icon="fingerprint" title="Unique keys per identity" text="Each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
-"/>
-    <Feature key="keys" icon="shieldcheck" title="Tamper-proof data transfer" text="By pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorised producers can write to a topic ensuring that the data in your topic is highly trustworthy. "/>
-    <Feature key="keys" icon="clock" title="Reduced exposure window" text="Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralised shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimises the risk to future data using automatically rotating keys."/>        
-</SimpleGrid>
-
-
-
