@@ -60,8 +60,8 @@ const Thumbnail: FC<ThumbnailProps> = ({ imagePath }) => {
   return <></>;
 };
 
-// eslint-disable-next-line @next/next/no-img-element
 const Watermark: FC = () => (
+  // eslint-disable-next-line @next/next/no-img-element
   <img
     alt=""
     width="70px"
@@ -95,7 +95,7 @@ const Features: FC<FeaturesProps> = ({ features }) => {
 
   const featureListStyles = {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as 'column',
     width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -104,10 +104,10 @@ const Features: FC<FeaturesProps> = ({ features }) => {
 
   const featureStyles = {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row' as 'row',
     width: '90%',
     gap: 20,
-    textAlign: 'left',
+    textAlign: 'left' as 'left',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   };
