@@ -24,7 +24,7 @@ const SEOHead: FunctionComponent<SEOHeadProps> = ({
   canonicalPath,
   smallTwitterCard,
 }) => {
-  const commonTitleWithSubTitle = subTitle && `${CONFIG.app.title} | ${subTitle}`;
+  const commonTitleWithSubTitle = subTitle && `${subTitle} | ${CONFIG.app.title}`;
   const specificTitle = title || commonTitleWithSubTitle;
   const ogImageUrl = `${CONFIG.app.rootUrl}${ogImageSrc}`;
   const canonicalUrl = clearTrailingSlashes(`${CONFIG.app.rootUrl}${canonicalPath}`);
