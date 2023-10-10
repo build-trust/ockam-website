@@ -1,0 +1,45 @@
+name: Commits
+
+permissions:
+  contents: read
+
+on: [workflow_dispatch, pull_request, push]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Commits - Check
+    runs-on: ubuntu-20.04
+
+    # We assume that commit 82c2a8ec3a33fff8f5d28f7ad0ce338dfe625750 will be in the history
+    # of all commits based on ockam develop branch
+    # https://github.com/build-trust/ockam-website/commit/82c2a8ec3a33fff8f5d28f7ad0ce338dfe625750
+    env:
+      FIRST_COMMIT: 82c2a8ec3a33fff8f5d28f7ad0ce338dfe625750
+      COMMITLINT_CONFIG_PATH: commitlint.config.js
+
+    steps:
+      - name: Run Composite Action
+        uses: build-trust/.github/actions/commit_lint@custom-actions
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  grammer_lint:
+    name: Grammer - Lint
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 
+        with:
+          fetch-depth: 0 # checkout full tree
+
+      - name: Install grammar linters
+        run: npm install -g @ocular-d/vale-bin 
+
+      - name: Lint grammar
+        continue-on-error: true
+        run: |
+          vale src/content/**/*.mdx
