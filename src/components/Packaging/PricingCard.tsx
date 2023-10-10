@@ -26,6 +26,7 @@ export interface PricingCardData {
   priceInterval?: string;
   priceUnit?: string;
   floor?: string;
+  onlyFloor?: boolean;
 }
 
 type Cta = {
@@ -54,11 +55,21 @@ interface PriceProps {
   unit?: string;
   interval?: string;
   floor?: string;
+  onlyFloor?: boolean;
 }
 const Price = (props: PriceProps): JSX.Element => {
-  const { price, unit, interval, floor } = props;
+  const { price, unit, interval, floor, onlyFloor } = props;
 
   const units = (): JSX.Element | undefined => {
+    if (onlyFloor) {
+      return (
+        <>
+          <Text fontWeight="inherit" fontSize="xl">
+            / {interval}
+          </Text>
+        </>
+      );
+    }
     if (unit && interval) {
       return (
         <>
@@ -83,6 +94,11 @@ const Price = (props: PriceProps): JSX.Element => {
     return undefined;
   };
 
+  const formattedPrice = (): string => {
+    const numPart = price.replace('$', '');
+    return `$${parseInt(numPart, 10).toLocaleString()}`;
+  };
+
   const priceSize = (): string => {
     if (unit || interval) {
       return '2xl';
@@ -99,8 +115,9 @@ const Price = (props: PriceProps): JSX.Element => {
   return (
     <VStack mb={4}>
       <HStack height="4em">
+        {onlyFloor && <Text>Starting at</Text>}
         <Heading size={priceSize()} fontWeight="inherit" lineHeight="0.9em" alignSelf="center">
-          {price}
+          {formattedPrice()}
         </Heading>
         {units()}
       </HStack>
@@ -110,7 +127,7 @@ const Price = (props: PriceProps): JSX.Element => {
 };
 const PricingCard = (props: PricingCardProps): JSX.Element => {
   const { data, icon, button, isPopular, previousTier, ...rest } = props;
-  const { features, price, priceUnit, priceInterval, name, floor } = data;
+  const { features, price, priceUnit, priceInterval, name, floor, onlyFloor } = data;
   const theme = useTheme();
 
   const featureName = (feature: Feature): string => {
@@ -138,7 +155,13 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
           {name}
         </Heading>
       </VStack>
-      <Price price={price} unit={priceUnit} interval={priceInterval} floor={floor} />
+      <Price
+        price={price}
+        unit={priceUnit}
+        interval={priceInterval}
+        floor={floor}
+        onlyFloor={onlyFloor}
+      />
       {button}
       <List spacing="1" mb="8" maxW="28ch" mx="0" fontSize="xs">
         {previousFeatures()}

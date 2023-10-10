@@ -12,13 +12,13 @@ import {
   Td,
   TableContainer,
   Heading,
-  Flex,
-  ListItem,
-  List,
-  useTheme,
   Link,
+  Accordion,
+  AccordionItem,
+  AccordionPanel,
+  AccordionButton,
+  AccordionIcon,
 } from '@chakra-ui/react';
-import { HiBadgeCheck as Check } from 'react-icons/hi';
 
 import ActionButton from '@components/Packaging/ActionButton';
 import PricingCard from '@components/Packaging/PricingCard';
@@ -35,6 +35,7 @@ type Tier = {
   price_interval?: string;
   price_unit?: string;
   floor?: string;
+  onlyFloor?: boolean;
   isPopular?: boolean;
   cta: Cta;
 };
@@ -48,9 +49,18 @@ type Feature = {
   onCard?: boolean;
 };
 
+type Segment = {
+  name: string;
+  tiers: string[];
+};
+const SEGMENTS: Segment[] = [
+  { name: 'Developers', tiers: ['Free', 'Premium'] },
+  { name: 'Companies', tiers: ['Small', 'Medium', 'Large'] },
+  { name: 'Enterprise', tiers: ['Business Critical'] },
+];
 const TIERS: Tier[] = [
   {
-    name: 'Starter',
+    name: 'Free',
     text: 'The Tools for Builders',
     price: '$0',
     price_interval: 'mo',
@@ -62,9 +72,9 @@ const TIERS: Tier[] = [
   },
 
   {
-    name: 'Team',
+    name: 'Premium',
     text: 'The Tools for Builders',
-    price: '$9',
+    price: '$5',
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
@@ -73,20 +83,33 @@ const TIERS: Tier[] = [
   },
 
   {
-    name: 'Basic',
+    name: 'Small',
     text: 'The Tools for Builders',
-    price: '$200',
+    price: '$500',
     price_interval: 'mo',
+    onlyFloor: true,
     cta: {
       text: 'Start 14-day trial →',
       url: '/download',
     },
   },
-
   {
-    name: 'Enterprise',
+    name: 'Medium',
     text: 'The Tools for Builders',
-    price: 'Talk to sales',
+    price: '$2500',
+    price_interval: 'mo',
+    onlyFloor: true,
+    cta: {
+      text: 'Start 14-day trial →',
+      url: '/download',
+    },
+  },
+  {
+    name: 'Large',
+    text: 'The Tools for Builders',
+    price: '$10000',
+    price_interval: 'mo',
+    onlyFloor: true,
     cta: {
       text: 'Talk to sales →',
       url: `${CONTACT_FORM_PATH}`,
@@ -94,20 +117,32 @@ const TIERS: Tier[] = [
   },
 
   {
-    name: 'Platform',
+    name: 'Business Critical',
     text: 'The Tools for Builders',
-    price: 'Talk to sales',
+    price: '50000',
+    price_interval: 'mo',
+    onlyFloor: true,
     cta: {
       text: 'Talk to sales →',
       url: `${CONTACT_FORM_PATH}`,
     },
   },
+
+  // {
+  //   name: 'Platform',
+  //   text: 'The Tools for Builders',
+  //   price: 'Talk to sales',
+  //   cta: {
+  //     text: 'Talk to sales →',
+  //     url: `${CONTACT_FORM_PATH}`,
+  //   },
+  // },
 ];
 
 const FEATURES: Feature[] = [
   {
     name: 'Introductory price guarantee',
-    tiers: ['Team', 'Basic', 'Pro', 'Enterprise', 'Platform'],
+    tiers: ['Free', 'Premium', 'Small', 'Medium', 'Large', 'Business Critical'],
     onCard: true,
   },
 
@@ -148,48 +183,54 @@ const FEATURES: Feature[] = [
   { name: 'Ockam Command', tiers: ['*'], onCard: true },
   { name: 'Programming libraries', tiers: ['*'], onCard: true },
   { name: 'Community-based support', tiers: ['*'], onCard: true },
-  { name: 'Ockam support', tiers: ['Basic', 'Pro', 'Enterprise', 'Platform'], onCard: true },
-  { name: 'Premium Ockam support', tiers: ['Pro', 'Enterprise', 'Platform'], onCard: true },
-  { name: 'Volume discounts', tiers: ['Enterprise', 'Platform'], onCard: true },
-  { name: 'Service Level Agreements (SLAs)', tiers: ['Enterprise', 'Platform'] },
-  { name: 'Customized terms', tiers: ['Enterprise', 'Platform'] },
-  { name: 'Private labelling', tiers: ['Platform'], onCard: true },
-  { name: 'Custom domains', tiers: ['Platform'] },
+  { name: 'Ockam support', tiers: ['Small', 'Medium', 'Large', 'Business Critical'], onCard: true },
+  { name: 'Premium Ockam support', tiers: ['Large', 'Business Critical'], onCard: true },
+  { name: 'Volume discounts', tiers: ['Large', 'Business Critical', 'Platform'], onCard: true },
+  {
+    name: 'Service Level Agreements (SLAs)',
+    tiers: ['Medium', 'Large', 'Business Critical', 'Platform'],
+  },
+  { name: 'Customized terms', tiers: ['Large', 'Business Critical', 'Platform'] },
+  { name: 'Private labelling', tiers: ['Business Critical'], onCard: true },
 ];
 
 const LIMITS: { [id: string]: { [id: string]: string } } = {
   Spaces: {
-    Starter: 'Up to 1',
-    Team: 'Up to 1',
-    Basic: 'Unlimited',
-    Pro: 'Unlimited',
-    Enterprise: 'Unlimited',
+    Free: 'Up to 1',
+    Premium: 'Up to 1',
+    Small: 'Unlimited',
+    Medium: 'Unlimited',
+    Large: 'Unlimited',
+    'Business Critical': 'Unlimited',
     Platform: 'Unlimited',
   },
 
   'Projects per space': {
-    Starter: 'Up to 1',
-    Team: 'Up to 1',
-    Basic: 'Unlimited',
-    Pro: 'Unlimited',
-    Enterprise: 'Unlimited',
+    Free: 'Up to 1',
+    Premium: 'Up to 1',
+    Small: 'Unlimited',
+    Medium: 'Unlimited',
+    Large: 'Unlimited',
+    'Business Critical': 'Unlimited',
     Platform: 'Unlimited',
   },
 
   'Project authority nodes': {
-    Starter: 'Up to 1',
-    Team: 'Up to 1',
-    Basic: 'Unlimited',
-    Pro: 'Unlimited',
-    Enterprise: 'Unlimited',
+    Free: 'Up to 1',
+    Premium: 'Up to 1',
+    Small: 'Unlimited',
+    Medium: 'Unlimited',
+    Large: 'Unlimited',
+    'Business Critical': 'Unlimited',
     Platform: 'Unlimited',
   },
   'Credential authorities': {
-    Starter: 'Up to 1',
-    Team: 'Up to 1',
-    Basic: 'Unlimited',
-    Pro: 'Unlimited',
-    Enterprise: 'Unlimited',
+    Free: 'Up to 1',
+    Premium: 'Up to 1',
+    Small: 'Unlimited',
+    Medium: 'Unlimited',
+    Large: 'Unlimited',
+    'Business Critical': 'Unlimited',
     Platform: 'Unlimited',
   },
 
@@ -245,28 +286,31 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
   //   Platform: 'Unlimited',
   // },
   'Project members': {
-    Starter: 'Up to 2',
-    Team: 'Up to 10',
-    Basic: 'Unlimited',
-    Pro: 'Unlimited',
-    Enterprise: 'Unlimited',
+    Free: 'Up to 2',
+    Premium: 'Up to 10',
+    Small: 'Unlimited',
+    Medium: 'Unlimited',
+    Large: 'Unlimited',
+    'Business Critical': 'Unlimited',
     Platform: 'Unlimited',
   },
 
   'Enrollment methods': {
-    Starter: '1',
-    Team: 'Up to 2',
-    Basic: 'Unlimited',
-    Pro: 'Unlimited',
-    Enterprise: 'Unlimited',
-    Platform: 'Unlimited',
+    Free: '1',
+    Premium: '1',
+    Small: 'Up to 2',
+    Medium: 'Unlimited',
+    Large: 'Unlimited',
+    'Business Critical': 'Unlimited',
   },
 
   'Project nodes': {
-    Starter: 'Up to 5',
-    Team: 'Up to 10',
-    Basic: '40 included',
-    Enterprise: 'Unlimited',
+    Free: 'Up to 5',
+    Premium: 'Up to 10',
+    Small: '40 included',
+    Medium: 'Unlimited',
+    Large: 'Unlimited',
+    'Business Critical': 'Unlimited',
     Platform: 'Unlimited',
   },
 
@@ -287,19 +331,21 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
   //   Platform: 'Unlimited',
   // },
   Identities: {
-    Starter: 'Up to 5',
-    Team: 'Up to 20',
-    Basic: 'Unlimited',
-    Pro: 'Unlimited',
-    Enterprise: 'Unlimited',
+    Free: 'Up to 5',
+    Premium: 'Up to 5',
+    Small: 'Up to 20',
+    Medium: 'Unlimited',
+    Large: 'Unlimited',
+    'Business Critical': 'Unlimited',
     Platform: 'Unlimited',
   },
   'Included data transfer': {
-    Starter: '10/GB/mo',
-    Team: '80/GB/mo',
-    Basic: '2,000/GB/mo',
-    Pro: '50,000/GB/mo',
-    Enterprise: 'Custom',
+    Free: '10/GB/mo',
+    Premium: '20/GB/mo',
+    Small: '80/GB/mo',
+    Medium: '2,000/GB/mo',
+    Large: '50,000/GB/mo',
+    'Business Critical': 'Custom',
     Platform: 'Custom',
   },
 };
@@ -354,66 +400,88 @@ const CARDS = TIERS.filter((tier) => !['Platform'].includes(tier.name)).map((tie
   return { ...tier, features };
 });
 
-const Packages: FunctionComponent = () => {
-  const theme = useTheme();
+const Packages: FunctionComponent = () => (
+  <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }}>
+    <Heading as="h1" size="h2">
+      Elevate your security
+    </Heading>
+    <Heading as="h2" size="h4" color="gray.400">
+      Keep trust at the application layer instead of deferring to the network
+    </Heading>
+    <Box as="section" py="14" px={{ base: '4', md: '8' }} style={{ width: '100%' }}>
+      <Accordion style={{ width: '100%' }}>
+        {SEGMENTS.map((segment) => (
+          <AccordionItem style={{ width: '100%' }}>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex="1" textAlign="left">
+                  For {segment.name}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <SimpleGrid
+                minChildWidth={2}
+                spacing={{ base: '8', lg: '0' }}
+                maxW="7xl"
+                mx="auto"
+                justifyItems="center"
+                alignItems="stretch"
+              >
+                {CARDS.filter((card) => segment.tiers.includes(card.name)).map((card) => (
+                  <PricingCard
+                    key={card.name}
+                    data={{
+                      price: card.price,
+                      name: card.name,
+                      priceUnit: card.price_unit,
+                      priceInterval: card.price_interval,
+                      features: card.features,
+                      floor: card.floor,
+                      onlyFloor: card.onlyFloor,
+                    }}
+                    isPopular={card.isPopular}
+                    display="flex"
+                    flexDirection="column"
+                    previousTier={
+                      TIERS[TIERS.findIndex((tier: Tier) => tier.name === card.name) - 1]
+                    }
+                    button={
+                      <ActionButton
+                        variant="outline"
+                        borderWidth="2px"
+                        mt={2}
+                        mb={8}
+                        href={card.cta.url}
+                      >
+                        {card.cta.text}
+                      </ActionButton>
+                    }
+                  />
+                ))}
+              </SimpleGrid>
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </Box>
+    <Box width="100%" p={4} mx={0} my={0}>
+      <Heading>What&apos;s an &quot;introductory price guarantee&quot;?</Heading>
+      We know pricing is hard to get right (this isn&apos;t our first rodeo). We&apos;re also much
+      more interested in spending our time building the most amazing product experience possible
+      rather than trying to have the perfect pricing. So the prices you see here are just enough to
+      let us get back to work. We know they&apos;ll change in the future. Will they go up? Or will
+      they go down? 🤷‍♂️ We don&apos;t know for sure.
+      <br />
+      <br />
+      What we do know is that if you sign up today no new customer will get a better deal than you.
+      If our prices go up, we agree honour the price you signed up at for 12 months. If prices go
+      down we&apos;ll automatically put you onto the better price. We&apos;re here to build trust
+      and a decades long relationship with you.
+    </Box>
 
-  return (
-    <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }}>
-      <Heading as="h1" size="h2">
-        Elevate your security
-      </Heading>
-      <Heading as="h2" size="h4" color="gray.400">
-        Keep trust at the application layer instead of deferring to the network
-      </Heading>
-      <Box as="section" py="14" px={{ base: '4', md: '8' }}>
-        <SimpleGrid
-          columns={{ base: 1, lg: 4 }}
-          spacing={{ base: '8', lg: '0' }}
-          maxW="7xl"
-          mx="auto"
-          justifyItems="center"
-          alignItems="stretch"
-        >
-          {CARDS.map((card) => (
-            <PricingCard
-              key={card.name}
-              data={{
-                price: card.price,
-                name: card.name,
-                priceUnit: card.price_unit,
-                priceInterval: card.price_interval,
-                features: card.features,
-                floor: card.floor,
-              }}
-              isPopular={card.isPopular}
-              display="flex"
-              flexDirection="column"
-              previousTier={TIERS[TIERS.findIndex((tier: Tier) => tier.name === card.name) - 1]}
-              button={
-                <ActionButton variant="outline" borderWidth="2px" mt={2} mb={8} href={card.cta.url}>
-                  {card.cta.text}
-                </ActionButton>
-              }
-            />
-          ))}
-        </SimpleGrid>
-      </Box>
-      <Box width="100%" p={4} mx={0} my={0}>
-        <Heading>What&apos;s an &quot;introductory price guarantee&quot;?</Heading>
-        We know pricing is hard to get right (this isn&apos;t our first rodeo). We&apos;re also much
-        more interested in spending our time building the most amazing product experience possible
-        rather than trying to have the perfect pricing. So the prices you see here are just enough
-        to let us get back to work. We know they&apos;ll change in the future. Will they go up? Or
-        will they go down? 🤷‍♂️ We don&apos;t know for sure.
-        <br />
-        <br />
-        What we do know is that if you sign up today no new customer will get a better deal than
-        you. If our prices go up, we agree honour the price you signed up at for 12 months. If
-        prices go down we&apos;ll automatically put you onto the better price. We&apos;re here to
-        build trust and a decades long relationship with you.
-      </Box>
-
-      <Box
+    {/* <Box
         width="100%"
         bgGradient={`linear-gradient(296.58deg, ${theme.colors.brand['600']} -6.45%, ${theme.colors.brand['900']} 96.92%)`}
         borderRadius="base"
@@ -478,50 +546,49 @@ const Packages: FunctionComponent = () => {
             </List>
           </Box>
         </Flex>
-      </Box>
+      </Box> */}
 
-      <Box>
-        <TableContainer fontSize="xs">
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th />
-                {TIERS.map((tier) => (
-                  <Th textAlign="center">{tier.name}</Th>
-                ))}
-              </Tr>
-            </Thead>
-            <Tbody>
-              {FEATURES.map((feature) => (
-                <Tr>
-                  <Td fontSize="xs">{feature.name}</Td>
-                  {TIERS.map((tier) => {
-                    if (hasFeature(tier, feature))
-                      return (
-                        <Td textAlign="center" fontSize="xx-small">
-                          {featureValue(tier, feature)}️
-                        </Td>
-                      );
-                    return <Td textAlign="center" fontSize="xs">{`\u2013`}</Td>;
-                  })}
-                </Tr>
+    <Box>
+      <TableContainer fontSize="xs">
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th />
+              {TIERS.map((tier) => (
+                <Th textAlign="center">{tier.name}</Th>
               ))}
-            </Tbody>
-            <Tfoot>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {FEATURES.map((feature) => (
               <Tr>
-                <Th />
-                {TIERS.map((tier) => (
-                  <Th>
-                    <Link href={tier.cta.url}>{tier.cta.text}</Link>
-                  </Th>
-                ))}
+                <Td fontSize="xs">{feature.name}</Td>
+                {TIERS.map((tier) => {
+                  if (hasFeature(tier, feature))
+                    return (
+                      <Td textAlign="center" fontSize="xx-small">
+                        {featureValue(tier, feature)}️
+                      </Td>
+                    );
+                  return <Td textAlign="center" fontSize="xs">{`\u2013`}</Td>;
+                })}
               </Tr>
-            </Tfoot>
-          </Table>
-        </TableContainer>
-      </Box>
-    </Container>
-  );
-};
+            ))}
+          </Tbody>
+          <Tfoot>
+            <Tr>
+              <Th />
+              {TIERS.map((tier) => (
+                <Th>
+                  <Link href={tier.cta.url}>{tier.cta.text}</Link>
+                </Th>
+              ))}
+            </Tr>
+          </Tfoot>
+        </Table>
+      </TableContainer>
+    </Box>
+  </Container>
+);
 
 export default Packages;
