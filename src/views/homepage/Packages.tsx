@@ -394,24 +394,53 @@ const CARDS = TIERS.filter((tier) => !['Platform'].includes(tier.name)).map((tie
 
 const Packages: FunctionComponent = () => (
   <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }}>
-    <Heading as="h1" size="h2">
-      Elevate your security
+    <Heading
+      as="h1"
+      fontWeight="extrabold"
+      textAlign="center"
+      color="white"
+      size={{ base: '2xl', lg: '3xl' }}
+      letterSpacing={{ base: '-1.5px', lg: '-1.5px' }}
+      lineHeight={{ base: 1, lg: 1.5 }}
+    >
+      Plans for any scale
     </Heading>
-    <Heading as="h2" size="h4" color="gray.400">
-      Keep trust at the application layer instead of deferring to the network
+    <Heading
+      as="h2"
+      textAlign="center"
+      fontWeight="medium"
+      color="rgba(255, 255, 255, 0.8)"
+      size={{ base: 'lg', lg: 'xl' }}
+      letterSpacing={{ base: '-1.7px', md: '-2px', lg: '-1.7px' }}
+      lineHeight={{ base: 1, md: 1.2, lg: 1 }}
+      mt={{ base: 5, lg: 1 }}
+      mx="20"
+      mb="20"
+    >
+      Start free &mdash; with predictable pricing that scales when you need
     </Heading>
     <Box as="section" py="14" px={{ base: '4', md: '8' }} style={{ width: '100%' }}>
-      <Accordion style={{ width: '100%' }}>
+      <Accordion style={{ width: '100%' }} allowMultiple allowToggle defaultIndex={[0, 1, 2]}>
         {SEGMENTS.map((segment) => (
-          <AccordionItem style={{ width: '100%' }}>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
+          <AccordionItem
+            style={{
+              width: '100%',
+              borderStyle: 'none',
+              backgroundColor: 'white',
+              borderRadius: 15,
+            }}
+            p="4"
+            shadow="2xl"
+            my={8}
+          >
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                <Heading as="h3" letterSpacing="-1.5px">
                   For {segment.name}
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
+                </Heading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
             <AccordionPanel>
               <SimpleGrid
                 minChildWidth={2}
@@ -420,6 +449,8 @@ const Packages: FunctionComponent = () => (
                 mx="auto"
                 justifyItems="center"
                 alignItems="stretch"
+                mt="8"
+                gap="8"
               >
                 {CARDS.filter((card) => segment.tiers.includes(card.name)).map((card) => (
                   <PricingCard
@@ -433,6 +464,11 @@ const Packages: FunctionComponent = () => (
                       floor: card.floor,
                       onlyFloor: card.onlyFloor,
                     }}
+                    borderStyle="solid"
+                    borderColor="#ddd"
+                    borderWidth="1px"
+                    borderRadius={15}
+                    // shadow="lg"
                     isPopular={card.isPopular}
                     display="flex"
                     flexDirection="column"
