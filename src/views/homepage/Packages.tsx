@@ -140,12 +140,6 @@ const TIERS: Tier[] = [
 ];
 
 const FEATURES: Feature[] = [
-  {
-    name: 'Introductory price guarantee',
-    tiers: ['Free', 'Premium', 'Small', 'Medium', 'Large', 'Business Critical'],
-    onCard: true,
-  },
-
   { name: 'Spaces', tiers: ['*'], hasLimits: true, onCard: true },
   // { name: 'Space administrators', tiers: ['*'], hasLimits: true, onCard: true  },
 
@@ -191,7 +185,6 @@ const FEATURES: Feature[] = [
     tiers: ['Medium', 'Large', 'Business Critical', 'Platform'],
   },
   { name: 'Customized terms', tiers: ['Large', 'Business Critical', 'Platform'] },
-  { name: 'Private labelling', tiers: ['Business Critical'], onCard: true },
 ];
 
 const LIMITS: { [id: string]: { [id: string]: string } } = {
@@ -376,7 +369,6 @@ const CARDS = TIERS.filter((tier) => !['Platform'].includes(tier.name)).map((tie
   const features = FEATURES.filter((f) => f.onCard)
     .filter((feature) => {
       if (idx > 0) {
-        // if (feature.name === 'Introductory price guarantee') return true;
         if (feature.hasLimits) {
           if (tierLimit(tier, feature) === tierLimit(TIERS[idx - 1], feature)) {
             return false;
@@ -466,21 +458,6 @@ const Packages: FunctionComponent = () => (
         ))}
       </Accordion>
     </Box>
-    <Box width="100%" p={4} mx={0} my={0}>
-      <Heading>What&apos;s an &quot;introductory price guarantee&quot;?</Heading>
-      We know pricing is hard to get right (this isn&apos;t our first rodeo). We&apos;re also much
-      more interested in spending our time building the most amazing product experience possible
-      rather than trying to have the perfect pricing. So the prices you see here are just enough to
-      let us get back to work. We know they&apos;ll change in the future. Will they go up? Or will
-      they go down? 🤷‍♂️ We don&apos;t know for sure.
-      <br />
-      <br />
-      What we do know is that if you sign up today no new customer will get a better deal than you.
-      If our prices go up, we agree honour the price you signed up at for 12 months. If prices go
-      down we&apos;ll automatically put you onto the better price. We&apos;re here to build trust
-      and a decades long relationship with you.
-    </Box>
-
     {/* <Box
         width="100%"
         bgGradient={`linear-gradient(296.58deg, ${theme.colors.brand['600']} -6.45%, ${theme.colors.brand['900']} 96.92%)`}

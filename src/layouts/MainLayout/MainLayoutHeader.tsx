@@ -2,6 +2,7 @@ import { FunctionComponent, useContext, RefObject } from 'react';
 import { Box, Container, Flex, forwardRef, useDisclosure } from '@chakra-ui/react';
 import Link from 'next/link';
 
+import LogoGray from '@assets/logo-gray.svg';
 import LogoDark from '@assets/logo-dark.svg';
 import MainLayoutMobileNav from '@layouts/MainLayout/MainLayoutMobileNav';
 import { MainLayoutDesktopNav } from '@layouts/MainLayout/MainLayoutDesktopNav';
@@ -13,10 +14,13 @@ import BrandAssetPopover from '@root/components/BrandAssetPopover';
 import LayoutMobileHeader from '../components/LayoutMobileHeader';
 
 const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
+  const { hasGradient } = props;
   const { isScrolled } = useScroll(40, true, ref as RefObject<HTMLDivElement>);
   const { isBelowSmallLaptop } = useContext(MobileNavbarContext);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const headerDesktopPaddingY = isScrolled ? 5 : 8;
+  const StartLogo = hasGradient ? LogoGray : LogoDark;
+  const startbg = hasGradient ? 'transparent' : 'white';
 
   if (isBelowSmallLaptop) {
     return (
@@ -37,7 +41,7 @@ const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
       pos="fixed"
       top={0}
       zIndex={1}
-      bgColor="white"
+      bgColor={isScrolled ? 'white' : startbg}
       boxShadow={isScrolled ? 'md' : 'none'}
       py={{ base: 4, lg: headerDesktopPaddingY }}
       transition="all 400ms ease-in-out"
@@ -48,7 +52,7 @@ const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
           <Link href={HOME_PATH} passHref legacyBehavior>
             <Box as="a" flex={0} pr={{ base: 2, xl: 4 }} maxW="11rem" h="auto">
               <Box
-                as={LogoDark}
+                as={isScrolled ? LogoDark : StartLogo}
                 alt="Homepage link"
                 transition="all 400ms ease-in-out"
                 w={{ base: '7.875rem', lg: isScrolled ? '8.75rem' : '11rem' }}

@@ -13,6 +13,8 @@ const PricingPage: NextPageWithLayout = () => (
   </Box>
 );
 
-PricingPage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
+PricingPage.getLayout = (page: ReactElement): ReactNode => (
+  <MainLayout gradient={['#4FDAB8', '#52C7EA']}>{page}</MainLayout>
+);
 
 export default PricingPage;
