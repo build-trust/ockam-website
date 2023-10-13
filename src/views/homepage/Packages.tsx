@@ -28,6 +28,7 @@ import GcpLogo from '@assets/images/logos/gcp.svg';
 import { Tier, Feature, LIMITS, TIERS, FEATURES, SEGMENTS } from '@components/Packaging/tiers';
 import MarketplaceButton from '@root/components/Packaging/MarketplaceButton';
 
+const noHeadingOrphanStyle = { textWrap: 'balance' };
 const hasFeature = (tier: Tier, feature: Feature): boolean => {
   if (feature.tiers.indexOf('*') >= 0) return true;
   if (feature.tiers.indexOf(tier.name) >= 0) return true;
@@ -185,7 +186,7 @@ const Packages: FunctionComponent = () => (
         as="h4"
         letterSpacing="-1px"
         size="lg"
-        style={{ textWrap: 'balance' }}
+        style={noHeadingOrphanStyle}
         mb="4"
         color="#242A31"
       >
