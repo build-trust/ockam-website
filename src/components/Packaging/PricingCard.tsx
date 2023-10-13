@@ -114,7 +114,7 @@ const Price = (props: PriceProps): JSX.Element => {
 
   return (
     <VStack mb={4}>
-      <HStack height="4em">
+      <HStack height="4em" key={`price-heading-${price}-${floor}`}>
         {onlyFloor && <Text>Starting at</Text>}
         <Heading size={priceSize()} fontWeight="inherit" lineHeight="0.9em" alignSelf="center">
           {formattedPrice()}
@@ -151,7 +151,7 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
   return (
     <Card {...rest} isPopular={isPopular}>
       <VStack spacing={6} h={16}>
-        <Heading size="md" fontWeight="extrabold">
+        <Heading size="md" fontWeight="extrabold" key={`price-head-${name}`}>
           {name}
         </Heading>
       </VStack>

@@ -19,10 +19,12 @@ import {
   AccordionButton,
   AccordionIcon,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 
 import ActionButton from '@components/Packaging/ActionButton';
 import PricingCard from '@components/Packaging/PricingCard';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
+import awsLogo from '@assets/images/logos/aws.svg';
 
 type Cta = {
   text: string;
@@ -419,10 +421,15 @@ const Packages: FunctionComponent = () => (
     >
       Start free &mdash; with predictable pricing that scales when you need
     </Heading>
+    <Box>
+      <Image src={awsLogo} alt="AWS" />
+    </Box>
+
     <Box as="section" py="14" px={{ base: '4', md: '8' }} style={{ width: '100%' }}>
-      <Accordion style={{ width: '100%' }} allowMultiple allowToggle defaultIndex={[0, 1, 2]}>
+      <Accordion style={{ width: '100%' }} allowMultiple defaultIndex={[0, 1, 2]}>
         {SEGMENTS.map((segment) => (
           <AccordionItem
+            key={segment.name}
             style={{
               width: '100%',
               borderStyle: 'none',
@@ -494,6 +501,7 @@ const Packages: FunctionComponent = () => (
         ))}
       </Accordion>
     </Box>
+
     {/* <Box
         width="100%"
         bgGradient={`linear-gradient(296.58deg, ${theme.colors.brand['600']} -6.45%, ${theme.colors.brand['900']} 96.92%)`}
@@ -566,33 +574,45 @@ const Packages: FunctionComponent = () => (
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th />
+              <Th key="blank-header-column-1" />
               {TIERS.map((tier) => (
-                <Th textAlign="center">{tier.name}</Th>
+                <Th textAlign="center" key={tier.name}>
+                  {tier.name}
+                </Th>
               ))}
             </Tr>
           </Thead>
           <Tbody>
             {FEATURES.map((feature) => (
-              <Tr>
+              <Tr key={feature.name}>
                 <Td fontSize="xs">{feature.name}</Td>
                 {TIERS.map((tier) => {
                   if (hasFeature(tier, feature))
                     return (
-                      <Td textAlign="center" fontSize="xx-small">
+                      <Td
+                        textAlign="center"
+                        fontSize="xx-small"
+                        key={`${feature.name}-${tier.name}`}
+                      >
                         {featureValue(tier, feature)}️
                       </Td>
                     );
-                  return <Td textAlign="center" fontSize="xs">{`\u2013`}</Td>;
+                  return (
+                    <Td
+                      textAlign="center"
+                      fontSize="xs"
+                      key={`${feature.name}-${tier.name}`}
+                    >{`\u2013`}</Td>
+                  );
                 })}
               </Tr>
             ))}
           </Tbody>
           <Tfoot>
             <Tr>
-              <Th />
+              <Th key="blank-footer-column-1" />
               {TIERS.map((tier) => (
-                <Th>
+                <Th key={`cta-${tier.name}`}>
                   <Link href={tier.cta.url}>{tier.cta.text}</Link>
                 </Th>
               ))}

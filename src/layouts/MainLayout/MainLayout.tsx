@@ -8,13 +8,13 @@ import LayoutFooter from '../components/LayoutFooter';
 
 import MainLayoutHeader from './MainLayoutHeader';
 
-const GradientContainer = styled(Flex)<{ leftColor?: string; rightColor?: string }>`
-  ${({ leftColor, rightColor }): string | undefined =>
-    leftColor &&
-    rightColor &&
+const GradientContainer = styled(Flex)<{ leftcolor?: string; rightcolor?: string }>`
+  ${({ leftcolor, rightcolor }): string | undefined =>
+    leftcolor &&
+    rightcolor &&
     `
     background-color: red;
-    background-image: url('/hero-slice.png'), linear-gradient(white, white), linear-gradient(to right, ${leftColor}, ${rightColor});
+    background-image: url('/hero-slice.png'), linear-gradient(white, white), linear-gradient(to right, ${leftcolor}, ${rightcolor});
     background-repeat: no-repeat, repeat-x, no-repeat;
     background-size: 100%, 100%, 100% 75vh;
     background-position: calc(1px - 1px) calc(75vh - 256*100vw/5120), calc(1px - 1px) calc(75vh - 0px), calc(1px - 1px) calc(1px - 1px);
@@ -30,11 +30,11 @@ const MainLayout: FunctionComponent<LayoutProps> = ({ gradient, children }) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const headerHeight = `${headerRef.current?.clientHeight || 80}px`;
   const hasGradient = !!gradient;
-  let leftColor;
-  let rightColor;
+  let leftcolor;
+  let rightcolor;
   if (hasGradient) {
-    leftColor = gradient.pop();
-    rightColor = gradient.pop();
+    leftcolor = gradient.pop();
+    rightcolor = gradient.pop();
   }
 
   return (
@@ -47,8 +47,8 @@ const MainLayout: FunctionComponent<LayoutProps> = ({ gradient, children }) => {
         minH="full"
         w="full"
         overflowX="hidden"
-        leftColor={leftColor}
-        rightColor={rightColor}
+        leftcolor={leftcolor}
+        rightcolor={rightcolor}
       >
         <Box as="main" flex={1} w="full" pt={{ base: 0, lg: headerHeight }}>
           {children}
