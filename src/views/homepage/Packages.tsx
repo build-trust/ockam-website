@@ -53,6 +53,7 @@ const featureValue = (tier: Tier, feature: Feature): string => {
 const CARDS = TIERS.filter((tier) => !['Platform'].includes(tier.name)).map((tier, idx) => {
   const features = FEATURES.filter((f) => f.onCard)
     .filter((feature) => {
+      const segment = SEGMENTS.find((s) => s.tiers.includes(tier.name));
       if (idx > 0) {
         if (feature.hasLimits) {
           if (tierLimit(tier, feature) === tierLimit(TIERS[idx - 1], feature)) {
@@ -60,8 +61,9 @@ const CARDS = TIERS.filter((tier) => !['Platform'].includes(tier.name)).map((tie
           }
           return true;
         }
-        if (feature.tiers.indexOf('*') >= 0) return false;
-        if (hasFeature(TIERS[idx - 1], feature)) return false;
+        // if (feature.tiers.indexOf('*') >= 0) return false;
+        if (hasFeature(TIERS[idx - 1], feature) && segment?.tiers.includes(TIERS[idx - 1].name))
+          return false;
       }
       if (feature.tiers.indexOf('*') >= 0) return true;
       if (feature.tiers.indexOf(tier.name) >= 0) return true;
@@ -154,12 +156,17 @@ const Packages: FunctionComponent = () => (
                     borderColor="#ddd"
                     borderWidth="1px"
                     borderRadius={15}
-                    // shadow="lg"
                     isPopular={card.isPopular}
                     display="flex"
                     flexDirection="column"
                     previousTier={
-                      TIERS[TIERS.findIndex((tier: Tier) => tier.name === card.name) - 1]
+                      TIERS[
+                        TIERS.findIndex(
+                          (tier: Tier) =>
+                            tier.name ===
+                            segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1]
+                        )
+                      ]
                     }
                     button={
                       <ActionButton
