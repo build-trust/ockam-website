@@ -80,8 +80,8 @@ request.timeout.ms=30000
 security.protocol=SASL_PLAINTEXT
 sasl.mechanism=PLAIN
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
-        username="YOUR_CONFLUENT_CLOUD_USER_NAME" \
-        password="YOUR_CONFLUENT_CLOUD_PASSWORD";
+        username="YOUR_CONFLUENT_CLOUD_KAFKA_CLUSTER_API_KEY" \
+        password="YOUR_CONFLUENT_CLOUD_KAFKA_CLUSTER_API_SECRET";
 EOF
 ```
 
@@ -110,7 +110,7 @@ ockam node create consumer \
 Once that completes we can now expose our Kafka bootstrap server. This is like the remote Kafka bootstrap server and brokers have become virtually adjacent on `localhost:4000`:
 
 ```bash
-ockam kafka-consumer create --node consumer
+ockam kafka-consumer create --at consumer
 ```
 
 Copy the `kafka.config` file across, and use it to create a new topic that we'll use for sending messages between the producer and consumer in this demo (in this case we've called the topic `demo-topic`)
@@ -160,7 +160,7 @@ ockam node create producer1 \
 And expose our Kafka bootstrap server on port `5000` so we can start sending messages through Confluent Cloud:
 
 ```bash
-ockam kafka-producer create --node producer1
+ockam kafka-producer create --at producer1
 ```
 
 Make sure to copy the `kafka.config` file across, and start your producer:
