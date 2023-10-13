@@ -17,7 +17,7 @@ const GradientContainer = styled(Flex)<{ leftcolor?: string; rightcolor?: string
     background-image: url('/hero-slice.png'), linear-gradient(white, white), linear-gradient(to right, ${leftcolor}, ${rightcolor});
     background-repeat: no-repeat, repeat-x, no-repeat;
     background-size: 100%, 100%, 100% 75vh;
-    background-position: calc(1px - 1px) calc(75vh - 256*100vw/5120), calc(1px - 1px) calc(75vh - 0px), calc(1px - 1px) calc(1px - 1px);
+    background-position: calc(1px - 1px) calc(75vh - 254*100vw/5120), calc(1px - 1px) calc(75vh - 0px), calc(1px - 1px) calc(1px - 1px);
   `}
 `;
 

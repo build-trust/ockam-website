@@ -19,331 +19,14 @@ import {
   AccordionButton,
   AccordionIcon,
 } from '@chakra-ui/react';
-import Image from 'next/image';
 
 import ActionButton from '@components/Packaging/ActionButton';
 import PricingCard from '@components/Packaging/PricingCard';
-import { CONTACT_FORM_PATH } from '@root/consts/paths';
-import awsLogo from '@assets/images/logos/aws.svg';
-
-type Cta = {
-  text: string;
-  url: string;
-};
-type Tier = {
-  name: string;
-  text: string;
-  price: string;
-  price_interval?: string;
-  price_unit?: string;
-  floor?: string;
-  onlyFloor?: boolean;
-  isPopular?: boolean;
-  cta: Cta;
-};
-type Feature = {
-  name: string;
-  description?: string;
-  more_info_link?: string;
-  tiers: string[];
-  hasLimits?: boolean;
-  limits?: string;
-  onCard?: boolean;
-};
-
-type Segment = {
-  name: string;
-  tiers: string[];
-};
-const SEGMENTS: Segment[] = [
-  { name: 'Developers', tiers: ['Free', 'Premium'] },
-  { name: 'Companies', tiers: ['Small', 'Medium', 'Large'] },
-  { name: 'Enterprise', tiers: ['Business Critical'] },
-];
-const TIERS: Tier[] = [
-  {
-    name: 'Free',
-    text: 'The Tools for Builders',
-    price: '$0',
-    price_interval: 'mo',
-    isPopular: true,
-    cta: {
-      text: 'Get started →',
-      url: '/download',
-    },
-  },
-
-  {
-    name: 'Premium',
-    text: 'The Tools for Builders',
-    price: '$5',
-    price_interval: 'mo',
-    cta: {
-      text: 'Start 14-day trial →',
-      url: '/download',
-    },
-  },
-
-  {
-    name: 'Small',
-    text: 'The Tools for Builders',
-    price: '$500',
-    price_interval: 'mo',
-    onlyFloor: true,
-    cta: {
-      text: 'Start 14-day trial →',
-      url: '/download',
-    },
-  },
-  {
-    name: 'Medium',
-    text: 'The Tools for Builders',
-    price: '$2500',
-    price_interval: 'mo',
-    onlyFloor: true,
-    cta: {
-      text: 'Start 14-day trial →',
-      url: '/download',
-    },
-  },
-  {
-    name: 'Large',
-    text: 'The Tools for Builders',
-    price: '$10000',
-    price_interval: 'mo',
-    onlyFloor: true,
-    cta: {
-      text: 'Talk to sales →',
-      url: `${CONTACT_FORM_PATH}`,
-    },
-  },
-
-  {
-    name: 'Business Critical',
-    text: 'The Tools for Builders',
-    price: '50000',
-    price_interval: 'mo',
-    onlyFloor: true,
-    cta: {
-      text: 'Talk to sales →',
-      url: `${CONTACT_FORM_PATH}`,
-    },
-  },
-
-  // {
-  //   name: 'Platform',
-  //   text: 'The Tools for Builders',
-  //   price: 'Talk to sales',
-  //   cta: {
-  //     text: 'Talk to sales →',
-  //     url: `${CONTACT_FORM_PATH}`,
-  //   },
-  // },
-];
-
-const FEATURES: Feature[] = [
-  { name: 'Spaces', tiers: ['*'], hasLimits: true, onCard: true },
-  // { name: 'Space administrators', tiers: ['*'], hasLimits: true, onCard: true  },
-
-  { name: 'Projects per space', tiers: ['*'], hasLimits: true, onCard: false },
-  // { name: 'Project administrators', tiers: ['*'], hasLimits: true, onCard: true  },
-
-  { name: 'Project members', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Project authority nodes', tiers: ['*'], hasLimits: true, onCard: false },
-  { name: 'Credential authorities', tiers: ['*'], hasLimits: true, onCard: false },
-
-  // { name: 'Throughput - Platform API requests', tiers: ['*'], hasLimits: true, onCard: false },
-
-  // { name: 'TCP transport endpoints', tiers: ['*'], hasLimits: true, onCard: false },
-
-  // { name: 'Transparency logs', tiers: ['Pro', 'Enterprise', 'Platform'], onCard: true },
-  // { name: 'Audit logs', tiers: ['*'], hasLimits: true, onCard: true },
-
-  // { name: 'Authority node identity', tiers: ['*'], hasLimits: true, onCard: false },
-  // { name: 'Authority node identity keys', tiers: ['*'], hasLimits: true, onCard: false },
-
-  // { name: 'Project enrollers', tiers: ['*'], hasLimits: true, onCard: false },
-  // { name: 'Project members', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Enrollment methods', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Project nodes', tiers: ['*'], hasLimits: true, onCard: true },
-
-  // { name: 'Encrypted relays', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Identities', tiers: ['*'], hasLimits: true, onCard: true },
-  { name: 'Included data transfer', tiers: ['*'], hasLimits: true, onCard: false },
-  { name: 'Cloud managed', tiers: ['*'], onCard: true },
-  { name: 'Attribute-based access controls', tiers: ['*'], onCard: true },
-  { name: 'Ockam Command', tiers: ['*'], onCard: true },
-  { name: 'Programming libraries', tiers: ['*'], onCard: true },
-  { name: 'Community-based support', tiers: ['*'], onCard: true },
-  { name: 'Ockam support', tiers: ['Small', 'Medium', 'Large', 'Business Critical'], onCard: true },
-  { name: 'Premium Ockam support', tiers: ['Large', 'Business Critical'], onCard: true },
-  { name: 'Volume discounts', tiers: ['Large', 'Business Critical', 'Platform'], onCard: true },
-  {
-    name: 'Service Level Agreements (SLAs)',
-    tiers: ['Medium', 'Large', 'Business Critical', 'Platform'],
-  },
-  { name: 'Customized terms', tiers: ['Large', 'Business Critical', 'Platform'] },
-];
-
-const LIMITS: { [id: string]: { [id: string]: string } } = {
-  Spaces: {
-    Free: 'Up to 1',
-    Premium: 'Up to 1',
-    Small: 'Unlimited',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-
-  'Projects per space': {
-    Free: 'Up to 1',
-    Premium: 'Up to 1',
-    Small: 'Unlimited',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-
-  'Project authority nodes': {
-    Free: 'Up to 1',
-    Premium: 'Up to 1',
-    Small: 'Unlimited',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-  'Credential authorities': {
-    Free: 'Up to 1',
-    Premium: 'Up to 1',
-    Small: 'Unlimited',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-
-  // 'Throughput - Platform API requests': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-
-  // 'TCP transport endpoints': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  // 'Audit logs': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-
-  // 'Authority node identity': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  // 'Authority node identity keys': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-
-  // 'Project enrollers': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  'Project members': {
-    Free: 'Up to 2',
-    Premium: 'Up to 10',
-    Small: 'Unlimited',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-
-  'Enrollment methods': {
-    Free: '1',
-    Premium: '1',
-    Small: 'Up to 2',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-  },
-
-  'Project nodes': {
-    Free: 'Up to 5',
-    Premium: 'Up to 10',
-    Small: '40 included',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-
-  // 'Encrypted relays': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  // 'Team members': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  Identities: {
-    Free: 'Up to 5',
-    Premium: 'Up to 5',
-    Small: 'Up to 20',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-  'Included data transfer': {
-    Free: '10/GB/mo',
-    Premium: '20/GB/mo',
-    Small: '80/GB/mo',
-    Medium: '2,000/GB/mo',
-    Large: '50,000/GB/mo',
-    'Business Critical': 'Custom',
-    Platform: 'Custom',
-  },
-};
+import AwsLogo from '@assets/images/logos/aws.svg';
+import AzureLogo from '@assets/images/logos/azure.svg';
+import GcpLogo from '@assets/images/logos/gcp.svg';
+import { Tier, Feature, LIMITS, TIERS, FEATURES, SEGMENTS } from '@components/Packaging/tiers';
+import MarketplaceButton from '@root/components/Packaging/MarketplaceButton';
 
 const hasFeature = (tier: Tier, feature: Feature): boolean => {
   if (feature.tiers.indexOf('*') >= 0) return true;
@@ -421,10 +104,6 @@ const Packages: FunctionComponent = () => (
     >
       Start free &mdash; with predictable pricing that scales when you need
     </Heading>
-    <Box>
-      <Image src={awsLogo} alt="AWS" />
-    </Box>
-
     <Box as="section" py="14" px={{ base: '4', md: '8' }} style={{ width: '100%' }}>
       <Accordion style={{ width: '100%' }} allowMultiple defaultIndex={[0, 1, 2]}>
         {SEGMENTS.map((segment) => (
@@ -500,6 +179,30 @@ const Packages: FunctionComponent = () => (
           </AccordionItem>
         ))}
       </Accordion>
+    </Box>
+    <Box textAlign="center" mt="10" mb="20">
+      <Heading
+        as="h4"
+        letterSpacing="-1px"
+        size="lg"
+        style={{ textWrap: 'balance' }}
+        mb="4"
+        color="#242A31"
+      >
+        Sign up through marketplaces to unify billing and leverage existing commitments with cloud
+        providers
+      </Heading>
+      <Link href="https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk" isExternal>
+        <MarketplaceButton padding={3} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
+          <AwsLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
+        </MarketplaceButton>
+      </Link>
+      <MarketplaceButton padding={3} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
+        <AzureLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
+      </MarketplaceButton>
+      <MarketplaceButton padding={1} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
+        <GcpLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
+      </MarketplaceButton>
     </Box>
 
     {/* <Box
