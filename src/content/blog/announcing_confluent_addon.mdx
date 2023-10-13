@@ -61,7 +61,7 @@ ockam project addon configure confluent \
   --bootstrap-server YOUR_CONFLUENT_CLOUD_BOOTSTRAP_SERVER_ADDRESS
 ```
 
-As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tokens. We'll start by creating one for our consumer:​
+As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tickets. We'll start by creating one for our consumer:​
 
 ```bash
 ockam project ticket --attribute role=member > consumer.ticket
@@ -174,7 +174,7 @@ kafka-console-producer.sh \
 
 Your existing producer code will now be running, communicating with the broker via the secure portal we've created that has exposed the Kafka bootstrap server and Kafka brokers on local ports, and sending messages through to the consumer that was setup in the previous step. However all message payloads will be transparently encrypted as they enter the node on the producer, and not decrypted until they exit the consumer node. At no point in transit can the broker see the plaintext message payload that was initially sent by the producer.
 
-To take this example further you could repeat this step for _N_ number of producers by generating a new enrollment token for each, and then repeating the steps in this section.
+To take this example further you could repeat this step for _N_ number of producers by generating a new enrollment ticket for each, and then repeating the steps in this section.
 
 If you look at the encrypted messages inside Confluent Cloud, they will render as unrecognizable characters like in the following screen capture:
 
