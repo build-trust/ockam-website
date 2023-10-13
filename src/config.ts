@@ -1,5 +1,14 @@
 import { CONTACT_PAGE_PATH } from '@consts/paths';
 
+declare module 'react' {
+  interface CSSProperties {
+    /**
+     * Add your custom properties here
+     */
+    textWrap?: string | number;
+  }
+}
+
 const getRootUrl = (): string => {
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production')
     return process.env.NEXT_PUBLIC_SITE_URL || 'missing NEXT_PUBLIC_SITE_URL env';
