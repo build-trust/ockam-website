@@ -39,8 +39,8 @@ const tierColor = (tier: Tier): string | undefined =>
   SEGMENTS.find((s) => s.tiers.includes(tier.name))?.color;
 const tierColorLight = (tier: Tier): string | undefined =>
   chroma(tierColor(tier) || 'white')
-    .brighten(3)
-    .desaturate(0.7)
+    .brighten(2.5)
+    .desaturate(0.4)
     .hex();
 const tierColorDark = (tier: Tier): string | undefined =>
   chroma(tierColor(tier) || 'black')
@@ -135,7 +135,7 @@ const Packages: FunctionComponent = () => (
             shadow="2xl"
             my={8}
           >
-            <AccordionButton>
+            <AccordionButton _hover={{ background: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
                 <Heading as="h3" letterSpacing="-1.5px">
                   For {segment.name}
@@ -315,7 +315,7 @@ const Packages: FunctionComponent = () => (
                   borderTop={`4px solid ${tierColor(tier)}`}
                   background={tierColorLight(tier)}
                   color={tierColorDark(tier)}
-                  border="none"
+                  borderBottom="none"
                 >
                   {tier.name}
                 </Th>
@@ -333,7 +333,7 @@ const Packages: FunctionComponent = () => (
                     return (
                       <Td
                         textAlign="center"
-                        fontSize="xx-small"
+                        fontSize="small"
                         key={`${feature.name}-${tier.name}`}
                         background={tierColorLight(tier)}
                         color={tierColorDark(tier)}
@@ -349,6 +349,7 @@ const Packages: FunctionComponent = () => (
                       background={tierColorLight(tier)}
                       color={tierColorDark(tier)}
                       key={`${feature.name}-${tier.name}`}
+                      border="none"
                     >{`\u2013`}</Td>
                   );
                 })}
