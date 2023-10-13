@@ -255,3 +255,13 @@ jobs:
         continue-on-error: true
         run: |
           vale src/content/**/*.mdx
+
+  lint:
+    name: All - lint
+    runs-on: ubuntu-20.04
+    container: # gitlab.com/greut/eclint
+      image: greut/eclint:v0.3.3@sha256:95e9a3dcbd236bae6569625cd403175cbde3705303774e7baca418b6442b8d77
+    steps:
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+      - shell: sh
+        run: eclint -color=always
