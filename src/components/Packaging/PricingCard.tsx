@@ -1,13 +1,4 @@
-import {
-  ComponentWithAs,
-  Heading,
-  HStack,
-  List,
-  ListItem,
-  Text,
-  useTheme,
-  VStack,
-} from '@chakra-ui/react';
+import { ComponentWithAs, Heading, HStack, List, ListItem, Text, VStack } from '@chakra-ui/react';
 import { HiBadgeCheck as Check } from 'react-icons/hi';
 import { ElementType, ReactElement } from 'react';
 
@@ -48,6 +39,7 @@ interface PricingCardProps extends CardProps {
   icon?: ElementType;
   button: ReactElement;
   previousTier?: Tier;
+  segmentColor: string;
 }
 
 interface PriceProps {
@@ -56,9 +48,10 @@ interface PriceProps {
   interval?: string;
   floor?: string;
   onlyFloor?: boolean;
+  segmentColor: string;
 }
 const Price = (props: PriceProps): JSX.Element => {
-  const { price, unit, interval, floor, onlyFloor } = props;
+  const { price, unit, interval, floor, onlyFloor, segmentColor } = props;
 
   const units = (): JSX.Element | undefined => {
     if (onlyFloor) {
@@ -107,7 +100,7 @@ const Price = (props: PriceProps): JSX.Element => {
   };
 
   const floorPrice = (): JSX.Element => (
-    <Text width="100%" fontSize="xs" as="em" textAlign="center" height="1em">
+    <Text width="100%" fontSize="xs" as="em" textAlign="center" height="1em" color={segmentColor}>
       {floor ? `min cost: ${floor}` : ''}
     </Text>
   );
@@ -133,9 +126,8 @@ const Price = (props: PriceProps): JSX.Element => {
   );
 };
 const PricingCard = (props: PricingCardProps): JSX.Element => {
-  const { data, icon, button, isPopular, previousTier, ...rest } = props;
+  const { data, icon, button, isPopular, previousTier, segmentColor, ...rest } = props;
   const { features, price, priceUnit, priceInterval, name, floor, onlyFloor } = data;
-  const theme = useTheme();
 
   const featureName = (feature: Feature): string => {
     if (feature.limits) {
@@ -144,21 +136,22 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
     return feature.name;
   };
 
-  const previousFeatures = (): JSX.Element | undefined => {
+  const previousFeatures = (): JSX.Element => {
+    let text = 'Features';
     if (previousTier) {
-      return (
-        <ListItem fontWeight="medium" key={`${name}-prev`}>
-          Everything in {previousTier.name}, plus:
-        </ListItem>
-      );
+      text = `Everything in ${previousTier.name}, plus`;
     }
-    return undefined;
+    return (
+      <Heading as="h4" size="md" letterSpacing="-0.5px" mb="2">
+        {text}
+      </Heading>
+    );
   };
 
   return (
     <Card {...rest} isPopular={isPopular} pt={4}>
       <VStack spacing={6} align="left" mb={0}>
-        <Heading size="md" fontWeight="extrabold" key={`price-head-${name}`}>
+        <Heading size="md" fontWeight="extrabold" key={`price-head-${name}`} color={segmentColor}>
           {name}
         </Heading>
       </VStack>
@@ -168,14 +161,15 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
         interval={priceInterval}
         floor={floor}
         onlyFloor={onlyFloor}
+        segmentColor={segmentColor}
       />
       {button}
-      <List spacing="1" mb="8" maxW="28ch" mx="0" fontSize="xs">
+      <List spacing="1" mb="8" maxW="100%" mx="0" fontSize="xs">
         {previousFeatures()}
         {features.map((feature) => (
           <ListItem fontWeight="medium" key={`${name}-${feature.name}`}>
             <Check
-              color={theme.colors.avocado['600']}
+              color={segmentColor}
               size="1.5em"
               style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'middle' }}
             />

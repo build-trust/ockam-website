@@ -19,6 +19,7 @@ import {
   AccordionButton,
   AccordionIcon,
 } from '@chakra-ui/react';
+import chroma from 'chroma-js';
 
 import ActionButton from '@components/Packaging/ActionButton';
 import PricingCard from '@components/Packaging/PricingCard';
@@ -33,6 +34,13 @@ const hasFeature = (tier: Tier, feature: Feature): boolean => {
   if (feature.tiers.indexOf(tier.name) >= 0) return true;
   return false;
 };
+
+const tierColor = (tier: Tier): string | undefined =>
+  SEGMENTS.find((s) => s.tiers.includes(tier.name))?.color;
+const tierColorLight = (tier: Tier): string | undefined =>
+  chroma(tierColor(tier)).brighten(3).desaturate(0.7).hex();
+const tierColorDark = (tier: Tier): string | undefined =>
+  chroma(tierColor(tier)).darken(0.75).saturate(0.75).hex();
 
 const tierLimit = (tier: Tier, feature: Feature): string | undefined => {
   if (feature.name in LIMITS) {
@@ -152,6 +160,7 @@ const Packages: FunctionComponent = () => (
                       floor: card.floor,
                       onlyFloor: card.onlyFloor,
                     }}
+                    segmentColor={segment.color}
                     borderStyle="solid"
                     borderColor="#ddd"
                     borderWidth="1px"
@@ -175,6 +184,14 @@ const Packages: FunctionComponent = () => (
                         mt={2}
                         mb={8}
                         href={card.cta.url}
+                        border="none"
+                        borderColor={chroma(segment.color).darken(0.75).saturate(0.75).hex()}
+                        color={chroma(segment.color).darken(0.75).saturate(0.75).hex()}
+                        background={chroma(segment.color).brighten(1.5).desaturate(0.75).hex()}
+                        _hover={{
+                          background: chroma(segment.color).darken(0.75).saturate(0.75).hex(),
+                          color: chroma(segment.color).brighten(1.5).desaturate(0.75).hex(),
+                        }}
                       >
                         {card.cta.text}
                       </ActionButton>
@@ -284,9 +301,16 @@ const Packages: FunctionComponent = () => (
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th key="blank-header-column-1" />
+              <Th key="blank-header-column-1" border="none" />
               {TIERS.map((tier) => (
-                <Th textAlign="center" key={tier.name}>
+                <Th
+                  textAlign="center"
+                  key={tier.name}
+                  borderTop={`4px solid ${tierColor(tier)}`}
+                  background={tierColorLight(tier)}
+                  color={tierColorDark(tier)}
+                  border="none"
+                >
                   {tier.name}
                 </Th>
               ))}
@@ -295,7 +319,9 @@ const Packages: FunctionComponent = () => (
           <Tbody>
             {FEATURES.map((feature) => (
               <Tr key={feature.name}>
-                <Td fontSize="xs">{feature.name}</Td>
+                <Td fontSize="xs" border="none">
+                  {feature.name}
+                </Td>
                 {TIERS.map((tier) => {
                   if (hasFeature(tier, feature))
                     return (
@@ -303,6 +329,9 @@ const Packages: FunctionComponent = () => (
                         textAlign="center"
                         fontSize="xx-small"
                         key={`${feature.name}-${tier.name}`}
+                        background={tierColorLight(tier)}
+                        color={tierColorDark(tier)}
+                        border="none"
                       >
                         {featureValue(tier, feature)}️
                       </Td>
@@ -311,6 +340,8 @@ const Packages: FunctionComponent = () => (
                     <Td
                       textAlign="center"
                       fontSize="xs"
+                      background={tierColorLight(tier)}
+                      color={tierColorDark(tier)}
                       key={`${feature.name}-${tier.name}`}
                     >{`\u2013`}</Td>
                   );
@@ -322,7 +353,7 @@ const Packages: FunctionComponent = () => (
             <Tr>
               <Th key="blank-footer-column-1" />
               {TIERS.map((tier) => (
-                <Th key={`cta-${tier.name}`}>
+                <Th key={`cta-${tier.name}`} color={tierColorDark(tier)}>
                   <Link href={tier.cta.url}>{tier.cta.text}</Link>
                 </Th>
               ))}

@@ -9,7 +9,7 @@ const ActionButton = (props: ActionButtonProps): JSX.Element => {
 
   return (
     <Link href={href} textDecoration="none" _hover={{ textDecoration: 'none' }}>
-      <Button colorScheme="avocado" size="md" w="full" fontWeight="extrabold" py={2} {...props} />
+      <Button size="md" w="full" fontWeight="extrabold" py={2} {...props} />
     </Link>
   );
 };

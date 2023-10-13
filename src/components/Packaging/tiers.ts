@@ -28,11 +28,12 @@ type Feature = {
 type Segment = {
   name: string;
   tiers: string[];
+  color: string;
 };
 const SEGMENTS: Segment[] = [
-  { name: 'Developers', tiers: ['Free', 'Premium'] },
-  { name: 'Companies', tiers: ['Small', 'Medium', 'Large'] },
-  { name: 'Enterprise', tiers: ['Business Critical'] },
+  { name: 'Developers', tiers: ['Free', 'Premium'], color: '#52C7EA' },
+  { name: 'Companies', tiers: ['Small', 'Medium', 'Large'], color: '#3AC6A3' },
+  { name: 'Enterprise', tiers: ['Business Critical'], color: '#744D95' },
 ];
 const TIERS: Tier[] = [
   {
