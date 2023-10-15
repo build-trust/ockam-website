@@ -143,16 +143,17 @@ const Packages: FunctionComponent = () => (
               </Box>
               <AccordionIcon />
             </AccordionButton>
-            <AccordionPanel>
+            <AccordionPanel padding={{ base: '0', lg: '0' }}>
               <SimpleGrid
-                minChildWidth={2}
+                // columns={[1, null]}
+                minChildWidth={{ base: 'xxs', lg: 'xs' }}
                 spacing={{ base: '8', lg: '0' }}
                 maxW="7xl"
                 mx="auto"
                 justifyItems="center"
                 alignItems="stretch"
                 mt="8"
-                gap="8"
+                gap={{ base: '4', lg: '8' }}
               >
                 {CARDS.filter((card) => segment.tiers.includes(card.name)).map((card) => (
                   <PricingCard
@@ -234,73 +235,6 @@ const Packages: FunctionComponent = () => (
         <GcpLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
       </MarketplaceButton>
     </Box>
-
-    {/* <Box
-        width="100%"
-        bgGradient={`linear-gradient(296.58deg, ${theme.colors.brand['600']} -6.45%, ${theme.colors.brand['900']} 96.92%)`}
-        borderRadius="base"
-        p={4}
-        mx={0}
-        my={4}
-      >
-        <Heading color="white">Ockam Platform</Heading>
-        <Flex w="full" mt={2} flexDirection={{ base: 'column-reverse', lg: 'row' }}>
-          <Box flexGrow={0.5} width={{ base: '100%', lg: '50%' }} position="relative">
-            <ActionButton
-              href={TIERS.find((tier) => tier.name === 'Platform')?.cta.url || ''}
-              variant="solid"
-              colorScheme="whiteAlpha"
-              borderWidth="2px"
-              mt={2}
-              w={{ base: 'full', lg: 'auto' }}
-              position="absolute"
-              bottom="0"
-            >
-              {TIERS.find((tier) => tier.name === 'Platform')?.cta.text}
-            </ActionButton>
-          </Box>
-          <Box flexGrow={0.5} width={{ base: '100%', lg: '50%' }} color="white">
-            If you&apos;re running a SaaS plaform, deploying solutions on-prem in your
-            customers&apos; infrastructure, or even a hybrid approach that requires you to securely
-            connect to your customers&apos; private systems then we&apos;ve got the solutions to
-            integrate directly into your own product.
-            <List spacing="1" mb="2" mt="2" mx="0" fontSize="s">
-              <ListItem fontWeight="medium">
-                <Check
-                  size="1.5em"
-                  style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'middle' }}
-                  color={theme.colors.brand['600']}
-                />
-                Service Level Agreements
-              </ListItem>
-              <ListItem fontWeight="medium">
-                <Check
-                  size="1.5em"
-                  style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'middle' }}
-                  color={theme.colors.brand['600']}
-                />
-                Customized terms
-              </ListItem>
-              <ListItem fontWeight="medium">
-                <Check
-                  size="1.5em"
-                  style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'middle' }}
-                  color={theme.colors.brand['600']}
-                />
-                Volume discounts
-              </ListItem>
-              <ListItem fontWeight="medium">
-                <Check
-                  size="1.5em"
-                  style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'middle' }}
-                  color={theme.colors.brand['600']}
-                />
-                Private labelling & reseller features
-              </ListItem>
-            </List>
-          </Box>
-        </Flex>
-      </Box> */}
 
     <Box>
       <TableContainer fontSize="xs">
