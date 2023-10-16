@@ -58,7 +58,7 @@
     "next-remote-watch": "1.0.0",
     "next-svgr": "0.0.2",
     "nextjs-google-analytics": "^2.1.0",
-    "nextjs-progressbar": "0.0.14",
+    "nextjs-progressbar": "0.0.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "2.1.0",
