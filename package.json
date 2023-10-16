@@ -57,7 +57,7 @@
     "next": "^13.5.4",
     "next-mdx-remote": "^4.2.1",
     "next-remote-watch": "1.0.0",
-    "next-svgr": "0.0.2",
+    "next-svgr": "glenngillen/next-svgr",
     "nextjs-google-analytics": "^2.1.0",
     "nextjs-progressbar": "0.0.16",
     "react": "^18.2.0",
