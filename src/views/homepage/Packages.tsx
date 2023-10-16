@@ -3,14 +3,6 @@ import {
   Container,
   Box,
   SimpleGrid,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
   Heading,
   Link,
   Accordion,
@@ -26,42 +18,14 @@ import PricingCard from '@components/Packaging/PricingCard';
 import AwsLogo from '@assets/images/logos/aws.svg';
 import AzureLogo from '@assets/images/logos/azure.svg';
 import GcpLogo from '@assets/images/logos/gcp.svg';
-import { Tier, Feature, LIMITS, TIERS, FEATURES, SEGMENTS } from '@components/Packaging/tiers';
+import { Tier, Feature, TIERS, FEATURES, SEGMENTS, tierLimit } from '@components/Packaging/tiers';
+import FeatureTable from '@root/components/Packaging/FeatureTable';
 import MarketplaceButton from '@root/components/Packaging/MarketplaceButton';
 
 const hasFeature = (tier: Tier, feature: Feature): boolean => {
   if (feature.tiers.indexOf('*') >= 0) return true;
   if (feature.tiers.indexOf(tier.name) >= 0) return true;
   return false;
-};
-
-const tierColor = (tier: Tier): string | undefined =>
-  SEGMENTS.find((s) => s.tiers.includes(tier.name))?.color;
-const tierColorLight = (tier: Tier): string | undefined =>
-  chroma(tierColor(tier) || 'white')
-    .brighten(2.5)
-    .desaturate(0.4)
-    .hex();
-const tierColorDark = (tier: Tier): string | undefined =>
-  chroma(tierColor(tier) || 'black')
-    .darken(0.75)
-    .saturate(0.75)
-    .hex();
-
-const tierLimit = (tier: Tier, feature: Feature): string | undefined => {
-  if (feature.name in LIMITS) {
-    return LIMITS[feature.name][tier.name];
-  }
-  return undefined;
-};
-const featureValue = (tier: Tier, feature: Feature): string => {
-  if (hasFeature(tier, feature)) {
-    if (feature.hasLimits) {
-      return tierLimit(tier, feature) || '';
-    }
-    return '✔️';
-  }
-  return `\u2013`;
 };
 
 const CARDS = TIERS.filter((tier) => !['Platform'].includes(tier.name)).map((tier, idx) => {
@@ -236,72 +200,8 @@ const Packages: FunctionComponent = () => (
       </MarketplaceButton>
     </Box>
 
-    <Box>
-      <TableContainer fontSize="xs">
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th key="blank-header-column-1" border="none" />
-              {TIERS.map((tier) => (
-                <Th
-                  textAlign="center"
-                  key={tier.name}
-                  borderTop={`4px solid ${tierColor(tier)}`}
-                  background={tierColorLight(tier)}
-                  color={tierColorDark(tier)}
-                  borderBottom="none"
-                >
-                  {tier.name}
-                </Th>
-              ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {FEATURES.map((feature) => (
-              <Tr key={feature.name}>
-                <Td fontSize="xs" border="none">
-                  {feature.name}
-                </Td>
-                {TIERS.map((tier) => {
-                  if (hasFeature(tier, feature))
-                    return (
-                      <Td
-                        textAlign="center"
-                        fontSize="small"
-                        key={`${feature.name}-${tier.name}`}
-                        background={tierColorLight(tier)}
-                        color={tierColorDark(tier)}
-                        border="none"
-                      >
-                        {featureValue(tier, feature)}️
-                      </Td>
-                    );
-                  return (
-                    <Td
-                      textAlign="center"
-                      fontSize="xs"
-                      background={tierColorLight(tier)}
-                      color={tierColorDark(tier)}
-                      key={`${feature.name}-${tier.name}`}
-                      border="none"
-                    >{`\u2013`}</Td>
-                  );
-                })}
-              </Tr>
-            ))}
-          </Tbody>
-          <Tfoot>
-            <Tr>
-              <Th key="blank-footer-column-1" />
-              {TIERS.map((tier) => (
-                <Th key={`cta-${tier.name}`} color={tierColorDark(tier)}>
-                  <Link href={tier.cta.url}>{tier.cta.text}</Link>
-                </Th>
-              ))}
-            </Tr>
-          </Tfoot>
-        </Table>
-      </TableContainer>
+    <Box maxWidth="100%">
+      <FeatureTable tiers={TIERS} features={FEATURES} />
     </Box>
   </Container>
 );

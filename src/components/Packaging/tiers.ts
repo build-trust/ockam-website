@@ -1,3 +1,5 @@
+import chroma from 'chroma-js';
+
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 type Cta = {
@@ -320,5 +322,25 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
   },
 };
 
+const tierColor = (tier: Tier): string | undefined =>
+  SEGMENTS.find((s) => s.tiers.includes(tier.name))?.color;
+
+const tierColorLight = (tier: Tier): string | undefined =>
+  chroma(tierColor(tier) || 'white')
+    .brighten(2.5)
+    .desaturate(0.4)
+    .hex();
+const tierColorDark = (tier: Tier): string | undefined =>
+  chroma(tierColor(tier) || 'black')
+    .darken(0.75)
+    .saturate(0.75)
+    .hex();
+
+const tierLimit = (tier: Tier, feature: Feature): string | undefined => {
+  if (feature.name in LIMITS) {
+    return LIMITS[feature.name][tier.name];
+  }
+  return undefined;
+};
 export type { Tier, Feature };
-export { SEGMENTS, TIERS, FEATURES, LIMITS };
+export { SEGMENTS, TIERS, FEATURES, LIMITS, tierColor, tierColorDark, tierColorLight, tierLimit };
