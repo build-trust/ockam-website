@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Run Composite Action
-        uses: build-trust/.github/actions/commit_lint@custom-actions
+        uses: build-trust/ockam/.github/actions/lint_workflow@33b2c637e479f3683a8a902a7889afc0247b6599
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
