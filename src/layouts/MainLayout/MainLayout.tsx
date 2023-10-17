@@ -23,7 +23,7 @@ const GradientContainer = styled(Flex)<{ leftcolor?: string; rightcolor?: string
 
 type LayoutProps = {
   gradient?: string[];
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const MainLayout: FunctionComponent<LayoutProps> = ({ gradient, children }) => {

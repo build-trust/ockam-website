@@ -140,7 +140,16 @@ const noWidows = (str: string): JSX.Element => {
 };
 
 const Features: FunctionComponent = () => (
-  <Box bgColor="gray.50" pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 24 }}>
+  <Box
+    pt={{ base: 16, lg: 24 }}
+    pb={{ base: 20, lg: 24 }}
+    boxShadow="2xl"
+    borderRadius="15"
+    borderStyle="none"
+    background="white"
+    maxW="80%"
+    mx="auto"
+  >
     <Container variant="section">
       <Box id="features" visibility="hidden" position="absolute" left={0} top="-80px" />
 

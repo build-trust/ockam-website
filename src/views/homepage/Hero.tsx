@@ -12,8 +12,8 @@ import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import crypto from 'crypto';
 
-import { BUILD_DEMO } from '@root/consts/externalResources';
-import { CONTACT_FORM_PATH } from '@root/consts/paths';
+// import { BUILD_DEMO } from '@root/consts/externalResources';
+// import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import RotatingHeading from './RotatingHeading';
 
@@ -52,7 +52,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
       return (
         <>
           Build{' '}
-          <Box as="span" bgImage={gradients.primary} bgClip="text">
+          <Box as="span" bgImage="linear-gradient(#0A1A2B, #36A7C9)" bgClip="text">
             Trust
           </Box>
         </>
@@ -144,70 +144,71 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
         </Box>
       );
     }
-    return (
-      <Box textAlign="center" my={14}>
-        <Button
-          as={Link}
-          href={BUILD_DEMO.href}
-          color="rgb(40, 40, 40)"
-          border="1px solid white"
-          mb={{ base: 5, sm: 0 }}
-          ml={{ base: 2.5, sm: 3 }}
-          mr={{ base: 2.5, sm: 3 }}
-          _hover={{
-            backgroundColor: 'rgb(10, 10, 10)',
-            color: 'white',
-          }}
-        >
-          Start Building
-        </Button>
+    return <></>;
+    // return (
+    //   <Box textAlign="center" my={14}>
+    //     <Button
+    //       as={Link}
+    //       href={BUILD_DEMO.href}
+    //       color="rgb(40, 40, 40)"
+    //       border="1px solid white"
+    //       mb={{ base: 5, sm: 0 }}
+    //       ml={{ base: 2.5, sm: 3 }}
+    //       mr={{ base: 2.5, sm: 3 }}
+    //       _hover={{
+    //         backgroundColor: 'rgb(10, 10, 10)',
+    //         color: 'white',
+    //       }}
+    //     >
+    //       Start Building
+    //     </Button>
 
-        <Button
-          as={Link}
-          href={CONTACT_FORM_PATH}
-          position="relative"
-          color="white"
-          borderWidth={1}
-          borderStyle="solid"
-          borderColor="transparent"
-          backgroundColor="rgb(10, 10, 10)"
-          backgroundClip="padding-box"
-          mb={{ base: 5, sm: 0 }}
-          ml={{ base: 2.5, sm: 3 }}
-          mr={{ base: 2.5, sm: 3 }}
-          _before={{
-            content: "''",
-            backgroundImage: gradients.primary,
-            borderRadius: '4px',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: -1,
-            margin: '-1px',
-            boxShadow: '0 0 50px 0px #52c7ea',
-          }}
-          _hover={{
-            backgroundImage: gradients.primary,
-            borderColor: 'rgb(10, 10, 10)',
-            color: 'rgb(10, 10, 10)',
-          }}
-          _active={{
-            backgroundImage: `${gradients.primary}`,
-            color: 'white',
-            boxShadow: '0 0 60px 10px #52c7ea',
-          }}
-          _focus={{
-            backgroundImage: `${gradients.primary}`,
-            color: 'white',
-            boxShadow: '0 0 60px 10px #52c7ea',
-          }}
-        >
-          Get a Demo
-        </Button>
-      </Box>
-    );
+    //     <Button
+    //       as={Link}
+    //       href={CONTACT_FORM_PATH}
+    //       position="relative"
+    //       color="white"
+    //       borderWidth={1}
+    //       borderStyle="solid"
+    //       borderColor="transparent"
+    //       backgroundColor="rgb(10, 10, 10)"
+    //       backgroundClip="padding-box"
+    //       mb={{ base: 5, sm: 0 }}
+    //       ml={{ base: 2.5, sm: 3 }}
+    //       mr={{ base: 2.5, sm: 3 }}
+    //       _before={{
+    //         content: "''",
+    //         backgroundImage: gradients.primary,
+    //         borderRadius: '4px',
+    //         position: 'absolute',
+    //         top: 0,
+    //         left: 0,
+    //         right: 0,
+    //         bottom: 0,
+    //         zIndex: -1,
+    //         margin: '-1px',
+    //         boxShadow: '0 0 50px 0px #52c7ea',
+    //       }}
+    //       _hover={{
+    //         backgroundImage: gradients.primary,
+    //         borderColor: 'rgb(10, 10, 10)',
+    //         color: 'rgb(10, 10, 10)',
+    //       }}
+    //       _active={{
+    //         backgroundImage: `${gradients.primary}`,
+    //         color: 'white',
+    //         boxShadow: '0 0 60px 10px #52c7ea',
+    //       }}
+    //       _focus={{
+    //         backgroundImage: `${gradients.primary}`,
+    //         color: 'white',
+    //         boxShadow: '0 0 60px 10px #52c7ea',
+    //       }}
+    //     >
+    //       Get a Demo
+    //     </Button>
+    //   </Box>
+    // );
   };
   return (
     <HeroBox>
@@ -226,7 +227,8 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
             fontWeight="extrabold"
             textAlign="center"
             color="white"
-            my={16}
+            letterSpacing="-0.06em"
+            mt={16}
             lineHeight={calculatedLineHeight()}
           >
             <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>

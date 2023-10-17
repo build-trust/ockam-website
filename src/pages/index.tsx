@@ -58,6 +58,8 @@ const HomePage: NextPageWithLayout<HomePageProps> = ({ stars, contributors, down
   </Box>
 );
 
-HomePage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
+HomePage.getLayout = (page: ReactElement): ReactNode => (
+  <MainLayout gradient={['#4FDAB8', '#52C7EA']}>{page}</MainLayout>
+);
 
 export default HomePage;
