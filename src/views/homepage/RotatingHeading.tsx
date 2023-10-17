@@ -5,7 +5,7 @@ type Props = {
   text?: string;
 };
 const RotatingHeading: FC<Props> = ({ text }) => {
-  const msg = text || 'Ockam enables developers to build apps that can Trust data-in-motion';
+  const msg = text || 'Ockam enables developers to build apps<br/>that can Trust data-in-motion';
   return (
     <Box mb={10}>
       <Heading
