@@ -22,7 +22,7 @@ const CASES_CARDS = [
       'Create secure communication with private databases from anywhere.',
       'No longer do you need to expose your data to the public internet with service ports.',
     ],
-    actionHref: 'https://docs.ockam.io/guides/use-cases',
+    actionHref: 'https://docs.ockam.io/guides/use-cases/secure-database-access',
     actionText: 'Learn more',
     isExternal: true,
   },
@@ -33,7 +33,8 @@ const CASES_CARDS = [
       'Guarantee data authenticity and integrity of events from producers all-the-way to end consumers.',
       'End-to-end encrypt data-in-motion through Kafka.',
     ],
-    actionHref: 'https://docs.ockam.io/guides/use-cases',
+    actionHref:
+      'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
     actionText: 'Learn more',
     isExternal: true,
   },
@@ -44,7 +45,8 @@ const CASES_CARDS = [
       'Authenticate and authorize every access decision.',
       'Add identity-driven controls to enforce enterprise policies everywhere.',
     ],
-    actionHref: 'https://docs.ockam.io/guides/use-cases',
+    actionHref:
+      'https://docs.ockam.io/guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials',
     actionText: 'Learn more',
     isExternal: true,
   },
