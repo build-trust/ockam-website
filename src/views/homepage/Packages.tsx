@@ -4,7 +4,6 @@ import {
   Box,
   SimpleGrid,
   Heading,
-  Link,
   Accordion,
   AccordionItem,
   AccordionPanel,
@@ -15,12 +14,9 @@ import chroma from 'chroma-js';
 
 import ActionButton from '@components/Packaging/ActionButton';
 import PricingCard from '@components/Packaging/PricingCard';
-import AwsLogo from '@assets/images/logos/aws.svg';
-import AzureLogo from '@assets/images/logos/azure.svg';
-import GcpLogo from '@assets/images/logos/gcp.svg';
+import Marketplaces from '@components/Packaging/Marketplaces';
 import { Tier, Feature, TIERS, FEATURES, SEGMENTS, tierLimit } from '@components/Packaging/tiers';
 import FeatureTable from '@root/components/Packaging/FeatureTable';
-import MarketplaceButton from '@root/components/Packaging/MarketplaceButton';
 
 const hasFeature = (tier: Tier, feature: Feature): boolean => {
   if (feature.tiers.indexOf('*') >= 0) return true;
@@ -170,34 +166,11 @@ const Packages: FunctionComponent = () => (
                   />
                 ))}
               </SimpleGrid>
+              {segment.name === 'Companies' && <Marketplaces />}
             </AccordionPanel>
           </AccordionItem>
         ))}
       </Accordion>
-    </Box>
-    <Box textAlign="center" mt="10" mb="20">
-      <Heading
-        as="h4"
-        letterSpacing="-1px"
-        size="lg"
-        style={{ textWrap: 'balance' }}
-        mb="4"
-        color="#242A31"
-      >
-        Sign up through marketplaces to unify billing and leverage existing commitments with cloud
-        providers
-      </Heading>
-      <Link href="https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk" isExternal>
-        <MarketplaceButton padding={3} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
-          <AwsLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
-        </MarketplaceButton>
-      </Link>
-      <MarketplaceButton padding={3} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
-        <AzureLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
-      </MarketplaceButton>
-      <MarketplaceButton padding={1} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
-        <GcpLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
-      </MarketplaceButton>
     </Box>
 
     <Box maxWidth="100%">
