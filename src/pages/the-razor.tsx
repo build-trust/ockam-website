@@ -8,7 +8,11 @@ import LandingLayout from '@layouts/LandingLayout';
 
 const TheRazorSignupPage: NextPageWithLayout = () => (
   <Box pt={{ base: 10, lg: 20 }}>
-    <SEOHead subTitle="The Razor - newsletter signup" />
+    <SEOHead
+      subTitle="The Razor - newsletter signup"
+      description="The latest & most interesting news about secure-by-design systems, developer experience, and related tooling"
+      ogImageSrc="/the-razor.gif"
+    />
     <Hero
       text="The Razor"
       subtext="The latest & most interesting news about secure-by-design systems, developer experience, and related tooling"
