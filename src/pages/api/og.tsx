@@ -145,7 +145,7 @@ export default async function handler(request: NextRequest) {
     const hasFeatures = searchParams.has('features');
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : 'My default title';
     const features = hasFeatures ? searchParams.get('features')?.split('||') : [];
-    const template = hasTemplate ? searchParams.get('template') : null;
+    const template = hasTemplate ? searchParams.get('template') || undefined : undefined;
 
     return new ImageResponse(
       (
