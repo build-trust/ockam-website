@@ -36,7 +36,7 @@
     "url": "git+https://github.com/masterborn/"
   },
   "dependencies": {
-    "@auth0/auth0-spa-js": "^2.1.1",
+    "@auth0/auth0-spa-js": "^2.1.2",
     "@chakra-ui/anatomy": "2.0.1",
     "@chakra-ui/icons": "2.0.2",
     "@chakra-ui/react": "^2.8.1",
