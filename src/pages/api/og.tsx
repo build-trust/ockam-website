@@ -76,9 +76,10 @@ const Watermark: FC = () => (
 
 type FeaturesProps = {
   features?: string[];
+  template?: string;
 };
 
-const Features: FC<FeaturesProps> = ({ features }) => {
+const Features: FC<FeaturesProps> = ({ features, template }) => {
   const containerStyles = {
     display: 'flex',
     padding: '30px 15px 30px 30px',
@@ -113,12 +114,14 @@ const Features: FC<FeaturesProps> = ({ features }) => {
   };
 
   if (!features) return <></>;
+  const showCheck = !(template === 'nocheck');
+
   return (
     <div style={containerStyles}>
       <ul style={featureListStyles}>
         {features.map((feature) => (
           <li key={feature} style={featureStyles}>
-            <span style={{ flexBasis: '1em' }}>✅</span>
+            {showCheck && <span style={{ flexBasis: '1em' }}>✅</span>}
             <span style={{ flexBasis: 'auto' }}>{feature}</span>
           </li>
         ))}
@@ -138,9 +141,11 @@ export default async function handler(request: NextRequest) {
 
     const hasTitle = searchParams.has('title');
     const hasImage = searchParams.has('img');
+    const hasTemplate = searchParams.has('template');
     const hasFeatures = searchParams.has('features');
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : 'My default title';
     const features = hasFeatures ? searchParams.get('features')?.split('||') : [];
+    const template = hasTemplate ? searchParams.get('template') : null;
 
     return new ImageResponse(
       (
@@ -161,7 +166,7 @@ export default async function handler(request: NextRequest) {
         >
           <MainText title={title} />
           {hasImage && <Thumbnail imagePath={searchParams.get('img')} />}
-          {hasFeatures && <Features features={features} />}
+          {hasFeatures && <Features features={features} template={template} />}
           <Watermark />
         </div>
       ),
