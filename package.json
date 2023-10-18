@@ -79,7 +79,7 @@
     "@babel/core": "7.18.2",
     "@commitlint/cli": "17.0.1",
     "@commitlint/config-conventional": "17.0.0",
-    "@emotion/babel-plugin": "11.9.2",
+    "@emotion/babel-plugin": "11.11.0",
     "@emotion/babel-preset-css-prop": "11.2.0",
     "@emotion/eslint-plugin": "11.7.0",
     "@next/eslint-plugin-next": "^12.1.6",
