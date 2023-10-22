@@ -61,7 +61,7 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
       <BlogLayoutSidebar display={{ base: 'none', lg: 'flex' }} />
 
       <>
-        <Modal isOpen={isOpen} onClose={onClose} width="600px">
+        <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent background="#ECFDF9">
             <ModalCloseButton />
