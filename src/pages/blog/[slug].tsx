@@ -31,13 +31,14 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
     (frontMatter?.metaDescription as string) || (frontMatter?.description as string) || '';
   const canonicalPath = `${BLOG_PATH}/${router.query.slug}`;
   const image = (frontMatter?.image as string) || '';
+  const newsletterPopup = (frontMatter?.newsletterPopup as boolean) || false;
 
   const ogImage = `/api/og?title=${encodeURIComponent(originalTitle)}&img=${encodeURIComponent(
-    image
+    image,
   )}`;
 
   return (
-    <BlogLayout blogPosts={posts}>
+    <BlogLayout blogPosts={posts} newsletterPopup={newsletterPopup}>
       <SEOHead
         subTitle={title}
         description={description}

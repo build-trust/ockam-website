@@ -1,5 +1,17 @@
-import { FunctionComponent, ReactNode } from 'react';
-import { Box, Flex, useTheme } from '@chakra-ui/react';
+import { FunctionComponent, ReactNode, useEffect, useState } from 'react';
+import {
+  Image,
+  Box,
+  Flex,
+  useTheme,
+  useDisclosure,
+  Heading,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react';
 
 import BlogPostsProvider from '@contextProviders/BlogPostsProvider';
 import { BlogPost } from '@root/typings/BlogPost';
@@ -9,16 +21,68 @@ import LayoutFooter from '../components/LayoutFooter';
 import BlogLayoutSidebar from './BlogLayoutSidebar/BlogLayoutSidebar';
 import BlogLayoutMobileNav from './BlogLayoutMobileNav/BlogLayoutMobileNav';
 
+type BlogLayoutProps = { children?: ReactNode; blogPosts: BlogPost[]; newsletterPopup: boolean };
 
-type BlogLayoutProps = { children: ReactNode, blogPosts: BlogPost[] };
-
-const BlogLayout: FunctionComponent<BlogLayoutProps> = ({ children, blogPosts }) => {
+const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
+  children,
+  blogPosts,
+  newsletterPopup,
+}) => {
   const theme = useTheme();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [scrollY, setScrollY] = useState(0);
+  const [shownPopup, setShownPopup] = useState(false);
+
+  useEffect(() => {
+    if (!newsletterPopup) return () => {};
+    const handleScroll = (): void => {
+      setScrollY(window.scrollY);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newsletterPopup]);
+
+  useEffect(() => {
+    if (!newsletterPopup) return;
+    const scrollPerc = scrollY / document.body.scrollHeight;
+    if (scrollPerc >= 0.6 && !shownPopup) {
+      setShownPopup(true);
+      onOpen();
+    }
+  }, [scrollY, onOpen, shownPopup, newsletterPopup]);
 
   return (
-    <BlogPostsProvider blogPosts={blogPosts} >
+    <BlogPostsProvider blogPosts={blogPosts}>
       <BlogLayoutMobileNav />
       <BlogLayoutSidebar display={{ base: 'none', lg: 'flex' }} />
+
+      <>
+        <Modal isOpen={isOpen} onClose={onClose} width="600px">
+          <ModalOverlay />
+          <ModalContent background="#ECFDF9">
+            <ModalCloseButton />
+            <ModalBody>
+              <Image src="/logo.razor.gif" mx="auto" />
+              <Heading size="md" my="5">
+                Not enough time to keep up-to-date?
+              </Heading>
+              Save yourself hours - our once a month round-up will summarize the best articles
+              we&apos;ve been reading, products we&apos;ve found, and other inspirational sources
+              that are helping us to build high trust software & systems.
+              <iframe
+                src="https://cdn.forms-content.sg-form.com/c0e4f080-70c9-11ee-8f0b-1239171df302"
+                title="The Razor - signup"
+                width="100%"
+                height="400px"
+              />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </>
 
       <Flex w="full" direction="column" pl={{ base: 'none', lg: theme.sizes.container.sidebar }}>
         <Box w="full" maxW="container.blogBodyMax" mx="auto">
