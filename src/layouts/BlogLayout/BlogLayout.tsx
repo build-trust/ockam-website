@@ -21,7 +21,7 @@ import LayoutFooter from '../components/LayoutFooter';
 import BlogLayoutSidebar from './BlogLayoutSidebar/BlogLayoutSidebar';
 import BlogLayoutMobileNav from './BlogLayoutMobileNav/BlogLayoutMobileNav';
 
-type BlogLayoutProps = { children?: ReactNode; blogPosts: BlogPost[]; newsletterPopup: boolean };
+type BlogLayoutProps = { children?: ReactNode; blogPosts: BlogPost[]; newsletterPopup?: boolean };
 
 const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
   children,
