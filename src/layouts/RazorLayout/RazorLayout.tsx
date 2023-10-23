@@ -50,7 +50,7 @@ const RazorLayout: FunctionComponent<RazorProps> = ({ children, title, subtext, 
         />
       )}
       {children}
-      <Box width="100%" p={0} m={0} backgroundColor="#ECFDF9">
+      <Box width="100%" p={0} m={0} backgroundColor="#ECFDF9" letterSpacing="-0.03em">
         <Heading maxW="2xl" mx="auto" mb={2}>
           Want more? Not subscribed?
         </Heading>

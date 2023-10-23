@@ -1,8 +1,16 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Flex, Heading, Text, TextProps, ListItem, ListItemProps } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  TextProps,
+  ListItem,
+  ListItemProps,
+  Link,
+} from '@chakra-ui/react';
 import path from 'path';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import Link from 'next/link';
 
 import { generateSlugFromPath, getPageBySlug, pageFilePaths } from '@api/mdxApi';
 import mdxComponents from '@components/mdx';
@@ -85,16 +93,31 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ source, frontMatter }) => 
           mx="auto"
           fontFamily="blogPostBody"
           fontSize="lg"
+          letterSpacing="-0.01em"
         >
           <MDXRemote {...source} components={mdxComponents} />
           <AuthorSignature mt={6} author={author} authorAvatar={authorAvatar} />
-          <Box my={6} boxShadow="xl" p={6} align="center" background="white" borderRadius={6}>
+          <Box
+            my={6}
+            transition="all 400ms ease-in-out"
+            boxShadow="xl"
+            p={6}
+            align="center"
+            background="white"
+            borderRadius={6}
+            letterSpacing="-0.03em"
+            _hover={{ background: '#e3bfff' }}
+          >
             <Heading size="md" mb={6}>
               Want to meet people that are interested in these topics?
             </Heading>
-            <Text>
+            <Text fontFamily="Inter" color="brand.900">
               👾&nbsp;
-              <Link href={DISCORD.href} style={{ textDecoration: 'underline' }}>
+              <Link
+                href={DISCORD.href}
+                style={{ textDecoration: 'underline', fontWeight: '800' }}
+                _hover={{ color: '#891bdf' }}
+              >
                 Join the Build Trust community
               </Link>
               &nbsp;on Discord&nbsp;👾
