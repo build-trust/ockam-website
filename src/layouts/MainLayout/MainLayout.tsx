@@ -13,7 +13,6 @@ const GradientContainer = styled(Flex)<{ leftcolor?: string; rightcolor?: string
     leftcolor &&
     rightcolor &&
     `
-    background-color: red;
     background-image: url('/hero-slice.png'), linear-gradient(#F9F9F9, #F9F9F9), linear-gradient(to right, ${leftcolor}, ${rightcolor});
     background-repeat: no-repeat, repeat-x, no-repeat;
     background-size: 100%, 100%, 100% 75vh;
@@ -24,9 +23,10 @@ const GradientContainer = styled(Flex)<{ leftcolor?: string; rightcolor?: string
 type LayoutProps = {
   gradient?: string[];
   children?: ReactNode;
+  backgroundColor?: string;
 };
 
-const MainLayout: FunctionComponent<LayoutProps> = ({ gradient, children }) => {
+const MainLayout: FunctionComponent<LayoutProps> = ({ gradient, backgroundColor, children }) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const headerHeight = `${headerRef.current?.clientHeight || 80}px`;
   const hasGradient = !!gradient;
@@ -53,7 +53,9 @@ const MainLayout: FunctionComponent<LayoutProps> = ({ gradient, children }) => {
         <Box as="main" flex={1} w="full" pt={{ base: 0, lg: headerHeight }}>
           {children}
         </Box>
-        <LayoutFooter />
+        <Box backgroundColor={backgroundColor}>
+          <LayoutFooter backgroundColor={backgroundColor} />
+        </Box>
       </GradientContainer>
     </MobileNavbarProvider>
   );

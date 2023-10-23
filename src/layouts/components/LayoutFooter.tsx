@@ -158,6 +158,7 @@ const NAV = [
 
 interface Props extends BoxProps {
   landingPage?: boolean;
+  backgroundColor?: string;
 }
 const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) => {
   const { gradients } = useTheme();
@@ -181,7 +182,8 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
             align={{ base: 'center', lg: 'flex-start' }}
             verticalAlign="top"
             key={section.heading}
-            mx={6}
+            mx={0}
+            px={6}
             mb={{ base: 6, lg: 0 }}
           >
             <Heading as="h4" maxWidth="md" fontSize="sm" color="gray.500">

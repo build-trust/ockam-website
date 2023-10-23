@@ -1,0 +1,124 @@
+---
+title: 'The Razor: ep 1'
+date: '2023-09-17'
+description:
+  'MSFT key breach, Elixir is safe, designing for the CLI'
+author: 'Glenn'
+authorAvatar: /blog/glenn-gillen.jpg
+---
+
+{/* <!-- vale off --> */}
+Welcome to the first edition of Ockam's: The Razor 🎉
+
+Before we kick things off though I've a few quick asks:
+
+* **💌 Please reply to this email!** I'd love to hear any thoughts and feedback you 
+have, but it's also just an easy way to get your mail provider to know this 
+isn't spam and is actually something you've requested.
+* **🗣️ Spread the word.** Please let any friends or colleagues that might be 
+interested know that they should [sign up](https://www.ockam.io/the-razor).
+
+Now on with the show...
+
+## Secure-by-design
+
+* **The Microsoft key acquisition breach:** they've published the [results of the 
+investigation](https://msrc.microsoft.com/blog/2023/09/results-of-major-technical-investigations-for-storm-0558-key-acquisition/) 
+into how an attacker gained access to a key and was able to forge tokens to 
+access OWA and Outlook.com. It's a fascinating look at how even some of the most 
+well resourced companies is only as secure as its weakest link. Basically a 
+crash dump failed to redact a secret, the dump file was then available in a 
+debugging environment to assist in investigating the issue that caused the 
+crash, and later a developer machine was compromised that allowed access to the 
+debugging environment. Crashes by their nature can test the limits of expected 
+behavior and this shows how a series of plausible scenarios that aren't 
+sufficiently mitigated created a serious risk.
+* Elixir is (still) safe: [A response](https://paraxial.io/blog/still-safe) from 
+the Paraxial.io team to a research paper that was questioning the perception of 
+Elixir as a "safe" language (note: Elixir is one of the major languages we use 
+at Ockam, the other being Rust. Our CTO previously [published a post and 
+webinar](https://www.ockam.io/blog/rewriting_in_rust) on why we rewrote our 
+stack to be in Rust, in part for the safety improvements). I loved this 
+particular quote: _"... then a paper is published saying, 'roads paved with 
+Elixir still have potholes', ignoring that it results in fewer potholes"_. 
+Perfect safety is always difficult to guarantee, but the tools we choose can 
+definitely go a long way towards reducing the number of potholes we 
+inadvertently create.
+* **[RFC9420](https://datatracker.ietf.org/doc/html/rfc9420) was recently 
+published by the IETF:** a draft years in the making for defining Messaging 
+Layer Security (MLS) - think groups of users that want to send messages to each 
+other. The [working group homepage](https://messaginglayersecurity.rocks) gives 
+a brief outline that's easier to digest than an RFC, but if audio and podcasts 
+are more your style then Raphael Robert (co-author of the spec) was on the 
+[Security Cryptography Whatever](https://securitycryptographywhatever.com/2023/04/22/mls/) 
+podcast to talk about it.
+* **A year of 0-days:** The Threat Analysis Group @ Google published their 
+[year-in-review of 0-days exploited-in-the-wild](https://security.googleblog.com/2023/07/the-ups-and-downs-of-0-days-year-in.html) 
+a few months ago - a near record year with 41 0-days detected and disclosed in 2022. The positive news in their takeaway was that they believe security 
+improvements contributed to the 40% drop in exploits from the peak of 69 in 2021.
+* **An exploit so old it could drink:** Matt Johansen talks us through [a backdoor in 
+encrypted radio comms](https://twitter.com/mattjay/status/1684623084228136960?s=43) 
+that has been in use for over 25 years. The Black Hat USA 2023 presentation he 
+mentions was delivered last month, and the [slides are now available 
+online](https://www.blackhat.com/us-23/briefings/schedule/#all-cops-are-broadcasting-breaking-tetra-after-decades-in-the-shadows-31807 ).
+
+## DX
+
+* **Fixing rough edges in Clang:** Peter Goodman from Trail of Bits [takes a deep 
+dive](https://blog.trailofbits.com/2023/07/28/the-future-of-clang-based-tooling/) 
+into what I'd consider some of the DX challenges of Clang as a compiler. If 
+you're building C/C++/Objective-C apps it's worth a read as Peter has built some 
+tooling to improve the experience and address the issues he points out, and 
+mentions that DARPA (!!!) are helping to fund further improvements Trail of Bits 
+are making towards compilers.
+* **Application security through the lens of developer experience:** Peter Chan 
+(ex VP of Information Security @ Netflix) takes a look at [the next evolution of 
+AppSec](https://www.linkedin.com/pulse/application-security-through-lens-developer-experience-jason-chan/). 
+Including this 🌶️ take: _"AppSec teams have always meant well - we want to 
+minimize risk to the organization and improve software quality. However, the 
+way we’ve traditionally worked has been completely antithetical to DevEx"_. He 
+has a good explanation on why that's true though, go check it out.
+* **To `stderr` or not to `stderr`:** that is the question! Or I guess it might be 
+one `Sh4k3sp34r3` might pose if he were around today. I did ask something like 
+it recently in an internal chat as I wasn't sure in which cases output went to 
+`stdout` and when it went to `stderr`. Someone on the team helpfully pointed me 
+towards the [CLI Guidelines](https://clig.dev) written by Aanand Prasad, Ben 
+Firshman, Carl Tashian, and Eva Parish. In particular [the section on 
+outputs](https://clig.dev/#output), TLDR; things you want to be able to pipe to 
+another command or should be machine readable go to `stdout`, things you want to 
+be displayed back to the user go to `stdout`.
+* **Speaking of designing for the command line:** here's a flashback to the time 
+Amanda Pinsker spoke about her experiences [helping design the GitHub 
+CLI](https://www.youtube.com/watch?v=zsjeZZVAk1E). It's a great introduction to 
+and reminder of why people use CLI tools, and how you can provide great human 
+experiences that enhance all of the reasons people use CLIs in the first place. 
+I've always had a soft spot for well designed CLI tools as I think the 
+constraints they impose forces an extra level of empathy for whoever is trying 
+to use it, and so the ones that do it well just feel so natural to use. There's 
+also a quick journey through some of the research and inspiration they took 
+while designing their CLI, so if you're looking for inspiration or guidance for 
+your own projects it's definitely worth a few minutes of your time.
+
+## Product spotlight
+
+* **CipherStash:** At Ockam we strongly believe that we need better tools and 
+systems to protect data while it's in motion, and it's clear the team at 
+[CipherStash](https://cipherstash.com) feel the same way. Messaging like 
+"data doesn’t stay at rest. For data to be useful, it needs to be available" 
+resonates so strongly! If you're using Postgres then their searchable encryption 
+is an interesting (and complimentary) approach to securing the sensitive data 
+you're storing in your database. If you're interested, submit your request for 
+early access.
+
+## The odd bits
+
+* **Thanks, I hate it:** [here's a GitHub repo](https://github.com/mkrl/misbrands), 
+called "misbrands", filled with logos that will make your eyes twitch just a 
+little. Think VSCode but in the branding style of Vim, GitHub with the GitLab 
+logo. There's quite a few in here that gave me a chuckle. I'm almost tempted to 
+print some off to put on my laptop lid, they'd make a good conversation starter 
+for anyone with a keen eye at the next conference I'm at.
+
+That's it for this month! Once again, please let me know any feedback you have 
+and spread the love.
+
