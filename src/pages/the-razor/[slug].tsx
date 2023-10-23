@@ -13,7 +13,7 @@ import SEOHead from '@root/components/SEOHead';
 import { DISCORD } from '@root/consts/externalResources';
 import AuthorSignature from '@root/components/AuthorSignature';
 
-export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/the-razor');
+export const RAZOR_PAGE_PATH = path.join(process.cwd(), 'src/content/the-razor');
 
 mdxComponents.p = (props: TextProps): ReactNode => <Text mb={2} color="inherit" {...props} />;
 mdxComponents.li = (props: ListItemProps): ReactNode => (
@@ -28,7 +28,7 @@ export const getStaticPaths = async (): Promise<{
   paths: ParamsType[];
   fallback: boolean;
 }> => {
-  const paths = pageFilePaths(LANDING_PAGE_PATH)
+  const paths = pageFilePaths(RAZOR_PAGE_PATH)
     .map((p) => generateSlugFromPath(p))
     .map((slug) => ({ params: { slug } }));
 
@@ -45,7 +45,7 @@ type PageProps = {
 };
 
 export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: PageProps }> => {
-  const { source, frontMatter } = await getPageBySlug(LANDING_PAGE_PATH, params.slug);
+  const { source, frontMatter } = await getPageBySlug(RAZOR_PAGE_PATH, params.slug);
   const { slug } = params;
   return {
     props: {

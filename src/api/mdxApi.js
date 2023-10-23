@@ -10,6 +10,7 @@ import RehypeKeywordLinks from '@root/utils/keywordLinks';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guide');
+export const RAZOR_PATH = path.join(process.cwd(), 'src/content/the-razor');
 
 export const styleGuideFilePaths = fs
   .readdirSync(STYLE_GUIDE_PATH)
@@ -41,6 +42,10 @@ export const getAllPagesForFolder = (folder, noContent) => {
 
 export const getAllPosts = (noContent) => {
   return getAllPagesForFolder(POSTS_PATH, noContent);
+};
+
+export const getAllRazors = (noContent) => {
+  return getAllPagesForFolder(RAZOR_PATH, noContent);
 };
 
 export const getPageBySlug = async (folder, slug) => {
@@ -87,7 +92,7 @@ export const getStyleGuideSections = async () => {
         source: mdxSource,
         frontMatter: data,
       };
-    })
+    }),
   );
 
   return styleGuideSections;
