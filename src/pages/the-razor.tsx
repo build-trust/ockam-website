@@ -37,7 +37,7 @@ const TheRazorSignupPage: NextPageWithLayout<PageProps> = ({ previousEpisodes })
       src="https://cdn.forms-content.sg-form.com/d0d5f678-5032-11ee-81f9-026e7845c92d"
     />
 
-    <Box maxW="4xl" mx="auto" mb={8} align="center">
+    <Box maxW="4xl" mx="auto" mb={8} textAlign="center">
       <Heading mb={2}>Previous episodes</Heading>
       <List>
         {previousEpisodes.map((data): ReactNode[] => (
