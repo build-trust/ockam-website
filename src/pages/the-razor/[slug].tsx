@@ -23,7 +23,7 @@ import AuthorSignature from '@root/components/AuthorSignature';
 
 export const RAZOR_PAGE_PATH = path.join(process.cwd(), 'src/content/the-razor');
 
-mdxComponents.p = (props: TextProps): ReactNode => <Text mb={2} color="inherit" {...props} />;
+mdxComponents.p = (props: TextProps): JSX.Element => <Text mb={2} color="inherit" {...props} />;
 mdxComponents.li = (props: ListItemProps): ReactNode => (
   <ListItem {...props} mb={2} lineHeight="1.5em" />
 );
