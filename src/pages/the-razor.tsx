@@ -8,8 +8,8 @@ import { Hero } from '@views/homepage';
 import LandingLayout from '@layouts/LandingLayout';
 
 type Metadata = {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
 };
 
 type Post = {
