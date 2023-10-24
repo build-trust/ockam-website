@@ -23,11 +23,13 @@ import AuthorSignature from '@root/components/AuthorSignature';
 
 export const RAZOR_PAGE_PATH = path.join(process.cwd(), 'src/content/the-razor');
 
-mdxComponents.p = (props: TextProps): JSX.Element => <Text mb={2} color="inherit" {...props} />;
-mdxComponents.li = (props: ListItemProps): ReactNode => (
-  <ListItem {...props} mb={2} lineHeight="1.5em" />
-);
-delete mdxComponents.strong;
+if (mdxComponents) {
+  mdxComponents.p = (props: TextProps): JSX.Element => <Text mb={2} color="inherit" {...props} />;
+  mdxComponents.li = (props: ListItemProps): JSX.Element => (
+    <ListItem {...props} mb={2} lineHeight="1.5em" />
+  );
+  delete mdxComponents.strong;
+}
 type ParamsType = {
   params: { slug: string };
 };
@@ -102,7 +104,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ source, frontMatter }) => 
             transition="all 400ms ease-in-out"
             boxShadow="xl"
             p={6}
-            align="center"
+            textAlign="center"
             background="white"
             borderRadius={6}
             letterSpacing="-0.03em"
