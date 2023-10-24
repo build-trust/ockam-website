@@ -164,6 +164,7 @@ const FEATURES: Feature[] = [
     tiers: ['Medium', 'Large', 'Business Critical', 'Platform'],
   },
   { name: 'Customized terms', tiers: ['Large', 'Business Critical', 'Platform'] },
+  { name: 'Bring Your Own Cloud (BYOC)', tiers: ['Business Critical'], onCard: true },
 ];
 
 const LIMITS: { [id: string]: { [id: string]: string } } = {
