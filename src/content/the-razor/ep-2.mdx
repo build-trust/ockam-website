@@ -1,0 +1,110 @@
+---
+title: 'The Razor: ep 2'
+date: '2023-10-23'
+description:
+  'CISA making noise, OWASP API 10, and AI-enhanced shopping lists'
+author: 'Glenn'
+authorAvatar: /blog/glenn-gillen.jpg
+---
+
+{/* <!-- vale off --> */}
+
+Here we are in October already! Hacktoberfest is in full swing and we've already
+had [64 new people join people join us as contributors](https://twitter.com/mrinal/status/1716197909501534512). 
+It's been amazing to watch. If you've ever wanted to make a contribution to 
+a popular open source project, but didn't know how to begin, there's still
+plenty of [issues to get started with](https://github.com/build-trust/ockam/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+label%3Ahacktoberfest).
+
+For now, on with the show&hellip;
+
+## Secure-by-design
+
+* **🥷 Hackers got into Okta:** Krebs has a story that explains how hackers
+were able to use [customer cookies or session tokens that were shared in support
+tickets](https://krebsonsecurity.com/2023/10/hackers-stole-access-tokens-from-oktas-support-unit/)
+to then compromise customer's systems. Affected customers were notified &mdash; 
+the reporting so far seems to suggest that customers noticed the attempts and 
+were able to thwart them.
+* **🕵️‍♂ Cybersecurity & Infrastructure Security Agency (CISA) with all the 
+advisories:** It's been a busy month or so for CISA with a number a 
+notices across a range of areas. First there's a report stating that [multiple 
+nation-state threat actors have been exploiting known vulnerabilities], namely in
+Zoho ManageEngine and FortiOS SSL-VPN. Next was a warning that [attackers could
+modify router firmware without detection](https://www.cisa.gov/news-events/news/cisa-nsa-fbi-and-japan-release-advisory-warning-blacktech-prc-linked-cyber-activity).
+If you're working with OT or industrial systems you'll want to take a look
+at their guidance for [Improving Open Source Software in Operational Technology
+and Industrial Control Systems](https://www.cisa.gov/sites/default/files/2023-10/Fact_Sheet_Improving_OSS_in_OT_ICS_508c.pdf).
+Earlier this month they published their [Top 10 Cybersecurity Misconfigurations](https://media.defense.gov/2023/Oct/05/2003314578/-1/-1/0/JOINT_CSA_TOP_TEN_MISCONFIGURATIONS_TLP-CLEAR.PDF) 
+&mdash; a list of expected things that people are still often getting wrong. 
+This is why at Ockam thinks it's so critical to shift
+towards building systems that are secure-by-design: it's time to stop hoping 
+people will get every single security detail right, they need to be right
+by default!
+* **🔐 Don't just take our word for it:** CISA are across this topic too: [Open
+Source Software Must Start with Secure Code](https://www.cisa.gov/news-events/news/open-source-software-must-start-secure-code).
+* **🐝 OWASP Top 10 for APIs:** The OWASP group published their list of [top 10
+API security risks](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)
+and much like the CISA misconfigurations list it's a who's who of the same issues
+plaguing the industry for a decade or more. 
+* **🚗 No privacy in your car:** Mozilla reviews 25 major card brands and
+made the bold proclamation that they're all a [privacy nightmare on wheels](https://foundation.mozilla.org/en/blog/privacy-nightmare-on-wheels-every-car-brand-reviewed-by-mozilla-including-ford-volkswagen-and-toyota-flunks-privacy-test/).
+Along with the privacy concerns they've raised about how manufacturers can
+use/sell your data, not one of the brands reviewed met Mozilla's "Minimum 
+Security Standards"! 😬
+* **🐟 Wet wet wet:** This one is a bit of a throwback given it happened in 2018, but I 
+thought it's a wonderful reminder that you're only ever as strong as your
+weakest link. And apparently that weakest link can be an [IoT connected thermometer 
+in a fish tank](https://thehackernews.com/2018/04/iot-hacking-thermometer.html).
+
+## DX
+
+* **🎨 Add some color to your life:** [Flexoki](https://stephango.com/flexoki)
+is _"an inky color scheme for prose and code"_. What does that actually mean? It 
+means Steph took his years of experience of working with dyes and inks and 
+applied it towards designing a syntax highlighting color scheme that's 
+optimized for perceptual balance. He explains why replicating the way ink colors
+mix in a digital medium is hard, and there's a link to a SIGGRAPH talk that
+goes into even more detail. The results are beautiful! 🤩 I've already switched 
+my terminals and IDEs over.
+* **🐚 Need a new shell??** [Marcell is a shell](https://www.marceltheshell.org/).
+It embraces the UNIX philosophy of using pipes as a form of composition, but
+takes it a step further by returning Python values such as lists and tuples
+rather than a text stream. Given how often I've found myself having to use 
+`sed`, `cut`, `awk`, and/or `jq` to massage data into the form I need, this 
+has me intrigued. Being able to manipulate outputs directly inline
+with Python also has a certain appeal to it. However I've such a strong muscle memory
+for my existing habits so I can't see myself changing to this as my
+daily driver just yet. If you do take if for a spin please let me know how it
+goes!
+
+## Product spotlight
+
+* **🧑‍🍳 What are we cooking up?** The team at Ockam have been working on 
+something new, and we'll be ready to ship an early alpha version of it in the
+next two weeks. If you're interested in taking it for a spin _and_ you're 
+willing to record &amp; share with us a video of yourself trying it out (so that
+we can see any UX issues you run into and fix them) please reply to this email
+and let me know!
+* **📋 Get compliant:** This looks early, but also interesting: 
+[compliance.sh](https://compliance.sh/). If you've ever gone through the process
+to get official recognition of the most common compliance frameworks (for example 
+ISO27001, SOC2) then you'll know a lot of the work isn't fun. 
+Compliance.sh claims to streamline this via the clever use of everyone's 
+favorite buzzword&hellip; AI! The video on the homepage shows how it can help you 
+generate policies that are aligned with multiple frameworks at the same time.
+Neat!
+
+## The odd bits
+
+* **🤖 AI your shopping list:** While we're talking about AI, why not use it
+to [make your next visit to the supermarket much more efficient](https://x.com/peternixey/status/1706660963045564421?s=20)?
+* **🔏 Unauthenticated signatures vs unauthenticated payloads:** [An example](https://mastodon.social/@kennwhite/111248292820347087) 😝
+* **🔪 Respects to the OG:** I stumbled upon this much earlier edition of [The Razor&hellip;](https://www.sharpeninghandbook.info/Images/Knife_Sharpening_text.pdf)
+
+That's it for this month. If you come across any interesting products you think
+are worth sharing, a developer experience that got you excited, or just
+want to compare notes on building secure systems please drop me a line.
+
+Thanks,
+
+Glenn
