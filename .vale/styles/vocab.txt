@@ -16,3 +16,8 @@ Postgresql
 Kafka
 Apache
 plaintext
+cybersecurity
+Zoho
+API
+APIs
+misconfigurations

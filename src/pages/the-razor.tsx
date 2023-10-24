@@ -7,16 +7,24 @@ import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { Hero } from '@views/homepage';
 import LandingLayout from '@layouts/LandingLayout';
 
+type Metadata = {
+  title: string;
+  description: string;
+};
+
 type Post = {
   // eslint-disable-next-line
   content?: any;
-  // eslint-disable-next-line
-  data: any;
+  data: Metadata;
   filePath: string;
 };
 type PageProps = { previousEpisodes: Post[] };
 
-const TheRazorSignupPage: NextPageWithLayout<PageProps> = ({ previousEpisodes }) => (
+const TheRazorSignupPage: NextPageWithLayout<PageProps> = ({
+  previousEpisodes,
+}: {
+  previousEpisodes: Post[];
+}) => (
   <Box pt={{ base: 10, lg: 20 }}>
     <SEOHead
       subTitle="The Razor - newsletter signup"
@@ -40,7 +48,7 @@ const TheRazorSignupPage: NextPageWithLayout<PageProps> = ({ previousEpisodes })
     <Box maxW="4xl" mx="auto" mb={8} textAlign="center">
       <Heading mb={2}>Previous episodes</Heading>
       <List>
-        {previousEpisodes.map((data): ReactNode[] => (
+        {previousEpisodes.map((data) => (
           <ListItem>
             {data.data.title} &mdash;{' '}
             <Link
