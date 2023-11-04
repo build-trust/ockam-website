@@ -24,7 +24,7 @@ const RazorLayout: FunctionComponent<RazorProps> = ({ children, title, subtext, 
       title="The Razor - signup"
       width="100%"
       height="500px"
-      src="https://cdn.forms-content.sg-form.com/d0d5f678-5032-11ee-81f9-026e7845c92d"
+      src="https://cdn.forms-content.sg-form.com/c0e4f080-70c9-11ee-8f0b-1239171df302"
     />
   );
   const signupCTAText = isEpisode ? (
@@ -38,7 +38,7 @@ const RazorLayout: FunctionComponent<RazorProps> = ({ children, title, subtext, 
   );
 
   return (
-    <MainLayout gradient={['#4FDAB8', '#52C7EA']} backgroundColor="#ECFDF9">
+    <MainLayout gradient={['#4FDAB8', '#52C7EA']} backgroundColor="#ECFDF9" noslice>
       {!isEpisode && (
         <Hero
           text={title || 'The Razor'}
@@ -46,7 +46,6 @@ const RazorLayout: FunctionComponent<RazorProps> = ({ children, title, subtext, 
             subtext ||
             'The latest & most interesting news about secure-by-design systems, developer experience, and related tooling'
           }
-          landingPage
         />
       )}
       {children}

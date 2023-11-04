@@ -1,11 +1,10 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Heading, List, ListItem, Link } from '@chakra-ui/react';
+import { Box, Heading, List, ListItem, Link, Text } from '@chakra-ui/react';
 
 import { getAllRazors } from '@api/mdxApi';
 import SEOHead from '@components/SEOHead';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
-import { Hero } from '@views/homepage';
-import LandingLayout from '@layouts/LandingLayout';
+import RazorLayout from '@layouts/RazorLayout';
 
 type Metadata = {
   title?: string;
@@ -25,27 +24,27 @@ const TheRazorSignupPage: NextPageWithLayout<PageProps> = ({
 }: {
   previousEpisodes: Post[];
 }) => (
-  <Box pt={{ base: 10, lg: 20 }}>
+  <Box pt={{ base: 10, lg: 20 }} background="#ECFDF9" mx="auto">
     <SEOHead
       subTitle="The Razor - newsletter signup"
       description="The latest & most interesting news about secure-by-design systems, developer experience, and related tooling"
       ogImageSrc="/the-razor.gif"
     />
-    <Hero
-      text="The Razor"
-      subtext="The latest & most interesting news about secure-by-design systems, developer experience, and related tooling"
-      landingPage
-    />
-
+    <Box maxW="4xl" mx="auto" pb={8} textAlign="center">
+      <Text color="brand.900">
+        <strong>Sign up. Be inspired. Build trust.</strong>&nbsp; Save hours of your time, with our
+        regular roundup of the most interesting things we&apos;ve been reading each months.
+        We&apos;ll save your inbox too - it&apos;s only one email per month!{' '}
+      </Text>
+    </Box>
     <iframe
       id="why"
       title="The Razor - signup"
       width="100%"
-      height="500px"
-      src="https://cdn.forms-content.sg-form.com/d0d5f678-5032-11ee-81f9-026e7845c92d"
+      height="350px"
+      src="https://cdn.forms-content.sg-form.com/c0e4f080-70c9-11ee-8f0b-1239171df302"
     />
-
-    <Box maxW="4xl" mx="auto" mb={8} textAlign="center">
+    <Box maxW="4xl" mx="auto" pb={8} textAlign="center">
       <Heading mb={2}>Previous episodes</Heading>
       <List>
         {previousEpisodes.map((data) => (
@@ -65,9 +64,7 @@ const TheRazorSignupPage: NextPageWithLayout<PageProps> = ({
   </Box>
 );
 
-TheRazorSignupPage.getLayout = (page: ReactElement): ReactNode => (
-  <LandingLayout>{page}</LandingLayout>
-);
+TheRazorSignupPage.getLayout = (page: ReactElement): ReactNode => <RazorLayout>{page}</RazorLayout>;
 
 export function getStaticProps(): { props: PageProps } {
   const previousEpisodes = getAllRazors(true);
