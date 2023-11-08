@@ -14,9 +14,13 @@ Be sure to familiarize yourself with Ockam’s [guidelines for contribution](htt
 ### Add yourself as contributor
 
 1. Setup [code signing](https://github.com/build-trust/ockam-website/blob/develop/CODE_SIGNING.md)
-1. Fork the contributors repository from https://github.com/build-trust/ockam-contributors
-1. Create a new feature branch under your forked repo and add your Name, Github Username, Email, and “Yes” for CLA under “CONTRIBUTORS.csv” at the end of the list
-1. Create a Pull Request across your feature branch from the fork and origin Ockam contributors repository and wait for approval
+1. Checkout the Ockam repo: `git@github.com:build-trust/ockam.git`
+1. Create a new feature branch and edit .github/CONTRIBUTORS.csv by adding 
+    ```
+    yes,github username,name,<email>
+    ```
+    at the end of the list
+1. Create a Pull Request of your feature branch to develop and wait for approval
     1. As noted above, when making a commit be sure to follow the [guidelines here](https://github.com/build-trust/.github/blob/main/CONTRIBUTING.md#commit-messages)
     1. If you signed in your commit correctly you should see “Verified” badge near your commit in pull request -> http://d.miedziak.io/i/iLI4ku
 1. Wait until your Pull request is merged
