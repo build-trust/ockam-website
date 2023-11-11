@@ -75,7 +75,7 @@ const FEATURES = [
   {
     icon: DeveloperIcon,
     title: 'Developer Experience',
-    texts: ['Tools and Packages', 'SLAs and Support'],
+    texts: ['CLI and a Rust Library', 'Connect applications and get data moving in minutes'],
   },
 ];
 

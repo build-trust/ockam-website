@@ -1,0 +1,10 @@
+# Query: forget about networks
+# ContextLines: 1
+
+1 result - 1 file
+
+src/views/homepage/Features.tsx:
+  35  const DESCRIPTIONS = [
+  36:   "Forget about configuring networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, Private Links, VPC Peering, CAs, and tokens.",
+  "You don't want to touch these things, and you don't need to engage your IT teams either!",
+  37  ];
