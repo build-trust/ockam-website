@@ -33,7 +33,7 @@ import { DOCS } from '@consts/externalResources';
 
 const TITLE = 'Connect Applications, not Networks';
 const DESCRIPTIONS = [
-  "Forget about configuring networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, Private Links, VPC Peering, CAs, and tokens.",
+  "Forget about configuring networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, Private Links, reverse proxies, VPC Peering, PKIs, CAs, and tokens.",
   "You don't want to touch the network, and you don't need to engage your IT teams either!"
 ];
 const IconLookup: { [key: string]: IconType } = {
