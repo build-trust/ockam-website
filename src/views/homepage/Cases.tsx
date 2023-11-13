@@ -17,7 +17,7 @@ const TEXTS = [
 const CASES_CARDS = [
   {
     image: CasesOneImage,
-    title: 'Virtually-Adjacent Databases',
+    title: 'Access Distributed Data',
     texts: [
       'Create secure communication between private databases - from anywhere!',
       'Stop exposing your data to the public internet with service ports.',
@@ -28,7 +28,7 @@ const CASES_CARDS = [
   },
   {
     image: CasesTwoImage,
-    title: 'Secure-by-Design Messaging',
+    title: 'Secure Kakfa Streams',
     texts: [
       'Guarantee data authenticity and integrity of events from producers all-the-way to end consumers.',
       'Start encrypting data-in-motion through Kafka.',
@@ -40,7 +40,7 @@ const CASES_CARDS = [
   },
   {
     image: CasesThreeImage,
-    title: 'Developer-First Empowerment',
+    title: 'Ship it Today',
     texts: [
       'Ockam is an application layer solution with easy to use developer tools.',
       'Stop waiting for your IT team, and start deploying your applications to production today.',
