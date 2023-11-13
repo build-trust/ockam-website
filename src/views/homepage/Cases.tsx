@@ -3,15 +3,15 @@ import Image, { StaticImageData } from 'next/legacy/image';
 import { Box, Flex, Container, Text, Heading, SimpleGrid, Center } from '@chakra-ui/react';
 
 import Card from '@components/Card';
-import CasesOneImage from '@assets/images/influxdata.png';
-import CasesTwoImage from '@assets/images/confluent.png';
-import CasesThreeImage from '@assets/images/okta.png';
+import CasesOneImage from '@assets/images/vpc-peering.png';
+import CasesTwoImage from '@assets/images/kafka-icon.png';
+import CasesThreeImage from '@assets/images/developer-hero.png';
 import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
 
 const TITLE = 'How is Ockam Used?';
 const TEXTS = [
-  'Run Ockam at each of your applications to create a secure communication channel directly with all of your other apps.',
+  'Simply run Ockam at each of your applications to create secure communication channels between apps and datastores in remote private networks.',
 ];
 
 const CASES_CARDS = [
@@ -19,8 +19,8 @@ const CASES_CARDS = [
     image: CasesOneImage,
     title: 'Virtually-Adjacent Databases',
     texts: [
-      'Create secure communication with private databases from anywhere.',
-      'No longer do you need to expose your data to the public internet with service ports.',
+      'Create secure communication between private databases - from anywhere!',
+      'Stop exposing your data to the public internet with service ports.',
     ],
     actionHref: 'https://docs.ockam.io/guides/use-cases/secure-database-access',
     actionText: 'Learn more',
@@ -31,7 +31,7 @@ const CASES_CARDS = [
     title: 'Secure-by-Design Messaging',
     texts: [
       'Guarantee data authenticity and integrity of events from producers all-the-way to end consumers.',
-      'End-to-end encrypt data-in-motion through Kafka.',
+      'Start encrypting data-in-motion through Kafka.',
     ],
     actionHref:
       'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
@@ -40,13 +40,13 @@ const CASES_CARDS = [
   },
   {
     image: CasesThreeImage,
-    title: 'Developer-First Authentication',
+    title: 'Developer-First Empowerment',
     texts: [
-      'Authenticate and authorize every access decision.',
-      'Add identity-driven controls to enforce enterprise policies everywhere.',
+      'Ockam is an application layer solution with easy to use developer tools.',
+      'Stop waiting for your IT team, and start deploying your applications to production today.',
     ],
     actionHref:
-      'https://docs.ockam.io/guides/use-cases/use-employee-attributes-from-okta-to-build-trust-with-cryptographically-verifiable-credentials',
+      'https://docs.ockam.io/guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change',
     actionText: 'Learn more',
     isExternal: true,
   },
