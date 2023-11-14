@@ -11,7 +11,7 @@ import Transition from '@root/components/Transition/Transition';
 
 const TITLE = 'How is Ockam Used?';
 const TEXTS = [
-  'Simply run Ockam at each of your applications to create secure communication channels between apps and datastores in remote private networks.',
+  'Simply run Ockam at each of your applications to create trusted communication channels between apps and datastores in remote private networks.',
 ];
 
 const CASES_CARDS = [
@@ -19,8 +19,9 @@ const CASES_CARDS = [
     image: CasesOneImage,
     title: 'Access Distributed Data',
     texts: [
-      'Create secure communication between private databases - from anywhere!',
-      'Stop exposing your data to the public internet with service ports.',
+      'Create secure access to private databases - from any application, anywhere!',
+      'Stop exposing private data to the public internet with service ports.',
+      'Start isolating data exposure to the endpoint of your application.',
     ],
     actionHref: 'https://docs.ockam.io/guides/use-cases/secure-database-access',
     actionText: 'Learn more',
@@ -30,7 +31,8 @@ const CASES_CARDS = [
     image: CasesTwoImage,
     title: 'Secure Kakfa Streams',
     texts: [
-      'Guarantee data authenticity and integrity of events from producers all-the-way to end consumers.',
+      'Guarantee data authenticity and integrity from producers all-the-way to consumers.',
+      'Stop exposing the broker to your data streams.',
       'Start encrypting data-in-motion through Kafka.',
     ],
     actionHref:
@@ -40,10 +42,11 @@ const CASES_CARDS = [
   },
   {
     image: CasesThreeImage,
-    title: 'Ship it Today',
+    title: 'Ship <it> Today',
     texts: [
-      'Ockam is an application layer solution with easy to use developer tools.',
-      'Stop waiting for your IT team, and start deploying your applications to production today.',
+      'Shift left and move security into your application layer with simple developer tools.',
+      'Stop waiting for your IT team.', 
+      'Start deploying your applications to production today.',
     ],
     actionHref:
       'https://docs.ockam.io/guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change',
