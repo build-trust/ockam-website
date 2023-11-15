@@ -50,33 +50,37 @@ const IconLookup: { [key: string]: IconType } = {
 const FEATURES = [
   {
     icon: LeftIcon,
-    title: 'Trust at the Application Layer',
+    title: 'Authentication between Applications',
     texts: [
-      'Cryptographic identities and authentication - everywhere',
+      'Orchestrated cryptographic identifiers and mutual authentication',
       'Managed credential authorities and ABAC',
-      'Enrollment protocols that bootstrap',
-      'BYO identity providers and access control policies',
+      'Enroll applications with bootstrap services',
     ],
   },
   {
     icon: LockIcon,
-    title: 'End-to-End Encryption for Data-in-Motion',
+    title: 'Encrypted Data-in-Motion',
     texts: [
-      'Through networks, clouds, and protocols',
-      'Over enterprise messaging and event streams',
+      'End-to-end across networks and clouds',
+      'Transport and infrastructure agnostic',
       'For existing and new infrastructure',
-      'Built for high-thoughput, low-latency, and high-availability',
     ],
   },
   {
     icon: GitHubIcon,
     title: 'Open and Adaptable',
-    texts: ['Open Source', 'Add-ons for Confluent, InfluxData, Okta, KMS, UDP and more'],
+    texts: [
+      'Open Source', 
+      'Add-ons for Confluent, Snowflake, Okta, KMS, UDP, and more'
+    ],
   },
   {
     icon: DeveloperIcon,
-    title: 'Developer Experience',
-    texts: ['CLI and a Rust Library', 'Connect applications and get data moving in minutes'],
+    title: 'Developer-first Experience',
+    texts: [
+      'CLI and a Rust Library', 
+      'As simple as it should be to get data moving'
+    ],
   },
 ];
 
