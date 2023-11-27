@@ -250,7 +250,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, ani
             borderTopLeftRadius="3xl"
             borderTopRightRadius="3xl"
           >
-            <ExcalidrawAnimation src={image} animate={animate} />
+            <ExcalidrawAnimation src={image} animate={!!animate} />
           </Box>
         )}
       </Container>

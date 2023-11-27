@@ -2,7 +2,6 @@ import {
   ComponentType,
   FunctionComponent,
   ReactElement,
-  ReactNode,
   useCallback,
   useEffect,
   useRef,
@@ -35,18 +34,18 @@ const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): Rea
 
   if (!loading && ImportedSvgRef.current) {
     const { current: ImportedSvg }: { current: ComponentType<SvgProps> | null } = ImportedSvgRef;
-    return (
-      // eslint-disable-next-line max-classes-per-file
-      <ImportedSvg
-        style={{
-          display: 'block',
-          width: '100%',
-          height: '100%',
-        }}
-      />
-    );
+    if (ImportedSvg)
+      return (
+        <ImportedSvg
+          style={{
+            display: 'block',
+            width: '100%',
+            height: '100%',
+          }}
+        />
+      );
+    return <></>;
   }
-
   return <></>;
 };
 
@@ -54,8 +53,8 @@ type Props = {
   src: string;
   animate: boolean;
 };
-const ExcalidrawAnimation: FunctionComponent<Props> = ({ src, animate }): ReactNode => {
-  const ref = useRef<HTMLDivElement | undefined>();
+const ExcalidrawAnimation: FunctionComponent<Props> = ({ src, animate }): ReactElement | null => {
+  const ref = useRef<HTMLDivElement>();
   const [svg, setSvg] = useState<SVGSVGElement>();
 
   const [scrollPosition, setScrollPosition] = useState(0);
