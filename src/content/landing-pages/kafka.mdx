@@ -1,7 +1,8 @@
 ---
 title: Apache Kafka needs encryption - encrypt it the right way
 hero_text: Encrypt Kafka the _right way_
-hero_image: "@assets/animations/insecure-kafka.svg"
+hero_image: insecure-kafka
+hero_animated: true
 subtext: Don't settle for naive end-to-end encryption when you need app-to-app trust
 features:
   - icon: fingerprint
@@ -17,6 +18,7 @@ features:
 
 {/* <!-- vale off --> */}
 
+<SideBySidePanel textOrientation="left" image="kafka-encrypted-ockam" animate>
 ## App-to-app trust
 
 Kafka applications that are handling sensitive data require more than encryption
@@ -25,7 +27,9 @@ expectations are guarantees that the intended applications are exclusively the
 apps that can participate in a sensitive message stream. Ockam moves trust to 
 the application layer by building a mutually authenticated and encrypted 
 communication channel between all of your Kafka apps _through_ your Kafka brokers.
+</SideBySidePanel>
 
+<SideBySidePanel textOrientation="right" image="kafka-key-layers" animate>
 ## No more shared secret keys
 
 Sharing secret keys across many apps and services increases the likelihood of
@@ -38,8 +42,13 @@ were able to use the shared secret keys.
 With Ockam, each Kafka app generates it's own _unique_ cryptographically provable identity 
 and encryption keys, and uses those keys to establish trusted secure channels directly 
 with other authorized apps as required.
+</SideBySidePanel>
 
+<SideBySidePanel textOrientation="left" image="shared-key-shipping-exposure-risk" animate>
 ## No more shipping secrets
+
+Voluptate mollit ex velit labore laborum ipsum dolore veniam dolor nostrud ea aute. Aute cillum excepteur nostrud nostrud duis cupidatat consectetur deserunt officia enim consectetur esse cillum est. Dolore eu eiusmod sit et dolor elit eiusmod. Nostrud voluptate excepteur exercitation sit minim excepteur nisi.
+</SideBySidePanel>
 
 ## Automated & regular key-rotation
 
@@ -61,11 +70,13 @@ the messages moving through your system.
 Because each app generates keys and establishes trust directly there's no need to run
 often complicated PKI systems.
 
+<SideBySidePanel textOrientation="left" image="kafka-any-language">
 ## Any language
 
 The Kafka add-on for Ockam can work with any language. You've the flexibility
 to write your producers and consumers in a mix of Java, Python, Go, Scala, you 
 name it!
+</SideBySidePanel>
 
 ## No app code changes
 
@@ -79,10 +90,15 @@ apps.
 Running Kafka yourself? Maybe a managed offering inside you own VPC? Ockam 
 works wherever you need it.
 
+<SideBySidePanel textOrientation="right" image="kafka-heterogeneous">
 ## Heterogeneous deployments
 
 Ockam's agnostic to network-level and cloud-specific features. Run a mix of apps
 across the major cloud vendors to access specific value-add services without 
 the complication of configuring secure cross-cloud access to a specific KMS or
 setting services like Private Link or VPC Peering.
+</SideBySidePanel>
 
+## Available today
+
+Voluptate mollit ex velit labore laborum ipsum dolore veniam dolor nostrud ea aute. Aute cillum excepteur nostrud nostrud duis cupidatat consectetur deserunt officia enim consectetur esse cillum est. Dolore eu eiusmod sit et dolor elit eiusmod. Nostrud voluptate excepteur exercitation sit minim excepteur nisi.

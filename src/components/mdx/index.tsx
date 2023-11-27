@@ -22,6 +22,7 @@ import Table, { tableIntegralComponents } from './Table';
 import AspectRatio from './AspectRatio';
 import Video from './Video';
 import Alert from './Alert';
+import SideBySidePanel from './SideBySidePanel';
 
 export default {
   p: Paragraph,
@@ -46,4 +47,5 @@ export default {
   Feature,
   SimpleGrid,
   ExcalidrawAnimation,
+  SideBySidePanel,
 } as MDXRemoteProps['components'];

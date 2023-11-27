@@ -39,13 +39,16 @@ const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): Rea
 
 type Props = {
   src: string;
+  animate: boolean;
 };
-const ExcalidrawAnimation: FunctionComponent<Props> = ({ src }): ReactNode => {
+const ExcalidrawAnimation: FunctionComponent<Props> = ({ src, animate }): ReactNode => {
   const ref = useRef<HTMLDivElement | undefined>();
   const [svg, setSvg] = useState<SVGSVGElement>();
+
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isPlayable, setIsPlayable] = useState(false);
+
   // const animationTimerRef = useRef<NodeJS.Timeout | undefined>()
 
   // const stepForwardAnimations = useCallback((): void => {
@@ -88,6 +91,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({ src }): ReactNode => {
   const { ref: inViewRef } = useInView({
     threshold: 0.65,
     onChange: (inView) => {
+      if (!animate) return;
       setIsVisible(inView);
     },
   });
@@ -140,20 +144,25 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({ src }): ReactNode => {
 
   useEffect(() => {
     if (!svg) return;
-    if (isPlayable) {
-      svg.unpauseAnimations();
+    if (animate) {
+      if (isPlayable) {
+        svg.unpauseAnimations();
+      } else {
+        svg.pauseAnimations();
+      }
     } else {
       svg.pauseAnimations();
     }
-  }, [svg, isPlayable]);
+  }, [svg, animate, isPlayable]);
 
   useEffect(() => {
+    if (!animate) return;
     if (isVisible && scrollPosition > 300) {
       setIsPlayable(true);
     } else {
       setIsPlayable(false);
     }
-  }, [scrollPosition, isVisible]);
+  }, [scrollPosition, isVisible, animate]);
 
   return (
     <div

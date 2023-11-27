@@ -68,6 +68,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const text = frontMatter?.hero_text as string;
   const image = frontMatter?.hero_image as string;
+  const animate = frontMatter?.hero_animated as boolean;
   const subtext = frontMatter?.subtext as string;
   const features: FrontmatterFeature[] =
     (frontMatter?.features as unknown as FrontmatterFeature[]) || [];
@@ -101,7 +102,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   return (
     <Box pt={{ base: 10, lg: 10 }}>
       <SEOHead title={title} ogImageSrc={ogImage} />
-      <Hero text={text} subtext={subtext} image={image} landingPage />
+      <Hero text={text} subtext={subtext} image={image} landingPage animate={animate || false} />
 
       <Flex
         w="full"
@@ -143,7 +144,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
           </Link>
         </Box>
         <Heading>&hellip; or, ask our team a question</Heading>
-        <Paragraph>We&apos; get back to you within one business day.</Paragraph>
+        <Paragraph>We&apos;ll get back to you within one business day.</Paragraph>
         <ContactForm landingPage={slug} />
       </Flex>
     </Box>

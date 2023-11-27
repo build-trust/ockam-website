@@ -88,10 +88,10 @@ const svgconfig = {
       // Convert all other *.svg imports to React components
       {
         test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
+        // issuer: /\.[jt]sx?$/,
         resourceQuery: { not: /url/ }, // exclude if *.svg?url
         use: ['@svgr/webpack'],
-      }
+      },
     );
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
