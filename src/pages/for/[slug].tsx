@@ -67,6 +67,7 @@ type FrontmatterFeature = {
 const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter }) => {
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const text = frontMatter?.hero_text as string;
+  const image = frontMatter?.hero_image as string;
   const subtext = frontMatter?.subtext as string;
   const features: FrontmatterFeature[] =
     (frontMatter?.features as unknown as FrontmatterFeature[]) || [];
@@ -94,13 +95,13 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
 
   const feats = features.map((feature) => feature.title).join('||');
   const ogImage = `/api/og?title=${encodeURIComponent(
-    text.replaceAll('_', '')
+    text.replaceAll('_', ''),
   )}&template=landing&features=${encodeURIComponent(feats)}`;
 
   return (
     <Box pt={{ base: 10, lg: 10 }}>
       <SEOHead title={title} ogImageSrc={ogImage} />
-      <Hero text={text} subtext={subtext} landingPage />
+      <Hero text={text} subtext={subtext} image={image} landingPage />
 
       <Flex
         w="full"

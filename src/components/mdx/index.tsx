@@ -2,6 +2,7 @@ import { MDXRemoteProps } from 'next-mdx-remote';
 import { SimpleGrid } from '@chakra-ui/react';
 
 import StyleGuideResourceItem from '@root/components/StyleGuideResourceItem';
+import ExcalidrawAnimation from '@root/components/ExcalidrawAnimation';
 import { Feature } from '@root/views/homepage/Features';
 
 import Paragraph from './Paragraph';
@@ -44,4 +45,5 @@ export default {
   Alert,
   Feature,
   SimpleGrid,
+  ExcalidrawAnimation,
 } as MDXRemoteProps['components'];

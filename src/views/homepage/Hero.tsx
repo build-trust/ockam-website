@@ -15,6 +15,8 @@ import crypto from 'crypto';
 // import { BUILD_DEMO } from '@root/consts/externalResources';
 // import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
+import ExcalidrawAnimation from '@root/components/ExcalidrawAnimation';
+
 import RotatingHeading from './RotatingHeading';
 
 const sha512 = (input: string): string => {
@@ -42,9 +44,10 @@ const HeroBox = styled(Box)`
 type Props = {
   text?: string;
   subtext?: string;
+  image?: string;
   landingPage?: boolean;
 };
-const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
+const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage }) => {
   const { gradients } = useTheme();
 
   const heroText = (): JSX.Element => {
@@ -238,6 +241,17 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, landingPage }) => {
           {ctas()}
           <RotatingHeading text={subtext} />
         </Box>
+        {image && (
+          <Box
+            width="100%"
+            height="400px"
+            overflow="hidden"
+            borderTopLeftRadius="3xl"
+            borderTopRightRadius="3xl"
+          >
+            <ExcalidrawAnimation height="100%" width="100%" />
+          </Box>
+        )}
       </Container>
     </HeroBox>
   );
