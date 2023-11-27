@@ -1,7 +1,19 @@
-import { FunctionComponent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  ComponentType,
+  FunctionComponent,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): ReactNode => {
+type SvgProps = {
+  style: {};
+};
+const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): ReactElement => {
   const ImportedSvgRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
@@ -22,8 +34,9 @@ const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): Rea
   }, [name, onLoad]);
 
   if (!loading && ImportedSvgRef.current) {
-    const { current: ImportedSvg } = ImportedSvgRef;
+    const { current: ImportedSvg }: { current: ComponentType<SvgProps> | null } = ImportedSvgRef;
     return (
+      // eslint-disable-next-line max-classes-per-file
       <ImportedSvg
         style={{
           display: 'block',
@@ -34,7 +47,7 @@ const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): Rea
     );
   }
 
-  return null;
+  return <></>;
 };
 
 type Props = {
