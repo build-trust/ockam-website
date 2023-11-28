@@ -41,6 +41,7 @@ const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): Rea
             display: 'block',
             width: '100%',
             height: '100%',
+            overflow: 'visible',
           }}
         />
       );
@@ -196,6 +197,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({ src, animate }): ReactE
         height: '100%',
         width: '100%',
         background: 'white',
+        paddingTop: '15px',
       }}
     >
       <SvgAnimation name={src} onLoad={svgLoaded} />
