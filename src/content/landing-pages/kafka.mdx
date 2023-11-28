@@ -19,7 +19,7 @@ features:
 
 {/* <!-- vale off --> */}
 
-<SideBySidePanel textOrientation="left" image="kafka-encrypted-ockam" animate>
+<SideBySidePanel textOrientation="left" image="kafka-encrypted-ockam">
 ## App-to-app trust
 
 Kafka applications that are handling sensitive data require more than encryption
@@ -67,16 +67,24 @@ historical and future data at risk because rotating secret keys is difficult &md
 it's built-in from the start.
 </SideBySidePanel>
 
+<SideBySidePanel textOrientation="left" image="guaranteed-authenticity">
 ## Data authenticity & integrity
 
 The approach to mutual authentication of every app that Ockam provides results
 in strong data governance guarantees around the authenticity and integrity of 
 the messages moving through your system. 
+</SideBySidePanel>
 
+<SideBySidePanel textOrientation="right" image="no-pki">
 ## No need to run Public Key Infrastructure (PKI)
 
-Because each app generates keys and establishes trust directly there's no need to run
-often complicated PKI systems.
+Nobody loves running their own PKI. It's complicated, you still need to work out
+how to securely handle your root certificate and keys, have policies around 
+lifecycle management&hellip; a lot of extra infrastructure and orchestration.
+
+With Ockam, each app generates keys and establishes trust directly there's no 
+need to run your own PKI systems.
+</SideBySidePanel>
 
 <SideBySidePanel textOrientation="left" image="kafka-any-language">
 ## Any language
@@ -95,10 +103,12 @@ and won't require you to change any of the business logic or implementation in y
 apps.
 </SideBySidePanel>
 
+<SideBySidePanel textOrientation="left" image="cloud-on-prem">
 ## Self-managed deployments
 
 Running Kafka yourself? Maybe a managed offering inside you own VPC? Ockam 
 works wherever you need it.
+</SideBySidePanel>
 
 <SideBySidePanel textOrientation="right" image="kafka-heterogeneous">
 ## Heterogeneous deployments
