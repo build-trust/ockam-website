@@ -2,8 +2,9 @@
 title: Apache Kafka needs encryption - encrypt it the right way
 hero_text: Encrypt Kafka the _right way_
 hero_image: insecure-kafka
-hero_animated: true
+hero_animated: false
 subtext: Don't settle for naive end-to-end encryption when you need app-to-app trust
+list_features: false
 features:
   - icon: fingerprint
     title: Unique keys per identity
@@ -18,7 +19,7 @@ features:
 
 {/* <!-- vale off --> */}
 
-<SideBySidePanel textOrientation="left" image="kafka-encrypted-ockam" animate>
+<SideBySidePanel textOrientation="left" image="kafka-encrypted-ockam">
 ## App-to-app trust
 
 Kafka applications that are handling sensitive data require more than encryption
@@ -44,31 +45,46 @@ and encryption keys, and uses those keys to establish trusted secure channels di
 with other authorized apps as required.
 </SideBySidePanel>
 
-<SideBySidePanel textOrientation="left" image="shared-key-shipping-exposure-risk" animate>
+<SideBySidePanel textOrientation="left" image="shared-key-shipping-exposure-risk">
 ## No more shipping secrets
 
-Voluptate mollit ex velit labore laborum ipsum dolore veniam dolor nostrud ea aute. Aute cillum excepteur nostrud nostrud duis cupidatat consectetur deserunt officia enim consectetur esse cillum est. Dolore eu eiusmod sit et dolor elit eiusmod. Nostrud voluptate excepteur exercitation sit minim excepteur nisi.
+Whether it's reading a credential or secret value from a central source, or 
+transmitting a secret key to another app, every time a secret value is transmitted
+over the wire is another opportunity for it to leak. Ockam's approach to secret 
+management means each secret key never needs to leave the place where it was 
+generated. By removing the need to transmit secrets the risk of an attacker 
+intercepting a secret in transit is also removed.
 </SideBySidePanel>
 
+<SideBySidePanel textOrientation="right" image="automated-key-rotation">
 ## Automated & regular key-rotation
 
 Everyone hopes they never have a data breach, but to minimize the impact incase
 the worst happens Ockam apps automatically and regularly rotate their encryption
 keys. If a secret key is ever leaked the data at risk is reduced to the amount sent
 in the small window of that secret key was active. Don't put your 
-historical and future data at risk because rotating secret keys is difficult &emdash; 
+historical and future data at risk because rotating secret keys is difficult &mdash; 
 it's built-in from the start.
+</SideBySidePanel>
 
+<SideBySidePanel textOrientation="left" image="guaranteed-authenticity">
 ## Data authenticity & integrity
 
 The approach to mutual authentication of every app that Ockam provides results
 in strong data governance guarantees around the authenticity and integrity of 
 the messages moving through your system. 
+</SideBySidePanel>
 
+<SideBySidePanel textOrientation="right" image="no-pki">
 ## No need to run Public Key Infrastructure (PKI)
 
-Because each app generates keys and establishes trust directly there's no need to run
-often complicated PKI systems.
+Nobody loves running their own PKI. It's complicated, you still need to work out
+how to securely handle your root certificate and keys, have policies around 
+lifecycle management&hellip; a lot of extra infrastructure and orchestration.
+
+With Ockam, each app generates keys and establishes trust directly there's no 
+need to run your own PKI systems.
+</SideBySidePanel>
 
 <SideBySidePanel textOrientation="left" image="kafka-any-language">
 ## Any language
@@ -78,17 +94,21 @@ to write your producers and consumers in a mix of Java, Python, Go, Scala, you
 name it!
 </SideBySidePanel>
 
+<SideBySidePanel textOrientation="right" image="no-code-changes">
 ## No app code changes
 
 Just a single configuration change: update the broker host to point to the secure channel
 that Ockam sets up on `localhost` for each app. It takes a couple of seconds,
 and won't require you to change any of the business logic or implementation in your
 apps.
+</SideBySidePanel>
 
+<SideBySidePanel textOrientation="left" image="cloud-on-prem">
 ## Self-managed deployments
 
 Running Kafka yourself? Maybe a managed offering inside you own VPC? Ockam 
 works wherever you need it.
+</SideBySidePanel>
 
 <SideBySidePanel textOrientation="right" image="kafka-heterogeneous">
 ## Heterogeneous deployments
@@ -99,6 +119,12 @@ the complication of configuring secure cross-cloud access to a specific KMS or
 setting services like Private Link or VPC Peering.
 </SideBySidePanel>
 
+<SideBySidePanel textOrientation="left" image="available-today">
 ## Available today
 
-Voluptate mollit ex velit labore laborum ipsum dolore veniam dolor nostrud ea aute. Aute cillum excepteur nostrud nostrud duis cupidatat consectetur deserunt officia enim consectetur esse cillum est. Dolore eu eiusmod sit et dolor elit eiusmod. Nostrud voluptate excepteur exercitation sit minim excepteur nisi.
+All of these features are available and production ready, today. There's no
+waiting to get accepted into a beta program, for a professional services
+team to draft a statement of work, or to even speak to our sales team (though
+we would still love to speak with you!). You can [create an account for free](https://www.ockam.io/download)
+and have [Ockam securing your Kafka environment within minutes](https://docs.ockam.io/guides/examples/end-to-end-encrypted-kafka).
+</SideBySidePanel>

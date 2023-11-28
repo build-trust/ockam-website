@@ -149,10 +149,20 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({ src, animate }): ReactE
       if (s) {
         setSvg(s);
         s.setCurrentTime(0);
+        if (!animate) {
+          const steps = s.querySelectorAll('animate');
+          if (steps && steps.length > 0) {
+            const lastStep = steps[steps.length - 1];
+            s.setCurrentTime(
+              parseFloat(lastStep.getAttribute('begin') || '0') +
+                parseFloat(lastStep.getAttribute('delay') || '0'),
+            );
+          }
+        }
         s.pauseAnimations();
       }
     }
-  }, []);
+  }, [animate]);
 
   useEffect(() => {
     if (!svg) return;

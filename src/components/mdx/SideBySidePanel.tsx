@@ -26,7 +26,13 @@ const SideBySidePanel: FC<Props> = ({ textOrientation, image, children, animate 
   };
 
   return (
-    <Flex direction={direction()} gap="4" width="100%" mb={{ base: '32' }}>
+    <Flex
+      direction={direction()}
+      gap="4"
+      width="100%"
+      mb={{ base: '32' }}
+      px={{ base: '8', lg: '0' }}
+    >
       <Box width={{ base: '100%', lg: '50%' }}>{children}</Box>
       <Box width={{ base: '100%', lg: '50%' }}>
         <ExcalidrawAnimation src={image} animate={animate || false} />

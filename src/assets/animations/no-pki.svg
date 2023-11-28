@@ -1,0 +1,21 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 328.1204947023093 319" width="656.2409894046186" height="638">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+      @font-face {
+        font-family: "Assistant";
+        src: url("https://excalidraw.com/Assistant-Regular.woff2");
+      }
+    </style>
+    
+  </defs>
+  <rect x="0" y="0" width="328.1204947023093" height="319" fill="#ffffff"></rect><g transform="translate(32.496009826660156 100) rotate(0 128.70879516601565 66)"><text x="128.70879516601562" y="0" font-family="Virgil, Segoe UI Emoji" font-size="35.19999999999999px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">Public</text><text x="128.70879516601562" y="43.999999999999986" font-family="Virgil, Segoe UI Emoji" font-size="35.19999999999999px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">Key</text><text x="128.70879516601562" y="87.99999999999997" font-family="Virgil, Segoe UI Emoji" font-size="35.19999999999999px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">Infrastructure</text></g><g stroke-linecap="round" transform="translate(10 10) rotate(0 149.5 149.5)"><path d="M70.68 19.72 C81.83 10.01, 99.87 5.03, 115.13 1.83 C130.38 -1.36, 146.43 -1.04, 162.22 0.56 C178.01 2.16, 195.44 5.32, 209.87 11.43 C224.3 17.54, 237.56 27.18, 248.81 37.2 C260.06 47.23, 269.46 58.6, 277.37 71.56 C285.27 84.53, 292.61 99.8, 296.24 115.01 C299.88 130.22, 300.63 147.13, 299.17 162.81 C297.7 178.48, 293.91 195.07, 287.45 209.05 C280.98 223.03, 270.69 234.93, 260.35 246.71 C250.02 258.49, 238.05 271.68, 225.42 279.72 C212.78 287.76, 199.44 291.87, 184.54 294.94 C169.64 298.01, 151.36 299.68, 136.03 298.14 C120.71 296.6, 106.73 292, 92.59 285.7 C78.45 279.39, 62.78 270.18, 51.2 260.33 C39.61 250.48, 31 239.61, 23.08 226.6 C15.16 213.58, 7.74 197.09, 3.69 182.24 C-0.35 167.4, -2.36 152.84, -1.18 137.53 C0.01 122.23, 4.46 105.06, 10.78 90.43 C17.11 75.81, 20.08 63.87, 36.76 49.8 C53.44 35.72, 91.06 13.6, 110.87 6 C130.68 -1.59, 154.76 1.81, 155.62 4.22 M113.05 3.18 C127.08 -1.89, 145.61 0.22, 161.74 1.92 C177.87 3.62, 195.88 7.66, 209.82 13.4 C223.75 19.14, 233.58 26.21, 245.34 36.34 C257.1 46.48, 271.8 61.1, 280.38 74.23 C288.96 87.35, 293.54 100.89, 296.84 115.09 C300.14 129.28, 301.48 144.24, 300.18 159.42 C298.88 174.59, 295.62 191.94, 289.03 206.15 C282.44 220.36, 270.77 232.9, 260.64 244.68 C250.5 256.46, 240.97 268.13, 228.22 276.82 C215.48 285.51, 199.69 292.76, 184.17 296.8 C168.65 300.85, 150.97 302.87, 135.1 301.08 C119.24 299.29, 102.49 292.29, 88.96 286.08 C75.43 279.87, 65.5 273.27, 53.91 263.8 C42.33 254.33, 27.87 242.92, 19.43 229.26 C11 215.6, 6.08 197.63, 3.3 181.82 C0.53 166.01, 1.36 149.27, 2.8 134.41 C4.24 119.55, 5.92 106.39, 11.93 92.67 C17.94 78.94, 29.28 64.34, 38.87 52.07 C48.47 39.8, 56.8 27.36, 69.49 19.05 C82.18 10.73, 106.96 3.72, 115.02 2.16 C123.09 0.59, 117.6 7.31, 117.88 9.64" stroke="#e03131" stroke-width="2" fill="none"></path></g><g stroke-linecap="round"><g transform="translate(20 277) rotate(0 148 -111.5)"><path d="M0.21 -1.35 C48.8 -38.62, 244.14 -187.75, 293.22 -225.15 M-3.12 4.09 C46.13 -32.76, 248.9 -184.65, 298.12 -222.68" stroke="#e03131" stroke-width="2" fill="none"></path></g></g><mask></mask></svg>

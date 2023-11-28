@@ -70,10 +70,14 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   const image = frontMatter?.hero_image as string;
   const animate = frontMatter?.hero_animated as boolean;
   const subtext = frontMatter?.subtext as string;
+  const listFeatures = (
+    typeof frontMatter?.list_features === 'undefined' ? true : frontMatter?.list_features
+  ) as boolean;
   const features: FrontmatterFeature[] =
     (frontMatter?.features as unknown as FrontmatterFeature[]) || [];
 
   const displayFeatures = (): JSX.Element => {
+    if (!listFeatures) return <></>;
     if (Array.isArray(features) && features.length < 1) return <></>;
     return (
       <SimpleGrid
