@@ -1,0 +1,21 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 369.9699942296595" width="672" height="739.939988459319">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+      @font-face {
+        font-family: "Assistant";
+        src: url("https://excalidraw.com/Assistant-Regular.woff2");
+      }
+    </style>
+    
+  </defs>
+  <rect x="0" y="0" width="336" height="369.9699942296595" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(12 10) rotate(0 156.5 32)"><path d="M16 0 C85.58 0, 155.15 0, 297 0 C307.67 0, 313 5.33, 313 16 C313 22.89, 313 29.78, 313 48 C313 58.67, 307.67 64, 297 64 C186.62 64, 76.25 64, 16 64 C5.33 64, 0 58.67, 0 48 C0 38.72, 0 29.45, 0 16 C0 5.33, 5.33 0, 16 0" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M16 0 C104.8 0, 193.61 0, 297 0 M16 0 C77.99 0, 139.99 0, 297 0 M297 0 C307.67 0, 313 5.33, 313 16 M297 0 C307.67 0, 313 5.33, 313 16 M313 16 C313 25.43, 313 34.86, 313 48 M313 16 C313 26.45, 313 36.91, 313 48 M313 48 C313 58.67, 307.67 64, 297 64 M313 48 C313 58.67, 307.67 64, 297 64 M297 64 C232.77 64, 168.53 64, 16 64 M297 64 C220.97 64, 144.94 64, 16 64 M16 64 C5.33 64, 0 58.67, 0 48 M16 64 C5.33 64, 0 58.67, 0 48 M0 48 C0 39.74, 0 31.49, 0 16 M0 48 C0 38.9, 0 29.79, 0 16 M0 16 C0 5.33, 5.33 0, 16 0 M0 16 C0 5.33, 5.33 0, 16 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(77 72.7080207732256) rotate(0 97.2314453125 143.63098672821695)"><text x="0" y="0" font-family="Virgil, Segoe UI Emoji" font-size="229.80957876514702px" fill="#69db7c" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">✔</text></g><g stroke-linecap="round" transform="translate(10 10) rotate(0 158 159)"><path d="M32 0 C128.76 1.22, 224.58 0.54, 284 0 M32 0 C101.83 -1.02, 170.78 -1.63, 284 0 M284 0 C306.1 0.01, 317.31 9.6, 316 32 M284 0 C307.25 -1.85, 317.3 12.07, 316 32 M316 32 C313.64 130.33, 314.7 229.58, 316 286 M316 32 C317.27 125.22, 317.25 220.05, 316 286 M316 286 C317.42 306.63, 304.3 319.53, 284 318 M316 286 C314.26 309.55, 306.14 318.39, 284 318 M284 318 C217.62 316.34, 152.37 318.34, 32 318 M284 318 C196.72 317.02, 109.07 317.72, 32 318 M32 318 C12.63 319.19, 1.8 306.62, 0 286 M32 318 C8.86 319.55, 1.58 306.01, 0 286 M0 286 C-0.29 219.19, 0.91 152.96, 0 32 M0 286 C1.35 232.06, 0.45 176.84, 0 32 M0 32 C1.02 8.78, 11.84 -1.16, 32 0 M0 32 C-1.51 8.8, 9.85 -1.78, 32 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g stroke-linecap="round"><g transform="translate(16 76) rotate(0 153.5 0)"><path d="M0.58 -0.78 C51.61 -1.58, 257.69 -2.39, 308.59 -2.15 M-2.56 -3.68 C48.03 -2.99, 256.19 -0.99, 307.22 0.31" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g transform="translate(105 25) rotate(0 62.676002502441406 22.5)"><text x="0" y="0" font-family="Virgil, Segoe UI Emoji" font-size="36px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge">TODAY</text></g></svg>
