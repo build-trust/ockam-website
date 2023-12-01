@@ -1,0 +1,120 @@
+---
+title: 'The Razor: ep 3'
+date: '2023-11-30'
+description: Private things where they shouldn't be, stopping the ships, MOVEit body count increases, almost no mention of OpenAI.
+author: 'Glenn'
+authorAvatar: /blog/glenn-gillen.jpg
+---
+
+{/* <!-- vale off --> */}
+
+Wow, where did November go?! I guess with the holidays it flies by quicker than
+other months. I'm sure for all those that celebrate Thanksgiving there was a lot
+of food, and for the rest of us it was 🍿 time as we witnessed whatever it was
+that happened at OpenAI.
+
+## Secure-by-design
+
+* **👵🏻 Long-lived credentials are still a problem:** [DataDog published their
+State of Cloud Security report](https://www.datadoghq.com/state-of-cloud-security/). Lots of great stuff in there and things we
+need, as an industry, to do better at. Leading the report: stop using long-lived
+credentials everywhere!!
+* **🧢 BlueHat conference videos are up:** Microsoft's Security Response Center 
+hosted their BlueHat conference in October, and the [videos are now online](https://www.youtube.com/playlist?list=PLXkmvDo4MfutylXJNJ6gth_qIEwJdeWz7). I've
+had a chance to watch a couple but they've already been quite eye opening. 
+Laura Plein & Dr. Segio Coronado give a [demo of RatGPT](https://www.youtube.com/watch?v=WVSWqCgf-GU&list=PLXkmvDo4MfutylXJNJ6gth_qIEwJdeWz7&index=21) &mdash; their proof of
+concept for using Large Language Models to dynamically generate malware and 
+ransomware code that could be automatically executed by a victim and incredibly
+difficult to detect using usual malware tools because of the fact it's generated
+on the fly 😬. Luke Jennings covers the [evolution of cyber attacks](https://www.youtube.com/watch?v=pdDzUTFVIZc&list=PLXkmvDo4MfutylXJNJ6gth_qIEwJdeWz7&index=16) and what the 
+landscape looks like given we've moved to a SaaS & remote-first world. 
+Dr. Nestori Syynimaa gives some examples of vulnerabilities where the initial
+response was [it's working that way "by design"](https://www.youtube.com/watch?v=VGkfDBdlwjg&list=PLXkmvDo4MfutylXJNJ6gth_qIEwJdeWz7&index=10)... so obviously I had to include that talk!
+* **🙈 Private keys in public places:** I'm still playing catch-up on the DefCon 
+talks from two months ago so I've only just caught this wonderful one that 
+resonates from Tom Pohl about [how private keys, certs, encryption keys, etc. keep
+ending up in places where they can be found](https://www.youtube.com/watch?v=7t_ntuSXniw). 
+* **🐢 Getting hacked slowly:** [Matt Johansen explains something](https://www.mattjay.com/blog/getting-hacked-slowly) that has 
+intuitively made sense to me for a while but that I've never put words to before -
+getting hacked doesn't happen suddenly like a car crash, it's a gradual thing that
+happens over months or years.
+* **☁️ Keep those EC2 instances safe:** Lior Zatlavi @ Tenable [gives an example](https://ermetic.com/blog/cloud/exfiltrated-signed-delivered-what-can-go-wrong-when-an-amazon-elastic-compute-cloud-ec2-instance-is-exposed-to-ssrf/) of
+how an EC2 instance that is vulnerable to Server-side Request Forgery (SSRF) can
+then generate signed URLs to grant an attacker access to other services. 
+* **🧱 Lock down your ECS containers:** If you're using ECS to manage your container
+workloads then you need to read this [detailed list of ECS security best practices](https://aws.amazon.com/blogs/security/security-considerations-for-running-containers-on-amazon-ecs/) from Mutaz Hajeer,
+Ibtissam Liedri, and Temi Adebambo at AWS.
+* **🦀 Memory safe `sudo`:** Prossimo, Tweede Golf, and Ferrous Systems teamed
+up to build [a memory safe implementation of `sudo` that is written in Rust](https://www.memorysafety.org/blog/sudo-first-stable-release/?utm_source=tldrsec.com&utm_medium=referral&utm_campaign=tl-dr-sec-207-web-security-interview-questions-eks-cluster-games-supply-chain-resources).
+Given the escalation risks inherent in using `sudo` I'm sure this will be a much
+appreciated contribution by everyone concerned with building secure systems.
+* **⚠️ Explaining supply chain threats:** OpenSSF has published an entire site 
+and framework dedicated to assessing the security of software supply chains. I 
+found [the page detailing threats](https://slsa.dev/spec/v1.0/threats-overview?utm_source=tldrsec.com&utm_medium=referral&utm_campaign=tl-dr-sec-207-web-security-interview-questions-eks-cluster-games-supply-chain-resources) particularly interesting for both the visual
+of where they can occur (i.e., everywhere!) and also how they call out specific
+historical examples of it occuring in the wild.
+* **👷 Moar in supply chain security:** Russ Cox (of Golang fame!) gave a talk
+about both [the history of supply chain attacks and some of the initiatives in
+place at Google to address the problem](https://research.swtch.com/acmscored).
+* **½ What's between a 0-day and 1-day?** Ilya Goldman and Yaki Kadkoda explore
+the definition and impact of [vulnerabilities that sit somewhere in the middle of
+our common terminology](https://blog.aquasec.com/50-shades-of-vulnerabilities-uncovering-flaws-in-open-source-vulnerability-disclosures).
+* **👮 SolarWinds CISO Charged:** [The SEC charged the SolarWinds CISO with securities fraud](https://www.sec.gov/news/press-release/2023-227)
+relating to their breach back in 2020.
+* **🥷 Time to compromise < 5mins:** William Gamazo and Nathaniel Quist from Palo
+Alto Networks [show that it takes less than 5 minutes](https://unit42.paloaltonetworks.com/malicious-operations-of-exposed-iam-keys-cryptojacking/) for an exposed IAM credential
+to be exploited! 
+* **🔐 Are SSH keys still safe?** Keegan Ryan and a team of researchers [show a new
+attack](https://arstechnica.com/security/2023/11/hackers-can-steal-ssh-cryptographic-keys-in-new-cutting-edge-attack/) that can potentially expose private SSH keys.
+
+## Exposed
+
+There's been such a regular drumbeat of high-profile breaches I thought I'd break
+this out into its own section.
+
+* **😭 It's worse than we thought:** Okta [provided an update that their previous
+breach actually affected _all_ support users](https://www.bloomberg.com/news/articles/2023-11-29/okta-says-hackers-stole-data-for-all-customer-support-users), not just the 1% previously reported.
+Employee information was stolen too.
+* **⏱️ NXP hackers had access for 2 years:** In keeping with the story linked above
+about being hacked slowly, NXP reported that [hackers spent over two your exfiltrating
+secrets before they were detected](https://arstechnica.com/security/2023/11/hackers-spent-2-years-looting-secrets-of-chipmaker-nxp-before-being-detected/).
+* **🛬 Rough landing ahead:** [Boeing confirms its systems were compromised by a cyberattack](https://www.darkreading.com/endpoint-security/boeing-confirms-system-compromise-alerting-customers)
+* **🥶 Confluence has critical CVE:** Atlassian announced that the [Data Center & Server
+versions of Confluence have a critical CVE](https://confluence.atlassian.com/security/cve-2023-22518-improper-authorization-vulnerability-in-confluence-data-center-and-server-1311473907.html).
+* **🦞 Maine loses its people:** The MOVEit breach earlier this year keeps causing problems,
+this time the state of Maine in the US has [had personal information for most of the
+state leaked](https://mashable.com/article/maine-moveit-ransomware-attack).
+* **🛞 Car parts aren't safe:** Speaking of MOVEit, [AutoZone got hit too](https://www.jdsupra.com/legalnews/autozone-notifies-184-995-individuals-5956264/).
+* **🚢 Australian ports attacked:** [A ransomware attack of Australia's largest
+shipping port operator closed ports for a few days](https://www.bloomberg.com/news/articles/2023-11-12/dp-world-sees-significant-progress-in-australia-port-resumption) and potentially impacted the
+supply chain and holiday season plans for several million people.
+* **🕵️ 2x the bad news:** [MeridianLink was the victim of a ransomware attack](https://www.bleepingcomputer.com/news/security/ransomware-gang-files-sec-complaint-over-victims-undisclosed-breach/),
+and to add insult to injury the attackers then also reported them to the SEC due
+to their lack of disclosure about being attacked!
+* **🚗 Fasten your seatbelts:** [Toyota confrms](https://www.bleepingcomputer.com/news/security/toyota-confirms-breach-after-medusa-ransomware-threatens-to-leak-data/) it was the victim of a ransomware attack.
+* **📚 Some heavy reading:** Both the [Toronto](https://torontopubliclibrary.typepad.com/tpl/home.html)
+and [British](https://twitter.com/britishlibrary/status/1726618361398722754) public
+libraries were offline for weeks due to cyberattacks.
+## DX
+
+* **🎗️ Never forget a pentest command:** If you do pentesting then remembering
+all of the arguments for all of the tools is a non-trivial ask. Thankfully
+[Arsenal](https://github.com/Orange-Cyberdefense/arsenal) has your back. It's a
+CLI tool that lets you search for a command and will then prefill your terminal
+with the arguments you need.
+* **🤖 AI-powered AppSec**: Asha Chakrabart & Laura Paine [cover just a handful of 
+dozens of advanced security features](https://github.blog/2023-11-08-ai-powered-appsec) GitHub has released over the past year.
+
+## Product spotlight
+
+* **🧑‍🍳 What are we cooking up?** We've space for 5 more alpha testers for 
+something we've been working on. If you're interested in taking it for a spin _and_ you're 
+willing to record &amp; share with us a video of yourself trying it out (so that
+we can see any UX issues you run into and fix them) please reply to this email
+and let me know!
+
+🎬 That's a wrap! I _might_ squeeze one more edition in before we disappear for
+the holidays. If not, I wish you all a happy new year and look forward to hearing
+from you all in 2024. 
+
+Thanks,
