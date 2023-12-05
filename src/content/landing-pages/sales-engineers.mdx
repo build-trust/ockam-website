@@ -1,0 +1,77 @@
+---
+title: Connect systems simply, close deals faster
+hero_text: _Stop waiting_ on Infrastructure teams _to connect networks_
+hero_image: dont-ask-customers-privatelink
+hero_animated: true
+subtext: Shave weeks off the time it takes to onboard new customers & close deals
+list_features: false
+features:
+  - icon: fingerprint
+    title: Unique keys per identity
+    text: Each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
+  - icon: shieldcheck
+    title: Tamper-proof data transfer
+    text: By pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorised producers can write to a topic ensuring that the data in your topic is highly trustworthy.
+  - icon: clock
+    title: Reduced exposure window
+    text: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralised shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimises the risk to future data using automatically rotating keys.
+---
+
+<SideBySidePanel textOrientation="left" image="simplified-saas-connectivity" animate>
+## Remove unnecessary network complexity
+
+Asking your customers to make changes to their network configuration to
+connect to your product is slowing down on-boarding and adoption. Replace the 
+bureaucracy required to make network-level changes with the excitement
+of seeing value from using your product.
+
+Ockam works with your product's existing solutions such as PrivateLink of VPC 
+peering, but removes the need for your customers to make changes to their account. 
+Your customer runs Ockam alongside your app, establishes a mutually authenticated secure 
+channel, which enables trusted communication between the systems.
+</SideBySidePanel>
+
+
+<SideBySidePanel textOrientation="right" image="multicloud">
+## Multi-cloud deployments
+
+Ockam's agnostic to network-level and cloud-specific features. That means no 
+matter which cloud your customers are using, or if they're using multiple 
+clouds, you've a single approach that works consistently wherever your customers
+are.
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="left" image="five-stars">
+## Trust your security team can depend on
+
+Ockam's approach uses a series of existing and well established open source
+technologies and frameworks. The cryptographic and messaging protocols are 
+[publicly documented](https://docs.ockam.io/reference/protocols) and
+the implementations are 
+[open source and available on GitHub](https://github.com/build-trust/ockam).
+
+Also available is a published and independent third-party audit by
+the security research firm [Trail of Bits](https://www.trailofbits.com).
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="left" image="kafka-encrypted-ockam">
+## Trust at the application level
+
+Words about moving trust to the application layer means finer-grained security
+controls vs connecting entire networks.
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="left" image="guaranteed-authenticity">
+## Data authenticity & integrity
+
+The approach to mutual authentication of every app that Ockam provides results
+in strong data governance guarantees around the authenticity and integrity of 
+the messages moving through your system. 
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="left" image="cloud-on-prem">
+## Self-managed deployments
+
+???
+</SideBySidePanel>
+

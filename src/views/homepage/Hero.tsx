@@ -245,7 +245,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, ani
         {image && (
           <Box
             width="100%"
-            height="400px"
+            height="80vh"
             overflow="hidden"
             borderTopLeftRadius="3xl"
             borderTopRightRadius="3xl"
