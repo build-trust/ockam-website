@@ -1,0 +1,77 @@
+---
+title: 
+hero_text: Create secure connections with your vendors, without punching holes in your network
+hero_image: 
+hero_animated: true
+subtext: Ockam seamlessly integrates with your existing infrastructure, enabling secure connectivity without the complexity or security threats
+list_features: false
+
+
+---
+
+{/* <!-- vale off --> */}
+
+<SideBySidePanel textOrientation="left" image="">
+## Secure connectivity,  without changing your network
+
+Changing your network configurations to connect to SaaS providers is slowing down on-boarding and increasing risk. Replace network-level changes with direct, private connections over Ockam Secure Channels. 
+
+
+Ockam works with your existing infrastructure, and runs alongside your application or database. Establish mutually authenticated secure channels, which enables trusted communication between systems.
+
+
+</SideBySidePanel>
+.
+
+Also available is a published and independent third-party audit by the security research firm Trail of Bits.
+
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="left" image="">
+## Set up in minutes
+
+Creating an Ockam Secure Channel only takes a few minutes, and doesn’t require any complex network changes. Enable your teams to quickly integrate with SaaS applications with no code changes, and no dependencies.
+
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="right" image="" animate>
+## Connect from anywhere
+
+Ockam is agnostic to network-level and cloud-specific features. That means no matter where your database or application is - on prem, multiple clouds, in a VPC, etc -  you have a single approach that works consistently. 
+
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="left" image="kafka-encrypted-ockam">
+## App-to-app trust
+
+Applications that are handling sensitive data require more than encryption
+to the "end". Where's the "end"? What's needed to meet modern data governance 
+expectations are guarantees that the intended applications are exclusively the
+apps that can participate in a sensitive message stream. Ockam moves trust to 
+the application layer by building a mutually authenticated and encrypted 
+communication channel between all of your apps.
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="right" image="" animate>
+## Trust your security team can depend on
+
+Ockam's approach uses a series of existing and well established open source technologies and frameworks. The cryptographic and messaging protocols are publicly documented and the implementations are open source and available on GitHub
+
+<SideBySidePanel textOrientation="left" image="automated-key-rotation">
+## Automated & regular key-rotation
+
+Everyone hopes they never have a data breach, but to minimize the impact incase
+the worst happens Ockam apps automatically and regularly rotate their encryption
+keys. If a secret key is ever leaked the data at risk is reduced to the amount sent
+in the small window of that secret key was active. Don't put your 
+historical and future data at risk because rotating secret keys is difficult &mdash; 
+it's built-in from the start.
+</SideBySidePanel>
+
+<SideBySidePanel textOrientation="right" image="guaranteed-authenticity">
+## Data authenticity & integrity
+
+The approach to mutual authentication of every app that Ockam provides results
+in strong data governance guarantees around the authenticity and integrity of 
+the messages moving through your system. 
+</SideBySidePanel>
