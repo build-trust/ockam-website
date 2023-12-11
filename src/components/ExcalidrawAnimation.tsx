@@ -102,7 +102,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({ src, animate }): ReactE
   };
 
   const { ref: inViewRef } = useInView({
-    threshold: 0.65,
+    threshold: 0.5,
     onChange: (inView) => {
       if (!animate) return;
       setIsVisible(inView);

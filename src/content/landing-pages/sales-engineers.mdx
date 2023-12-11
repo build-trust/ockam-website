@@ -1,9 +1,9 @@
 ---
 title: Connect systems simply, close deals faster
-hero_text: _Stop waiting_ on Infrastructure teams _to connect networks_
+hero_text: Connect systems _simply_, close deals _faster_
 hero_image: dont-ask-customers-privatelink
 hero_animated: true
-subtext: Shave weeks off the time it takes to onboard new customers & close deals
+subtext: Simple & secure connections across any cloud and datacenter. With no changes to your code.
 list_features: false
 features:
   - icon: fingerprint
@@ -20,15 +20,17 @@ features:
 <SideBySidePanel textOrientation="left" image="simplified-saas-connectivity" animate>
 ## Remove unnecessary network complexity
 
-Asking your customers to make changes to their network configuration to
-connect to your product is slowing down on-boarding and adoption. Replace the 
-bureaucracy required to make network-level changes with the excitement
-of seeing value from using your product.
+Asking your customers to make changes to their network and infrastructure 
+configuration to connect to your product is slowing down on-boarding and 
+adoption. Replace the bureaucracy required to make network-level changes with 
+the excitement of seeing value from using your product.
 
 Ockam works with your product's existing solutions such as PrivateLink of VPC 
 peering, but removes the need for your customers to make changes to their account. 
 Your customer runs Ockam alongside your app, establishes a mutually authenticated secure 
 channel, which enables trusted communication between the systems.
+
+Your customers can have your systems connected in minutes, not weeks.
 </SideBySidePanel>
 
 
@@ -38,13 +40,14 @@ channel, which enables trusted communication between the systems.
 Ockam's agnostic to network-level and cloud-specific features. That means no 
 matter which cloud your customers are using, or if they're using multiple 
 clouds, you've a single approach that works consistently wherever your customers
-are.
+are. That includes other on-prem environments, data centers, or even a server 
+that's under someone's desk.
 </SideBySidePanel>
 
 <SideBySidePanel textOrientation="left" image="five-stars">
 ## Trust your security team can depend on
 
-Ockam's approach uses a series of existing and well established open source
+Ockam's approach uses existing and well established open source
 technologies and frameworks. The cryptographic and messaging protocols are 
 [publicly documented](https://docs.ockam.io/reference/protocols) and
 the implementations are 
@@ -54,11 +57,19 @@ Also available is a published and independent third-party audit by
 the security research firm [Trail of Bits](https://www.trailofbits.com).
 </SideBySidePanel>
 
-<SideBySidePanel textOrientation="left" image="kafka-encrypted-ockam">
+<SideBySidePanel textOrientation="right" image="kafka-encrypted-ockam">
 ## Trust at the application level
 
-Words about moving trust to the application layer means finer-grained security
-controls vs connecting entire networks.
+Traditional solutions like peering, VPNs, and maintaining allow lists - 
+network-level approaches that connect entire networks to each other. To reduce
+lateral movement within the networks further controls are then applied. 
+
+By elevating trust to the application level, Ockam provides
+fine-grained access controls that map to actual business needs. There's no long-standing
+assumptions about networks, and secure communication guarantees 
+push beyond network perimeters and system boundaries &mdash; they're
+established all the way through to the applications processing your data.
+
 </SideBySidePanel>
 
 <SideBySidePanel textOrientation="left" image="guaranteed-authenticity">
@@ -72,6 +83,11 @@ the messages moving through your system.
 <SideBySidePanel textOrientation="left" image="cloud-on-prem">
 ## Self-managed deployments
 
-???
+Ockam Orchestrator is a cloud-based fully-managed solution that allows you,
+and your customers, to be successful within minutes. With SLA guarantees and
+publicly available historical uptime reporting, it's the preferred deployment
+approach for the majority of customers. For those with specific self-managed 
+deployment requirements, Ockam Business Critical provides options for running
+entirely within your own VPC or on-prem.
 </SideBySidePanel>
 
