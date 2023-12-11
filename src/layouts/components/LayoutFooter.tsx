@@ -75,24 +75,14 @@ const NAV = [
     heading: 'Use cases',
     links: [
       {
-        name: 'Secure Kafka within financial services',
-        href: '/for/kafka-financial-services',
+        name: 'Kafka Encryption',
+        href: '/for/kafka',
         isExternal: false,
       },
       {
-        name: 'Chief Information Security Offices (CISOs)',
-        href: '/for/CISOs',
+        name: 'Sales Engineers',
+        href: '/for/sales-engineers',
         isExternal: false,
-      },
-      {
-        name: 'Kafka end-to-end encryption',
-        href: 'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
-        isExternal: true,
-      },
-      {
-        name: 'Okta / Auth0 ABAC',
-        href: 'https://docs.ockam.io/guides/use-cases/apply-fine-grained-permissions-with-attribute-based-access-control-abac',
-        isExtenal: true,
       },
       {
         name: 'Confluent Cloud compliance',
@@ -100,24 +90,9 @@ const NAV = [
         isExternal: true,
       },
       {
-        name: 'InfluxDB token management',
-        href: 'https://docs.ockam.io/guides/use-cases/influxdb-cloud-token-management',
-        isExternal: true,
-      },
-      {
-        name: 'Configure Telegraf with InfluxDB',
-        href: 'https://docs.ockam.io/guides/examples/telegraf-+-influxdb',
-        isExternal: true,
-      },
-      {
         name: 'Database protection',
         href: 'https://docs.ockam.io/guides/use-cases/secure-database-access',
         isExternal: true,
-      },
-      {
-        name: 'Enterprise Architects',
-        href: '/for/architects',
-        isExternal: false,
       },
     ],
   },
