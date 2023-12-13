@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable  */
 type Checkpoint = {
   [key: string]: number;
@@ -10,7 +11,6 @@ type Checkpoint = {
  * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Underscore may be freely distributed under the MIT license.
  */
-
 function throttle(func, wait) {
   var context, args, result;
   var timeout = null;
@@ -72,11 +72,11 @@ const trackScrollDepth = (): void => {
 };
 
 const bindScrollDepth = (): void => {
-  document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('scroll', throttle(trackScrollDepth, 500));
-  });
+  if (typeof window !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('scroll', throttle(trackScrollDepth, 500));
+    });
+  }
 };
 
-if (typeof window !== 'undefined') {
-  bindScrollDepth();
-}
+export default bindScrollDepth;

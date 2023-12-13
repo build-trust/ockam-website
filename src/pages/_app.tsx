@@ -19,7 +19,9 @@ import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import theme from '@theme';
 import { clearTrailingSlashes } from '@utils/seoUtils';
 import '../utils/segmentAnalytics';
-import '../utils/scrollTracking';
+import ScrollTracking from '@utils/scrollTracking';
+
+ScrollTracking();
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
