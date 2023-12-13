@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
-import Image, { StaticImageData } from 'next/legacy/image';
-import { Box, Flex, Container, Text, Heading, SimpleGrid, Center } from '@chakra-ui/react';
+import Image, { StaticImageData } from 'next/image';
+import { Box, Flex, Container, Text, Heading, SimpleGrid } from '@chakra-ui/react';
 
 import Card from '@components/Card';
-import CasesOneImage from '@assets/images/vpc-peering.png';
-import CasesTwoImage from '@assets/images/kafka-icon.png';
-import CasesThreeImage from '@assets/images/developer-hero.png';
+import CasesAccessDataImage from '@assets/images/accessing-data.png';
+import CasesKafkaImage from '@assets/images/encrypted-kafka.png';
+import CasesStartTodayImage from '@assets/images/start-today.png';
 import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
 
@@ -16,7 +16,7 @@ const TEXTS = [
 
 const CASES_CARDS = [
   {
-    image: CasesOneImage,
+    image: CasesAccessDataImage,
     title: 'Access Distributed Data',
     texts: [
       'Create secure access to private databases - from any application, anywhere!',
@@ -28,24 +28,23 @@ const CASES_CARDS = [
     isExternal: true,
   },
   {
-    image: CasesTwoImage,
+    image: CasesKafkaImage,
     title: 'Secure Kakfa Streams',
     texts: [
       'Guarantee data authenticity and integrity from producers all-the-way to consumers.',
       'Stop exposing the broker to your data streams.',
       'Start encrypting data-in-motion through Kafka.',
     ],
-    actionHref:
-      'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
+    actionHref: '/for/kafka',
     actionText: 'Learn more',
     isExternal: true,
   },
   {
-    image: CasesThreeImage,
+    image: CasesStartTodayImage,
     title: 'Ship <it> Today',
     texts: [
       'Shift left and move security into your application layer with simple developer tools.',
-      'Stop waiting for your IT team.', 
+      'Stop waiting for your IT team.',
       'Start deploying your applications to production today.',
     ],
     actionHref:
@@ -73,10 +72,16 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
   isExternal,
 }) => (
   <Card p={6} height="100%">
-    <Center pb={6} mb={6} borderBottom="1px" borderColor="gray.200">
-      <Image src={image} alt={`${title} image`} width={313} height={170} placeholder="blur" />
-    </Center>
-
+    <Box width={313} height={170} verticalAlign="middle" mb={6} position="relative">
+      <Image
+        src={image}
+        alt={`${title} image`}
+        fill
+        placeholder="blur"
+        sizes="100vw"
+        style={{ objectFit: 'contain' }}
+      />
+    </Box>
     <Box>
       <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={6}>
         {title}
