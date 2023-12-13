@@ -19,6 +19,7 @@ import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import theme from '@theme';
 import { clearTrailingSlashes } from '@utils/seoUtils';
 import '../utils/segmentAnalytics';
+import '../utils/scrollTracking';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -37,7 +38,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   const pathname = usePathname();
   const canonicalUrl = useMemo(
     () => clearTrailingSlashes(CONFIG.app.rootUrl + pathname),
-    [pathname]
+    [pathname],
   );
   const ogImageUrl = `${CONFIG.app.rootUrl}${defaultOgImage.src}`;
 
