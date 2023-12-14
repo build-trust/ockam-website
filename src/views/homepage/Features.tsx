@@ -22,6 +22,7 @@ import {
   HiLockClosed,
   HiKey,
   HiCubeTransparent,
+  HiCloud,
 } from 'react-icons/hi';
 
 import GitHubIcon from '@assets/icons/github.svg';
@@ -33,8 +34,8 @@ import { DOCS } from '@consts/externalResources';
 
 const TITLE = 'Connect Applications, not Networks';
 const DESCRIPTIONS = [
-  "Forget about configuring networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, Private Links, reverse proxies, VPC Peering, PKIs, CAs, and tokens.",
-  "You don't want to touch the network, and you don't need to engage your IT teams either!"
+  'Forget about configuring networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, Private Links, reverse proxies, VPC Peering, PKIs, CAs, and tokens.',
+  "You don't want to touch the network, and you don't need to engage your IT teams either!",
 ];
 const IconLookup: { [key: string]: IconType } = {
   fingerprint: HiFingerPrint,
@@ -46,6 +47,7 @@ const IconLookup: { [key: string]: IconType } = {
   lock: HiLockClosed,
   key: HiKey,
   transparentcube: HiCubeTransparent,
+  cloud: HiCloud,
 };
 const FEATURES = [
   {
@@ -69,18 +71,12 @@ const FEATURES = [
   {
     icon: GitHubIcon,
     title: 'Open and Adaptable',
-    texts: [
-      'Open Source', 
-      'Add-ons for Confluent, Snowflake, Okta, KMS, UDP, and more'
-    ],
+    texts: ['Open Source', 'Add-ons for Confluent, Snowflake, Okta, KMS, UDP, and more'],
   },
   {
     icon: DeveloperIcon,
     title: 'Developer-first Experience',
-    texts: [
-      'CLI and a Rust Library', 
-      'As simple as it should be to get data moving'
-    ],
+    texts: ['CLI and a Rust Library', 'As simple as it should be to get data moving'],
   },
 ];
 

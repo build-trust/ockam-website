@@ -1,0 +1,14 @@
+.container h1, .container h2, .container h3 {
+    width: 100%;
+}
+.container p {
+    width: 100%;
+}
+
+.container p strong {
+    font-weight: 800;
+}
+
+.container ul {
+    width: 100%;
+}
