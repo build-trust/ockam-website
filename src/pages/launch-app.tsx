@@ -49,7 +49,7 @@ const OckamLink = (): ReactElement => {
           <Text>
             Before you launch Ockam, please make sure you have the Ockam.app installed from brew
             using
-            <br /> <code>`brew install --cask build-trust/ockam/ockam-app --no-quarantine`</code>
+            <br /> <code>`brew install --cask build-trust/ockam/portals`</code>
           </Text>
           <Text fontSize="sm" lineHeight={1.4}>
             Click &apos;Open Ockam&apos; on the dialog box shown above by your browser.
