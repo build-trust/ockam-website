@@ -64,12 +64,12 @@ ockam project addon configure confluent \
 As the administrator of the Ockam project, you're able to control what other identities are allowed to enroll themselves into your project by issuing unique one-time use enrollment tickets. We'll start by creating one for our consumer:​
 
 ```bash
-ockam project ticket --attribute role=member > consumer.ticket
+ockam project ticket --attribute role=member --relay "*" > consumer.ticket
 ```
 ... and then one for the first producer:
 
 ```bash
-ockam project ticket --attribute role=member > producer1.ticket
+ockam project ticket --attribute role=member --relay "*" > producer1.ticket
 ```
 
 The last configuration file we need to generate is `kafka.config`, which will be where you store the username and password you use to access your cluster on Confluent Cloud:
