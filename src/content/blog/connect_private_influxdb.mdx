@@ -149,7 +149,7 @@ The first step is to enroll yourself with Ockam, and create enrollment tokens fo
 ```bash
 ockam enroll
 export OCKAM_INFLUXDB_TICKET=$( \
-  ockam project ticket --attribute component=influxdb)
+  ockam project ticket --attribute component=influxdb --relay "influxdb")
 export OCKAM_TELEGRAF_TICKET=$( \
   ockam project ticket --attribute component=telegraf)
 ```

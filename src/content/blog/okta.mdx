@@ -210,11 +210,12 @@ This will create a managed Credential Authority for our project.
 
 Next we generate two one-time-use enrollment tokens to enable Machine 1 and 2 to enroll
 and get credentials. Notice how we specify the attributes to attest for these two
-machines: `city` and `application`.
+machines: `city` and `application`.  We also specify the name of the relays on orchestrator that these
+machines can create: "m1" and "m2" respectively.
 
 ```bash
-m1_token=$(ockam project ticket --attribute application="Smart Factory" --attribute city="San Francisco")
-m2_token=$(ockam project ticket --attribute application="Smart Factory" --attribute city="New York")
+m1_token=$(ockam project ticket --attribute application="Smart Factory" --attribute city="San Francisco" --relay "m1")
+m2_token=$(ockam project ticket --attribute application="Smart Factory" --attribute city="New York" --relay "m2")
 ```
 
 ### Machine 1 in New York
