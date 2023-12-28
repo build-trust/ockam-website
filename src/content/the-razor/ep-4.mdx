@@ -1,0 +1,64 @@
+---
+title: 'The Razor: ep 4'
+date: '2023-12-28'
+description: ???
+author: 'Glenn'
+authorAvatar: /blog/glenn-gillen.jpg
+---
+{/* <!-- vale off --> */
+
+Twas a few nights after Christmas, and across all your apps,<br/>
+Were offers for discounts, and sales, and end of year wraps.<br/>
+The last edition of The Razor also flew through the air,<br/>
+In the hopes 2024 might be the year we stop ransomware<br/>
+
+The CISOs were buried deep in compliance reports,<br/>
+While Ockam released [something to share ports](https://github.com/build-trust/ockam/blob/develop/examples/app/portals/README.md).<br/>
+And I hit send on largest list of links for the year,<br/>
+which I'm happy to say starts right&hellip; here.
+
+
+## Secure-by-design
+
+* **🪩 Attracting attention with new TLS certs:** When you request a new TLS certificate from a provider such as Let's Encrypt, the fact a certificate was issued shows up in their certificate transparency logs. [Chris Siebenmann decided to time how long it took](https://utcc.utoronto.ca/~cks/space/blog/web/WebProbeSpeedNewTLSCertificate) between requesting a new certificate and someone using that information to try and port scan his machine for vulnerabilities. Spoiler: it's less than a minute.
+* **🤝 On trust:** A [short essay from Mark Seeman](https://blog.ploeh.dk/2023/03/20/on-trust-in-software-development/) that touches on an idea that I've seen embodied the way various high availability, large scale, and high trust systems are designed. Not trusting something doesn't require you to have distrust/mistrust, cynicism, or misgivings. It can be as simple as accepting human fallibility, and being supportive of each others humanity rather than expecting everyone to be superhuman all of the time.
+* **🔍 When linting detects false assumptions:** If you're using ECMAScript (i.e., JavasScript) then [this post about the `no-constant-binary-expression` rule](https://eslint.org/blog/2022/07/interesting-bugs-caught-by-no-constant-binary-expression/), from Jordan Eldredge, is definitely worth a read. That rule is intended to catch where short-circuit logic in an expression won't change at runtime. The result wasn't just clearer code though, it uncovered a lot of real world situations where developers had confused operator precedence in expressions or where object/value comparisons were not what the developer expected.
+* **🙅‍♂️ On losing trust:** What happens when people just don't believe what you say? Simon Willison explores that in [discussing the reaction to Dropbox launching some AI features](https://simonwillison.net/2023/Dec/14/ai-trust-crisis/). This is as much a result of Dropbox not being particularly clear with what data was being shared and when, but also people just not believing OpenAI (who Dropbox are selectively sharing the data with) when they say it's not being used to train their own models.
+* **📱 How to completely pwn an iPhone:** Through the crafty stacking of a number of vulnerabilities, [Boris Larin discusses how an attacker could take complete control of an iPhone](https://securelist.com/operation-triangulation-the-last-hardware-mystery/111669/). An iMessage attachment that contains a PDF with a TrueType font exploit, which then patches the JavaScript Core environment to execute a privilege escalation. Most impressive of all is it does not require the recipient to open or even acknowledge the attachment, and circumvents the hardware-based security protection on iPhones. Ars Technica also have [coverage that states this exploit has been in use for over four years](https://arstechnica.com/security/2023/12/exploit-used-in-mass-iphone-infection-campaign-targeted-secret-hardware-feature/)!
+* **👩‍❤️‍👨 A tale as old as (cryptography) time:** Have you ever wondered why so many explanations of crypographic concepts explains them with Alice and Bob as the protagonists? Of course you have! It's ok, [I've got you](http://cryptocouple.com/).
+* **🚫 These things are not equal:** What is a parser mismatch vulnerability? [Tim McCormack has the answer for you](https://www.brainonfire.net/blog/2022/04/11/what-is-parser-mismatch/). The broad definition is: when two code paths parse the same thing but disagree in what some inputs mean. His examples highlight scenarios I've seen a lot where some validation logic will do a light parse, but later in the code the full value is consumed. The gotchas start to appear when this gets exploited with malformed inputs.
+* **🛟 Are we looking for more than memory safety?** We're big [Rust fans at Ockam](), so it's always great to read someone else's take on why Rust is valuable for building systems that are secure by design. When that someone is Steve Klabnik it's worth paying extra attention. I liked his threads about how maybe it's [not so much about memory safety, and more about having defined behaviour by default](https://steveklabnik.com/writing/memory-safety-is-a-red-herring).
+* https://www.cisecurity.org/insights/blog/initial-access-brokers-how-theyre-changing-cybercrime
+* https://people.redhat.com/~hkario/marvin/
+* https://trufflesecurity.com/blog/why-did-1-github-repo-leak-5000-live-gcp-keys/
+* https://permiso.io/blog/lucr-3-scattered-spider-getting-saas-y-in-the-cloud in particular the attacker lifecycle diagram
+* https://azeemba.com/posts/intuition-for-cryptography.html
+* https://blog.mozilla.org/en/products/firefox/encrypted-hello/
+* https://www.moderne.io/blog/security-dependency-updates-unmasked
+
+## Exposed
+
+There's been such a regular drumbeat of high-profile breaches I thought I'd break
+this out into its own section.
+
+* https://www.mongodb.com/blog/post/mongodb-security-incident-update-december-20-2023
+* https://www.theverge.com/2023/12/18/24007082/xfinity-data-breach-hack-notice-citrix
+* https://arstechnica.com/security/2023/10/actively-exploited-cisco-0-day-with-maximum-10-severity-gives-full-network-control/
+* https://retool.com/blog/mfa-isnt-mfa
+
+
+## DX
+
+* https://github.com/secengjeff/awskillswitch
+* https://github.com/abi/screenshot-to-code#examples
+* https://jvns.ca/blog/2023/11/01/confusing-git-terminology/
+* https://twitter.com/javilopen/status/1719363262179938401
+* https://howtorotate.com/docs/introduction/getting-started/
+* https://mitchellh.com/writing/ghostty-devlog-005
+* https://monaspace.githubnext.com
+* https://gittuf.dev/
+* https://queue.acm.org/detail.cfm?id=3595878
+
+## Product spotlight
+
+* **[🟠 Portals for Mac, by Ockam 🔵](https://github.com/build-trust/ockam/blob/develop/examples/app/portals/README.md)** - The last couple of editions I've asked for testers for something we'd been playing with internally. Well, it's publicly available now and I'd love if you'd [check it out](https://github.com/build-trust/ockam/blob/develop/examples/app/portals/README.md). If you've ever needed to quickly and privately share a service on your local machine with a friend or teammate&hellip; this is what you need.
