@@ -33,7 +33,14 @@ const SideBySidePanel: FC<Props> = ({ textOrientation, image, children, animate 
       mb={{ base: '32' }}
       px={{ base: '8', lg: '0' }}
     >
-      <Box width={{ base: '100%', lg: '50%' }}>{children}</Box>
+      <Flex
+        width={{ base: '100%', lg: '50%' }}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        {children}
+      </Flex>
       <Box width={{ base: '100%', lg: '50%' }}>
         <ExcalidrawAnimation src={image} animate={animate || false} />
       </Box>
