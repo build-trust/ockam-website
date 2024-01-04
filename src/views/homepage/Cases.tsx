@@ -44,11 +44,11 @@ const CASES_CARDS = [
     title: 'Ship <it> Today',
     texts: [
       'Shift left and move security into your application layer with simple developer tools.',
-      'Stop waiting for your IT team.',
+      'Stop waiting on an IT team.',
       'Start deploying your applications to production today.',
     ],
     actionHref:
-      'https://docs.ockam.io/guides/use-cases/add-end-to-end-encryption-to-any-client-and-server-application-with-no-code-change',
+      '/for/sales-engineers',
     actionText: 'Learn more',
     isExternal: true,
   },
