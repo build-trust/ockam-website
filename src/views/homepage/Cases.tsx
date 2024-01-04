@@ -23,7 +23,7 @@ const CASES_CARDS = [
       'Stop exposing private data to the public internet with service ports.',
       'Start isolating data exposure to the endpoint of your application.',
     ],
-    actionHref: 'https://docs.ockam.io/guides/use-cases/secure-database-access',
+    actionHref: '/for/private-connectivity',
     actionText: 'Learn more',
     isExternal: true,
   },
