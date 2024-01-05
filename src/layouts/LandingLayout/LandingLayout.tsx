@@ -14,7 +14,7 @@ type Props = {
 };
 const LandingLayout: FunctionComponent<Props> = ({ hideNav, children }) => {
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerHeight = `${headerRef.current?.clientHeight || 80}px`;
+  const headerHeight = `${headerRef.current?.clientHeight || 40}px`;
 
   const nav = (): ReactNode => {
     if (hideNav) return <></>;
