@@ -21,7 +21,7 @@ const CASES_CARDS = [
     ],
     actionHref: '/for/private-connectivity',
     actionText: 'Learn more',
-    isExternal: true,
+    isExternal: false,
   },
   {
     image: 'kafka-encrypted-ockam',
@@ -33,7 +33,7 @@ const CASES_CARDS = [
     ],
     actionHref: '/for/kafka',
     actionText: 'Learn more',
-    isExternal: true,
+    isExternal: false,
   },
   {
     image: 'no-need-for-complicated-network',
@@ -45,7 +45,7 @@ const CASES_CARDS = [
     ],
     actionHref: '/for/sales-engineers',
     actionText: 'Learn more',
-    isExternal: true,
+    isExternal: false,
   },
 ];
 

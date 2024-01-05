@@ -17,7 +17,7 @@ const CTALink: FunctionComponent<CTALinkProps> = ({ href, text, isExternal, ...r
     {...(isExternal ? { isExternal: true, ...restProps } : { passHref: true })}
   >
     <Text
-      as={isExternal ? 'span' : 'a'}
+      as="span"
       {...(isExternal ? {} : { ...restProps })}
       fontWeight="semibold"
       color="black"
