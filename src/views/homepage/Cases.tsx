@@ -1,13 +1,9 @@
 import { FunctionComponent } from 'react';
-import Image, { StaticImageData } from 'next/image';
-import { Box, Flex, Container, Text, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Flex, Container, Text, Heading } from '@chakra-ui/react';
 
-import Card from '@components/Card';
-import CasesAccessDataImage from '@assets/images/accessing-data.png';
-import CasesKafkaImage from '@assets/images/encrypted-kafka.png';
-import CasesStartTodayImage from '@assets/images/start-today.png';
 import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
+import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 
 const TITLE = 'How is Ockam Used?';
 const TEXTS = [
@@ -16,7 +12,7 @@ const TEXTS = [
 
 const CASES_CARDS = [
   {
-    image: CasesAccessDataImage,
+    image: 'app-level',
     title: 'Access Distributed Data',
     texts: [
       'Create secure access to private databases - from any application, anywhere!',
@@ -28,7 +24,7 @@ const CASES_CARDS = [
     isExternal: true,
   },
   {
-    image: CasesKafkaImage,
+    image: 'kafka-encrypted-ockam',
     title: 'Secure Kakfa Streams',
     texts: [
       'Guarantee data authenticity and integrity from producers all-the-way to consumers.',
@@ -40,27 +36,27 @@ const CASES_CARDS = [
     isExternal: true,
   },
   {
-    image: CasesStartTodayImage,
+    image: 'no-need-for-complicated-network',
     title: 'Ship <it> Today',
     texts: [
       'Shift left and move security into your application layer with simple developer tools.',
       'Stop waiting on an IT team.',
       'Start deploying your applications to production today.',
     ],
-    actionHref:
-      '/for/sales-engineers',
+    actionHref: '/for/sales-engineers',
     actionText: 'Learn more',
     isExternal: true,
   },
 ];
 
 type CasesCardProps = {
-  image: StaticImageData;
+  image: string;
   title: string;
   texts: string[];
   actionText: string;
   actionHref: string;
   isExternal?: boolean;
+  textOrientation: 'left' | 'right';
 };
 
 const CasesCard: FunctionComponent<CasesCardProps> = ({
@@ -70,32 +66,31 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
   actionText,
   actionHref,
   isExternal,
+  textOrientation,
 }) => (
-  <Card p={6} height="100%">
-    <Box width={313} height={170} verticalAlign="middle" mb={6} position="relative">
-      <Image
-        src={image}
-        alt={`${title} image`}
-        fill
-        placeholder="blur"
-        sizes="100vw"
-        style={{ objectFit: 'contain' }}
-      />
-    </Box>
-    <Box>
-      <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={6}>
-        {title}
+  <SideBySidePanel
+    isPanel
+    image={image}
+    textOrientation={textOrientation}
+    alignItems={textOrientation === 'left' ? 'start' : 'end'}
+  >
+    <Heading letterSpacing="-2px" mb={4}>
+      {title}
+    </Heading>
+    {texts.map((text) => (
+      <Text
+        key={text}
+        mb={6}
+        fontSize="md"
+        textAlign={textOrientation}
+        style={{ textWrap: 'balance' }}
+      >
+        {text}
       </Text>
-
-      {texts.map((text) => (
-        <Text key={text} mb={6} fontSize="sm">
-          {text}
-        </Text>
-      ))}
-    </Box>
+    ))}
 
     <CTALink text={actionText} href={actionHref} isExternal={isExternal} />
-  </Card>
+  </SideBySidePanel>
 );
 
 const Cases: FunctionComponent = () => (
@@ -107,24 +102,31 @@ const Cases: FunctionComponent = () => (
       w="full"
       mb={{ base: 12, lg: 16 }}
     >
-      <Heading as="h2" size="h2" mb={6}>
+      <Heading as="h2" size="h2" mb={6} letterSpacing="-2px">
         {TITLE}
       </Heading>
 
       {TEXTS.map((text) => (
-        <Text key={text} fontSize={{ lg: 'lg' }} lineHeight={1.4} _notLast={{ mb: 5 }}>
+        <Text
+          key={text}
+          fontSize={{ lg: 'lg' }}
+          lineHeight={1.4}
+          _notLast={{ mb: 5 }}
+          maxW="4xl"
+          style={{ textWrap: 'balance' }}
+        >
           {text}
         </Text>
       ))}
     </Flex>
 
-    <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 6, lg: 10 }}>
+    <Flex direction="column" width="100%">
       {CASES_CARDS.map((item, index) => (
         <Transition key={item.title} delay={(index + 1) * 300} duration={500}>
-          <CasesCard {...item} />
+          <CasesCard {...item} textOrientation={index % 2 === 0 ? 'left' : 'right'} />
         </Transition>
       ))}
-    </SimpleGrid>
+    </Flex>
   </Container>
 );
 

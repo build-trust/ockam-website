@@ -15,7 +15,6 @@ const CTALink: FunctionComponent<CTALinkProps> = ({ href, text, isExternal, ...r
     href={href}
     as={isExternal ? ChakraLink : NextLink}
     {...(isExternal ? { isExternal: true, ...restProps } : { passHref: true })}
-    mt="auto"
   >
     <Text
       as={isExternal ? 'span' : 'a'}

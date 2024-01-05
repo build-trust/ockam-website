@@ -6,12 +6,21 @@ import ExcalidrawAnimation from '../ExcalidrawAnimation';
 
 type Props = {
   textOrientation: 'left' | 'right';
-  image: 'string';
+  image: string;
   animate?: boolean;
   children?: ReactNode;
+  alignItems?: 'start' | 'end' | 'center';
+  isPanel?: boolean;
 };
 
-const SideBySidePanel: FC<Props> = ({ textOrientation, image, children, animate }) => {
+const SideBySidePanel: FC<Props> = ({
+  textOrientation,
+  image,
+  children,
+  animate,
+  alignItems,
+  isPanel,
+}) => {
   const direction = (): ResponsiveValue<Property.FlexDirection> => {
     if (textOrientation === 'left') {
       return {
@@ -25,18 +34,29 @@ const SideBySidePanel: FC<Props> = ({ textOrientation, image, children, animate 
     };
   };
 
+  const panelProps = (): {} => {
+    if (!isPanel)
+      return {
+        mb: { base: '32' },
+        px: { base: '8', lg: '0' },
+      };
+    return {
+      borderRadius: '2xl',
+      backgroundColor: 'white',
+      boxShadow: '2xl',
+      overflow: 'hidden',
+      px: { base: '8', lg: '8' },
+      py: { base: '8', lg: '8' },
+      mb: { base: '8', lg: '8 ' },
+    };
+  };
+
   return (
-    <Flex
-      direction={direction()}
-      gap="4"
-      width="100%"
-      mb={{ base: '32' }}
-      px={{ base: '8', lg: '0' }}
-    >
+    <Flex direction={direction()} gap="4" width="100%" {...panelProps()}>
       <Flex
         width={{ base: '100%', lg: '50%' }}
         direction="column"
-        alignItems="center"
+        alignItems={alignItems || 'center'}
         justifyContent="center"
       >
         {children}
