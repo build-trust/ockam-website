@@ -116,7 +116,7 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts, text }) 
       </Box>
 
       <Box>
-        <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>
+        <Text fontWeight="bold" fontSize="xl" color="brand.900" mb={2} letterSpacing="-1px">
           {title}
         </Text>
         {displayText()}
@@ -161,7 +161,7 @@ const Features: FunctionComponent = () => (
         mb={{ base: 10, md: 16 }}
       >
         <Box alignSelf="flex-start" w="full" maxW="2.5xl">
-          <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }}>
+          <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
             {noWidows(TITLE)}
           </Heading>
 
