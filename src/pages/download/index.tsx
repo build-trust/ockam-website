@@ -40,9 +40,10 @@ const components = {
 type InstructionsProps = {
   email?: string;
   install: MDXRemoteSerializeResult;
+  portals: MDXRemoteSerializeResult;
   enroll: MDXRemoteSerializeResult;
 };
-const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement => {
+const Instructions: FC<InstructionsProps> = ({ install, portals, enroll }): ReactElement => {
   const steps = [
     { title: 'Log in', description: 'Setup your account' },
     { title: 'Download', description: 'Download & Install Ockam' },
@@ -64,9 +65,21 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
         return (
           <Box>
             <Heading as="h2" size="lg" mb="4">
-              Download
+              Mac users only: Install Portals for Mac, by Ockam
             </Heading>
-
+            <Text mb="10">
+              Portals is a Mac app that uses the Ockam library to privately share a service on your
+              Mac to anyone, anywhere. The service is shared securely over an end-to-end encrypted
+              Ockam Portal. Your friends will have access to it on their{' '}
+              <strong>
+                <code>localhost</code>
+              </strong>
+              !
+            </Text>
+            <MDXRemote {...portals} components={components} />
+            <Heading as="h2" size="lg" mb="4">
+              Everyone else: Install Ockam Command
+            </Heading>
             <Text mb="10">
               Now that you&apos;ve created your account you need to download and install Ockam
               Command to your local machine:
@@ -180,12 +193,13 @@ const Instructions: FC<InstructionsProps> = ({ install, enroll }): ReactElement 
 
 interface Props {
   install: MDXRemoteSerializeResult;
+  portals: MDXRemoteSerializeResult;
   enroll: MDXRemoteSerializeResult;
 }
 interface StaticProps {
   props: Props;
 }
-const DownloadPage: NextPageWithLayout<Props> = ({ install, enroll }) => {
+const DownloadPage: NextPageWithLayout<Props> = ({ install, portals, enroll }) => {
   const router = useRouter();
   const [user, setUser] = useState<User>({});
 
@@ -196,7 +210,7 @@ const DownloadPage: NextPageWithLayout<Props> = ({ install, enroll }) => {
   return (
     <Box pt={{ base: 10, lg: 10 }}>
       <SEOHead title="Download Ockam - Get started for free" />
-      <Instructions email={user.email} install={install} enroll={enroll} />
+      <Instructions email={user.email} install={install} portals={portals} enroll={enroll} />
     </Box>
   );
 };
@@ -220,6 +234,12 @@ export async function getStaticProps(): Promise<StaticProps> {
   \`\`\`
   `;
 
+  const portals = `
+  \`\`\`sh
+  brew update && brew install build-trust/ockam/portals
+  \`\`\`  
+  `;
+
   const enroll = `
   \`\`\`sh
   ockam enroll
@@ -229,6 +249,7 @@ export async function getStaticProps(): Promise<StaticProps> {
   return {
     props: {
       install: await mdxSerialize(install),
+      portals: await mdxSerialize(portals),
       enroll: await mdxSerialize(enroll),
     },
   };
