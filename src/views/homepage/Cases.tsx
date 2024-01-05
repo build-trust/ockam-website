@@ -47,6 +47,18 @@ const CASES_CARDS = [
     actionText: 'Learn more',
     isExternal: false,
   },
+  {
+    image: 'simplified-connecting-saas',
+    title: 'Private connections to SaaS',
+    texts: [
+      'Securely & privately connect to SaaS platforms in minutes',
+      'Stop punching holes in firewalls.',
+      'Unblock your teams without waiting for IT changes.',
+    ],
+    actionHref: '/for/saas-connectivity',
+    actionText: 'Learn more',
+    isExternal: false,
+  },
 ];
 
 type CasesCardProps = {
