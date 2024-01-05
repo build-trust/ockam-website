@@ -47,6 +47,8 @@ const findMaxCheckpoint = (checkpoints: Checkpoint[], depth: number): string | v
     return Object.keys(match)[0];
   }
 };
+
+const tracked = [];
 const trackScrollDepth = (): void => {
   const minHeight = 100;
   const docHeight = document.documentElement.scrollHeight;
@@ -63,11 +65,14 @@ const trackScrollDepth = (): void => {
   const point = findMaxCheckpoint(checkpoints, scrollTop);
   if (point) {
     const analytics = (window.analytics = window?.analytics || []);
-    analytics.track('Scroll Percentage', {
-      category: 'Scroll Depth',
-      label: point,
-      eventNonInteraction: 1,
-    });
+    if (tracked.indexOf(point) === -1) {
+      analytics.track('Scroll Percentage', {
+        category: 'Scroll Depth',
+        label: point,
+        eventNonInteraction: 1,
+      });
+      tracked.push(point);
+    }
   }
 };
 
