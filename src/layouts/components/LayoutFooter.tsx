@@ -75,10 +75,16 @@ const NAV = [
     heading: 'Use cases',
     links: [
       {
+        name: 'Database protection',
+        href: '/for/private-connectivity',
+        isExternal: false,
+      },
+      {
         name: 'Kafka Encryption',
         href: '/for/kafka',
         isExternal: false,
       },
+      { name: 'SaaS Connectivity', href: '/for/saas-connectivity', isExternal: false },
       {
         name: 'Sales Engineers',
         href: '/for/sales-engineers',
@@ -87,11 +93,6 @@ const NAV = [
       {
         name: 'Confluent Cloud compliance',
         href: 'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
-        isExternal: true,
-      },
-      {
-        name: 'Database protection',
-        href: 'https://docs.ockam.io/guides/use-cases/secure-database-access',
         isExternal: true,
       },
     ],
