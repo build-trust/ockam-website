@@ -12,7 +12,7 @@ export const NAV_MENU_ITEMS = [
     onLandingPage: true,
     landingPageHref: '#features',
   },
-  { text: 'Use Cases', href: '/#use-cases', isExternal: false },
+  { text: 'Use Cases', href: '/#use-cases', isExternal: false, onLandingPage: true },
   { text: 'Pricing', href: '/pricing', isExternal: false, onLandingPage: true },
   {
     text: 'Team',
@@ -30,10 +30,12 @@ export const NAV_MENU_ITEMS = [
     text: 'Blog',
     href: BLOG_PATH,
     isExternal: false,
+    onLandingPage: true,
   },
   {
     text: 'Docs',
     href: DOCS.href,
     isExternal: true,
+    onLandingPage: true,
   },
 ];
