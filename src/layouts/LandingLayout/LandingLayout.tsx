@@ -35,7 +35,7 @@ const LandingLayout: FunctionComponent<Props> = ({ hideNav, children }) => {
           {children}
         </Box>
 
-        <LayoutFooter landingPage />
+        <LayoutFooter />
       </Flex>
     </MobileNavbarProvider>
   );
