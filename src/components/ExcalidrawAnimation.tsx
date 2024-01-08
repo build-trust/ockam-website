@@ -16,15 +16,24 @@ type SvgProps = {
 const SvgAnimation = ({
   name,
   onLoad,
-  hero,
+  aspect,
 }: {
   name: string;
   onLoad: Function;
-  hero?: boolean;
+  aspect?: 'width' | 'height';
 }): ReactElement => {
   const ImportedSvgRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
+  const width = (): string => {
+    if (!aspect) return '100%';
+    return aspect === 'height' ? 'auto' : '100%';
+  };
+
+  const height = (): string => {
+    if (!aspect) return '100%';
+    return aspect === 'height' ? '100%' : 'auto';
+  };
   useEffect(() => {
     setLoading(true);
     const importSvg = async (): Promise<void> => {
@@ -48,10 +57,11 @@ const SvgAnimation = ({
         <ImportedSvg
           style={{
             display: 'block',
-            width: hero ? 'auto' : '100%',
-            height: hero ? '100%' : '100%',
+            width: width(),
+            height: height(),
             margin: '15px auto',
-            paddingTop: hero ? '15px' : 'auto',
+            paddingTop: '15px',
+            paddingBottom: '15px',
           }}
         />
       );
@@ -64,11 +74,13 @@ type Props = {
   src: string;
   animate: boolean;
   hero?: boolean;
+  aspect?: 'width' | 'height';
 };
 const ExcalidrawAnimation: FunctionComponent<Props> = ({
   src,
   animate,
   hero,
+  aspect,
 }): ReactElement | null => {
   const ref = useRef<HTMLDivElement>();
   const [svg, setSvg] = useState<SVGSVGElement>();
@@ -83,7 +95,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   };
 
   const { ref: inViewRef } = useInView({
-    threshold: 0.5,
+    threshold: 0.35,
     onChange: (inView) => {
       if (!animate) return;
       setIsVisible(inView);
@@ -174,7 +186,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       ref={setRefs}
       flexDirection="column"
       h={{
-        base: hero ? '80vh' : '100%',
+        base: hero ? 'auto' : '100%',
       }}
       w="100%"
       backgroundClip="white"
@@ -186,7 +198,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       }}
       boxSizing={hero ? 'border-box' : 'content-box'}
     >
-      <SvgAnimation name={src} onLoad={svgLoaded} hero={hero} />
+      <SvgAnimation name={src} onLoad={svgLoaded} aspect={aspect} />
     </Box>
   );
 };

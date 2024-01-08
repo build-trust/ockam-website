@@ -69,6 +69,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   const text = frontMatter?.hero_text as string;
   const image = frontMatter?.hero_image as string;
   const animate = frontMatter?.hero_animated as boolean;
+  const imageAspect = frontMatter?.hero_aspect_priority as 'width' | 'height';
   const subtext = frontMatter?.subtext as string;
   const listFeatures = (
     typeof frontMatter?.list_features === 'undefined' ? true : frontMatter?.list_features
@@ -106,7 +107,14 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   return (
     <Box pt={{ base: 0, lg: 10 }}>
       <SEOHead title={title} ogImageSrc={ogImage} />
-      <Hero text={text} subtext={subtext} image={image} landingPage animate={animate || false} />
+      <Hero
+        text={text}
+        subtext={subtext}
+        image={image}
+        landingPage
+        animate={animate || false}
+        aspect={imageAspect}
+      />
 
       <Flex
         w="full"

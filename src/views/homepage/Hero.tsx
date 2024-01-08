@@ -47,8 +47,9 @@ type Props = {
   image?: string;
   landingPage?: boolean;
   animate?: boolean;
+  aspect?: 'width' | 'height';
 };
-const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, animate }) => {
+const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, animate, aspect }) => {
   const { gradients } = useTheme();
 
   const heroText = (): JSX.Element => {
@@ -181,13 +182,13 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, ani
         {image && (
           <Box
             width="100%"
-            height="80vh"
+            height="auto"
             overflow="hidden"
             background="white"
             borderTopLeftRadius="3xl"
             borderTopRightRadius="3xl"
           >
-            <ExcalidrawAnimation src={image} animate={!!animate} hero />
+            <ExcalidrawAnimation src={image} animate={!!animate} hero aspect={aspect} />
           </Box>
         )}
       </Container>

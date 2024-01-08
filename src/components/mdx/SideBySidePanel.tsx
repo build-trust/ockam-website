@@ -7,15 +7,17 @@ import ExcalidrawAnimation from '../ExcalidrawAnimation';
 type Props = {
   textOrientation: 'left' | 'right';
   image: string;
+  aspect?: 'width' | 'height';
   animate?: boolean;
   children?: ReactNode;
-  alignItems?: 'start' | 'end' | 'center';
+  alignItems?: ResponsiveValue<'start' | 'end' | 'center'>;
   isPanel?: boolean;
 };
 
 const SideBySidePanel: FC<Props> = ({
   textOrientation,
   image,
+  aspect,
   children,
   animate,
   alignItems,
@@ -82,7 +84,7 @@ const SideBySidePanel: FC<Props> = ({
           xl: 'min-content',
         }}
       >
-        <ExcalidrawAnimation src={image} animate={animate || false} />
+        <ExcalidrawAnimation src={image} animate={animate || false} aspect={aspect} />
       </Box>
     </Flex>
   );

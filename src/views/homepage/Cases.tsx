@@ -10,7 +10,15 @@ const TEXTS = [
   'Simply run Ockam at each of your applications to create trusted communication channels between apps and datastores in remote private networks.',
 ];
 
-const CASES_CARDS = [
+const CASES_CARDS: {
+  image: string;
+  aspect?: 'width' | 'height';
+  title: string;
+  texts: string[];
+  actionHref: string;
+  actionText: string;
+  isExternal: boolean;
+}[] = [
   {
     image: 'app-level',
     title: 'Access Distributed Data',
@@ -63,6 +71,7 @@ const CASES_CARDS = [
 
 type CasesCardProps = {
   image: string;
+  aspect?: 'width' | 'height';
   title: string;
   texts: string[];
   actionText: string;
@@ -73,6 +82,7 @@ type CasesCardProps = {
 
 const CasesCard: FunctionComponent<CasesCardProps> = ({
   image,
+  aspect,
   title,
   texts,
   actionText,
@@ -84,9 +94,20 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
     isPanel
     image={image}
     textOrientation={textOrientation}
-    alignItems={textOrientation === 'left' ? 'start' : 'end'}
+    alignItems={{
+      base: 'start',
+      lg: textOrientation === 'left' ? 'start' : 'end',
+    }}
+    aspect={aspect}
   >
-    <Heading letterSpacing="-2px" mb={4}>
+    <Heading
+      letterSpacing="-2px"
+      mb={4}
+      textAlign={{
+        base: 'left',
+        lg: textOrientation,
+      }}
+    >
       {title}
     </Heading>
     {texts.map((text) => (
@@ -94,7 +115,10 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
         key={text}
         mb={6}
         fontSize="md"
-        textAlign={textOrientation}
+        textAlign={{
+          base: 'left',
+          lg: textOrientation,
+        }}
         style={{ textWrap: 'balance' }}
       >
         {text}
