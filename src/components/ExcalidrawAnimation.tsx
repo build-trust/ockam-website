@@ -48,9 +48,10 @@ const SvgAnimation = ({
         <ImportedSvg
           style={{
             display: 'block',
-            width: hero ? '100%' : '100%',
+            width: hero ? 'auto' : '100%',
             height: hero ? '100%' : '100%',
-            margin: '0 auto',
+            margin: '15px auto',
+            paddingTop: hero ? '15px' : 'auto',
           }}
         />
       );
@@ -172,7 +173,9 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       className="excalidraw-animation"
       ref={setRefs}
       flexDirection="column"
-      h="100%"
+      h={{
+        base: hero ? '80vh' : '100%',
+      }}
       w="100%"
       backgroundClip="white"
       pt="15px"
@@ -181,6 +184,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
         lg: 'min-content',
         xl: 'min-content',
       }}
+      boxSizing={hero ? 'border-box' : 'content-box'}
     >
       <SvgAnimation name={src} onLoad={svgLoaded} hero={hero} />
     </Box>
