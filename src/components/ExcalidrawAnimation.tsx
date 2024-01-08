@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import {
   ComponentType,
   FunctionComponent,
@@ -12,7 +13,15 @@ import { useInView } from 'react-intersection-observer';
 type SvgProps = {
   style: {};
 };
-const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): ReactElement => {
+const SvgAnimation = ({
+  name,
+  onLoad,
+  hero,
+}: {
+  name: string;
+  onLoad: Function;
+  hero?: boolean;
+}): ReactElement => {
   const ImportedSvgRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
@@ -39,9 +48,9 @@ const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): Rea
         <ImportedSvg
           style={{
             display: 'block',
-            width: '100%',
-            height: '100%',
-            overflow: 'visible',
+            width: hero ? '100%' : '100%',
+            height: hero ? '100%' : '100%',
+            margin: '0 auto',
           }}
         />
       );
@@ -53,48 +62,19 @@ const SvgAnimation = ({ name, onLoad }: { name: string; onLoad: Function }): Rea
 type Props = {
   src: string;
   animate: boolean;
+  hero?: boolean;
 };
-const ExcalidrawAnimation: FunctionComponent<Props> = ({ src, animate }): ReactElement | null => {
+const ExcalidrawAnimation: FunctionComponent<Props> = ({
+  src,
+  animate,
+  hero,
+}): ReactElement | null => {
   const ref = useRef<HTMLDivElement>();
   const [svg, setSvg] = useState<SVGSVGElement>();
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isPlayable, setIsPlayable] = useState(false);
-
-  // const animationTimerRef = useRef<NodeJS.Timeout | undefined>()
-
-  // const stepForwardAnimations = useCallback((): void => {
-  //     // const beginTimeList: number[] = [1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000]
-  //     if (svg) {
-  //         // const currentTime = svg.getCurrentTime() * 1000;
-  //         // let nextTime = beginTimeList.find((t) => t > currentTime + 50) || 0;
-  //         // if (nextTime) {
-  //         //     nextTime -= 1;
-  //         // } else {
-  //         //     nextTime = currentTime + 500;
-  //         // }
-  //         // console.log('nextTime ', nextTime)
-  //         // if (animationTimerRef.current) {
-  //         //     clearTimeout(animationTimerRef.current);
-  //         //     animationTimerRef.current = undefined
-  //         // }
-  //         svg.unpauseAnimations();
-  //         // const pause = (nextTime - currentTime)
-  //         // console.log("pause ", pause)
-  //         // animationTimerRef.current = setTimeout(() => {
-  //         //     console.log('timeout')
-  //         //     clearTimeout(animationTimerRef.current);
-  //         //     svg.pauseAnimations();
-  //         //     //svg.setCurrentTime(nextTime / 1000);
-  //         //     stepForwardAnimations()
-  //         // }, pause);
-  //     }
-  // }, [svg])
-
-  // const resetAnimations = (): void => {
-  //     svg.setCurrentTime(0);
-  // }
 
   const handleScroll = (): void => {
     const position = window.pageYOffset;
@@ -188,20 +168,22 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({ src, animate }): ReactE
   }, [scrollPosition, isVisible, animate]);
 
   return (
-    <div
+    <Box
       className="excalidraw-animation"
       ref={setRefs}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        width: '100%',
-        background: 'white',
-        paddingTop: '15px',
+      flexDirection="column"
+      h="100%"
+      w="100%"
+      backgroundClip="white"
+      pt="15px"
+      maxH={{
+        base: hero ? '80vh' : '50vh',
+        lg: 'min-content',
+        xl: 'min-content',
       }}
     >
-      <SvgAnimation name={src} onLoad={svgLoaded} />
-    </div>
+      <SvgAnimation name={src} onLoad={svgLoaded} hero={hero} />
+    </Box>
   );
 };
 

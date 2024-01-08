@@ -104,7 +104,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   )}&template=landing&features=${encodeURIComponent(feats)}`;
 
   return (
-    <Box pt={{ base: 10, lg: 10 }}>
+    <Box pt={{ base: 0, lg: 10 }}>
       <SEOHead title={title} ogImageSrc={ogImage} />
       <Hero text={text} subtext={subtext} image={image} landingPage animate={animate || false} />
 
@@ -112,10 +112,15 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
         w="full"
         pt={{ base: 12, md: 24 }}
         pb={{ base: 24, md: 32 }}
+        maxW="container.max"
+        px={{
+          base: 5,
+          lg: 20,
+          xl: 30,
+        }}
         justify={{ base: 'center', lg: 'center' }}
         align="center"
         gap={{ base: 0, lg: 10 }}
-        maxW={{ base: '3xl', lg: '3xl' }}
         direction="column"
         mx="auto"
         id="why"

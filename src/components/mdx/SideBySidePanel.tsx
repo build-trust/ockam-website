@@ -54,14 +54,34 @@ const SideBySidePanel: FC<Props> = ({
   return (
     <Flex direction={direction()} gap="4" width="100%" {...panelProps()}>
       <Flex
-        width={{ base: '100%', lg: '50%' }}
+        width={{
+          base: '100%',
+          lg: '45%',
+          xl: '40%',
+        }}
         direction="column"
         alignItems={alignItems || 'center'}
         justifyContent="center"
       >
         {children}
       </Flex>
-      <Box width={{ base: '100%', lg: '50%' }}>
+      <Box
+        width={{
+          base: '100%',
+          lg: '55%',
+          xl: '60%',
+        }}
+        h={{
+          base: '50vh',
+          lg: 'auto',
+          xl: 'auto',
+        }}
+        maxH={{
+          base: '50vh',
+          lg: 'min-content',
+          xl: 'min-content',
+        }}
+      >
         <ExcalidrawAnimation src={image} animate={animate || false} />
       </Box>
     </Flex>

@@ -149,70 +149,6 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, ani
       );
     }
     return <></>;
-    // return (
-    //   <Box textAlign="center" my={14}>
-    //     <Button
-    //       as={Link}
-    //       href={BUILD_DEMO.href}
-    //       color="rgb(40, 40, 40)"
-    //       border="1px solid white"
-    //       mb={{ base: 5, sm: 0 }}
-    //       ml={{ base: 2.5, sm: 3 }}
-    //       mr={{ base: 2.5, sm: 3 }}
-    //       _hover={{
-    //         backgroundColor: 'rgb(10, 10, 10)',
-    //         color: 'white',
-    //       }}
-    //     >
-    //       Start Building
-    //     </Button>
-
-    //     <Button
-    //       as={Link}
-    //       href={CONTACT_FORM_PATH}
-    //       position="relative"
-    //       color="white"
-    //       borderWidth={1}
-    //       borderStyle="solid"
-    //       borderColor="transparent"
-    //       backgroundColor="rgb(10, 10, 10)"
-    //       backgroundClip="padding-box"
-    //       mb={{ base: 5, sm: 0 }}
-    //       ml={{ base: 2.5, sm: 3 }}
-    //       mr={{ base: 2.5, sm: 3 }}
-    //       _before={{
-    //         content: "''",
-    //         backgroundImage: gradients.primary,
-    //         borderRadius: '4px',
-    //         position: 'absolute',
-    //         top: 0,
-    //         left: 0,
-    //         right: 0,
-    //         bottom: 0,
-    //         zIndex: -1,
-    //         margin: '-1px',
-    //         boxShadow: '0 0 50px 0px #52c7ea',
-    //       }}
-    //       _hover={{
-    //         backgroundImage: gradients.primary,
-    //         borderColor: 'rgb(10, 10, 10)',
-    //         color: 'rgb(10, 10, 10)',
-    //       }}
-    //       _active={{
-    //         backgroundImage: `${gradients.primary}`,
-    //         color: 'white',
-    //         boxShadow: '0 0 60px 10px #52c7ea',
-    //       }}
-    //       _focus={{
-    //         backgroundImage: `${gradients.primary}`,
-    //         color: 'white',
-    //         boxShadow: '0 0 60px 10px #52c7ea',
-    //       }}
-    //     >
-    //       Get a Demo
-    //     </Button>
-    //   </Box>
-    // );
   };
   return (
     <HeroBox>
@@ -247,10 +183,11 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, ani
             width="100%"
             height="80vh"
             overflow="hidden"
+            background="white"
             borderTopLeftRadius="3xl"
             borderTopRightRadius="3xl"
           >
-            <ExcalidrawAnimation src={image} animate={!!animate} />
+            <ExcalidrawAnimation src={image} animate={!!animate} hero />
           </Box>
         )}
       </Container>
