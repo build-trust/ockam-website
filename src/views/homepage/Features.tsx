@@ -148,7 +148,7 @@ const Features: FunctionComponent = () => (
     borderRadius="15"
     borderStyle="none"
     background="white"
-    maxW="80%"
+    maxW="container.max"
     mx="auto"
   >
     <Container variant="section">

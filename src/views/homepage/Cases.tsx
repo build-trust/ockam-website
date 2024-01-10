@@ -6,9 +6,7 @@ import Transition from '@root/components/Transition/Transition';
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 
 const TITLE = 'How is Ockam Used?';
-const TEXTS = [
-  'Simply run Ockam at each of your applications to create trusted communication channels between apps and datastores in remote private networks.',
-];
+const TEXTS: string[] = [];
 
 const CASES_CARDS: {
   image: string;
@@ -130,7 +128,14 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
 );
 
 const Cases: FunctionComponent = () => (
-  <Container variant="section" id="use-cases" pt={{ base: 16, lg: 20 }} pb={{ base: 20, lg: 18 }}>
+  <Container
+    variant="section"
+    id="use-cases"
+    pt={{ base: 16, lg: 20 }}
+    pb={{ base: 20, lg: 18 }}
+    px={0}
+    mt={16}
+  >
     <Flex
       direction="column"
       alignItems="center"
@@ -138,7 +143,7 @@ const Cases: FunctionComponent = () => (
       w="full"
       mb={{ base: 12, lg: 16 }}
     >
-      <Heading as="h2" size="h2" mb={6} letterSpacing="-2px">
+      <Heading as="h2" size="h2" mt={0} mb={0} letterSpacing="-2px">
         {TITLE}
       </Heading>
 
