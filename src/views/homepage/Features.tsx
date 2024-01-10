@@ -1,15 +1,5 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import {
-  Box,
-  Container,
-  Flex,
-  Text,
-  Heading,
-  SimpleGrid,
-  Icon,
-  Button,
-  Link,
-} from '@chakra-ui/react';
+import { Box, Container, Flex, Text, Heading, SimpleGrid, Icon } from '@chakra-ui/react';
 import styled from 'styled-components';
 import { IconType } from 'react-icons';
 import {
@@ -30,7 +20,6 @@ import DeveloperIcon from '@assets/icons/developer.svg';
 import LockIcon from '@assets/icons/lock.svg';
 import LeftIcon from '@assets/icons/left.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
-import { DOCS } from '@consts/externalResources';
 
 const TITLE = 'Connect Applications, not Networks';
 const DESCRIPTIONS = [
@@ -171,18 +160,6 @@ const Features: FunctionComponent = () => (
             </Text>
           ))}
         </Box>
-
-        <Link
-          as={Link}
-          isExternal
-          href={DOCS.href}
-          _hover={{ textDecoration: 'none' }}
-          mt={{ base: 8, md: 0 }}
-        >
-          <Button as="span" colorScheme="avocado" color="black" size="lg">
-            Learn More
-          </Button>
-        </Link>
       </Flex>
 
       <SimpleGrid
