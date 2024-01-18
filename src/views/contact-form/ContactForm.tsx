@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useSearchParams } from 'next/navigation';
 
 import CONFIG from '@config';
 import FormInput from '@components/FormInput';
@@ -89,7 +90,8 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
     setValue,
     trigger,
   } = useForm();
-
+  const searchParams = useSearchParams();
+  const featureRequest = !!searchParams.get('feature');
   const attribution = landingPage || 'general';
 
   const contactFormRef = useRef<HTMLFormElement>(null);
@@ -119,8 +121,34 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
     sfdcTimestamp();
   });
 
+  const featureRequestMessage = (): string | undefined => {
+    if (featureRequest) {
+      switch (searchParams.get('feature')) {
+        case 'marketplace': {
+          let marketplace = '';
+          if (searchParams.get('marketplace') === 'azure') marketplace = 'Azure';
+          if (searchParams.get('marketplace') === 'gcp') marketplace = 'Google Cloud';
+          return `Purchasing via the ${marketplace} marketplace is not yet complete. Speak to our sales team to get setup up.`;
+          break;
+        }
+        default:
+          return undefined;
+          break;
+      }
+    }
+    return undefined;
+  };
+
   return (
     <Card w="full" maxW="2xl" p={10}>
+      {featureRequest && (
+        <Alert status="info" variant="solid" borderRadius="base" mb="8">
+          <>
+            <AlertIcon />
+            {featureRequestMessage()}
+          </>
+        </Alert>
+      )}
       <chakra.form
         ref={contactFormRef}
         method="POST"

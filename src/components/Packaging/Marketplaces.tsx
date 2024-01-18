@@ -5,6 +5,7 @@ import MarketplaceButton from '@root/components/Packaging/MarketplaceButton';
 import AwsLogo from '@assets/images/logos/aws.svg';
 import AzureLogo from '@assets/images/logos/azure.svg';
 import GcpLogo from '@assets/images/logos/gcp.svg';
+import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 const Marketplaces: FunctionComponent = () => (
   <Box textAlign="center" mt="10" mb="20">
@@ -30,12 +31,16 @@ const Marketplaces: FunctionComponent = () => (
         <AwsLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
       </MarketplaceButton>
     </Link>
-    <MarketplaceButton padding={3} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
-      <AzureLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
-    </MarketplaceButton>
-    <MarketplaceButton padding={1} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
-      <GcpLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
-    </MarketplaceButton>
+    <Link href={`${CONTACT_FORM_PATH}?feature=marketplace&marketplace=azure`}>
+      <MarketplaceButton padding={3} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
+        <AzureLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
+      </MarketplaceButton>
+    </Link>
+    <Link href={`${CONTACT_FORM_PATH}?feature=marketplace&marketplace=gcp`}>
+      <MarketplaceButton padding={1} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
+        <GcpLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
+      </MarketplaceButton>
+    </Link>
   </Box>
 );
 export default Marketplaces;
