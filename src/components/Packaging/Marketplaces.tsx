@@ -20,7 +20,13 @@ const Marketplaces: FunctionComponent = () => (
       commitments
     </Heading>
     <Link href="https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk" isExternal>
-      <MarketplaceButton padding={3} mx={2} my={4} shadow="lg" _hover={{ shadow: 'sm' }}>
+      <MarketplaceButton
+        padding={3}
+        mx={2}
+        my={4}
+        shadow="lg"
+        _hover={{ shadow: 'sm', cursor: 'hand' }}
+      >
         <AwsLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
       </MarketplaceButton>
     </Link>
