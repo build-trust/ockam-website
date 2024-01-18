@@ -31,11 +31,12 @@ type Segment = {
   name: string;
   tiers: string[];
   color: string;
+  expanded: boolean;
 };
 const SEGMENTS: Segment[] = [
-  { name: 'Developers', tiers: ['Free', 'Premium'], color: '#52C7EA' },
-  { name: 'Companies', tiers: ['Small', 'Medium', 'Large'], color: '#3AC6A3' },
-  { name: 'Enterprises', tiers: ['Business Critical'], color: '#744D95' },
+  { name: 'Developers', tiers: ['Free', 'Premium'], color: '#52C7EA', expanded: false },
+  { name: 'Companies', tiers: ['Small', 'Medium', 'Large'], color: '#3AC6A3', expanded: true },
+  { name: 'Enterprises', tiers: ['Business Critical'], color: '#744D95', expanded: false },
 ];
 const TIERS: Tier[] = [
   {
@@ -106,86 +107,55 @@ const TIERS: Tier[] = [
       url: `${CONTACT_FORM_PATH}`,
     },
   },
-
-  // {
-  //   name: 'Platform',
-  //   text: 'The Tools for Builders',
-  //   price: 'Talk to sales',
-  //   cta: {
-  //     text: 'Talk to sales →',
-  //     url: `${CONTACT_FORM_PATH}`,
-  //   },
-  // },
 ];
 
 const FEATURES: Feature[] = [
-  { name: 'Spaces', tiers: ['*'], hasLimits: true, onCard: true },
-  // { name: 'Space administrators', tiers: ['*'], hasLimits: true, onCard: true  },
+  { name: 'Projects', tiers: ['*'], hasLimits: true, onCard: true },
+  { name: 'Secure Channels', tiers: ['*'], hasLimits: true, onCard: true },
 
-  { name: 'Projects per space', tiers: ['*'], hasLimits: true, onCard: false },
-  // { name: 'Project administrators', tiers: ['*'], hasLimits: true, onCard: true  },
-
-  { name: 'Project members', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Project authority nodes', tiers: ['*'], hasLimits: true, onCard: false },
-  { name: 'Credential authorities', tiers: ['*'], hasLimits: true, onCard: false },
-
-  // { name: 'Throughput - Platform API requests', tiers: ['*'], hasLimits: true, onCard: false },
-
-  // { name: 'TCP transport endpoints', tiers: ['*'], hasLimits: true, onCard: false },
-
-  // { name: 'Transparency logs', tiers: ['Pro', 'Enterprise', 'Platform'], onCard: true },
-  // { name: 'Audit logs', tiers: ['*'], hasLimits: true, onCard: true },
-
-  // { name: 'Authority node identity', tiers: ['*'], hasLimits: true, onCard: false },
-  // { name: 'Authority node identity keys', tiers: ['*'], hasLimits: true, onCard: false },
-
-  // { name: 'Project enrollers', tiers: ['*'], hasLimits: true, onCard: false },
-  // { name: 'Project members', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Enrollment methods', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Project nodes', tiers: ['*'], hasLimits: true, onCard: true },
-
-  // { name: 'Encrypted relays', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Identities', tiers: ['*'], hasLimits: true, onCard: true },
-  { name: 'Included data transfer', tiers: ['*'], hasLimits: true, onCard: false },
-  { name: 'Cloud managed', tiers: ['*'], onCard: true },
-  { name: 'Attribute-based access controls', tiers: ['*'], onCard: true },
-  { name: 'Ockam Command', tiers: ['*'], onCard: true },
-  { name: 'Programming libraries', tiers: ['*'], onCard: true },
-  { name: 'Community-based support', tiers: ['*'], onCard: true },
-  { name: 'Ockam support', tiers: ['Small', 'Medium', 'Large', 'Business Critical'], onCard: true },
-  { name: 'Premium Ockam support', tiers: ['Large', 'Business Critical'], onCard: true },
-  { name: 'Volume discounts', tiers: ['Large', 'Business Critical', 'Platform'], onCard: true },
+  { name: 'Attribute-based access controls', tiers: ['*'] },
+  { name: 'Ockam Command', tiers: ['*'] },
+  { name: 'Portals App', tiers: ['*'] },
+  { name: 'Programming libraries', tiers: ['*'] },
+  { name: 'Community-based support', tiers: ['Free', 'Premium'], onCard: true },
+  { name: 'Ockam support', tiers: ['Small', 'Medium'], onCard: true },
   {
-    name: 'Service Level Agreements (SLAs)',
-    tiers: ['Medium', 'Large', 'Business Critical', 'Platform'],
+    name: 'Ockam support with Service Level Agreement',
+    tiers: ['Large', 'Business Critical'],
+    onCard: true,
   },
-  { name: 'Customized terms', tiers: ['Large', 'Business Critical', 'Platform'] },
+  {
+    name: 'Uptime Service Level Agreement',
+    tiers: ['Large', 'Business Critical'],
+    onCard: true,
+  },
+  { name: 'Volume discounts', tiers: ['Large', 'Business Critical'], onCard: true },
+  { name: 'Customized terms', tiers: ['Large', 'Business Critical'] },
   { name: 'Bring Your Own Cloud (BYOC)', tiers: ['Business Critical'], onCard: true },
+  { name: 'Data transfer cap', tiers: ['Free', 'Premium'], hasLimits: true },
+  {
+    name: 'Data transfer',
+    tiers: ['Small', 'Medium', 'Large', 'Business Critical'],
+    hasLimits: true,
+  },
 ];
 
 const LIMITS: { [id: string]: { [id: string]: string } } = {
-  Spaces: {
-    Free: 'Up to 1',
-    Premium: 'Up to 1',
-    Small: 'Unlimited',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
+  Projects: {
+    Free: '1',
+    Premium: '1',
+    Small: '1',
+    Medium: '3',
+    Large: '10',
     'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
   },
-
-  'Projects per space': {
-    Free: 'Up to 1',
-    Premium: 'Up to 1',
-    Small: 'Unlimited',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
+  'Secure Channels': {
+    Free: '1',
+    Premium: '5',
+    Small: '10',
+    Medium: '100',
+    Large: '1000',
     'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
   },
 
   'Project authority nodes': {
@@ -195,7 +165,6 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
     Medium: 'Unlimited',
     Large: 'Unlimited',
     'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
   },
   'Credential authorities': {
     Free: 'Up to 1',
@@ -204,122 +173,16 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
     Medium: 'Unlimited',
     Large: 'Unlimited',
     'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
   },
-
-  // 'Throughput - Platform API requests': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-
-  // 'TCP transport endpoints': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  // 'Audit logs': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-
-  // 'Authority node identity': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  // 'Authority node identity keys': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-
-  // 'Project enrollers': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  'Project members': {
-    Free: 'Up to 2',
-    Premium: 'Up to 10',
-    Small: 'Unlimited',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
+  'Data transfer cap': {
+    Free: '1GB/day',
+    Premium: '1GB/day',
   },
-
-  'Enrollment methods': {
-    Free: '1',
-    Premium: '1',
-    Small: 'Up to 2',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-  },
-
-  'Project nodes': {
-    Free: 'Up to 5',
-    Premium: 'Up to 10',
-    Small: '40 included',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-
-  // 'Encrypted relays': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  // 'Team members': {
-  //   Starter: 'Up to X',
-  //   Team: 'Up to Y',
-  //   Basic: 'Unlimited',
-  //   Pro: 'Unlimited',
-  //   Enterprise: 'Unlimited',
-  //   Platform: 'Unlimited',
-  // },
-  Identities: {
-    Free: 'Up to 5',
-    Premium: 'Up to 5',
-    Small: 'Up to 20',
-    Medium: 'Unlimited',
-    Large: 'Unlimited',
-    'Business Critical': 'Unlimited',
-    Platform: 'Unlimited',
-  },
-  'Included data transfer': {
-    Free: '10/GB/mo',
-    Premium: '20/GB/mo',
-    Small: '80/GB/mo',
-    Medium: '2,000/GB/mo',
-    Large: '50,000/GB/mo',
-    'Business Critical': 'Custom',
-    Platform: 'Custom',
+  'Data transfer': {
+    Small: '$0.10/GB',
+    Medium: '$0.10/GB',
+    Large: '$0.10/GB',
+    'Business Critical': '$0.10/GB',
   },
 };
 
