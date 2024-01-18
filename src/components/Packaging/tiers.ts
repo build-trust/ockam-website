@@ -32,11 +32,30 @@ type Segment = {
   tiers: string[];
   color: string;
   expanded: boolean;
+  text: string;
 };
 const SEGMENTS: Segment[] = [
-  { name: 'Developers', tiers: ['Free', 'Premium'], color: '#52C7EA', expanded: false },
-  { name: 'Companies', tiers: ['Small', 'Medium', 'Large'], color: '#3AC6A3', expanded: true },
-  { name: 'Enterprises', tiers: ['Business Critical'], color: '#744D95', expanded: false },
+  {
+    name: 'Developers',
+    tiers: ['Free', 'Premium'],
+    color: '#52C7EA',
+    expanded: false,
+    text: 'The Developer editions of Ockam Orchestrator are intended to be used by individual developers, that are working on hobby projects, and not by companies. Support is via our community in Discord and GitHub, and does not come with an SLA. If you are using Portals, the Mac app, you will need a developer edition license to use the application.',
+  },
+  {
+    name: 'Companies',
+    tiers: ['Small', 'Medium', 'Large'],
+    color: '#3AC6A3',
+    expanded: true,
+    text: 'Ockam Orchestrator’s Company Editions are enterprise ready, with direct support from the Ockam team, and can elastically scale to your production needs. This product purchased through your cloud marketplace vendor, so you can start building today with your 14 day free trial.',
+  },
+  {
+    name: 'Enterprises',
+    tiers: ['Business Critical'],
+    color: '#744D95',
+    expanded: false,
+    text: 'Ockam Orchestrator is offered in a bring-your-own-cloud (BYOC) Enterprise Edition for companies that are committed to running software entirely within their own network boundaries. These plans are highly customizable. Please contact Ockam’s sales team for a technical consultation.',
+  },
 ];
 const TIERS: Tier[] = [
   {

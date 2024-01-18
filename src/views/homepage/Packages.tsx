@@ -9,6 +9,7 @@ import {
   AccordionPanel,
   AccordionButton,
   AccordionIcon,
+  Text,
 } from '@chakra-ui/react';
 import chroma from 'chroma-js';
 
@@ -113,6 +114,7 @@ const Packages: FunctionComponent = () => {
                 <AccordionIcon />
               </AccordionButton>
               <AccordionPanel padding={{ base: '0', lg: '0' }}>
+                <Text mx={4}>{segment.text}</Text>
                 <SimpleGrid
                   // columns={[1, null]}
                   minChildWidth={{ base: 'xxs', lg: 'xs' }}
