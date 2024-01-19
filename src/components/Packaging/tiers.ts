@@ -40,7 +40,7 @@ const SEGMENTS: Segment[] = [
     tiers: ['Free', 'Premium'],
     color: '#52C7EA',
     expanded: false,
-    text: 'The Developer editions of Ockam Orchestrator are intended to be used by individual developers, that are working on hobby projects, and not by companies. Support is via our community in Discord and GitHub, and does not come with an SLA. If you are using Portals, the Mac app, you will need a developer edition license to use the application.',
+    text: 'The Developer editions of Ockam Orchestrator are intended to be used by individual developers, that are working on hobby projects, and not by companies. Support is via our community in Discord and GitHub, and does not come with an SLA. If you are using Portals for Mac you will need a developer edition license to use the application.',
   },
   {
     name: 'Companies',
@@ -129,12 +129,12 @@ const TIERS: Tier[] = [
 ];
 
 const FEATURES: Feature[] = [
-  { name: 'Projects', tiers: ['*'], hasLimits: true, onCard: true },
   { name: 'Secure Channels', tiers: ['*'], hasLimits: true, onCard: true },
+  { name: 'Projects', tiers: ['*'], hasLimits: true, onCard: true },
 
   { name: 'Attribute-based access controls', tiers: ['*'] },
   { name: 'Ockam Command', tiers: ['*'] },
-  { name: 'Portals App', tiers: ['*'] },
+  { name: 'Portals for Mac', tiers: ['*'] },
   { name: 'Programming libraries', tiers: ['*'] },
   { name: 'Community-based support', tiers: ['Free', 'Premium'], onCard: true },
   { name: 'Ockam support', tiers: ['Small', 'Medium'], onCard: true },
@@ -205,19 +205,18 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
   },
 };
 
+const darken = (color: string): string | undefined =>
+  chroma(color).darken(0.75).saturate(0.75).hex();
+
+const lighten = (color: string): string | undefined =>
+  chroma(color).brighten(2.5).desaturate(0.4).hex();
+
 const tierColor = (tier: Tier): string | undefined =>
   SEGMENTS.find((s) => s.tiers.includes(tier.name))?.color;
 
-const tierColorLight = (tier: Tier): string | undefined =>
-  chroma(tierColor(tier) || 'white')
-    .brighten(2.5)
-    .desaturate(0.4)
-    .hex();
-const tierColorDark = (tier: Tier): string | undefined =>
-  chroma(tierColor(tier) || 'black')
-    .darken(0.75)
-    .saturate(0.75)
-    .hex();
+const tierColorLight = (tier: Tier): string | undefined => lighten(tierColor(tier) || 'white');
+
+const tierColorDark = (tier: Tier): string | undefined => darken(tierColor(tier) || 'black');
 
 const tierLimit = (tier: Tier, feature: Feature): string | undefined => {
   if (feature.name in LIMITS) {
@@ -225,5 +224,16 @@ const tierLimit = (tier: Tier, feature: Feature): string | undefined => {
   }
   return undefined;
 };
-export type { Tier, Feature };
-export { SEGMENTS, TIERS, FEATURES, LIMITS, tierColor, tierColorDark, tierColorLight, tierLimit };
+export type { Tier, Feature, Segment };
+export {
+  SEGMENTS,
+  TIERS,
+  FEATURES,
+  LIMITS,
+  lighten,
+  darken,
+  tierColor,
+  tierColorDark,
+  tierColorLight,
+  tierLimit,
+};

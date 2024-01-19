@@ -31,7 +31,7 @@ const LandingLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
       w="full"
       pos="fixed"
       top={0}
-      zIndex={1}
+      zIndex={10}
       bgColor="white"
       boxShadow={isScrolled ? 'md' : 'none'}
       py={{ base: 4, lg: headerDesktopPaddingY }}

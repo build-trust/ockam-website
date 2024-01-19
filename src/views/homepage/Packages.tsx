@@ -187,7 +187,7 @@ const Packages: FunctionComponent = () => {
       </Box>
 
       <Box maxWidth="100%">
-        <FeatureTable tiers={TIERS} features={FEATURES} />
+        <FeatureTable tiers={TIERS} features={FEATURES} segments={SEGMENTS} />
       </Box>
     </Container>
   );

@@ -5,10 +5,12 @@ import { PiCheckCircleDuotone as Check } from 'react-icons/pi';
 import {
   Tier,
   Feature,
-  tierColor,
+  Segment,
   tierColorLight,
   tierColorDark,
   tierLimit,
+  lighten,
+  darken,
 } from '@components/Packaging/tiers';
 
 const hasFeature = (tier: Tier, feature: Feature): boolean => {
@@ -30,31 +32,57 @@ const featureValue = (tier: Tier, feature: Feature): ReactNode | string => {
 type FeatureProps = {
   tiers: Tier[];
   features: Feature[];
+  segments: Segment[];
 };
-const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features }) => (
+const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features, segments }) => (
   <TableContainer
     fontSize="xs"
     maxWidth={{ base: '100%', lg: 'auto' }}
     margin="0 auto"
     padding="0"
-    height={{ base: '80vh', lg: 'auto' }}
-    overflowX="scroll"
-    overflowY="scroll"
+    height={{ base: '30vh', lg: 'auto' }}
     position="relative"
+    overflowY="scroll"
   >
     <Table variant="simple">
       <Thead>
-        <Tr>
+        <Tr position="sticky" zIndex="2" style={{ top: 0, left: 0 }}>
           <Th
             key="blank-header-column-1"
             border="none"
-            position="sticky"
             style={{ top: 0, left: 0 }}
-            borderTop="4px solid white"
-            borderBottom="none"
             zIndex="2"
+            position="sticky"
+            p={{ base: 3 }}
+            background="white"
+          >
+            &nbsp;
+          </Th>
+          {segments.map((segment) => (
+            <Th
+              colSpan={segment.tiers.length}
+              textAlign="center"
+              key={`${segment.name}-a`}
+              background={darken(segment.color)}
+              color={lighten(segment.color)}
+              border="none"
+              style={{ top: 0 }}
+              p={{ base: 2 }}
+              px={{ base: 2, lg: 10 }}
+            >
+              {segment.name}
+            </Th>
+          ))}
+        </Tr>
+        <Tr position="sticky" zIndex="2" style={{ top: '3.35em', left: 0 }}>
+          <Th
+            key="blank-header-column-2"
+            border="none"
+            style={{ top: 0, left: 0 }}
             p={{ base: 2 }}
             background="white"
+            zIndex="2"
+            position="sticky"
           >
             &nbsp;
           </Th>
@@ -62,11 +90,9 @@ const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features }) => (
             <Th
               textAlign="center"
               key={tier.name}
-              borderTop={`4px solid ${tierColor(tier)}`}
               background={tierColorLight(tier)}
               color={tierColorDark(tier)}
-              borderBottom="none"
-              position="sticky"
+              border="none"
               style={{ top: 0 }}
               p={{ base: 2 }}
               px={{ base: 2, lg: 10 }}
@@ -119,13 +145,7 @@ const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features }) => (
       </Tbody>
       <Tfoot>
         <Tr>
-          <Th
-            key="blank-footer-column-1"
-            background="white"
-            zIndex="2"
-            position="sticky"
-            style={{ left: 0 }}
-          >
+          <Th key="blank-footer-column-1" background="white" position="sticky" style={{ left: 0 }}>
             &nbsp;
           </Th>
           {tiers.map((tier) => (
