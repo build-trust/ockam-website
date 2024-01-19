@@ -211,6 +211,9 @@ const darken = (color: string): string | undefined =>
 const lighten = (color: string): string | undefined =>
   chroma(color).brighten(2.5).desaturate(0.4).hex();
 
+const gentlyLighten = (color: string): string | undefined =>
+  chroma(color).brighten(1.5).desaturate(0.75).hex();
+
 const tierColor = (tier: Tier): string | undefined =>
   SEGMENTS.find((s) => s.tiers.includes(tier.name))?.color;
 
@@ -231,6 +234,7 @@ export {
   FEATURES,
   LIMITS,
   lighten,
+  gentlyLighten,
   darken,
   tierColor,
   tierColorDark,

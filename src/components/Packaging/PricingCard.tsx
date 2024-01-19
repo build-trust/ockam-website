@@ -11,7 +11,7 @@ type Feature = {
   limits?: string;
 };
 export interface PricingCardData {
-  features: Feature[];
+  features?: Feature[];
   name: string;
   price: string;
   priceInterval?: string;
@@ -40,6 +40,7 @@ interface PricingCardProps extends CardProps {
   button: ReactElement;
   previousTier?: Tier;
   segmentColor: string;
+  slim?: boolean;
 }
 
 interface PriceProps {
@@ -49,9 +50,10 @@ interface PriceProps {
   floor?: string;
   onlyFloor?: boolean;
   segmentColor: string;
+  slim?: boolean;
 }
 const Price = (props: PriceProps): JSX.Element => {
-  const { price, unit, interval, floor, onlyFloor, segmentColor } = props;
+  const { price, unit, interval, floor, onlyFloor, segmentColor, slim } = props;
 
   const units = (): JSX.Element | undefined => {
     if (onlyFloor) {
@@ -93,20 +95,22 @@ const Price = (props: PriceProps): JSX.Element => {
   };
 
   const priceSize = (): string => {
-    if (unit || interval) {
-      return '2xl';
-    }
+    if (slim) return 'xl';
+    if (unit || interval) return '2xl';
     return '1xl';
   };
 
-  const floorPrice = (): JSX.Element => (
-    <Text width="100%" fontSize="xs" as="em" textAlign="center" height="1em" color={segmentColor}>
-      {floor ? `min cost: ${floor}` : ''}
-    </Text>
-  );
+  const floorPrice = (): JSX.Element | undefined => {
+    if (floor) {
+      <Text width="100%" fontSize="xs" as="em" textAlign="center" height="1em" color={segmentColor}>
+        {floor ? `min cost: ${floor}` : ''}
+      </Text>;
+    }
+    return undefined;
+  };
 
   return (
-    <VStack my={4} align="left">
+    <VStack my={slim ? 0 : 4} align="left">
       {onlyFloor && <Text>Starting at</Text>}
       <HStack key={`price-heading-${price}-${floor}`} letterSpacing="-1px">
         <Heading
@@ -126,8 +130,10 @@ const Price = (props: PriceProps): JSX.Element => {
   );
 };
 const PricingCard = (props: PricingCardProps): JSX.Element => {
-  const { data, icon, button, isPopular, previousTier, segmentColor, ...rest } = props;
+  const { data, icon, button, isPopular, previousTier, segmentColor, slim, ...rest } = props;
   const { features, price, priceUnit, priceInterval, name, floor, onlyFloor } = data;
+
+  const Stack = slim ? HStack : VStack;
 
   const featureName = (feature: Feature): string => {
     if (feature.limits) {
@@ -149,35 +155,50 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
   };
 
   return (
-    <Card {...rest} isPopular={isPopular} pt={4}>
-      <VStack spacing={6} align="left" mb={0}>
-        <Heading size="md" fontWeight="extrabold" key={`price-head-${name}`} color={segmentColor}>
+    <Card {...rest} isPopular={isPopular} pt={4} width={slim ? 'xs' : '100%'}>
+      <Stack
+        spacing={slim ? 0 : 6}
+        align="left"
+        mb={0}
+        alignItems={slim ? 'end' : 'start'}
+        justifyContent={slim ? 'space-between' : 'start'}
+      >
+        <Heading
+          size="md"
+          fontWeight="extrabold"
+          key={`price-head-${name}`}
+          color={segmentColor}
+          width="min-content"
+        >
           {name}
         </Heading>
-      </VStack>
-      <Price
-        price={price}
-        unit={priceUnit}
-        interval={priceInterval}
-        floor={floor}
-        onlyFloor={onlyFloor}
-        segmentColor={segmentColor}
-      />
+        <Price
+          price={price}
+          unit={priceUnit}
+          interval={priceInterval}
+          floor={floor}
+          onlyFloor={onlyFloor}
+          segmentColor={segmentColor}
+          slim={slim}
+        />
+      </Stack>
       {button}
-      <List spacing="1" mb="8" maxW="100%" mx="0" fontSize="xs">
-        {previousFeatures()}
-        {features.map((feature) => (
-          <ListItem fontWeight="medium" key={`${name}-${feature.name}`}>
-            <Check
-              color={segmentColor}
-              size="1.5em"
-              style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'middle' }}
-            />
-            ️
-            <span dangerouslySetInnerHTML={{ __html: featureName(feature) }} />
-          </ListItem>
-        ))}
-      </List>
+      {features && (
+        <List spacing="1" mb="8" maxW="100%" mx="0" fontSize="xs">
+          {previousFeatures()}
+          {features.map((feature) => (
+            <ListItem fontWeight="medium" key={`${name}-${feature.name}`}>
+              <Check
+                color={segmentColor}
+                size="1.5em"
+                style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'middle' }}
+              />
+              ️
+              <span dangerouslySetInnerHTML={{ __html: featureName(feature) }} />
+            </ListItem>
+          ))}
+        </List>
+      )}
     </Card>
   );
 };
