@@ -1,4 +1,13 @@
-import { ComponentWithAs, Heading, HStack, List, ListItem, Text, VStack } from '@chakra-ui/react';
+import {
+  ComponentWithAs,
+  Heading,
+  HStack,
+  List,
+  ListItem,
+  ResponsiveValue,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import { PiCheckCircleDuotone as Check } from 'react-icons/pi';
 import { ElementType, ReactElement } from 'react';
 
@@ -41,6 +50,7 @@ interface PricingCardProps extends CardProps {
   previousTier?: Tier;
   segmentColor: string;
   slim?: boolean;
+  fade?: boolean;
 }
 
 interface PriceProps {
@@ -55,11 +65,22 @@ interface PriceProps {
 const Price = (props: PriceProps): JSX.Element => {
   const { price, unit, interval, floor, onlyFloor, segmentColor, slim } = props;
 
+  const fontSize = (): ResponsiveValue<
+    (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
+  > => {
+    if (slim) {
+      return {
+        base: 'sm',
+        lg: 'xl',
+      };
+    }
+    return 'xl';
+  };
   const units = (): JSX.Element | undefined => {
     if (onlyFloor) {
       return (
         <>
-          <Text fontWeight="inherit" fontSize="xl">
+          <Text fontWeight="inherit" fontSize={fontSize()}>
             / {interval}
           </Text>
         </>
@@ -68,10 +89,10 @@ const Price = (props: PriceProps): JSX.Element => {
     if (unit && interval) {
       return (
         <>
-          <Text fontWeight="inherit" fontSize="xl">
+          <Text fontWeight="inherit" fontSize={fontSize()}>
             / {unit}
           </Text>
-          <Text fontWeight="inherit" fontSize="xl">
+          <Text fontWeight="inherit" fontSize={fontSize()}>
             / {interval}
           </Text>
         </>
@@ -80,7 +101,7 @@ const Price = (props: PriceProps): JSX.Element => {
     if (interval) {
       return (
         <>
-          <Text fontWeight="inherit" fontSize="xl">
+          <Text fontWeight="inherit" fontSize={fontSize()}>
             / {interval}
           </Text>
         </>
@@ -94,10 +115,12 @@ const Price = (props: PriceProps): JSX.Element => {
     return `$${parseInt(numPart, 10).toLocaleString()}`;
   };
 
-  const priceSize = (): string => {
-    if (slim) return 'xl';
+  const priceSize = (): ResponsiveValue<
+    (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
+  > => {
+    if (slim) return { base: 'sm', lg: 'xl' };
     if (unit || interval) return '2xl';
-    return '1xl';
+    return 'xl';
   };
 
   const floorPrice = (): JSX.Element | undefined => {
@@ -111,14 +134,14 @@ const Price = (props: PriceProps): JSX.Element => {
 
   return (
     <VStack my={slim ? 0 : 4} align="left">
-      {onlyFloor && <Text>Starting at</Text>}
+      {onlyFloor && <Text fontSize="xs">Starting at</Text>}
       <HStack key={`price-heading-${price}-${floor}`} letterSpacing="-1px">
         <Heading
           size={priceSize()}
           fontWeight="inherit"
           lineHeight="0.9em"
           alignSelf="center"
-          letterSpacing="-4px"
+          letterSpacing="-0.07em"
           style={{ fontWeight: 'bold' }}
         >
           {formattedPrice()}
@@ -130,7 +153,7 @@ const Price = (props: PriceProps): JSX.Element => {
   );
 };
 const PricingCard = (props: PricingCardProps): JSX.Element => {
-  const { data, icon, button, isPopular, previousTier, segmentColor, slim, ...rest } = props;
+  const { data, icon, button, isPopular, previousTier, segmentColor, slim, fade, ...rest } = props;
   const { features, price, priceUnit, priceInterval, name, floor, onlyFloor } = data;
 
   const Stack = slim ? HStack : VStack;
@@ -155,7 +178,14 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
   };
 
   return (
-    <Card {...rest} isPopular={isPopular} pt={4} width={slim ? 'xs' : '100%'}>
+    <Card
+      {...rest}
+      isPopular={isPopular}
+      pt={4}
+      width={slim ? { base: 'xs' } : '100%'}
+      opacity={fade ? 0.2 : 1}
+      transition="opacity 1.5s ease-in-out"
+    >
       <Stack
         spacing={slim ? 0 : 6}
         align="left"

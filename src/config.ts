@@ -47,4 +47,9 @@ export default {
   googleAnalytics: {
     key: '8dtzkipp65WtJaMsBoNbabRuFH3kTZFH',
   },
+  auth0: {
+    issuerBaseHost: process.env.AUTH0_ISSUER_BASE_HOST || '',
+    clientId: process.env.AUTH0_CLIENT_ID,
+    baseUrl: process.env.AUTH0_BASE_URL || '',
+  },
 };

@@ -1,9 +1,12 @@
-import { FC } from 'react';
-import { Box, HStack, Heading, VStack } from '@chakra-ui/react';
+import { FC, MouseEvent, useState } from 'react';
+import { Box, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import { HiCheck } from 'react-icons/hi';
 
 import { SEGMENTS, TIERS, Tier, darken, gentlyLighten } from '@root/components/Packaging/tiers';
 import PricingCard from '@root/components/Packaging/PricingCard';
 import ActionButton from '@root/components/Packaging/ActionButton';
+import { currentUser } from '@root/components/Auth';
+import Auth0Api from '@root/api/auth0Api';
 
 const cta = (tier: Tier): string => {
   if (tier.price === '$0') return 'Get started';
@@ -15,11 +18,32 @@ type Props = {
   onComplete: Function;
 };
 const ChoosePlan: FC<Props> = ({ onComplete }) => {
-  const onClick = (): void => {
-    onComplete('plan');
+  const [purchasing, setPurchasing] = useState(false);
+  const [purchased, setPurchased] = useState(false);
+  const [purchaedPlan, setPurchasedPlan] = useState<string>();
+
+  const onClick = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
+    e.preventDefault();
+    const plan = (e.target as HTMLButtonElement).getAttribute('data-plan');
+    if (plan) {
+      setPurchasing(true);
+      setPurchasedPlan(plan);
+      const user = await currentUser();
+      if (user) {
+        Auth0Api.managementApi.updateUserMetadata(user.token, user.userId, { plan });
+      }
+      setPurchasing(true);
+      setTimeout(() => {
+        setPurchased(true);
+        setTimeout(() => {
+          onComplete();
+        }, 2000);
+      }, 4000);
+    }
   };
+
   return (
-    <Box>
+    <Box transition="opacity 1s ease-in" opacity={purchased ? 0 : 1}>
       <Heading as="h2" size="h2" mb="8">
         Choose a plan
       </Heading>
@@ -28,10 +52,19 @@ const ChoosePlan: FC<Props> = ({ onComplete }) => {
           <Heading as="h3" size="h4">
             For {segment.name}
           </Heading>
-          <HStack>
+          <Text mx={0} maxW="45em" letterSpacing="-0.5px">
+            {segment.text}
+          </Text>
+          <Flex
+            direction={{ base: 'column', xl: 'row' }}
+            gap={4}
+            alignItems={{ base: 'start' }}
+            mt={4}
+          >
             {TIERS.filter((tier) => segment.tiers.includes(tier.name)).map((tier) => (
               <PricingCard
                 slim
+                fade={purchasing && purchaedPlan !== tier.name}
                 data={{
                   price: tier.price,
                   name: tier.name,
@@ -54,8 +87,11 @@ const ChoosePlan: FC<Props> = ({ onComplete }) => {
                     borderWidth="2px"
                     href="#"
                     onClick={onClick}
+                    data-plan={tier.name}
                     border="none"
                     mt="4"
+                    isLoading={!purchased && purchaedPlan === tier.name}
+                    leftIcon={purchased && <HiCheck />}
                     borderColor={darken(segment.color)}
                     color={darken(segment.color)}
                     background={gentlyLighten(segment.color)}
@@ -64,12 +100,12 @@ const ChoosePlan: FC<Props> = ({ onComplete }) => {
                       color: gentlyLighten(segment.color),
                     }}
                   >
-                    {cta(tier)}
+                    {!purchased && cta(tier)}
                   </ActionButton>
                 }
               />
             ))}
-          </HStack>
+          </Flex>
         </VStack>
       ))}
     </Box>

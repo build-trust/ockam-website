@@ -6,6 +6,7 @@ import Input from './input';
 import Textarea from './textarea';
 import FormLabel from './label';
 import FormError from './FormError';
+import Steps from './steps';
 
 const components = {
   Button,
@@ -16,6 +17,7 @@ const components = {
   Textarea,
   FormLabel,
   FormError,
+  Steps,
 };
 
 export default components;

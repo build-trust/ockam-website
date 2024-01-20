@@ -1,22 +1,15 @@
 import { FC, ReactElement, ReactNode, useEffect, useState } from 'react';
+import { Steps, Step, useSteps } from 'chakra-ui-steps';
 import {
   Box,
   Heading,
   Text,
-  Step,
-  StepDescription,
-  StepIcon,
-  StepIndicator,
-  StepNumber,
-  StepSeparator,
-  StepStatus,
-  StepTitle,
-  Stepper,
-  useSteps,
   Button,
   Link,
   ListItem,
   UnorderedList,
+  Flex,
+  theme,
 } from '@chakra-ui/react';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
@@ -40,7 +33,6 @@ const components = {
 };
 
 type InstructionsProps = {
-  email?: string;
   install: MDXRemoteSerializeResult;
   portals: MDXRemoteSerializeResult;
   enroll: MDXRemoteSerializeResult;
@@ -151,26 +143,26 @@ const Deploy: FC = () => (
   </Box>
 );
 
-const Instructions: FC<InstructionsProps> = ({ email, enroll, install, portals }): ReactElement => {
+const Instructions: FC<InstructionsProps> = ({ enroll, install, portals }): ReactElement => {
   const steps = [
     { title: 'Log in', description: 'Setup your account' },
-    { title: 'Choose your plan', description: 'Lorem ipsum' },
+    { title: 'Choose a plan', description: 'Lorem ipsum' },
     { title: 'Download', description: 'Download & Install Ockam' },
     { title: 'Enroll', description: 'Connect your first node' },
     { title: 'Deploy', description: 'Create a secure channel' },
   ];
-  const { activeStep, setActiveStep } = useSteps({
-    index: 1,
-    count: steps.length,
+
+  const { nextStep, prevStep, activeStep } = useSteps({
+    initialStep: 1,
   });
+
   useEffect(() => {
     // @ts-ignore window.analytics undefined below
-    window.analytics.track(`Download - Step ${activeStep + 1}`);
+    window.analytics.track(`Signup - Step ${activeStep + 1}`);
   }, [activeStep]);
 
-  const setPlan = (plan: string): void => {
-    console.log('user ', email, ' chose plan ', plan);
-    setActiveStep(activeStep + 1);
+  const setPlan = (): void => {
+    nextStep();
   };
   const displayStep = (step: number): ReactElement => {
     switch (step) {
@@ -192,34 +184,35 @@ const Instructions: FC<InstructionsProps> = ({ email, enroll, install, portals }
   };
 
   return (
-    <Box maxW="6xl" mx="auto" mb="32">
-      <Stepper index={activeStep} mb="8" mt="16" colorScheme="avocado">
-        {steps.map((step) => (
-          <Step key={`step-${step.title}`}>
-            <StepIndicator>
-              <StepStatus
-                complete={<StepIcon />}
-                incomplete={<StepNumber />}
-                active={<StepNumber />}
-              />
-            </StepIndicator>
-
-            <Box flexShrink="0">
-              <StepTitle>{step.title}</StepTitle>
-              <StepDescription>{step.description}</StepDescription>
-            </Box>
-
-            <StepSeparator />
-          </Step>
-        ))}
-      </Stepper>
-      {displayStep(activeStep)}
-      {activeStep < steps.length - 1 && activeStep !== 1 && (
-        <Button colorScheme="avocado" mb="8" onClick={(): void => setActiveStep(activeStep + 1)}>
-          I&apos;ve completed this step
+    <Flex mx="auto" mb="32" p={8} direction={{ base: 'row' }} w="100%">
+      <Box>
+        <Steps
+          variant="circles"
+          orientation="vertical"
+          mobileBreakpoint={theme.breakpoints.sm}
+          activeStep={activeStep}
+          colorScheme="avocado"
+          mb={12}
+          size="sm"
+          minW={{ base: '250px' }}
+        >
+          {steps.map(({ title, description }) => (
+            <Step key={`step-${title}`} label={title} description={description} />
+          ))}
+        </Steps>
+      </Box>
+      <Box>
+        {displayStep(activeStep)}
+        <Button colorScheme="avocado" mb="8" onClick={prevStep}>
+          Go back
         </Button>
-      )}
-    </Box>
+        {activeStep < steps.length - 1 && activeStep !== 1 && (
+          <Button colorScheme="avocado" mb="8" onClick={nextStep}>
+            I&apos;ve completed this step
+          </Button>
+        )}
+      </Box>
+    </Flex>
   );
 };
 
@@ -256,19 +249,16 @@ export async function getStaticProps(): Promise<StaticProps> {
   const install = `
   \`\`\`sh
   curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash
-  \`\`\`;
   `;
 
   const portals = `
   \`\`\`sh
-  brew update && brew install build-trust/ockam/portals
-  \`\`\`;
+  brew update && brew install build-trust/ockam/portals  
   `;
 
   const enroll = `
   \`\`\`sh
   ockam enroll
-  \`\`\`
   `;
 
   return {
