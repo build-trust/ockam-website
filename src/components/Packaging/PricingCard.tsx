@@ -184,7 +184,7 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
       pt={4}
       width={slim ? { base: 'xs' } : '100%'}
       opacity={fade ? 0.2 : 1}
-      transition="opacity 1.5s ease-in-out"
+      transition="opacity 0.8s ease-in-out"
     >
       <Stack
         spacing={slim ? 0 : 6}
