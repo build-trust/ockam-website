@@ -2,7 +2,7 @@ import { Box, Heading, Link, ListItem, Text, UnorderedList } from '@chakra-ui/re
 import { FC } from 'react';
 
 const Deploy: FC = () => (
-  <Box>
+  <Box mb={4}>
     <Heading as="h2" size="lg" mb="4">
       Deploy
     </Heading>

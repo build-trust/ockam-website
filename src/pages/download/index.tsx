@@ -1,15 +1,13 @@
-import { ReactElement, ReactNode, useEffect, useState } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import RemarkGFM from 'remark-gfm';
 import RemarkPrism from 'remark-prism';
-import { useRouter } from 'next/router';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { MainLayout } from '@root/layouts';
 import SEOHead from '@components/SEOHead';
-import { currentUser, isLoggedIn, User } from '@root/components/Auth';
 
 import SignupFlowManager from './SignupFlowManager';
 
@@ -31,21 +29,12 @@ interface StaticProps {
   props: Props;
 }
 
-const DownloadPage: NextPageWithLayout<Props> = ({ enroll, install, portals }) => {
-  const router = useRouter();
-  const [user, setUser] = useState<User>({});
-
-  useEffect(() => {
-    if (!isLoggedIn()) router.replace('/auth/login');
-    setUser(currentUser() || {});
-  }, [setUser, router]);
-  return (
-    <Box pt={{ base: 10, lg: 10 }}>
-      <SEOHead title="Download Ockam - Get started for free" />
-      <SignupFlowManager email={user.email} enroll={enroll} install={install} portals={portals} />
-    </Box>
-  );
-};
+const DownloadPage: NextPageWithLayout<Props> = ({ enroll, install, portals }) => (
+  <Box pt={{ base: 10, lg: 10 }}>
+    <SEOHead title="Download Ockam - Get started for free" />
+    <SignupFlowManager enroll={enroll} install={install} portals={portals} />
+  </Box>
+);
 
 DownloadPage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
 

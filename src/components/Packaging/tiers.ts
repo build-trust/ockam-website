@@ -16,6 +16,7 @@ type Tier = {
   onlyFloor?: boolean;
   isPopular?: boolean;
   cta: Cta;
+  marketplaceOnly?: boolean;
 };
 type Feature = {
   name: string;
@@ -91,6 +92,7 @@ const TIERS: Tier[] = [
       text: 'Start 14-day trial →',
       url: '/download',
     },
+    marketplaceOnly: true,
   },
   {
     name: 'Medium',
@@ -102,6 +104,7 @@ const TIERS: Tier[] = [
       text: 'Start 14-day trial →',
       url: '/download',
     },
+    marketplaceOnly: true,
   },
   {
     name: 'Large',
@@ -113,6 +116,7 @@ const TIERS: Tier[] = [
       text: 'Talk to sales →',
       url: `${CONTACT_FORM_PATH}`,
     },
+    marketplaceOnly: true,
   },
 
   {
@@ -125,6 +129,7 @@ const TIERS: Tier[] = [
       text: 'Talk to sales →',
       url: `${CONTACT_FORM_PATH}`,
     },
+    marketplaceOnly: true,
   },
 ];
 

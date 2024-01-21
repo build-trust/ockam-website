@@ -1,12 +1,14 @@
-import { FC, MouseEvent, useState } from 'react';
+import { FC, MouseEvent, ReactElement, useEffect, useState } from 'react';
 import { Box, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import { HiCheck } from 'react-icons/hi';
 
 import { SEGMENTS, TIERS, Tier, darken, gentlyLighten } from '@root/components/Packaging/tiers';
 import PricingCard from '@root/components/Packaging/PricingCard';
 import ActionButton from '@root/components/Packaging/ActionButton';
-import { currentUser } from '@root/components/Auth';
+import { User } from '@root/components/Auth';
 import Auth0Api from '@root/api/auth0Api';
+
+import MarketplaceSetup from './MarketplaceSetup';
 
 const cta = (tier: Tier): string => {
   if (tier.price === '$0') return 'Get started';
@@ -16,11 +18,23 @@ const cta = (tier: Tier): string => {
 
 type Props = {
   onComplete: Function;
+  hideNext: Function;
+  showNext: Function;
+  user?: User;
 };
-const ChoosePlan: FC<Props> = ({ onComplete }) => {
+const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
   const [purchasing, setPurchasing] = useState(false);
   const [purchased, setPurchased] = useState(false);
   const [purchaedPlan, setPurchasedPlan] = useState<string>();
+  const [setupMarketplace, setSetupMarketplace] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (setupMarketplace) {
+      showNext();
+    } else {
+      hideNext();
+    }
+  }, [hideNext, setupMarketplace, showNext]);
 
   const onClick = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault();
@@ -28,22 +42,28 @@ const ChoosePlan: FC<Props> = ({ onComplete }) => {
     if (plan) {
       setPurchasing(true);
       setPurchasedPlan(plan);
-      const user = await currentUser();
       if (user) {
         Auth0Api.managementApi.updateUserMetadata(user.token, user.userId, { plan });
       }
       setPurchasing(true);
       setTimeout(() => {
-        setPurchased(true);
-        setTimeout(() => {
-          onComplete();
-        }, 2000);
+        const t = TIERS.find((tier) => tier.name === plan);
+        if (t?.marketplaceOnly) {
+          showNext();
+          setSetupMarketplace(true);
+        } else {
+          setPurchased(true);
+          setTimeout(() => {
+            onComplete();
+            showNext();
+          }, 2000);
+        }
       }, 4000);
     }
   };
 
-  return (
-    <Box transition="opacity 1s ease-in" opacity={purchased ? 0 : 1}>
+  const planSelection = (): ReactElement => (
+    <>
       <Heading as="h2" size="h2" mb="8">
         Choose a plan
       </Heading>
@@ -108,6 +128,13 @@ const ChoosePlan: FC<Props> = ({ onComplete }) => {
           </Flex>
         </VStack>
       ))}
+    </>
+  );
+
+  return (
+    <Box transition="opacity 1s ease-in" opacity={purchased ? 0 : 1}>
+      {!setupMarketplace && planSelection()}
+      {setupMarketplace && <MarketplaceSetup />}
     </Box>
   );
 };

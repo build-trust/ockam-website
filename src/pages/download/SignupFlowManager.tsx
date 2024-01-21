@@ -1,12 +1,16 @@
 import { Steps, Step, useSteps } from 'chakra-ui-steps';
-import { FC, ReactElement, useEffect } from 'react';
+import { FC, ReactElement, useEffect, useMemo, useState } from 'react';
 import { Box, Button, Flex, theme } from '@chakra-ui/react';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { useRouter } from 'next/router';
+
+import { User, currentUser, isLoggedIn } from '@root/components/Auth';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
 import Enroll from './Enroll';
 import Deploy from './Deploy';
+import Welcome from './Welcome';
 
 type Props = {
   install: MDXRemoteSerializeResult;
@@ -15,30 +19,65 @@ type Props = {
 };
 
 const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElement => {
-  const steps = [
-    { title: 'Log in', description: 'Setup your account' },
-    { title: 'Choose a plan', description: 'Right-size to your needs' },
-    { title: 'Download', description: 'Download & Install Ockam' },
-    { title: 'Enroll', description: 'Connect your first node' },
-    { title: 'Deploy', description: 'Create a secure channel' },
-  ];
+  const steps = useMemo(
+    () => [
+      { title: 'Log in', description: 'Setup your account' },
+      { title: 'Choose a plan', description: 'Right-size to your needs' },
+      { title: 'Download', description: 'Download & Install Ockam' },
+      { title: 'Enroll', description: 'Connect your first node' },
+      { title: 'Deploy', description: 'Create a secure channel' },
+    ],
+    [],
+  );
 
   const { nextStep, prevStep, activeStep } = useSteps({
-    initialStep: 1,
+    initialStep: 0,
   });
 
-  useEffect(() => {
-    // @ts-ignore window.analytics undefined below
-    window.analytics.track(`Signup - Step ${activeStep + 1}`);
-  }, [activeStep]);
+  const router = useRouter();
+  const [user, setUser] = useState<User>();
+  const [nextHidden, setNextHidden] = useState(false);
 
+  useEffect(() => {
+    async function setup(): Promise<void> {
+      if (!isLoggedIn()) router.replace('/auth/login');
+      const u = await currentUser();
+      if (u) setUser(u);
+    }
+    setup();
+  }, [setUser, router]);
+
+  useEffect(() => {
+    const stepName = steps[activeStep].title;
+    // @ts-ignore window.analytics undefined below
+    window.analytics.track(`Signup - Step - ${stepName}`);
+    const generatedUrl = `${window.location.protocol}//${window.location.host}/${window.location.pathname}/${stepName}`;
+    // @ts-ignore window.analytics undefined below
+    window.analytics.page(generatedUrl);
+  }, [steps, activeStep]);
+
+  useEffect(() => {});
   const setPlan = (): void => {
     nextStep();
   };
+
+  const hideNext = (): void => {
+    setNextHidden(true);
+  };
+
+  const showNext = (): void => {
+    setNextHidden(false);
+  };
+
   const displayStep = (step: number): ReactElement => {
     switch (step) {
+      case 0:
+        return <Welcome user={user} nextCallback={nextStep} />;
+        break;
       case 1:
-        return <ChoosePlan onComplete={setPlan} />;
+        return (
+          <ChoosePlan onComplete={setPlan} user={user} hideNext={hideNext} showNext={showNext} />
+        );
         break;
       case 2:
         return <Download install={install} portals={portals} />;
@@ -53,6 +92,12 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
         return <></>;
     }
   };
+
+  const displayNext = (): boolean =>
+    !nextHidden && activeStep !== 0 && activeStep < steps.length - 1;
+  // activeStep < steps.length - 1 && activeStep !== 0 && nextHidden === true
+
+  const displayBack = (): boolean => activeStep > 0;
 
   return (
     <Flex mx="auto" mb="32" p={8} direction={{ base: 'row' }} w="100%">
@@ -74,14 +119,18 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
       </Box>
       <Box>
         {displayStep(activeStep)}
-        <Button colorScheme="avocado" mb="8" onClick={prevStep}>
-          Go back
-        </Button>
-        {activeStep < steps.length - 1 && activeStep !== 1 && (
-          <Button colorScheme="avocado" mb="8" onClick={nextStep}>
-            I&apos;ve completed this step
-          </Button>
-        )}
+        <Flex direction="row" justifyContent="space-between">
+          {displayNext() && (
+            <Button colorScheme="avocado" mb="8" onClick={nextStep}>
+              I&apos;ve completed this step
+            </Button>
+          )}
+          {displayBack() && (
+            <Button colorScheme="gray" mb="8" onClick={prevStep}>
+              Go back
+            </Button>
+          )}
+        </Flex>
       </Box>
     </Flex>
   );
