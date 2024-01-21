@@ -45,17 +45,20 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   const ogImageUrl = `${CONFIG.app.rootUrl}${defaultOgImage.src}`;
 
   useEffect(() => {
-    if (isBrowser && !initialRouteTracked && window.location.search === '') {
-      setInitialRouteTracked(true);
-      identify();
-      // @ts-ignore window.analytics undefined below
-      window.analytics.page(window.location.href);
+    async function sync(): Promise<void> {
+      if (isBrowser && !initialRouteTracked && window.location.search === '') {
+        setInitialRouteTracked(true);
+        await identify();
+        // @ts-ignore window.analytics undefined below
+        window.analytics.page(window.location.href);
+      }
+      events.on('routeChangeComplete', async (url) => {
+        await identify();
+        // @ts-ignore window.analytics undefined below
+        window.analytics.page(url);
+      });
     }
-    events.on('routeChangeComplete', (url) => {
-      identify();
-      // @ts-ignore window.analytics undefined below
-      window.analytics.page(url);
-    });
+    sync();
   }, [events, isBrowser, initialRouteTracked]);
 
   return (

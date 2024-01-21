@@ -62,7 +62,7 @@ const Welcome: FC<Props> = ({ user, nextCallback }) => {
         mr={4}
         verticalAlign="middle"
       >
-        <Image src={user?.avatar} layout="fill" objectFit="contain" sizes="48px" alt={user.email} />
+        <Image src={user?.avatar} objectFit="contain" sizes="48px" alt={user.email} />
       </Box>
     );
   };

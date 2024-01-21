@@ -7,6 +7,7 @@ import PricingCard from '@root/components/Packaging/PricingCard';
 import ActionButton from '@root/components/Packaging/ActionButton';
 import { User } from '@root/components/Auth';
 import Auth0Api from '@root/api/auth0Api';
+import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import MarketplaceSetup from './MarketplaceSetup';
 
@@ -51,6 +52,16 @@ const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
         if (t?.marketplaceOnly) {
           showNext();
           setSetupMarketplace(true);
+        } else if (t?.contactSalesOnly) {
+          setPurchased(true);
+          const ctaUrl = `${window.location.protocol}//${
+            window.location.host
+          }${CONTACT_FORM_PATH}?reason=${encodeURI(
+            `The ${plan} plan is only available for purchase via speaking to our sales team.`,
+          )}`;
+          setTimeout(() => {
+            window.location.href = ctaUrl;
+          }, 2000);
         } else {
           setPurchased(true);
           setTimeout(() => {
@@ -111,7 +122,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
                     border="none"
                     mt="4"
                     isLoading={!purchased && purchaedPlan === tier.name}
-                    leftIcon={purchased && <HiCheck />}
+                    leftIcon={purchased ? <HiCheck /> : undefined}
                     borderColor={darken(segment.color)}
                     color={darken(segment.color)}
                     background={gentlyLighten(segment.color)}

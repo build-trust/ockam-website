@@ -17,6 +17,7 @@ type Tier = {
   isPopular?: boolean;
   cta: Cta;
   marketplaceOnly?: boolean;
+  contactSalesOnly?: boolean;
 };
 type Feature = {
   name: string;
@@ -129,7 +130,7 @@ const TIERS: Tier[] = [
       text: 'Talk to sales →',
       url: `${CONTACT_FORM_PATH}`,
     },
-    marketplaceOnly: true,
+    contactSalesOnly: true,
   },
 ];
 

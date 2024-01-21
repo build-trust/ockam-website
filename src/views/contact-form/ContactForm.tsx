@@ -92,6 +92,7 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
   } = useForm();
   const searchParams = useSearchParams();
   const featureRequest = !!searchParams.get('feature');
+  const contactReason = !!searchParams.get('reason');
   const attribution = landingPage || 'general';
 
   const contactFormRef = useRef<HTMLFormElement>(null);
@@ -139,13 +140,20 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
     return undefined;
   };
 
+  const contactWithReasonMessage = (): string | undefined | null => {
+    if (contactReason) {
+      return searchParams.get('reason');
+    }
+    return undefined;
+  };
+
   return (
     <Card w="full" maxW="2xl" p={10}>
-      {featureRequest && (
+      {(featureRequest || contactReason) && (
         <Alert status="info" variant="solid" borderRadius="base" mb="8">
           <>
             <AlertIcon />
-            {featureRequestMessage()}
+            {featureRequestMessage() || contactWithReasonMessage()}
           </>
         </Alert>
       )}

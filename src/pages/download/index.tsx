@@ -9,7 +9,7 @@ import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { MainLayout } from '@root/layouts';
 import SEOHead from '@components/SEOHead';
 
-import SignupFlowManager from './SignupFlowManager';
+import SignupFlowManager from '../../components/Signup/SignupFlowManager';
 
 const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> => {
   const result = await serialize(content, {

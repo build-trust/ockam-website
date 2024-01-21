@@ -75,7 +75,7 @@ const trackSignup = (user: User): void => {
     window.sessionStorage.setItem('signup', '1');
   }
 };
-const identify = async (): void => {
+const identify = async (): Promise<void> => {
   if (await isLoggedIn()) {
     const user = await currentUser();
     if (user) {
