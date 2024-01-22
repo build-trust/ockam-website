@@ -57,9 +57,18 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
     window.analytics.page(generatedUrl);
   }, [steps, activeStep]);
 
+  const hideNext = (): void => {
+    setNextHidden(true);
+  };
+
+  const showNext = (): void => {
+    setNextHidden(false);
+  };
+
   const next = (): void => {
     setTransitioning(true);
     setTimeout(() => {
+      showNext();
       nextStep();
       setTransitioning(false);
     }, 1200);
@@ -68,6 +77,7 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
   const prev = (): void => {
     setTransitioning(true);
     setTimeout(() => {
+      showNext();
       prevStep();
       setTransitioning(false);
     }, 1200);
@@ -76,14 +86,6 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
   useEffect(() => {});
   const setPlan = (): void => {
     next();
-  };
-
-  const hideNext = (): void => {
-    setNextHidden(true);
-  };
-
-  const showNext = (): void => {
-    setNextHidden(false);
   };
 
   const displayStep = (step: number): ReactElement => {
