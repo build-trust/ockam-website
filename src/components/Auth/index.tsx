@@ -50,9 +50,9 @@ const isLoggedIn = async (): Promise<boolean> => {
   try {
     const user = await currentUser();
     return !!user && !!user?.userId;
-  } catch (e) {
-    console.log(e.message === 'Login required');
-    if (e.message === 'Login required') return false;
+    // eslint-disable-next-line
+  } catch (e: any) {
+    if (e?.message === 'Login required') return false;
     throw e;
   }
 };
