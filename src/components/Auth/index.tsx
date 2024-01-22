@@ -47,8 +47,14 @@ const currentUser = async (): Promise<User | void> => {
   }
 };
 const isLoggedIn = async (): Promise<boolean> => {
-  const user = await currentUser();
-  return !!user && !!user?.userId;
+  try {
+    const user = await currentUser();
+    return !!user && !!user?.userId;
+  } catch (e) {
+    console.log(e.message === 'Login required');
+    if (e.message === 'Login required') return false;
+    throw e;
+  }
 };
 
 const trackSignup = (user: User): void => {

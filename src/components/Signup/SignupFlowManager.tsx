@@ -41,7 +41,7 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
 
   useEffect(() => {
     async function setup(): Promise<void> {
-      if (!isLoggedIn()) router.replace('/auth/login');
+      if (!(await isLoggedIn())) router.replace('/auth/login');
       const u = await currentUser();
       if (u) setUser(u);
     }
