@@ -36,6 +36,7 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
 
   const router = useRouter();
   const [user, setUser] = useState<User>();
+  const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
 
   useEffect(() => {
@@ -56,9 +57,25 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
     window.analytics.page(generatedUrl);
   }, [steps, activeStep]);
 
+  const next = (): void => {
+    setTransitioning(true);
+    setTimeout(() => {
+      nextStep();
+      setTransitioning(false);
+    }, 1200);
+  };
+
+  const prev = (): void => {
+    setTransitioning(true);
+    setTimeout(() => {
+      prevStep();
+      setTransitioning(false);
+    }, 1200);
+  };
+
   useEffect(() => {});
   const setPlan = (): void => {
-    nextStep();
+    next();
   };
 
   const hideNext = (): void => {
@@ -117,16 +134,16 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
           ))}
         </Steps>
       </Box>
-      <Box>
+      <Box transition="opacity 1s 0s ease-in-out" opacity={transitioning ? '0' : '1'}>
         {displayStep(activeStep)}
         <Flex direction="row" justifyContent="space-between">
           {displayNext() && (
-            <Button colorScheme="avocado" mb="8" onClick={nextStep}>
+            <Button colorScheme="avocado" mb="8" onClick={next}>
               I&apos;ve completed this step
             </Button>
           )}
           {displayBack() && (
-            <Button colorScheme="gray" mb="8" onClick={prevStep}>
+            <Button colorScheme="gray" mb="8" onClick={prev}>
               Go back
             </Button>
           )}

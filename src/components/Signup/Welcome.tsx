@@ -75,7 +75,7 @@ const Welcome: FC<Props> = ({ user, nextCallback }) => {
   };
 
   return (
-    <Box opacity={loggedIn ? '0' : '1'} transition="opacity 0.5s 8s ease-in-out">
+    <Box>
       <Heading
         opacity={loggedIn ? '0' : '1'}
         height={loggedIn ? '0' : 'auto'}
