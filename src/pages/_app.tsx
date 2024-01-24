@@ -86,6 +86,11 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
       <Script
+        id="6senseWebTag"
+        async
+        src="https://j.6sc.co/j/fdf9f91d-ec8b-4daf-b254-b8960c0e3c2e.js"
+      />
+      <Script
         async
         src="https://tag.clearbitscripts.com/v1/pk_29cb8603dd5cf9cfebe03cb5cdb56049/tags.js"
         referrerPolicy="strict-origin-when-cross-origin"
