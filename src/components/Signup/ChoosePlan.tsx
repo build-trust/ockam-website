@@ -145,7 +145,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
   return (
     <Box transition="opacity 1s ease-in" opacity={purchased ? 0 : 1}>
       {!setupMarketplace && planSelection()}
-      {setupMarketplace && <MarketplaceSetup />}
+      {setupMarketplace && <MarketplaceSetup plan={purchaedPlan} />}
     </Box>
   );
 };

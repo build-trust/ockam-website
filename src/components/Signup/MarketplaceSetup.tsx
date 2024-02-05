@@ -3,7 +3,10 @@ import { Box, Heading, ListItem, OrderedList, Text } from '@chakra-ui/react';
 
 import { AWS, Azure, GCP } from '@root/components/Packaging/Marketplaces';
 
-const MarketplaceSetup: FC = () => (
+type Props = {
+  plan?: string;
+};
+const MarketplaceSetup: FC<Props> = ({ plan }) => (
   <Box pb={8}>
     <Heading as="h2" size="h2" mb="8">
       Add subscription via your cloud marketplace
@@ -24,9 +27,9 @@ const MarketplaceSetup: FC = () => (
       <ListItem>Click subscribe</ListItem>
       <ListItem>Check your email for the next steps</ListItem>
     </OrderedList>
-    <AWS />
-    <Azure />
-    <GCP />
+    <AWS plan={plan} />
+    <Azure plan={plan} />
+    <GCP plan={plan} />
   </Box>
 );
 

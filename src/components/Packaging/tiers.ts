@@ -6,6 +6,13 @@ type Cta = {
   text: string;
   url: string;
 };
+
+type MarketplaceDetails = {
+  link: string;
+};
+type Marketplaces = {
+  [key: string]: MarketplaceDetails;
+};
 type Tier = {
   name: string;
   text: string;
@@ -18,6 +25,7 @@ type Tier = {
   cta: Cta;
   marketplaceOnly?: boolean;
   contactSalesOnly?: boolean;
+  marketplaces?: Marketplaces;
 };
 type Feature = {
   name: string;
@@ -94,6 +102,17 @@ const TIERS: Tier[] = [
       url: '/download',
     },
     marketplaceOnly: true,
+    marketplaces: {
+      aws: {
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk',
+      },
+      azure: {
+        link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=azure`,
+      },
+      gcp: {
+        link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=gcp`,
+      },
+    },
   },
   {
     name: 'Medium',
@@ -106,6 +125,17 @@ const TIERS: Tier[] = [
       url: '/download',
     },
     marketplaceOnly: true,
+    marketplaces: {
+      aws: {
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk',
+      },
+      azure: {
+        link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=azure`,
+      },
+      gcp: {
+        link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=gcp`,
+      },
+    },
   },
   {
     name: 'Large',
@@ -118,6 +148,17 @@ const TIERS: Tier[] = [
       url: `${CONTACT_FORM_PATH}`,
     },
     marketplaceOnly: true,
+    marketplaces: {
+      aws: {
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk',
+      },
+      azure: {
+        link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=azure`,
+      },
+      gcp: {
+        link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=gcp`,
+      },
+    },
   },
 
   {
