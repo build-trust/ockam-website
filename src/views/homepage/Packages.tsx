@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import chroma from 'chroma-js';
 
+import CONFIG from '@config';
 import ActionButton from '@components/Packaging/ActionButton';
 import PricingCard from '@components/Packaging/PricingCard';
 import Marketplaces from '@components/Packaging/Marketplaces';
@@ -51,7 +52,9 @@ const CARDS = TIERS.filter((tier) => !['Platform'].includes(tier.name)).map((tie
       }
       return f;
     });
-  return { ...tier, features };
+  const url = new URL(tier.cta.url, CONFIG.app.rootUrl);
+  url.searchParams.append('plan', tier.name);
+  return { ...tier, features, url: url.toString() };
 });
 
 const Packages: FunctionComponent = () => {
@@ -163,7 +166,7 @@ const Packages: FunctionComponent = () => {
                           borderWidth="2px"
                           mt={2}
                           mb={8}
-                          href={card.cta.url}
+                          href={card.url}
                           border="none"
                           borderColor={chroma(segment.color).darken(0.75).saturate(0.75).hex()}
                           color={chroma(segment.color).darken(0.75).saturate(0.75).hex()}

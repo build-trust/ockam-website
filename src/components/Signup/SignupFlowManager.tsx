@@ -1,8 +1,9 @@
 import { Steps, Step, useSteps } from 'chakra-ui-steps';
-import { FC, ReactElement, useEffect, useMemo, useState } from 'react';
+import { FC, ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 import { Box, Button, Flex, theme } from '@chakra-ui/react';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 
 import { User, currentUser, isLoggedIn } from '@root/components/Auth';
 
@@ -35,18 +36,36 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
   });
 
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [user, setUser] = useState<User>();
   const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string>();
+
+  const rememberPlanSelection = useCallback(async (): Promise<void> => {
+    const passedPlan = searchParams.get('plan');
+    if (passedPlan) {
+      window.localStorage.setItem('plan', passedPlan);
+      const { pathname, query } = router;
+      // @ts-ignore: this dict type actually works here
+      const params = new URLSearchParams(query);
+      params.delete('plan');
+      router.replace({ pathname, query: params.toString() }, undefined, { shallow: true });
+    }
+  }, [router, searchParams]);
 
   useEffect(() => {
     async function setup(): Promise<void> {
+      await rememberPlanSelection();
       if (!(await isLoggedIn())) router.replace('/auth/login');
       const u = await currentUser();
+      const p = window.localStorage.getItem('plan');
+      window.localStorage.removeItem('plan');
+      if (p) setSelectedPlan(p);
       if (u) setUser(u);
     }
     setup();
-  }, [setUser, router]);
+  }, [setUser, router, rememberPlanSelection]);
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
@@ -95,7 +114,13 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
         break;
       case 1:
         return (
-          <ChoosePlan onComplete={setPlan} user={user} hideNext={hideNext} showNext={showNext} />
+          <ChoosePlan
+            onComplete={setPlan}
+            user={user}
+            hideNext={hideNext}
+            showNext={showNext}
+            selectedPlan={selectedPlan}
+          />
         );
         break;
       case 2:

@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactElement, useEffect, useState } from 'react';
+import { FC, MouseEvent, ReactElement, useCallback, useEffect, useState } from 'react';
 import { Box, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import { HiCheck } from 'react-icons/hi';
 
@@ -21,26 +21,25 @@ type Props = {
   onComplete: Function;
   hideNext: Function;
   showNext: Function;
+  currentPlan?: string;
+  selectedPlan?: string;
   user?: User;
 };
-const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
+const ChoosePlan: FC<Props> = ({
+  onComplete,
+  user,
+  hideNext,
+  showNext,
+  currentPlan,
+  selectedPlan,
+}) => {
   const [purchasing, setPurchasing] = useState(false);
   const [purchased, setPurchased] = useState(false);
-  const [purchaedPlan, setPurchasedPlan] = useState<string>();
+  const [purchasedPlan, setPurchasedPlan] = useState<string>();
   const [setupMarketplace, setSetupMarketplace] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (setupMarketplace) {
-      showNext();
-    } else {
-      hideNext();
-    }
-  }, [hideNext, setupMarketplace, showNext]);
-
-  const onClick = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
-    e.preventDefault();
-    const plan = (e.target as HTMLButtonElement).getAttribute('data-plan');
-    if (plan) {
+  const purchase = useCallback(
+    async (plan: string): Promise<void> => {
       setPurchasing(true);
       setPurchasedPlan(plan);
       if (user) {
@@ -70,6 +69,30 @@ const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
           }, 2000);
         }
       }, 4000);
+    },
+    [onComplete, showNext, user],
+  );
+
+  const alreadySelected = useCallback((): void => {
+    if (selectedPlan && !currentPlan) {
+      purchase(selectedPlan);
+    }
+  }, [selectedPlan, currentPlan, purchase]);
+
+  useEffect(() => {
+    if (setupMarketplace) {
+      showNext();
+    } else {
+      hideNext();
+      alreadySelected();
+    }
+  }, [hideNext, setupMarketplace, showNext, alreadySelected]);
+
+  const onClick = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
+    e.preventDefault();
+    const plan = (e.target as HTMLButtonElement).getAttribute('data-plan');
+    if (plan) {
+      await purchase(plan);
     }
   };
 
@@ -95,7 +118,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
             {TIERS.filter((tier) => segment.tiers.includes(tier.name)).map((tier) => (
               <PricingCard
                 slim
-                fade={purchasing && purchaedPlan !== tier.name}
+                fade={purchasing && purchasedPlan !== tier.name}
                 data={{
                   price: tier.price,
                   name: tier.name,
@@ -121,7 +144,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
                     data-plan={tier.name}
                     border="none"
                     mt="4"
-                    isLoading={!purchased && purchaedPlan === tier.name}
+                    isLoading={!purchased && purchasedPlan === tier.name}
                     leftIcon={purchased ? <HiCheck /> : undefined}
                     borderColor={darken(segment.color)}
                     color={darken(segment.color)}
@@ -145,7 +168,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, user, hideNext, showNext }) => {
   return (
     <Box transition="opacity 1s ease-in" opacity={purchased ? 0 : 1}>
       {!setupMarketplace && planSelection()}
-      {setupMarketplace && <MarketplaceSetup plan={purchaedPlan} />}
+      {setupMarketplace && <MarketplaceSetup plan={purchasedPlan} />}
     </Box>
   );
 };
