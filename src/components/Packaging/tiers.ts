@@ -248,7 +248,7 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
     Small: '$0.10/GB',
     Medium: '$0.10/GB',
     Large: '$0.10/GB',
-    'Business Critical': '$0.10/GB',
+    'Business Critical': '$0.00 - $0.10/GB',
   },
 };
 
