@@ -51,6 +51,7 @@ interface PricingCardProps extends CardProps {
   segmentColor: string;
   slim?: boolean;
   fade?: boolean;
+  current?: boolean;
 }
 
 interface PriceProps {
@@ -153,7 +154,18 @@ const Price = (props: PriceProps): JSX.Element => {
   );
 };
 const PricingCard = (props: PricingCardProps): JSX.Element => {
-  const { data, icon, button, isPopular, previousTier, segmentColor, slim, fade, ...rest } = props;
+  const {
+    data,
+    icon,
+    button,
+    isPopular,
+    previousTier,
+    segmentColor,
+    slim,
+    fade,
+    current,
+    ...rest
+  } = props;
   const { features, price, priceUnit, priceInterval, name, floor, onlyFloor } = data;
 
   const Stack = slim ? HStack : VStack;
@@ -185,6 +197,8 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
       width={slim ? { base: 'xs' } : '100%'}
       opacity={fade ? 0.2 : 1}
       transition="opacity 0.8s ease-in-out"
+      borderWidth={current ? 2 : 1}
+      borderColor={current ? 'gray.500' : 'gray.200'}
     >
       <Stack
         spacing={slim ? 0 : 6}

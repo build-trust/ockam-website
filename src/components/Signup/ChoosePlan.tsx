@@ -11,7 +11,8 @@ import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import MarketplaceSetup from './MarketplaceSetup';
 
-const cta = (tier: Tier): string => {
+const cta = (tier: Tier, currentPlan?: string): string => {
+  if (currentPlan && currentPlan === tier.name) return 'Your current plan';
   if (tier.price === '$0') return 'Get started';
   if (tier.name === 'Business Critical') return 'Contact Sales';
   return 'Start 14 day trial';
@@ -127,6 +128,7 @@ const ChoosePlan: FC<Props> = ({
                   floor: tier.floor,
                   onlyFloor: tier.onlyFloor,
                 }}
+                current={currentPlan === tier.name}
                 segmentColor={segment.color}
                 borderStyle="solid"
                 borderColor="#ddd"
@@ -154,7 +156,7 @@ const ChoosePlan: FC<Props> = ({
                       color: gentlyLighten(segment.color),
                     }}
                   >
-                    {!purchased && cta(tier)}
+                    {!purchased && cta(tier, currentPlan)}
                   </ActionButton>
                 }
               />

@@ -17,8 +17,8 @@ class ManagementAPI {
     this.baseServicePath = `/api/v2/users/`;
   }
 
-  getUserMetadata(token: string, client: string, userId: string): Promise<AxiosResponse> {
-    const url = `${this.baseServicePath}${userId}`;
+  getUserMetadata(token: string, userId: string): Promise<AxiosResponse> {
+    const url = `${this.baseServicePath}${userId}?fields=user_metadata`;
     return this.api.get(url, {
       headers: {
         Authorization: `Bearer ${token}`,

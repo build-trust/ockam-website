@@ -5,6 +5,7 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 
+import Auth0Api from '@root/api/auth0Api';
 import { User, currentUser, isLoggedIn } from '@root/components/Auth';
 
 import ChoosePlan from './ChoosePlan';
@@ -41,6 +42,17 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
   const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string>();
+  const [currentPlan, setCurrentPlan] = useState<string>();
+
+  const getCurrentPlan = useCallback(async (): Promise<string | undefined> => {
+    if (user) {
+      const r = await Auth0Api.managementApi.getUserMetadata(user.token, user.userId);
+      if (r) {
+        return r.data.user_metadata.plan;
+      }
+    }
+    return undefined;
+  }, [user]);
 
   const rememberPlanSelection = useCallback(async (): Promise<void> => {
     const passedPlan = searchParams.get('plan');
@@ -66,6 +78,14 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
     }
     setup();
   }, [setUser, router, rememberPlanSelection]);
+
+  useEffect(() => {
+    if (user) {
+      getCurrentPlan().then((p) => {
+        if (p) setCurrentPlan(p);
+      });
+    }
+  }, [user, getCurrentPlan]);
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
@@ -120,6 +140,7 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
             hideNext={hideNext}
             showNext={showNext}
             selectedPlan={selectedPlan}
+            currentPlan={currentPlan}
           />
         );
         break;
