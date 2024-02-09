@@ -125,7 +125,6 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
   useEffect(() => {});
   const setPlan = (plan: string): void => {
     setCurrentPlan(plan);
-    next();
   };
 
   const displayStep = (step: number): ReactElement => {
@@ -136,7 +135,8 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
       case 1:
         return (
           <ChoosePlan
-            onComplete={setPlan}
+            onComplete={next}
+            onSelected={setPlan}
             user={user}
             hideNext={hideNext}
             showNext={showNext}

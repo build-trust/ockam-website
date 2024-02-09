@@ -21,6 +21,7 @@ const cta = (tier: Tier, currentPlan?: string): string => {
 
 type Props = {
   onComplete: Function;
+  onSelected: Function;
   hideNext: Function;
   showNext: Function;
   currentPlan?: string;
@@ -29,6 +30,7 @@ type Props = {
 };
 const ChoosePlan: FC<Props> = ({
   onComplete,
+  onSelected,
   user,
   hideNext,
   showNext,
@@ -45,6 +47,7 @@ const ChoosePlan: FC<Props> = ({
     async (plan: string): Promise<void> => {
       setPurchasing(true);
       setPurchasedPlan(plan);
+      onSelected(plan);
       if (user) {
         Auth0Api.managementApi.updateUserMetadata(user.token, user.userId, { plan });
       }
@@ -71,12 +74,11 @@ const ChoosePlan: FC<Props> = ({
           setPurchased(true);
           setTimeout(() => {
             onComplete();
-            showNext();
           }, 2000);
         }
       }, 4000);
     },
-    [onComplete, showNext, user],
+    [onComplete, onSelected, showNext, user],
   );
 
   const alreadySelected = useCallback((): void => {
