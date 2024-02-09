@@ -20,7 +20,7 @@ const RotatingHeading: FC<Props> = ({ text }) => {
   };
 
   const message = (): ReactNode => {
-    if (rotatingWords().length > 0) {
+    if (text && rotatingWords().length > 0) {
       const parts = text.split(re);
       return parts.map((p, ix) => {
         if (ix === 1) {
