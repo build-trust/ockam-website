@@ -7,7 +7,7 @@ import { Hero, GetStarted, Features, Cases } from '@views/homepage';
 
 const HomePage: NextPageWithLayout = () => (
   <Box pt={{ base: 0 }}>
-    <Hero />
+    <Hero subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere" />
     <Features />
     <Cases />
     <GetStarted />

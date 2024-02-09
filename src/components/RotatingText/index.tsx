@@ -14,21 +14,24 @@ const AnimatedContainer = styled(animated.div)`
     content: '';
     position: absolute;
     top: 97%;
-    width: 100%;
     left: 0;
     height: 3px;
     border-radius: 2px;
-    background-image: linear-gradient(142.21deg, #4fdab8 4.44%, #52c7ea 94.64%);
+    background-image: linear-gradient(142.21deg, #c00, #000);
   }
 
   position: relative;
-  overflow: auto;
+  overflow-x: visible;
   overflow-y: hidden;
   display: inline-block;
   font-size: 1em;
   height: 1.2em;
+  width: auto;
   vertical-align: middle;
-  line-height: 1em;
+  line-height: 1.2em;
+  font-weight: 800;
+  padding-right: 0.1em;
+  padding-left: 0.1em;
 `;
 
 type Props = {
@@ -40,13 +43,13 @@ type Props = {
 
 const makeElements = (
   words: string[],
-  styles?: CSSProperties
+  styles?: CSSProperties,
 ): ((props: AnimatedProps<{ style: CSSProperties }>) => React.ReactElement)[] =>
   words.map(
     (word) =>
       function ({ style }: AnimatedProps<{ style: CSSProperties }>) {
         return <animated.div style={{ ...style, ...styles }}>{word}</animated.div>;
-      }
+      },
   );
 
 const RotatingText: FC<Props> = ({ words, interval, delay, styles }) => {

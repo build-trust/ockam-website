@@ -31,7 +31,7 @@ const sizes = {
   '2.5xl': '43.75rem', // 700px
   container: {
     sidebar: '305px',
-    max: '1440px',
+    max: '1200px',
     blogBodyMax: '1135px',
   },
 };
@@ -40,6 +40,7 @@ const gradients = {
   primary: 'linear-gradient(142.21deg, #4FDAB8 4.44%, #52C7EA 94.64%)',
   secondary: 'linear-gradient(296.58deg, #36A7C9 -6.45%, #3AC6A3 96.92%)',
   tertiary: 'linear-gradient(180deg, rgba(79, 218, 184, 0) 20.47%, #4FDAB8 102.84%)',
+  dark: 'linear-gradient(180deg, #0A1A2B 20.47%, #36A7C9 102.84%)',
 };
 
 const breakpoints = {
