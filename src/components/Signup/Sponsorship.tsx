@@ -36,7 +36,8 @@ const Sponsorship: FC = () => (
         </Link>
       </ListItem>
       <ListItem>
-        That&apos;s it - each month we&pos;ll redistribute 2x the sponsored amount to other projects
+        That&apos;s it - each month we&apos;ll redistribute 2x the sponsored amount to other
+        projects
       </ListItem>
     </OrderedList>
   </Box>
