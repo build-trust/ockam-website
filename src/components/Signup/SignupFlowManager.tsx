@@ -123,7 +123,8 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
   };
 
   useEffect(() => {});
-  const setPlan = (): void => {
+  const setPlan = (plan: string): void => {
+    setCurrentPlan(plan);
     next();
   };
 

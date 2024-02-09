@@ -24,6 +24,7 @@ type Tier = {
   isPopular?: boolean;
   cta: Cta;
   marketplaceOnly?: boolean;
+  sponsorship?: boolean;
   contactSalesOnly?: boolean;
   marketplaces?: Marketplaces;
 };
@@ -89,6 +90,7 @@ const TIERS: Tier[] = [
       text: 'Start 14-day trial →',
       url: '/download',
     },
+    sponsorship: true,
   },
 
   {

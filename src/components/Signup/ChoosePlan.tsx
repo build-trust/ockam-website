@@ -10,6 +10,7 @@ import Auth0Api from '@root/api/auth0Api';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import MarketplaceSetup from './MarketplaceSetup';
+import Sponsorship from './Sponsorship';
 
 const cta = (tier: Tier, currentPlan?: string): string => {
   if (currentPlan && currentPlan === tier.name) return 'Your current plan';
@@ -38,6 +39,7 @@ const ChoosePlan: FC<Props> = ({
   const [purchased, setPurchased] = useState(false);
   const [purchasedPlan, setPurchasedPlan] = useState<string>();
   const [setupMarketplace, setSetupMarketplace] = useState<boolean>(false);
+  const [setupSponsorship, setSetupSponsorship] = useState<boolean>(false);
 
   const purchase = useCallback(
     async (plan: string): Promise<void> => {
@@ -52,6 +54,9 @@ const ChoosePlan: FC<Props> = ({
         if (t?.marketplaceOnly) {
           showNext();
           setSetupMarketplace(true);
+        } else if (t?.sponsorship) {
+          showNext();
+          setSetupSponsorship(true);
         } else if (t?.contactSalesOnly) {
           setPurchased(true);
           const ctaUrl = `${window.location.protocol}//${
@@ -81,13 +86,13 @@ const ChoosePlan: FC<Props> = ({
   }, [selectedPlan, currentPlan, purchase]);
 
   useEffect(() => {
-    if (setupMarketplace) {
+    if (setupMarketplace || setupSponsorship) {
       showNext();
     } else {
       hideNext();
       alreadySelected();
     }
-  }, [hideNext, setupMarketplace, showNext, alreadySelected]);
+  }, [hideNext, setupMarketplace, setupSponsorship, showNext, alreadySelected]);
 
   const onClick = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault();
@@ -169,8 +174,9 @@ const ChoosePlan: FC<Props> = ({
 
   return (
     <Box transition="opacity 1s ease-in" opacity={purchased ? 0 : 1}>
-      {!setupMarketplace && planSelection()}
+      {!setupMarketplace && !setupSponsorship && planSelection()}
       {setupMarketplace && <MarketplaceSetup plan={purchasedPlan} />}
+      {setupSponsorship && <Sponsorship />}
     </Box>
   );
 };
