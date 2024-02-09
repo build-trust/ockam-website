@@ -130,7 +130,7 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
   const displayStep = (step: number): ReactElement => {
     switch (step) {
       case 0:
-        return <Welcome user={user} nextCallback={nextStep} />;
+        return <Welcome user={user} nextCallback={next} />;
         break;
       case 1:
         return (

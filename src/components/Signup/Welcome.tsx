@@ -97,7 +97,18 @@ const Welcome: FC<Props> = ({ user, nextCallback }) => {
         letterSpacing="-0.5px"
       >
         Congratulations on creating your account. We&apos;ll now walk you through configuring your
-        initial plan, installing Ockam, and then using it to establish your first secure channel...
+        initial plan, installing Ockam, and then using it to establish your first secure channel.
+      </Text>
+      <Text
+        opacity={loggedIn ? '1' : '0'}
+        transition="opacity 1s 3.1s ease-in-out"
+        mx={0}
+        my={4}
+        maxW="45em"
+        letterSpacing="-0.5px"
+      >
+        <Spinner size="xs" />
+        &nbsp;Loading plan information&hellip;
       </Text>
     </Box>
   );
