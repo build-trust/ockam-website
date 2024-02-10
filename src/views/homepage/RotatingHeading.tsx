@@ -34,6 +34,8 @@ const RotatingHeading: FC<Props> = ({ text }) => {
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
+                paddingLeft: '0.1em',
+                paddingRight: '0.1em',
               }}
             />
           );

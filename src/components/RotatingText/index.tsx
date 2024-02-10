@@ -30,8 +30,6 @@ const AnimatedContainer = styled(animated.div)`
   vertical-align: middle;
   line-height: 1.2em;
   font-weight: 800;
-  padding-right: 0.1em;
-  padding-left: 0.1em;
 `;
 
 type Props = {
