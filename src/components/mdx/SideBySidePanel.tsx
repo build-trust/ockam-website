@@ -56,7 +56,7 @@ const SideBySidePanel: FC<Props> = ({
         overflow: 'hidden',
         px: { base: '8', lg: '8' },
         py: { base: '8', lg: '8' },
-        mx: { base: '8', lg: '8 ' },
+        mx: { base: '0' },
       };
     }
     return {

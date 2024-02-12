@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Flex, Container, Text, Heading } from '@chakra-ui/react';
+import { Flex, Container, Text, Heading, Box } from '@chakra-ui/react';
 
 import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
@@ -97,7 +97,6 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
       lg: textOrientation === 'left' ? 'start' : 'end',
     }}
     aspect={aspect}
-    width="100%"
   >
     <Heading
       letterSpacing="-2px"
@@ -114,7 +113,7 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
       <Text
         key={text}
         mb={6}
-        fontSize="md"
+        fontSize="sm"
         textAlign={{
           base: 'left',
           lg: textOrientation,
@@ -150,11 +149,20 @@ const Cases: FunctionComponent = () => (
       </Heading>
     </Flex>
 
-    <Flex direction="row" width="100%" gap="4" alignItems="stretch">
+    <Flex
+      direction="row"
+      width="100%"
+      gap="4"
+      alignItems="stretch"
+      flexWrap="wrap"
+      justify="space-around"
+    >
       {CASES_CARDS.map((item, index) => (
-        <Transition key={item.title} delay={(index + 1) * 300} duration={500}>
-          <CasesCard {...item} textOrientation="left" />
-        </Transition>
+        <Box width="23%" minW="300px">
+          <Transition key={item.title} delay={(index + 1) * 300} duration={500} height="100%">
+            <CasesCard {...item} textOrientation="left" />
+          </Transition>
+        </Box>
       ))}
     </Flex>
   </Container>

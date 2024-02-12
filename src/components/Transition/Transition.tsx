@@ -14,6 +14,8 @@ type TransitionProps = {
   duration?: number;
   delay?: number;
   children: ReactNode;
+  /* eslint-disable */
+  [x: string]: any;
 };
 
 const Transition: FC<TransitionProps> = ({
@@ -22,6 +24,7 @@ const Transition: FC<TransitionProps> = ({
   delay = 100,
   initialState = { opacity: 0, y: 25 },
   finalState = { opacity: 1, y: 0 },
+  ...rest
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -53,7 +56,7 @@ const Transition: FC<TransitionProps> = ({
   }, [animation, delay, finalState.opacity, finalState.y, initialState.opacity, initialState.y]);
 
   return (
-    <animated.div ref={ref} style={{ ...transitions }}>
+    <animated.div ref={ref} style={{ ...rest, ...transitions }}>
       {children}
     </animated.div>
   );
