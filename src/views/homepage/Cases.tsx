@@ -161,7 +161,7 @@ const Cases: FunctionComponent = () => (
       justify="space-around"
     >
       {CASES_CARDS.map((item, index) => (
-        <Box width="23%" minW="300px">
+        <Box width="23%" minW="300px" key={`case-${item.title}`}>
           <Transition key={item.title} delay={(index + 1) * 300} duration={500} height="100%">
             <CasesCard {...item} textOrientation="left" />
           </Transition>

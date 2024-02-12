@@ -46,7 +46,11 @@ const makeElements = (
   words.map(
     (word) =>
       function ({ style }: AnimatedProps<{ style: CSSProperties }>) {
-        return <animated.div style={{ ...style, ...styles }}>{word}</animated.div>;
+        return (
+          <animated.div style={{ ...style, ...styles }} key={`ani-${word}`}>
+            {word}
+          </animated.div>
+        );
       },
   );
 

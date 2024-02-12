@@ -26,6 +26,7 @@ const RotatingHeading: FC<Props> = ({ text }) => {
         if (ix === 1) {
           return (
             <RotatingText
+              key={rotatingWords().join()}
               interval={3000}
               delay={4000}
               words={rotatingWords()}
