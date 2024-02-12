@@ -97,6 +97,7 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
       lg: textOrientation === 'left' ? 'start' : 'end',
     }}
     aspect={aspect}
+    href={actionHref}
   >
     <Link href={actionHref}>
       <Heading

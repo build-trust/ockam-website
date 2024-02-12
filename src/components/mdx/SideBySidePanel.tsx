@@ -1,4 +1,4 @@
-import { Box, Flex, ResponsiveValue } from '@chakra-ui/react';
+import { Box, Flex, Link, ResponsiveValue } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import type { Property } from 'csstype';
 
@@ -13,6 +13,7 @@ type Props = {
   alignItems?: ResponsiveValue<'start' | 'end' | 'center'>;
   isPanel?: boolean;
   isMinimal?: boolean;
+  href?: string;
   width?: ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>;
 };
 
@@ -25,6 +26,7 @@ const SideBySidePanel: FC<Props> = ({
   alignItems,
   isPanel,
   isMinimal,
+  href,
   width,
 }) => {
   const direction = (): ResponsiveValue<Property.FlexDirection> => {
@@ -115,7 +117,9 @@ const SideBySidePanel: FC<Props> = ({
           xl: 'min-content',
         }}
       >
-        <ExcalidrawAnimation src={image} animate={animate || false} aspect={aspect} />
+        <Link href={href}>
+          <ExcalidrawAnimation src={image} animate={animate || false} aspect={aspect} />
+        </Link>
       </Box>
     </Flex>
   );
