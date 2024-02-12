@@ -23,7 +23,13 @@ const Networkless: FC = () => (
         </Heading>
         <Text>
           When application security is decoupled from your network, <br />
-          you no longer need to ...
+          you no longer need to{' '}
+          <RotatingText
+            interval={3000}
+            delay={4000}
+            words={['punch holes in your firewall', 'wait on your IT department']}
+          />
+          .
         </Text>
       </Box>
     </Flex>
