@@ -67,7 +67,7 @@ const HomePage: NextPageWithLayout = () => (
       borderStyle="none"
       background="white"
       maxW="container.max"
-      mx={{ base: 12, xl: 'auto' }}
+      mx={{ base: 0, xl: 'auto' }}
     >
       <Networkless />
       <SecureByDesign />

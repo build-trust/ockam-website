@@ -155,13 +155,18 @@ const Cases: FunctionComponent = () => (
     <Flex
       direction="row"
       width="100%"
-      gap="4"
+      gap={{ base: '4', md: '4' }}
       alignItems="stretch"
       flexWrap="wrap"
       justify="space-around"
     >
       {CASES_CARDS.map((item, index) => (
-        <Box width="23%" minW="300px" key={`case-${item.title}`}>
+        <Box
+          width={{ base: '100%', md: '23%' }}
+          minW="300px"
+          key={`case-${item.title}`}
+          my={{ base: '4', md: '0' }}
+        >
           <Transition key={item.title} delay={(index + 1) * 300} duration={500} height="100%">
             <CasesCard {...item} textOrientation="left" />
           </Transition>
