@@ -18,7 +18,9 @@ const Networkless: FC = () => (
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Networkless connectivity
         </Heading>
-        <Text>Ockam works at the application layer.</Text>
+        <Heading size="h4" as="h3">
+          Ockam works at the application layer.
+        </Heading>
         <Text>
           When application security is decoupled from your network, <br />
           you no longer need to ...
@@ -39,7 +41,7 @@ const SecureByDesign: FC = () => (
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Secure-by-design
         </Heading>
-        <Text>
+        <Heading size="h4" as="h3">
           Ockam is{' '}
           <RotatingText
             interval={3000}
@@ -47,7 +49,7 @@ const SecureByDesign: FC = () => (
             words={['audited', 'point-to-point', 'open source', 'zero trust']}
           />
           .
-        </Text>
+        </Heading>
         <Text>So your applications can be secure too.</Text>
       </Box>
     </Flex>

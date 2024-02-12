@@ -28,7 +28,7 @@ const AnimatedContainer = styled(animated.div)`
   height: 1.2em;
   width: auto;
   vertical-align: middle;
-  line-height: 1.2em;
+  line-height: 1em;
   font-weight: 800;
 `;
 
