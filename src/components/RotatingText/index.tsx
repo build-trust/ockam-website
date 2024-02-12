@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, CSSProperties, useCallback } from 'react';
+import { FC, useEffect, useState, CSSProperties, useCallback, useRef } from 'react';
 import {
   animated,
   config,
@@ -6,6 +6,10 @@ import {
   useSpringRef,
   AnimatedProps,
   TransitionFn,
+  SpringValue,
+  AnimationResult,
+  UnknownProps,
+  Controller,
 } from '@react-spring/web';
 import styled from 'styled-components';
 
@@ -60,9 +64,25 @@ const RotatingText: FC<Props> = ({ words, interval, delay, styles }) => {
   const dly = delay || 0;
   const [wordIdx, setWordIdx] = useState(0);
   const [delayed, setDelayed] = useState(false);
+  const [animCount, setAnimCount] = useState(0);
   const transRef = useSpringRef();
-
+  const wordRef = useRef<HTMLDivElement>(null);
   const wordElements = makeElements(words, styles);
+
+  let intervId: NodeJS.Timer | null;
+
+  const elementScrollPosition = useCallback((): number | undefined => {
+    const viewportY = document.documentElement.clientHeight;
+    const elScrollTop = wordRef.current?.getBoundingClientRect().top;
+    const scrollPerc = (elScrollTop || 0) / viewportY;
+    return scrollPerc;
+  }, [wordRef]);
+
+  const shouldAnimate = useCallback((): boolean => {
+    const scrollPerc = elementScrollPosition();
+    if (scrollPerc && scrollPerc > 0.25 && scrollPerc < 0.8) return true;
+    return false;
+  }, [elementScrollPosition]);
 
   const transition: TransitionFn<
     number,
@@ -87,6 +107,29 @@ const RotatingText: FC<Props> = ({ words, interval, delay, styles }) => {
       transform: 'translate3d(0,120%,0)',
       position: 'absolute' as const,
     },
+    onChange: () => {
+      if (!shouldAnimate()) {
+        transRef.pause();
+      }
+    },
+    onPause: (
+      result: AnimationResult<SpringValue<UnknownProps>>,
+      ctrl: Controller | SpringValue,
+    ) => {
+      const keepChecking = (): void => {
+        if (shouldAnimate()) {
+          if (intervId) {
+            clearInterval(intervId);
+            intervId = null;
+          }
+          transRef.resume();
+        }
+      };
+      intervId = setInterval(keepChecking, 500);
+      if (!result.finished) {
+        if (ctrl instanceof SpringValue) ctrl.finish();
+      }
+    },
   });
 
   const animateWord = useCallback(() => {
@@ -96,12 +139,15 @@ const RotatingText: FC<Props> = ({ words, interval, delay, styles }) => {
     } else {
       nextIdx = wordIdx + 1;
     }
-    setWordIdx(nextIdx);
-  }, [words, wordIdx]);
+    if (shouldAnimate()) {
+      setWordIdx(nextIdx);
+    } else {
+      setAnimCount(animCount + 1);
+    }
+  }, [words, wordIdx, shouldAnimate, animCount]);
 
   useEffect(() => {
     transRef.start();
-
     if (delayed) {
       setTimeout(() => {
         animateWord();
@@ -115,7 +161,7 @@ const RotatingText: FC<Props> = ({ words, interval, delay, styles }) => {
   }, [wordIdx, animateWord, int, delayed, dly, transRef]);
 
   return (
-    <AnimatedContainer>
+    <AnimatedContainer ref={wordRef}>
       {transition((sty, i) => {
         const Word = wordElements[i];
         return <Word style={sty} />;

@@ -1,5 +1,5 @@
 import { FC, ReactElement, ReactNode } from 'react';
-import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading } from '@chakra-ui/react';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
@@ -21,7 +21,7 @@ const Networkless: FC = () => (
         <Heading size="h4" as="h3">
           Ockam works at the application layer.
         </Heading>
-        <Text>
+        <Heading as="h3" size="md" color="gray.500" fontWeight="500" letterSpacing="-0.07em">
           When application security is decoupled from your network, <br />
           you no longer need to{' '}
           <RotatingText
@@ -30,7 +30,7 @@ const Networkless: FC = () => (
             words={['punch holes in your firewall', 'wait on your IT department']}
           />
           .
-        </Text>
+        </Heading>
       </Box>
     </Flex>
   </Container>
@@ -56,7 +56,9 @@ const SecureByDesign: FC = () => (
           />
           .
         </Heading>
-        <Text>So your applications can be secure too.</Text>
+        <Heading as="h3" size="md" color="gray.500" fontWeight="500" letterSpacing="-0.07em">
+          So your applications can be secure too.
+        </Heading>
       </Box>
     </Flex>
   </Container>
