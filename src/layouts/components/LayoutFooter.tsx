@@ -212,7 +212,7 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
             mr={{ base: 0, lg: 8 }}
             my={{ base: 2, lg: 0 }}
           >
-            Start Building
+            Sign Up
           </Button>
           <Button
             as="a"
