@@ -11,7 +11,11 @@ import RotatingText from '@root/components/RotatingText';
 const Networkless: FC = () => (
   <Container variant="section" mb="12">
     <Flex direction="column" alignItems="flex-start" justifyContent="space-between" width="100%">
-      <Box width="33%" marginLeft={{ base: '70%', md: '50%', lg: '50%' }} height="180px">
+      <Box
+        width={{ base: '70%', sm: '33%' }}
+        marginLeft={{ base: '30%', sm: '70%', md: '50%', lg: '50%' }}
+        height="180px"
+      >
         <ItsSimple width="100%" preserveAspectRatio="xMinYMin meet" />
       </Box>
       <Box flexGrow="1" mt={{ sm: '-20%', md: '-5%', lg: '0' }}>
@@ -39,11 +43,17 @@ const Networkless: FC = () => (
 const SecureByDesign: FC = () => (
   <Container variant="section" style={{ clear: 'both' }}>
     <Flex direction="row" alignItems="flex-start" justifyContent="space-between" width="100%">
-      <Box width="33%" ml={{ base: '0', sm: '0', md: '10%', lg: '15%' }}>
+      <Box width={{ base: '100%', sm: '53%' }} ml={{ base: '0', sm: '10%', md: '10%', lg: '25%' }}>
         <AndIts width="100%" preserveAspectRatio="xMinYMin meet" />
       </Box>
 
-      <Box flexGrow="1" pt="160px" ml="8" mt={{ sm: '-25%', md: '-10%', lg: '0' }}>
+      <Box
+        flexGrow="1"
+        pt="160px"
+        ml={{ base: '0', sm: '8' }}
+        mt={{ base: '-25%', sm: '-15%', md: '-10%', lg: '-5%' }}
+        w={{ base: '100%' }}
+      >
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Secure-by-design
         </Heading>
