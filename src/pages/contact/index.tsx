@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import SEOHead from '@components/SEOHead';
 import MainLayout from '@layouts/MainLayout';
-import { Hero, ContactMainActions, ContactExtensiveActions } from '@views/contact';
+import { Hero, ContactExtensiveActions } from '@views/contact';
 import { CONTACT_PAGE_PATH } from '@consts/paths';
 
 const ContactPage: NextPageWithLayout = () => {
@@ -43,7 +43,6 @@ const ContactPage: NextPageWithLayout = () => {
       <SEOHead subTitle="Contact" />
 
       <Hero />
-      <ContactMainActions />
       <ContactExtensiveActions />
     </Box>
   );
