@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Flex, Container, Text, Heading, Box } from '@chakra-ui/react';
+import { Flex, Container, Text, Heading, Box, Link } from '@chakra-ui/react';
 
 import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
@@ -98,17 +98,19 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
     }}
     aspect={aspect}
   >
-    <Heading
-      letterSpacing="-2px"
-      mb={4}
-      size="h4"
-      textAlign={{
-        base: 'left',
-        lg: textOrientation,
-      }}
-    >
-      {title}
-    </Heading>
+    <Link href={actionHref}>
+      <Heading
+        letterSpacing="-2px"
+        mb={4}
+        size="h4"
+        textAlign={{
+          base: 'left',
+          lg: textOrientation,
+        }}
+      >
+        {title}
+      </Heading>
+    </Link>
     {texts.map((text) => (
       <Text
         key={text}
