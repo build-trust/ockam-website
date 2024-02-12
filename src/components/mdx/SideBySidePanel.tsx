@@ -12,6 +12,8 @@ type Props = {
   children?: ReactNode;
   alignItems?: ResponsiveValue<'start' | 'end' | 'center'>;
   isPanel?: boolean;
+  isMinimal?: boolean;
+  width?: ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>;
 };
 
 const SideBySidePanel: FC<Props> = ({
@@ -22,8 +24,11 @@ const SideBySidePanel: FC<Props> = ({
   animate,
   alignItems,
   isPanel,
+  isMinimal,
+  width,
 }) => {
   const direction = (): ResponsiveValue<Property.FlexDirection> => {
+    if (isMinimal) return 'column';
     if (textOrientation === 'left') {
       return {
         base: 'column',
@@ -41,7 +46,19 @@ const SideBySidePanel: FC<Props> = ({
       return {
         mb: { base: '32' },
         px: { base: '8', lg: '0' },
+        width: width || '100%',
       };
+    if (isMinimal) {
+      return {
+        borderRadius: '2xl',
+        backgroundColor: 'white',
+        boxShadow: '2xl',
+        overflow: 'hidden',
+        px: { base: '8', lg: '8' },
+        py: { base: '8', lg: '8' },
+        mx: { base: '8', lg: '8 ' },
+      };
+    }
     return {
       borderRadius: '2xl',
       backgroundColor: 'white',
@@ -54,13 +71,23 @@ const SideBySidePanel: FC<Props> = ({
   };
 
   return (
-    <Flex direction={direction()} gap="4" width="100%" {...panelProps()}>
+    <Flex
+      direction={direction()}
+      gap="4"
+      width={width || '100%'}
+      height={isMinimal ? '100%' : 'auto'}
+      {...panelProps()}
+    >
       <Flex
-        width={{
-          base: '100%',
-          lg: '45%',
-          xl: '40%',
-        }}
+        width={
+          isMinimal
+            ? '100%'
+            : {
+                base: '100%',
+                lg: '45%',
+                xl: '40%',
+              }
+        }
         direction="column"
         alignItems={alignItems || 'center'}
         justifyContent="center"
@@ -68,11 +95,15 @@ const SideBySidePanel: FC<Props> = ({
         {children}
       </Flex>
       <Box
-        width={{
-          base: '100%',
-          lg: '55%',
-          xl: '60%',
-        }}
+        width={
+          isMinimal
+            ? '100%'
+            : {
+                base: '100%',
+                lg: '55%',
+                xl: '60%',
+              }
+        }
         h={{
           base: '50vh',
           lg: 'auto',

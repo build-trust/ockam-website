@@ -89,6 +89,7 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
 }) => (
   <SideBySidePanel
     isPanel
+    isMinimal
     image={image}
     textOrientation={textOrientation}
     alignItems={{
@@ -96,10 +97,12 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
       lg: textOrientation === 'left' ? 'start' : 'end',
     }}
     aspect={aspect}
+    width="100%"
   >
     <Heading
       letterSpacing="-2px"
       mb={4}
+      size="h4"
       textAlign={{
         base: 'left',
         lg: textOrientation,
@@ -147,10 +150,10 @@ const Cases: FunctionComponent = () => (
       </Heading>
     </Flex>
 
-    <Flex direction="column" width="100%">
+    <Flex direction="row" width="100%" gap="4" alignItems="stretch">
       {CASES_CARDS.map((item, index) => (
         <Transition key={item.title} delay={(index + 1) * 300} duration={500}>
-          <CasesCard {...item} textOrientation={index % 2 === 0 ? 'left' : 'right'} />
+          <CasesCard {...item} textOrientation="left" />
         </Transition>
       ))}
     </Flex>
