@@ -3,7 +3,7 @@ import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
-import { Hero, GetStarted, Features, Cases } from '@views/homepage';
+import { Hero, GetStarted, Cases } from '@views/homepage';
 import ItsSimple from '@assets/images/its-simple-with.svg';
 import AndIts from '@assets/images/and-its.svg';
 import RotatingText from '@root/components/RotatingText';
@@ -70,7 +70,6 @@ const HomePage: NextPageWithLayout = () => (
       <Networkless />
       <SecureByDesign />
     </Box>
-    <Features />
     <Cases />
     <GetStarted />
   </Box>

@@ -5,8 +5,7 @@ import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 
-const TITLE = 'How is Ockam Used?';
-const TEXTS: string[] = [];
+const TITLE = 'Use cases for Ockam';
 
 const CASES_CARDS: {
   image: string;
@@ -146,19 +145,6 @@ const Cases: FunctionComponent = () => (
       <Heading as="h2" size="h2" mt={0} mb={0} letterSpacing="-2px">
         {TITLE}
       </Heading>
-
-      {TEXTS.map((text) => (
-        <Text
-          key={text}
-          fontSize={{ lg: 'lg' }}
-          lineHeight={1.4}
-          _notLast={{ mb: 5 }}
-          maxW="4xl"
-          style={{ textWrap: 'balance' }}
-        >
-          {text}
-        </Text>
-      ))}
     </Flex>
 
     <Flex direction="column" width="100%">
