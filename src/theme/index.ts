@@ -31,7 +31,7 @@ const sizes = {
   '2.5xl': '43.75rem', // 700px
   container: {
     sidebar: '305px',
-    max: '1200px',
+    max: '1300px',
     blogBodyMax: '1135px',
   },
 };
