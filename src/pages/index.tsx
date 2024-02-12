@@ -11,10 +11,10 @@ import RotatingText from '@root/components/RotatingText';
 const Networkless: FC = () => (
   <Container variant="section" mb="12">
     <Flex direction="column" alignItems="flex-start" justifyContent="space-between" width="100%">
-      <Box width="350px" marginLeft="50%" height="180px">
+      <Box width="33%" marginLeft={{ base: '70%', md: '50%', lg: '50%' }} height="180px">
         <ItsSimple width="100%" preserveAspectRatio="xMinYMin meet" />
       </Box>
-      <Box flexGrow="1">
+      <Box flexGrow="1" mt={{ sm: '-20%', md: '-5%', lg: '0' }}>
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Networkless connectivity
         </Heading>
@@ -33,11 +33,11 @@ const Networkless: FC = () => (
 const SecureByDesign: FC = () => (
   <Container variant="section" style={{ clear: 'both' }}>
     <Flex direction="row" alignItems="flex-start" justifyContent="space-between" width="100%">
-      <Box width="33%" ml="15%">
+      <Box width="33%" ml={{ base: '0', sm: '0', md: '10%', lg: '15%' }}>
         <AndIts width="100%" preserveAspectRatio="xMinYMin meet" />
       </Box>
 
-      <Box flexGrow="1" pt="160px" ml="8">
+      <Box flexGrow="1" pt="160px" ml="8" mt={{ sm: '-25%', md: '-10%', lg: '0' }}>
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Secure-by-design
         </Heading>
@@ -67,7 +67,7 @@ const HomePage: NextPageWithLayout = () => (
       borderStyle="none"
       background="white"
       maxW="container.max"
-      mx="auto"
+      mx={{ base: 12, xl: 'auto' }}
     >
       <Networkless />
       <SecureByDesign />
