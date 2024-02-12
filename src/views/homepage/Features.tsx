@@ -1,6 +1,5 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import { Box, Container, Flex, Text, Heading, SimpleGrid, Icon } from '@chakra-ui/react';
-import styled from 'styled-components';
+import { Box, Container, Flex, Text, Heading, Icon } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import {
   HiFingerPrint,
@@ -20,12 +19,8 @@ import DeveloperIcon from '@assets/icons/developer.svg';
 import LockIcon from '@assets/icons/lock.svg';
 import LeftIcon from '@assets/icons/left.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
+import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 
-const TITLE = 'Connect Applications, not Networks';
-const DESCRIPTIONS = [
-  'Forget about configuring networks, clouds, gateways, protocols, routers, relays, ELBs, VPNs, VPCs, Private Links, reverse proxies, VPC Peering, PKIs, CAs, and tokens.',
-  "You don't want to touch the network, and you don't need to engage your IT teams either!",
-];
 const IconLookup: { [key: string]: IconType } = {
   fingerprint: HiFingerPrint,
   shieldcheck: HiShieldCheck,
@@ -41,7 +36,9 @@ const IconLookup: { [key: string]: IconType } = {
 const FEATURES = [
   {
     icon: LeftIcon,
+    image: 'app-level',
     title: 'Authentication between Applications',
+    text: 'The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.',
     texts: [
       'Orchestrated cryptographic identifiers and mutual authentication',
       'Managed credential authorities and ABAC',
@@ -50,7 +47,9 @@ const FEATURES = [
   },
   {
     icon: LockIcon,
+    image: 'guaranteed-authenticity',
     title: 'Encrypted Data-in-Motion',
+    text: 'Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To trust data-in-motion, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be private and secure by-design, applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.',
     texts: [
       'End-to-end across networks and clouds',
       'Transport and infrastructure agnostic',
@@ -59,12 +58,16 @@ const FEATURES = [
   },
   {
     icon: GitHubIcon,
+    image: 'five-stars',
     title: 'Open and Adaptable',
+    text: "Our programming libraries are open source and can be included in any applications. We've a thriving open source community and we're regularly ranked among the most popular open source security projects.",
     texts: ['Open Source', 'Add-ons for Confluent, Snowflake, Okta, KMS, UDP, and more'],
   },
   {
     icon: DeveloperIcon,
+    image: 'any-language',
     title: 'Developer-first Experience',
+    text: 'Ockam has been built by and for developers first. Use our OSS programming libraries to embed our protocols directly into your application, or use Ockam Command to manage your portals and secure channels via the CLI.',
     texts: ['CLI and a Rust Library', 'As simple as it should be to get data moving'],
   },
 ];
@@ -114,65 +117,56 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts, text }) 
   );
 };
 
-const NoBr = styled.span`
-  white-space: nowrap;
-`;
-const noWidows = (str: string): JSX.Element => {
-  const lastIndex = str.lastIndexOf(' ');
-  const sndLastIndex = str.lastIndexOf(' ', lastIndex - 1);
-  const endWords = <NoBr>{str.substring(sndLastIndex + 1)}</NoBr>;
-  const el = (
-    <>
-      {str.substring(0, sndLastIndex)} {endWords}
-    </>
-  );
-  return el;
-};
-
 const Features: FunctionComponent = () => (
-  <Box
-    pt={{ base: 16, lg: 24 }}
-    pb={{ base: 20, lg: 24 }}
-    boxShadow="2xl"
-    borderRadius="15"
-    borderStyle="none"
-    background="white"
-    maxW="container.max"
-    mx="auto"
-  >
-    <Container variant="section">
-      <Box id="features" visibility="hidden" position="absolute" left={0} top="-80px" />
+  <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }}>
+    <Heading
+      as="h1"
+      fontWeight="extrabold"
+      textAlign="center"
+      color="white"
+      size={{ base: '2xl', lg: '3xl' }}
+      letterSpacing={{ base: '-1.5px', lg: '-1.5px' }}
+      lineHeight={{ base: 1, lg: 1.5 }}
+    >
+      How Ockam Works
+    </Heading>
+    <Heading
+      as="h2"
+      textAlign="center"
+      fontWeight="medium"
+      color="rgba(255, 255, 255, 0.8)"
+      size={{ base: 'lg', lg: 'xl' }}
+      letterSpacing={{ base: '-1.7px', md: '-2px', lg: '-1.7px' }}
+      lineHeight={{ base: 1, md: 1.2, lg: 1 }}
+      mt={{ base: 5, lg: 1 }}
+      mx="20"
+      mb="20"
+    >
+      Orchestrate end-to-end encryption, mutual authentication, key management, credential
+      management, and authorization policy enforcement &mdash; at massive scale.
+    </Heading>
+    <Box
+      pt={{ base: 16, lg: 24 }}
+      pb={{ base: 20, lg: 24 }}
+      boxShadow="2xl"
+      borderRadius="15"
+      borderStyle="none"
+      background="white"
+      maxW="container.max"
+      mx="auto"
+    >
+      <Container variant="section">
+        <Box id="features" visibility="hidden" position="absolute" left={0} top="-80px" />
 
-      <Flex
-        direction={{ base: 'column', md: 'row' }}
-        w="full"
-        justify="space-between"
-        mb={{ base: 10, md: 16 }}
-      >
-        <Box alignSelf="flex-start" w="full" maxW="2.5xl">
-          <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
-            {noWidows(TITLE)}
-          </Heading>
-
-          {DESCRIPTIONS.map((text) => (
-            <Text key={text} fontSize={{ lg: 'lg' }} lineHeight={1.4} _notLast={{ mb: 2 }}>
-              {text}
-            </Text>
-          ))}
-        </Box>
-      </Flex>
-
-      <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 2 }}
-        spacingX={{ base: 8, md: 20, lg: 24 }}
-        spacingY={{ base: 8, md: 12, lg: 16 }}
-      >
-        {FEATURES.map((card) => (
-          <Feature key={card.title} {...card} />
+        {FEATURES.map((card, ix) => (
+          <SideBySidePanel image={card.image} textOrientation={ix % 2 === 0 ? 'left' : 'right'}>
+            <Heading>{card.title}</Heading>
+            <Text mt="4">{card.text}</Text>
+          </SideBySidePanel>
         ))}
-      </SimpleGrid>
-    </Container>
-  </Box>
+      </Container>
+    </Box>
+  </Container>
 );
 export { Feature };
 export default Features;
