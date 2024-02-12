@@ -13,11 +13,12 @@ const AnimatedContainer = styled(animated.div)`
   &:before {
     content: '';
     position: absolute;
-    top: 97%;
+    top: 80%;
+    width: 100%;
     left: 0;
     height: 3px;
     border-radius: 2px;
-    background-image: linear-gradient(142.21deg, #c00, #000);
+    background-image: linear-gradient(142.21deg, #0a1a2b, #36a7c9);
   }
 
   position: relative;
@@ -25,10 +26,10 @@ const AnimatedContainer = styled(animated.div)`
   overflow-y: hidden;
   display: inline-block;
   font-size: 1em;
-  height: 1.2em;
+  height: 1.4em;
   width: auto;
   vertical-align: middle;
-  line-height: 1em;
+  line-height: 1.2em;
   font-weight: 800;
 `;
 
