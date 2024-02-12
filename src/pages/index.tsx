@@ -27,11 +27,19 @@ const Networkless: FC = () => (
         </Heading>
         <Heading as="h3" size="md" color="gray.500" fontWeight="500" letterSpacing="-0.07em">
           When application security is decoupled from your network, <br />
-          you no longer need to{' '}
+          you can skip the pain of{' '}
           <RotatingText
             interval={3000}
             delay={4000}
-            words={['punch holes in your firewall', 'wait on your IT department']}
+            words={[
+              'firewalls',
+              'VPNs',
+              'reverse proxies',
+              'certificate management',
+              'IP lists',
+              'IT backlogs',
+              'sysadmins',
+            ]}
           />
           .
         </Heading>
