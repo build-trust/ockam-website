@@ -15,11 +15,12 @@ import {
 } from '@chakra-ui/react';
 
 import LogoGray from '@assets/logo-gray.svg';
-import { LINKEDIN, TWITTER, DISCUSSION, BUILD_DEMO, DISCORD } from '@consts/externalResources';
+import { LINKEDIN, TWITTER, DISCUSSION, DISCORD } from '@consts/externalResources';
 import {
   CONTACT_FORM_PATH,
   CONTACT_PAGE_PATH,
   MISSION_AND_VISION_PATH,
+  SIGNUP_PATH,
   STYLE_GUIDE_PATH,
   TEAM_PATH,
 } from '@consts/paths';
@@ -188,7 +189,7 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
         <Box>
           <Button
             as="a"
-            href={BUILD_DEMO.href}
+            href={SIGNUP_PATH}
             target="_blank"
             colorScheme="avocado"
             color="black"

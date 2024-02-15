@@ -21,6 +21,16 @@ const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
   const headerDesktopPaddingY = isScrolled ? 5 : 8;
   const StartLogo = hasGradient ? LogoGray : LogoDark;
   const startbg = hasGradient ? 'transparent' : 'white';
+  const scrolledProps = isScrolled
+    ? {
+        bgColor: 'white',
+        boxShadow: 'md',
+        className: 'scrolled',
+      }
+    : {
+        bgColor: startbg,
+        boxShadow: 'none',
+      };
 
   if (isBelowSmallLaptop) {
     return (
@@ -41,10 +51,9 @@ const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
       pos="fixed"
       top={0}
       zIndex={10}
-      bgColor={isScrolled ? 'white' : startbg}
-      boxShadow={isScrolled ? 'md' : 'none'}
       py={{ base: 4, lg: headerDesktopPaddingY }}
       transition="all 400ms ease-in-out"
+      {...scrolledProps}
     >
       <Container variant="section" display="flex" w="full">
         <Flex w="full" alignItems="center">

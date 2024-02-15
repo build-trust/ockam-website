@@ -1,45 +1,66 @@
 import { FunctionComponent } from 'react';
-import { Box, Button, Flex, useBreakpointValue } from '@chakra-ui/react';
+import { Button, Flex, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { CONTACT_FORM_PATH } from '@consts/paths';
+import { CONTACT_FORM_PATH, SIGNUP_PATH } from '@consts/paths';
 
-const GitHubButton = styled.a`
-  display: inline-block;
+const SignUpButton = styled(Button)`
+  background: white;
 
-  padding: 5px 10px;
-  border: 1px solid rgba(1, 4, 9, 0.8);
-  border-radius: 3px;
+  .scrolled & {
+    background: #4fdab8;
 
-  color: rgb(14, 17, 22);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-  white-space: nowrap;
-  background-color: rgb(231, 236, 240);
+    &:hover {
+      background: #3ac6a3;
+    }
+  }
 `;
+
+// const GitHubButton = styled.a`
+//   display: inline-block;
+
+//   padding: 5px 10px;
+//   border: 1px solid rgba(1, 4, 9, 0.8);
+//   border-radius: 3px;
+
+//   color: rgb(14, 17, 22);
+//   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+//   font-size: 12px;
+//   font-weight: 600;
+//   line-height: 16px;
+//   white-space: nowrap;
+//   background-color: rgb(231, 236, 240);
+// `;
 type Props = {
   landingPage?: boolean;
 };
 const MainLayoutCtaButtons: FunctionComponent<Props> = ({ landingPage }) => {
   const buttonsSize = useBreakpointValue({ base: 'lg', lg: 'md' });
   const contactHref = landingPage ? '#contact' : CONTACT_FORM_PATH;
-  const gitHubCTA = (): JSX.Element => (
-    <Box mt="2">
-      <GitHubButton
-        className="github-button"
-        href="https://github.com/build-trust/ockam"
-        data-color-scheme="no-preference: light_high_contrast; light: light_high_contrast; dark: dark_high_contrast;"
-        data-icon="octicon-star"
-        data-size="large"
-        data-show-count="true"
-        aria-label="Star build-trust/ockam on GitHub"
-      >
-        Star us on GitHub
-      </GitHubButton>
-    </Box>
+
+  // const gitHubCTA = (): JSX.Element => (
+  //   <Box mt="2">
+  //     <GitHubButton
+  //       className="github-button"
+  //       href="https://github.com/build-trust/ockam"
+  //       data-color-scheme="no-preference: light_high_contrast; light: light_high_contrast; dark: dark_high_contrast;"
+  //       data-icon="octicon-star"
+  //       data-size="large"
+  //       data-show-count="true"
+  //       aria-label="Star build-trust/ockam on GitHub"
+  //     >
+  //       Star us on GitHub
+  //     </GitHubButton>
+  //   </Box>
+  // );
+
+  const signup = (): JSX.Element => (
+    <Link href={SIGNUP_PATH} passHref legacyBehavior>
+      <SignUpButton variant="solid" colorScheme="avocado" size={buttonsSize} color="black">
+        Sign Up
+      </SignUpButton>
+    </Link>
   );
 
   const buttons = (): JSX.Element => {
@@ -52,7 +73,7 @@ const MainLayoutCtaButtons: FunctionComponent<Props> = ({ landingPage }) => {
         </Link>
       );
     }
-    return gitHubCTA();
+    return <>{signup()}</>;
   };
 
   return (

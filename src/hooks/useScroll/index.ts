@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback, RefObject, useMemo } from 're
 const useScroll = (
   offset = 0,
   reset = false,
-  outsideRef: RefObject<HTMLDivElement> = { current: null }
+  outsideRef: RefObject<HTMLDivElement> = { current: null },
 ): { ref?: RefObject<HTMLDivElement>; isScrolled: boolean } => {
   const [isScrolled, setScroll] = useState(false);
   const internalRef = useRef<HTMLDivElement>(null);
@@ -11,13 +11,13 @@ const useScroll = (
 
   const memoHandleScroll = useCallback(() => {
     if (!isScrolled && ref?.current) {
-      setScroll(window.pageYOffset > ref.current.getBoundingClientRect().top + offset);
+      setScroll(window.scrollY > ref.current.getBoundingClientRect().top + offset);
     } else {
       setScroll(true);
     }
 
     if (reset && ref?.current) {
-      if (window.pageYOffset === ref.current.getBoundingClientRect().top) setScroll(false);
+      if (window.scrollY === ref.current.getBoundingClientRect().top) setScroll(false);
     }
   }, [isScrolled, offset, reset, ref]);
 
