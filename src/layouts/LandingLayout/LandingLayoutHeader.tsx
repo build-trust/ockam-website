@@ -50,7 +50,7 @@ const LandingLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
               />
             </Box>
           </Link>
-          <MainLayoutDesktopNav landingPage isScrolled={isScrolled} />
+          <MainLayoutDesktopNav landingPage />
         </Flex>
       </Container>
     </Box>
