@@ -23,7 +23,7 @@ type Props = {
 const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElement => {
   const steps = useMemo(
     () => [
-      { title: 'Log in', description: 'Setup your account' },
+      { title: 'Sign in', description: 'Setup your account' },
       { title: 'Choose a plan', description: 'Right-size to your needs' },
       { title: 'Download', description: 'Download & Install Ockam' },
       { title: 'Enroll', description: 'Connect your first node' },

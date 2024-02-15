@@ -22,7 +22,7 @@ const MarketplaceSetup: FC<Props> = ({ plan }) => (
     </Text>
     <OrderedList>
       <ListItem>Click your preferred cloud marketplace below</ListItem>
-      <ListItem>Log in to your account at the cloud marketplace</ListItem>
+      <ListItem>Sign in to your account at the cloud marketplace</ListItem>
       <ListItem>Choose your preferred subscription option</ListItem>
       <ListItem>Click subscribe</ListItem>
       <ListItem>Check your email for the next steps</ListItem>
