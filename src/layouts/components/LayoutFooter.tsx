@@ -50,22 +50,7 @@ const NAV = [
       },
       {
         name: 'Documentation',
-        href: 'https://docs.ockam.io/readme/secure-by-design',
-        isExternal: true,
-      },
-      {
-        name: 'Secure-by-design applications',
-        href: 'https://docs.ockam.io/readme/secure-by-design',
-        isExternal: true,
-      },
-      {
-        name: 'Virtual adjacency',
-        href: 'https://docs.ockam.io/readme/virtually-adjacent',
-        isExternal: true,
-      },
-      {
-        name: 'Zero trust software',
-        href: 'https://docs.ockam.io/readme/secure-by-design#zero-implicit-trust',
+        href: 'https://docs.ockam.io/',
         isExternal: true,
       },
     ],
