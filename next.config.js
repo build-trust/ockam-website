@@ -21,6 +21,16 @@ const nextConfig = {
   },
   redirects: async () => [
     {
+      source: '/download',
+      destination: '/signin',
+      permanent: true,
+    },
+    {
+      source: '/signup',
+      destination: '/signin',
+      permanent: true,
+    },
+    {
       source: '/learn/guides/team/values_and_virtues_on_the_Ockam_Team',
       destination: '/mission',
       permanent: true,
