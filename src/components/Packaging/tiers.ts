@@ -146,7 +146,7 @@ const TIERS: Tier[] = [
     price_interval: 'mo',
     onlyFloor: true,
     cta: {
-      text: 'Talk to sales →',
+      text: 'Start 14-day trial →',
       url: `${CONTACT_FORM_PATH}`,
     },
     marketplaceOnly: true,
@@ -197,7 +197,7 @@ const FEATURES: Feature[] = [
     tiers: ['Large', 'Business Critical'],
     onCard: true,
   },
-  { name: 'Volume discounts', tiers: ['Large', 'Business Critical'], onCard: true },
+  { name: 'Long-term contracts', tiers: ['Large', 'Business Critical'], onCard: true },
   { name: 'Customized terms', tiers: ['Large', 'Business Critical'] },
   { name: 'Bring Your Own Cloud (BYOC)', tiers: ['Business Critical'], onCard: true },
   { name: 'Data transfer cap', tiers: ['Free', 'Premium'], hasLimits: true },
