@@ -37,6 +37,30 @@ const FEATURES = [
   {
     icon: LeftIcon,
     image: 'app-level',
+    title: 'Virtual Adjacency',
+    text: 'The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.',
+    texts: [
+      'Orchestrated cryptographic identifiers and mutual authentication',
+      'Managed credential authorities and ABAC',
+      'Enroll applications with bootstrap services',
+    ],
+  },
+
+  {
+    icon: LeftIcon,
+    image: 'app-level',
+    title: 'Portals',
+    text: 'The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.',
+    texts: [
+      'Orchestrated cryptographic identifiers and mutual authentication',
+      'Managed credential authorities and ABAC',
+      'Enroll applications with bootstrap services',
+    ],
+  },
+
+  {
+    icon: LeftIcon,
+    image: 'app-level',
     title: 'Authentication between Applications',
     text: 'The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.',
     texts: [

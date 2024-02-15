@@ -80,7 +80,7 @@ const RotatingText: FC<Props> = ({ words, interval, delay, styles }) => {
 
   const shouldAnimate = useCallback((): boolean => {
     const scrollPerc = elementScrollPosition();
-    if (scrollPerc && scrollPerc > 0.25 && scrollPerc < 0.8) return true;
+    if (scrollPerc && scrollPerc > 0.25 && scrollPerc < 0.75) return true;
     return false;
   }, [elementScrollPosition]);
 
