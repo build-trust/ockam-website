@@ -1,5 +1,6 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import { Box, Container, Flex, Text, Heading, Icon } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, Heading, Icon, TextProps } from '@chakra-ui/react';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { IconType } from 'react-icons';
 import {
   HiFingerPrint,
@@ -14,12 +15,16 @@ import {
   HiCloud,
 } from 'react-icons/hi';
 
-import GitHubIcon from '@assets/icons/github.svg';
-import DeveloperIcon from '@assets/icons/developer.svg';
-import LockIcon from '@assets/icons/lock.svg';
-import LeftIcon from '@assets/icons/left.svg';
 import GreenIconWrapper from '@components/GreenIconWrapper';
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
+import CodeBlock from '@root/components/mdx/CodeBlock';
+
+const components = {
+  p: (props: TextProps): JSX.Element => <Text mb={8} color="inherit" {...props} />,
+  h1: Heading,
+  Heading,
+  code: CodeBlock,
+};
 
 const IconLookup: { [key: string]: IconType } = {
   fingerprint: HiFingerPrint,
@@ -33,68 +38,6 @@ const IconLookup: { [key: string]: IconType } = {
   transparentcube: HiCubeTransparent,
   cloud: HiCloud,
 };
-const FEATURES = [
-  {
-    icon: LeftIcon,
-    image: 'app-level',
-    title: 'Virtual Adjacency',
-    text: 'The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.',
-    texts: [
-      'Orchestrated cryptographic identifiers and mutual authentication',
-      'Managed credential authorities and ABAC',
-      'Enroll applications with bootstrap services',
-    ],
-  },
-
-  {
-    icon: LeftIcon,
-    image: 'app-level',
-    title: 'Portals',
-    text: 'The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.',
-    texts: [
-      'Orchestrated cryptographic identifiers and mutual authentication',
-      'Managed credential authorities and ABAC',
-      'Enroll applications with bootstrap services',
-    ],
-  },
-
-  {
-    icon: LeftIcon,
-    image: 'app-level',
-    title: 'Authentication between Applications',
-    text: 'The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.',
-    texts: [
-      'Orchestrated cryptographic identifiers and mutual authentication',
-      'Managed credential authorities and ABAC',
-      'Enroll applications with bootstrap services',
-    ],
-  },
-  {
-    icon: LockIcon,
-    image: 'guaranteed-authenticity',
-    title: 'Encrypted Data-in-Motion',
-    text: 'Modern applications are distributed and have an unwieldy number of interconnections that must trustfully exchange data. To trust data-in-motion, applications need end-to-end guarantees of data authenticity, integrity, and confidentiality. To be private and secure by-design, applications must have granular control over every trust and access decision. Ockam allows you to add these controls and guarantees to any application.',
-    texts: [
-      'End-to-end across networks and clouds',
-      'Transport and infrastructure agnostic',
-      'For existing and new infrastructure',
-    ],
-  },
-  {
-    icon: GitHubIcon,
-    image: 'five-stars',
-    title: 'Open and Adaptable',
-    text: "Our programming libraries are open source and can be included in any applications. We've a thriving open source community and we're regularly ranked among the most popular open source security projects.",
-    texts: ['Open Source', 'Add-ons for Confluent, Snowflake, Okta, KMS, UDP, and more'],
-  },
-  {
-    icon: DeveloperIcon,
-    image: 'any-language',
-    title: 'Developer-first Experience',
-    text: 'Ockam has been built by and for developers first. Use our OSS programming libraries to embed our protocols directly into your application, or use Ockam Command to manage your portals and secure channels via the CLI.',
-    texts: ['CLI and a Rust Library', 'As simple as it should be to get data moving'],
-  },
-];
 
 type FeatureProps = {
   icon?: FunctionComponent<SVGAttributes<SVGElement>> | string;
@@ -141,7 +84,16 @@ const Feature: FunctionComponent<FeatureProps> = ({ icon, title, texts, text }) 
   );
 };
 
-const Features: FunctionComponent = () => (
+type FeatureType = {
+  image: string;
+  title: string;
+  mdx?: MDXRemoteSerializeResult;
+  text?: string;
+};
+type Props = {
+  features: FeatureType[];
+};
+const Features: FunctionComponent<Props> = ({ features }) => (
   <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }}>
     <Heading
       as="h1"
@@ -182,15 +134,24 @@ const Features: FunctionComponent = () => (
       <Container variant="section">
         <Box id="features" visibility="hidden" position="absolute" left={0} top="-80px" />
 
-        {FEATURES.map((card, ix) => (
-          <SideBySidePanel image={card.image} textOrientation={ix % 2 === 0 ? 'left' : 'right'}>
-            <Heading>{card.title}</Heading>
-            <Text mt="4">{card.text}</Text>
+        {features.map((card, ix) => (
+          <SideBySidePanel
+            image={card.image}
+            textOrientation={ix % 2 === 0 ? 'left' : 'right'}
+            animate
+          >
+            <Heading width="100%" mb={4}>
+              {card.title}
+            </Heading>
+            {card.mdx && <MDXRemote {...card.mdx} components={components} />}
+            {card.text && <Text>{card.text}</Text>}
           </SideBySidePanel>
         ))}
       </Container>
     </Box>
   </Container>
 );
+
 export { Feature };
+export type { FeatureType };
 export default Features;

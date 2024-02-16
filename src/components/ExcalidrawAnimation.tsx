@@ -88,6 +88,8 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isPlayable, setIsPlayable] = useState(false);
+  const [isNested, setIsNested] = useState(false);
+  const [interval, setInter] = useState<NodeJS.Timer>();
 
   const handleScroll = (): void => {
     const position = window.pageYOffset;
@@ -137,13 +139,27 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     };
   }, []);
 
+  const setupNestedAnimations = useCallback((parentSvg: SVGSVGElement): void => {
+    const scenes: NodeListOf<SVGSVGElement> = parentSvg.querySelectorAll('.scene');
+    if (scenes.length > 0) {
+      setIsNested(true);
+      const opening = parentSvg.getElementById('scene0') as SVGSVGElement;
+      if (opening) {
+        opening.style.display = 'block';
+        opening.setCurrentTime(0);
+      }
+    }
+  }, []);
+
   const svgLoaded = useCallback(async (): Promise<void> => {
     if (ref.current) {
       const s = (await waitForElm('svg', ref.current)) as SVGSVGElement;
       if (s) {
         setSvg(s);
         s.setCurrentTime(0);
-        if (!animate) {
+        if (animate) {
+          setupNestedAnimations(s);
+        } else {
           const steps = s.querySelectorAll('animate');
           if (steps && steps.length > 0) {
             const lastStep = steps[steps.length - 1];
@@ -156,20 +172,56 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
         s.pauseAnimations();
       }
     }
-  }, [animate]);
+  }, [animate, setupNestedAnimations]);
+
+  const play = useCallback(() => {
+    if (!svg) return;
+    if (isNested) {
+      if (!interval) {
+        const i = setInterval(() => {
+          const scenes = Array.from(svg.querySelectorAll('.scene')) as SVGSVGElement[];
+          const current = scenes.find((s) => s.style.display === 'block');
+          if (current) {
+            const cIx = parseInt(current.id.replace('scene', ''), 10);
+            let next: SVGSVGElement | undefined = svg.getElementById(
+              `scene${cIx + 1}`,
+            ) as SVGSVGElement;
+            next = next || svg.getElementById('scene0');
+            current.style.display = 'none';
+            next.style.display = 'block';
+          }
+        }, 1000);
+        setInter(i);
+      }
+    } else {
+      svg.unpauseAnimations();
+    }
+  }, [isNested, svg, interval]);
+
+  const pause = useCallback(() => {
+    if (!svg) return;
+    if (isNested) {
+      if (interval) {
+        clearInterval(interval);
+        setInter(undefined);
+      }
+    } else {
+      svg.pauseAnimations();
+    }
+  }, [isNested, svg, interval]);
 
   useEffect(() => {
     if (!svg) return;
     if (animate) {
       if (isPlayable) {
-        svg.unpauseAnimations();
+        play();
       } else {
-        svg.pauseAnimations();
+        pause();
       }
     } else {
-      svg.pauseAnimations();
+      pause();
     }
-  }, [svg, animate, isPlayable]);
+  }, [svg, animate, isPlayable, pause, play]);
 
   useEffect(() => {
     if (!animate) return;
