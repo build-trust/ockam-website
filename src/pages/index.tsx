@@ -32,6 +32,7 @@ const Networkless: FC = () => (
             interval={3000}
             delay={4000}
             words={[
+              'implicit trust in your network',
               'firewalls',
               'VPNs',
               'reverse proxies',

@@ -143,10 +143,19 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     const scenes: NodeListOf<SVGSVGElement> = parentSvg.querySelectorAll('.scene');
     if (scenes.length > 0) {
       setIsNested(true);
+      scenes.forEach((scene) => {
+        const s = scene;
+        s.style.display = 'none';
+        const endTime = Math.max(
+          ...Array.from(s.querySelectorAll('animate')).map((a) =>
+            parseInt(a.getAttribute('begin') || '0', 10),
+          ),
+        );
+        s.setCurrentTime(endTime);
+      });
       const opening = parentSvg.getElementById('scene0') as SVGSVGElement;
       if (opening) {
         opening.style.display = 'block';
-        opening.setCurrentTime(0);
       }
     }
   }, []);
@@ -180,15 +189,33 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       if (!interval) {
         const i = setInterval(() => {
           const scenes = Array.from(svg.querySelectorAll('.scene')) as SVGSVGElement[];
+          const total = scenes.length;
           const current = scenes.find((s) => s.style.display === 'block');
           if (current) {
             const cIx = parseInt(current.id.replace('scene', ''), 10);
-            let next: SVGSVGElement | undefined = svg.getElementById(
-              `scene${cIx + 1}`,
-            ) as SVGSVGElement;
-            next = next || svg.getElementById('scene0');
-            current.style.display = 'none';
-            next.style.display = 'block';
+            if (cIx === total - 1) {
+              const x = parseInt(current.dataset.looped || '0', 2);
+              if (x > 0) {
+                if (x >= 5) {
+                  current.dataset.looped = '0';
+                  const next: SVGSVGElement | undefined = svg.getElementById(
+                    `scene0`,
+                  ) as SVGSVGElement;
+                  current.style.display = 'none';
+                  next.style.display = 'block';
+                } else {
+                  current.dataset.looped = (x + 1).toString();
+                }
+              } else {
+                current.dataset.looped = '1';
+              }
+            } else {
+              const next: SVGSVGElement | undefined = svg.getElementById(
+                `scene${cIx + 1}`,
+              ) as SVGSVGElement;
+              current.style.display = 'none';
+              next.style.display = 'block';
+            }
           }
         }, 1000);
         setInter(i);

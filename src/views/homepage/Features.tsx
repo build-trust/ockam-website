@@ -139,6 +139,7 @@ const Features: FunctionComponent<Props> = ({ features }) => (
             image={card.image}
             textOrientation={ix % 2 === 0 ? 'left' : 'right'}
             animate
+            key={card.title}
           >
             <Heading width="100%" mb={4}>
               {card.title}
