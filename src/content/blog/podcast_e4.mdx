@@ -1,0 +1,119 @@
+---
+title: 'Episode 4: Introduction to Networkless'
+date: '2024-02-01'
+category: 'Podcast'
+description: "Ockam is networkless, so you can connect applications to data, without touching the network."
+metaTitle: "Ockam is a new type of abstraction for the Cloud era. We call it Networkless. Ockam enables developers to connect applications securely, without touching the underlying network infrastructure."
+image: /blog/podcast.png
+author: 'Matthew Gregory'
+authorAvatar: /blog/matthew_gregory-1.png
+---
+
+<AspectRatio maxW="100%" ratio={16 / 9}>
+  <iframe
+    src="https://www.youtube.com/watch?v=U2v3FdHa86A"
+    title="Introduction to Networkless"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</AspectRatio>
+
+**Transcript**
+
+Matthew Gregory: 
+We have a new Ockam podcast for you today. With me, I have Glenn and Mrinal, and today we're going to tackle a very fun topic, which is what we call Networkless. We describe Ockam as Networkless. One of the interesting things about Ockam is that we enable security and trust at the application layer, between applications that are in distributed locations. 
+What you also get from this are all things you don’t have to do because you use Ockam, and a lot of those things are at the network layer. This podcast is dedicated to the topic of Networkless. Maybe it will be controversial. Maybe everyone will get it.
+
+## Networkless: a new abstraction layer
+
+We've all suffered through serverless and all the heads banging on the table from that. but the analogy is very similar. Obviously, there is a network involved in moving data between applications and remote networks. Ockam is using those networks, but the key thing is that the end user of Ockam and the application developer that's trying to access data doesn't have to think about all of these network layer problems, which is often where you can make a mistake and have a data leak or a privacy issue or some sort of security vulnerability. Many times in big organizations, the person who's developing the application that needs to access the data doesn't have the capacity or capability to change the network. And they might not even know who the network team is. They're just focused on their application. 
+So how do we empower them to build applications that can access data in a trustful way? Glenn originated the Networkless idea when we started talking about Ockam together. I'm curious how you came up with this analogy between Ockam and the idea of Networkless and how you thought this was so similar to Serverless.
+What do you think, Glenn? 
+Glenn Gillen: 
+It reminds me a lot of when I was at AWS. I had a friend who would reach out to me about issues with the services he was using. 
+He would ask, how do I make this happen? And he would always qualify with, “Don't tell me the answer is serverless.” That's part of the joke of working at AWS to some extent, was that Lambdas was the answer to a bunch of questions around some feature that isn't rolled out to a service yet.
+Turns out there’s a 20-line Python script that also solves his problem. He hated serverless, he would say, “Everyone knows the server is there. This whole thing is stupid. Just give me the Python script and I'll just run it myself.” And that was fine. That was a back-and-forth we had all the time.
+Years later after I left AWS I caught up with him. He told me, “You'll never believe how all in on serverless we are these days.” What changed? He was now running a growing team with varying levels of expertise and realized that a whole bunch of his engineers were struggling with servers.
+What instance should I provision? How much memory should it have? What's the right thing to do? This had become a bottleneck for them and he became the bottleneck in answering those questions for his team.
+The turning point for him was realizing he could package up all of these things and allow his developers to only think about the app. That's the premise of functions as code or serverless. You only have to think about the code you want to run.
+There are still servers running, but as the CTO he was able to make decisions about how much memory they needed, what type of CPU's, and the right one for this particular workload.
+His app developers didn’t need to think about that at all. Their world is serverless. They never think about servers anymore. We pushed that problem onto people who care about it deeply and can focus on it. It was liberating for their team and was much more efficient. The app developer’s value is writing the code, not worrying about how to execute it and on what platform to execute it. 
+I had a similar realization early on when I was talking to you about Ockam when we started talking about what it achieves and what you're able to do with Ockam. His story was ringing in my head. There’s a whole bunch of network-related stuff that’s hard to think about if you're not thinking about it all the time. 
+I used an example a couple of times of trying to get a lambda in the serverless world to talk to a Postgres RDS instance. I know how to do that, it’s 12 different things I need to provision via Terraform to get it right. If I get any of those things wrong, it either doesn't work or worse, it works in an insecure way. There's so much that can go wrong there and it's low value, undifferentiated stuff.
+That's not where I should be spending most of my time. That should be simple. The quicker and faster I can abstract that away, the sooner I can get back to thinking about my application. That's where I should be spending my time.
+I need the network to be out of sight, out of mind as much as possible.
+Matthew Gregory: 
+Our innovation at Ockam is the developer experience on top of dozens of very complicated, difficult things. Someone could build it themselves, if they have a team of people,  years of time, and millions of dollars. Then you have to take on all the day two problems of maintaining and protecting it all. 
+But we've built this into our protocols where the components that are added together to create this abstraction allow an application developer to do things that they know how to do already. And that developer experience is the magic of what we've built.
+
+## Evolution of Cloud has created network complexity
+Mrinal Wadhwa: 
+Servers 20 years ago were very simple, but they got a lot more complex with cloud infrastructure in terms of their infrastructure and the number of servers involved. The decisions you have to make within that infrastructure have become more complex. 
+Similarly, on the network side, it used to be that applications ran in one big boundary of the company network. In that network, everything could talk to everything. In modern architectures, applications are running in different networks and different clouds, speaking different protocols, over different transports. It could be various wireless transports or TCP, UDP, or something more modern. 
+There's so much complexity in getting two things to talk to each other. To take your example, Lambda talking to a Postgres instance. That connection depends heavily on where that instance is, what network it is in, what boundaries it's protected by, and so forth. That requires several people to coordinate their work for that connection to happen. Or several infrastructure components to be coordinated for the connection to happen. So over the years the amount of complexity that sits in these layers has grown so much that they can benefit from some degree of simplification for someone who is just trying to build a CRUD app.
+That person shouldn't have to think about where a particular service is or how to reach it. They should be able to make a query and get answers.
+Glenn Gillen: 
+This reminds me of how the pendulum swings back and forth between different abstractions. In the early days of my career, I was working for an ISP doing C and CGI-based development. It was all in one box. The world was simple in that respect. 
+Fast forward a few years and I'm using the Microsoft stack and a lot of dotnet stuff and deploying to ISS. I have a higher abstraction now, I'm not thinking about deploying code the way I used to. Jump ahead another five years and Rails comes along. Partly because of the speed efficiencies and the less integrated Microsoft experience means that I'm back to thinking about servers again. I'm deploying with Capistrano, but everything's still close.
+And then the cloud comes along and all of a sudden things start to break up. So it's this constant pendulum swing of; a five-year window where I'd only have to think about app code, then I'd spend more time in the weeds and then the cloud came along and I was thinking about infrastructure again, and how to spin up EC2 instances. But then serverless came along and now I'm back to thinking about only code again. 
+The network layer was the sticking point. Functions are good by themselves, but functions need to talk to other stuff. Now I'm in a world of having to think about networks and firewalls and security groups. From my personal experience, the pendulum swing of abstractions has been back and forth over and over again. Now we have some pretty good app abstractions, but the world is more distributed than it's ever been.
+You're trying to connect to dozens of different systems in multiple different locations. It could be multi-cloud, or between on-prem and a cloud. You're no longer in that simple world of one or two servers in the same physical network.
+It’s spread across multiple virtual networks, across different cloud platforms, across different SaaS providers. That's why Serverless as an abstraction has been valuable.  But the new distributed world we live in, there's a network version of this that has been missing for a long, long time.
+
+## SaaS adoption further distributes your systems
+
+Matthew Gregory:
+Today, people get into a distributed computing mode much faster because of all of the best-of-breed services that are available. Snowflake is such a great product, right? When you're building an application, you need this data product, and now you are building your application in one place and using Snowflake in another. As soon as you break out of your own VPC or your own network, and start connecting more things, it's natural to keep going. Best of breed all around, for your analytics tools and other SaaS services.
+Companies are now breaking out of their trust boundary much sooner in their development cycle because by using all of these best-of-breed services, you can build the layers of your application that drive value for your customers faster. It's a natural progression. 
+As soon as you decide to use other services or put data in different locations, now you have this network and connectivity complexity that comes very quickly and probably prematurely to where your engineering team is. Startups don’t want to bring in a whole security or networking team, but you still need to make these connections. That is one of the benefits of Ockam; all the stuff you don't have to build, maintain, and deploy because you might not have the resources to do it.
+Another example is company-to-company connections. In a lot of scenarios you can't affect another company's network,  put a hole in their firewall or you know, create an IP allow list, or get them to build an API endpoint for you to make the connection. And then you have this natural friction where you have a business purpose for connecting your applications, but no ability to connect them. 
+When we talk about Networkless at Ockam and that we've moved this to the application layer, we mean that all you have to do is drop in applications into two endpoints to make this peer-to-peer connection with Ockam portals. That breaks us out of the dependency on control and management of the network and moves us to the application layer where you have the talent and people on your team to make the connection.
+
+## Network based solutions are the wrong tool for the job
+
+Glenn Gillen: 
+I've heard this quote a lot, we shape our tools and thereafter our tools shape us. We build the systems and solutions we need to get the job done, but then those tools end up constraining the way we think about a particular problem space.
+That's why I think it's important to have a different way of thinking about this because we've made this journey as an industry over multiple decades, from a heavily network-based approach to building things where the network doesn't mean what it used to mean.
+When you talk about integrating SaaS services and Snowflake and all these other things, there are many networks with different variations in your architecture now. Very few people in an organization should be thinking of that layer. 
+Because we have these network-based approaches to solving problems, we take tools that were invented decades ago and apply them to this modern approach. You're forcing everyone who is involved in the entire stack to think that way.
+The other thing about the network that's interesting to me is that very few people in your company should be worried about it. Most people should be thinking at a different layer of abstraction. But that's how we are naturally attuned to think about these business problems.
+We try to think about a problem a certain way, and when it comes to coming up with a solution, we look at the tools we have and the tools are telling us, no, you need to think about this at a network layer. And then you end up deploying brittle solutions that are based on IP allow lists, which were created for a time that’s long past.
+
+Mrinal Wadhwa: 
+What happens is that someone on a team needs to connect to a remote system. So they figure out the solution, but the solution is a lot of work and leaves the complexity to you. You still have to figure out how to make it secure and reliable. What ends up happening is someone who doesn't have the expertise to deal with those complexities of secure connectivity or making connections reliable, does just enough that they can move forward. 
+The result is a brittle system, that has security weaknesses, privacy problems, and a lot of risks to your business. And that problem compounds. This is just one decision in the journey of a system coming together. Over time, people make several of those decisions that stack on top of each other, and you end up with a rat’s nest-type complexity in your underlying layers.
+Glenn Gillen: 
+Secure by design is such an important cornerstone in making all this possible. If the default position is secure, and everything that entails, it makes everything else easier. You trust that your developer is starting from a place where they're going to get it right.
+Mrinal Wadhwa: 
+Yeah, the default position is the safe position. The simple answer is the right answer. That is the best way to approach these problems. I think it’s the only way to reliably tackle security and privacy challenges in our landscape of systems.
+
+## How abstractions like Serverless drive engineering advancements
+
+Matthew Gregory: 
+I realize that by describing what we do as Networkless, we are kicking the hornet's nest. I want to address that we are trolling a little bit and building on the serverless idea. All of us are laughing about this because we lived through serverless and we welcome all of the comments that will come with us creating this word Networkless. But I think that we can learn a lesson from what we saw with serverless. 
+People that were naysayers of serverless, in my opinion, are wrong. If you think of what we are doing collectively as engineers, building things, we need people developing chips and routers and data centers and different protocols and operating systems. You start going up the stack. We have all of these people focus on individual points of specification and specialization, and it is the sum of the parts that makes the reality of these different applications possible for us all to enjoy.
+What's happening in the AI revolution is that it is a collective effort across a lot of engineers that have been building for decades, if you look at it from a very zoomed-out point of view. So I think that the critical point of view on serverless is to say that people who work with serverless applications or are using Lambdas are somehow lesser engineers or do not fully understand what they're doing, or it has to be dumbed down for them, really miss the point. 
+The point is, as everything we do becomes more complicated, we need people who are more specialized so that as a stack of engineers, we can all do more. People are doing new cool things with chips and memory and data centers and operating systems that allow people to build the applications that are doing these amazing things in AI right now.
+In aggregate, we're all working together to get these big outcomes to happen. I think that's where people, when they talk about serverless miss the point. I think they're punching down. Maybe they see people that don't understand what they do or they're protecting their turf. I'm of the opinion that we are at an all-you-can-eat buffet and there are so many problems to be solved, so many applications to be built. We're going through this AI revolution that is expanding so fast that there's no real reason to have this protectionist mentality.
+I could see someone making that same critical point about Networkless. They might say, “Well, it's not that hard to set up end-to-end encrypted, mutually authenticated connections between distributed systems, if you have all the knowledge that I. Look, we're doing it over here.” But the problem is there aren't enough of those people in the world to secure all the networks and applications that need to move data between each other.
+We're dealing with such finite resources that we need these big advancements in tooling to move together further and faster.
+Mrinal Wadhwa: 
+Usually when someone is criticizing these ideas, they're coming from a point of view of, “In serverless, there are servers.” You're saying it's serverless, but there are servers. That's the trick with that. That's the difficult part about abstractions, of course the layer below the abstraction exists. We also know that all abstractions leak.
+There's no perfect abstraction. We still write programs that think about bits and bytes from time to time. The question is the degree of that leakiness. When the surface of complexity below an abstraction becomes really big, adding that layer abstraction, even if the abstraction is leaking, even if it doesn't hide one hundred percent of the complexity and it only hides 80% of the complexity, you are net positive in being able to build a new thing. That's the purpose of a tool. The purpose of a tool is to speed you up in building new things. You can invest in new functionality for your product because of that abstraction.
+ 
+Matthew Gregory: 
+I’ll probably lose half the audience with this analogy. Even before serverless, there was cloud, and Larry Ellison gave a presentation at Oracle World where they wheeled out the Oracle cloud, literally racks and servers. That's what the cloud looks like. When I was at Microsoft, working at Azure, I went to the cloud. It looks like a data center, no surprise. If you keep rolling back all of these abstractions, it's a new layer of abstraction that changes the experience for a group of people.
+That's what we're trying to get at with this concept of thinking Networkless.
+
+## Ockam is an abstraction of the network
+
+Mrinal Wadhwa: 
+The first time I heard Glenn describe Networkless, it reminded me of attempts from several years ago of people trying to do RPC abstractions over remote services. For a while it became like a big no-no, RPCs are bad because they're a very leaky abstraction. If you try to do a remote procedure call and mistakenly assume that it's like a local procedure call, it doesn't quite work out that way. Your application ends up with more errors because of that assumption, because that remote procedure call leaks heavily. But over time it became okay. We know today GRPCs are considered okay.
+You can use the Ockam command ‘create secure channel’ and a bunch of stuff happens over the network, and you get a secure channel. It’s like a composition of RPCs. Or when you call an API somewhere and a response comes back, you can assume it'll work most of the time. Over time we get better at doing these abstractions. 
+Specifically in Ockam's case, we say Ockam enables your applications to be Networkless. A good counterpoint would be, “What about all the fallacies of distributed systems? The articles that were written decades ago point out that the network has a bunch of complexity and if you forget about it, it's at your own peril. Because your application will get all these unexpected states.”
+With Ockam, we take care of the challenges of the network: security challenges, networks are heterogeneous with different types of transports, topologies, boundaries, and multiple networks.  Networks have different administrators and different security boundaries along the path. Latency, bandwidth, reliability, and throughput are all complexities at the network layer.
+What we are doing with Ockam is building an abstraction on top and providing certain guarantees to your application from those abstractions. One of the guarantees you get is that you are always talking to an authenticated entity. If your application is sending a message, it knows that it's always sending it to someone else who has been authenticated. 
+Another guarantee is that no one along the path can decrypt or manipulate the message as it travels. These guarantees can come out of this abstraction interface, which then enables you to build an app without worrying about an attacker on your network. Because now you have this guarantee coming from Ockam. That type of simplification of the network layer allows you to focus on building your core application rather than worry about these challenges around security, connectivity, reliability, and privacy.
+Matthew Gregory: 
+Thanks for joining this edition of the podcast. Let us know what you think about Networkless in the comments below. We'd love to discuss with you, and we'll see you on the next podcast. Until then, think Networkless. See you later.

@@ -1,0 +1,155 @@
+---
+title: 'Episode 3: How a SaaS Product Manager should think about connections to customer data'
+date: '2024-02-01'
+category: 'Podcast'
+description: "How a SaaS Product Manager should think about connections to customer data"
+metaTitle: "There are various ways SaaS products integrate with their customers private systems: APIs, VPNs, Private Link, etc. However, SaaS companies end up with a \'cookbook\' of different integration methods depending on the customers needs and architecture. The result: sales are blocked or delayed, customers have to punch holes in their network, and no one wins. Through this podcast we presume a Product Manager\'s point-of-view and then aim to show how Ockam might be the thing you\'ve been looking for."
+image: /blog/podcast.png
+author: 'Matthew Gregory'
+authorAvatar: /blog/matthew_gregory-1.png
+---
+
+<AspectRatio maxW="100%" ratio={16 / 9}>
+  <iframe
+    src="https://www.youtube.com/watch?v=p3f3M8vKCn4"
+    title="How a SaaS Product Manager should think about connections to customer data"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</AspectRatio>
+
+**Transcript**
+
+Matthew Gregory: 
+Welcome to the Ockam podcast. Every week, Mrinal, Glenn, and I discuss technology, building products, security by design, how Ockam works, and a lot more. We'll comment on industry macros across cloud, open source, and security.
+We have an exciting topic today, we are going to talk about a really cool use case for Ockam. This use case focuses on a setup of a company that's running a SaaS product in a cloud environment and needs to connect to their customer's data. We’ll discuss all the challenges that go into this problem of moving data from a customer to a SaaS product and what you need to think about. 
+From the point of view of a product manager who's running the SaaS product, we’ll discuss the technical hurdles, things that happen to slow down sales, and ultimately what creates great customer success. That's the first thing that every product manager is thinking about. Given that all three of us are product managers at heart, I think we'll have a lot of good perspectives for the product managers listening. If you're on the technical implementation side, this discussion will run through several things that you may not have thought of in how to connect SaaS products to your customer's data. 
+Let me start there, Glenn. What are some scenarios where a SaaS product would need to access customer data?
+
+## Why SaaS products need to connect to private systems
+
+Glenn Gillen: Most SaaS products are trying to add value on top of existing data or workflows to improve it for customers. So a lot of that by its very nature is private, it's not something that should be available to a public API or accessible from the public internet.
+It could be business IP or a business process that lives inside private VPCs. You see this a lot with customer data platforms. Tooling that provides visualization, analytics, and insight on top of data needs to access commercially or personally sensitive information.
+Another example is a developer-focused tool that needs to access a codebase that is stored in a self-hosted VCS system like Github or Gitlab. You need to integrate with a vendor that's doing some security analysis or dependency analysis to help you improve your security posture.
+Those two systems need to talk, and you don't want that code base living on the public internet for a variety of reasons. This use case is coming up a lot at the moment and is probably familiar to a lot of people. 
+Matthew Gregory: 
+That makes sense. We have a bunch of data that we are using internally and we connect to a lot of SaaS products. We're not going to replicate all of our data in every single place. 
+Mrinal, there are a lot of different ways people set this up. Can you walk through a couple of the typical architectures for how SaaS products and their customers connect data to that SaaS product?
+##  The most common solutions don't work for Enterprise customers
+Mrinal Wadhwa: 
+The typical approach is that the SaaS product exposes an API endpoint. The SaaS company tells their customer to call the API endpoint whenever they have some data to share. Some challenges emerge from that approach.
+First, The API call is only a reaction to something happening inside the customer. The customer has to call the API at some point because something happens. For example, a code commit has happened. So the source code management system hosted by the customer, like GitHub Enterprise, calls an API inside your SaaS product indicating that new code was committed. That can be one approach. The challenge here is that it only reacts when things are happening inside the customer environment.
+The other challenge is when the end customer is dealing with really sensitive information, they're concerned about these events going over the internet and the endpoint of your SaaS product that handles their private information being public on the internet.
+Matthew Gregory: 
+It's a one-to-one relationship, and I need to trigger something. Do I want to call a public endpoint if I'm trying to do something private in a one-to-one mapping? Then there's a problem for the SaaS product, which now has a public API that they need to fortify from all the threats of the entire internet.
+Glenn Gillen: 
+If I put my product manager manager hat on for a moment, there's also the fact that the communication channel exists for request and response. Whatever value you're providing has to be able to fit into that communication window.
+That means the payload has to have all the information you require to deliver that value, which goes to Mrinal’s point. The payload needs to have the code, if we are a scanning tool for example. And we don’t want that code transiting over the public internet.
+That's the whole point. So you’re in this place as the product manager where you’re asking, “How do I get our value to the customer in under a second with the limited payloads that they're willing to share with us via public API?” It's a tricky balance to have, and you end up with product features that don't work the way you intended.
+So you have to find a way back into the network or take the developer out of their flow. What you're often trying to do is meet someone where they are, in their workflow. But because of these restrictions, they have to log into your product to see what's happening, because we couldn't deliver our value to you in that response request cycle. 
+Matthew Gregory: 
+The opposite of this is also true. You could have the customer expose their data or their process with an endpoint that they're hosting. The SaaS product can reach out to that endpoint to trigger some action, fetch data, or do analysis. How would that work?
+
+## Your customers' don't want to host a public endpoint
+
+Mrinal Wadhwa: 
+You could tell the customer to put their source code repo on a public API endpoint on the internet and call it whenever you need to. The customer sends me an event, or I can proactively go analyze it by calling it and fetching the code or data.
+The problem is that customers never want to do that. It's really sensitive information that they don't want to expose, or they can't because of internal compliance or security requirements. They're unwilling to expose these endpoints on the internet. So you end up in this deadlock situation where you either need to limit your value only to things that happen or convince the customer to open an endpoint and have them set up IP whitelisting and other controls. Even in that case, things aren't safe so it takes very long to kind of navigate that set of hurdles. 
+Glenn Gillen: 
+It’s limiting from a product strategy perspective as well. You're trying to continuously provide value to your customers and to build a product that is constantly making your customers better. You're naturally constrained now to being reactive to actions they're taking. You can't be proactive about anything.
+In the use case where you hook into a CI-CD workflow, customers change code, but not all the code all the time, so you're not always going to get events. Meanwhile, the world out there in the threat landscape is constantly changing, and if you detect, as the SaaS vendor, that a dependency has a vulnerability, how do you let your customer know?
+You don't have a window into that experience to create a pull request as we have with some of our dependency checks to bump a version immediately. You have to sit there and wait and hope that someone pushes a commit to the right repo so you get that window of opportunity to come back to them with an error.
+Mrinal Wadhwa: 
+That's a really good example. We can only notify them about a vulnerability if they make a change to their code base and run a CI workflow.
+Whereas, if we learn that a vulnerability has happened, as the SaaS vendor that is analyzing their code, and know their dependency tree the moment we learn it, we could have created a pull request if we had that other path back, but we can't.
+So that's a good example of a missed opportunity to add value to the end customer.
+Matthew Gregory: 
+You're both talking about a unique use case that you're zooming in on. You're presuming the data that we need to access as the SaaS product is source code. It could be an analytics engine, a security auditing tool, or a Dependabot type of source code pipeline sort of tool. 
+What I like about this mental model is thinking about the decisions that that customer has already made. If their code is living in their own cloud or on-prem environment, that means they're not using GitHub.com, except as a private repo. They've already decided that they don't want Microsoft/GitHub to have possession of their code.
+That sets up a persona for the customer. What are they thinking about where they would make that decision to keep their data as close as possible?
+Mrinal Wadhwa: 
+It’s usually information that is really sensitive. It could be code, it could be customer health records. It might be a system where they are okay to allow analysis of something inside that database, but they don't want to hand over that database to a SaaS platform. There's a variety of scenarios. Typically they are large companies that are serving customers in the financial or healthcare domain and are subject to strict regulatory requirements.
+Matthew Gregory: 
+How do you think about this as a product manager, Glenn? You were the product lead on Terraform Cloud, you were connecting to customer systems, and running a SaaS product. What were you thinking about when you were fetching data from your customers? What were the concerns that you had?
+
+## Network level solutions are bad for security, customer experience, and not sustainable
+
+Glenn Gillen: 
+There's a bunch. We started with the reactive model. I think there's a crawl, walk, run approach to development, but the reactive to a webhook is definitely crawl. As soon as you come into contact with any medium or large-scale customer, they want you to be more proactive. 
+And then you have the constraint of the customer not wanting it on the public internet. They have private VPCs and you're trying to manage their resources. How do we manage that? I have experience with providing IP ranges and asking customers to open their network.
+It's a mess for everyone involved because you don't have strong guarantees that the IP pool will remain the same. It’s a difficult product problem for our SRE or ops team, who want flexibility to change IP addresses in that range, or to fail over to a different one. Or they can’t move an IP because of how they manage it. 
+So now you end up building an API that reports on the IP ranges. And you tell the customer, by the way, if you want to integrate you need to open your firewall to these IP ranges and also build tooling to automate it because we're gonna give you 48 hours notice of any change. The customer needs to hit the API once a day and react to it to make sure that they don't cause an outage with the integration. 
+Whatever approach you end up taking, normally you end up in a place where you need to connect two applications but don’t have a great solution. And then you provide your customer with a bunch of network-level stuff to set up, and they go solve it, because you can't make your app talk in a way that meets their compliance requirements. So now it's the customers' problem. 
+It's a really bad product experience, I've always hated ending up in that space. It's kind of gross.
+Mrinal Wadhwa: 
+That example illustrates the problem in the other direction as well. One side is that the customer doesn't want to expose their things on the internet. 
+But for this type of customer with sensitive data, they also don't want to hit arbitrary public endpoints. In that example, you've told them to hit a specific public endpoint and you keep it at a specific IP. Now you’ve asked them to manage a white list of that IP, and it turns out that managing that white list turns into a nightmare. In either direction, these endpoints are public when just two businesses are talking to each other. 
+There's no reason for everyone else on the internet to have a way to access this data. We're trying to avoid that. Both of these endpoints becoming public on the internet creates a hassle for the end customer and the product team, and it becomes a nightmare from there on out.
+Glenn Gillen: 
+One of the things I used to hire for when I was hiring product people, is empathy. The product role is ultimately one of empathy and understanding your customers. 
+What I've always hated about these solutions, is that the customer has a very clear requirement of a specific business need that they have good reasons for having, and the solutions are deaf to that. They show no empathy at all. It's almost like saying,  “That seems like a you problem. Here's how you solve it yourself. Come back to us when you've opened up your network and compromised on all of the reasons why you made this decision in the first place.”
+
+## When you ask your customer to build network layer connections you block your sales team
+
+Matthew Gregory: 
+It ultimately comes full circle. Let's take this crawl, walk, run analogy. Maybe the product starts with just making it functional. We just need to connect the data to our product in some sort of way. 
+Once you get that to work, you eventually get a more mature customer that won't hit or build a public. They need it to be a private, one-to-one connection. And then you give them a bunch of things they have to do to facilitate the connection. It’s on the customer to implement it since they have strict requirements for how they want to connect.
+If the customer won’t connect to your public endpoint, then you leave all the difficult implementation to the customer. That doesn't last very long, because it turns into a problem when your sales team can't recognize revenue or collect payment because your customer gets stuck at implementation. 
+We have heard about a lot of companies that have deals that are blocked for up to a year, and some of these are public companies. They have gotten their product capabilities to the point where the integration is a customer problem and not built into the product. 
+That's why I like thinking about this from a product manager's point of view. Admittedly, when you're a hammer, you see a world of nails. I'm a product manager, so this immediately jumps off the page to me. Come on, product people, you're not done yet. Make it so that when your sales team closes a deal, the next day the customer is happy. Can you imagine buying something you're super excited about and it doesn't get delivered? Or ending up with a pile of work for the next year to implement?
+Glenn Gillen: 
+You mentioned the sales cycles getting stuck, the other thing we’ve seen is what happens when the customers are multi-cloud or hybrid. If you're on AWS, quite often the solution is private link. The customer still needs to spin up infrastructure, which is what slows it down.
+But the next evolution is that the customer also runs things in GCP. You don't have an answer for that. It's like asking your customer to pick their region and hyperscaler when they sign up.
+You can't support multi-cloud because there's no common path to doing that unless you go deep into the network stack and try to connect things that way. It's turtles all the way down in terms of bad product experience.
+Mrinal Wadhwa: 
+What if the customer is not in a cloud? Then there's no answer. At least with AWS, Azure, or Google, there's some answer to connectivity. But oftentimes these types of customers are still transitioning to the cloud, they're still running private data centers. So now there's no answer to that type of connectivity.
+With private link connectivity could take months to onboard the customer, or they never get started and then they churn. There's a need for something better.
+
+## How products end up with customer implementation cookbooks
+
+Matthew Gregory: 
+Let's take this one step further. The problem hasn't gone away, there's also your internal support and security team.
+Let's say you get customers who love your product so much they will go through extreme pain and agony and time to joy to start using your product. But now they're all wiring up their data centers to your SaaS product in completely bespoke, basically random, different ways. All of a sudden you get more mature in the security and infrastructure of your product, and you get more requests to do special things for individual customers. We are talking to someone who describes it as a cookbook of ways that their customers connect their data to their service. And now this is an ongoing liability that you need to maintain in perpetuity because it's now back to being your problem again. So we've now seen two different ways where leaving it to the customer to implement has come back at us twice.
+Glenn Gillen: I've been many places where the cookbook of recipes to solve a problem ends up being this hidden risk that you don't realize as a business because your support team is so engaged in making sure customers are successful that they'll run through the cookbook. It's an objectively terrible experience, but no one talks about it anymore because you believe it is a solution.
+And then a customer churns a year from now, and you ask, what happened there? Well, they had a bad experience all the way through. And you ask why, why did no one tell us? You thought you had this solution. And you do some churn analysis and realize that everyone that's had the same bad experience ends up with the same result, which is you don't see them again after a year because they never got it working or it wasn't to their standards. You've just fallen short of their expectations in a big way.
+Mrinal Wadhwa: 
+Also, the cookbook path is error-prone in a lot of ways. You could do all the right things and still have an error rate in that workflow. It’s bad security and bad UX along that path.
+Matthew Gregory: 
+You're always talking about vulnerability surfaces. This is a massive surface to cognitively maintain. How do you test against it? Think about all the scenario analysis and threat modeling you need to do, it massively expands in an exponential, multidimensional way the number of threats you have to worry about to protect your own SaaS products. 
+Mrinal Wadhwa: 
+The cookbooks are not even being thought of as part of the product experience. They're being thought off after the fact. Oftentimes they're not even being considered and don’t go through the normal things you go through when thinking about security and vulnerability surfaces, and UX as part of building your product.
+Matthew Gregory: 
+Well, this all sounds very complicated. Let's go to the simple solution next and describe how we solve this at Ockam. Obviously, it has to be simple. It's built into our name. In a scenario where we're using Ockam, how does this change?
+
+## Ockam gives SaaS product managers a simple, secure, networkless agent.
+
+Mrinal Wadhwa: 
+The primary reason it changes is because with Ockam command we can give an experience to the SaaS vendor's end customer where that customer doesn't need to change anything at the network layer. They can create end-to-end encrypted connectivity to the SaaS vendor in a bidirectional way. So at any point in time, systems inside a customer's environment can call the SaaS vendor's APIs or services, and at any point in time systems inside the SaaS product can call particular services they're authorized to call inside the customer's environment. This is now a fully proactive integration where if the product needs to engage with something private to the customer, they can do it. And the setup takes five minutes, it’s not weeks or months or years. It takes five minutes for both sides to get started. The reason it works is that instead of exposing listening endpoints from either network, we make outgoing connections to a specific endpoint and set up end-to-end encrypted relays over that endpoint. So you can set up these connections that make it so that remote services appear inside your environment, virtually adjacent to where you need to access them. 
+Glenn Gillen: 
+Back to the product experience side of things, we're not breaking new ground here. Other companies have used this model where you run an agent or some aspect of your platform inside the customer account and that gives you application-level access to what you need to access.
+What's interesting is that it is a holistic, integrated experience. It's part of the same product experience, you told your customer to go solve this for themselves. 
+You've given them the solution, and all they need to do is run Ockam command. We've packaged up the solution for you. It's super simple, like you said, it takes five minutes. There are plenty of companies that have taken that approach. I've done it in the past as well. But what ends up happening is before you know it, you've got a team of five or more fully staffed to run the infrastructure just to get you into the network.
+Building your own connectivity agent unblocks a lot of product value, but it's valuable in the long term. You take on an ongoing operational cost to keep this critical infrastructure running, but ultimately it’s undifferentiated. All you've done is allow yourself to get into the customer’s network, and that's not the business you're in. You should be focused on core product functionality.
+Matthew Gregory: 
+A lot of agents end up doing some little job, or they're a worker in that customer's environment, but that's all they do. You're still leaving all the implementation of everything that has to happen at the network layer up to the customer to connect to your SaaS service. What makes Ockam unique is we are app-to-app and have this networkless abstraction over the network. There is no IT team. There is no IP allow list, there's no VPN that needs to be set up. There's nothing that needs to be done at a network level to connect applications. You also get to keep it private because it's a one-to-one mapping from the SaaS app to the data or source code repo. So it's a one-to-one, peer-to-peer secure mapping.
+Mrinal Wadhwa: 
+People go down this track of building an agent because that's the natural progression of that crawl, walk, run analogy. You feel like the only way you can have the best product experience is to build this agent. But it's not just the agent, it’s all the infrastructure in your SaaS product to make the agent connectivity work. You have to scale it because you need to put it at a lot of customer locations, and make sure it's up all the time. And also do it in a way that your endpoints are not public on the internet, because remember the customer doesn’t want to talk to public endpoints that aren’t end-to-end encrypted. They don't want their stuff to be public. 
+So even if you do the agent part, you are still left with the private connectivity piece that customers want. And in Ockam's case, we tackle both of those answers for you in one easy approach. You don't have to invest a lot of time and energy building all of this and then maintaining it and still not getting to the customer experience that you want to build and deliver.
+Matthew Gregory: 
+Also, as a product manager of the SaaS offering, I get one solution that I can give to all the customers. That means we can throw away the cookbook tomorrow. Stop doing all that. Get that entire team doing something productive that's offensive on the security side, instead of purely playing defense all day long.
+So the cookbook's gone. That second problem I talked about earlier where sales are blocked or the implementation of the solution ends up taking up to a year. In some cases, that time to value gets shrunk down to a matter of hours. Because you don't need to contact the IT team. No security team needs to get involved. We've built all of those pieces and then it's a one-size-fits-all regardless of what cloud you're in, if you're on-prem, if you're in AWS, if you're in Azure, Google, whatever you're doing, it's the same solution for any environment that this data might be living in. So this is another axis where you don't have permutations or implementation variations from customer to customer or even amongst a single customer.
+Glenn Gillen: 
+It’s interesting from a sales perspective as well. I've been in the room for a few of those where they ask how we connect to GCP, on-prem, etc. It's always an uncomfortable conversation to have where you don’t have a single solution.
+There are all these variables in play and like the person's already off drifting. Compare that to Ockam, where you can say, “Here’s how you connect, it’s the same regardless of your environment.” It's a five-second conversation at that point. It doesn't matter. It's the same thing wherever you are.
+That's exactly how you want those conversations to go. You don't want to introduce friction and let someone's mind wander about how hard it's gonna be.
+Matthew Gregory: 
+That was the thing that clicked for me about the power of Terraform seven or eight years ago. I was at Azure, we had just launched Azure resource templates, similar to AWS cloud formation. And I thought, what does this Terraform thing do? You're competing against all the clouds. All of a sudden I realized that Terraform is the universal way of writing one template and deploying it everywhere. Obviously, if you were doing anything complicated, you would go straight to Terraform. Even if you're only deploying in AWS or Azure, you would still use Terraform because you’re going to go multi-cloud at some point. We're picking the universal tool from the get-go. I remember having that ‘aha’ moment with Terraform years ago where I knew it would be huge because this is how you do infrastructure as code universally, everywhere with one tool.
+And we all know how that played out.
+Glenn Gillen: 
+It’s the cognitive load aspect. Knowing that we might not need this capability tomorrow, but if we need it next week, the gap I have to close is much, much smaller. It's so freeing to like, to know you already have a solution for it.
+Matthew Gregory: 
+So that takes us through how we could set up connectivity between our SaaS product to our customer's data that we need to access. We've seen the crawl, walk, run, and the pain of that journey along the way. Hopefully, we've laid out why Ockam allows you to skip straight to the end. It's the easiest, the most secure, and provides the best customer experience. As I said earlier, we are product managers and we build for that product manager that's trying to develop a product that delights customers, gives them fast time to value, and makes things simple.
+It's the name of our company. With that, I'll wrap things up. Stay tuned for our next episode. See y'all later, bye.
+
+
