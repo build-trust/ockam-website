@@ -1,5 +1,6 @@
 import { FC, ReactElement, ReactNode } from 'react';
 import { Box, Container, Flex, Heading } from '@chakra-ui/react';
+import styled from 'styled-components';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
@@ -83,6 +84,44 @@ const SecureByDesign: FC = () => (
   </Container>
 );
 
+const GradientContainer = styled(Flex)`
+  padding-top: 5%;
+  background-image: radial-gradient(ellipse 300% 140% at bottom, transparent 70%, #f9f9f9 70%),
+    radial-gradient(ellipse 150% 130% at top, transparent 70%, #f9f9f9 70%),
+    radial-gradient(
+      ellipse 300% 140% at bottom,
+      transparent 65%,
+      rgba(0, 0, 0, 0.07) 70%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 150% 130% at top,
+      transparent 65%,
+      rgba(0, 0, 0, 0.07) 70%,
+      transparent 70%
+    ),
+    linear-gradient(#f9f9f9, #f9f9f9), linear-gradient(to right, #52c7ea, #4fdab8);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, no-repeat, no-repeat;
+  background-size:
+    100% 100%,
+    100%,
+    100%,
+    100% 100%,
+    100% 100%,
+    100%,
+    100% 100%,
+    100% 100%;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    calc(1px - 1px) calc(75vh - 0px),
+    calc(1px - 1px),
+    calc(1px - 1px),
+    0 0;
+`;
+
 const HomePage: NextPageWithLayout = () => (
   <Box pt={{ base: 0 }}>
     <Hero subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere" />
@@ -99,6 +138,9 @@ const HomePage: NextPageWithLayout = () => (
       <Networkless />
       <SecureByDesign />
     </Box>
+    <GradientContainer minH="90vh" my={20}>
+      <Box px="20">Some words</Box>
+    </GradientContainer>
     <Cases />
   </Box>
 );
