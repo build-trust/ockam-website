@@ -1,5 +1,5 @@
 import { FC, ReactElement, useEffect, useState } from 'react';
-import { Box, Heading, Image, Spinner, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, Spinner, Text } from '@chakra-ui/react';
 import { HiCheck } from 'react-icons/hi';
 
 import { User } from '@root/components/Auth';
@@ -10,22 +10,22 @@ type Props = {
   nextCallback: Function;
 };
 const Welcome: FC<Props> = ({ user, nextCallback }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
-    if (user && !loggedIn) {
-      setLoggedIn(true);
+    if (user && !signedIn) {
+      setSignedIn(true);
       setTimeout(() => {
         nextCallback();
       }, 10000);
     }
-  }, [setLoggedIn, loggedIn, nextCallback, user]);
+  }, [setSignedIn, signedIn, nextCallback, user]);
 
   const doneIcon = (): ReactElement => (
     <Box
       display="inline-block"
-      opacity={loggedIn ? '1' : '0'}
-      width={loggedIn ? 'auto' : '0'}
+      opacity={signedIn ? '1' : '0'}
+      width={signedIn ? 'auto' : '0'}
       transition="opacity 0.5s 1s linear, width 0s 0.7s"
       height="43px"
       verticalAlign="middle"
@@ -36,8 +36,8 @@ const Welcome: FC<Props> = ({ user, nextCallback }) => {
   const spinner = (): ReactElement => (
     <Box
       display="inline-block"
-      opacity={loggedIn ? '0' : '1'}
-      width={loggedIn ? '0' : 'auto'}
+      opacity={signedIn ? '0' : '1'}
+      width={signedIn ? '0' : 'auto'}
       transition="opacity 0.5s 0s linear, width 0s 0.6s"
       height="43px"
       verticalAlign="middle"
@@ -77,19 +77,19 @@ const Welcome: FC<Props> = ({ user, nextCallback }) => {
   return (
     <Box>
       <Heading
-        opacity={loggedIn ? '0' : '1'}
-        height={loggedIn ? '0' : 'auto'}
+        opacity={signedIn ? '0' : '1'}
+        height={signedIn ? '0' : 'auto'}
         transition="opacity 1s 2s ease-in-out, height 0s 3s"
       >
         {spinner()}
         {doneIcon()}
         <span style={{ marginLeft: 4 }}>Checking account details</span>
       </Heading>
-      <Heading opacity={loggedIn ? '1' : '0'} transition="opacity 1s 3.1s ease-in-out">
+      <Heading opacity={signedIn ? '1' : '0'} transition="opacity 1s 3.1s ease-in-out">
         {avatar()}Welcome {userDetails()}
       </Heading>
       <Text
-        opacity={loggedIn ? '1' : '0'}
+        opacity={signedIn ? '1' : '0'}
         transition="opacity 1s 3.1s ease-in-out"
         mx={0}
         my={4}
@@ -99,17 +99,18 @@ const Welcome: FC<Props> = ({ user, nextCallback }) => {
         Congratulations on creating your account. We&apos;ll now walk you through configuring your
         initial plan, installing Ockam, and then using it to establish your first secure channel.
       </Text>
-      <Text
-        opacity={loggedIn ? '1' : '0'}
+      <Flex
+        direction="row"
+        justifyContent="flex-start"
+        align="center"
+        opacity={signedIn ? '1' : '0'}
         transition="opacity 1s 3.1s ease-in-out"
-        mx={0}
-        my={4}
-        maxW="45em"
-        letterSpacing="-0.5px"
       >
         <Spinner size="xs" />
-        &nbsp;Loading plan information&hellip;
-      </Text>
+        <Text mx={0} my={4} maxW="45em" letterSpacing="-0.5px">
+          &nbsp;Loading plan information&hellip;
+        </Text>
+      </Flex>
     </Box>
   );
 };

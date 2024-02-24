@@ -62,7 +62,12 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   }, [events, isBrowser, initialRouteTracked]);
 
   return (
-    <Auth loginPath="/auth/login" logoutPath="/auth/logout" callbackPath="/auth/callback">
+    <Auth
+      signinPath="/auth/signin"
+      signupPath="/auth/signup"
+      signoutPath="/auth/signout"
+      callbackPath="/auth/callback"
+    >
       <Head>
         <title key={KEYS.title}>{CONFIG.app.title}</title>
         <meta name="description" content={CONFIG.app.description} key={KEYS.description} />

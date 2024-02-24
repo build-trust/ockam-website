@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 
 import Auth0Api from '@root/api/auth0Api';
-import { User, currentUser, isLoggedIn } from '@root/components/Auth';
+import { User, currentUser, isSignedIn } from '@root/components/Auth';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
@@ -23,7 +23,7 @@ type Props = {
 const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElement => {
   const steps = useMemo(
     () => [
-      { title: 'Sign in', description: 'Setup your account' },
+      { title: 'Get started', description: 'Setup your account' },
       { title: 'Choose a plan', description: 'Right-size to your needs' },
       { title: 'Download', description: 'Download & Install Ockam' },
       { title: 'Enroll', description: 'Connect your first node' },
@@ -69,7 +69,7 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
   useEffect(() => {
     async function setup(): Promise<void> {
       await rememberPlanSelection();
-      if (!(await isLoggedIn())) router.replace('/auth/login');
+      if (!(await isSignedIn())) router.replace('/auth/signin');
       const u = await currentUser();
       const p = window.localStorage.getItem('plan');
       window.localStorage.removeItem('plan');

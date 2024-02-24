@@ -7,6 +7,5 @@ export const OPEN_ROLE_PATH = '/team';
 export const CONTACT_PAGE_PATH = '/contact';
 export const STYLE_GUIDE_PATH = '/style-guide';
 export const CONTACT_FORM_PATH = `${CONTACT_PAGE_PATH}/form`;
-export const LOGIN_PATH = '/login';
 export const SIGNUP_PATH = '/signup';
 export const SIGNIN_PATH = '/signin';

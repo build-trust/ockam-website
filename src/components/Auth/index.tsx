@@ -5,8 +5,9 @@ import { useRouter } from 'next/router';
 import { FunctionComponent, useCallback, useEffect } from 'react';
 
 type Props = {
-  loginPath: string;
-  logoutPath: string;
+  signinPath: string;
+  signupPath: string;
+  signoutPath: string;
   callbackPath: string;
   children: React.ReactNode;
 };
@@ -46,7 +47,7 @@ const currentUser = async (): Promise<User | void> => {
     return { email, avatar, userId, token };
   }
 };
-const isLoggedIn = async (): Promise<boolean> => {
+const isSignedIn = async (): Promise<boolean> => {
   try {
     const user = await currentUser();
     return !!user && !!user?.userId;
@@ -82,7 +83,7 @@ const trackSignup = (user: User): void => {
   }
 };
 const identify = async (): Promise<void> => {
-  if (await isLoggedIn()) {
+  if (await isSignedIn()) {
     const user = await currentUser();
     if (user) {
       // @ts-ignore window.analytics undefined below
@@ -91,23 +92,39 @@ const identify = async (): Promise<void> => {
     }
   }
 };
-const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, children }) => {
+const Auth: FunctionComponent<Props> = ({
+  signinPath,
+  signupPath,
+  signoutPath,
+  callbackPath,
+  children,
+}) => {
   const router = useRouter();
   const toast = useToast();
 
-  const checkLoggedIn = async (): Promise<void> => {
+  const checkSignedIn = async (): Promise<void> => {
     try {
-      await isLoggedIn();
+      await isSignedIn();
     } catch (e) {
       /* Do nothing */
     }
   };
 
-  const login = async (): Promise<void> => {
+  const signin = async (): Promise<void> => {
     await Auth0.loginWithRedirect({
       authorizationParams: {
         scope,
         audience,
+      },
+    });
+  };
+
+  const signup = async (): Promise<void> => {
+    await Auth0.loginWithRedirect({
+      authorizationParams: {
+        scope,
+        audience,
+        screen_hint: 'signup',
       },
     });
   };
@@ -123,7 +140,7 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
     router.replace('/download');
   }, [router]);
 
-  const logout = useCallback(async () => {
+  const signout = useCallback(async () => {
     if (typeof window !== 'undefined') {
       window.sessionStorage.removeItem('email');
       window.sessionStorage.removeItem('avatar');
@@ -132,7 +149,7 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
     await Auth0.logout();
     toast({
       position: 'top',
-      title: 'You have been logged out.',
+      title: 'You have been signed out.',
       status: 'success',
       duration: 3000,
       isClosable: true,
@@ -143,11 +160,14 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
   useEffect(() => {
     const path = router.asPath.replace(/\?.*/, '');
     switch (path) {
-      case loginPath:
-        login();
+      case signinPath:
+        signin();
         break;
-      case logoutPath:
-        logout();
+      case signupPath:
+        signup();
+        break;
+      case signoutPath:
+        signout();
         break;
       case callbackPath:
         callbackResult();
@@ -155,15 +175,15 @@ const Auth: FunctionComponent<Props> = ({ loginPath, logoutPath, callbackPath, c
       default:
         break;
     }
-  }, [router, loginPath, logoutPath, logout, callbackPath, callbackResult]);
+  }, [router, signinPath, signupPath, signoutPath, signout, callbackPath, callbackResult]);
 
   useEffect(() => {
-    checkLoggedIn().catch();
+    checkSignedIn().catch();
   });
 
   return <>{children}</>;
 };
 
 export type { User };
-export { currentUser, isLoggedIn, identify };
+export { currentUser, isSignedIn, identify };
 export default Auth;

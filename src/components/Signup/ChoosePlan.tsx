@@ -110,7 +110,7 @@ const ChoosePlan: FC<Props> = ({
         Choose a plan
       </Heading>
       {SEGMENTS.map((segment) => (
-        <VStack align="left" mb="8">
+        <VStack align="left" mb="8" key={segment.text}>
           <Heading as="h3" size="h4">
             For {segment.name}
           </Heading>
@@ -125,6 +125,7 @@ const ChoosePlan: FC<Props> = ({
           >
             {TIERS.filter((tier) => segment.tiers.includes(tier.name)).map((tier) => (
               <PricingCard
+                key={tier.name}
                 slim
                 fade={purchasing && purchasedPlan !== tier.name}
                 data={{

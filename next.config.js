@@ -27,7 +27,7 @@ const nextConfig = {
     },
     {
       source: '/signup',
-      destination: '/get-started',
+      destination: '/auth/signup',
       permanent: true,
     },
     {
