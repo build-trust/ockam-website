@@ -152,27 +152,6 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     showScene('scene0', s);
   };
 
-  // const setupNestedAnimations = useCallback((parentSvg: SVGSVGElement): void => {
-  //   const scenes: NodeListOf<SVGSVGElement> = parentSvg.querySelectorAll('.scene');
-  //   if (scenes.length > 0) {
-  //     setIsNested(true);
-  //     scenes.forEach((scene) => {
-  //       const s = scene;
-  //       s.style.display = 'none';
-  //       const endTime = Math.max(
-  //         ...Array.from(s.querySelectorAll('animate')).map((a) =>
-  //           parseInt(a.getAttribute('begin') || '0', 10),
-  //         ),
-  //       );
-  //       s.setCurrentTime(endTime);
-  //     });
-  //     const opening = parentSvg.getElementById('scene0') as SVGSVGElement;
-  //     if (opening) {
-  //       opening.style.display = 'block';
-  //     }
-  //   }
-  // }, []);
-
   const svgLoaded = async (): Promise<void> => {
     if (ref.current && !svg) {
       const s = (await waitForElm('svg', ref.current)) as SVGSVGElement;
@@ -238,48 +217,47 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     return `scene${cIx + 1}`;
   }, [findCurrentScene, getAllScenes]);
 
+  const claymationLoop = useCallback((): void => {
+    const current = findCurrentScene();
+    if (current) {
+      current.unpauseAnimations();
+      if (shouldKeepLooping(current)) {
+        incrementLoop(current);
+      } else {
+        const nextId = nextSceneId();
+        showScene(nextId);
+        hideScene(current.id);
+      }
+    }
+  }, [nextSceneId, showScene, hideScene, findCurrentScene, shouldKeepLooping]);
+
+  const singleSceneLoop = useCallback(() => {
+    if (!svg) return;
+    const duration = calculateAnimationDuration(svg) + viewingBufferMs;
+    const position = svg.getCurrentTime() * 1000;
+    if (position >= duration) svg.setCurrentTime(1.2);
+  }, [svg]);
+
   const play = useCallback(() => {
     if (!svg) return;
     if (isNested) {
       if (!interval) {
-        const i = setInterval(() => {
-          const current = findCurrentScene();
-          if (current) {
-            current.unpauseAnimations();
-            if (shouldKeepLooping(current)) {
-              incrementLoop(current);
-            } else {
-              const nextId = nextSceneId();
-              showScene(nextId);
-              hideScene(current.id);
-            }
-          }
-        }, intervalMs);
+        const i = setInterval(claymationLoop, intervalMs);
         setInter(i);
       }
-    } else {
+    } else if (!interval) {
+      const i = setInterval(singleSceneLoop, intervalMs);
+      setInter(i);
       svg.unpauseAnimations();
     }
-  }, [
-    nextSceneId,
-    isNested,
-    svg,
-    interval,
-    showScene,
-    hideScene,
-    findCurrentScene,
-    shouldKeepLooping,
-  ]);
+  }, [isNested, svg, interval, claymationLoop, singleSceneLoop]);
 
   const pause = useCallback(() => {
     if (!svg) return;
-    if (isNested) {
-      if (interval) {
-        clearInterval(interval);
-        setInter(undefined);
-      }
-    } else {
-      svg.pauseAnimations();
+    if (!isNested) svg.pauseAnimations();
+    if (interval) {
+      clearInterval(interval);
+      setInter(undefined);
     }
   }, [isNested, svg, interval]);
 
