@@ -61,7 +61,7 @@ const GradientContainer = styled(Flex)`
 `;
 
 const Magic: FunctionComponent<Props> = ({ magic }) => (
-  <Flex flexDir="column" alignContent="center" justifyContent="center" mt={20}>
+  <Flex flexDir="column" alignContent="center" justifyContent="center" mt={20} width="100%">
     <GradientContainer
       minH="70vh"
       flexDir="column"
@@ -85,15 +85,15 @@ const Magic: FunctionComponent<Props> = ({ magic }) => (
         management, and authorization policy enforcement &mdash; at massive scale.
       </HeroHeading>
     </GradientContainer>
-    <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }}>
+    <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }} maxW="container.max" px={0}>
       <Box
-        pt={{ base: 16, lg: 24 }}
-        pb={{ base: 20, lg: 24 }}
+        pt={{ base: 16, lg: 4 }}
+        pb={{ base: 4, lg: 4 }}
         boxShadow="2xl"
         borderRadius="15"
         borderStyle="none"
         background="white"
-        maxW="container.max"
+        width="100%"
         mx="auto"
       >
         <Container variant="section">
