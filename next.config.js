@@ -22,12 +22,17 @@ const nextConfig = {
   redirects: async () => [
     {
       source: '/download',
-      destination: '/signin',
+      destination: '/get-started',
       permanent: true,
     },
     {
       source: '/signup',
-      destination: '/signin',
+      destination: '/get-started',
+      permanent: true,
+    },
+    {
+      source: '/signin',
+      destination: '/get-started',
       permanent: true,
     },
     {
