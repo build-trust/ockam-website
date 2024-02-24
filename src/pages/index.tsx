@@ -1,6 +1,9 @@
 import { FC, ReactElement, ReactNode } from 'react';
 import { Box, Container, Flex, Heading } from '@chakra-ui/react';
-import styled from 'styled-components';
+import { serialize } from 'next-mdx-remote/serialize';
+import RemarkGFM from 'remark-gfm';
+import RemarkPrism from 'remark-prism';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
@@ -8,6 +11,16 @@ import { Hero, Cases } from '@views/homepage';
 import ItsSimple from '@assets/images/its-simple-with.svg';
 import AndIts from '@assets/images/and-its.svg';
 import RotatingText from '@root/components/RotatingText';
+import Magic, { FeatureType } from '@root/views/homepage/Magic';
+
+const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> => {
+  const result = await serialize(content, {
+    mdxOptions: {
+      remarkPlugins: [RemarkGFM, RemarkPrism],
+    },
+  });
+  return result;
+};
 
 const Networkless: FC = () => (
   <Container variant="section" mb="12">
@@ -84,45 +97,15 @@ const SecureByDesign: FC = () => (
   </Container>
 );
 
-const GradientContainer = styled(Flex)`
-  padding-top: 5%;
-  background-image: radial-gradient(ellipse 300% 140% at bottom, transparent 70%, #f9f9f9 70%),
-    radial-gradient(ellipse 150% 130% at top, transparent 70%, #f9f9f9 70%),
-    radial-gradient(
-      ellipse 300% 140% at bottom,
-      transparent 65%,
-      rgba(0, 0, 0, 0.07) 70%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 150% 130% at top,
-      transparent 65%,
-      rgba(0, 0, 0, 0.07) 70%,
-      transparent 70%
-    ),
-    linear-gradient(#f9f9f9, #f9f9f9), linear-gradient(to right, #52c7ea, #4fdab8);
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, no-repeat, no-repeat;
-  background-size:
-    100% 100%,
-    100%,
-    100%,
-    100% 100%,
-    100% 100%,
-    100%,
-    100% 100%,
-    100% 100%;
-  background-position:
-    0 0,
-    0 0,
-    0 0,
-    0 0,
-    calc(1px - 1px) calc(75vh - 0px),
-    calc(1px - 1px),
-    calc(1px - 1px),
-    0 0;
-`;
+interface Props {
+  magic: FeatureType[];
+}
 
-const HomePage: NextPageWithLayout = () => (
+interface StaticProps {
+  props: Props;
+}
+
+const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
   <Box pt={{ base: 0 }}>
     <Hero subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere" />
     <Box
@@ -138,12 +121,34 @@ const HomePage: NextPageWithLayout = () => (
       <Networkless />
       <SecureByDesign />
     </Box>
-    <GradientContainer minH="90vh" my={20}>
-      <Box px="20">Some words</Box>
-    </GradientContainer>
+    <Magic magic={magic} />
     <Cases />
   </Box>
 );
+
+export async function getStaticProps(): Promise<StaticProps> {
+  return {
+    props: {
+      magic: [
+        {
+          image: 'portals',
+          title: 'Portals',
+          mdx: await mdxSerialize(`
+The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.`),
+        },
+
+        {
+          image: 'virtual-adjacency',
+          title: 'Virtual Adjacency',
+          mdx: await mdxSerialize(`
+When you have two applications running in two different networks, and they need to share data with each other, the classic way to set this up would be to connect networks or use VPNs, reverse proxies, maybe a platform specific solution like PrivateLink. There are many ways that you could do this at the network layer.  
+          
+Ockam is at the application layer. This is a fundamental paradigm shift in how you can think about moving data and connecting applications. Because in this scenario, what we are doing is we're moving these applications so that they sit virtually next to each other. That means applications are available to each other on \`localhost\` in a peer-to-peer way. Applications appear to each other like they're sitting next to each other in the same box! And what we don't have to do in this scenario is change any of the network layer configurations or really need to understand anything and the network at all. In this way we say Ockam is networkless.`),
+        },
+      ],
+    },
+  };
+}
 
 HomePage.getLayout = (page: ReactElement): ReactNode => (
   <MainLayout gradient={['#4FDAB8', '#52C7EA']}>{page}</MainLayout>

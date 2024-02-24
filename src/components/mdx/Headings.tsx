@@ -67,4 +67,18 @@ const headingsComponents = {
   h6,
 };
 
+const HeroHeading = (props: HeadingProps): JSX.Element => (
+  <Heading
+    as="h1"
+    fontWeight="extrabold"
+    textAlign="center"
+    color="white"
+    size={{ base: '2xl', lg: '3xl' }}
+    letterSpacing={{ base: '-1.5px', lg: '-1.5px' }}
+    lineHeight={{ base: 1, lg: 1.5 }}
+    {...props}
+  />
+);
+
+export { HeroHeading };
 export default headingsComponents;
