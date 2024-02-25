@@ -135,8 +135,8 @@ const Cases: FunctionComponent = () => (
   <Container
     variant="section"
     id="use-cases"
-    pt={{ base: 16, lg: 20 }}
-    pb={{ base: 20, lg: 18 }}
+    pt={{ base: 0, lg: 0 }}
+    pb={{ base: 12, lg: 12 }}
     px={0}
     mt={16}
   >

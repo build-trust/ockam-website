@@ -134,16 +134,30 @@ export async function getStaticProps(): Promise<StaticProps> {
           image: 'portals',
           title: 'Portals',
           mdx: await mdxSerialize(`
-The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.`),
+          Portals carry various protocols over end-to-end encrypted Ockam secure channels. They work at the application level and 
+          abstract away the setup, management, and security of the network layer. When application connectivity and security is 
+          decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.
+          
+          No port forwarding, no changes to firewalls, no VPNs, no reverse proxies, no Private Link&hellip; get systems connected within minutes.
+          `),
         },
 
         {
           image: 'virtual-adjacency',
           title: 'Virtual Adjacency',
           mdx: await mdxSerialize(`
-When you have two applications running in two different networks, and they need to share data with each other, the classic way to set this up would be to connect networks or use VPNs, reverse proxies, maybe a platform specific solution like PrivateLink. There are many ways that you could do this at the network layer.  
+          The magical thing that Ockam unlocks via Portals is what we call Virtual Adjacency. 
+
+          The Portal connects your application a remote application, and _virtually_ 
+          pulls it through the portal so that it appears as though they sit next
+          to each other on the same machine. That means applications are available 
+          to each other on \`localhost\` in a peer-to-peer way. 
           
-Ockam is at the application layer. This is a fundamental paradigm shift in how you can think about moving data and connecting applications. Because in this scenario, what we are doing is we're moving these applications so that they sit virtually next to each other. That means applications are available to each other on \`localhost\` in a peer-to-peer way. Applications appear to each other like they're sitting next to each other in the same box! And what we don't have to do in this scenario is change any of the network layer configurations or really need to understand anything and the network at all. In this way we say Ockam is networkless.`),
+          What we don't have to do in this scenario is change any of the network 
+          layer configurations or really need to understand anything at the 
+          network layer at all. 
+          
+          In this way we say Ockam is networkless.`),
         },
       ],
     },

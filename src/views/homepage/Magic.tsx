@@ -8,7 +8,7 @@ import CodeBlock from '@root/components/mdx/CodeBlock';
 import { HeroHeading } from '@root/components/mdx/Headings';
 
 const components = {
-  p: (props: TextProps): JSX.Element => <Text mb={8} color="inherit" {...props} />,
+  p: (props: TextProps): JSX.Element => <Text mb={8} color="inherit" {...props} width="100%" />,
   h1: Heading,
   Heading,
   code: CodeBlock,
@@ -61,15 +61,22 @@ const GradientContainer = styled(Flex)`
 `;
 
 const Magic: FunctionComponent<Props> = ({ magic }) => (
-  <Flex flexDir="column" alignContent="center" justifyContent="center" mt={20} width="100%">
+  <Flex
+    flexDir="column"
+    alignContent="center"
+    justifyContent="center"
+    mt={20}
+    width="100%"
+    id="magic"
+  >
     <GradientContainer
       minH="70vh"
       flexDir="column"
       justifyContent="flex-start"
-      pt={{ base: '10%', sm: '10%', md: '10%', lg: '10%' }}
-      mb={{ base: '-15em', sm: '-20em', md: '-20em', lg: '-15em' }}
+      pt={{ base: '10%', sm: '10%', md: '10%', lg: '8%' }}
+      mb={{ base: '-15em', sm: '-20em', md: '-16em', lg: '-11em' }}
     >
-      <HeroHeading>How Ockam Works</HeroHeading>
+      <HeroHeading>The magic behind Ockam</HeroHeading>
 
       <HeroHeading
         as="h2"
@@ -85,7 +92,7 @@ const Magic: FunctionComponent<Props> = ({ magic }) => (
         management, and authorization policy enforcement &mdash; at massive scale.
       </HeroHeading>
     </GradientContainer>
-    <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }} maxW="container.max" px={0}>
+    <Container id="pricing" variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
       <Box
         pt={{ base: 16, lg: 4 }}
         pb={{ base: 4, lg: 4 }}

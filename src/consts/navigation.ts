@@ -7,7 +7,7 @@ import { DOCS } from '@consts/externalResources';
 export const NAV_MENU_ITEMS = [
   {
     text: 'Features',
-    href: '/features',
+    href: '/#magic',
     isExternal: false,
     onLandingPage: true,
     landingPageHref: '#features',

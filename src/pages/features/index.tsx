@@ -52,7 +52,9 @@ export async function getStaticProps(): Promise<StaticProps> {
           image: 'portals',
           title: 'Portals',
           mdx: await mdxSerialize(`
-The magical thing about Ockam - it is built around application layer protocols that abstract away the setup, management, and security of the network layer. When application connectivity and security is decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.`),
+Portals carry various protocols over end-to-end encrypted Ockam secure channels. They work at the application level and 
+abstract away the setup, management, and security of the network layer. When application connectivity and security is 
+decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.`),
         },
 
         {
