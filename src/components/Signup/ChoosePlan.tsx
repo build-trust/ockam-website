@@ -1,5 +1,15 @@
 import { FC, MouseEvent, ReactElement, useCallback, useEffect, useState } from 'react';
-import { Box, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Flex,
+  Heading,
+  Text,
+} from '@chakra-ui/react';
 import { HiCheck } from 'react-icons/hi';
 
 import { SEGMENTS, TIERS, Tier, darken, gentlyLighten } from '@root/components/Packaging/tiers';
@@ -104,74 +114,103 @@ const ChoosePlan: FC<Props> = ({
     }
   };
 
+  const expanded = SEGMENTS.reduce((p, c, cIdx) => {
+    if (c.expanded) {
+      p.push(cIdx);
+    }
+    return p;
+  }, [] as number[]);
+
   const planSelection = (): ReactElement => (
     <>
       <Heading as="h2" size="h2" mb="8">
         Choose a plan
       </Heading>
-      {SEGMENTS.map((segment) => (
-        <VStack align="left" mb="8" key={segment.text}>
-          <Heading as="h3" size="h4">
-            For {segment.name}
-          </Heading>
-          <Text mx={0} maxW="45em" letterSpacing="-0.5px">
-            {segment.text}
-          </Text>
-          <Flex
-            direction={{ base: 'column', xl: 'row' }}
-            gap={4}
-            alignItems={{ base: 'start' }}
-            mt={4}
+      <Accordion style={{ width: '100%' }} allowMultiple defaultIndex={expanded}>
+        {SEGMENTS.map((segment) => (
+          <AccordionItem
+            key={segment.name}
+            style={{
+              width: '100%',
+              borderStyle: 'none',
+              backgroundColor: 'white',
+              borderRadius: 15,
+            }}
+            p="4"
+            shadow="2xl"
+            my={8}
+            aria-expanded={segment.expanded}
+            width="100%"
           >
-            {TIERS.filter((tier) => segment.tiers.includes(tier.name)).map((tier) => (
-              <PricingCard
-                key={tier.name}
-                slim
-                fade={purchasing && purchasedPlan !== tier.name}
-                data={{
-                  price: tier.price,
-                  name: tier.name,
-                  priceUnit: tier.price_unit,
-                  priceInterval: tier.price_interval,
-                  floor: tier.floor,
-                  onlyFloor: tier.onlyFloor,
-                }}
-                current={currentPlan === tier.name}
-                segmentColor={segment.color}
-                borderStyle="solid"
-                borderColor="#ddd"
-                borderWidth="1px"
-                borderRadius={15}
-                isPopular={tier.isPopular}
-                display="flex"
-                flexDirection="column"
-                button={
-                  <ActionButton
-                    variant="outline"
-                    borderWidth="2px"
-                    href="#"
-                    onClick={onClick}
-                    data-plan={tier.name}
-                    border="none"
-                    mt="4"
-                    isLoading={!purchased && purchasedPlan === tier.name}
-                    leftIcon={purchased ? <HiCheck /> : undefined}
-                    borderColor={darken(segment.color)}
-                    color={darken(segment.color)}
-                    background={gentlyLighten(segment.color)}
-                    _hover={{
-                      background: darken(segment.color),
-                      color: gentlyLighten(segment.color),
+            <AccordionButton _hover={{ background: 'white' }}>
+              <Box as="span" flex="1" textAlign="left">
+                <Heading as="h3" size="h4">
+                  For {segment.name}
+                </Heading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel padding={{ base: '0', lg: '0' }}>
+              <Text mx={0} maxW="45em" letterSpacing="-0.5px" px={4}>
+                {segment.text}
+              </Text>
+              <Flex
+                direction={{ base: 'column', xl: 'row' }}
+                gap={4}
+                alignItems={{ base: 'start' }}
+                mt={4}
+              >
+                {TIERS.filter((tier) => segment.tiers.includes(tier.name)).map((tier) => (
+                  <PricingCard
+                    key={tier.name}
+                    slim
+                    fade={purchasing && purchasedPlan !== tier.name}
+                    data={{
+                      price: tier.price,
+                      name: tier.name,
+                      priceUnit: tier.price_unit,
+                      priceInterval: tier.price_interval,
+                      floor: tier.floor,
+                      onlyFloor: tier.onlyFloor,
                     }}
-                  >
-                    {!purchased && cta(tier, currentPlan)}
-                  </ActionButton>
-                }
-              />
-            ))}
-          </Flex>
-        </VStack>
-      ))}
+                    current={currentPlan === tier.name}
+                    segmentColor={segment.color}
+                    borderStyle="solid"
+                    borderColor="#ddd"
+                    borderWidth="1px"
+                    borderRadius={15}
+                    isPopular={tier.isPopular}
+                    display="flex"
+                    flexDirection="column"
+                    button={
+                      <ActionButton
+                        variant="outline"
+                        borderWidth="2px"
+                        href="#"
+                        onClick={onClick}
+                        data-plan={tier.name}
+                        border="none"
+                        mt="4"
+                        isLoading={!purchased && purchasedPlan === tier.name}
+                        leftIcon={purchased ? <HiCheck /> : undefined}
+                        borderColor={darken(segment.color)}
+                        color={darken(segment.color)}
+                        background={gentlyLighten(segment.color)}
+                        _hover={{
+                          background: darken(segment.color),
+                          color: gentlyLighten(segment.color),
+                        }}
+                      >
+                        {!purchased && cta(tier, currentPlan)}
+                      </ActionButton>
+                    }
+                  />
+                ))}
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </>
   );
 

@@ -183,7 +183,7 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
           ))}
         </Steps>
       </Box>
-      <Box transition="opacity 1s 0s ease-in-out" opacity={transitioning ? '0' : '1'}>
+      <Box transition="opacity 1s 0s ease-in-out" opacity={transitioning ? '0' : '1'} width="100%">
         {displayStep(activeStep)}
         <Flex direction="row" justifyContent="space-between">
           {displayNext() && (
