@@ -8,6 +8,7 @@ import {
   Box,
   Flex,
   Heading,
+  Link,
   Text,
 } from '@chakra-ui/react';
 import { HiCheck } from 'react-icons/hi';
@@ -126,6 +127,19 @@ const ChoosePlan: FC<Props> = ({
       <Heading as="h2" size="h2" mb="8">
         Choose a plan
       </Heading>
+      <Text variant="readabilityOptimized">
+        We&apos;ve a range of plans to suit any need. If you plan to use Ockam within your
+        organization get started for free with a 14 day trial on one of our fully-featured Company
+        plans. Individual users can sign up for one of our Developer plans.
+      </Text>
+
+      <Text variant="readabilityOptimized">
+        For a complete list of the features and differences between each plan take a look at our{' '}
+        <Link href="/pricing" isExternal={false} color="brand.600">
+          pricing page
+        </Link>
+        .
+      </Text>
       <Accordion style={{ width: '100%' }} allowMultiple defaultIndex={expanded}>
         {SEGMENTS.map((segment) => (
           <AccordionItem
@@ -151,7 +165,7 @@ const ChoosePlan: FC<Props> = ({
               <AccordionIcon />
             </AccordionButton>
             <AccordionPanel padding={{ base: '0', lg: '0' }}>
-              <Text mx={0} maxW="45em" letterSpacing="-0.5px" px={4}>
+              <Text variant="readabilityOptimized" mx={4}>
                 {segment.text}
               </Text>
               <Flex

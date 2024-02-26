@@ -1,4 +1,4 @@
-import { Box, Flex, LinkBox, LinkOverlay, ResponsiveValue } from '@chakra-ui/react';
+import { Box, Flex, LinkBox, LinkOverlay, ResponsiveValue, useTheme } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import type { Property } from 'csstype';
 
@@ -32,6 +32,7 @@ const SideBySidePanel: FC<Props> = ({
   width,
   cta_text,
 }) => {
+  const theme = useTheme();
   const direction = (): ResponsiveValue<Property.FlexDirection> => {
     if (isMinimal) return 'column';
     if (textOrientation === 'left') {
@@ -59,6 +60,8 @@ const SideBySidePanel: FC<Props> = ({
         backgroundColor: 'white',
         boxShadow: '2xl',
         overflow: 'hidden',
+        transition: 'border-color 2s linear',
+        border: '2px solid none',
         px: { base: '8', lg: '8' },
         py: { base: '8', lg: '8' },
         mx: { base: '0' },
@@ -75,6 +78,14 @@ const SideBySidePanel: FC<Props> = ({
     };
   };
 
+  const hoverStyle = (): {} => {
+    if (isMinimal && href)
+      return {
+        borderColor: theme.colors.brand[500],
+        boxShadow: 'xl',
+      };
+    return {};
+  };
   return (
     <LinkBox
       as="div"
@@ -85,6 +96,7 @@ const SideBySidePanel: FC<Props> = ({
       height={isMinimal ? '100%' : 'auto'}
       justifyContent={isMinimal ? 'space-between' : 'space-between'}
       alignItems="center"
+      _hover={hoverStyle()}
       {...panelProps()}
     >
       <Flex

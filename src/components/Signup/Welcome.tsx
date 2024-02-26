@@ -89,12 +89,9 @@ const Welcome: FC<Props> = ({ user, nextCallback }) => {
         {avatar()}Welcome {userDetails()}
       </Heading>
       <Text
+        variant="readabilityOptimized"
         opacity={signedIn ? '1' : '0'}
         transition="opacity 1s 3.1s ease-in-out"
-        mx={0}
-        my={4}
-        maxW="45em"
-        letterSpacing="-0.5px"
       >
         Congratulations on creating your account. We&apos;ll now walk you through configuring your
         initial plan, installing Ockam, and then using it to establish your first secure channel.
@@ -107,9 +104,7 @@ const Welcome: FC<Props> = ({ user, nextCallback }) => {
         transition="opacity 1s 3.1s ease-in-out"
       >
         <Spinner size="xs" />
-        <Text mx={0} my={4} maxW="45em" letterSpacing="-0.5px">
-          &nbsp;Loading plan information&hellip;
-        </Text>
+        <Text variant="readabilityOptimized">&nbsp;Loading plan information&hellip;</Text>
       </Flex>
     </Box>
   );

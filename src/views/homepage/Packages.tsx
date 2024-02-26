@@ -117,7 +117,7 @@ const Packages: FunctionComponent = () => {
                 <AccordionIcon />
               </AccordionButton>
               <AccordionPanel padding={{ base: '0', lg: '0' }}>
-                <Text mx={4} maxW="45em" letterSpacing="-0.5px">
+                <Text variant="readabilityOptimized" mx={4}>
                   {segment.text}
                 </Text>
                 <SimpleGrid

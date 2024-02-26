@@ -11,15 +11,13 @@ const MarketplaceSetup: FC<Props> = ({ plan }) => (
     <Heading as="h2" size="h2" mb="8">
       Add subscription via your cloud marketplace
     </Heading>
-    <Text mx={0} maxW="45em" letterSpacing="-0.5px" mb={4}>
+    <Text variant="readabilityOptimized">
       Ockam&apos;s Business and Enterprise plans are available for purchase via your cloud
       marketplace. By subscribing via the marketplace the process is as frictionless as possible for
       you and your team. You&apos;re able to utilize existing spend commitments with your cloud
       providers, there&apos;s no paperwork to fill out, no budget approvals, no vendor onboarding.
     </Text>
-    <Text mx={0} maxW="45em" letterSpacing="-0.5px" mb={4}>
-      You can get started today! Here&apos;s the steps:
-    </Text>
+    <Text variant="readabilityOptimized">You can get started today! Here&apos;s the steps:</Text>
     <OrderedList>
       <ListItem>Click your preferred cloud marketplace below</ListItem>
       <ListItem>Sign in to your account at the cloud marketplace</ListItem>
