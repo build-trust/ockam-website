@@ -100,7 +100,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       const root = s || svg;
       if (root) {
         if (hasClaymationSteps(root)) return root.getElementById(id) as SVGSVGElement;
-        if (root.id === id) return svg;
+        if (root.id === id) return root;
       }
       return undefined;
     },
@@ -120,15 +120,18 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   );
 
   const showScene = useCallback(
-    (id: string, s?: SVGSVGElement, jumpToEnd?: boolean): void => {
+    (id: string, s?: SVGSVGElement, jumpToEnd?: boolean, jumpToDrawn?: boolean): void => {
       const scene = findScene(id, s);
       if (!scene) return;
+      if (scene.style.display === 'block' && scene.dataset.looped) return;
       scene.dataset.looped = '0';
       if (hasAnimatedDrawings(scene)) {
         const duration = calculateAnimationDuration(scene);
         let moveTo;
         if (jumpToEnd) {
           moveTo = duration;
+        } else if (jumpToDrawn && !isNested) {
+          moveTo = 1.2;
         } else {
           moveTo = duration < 2000 ? duration : 1.1;
         }
@@ -138,7 +141,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       }
       scene.style.display = 'block';
     },
-    [findScene, isPlayable],
+    [findScene, isPlayable, isNested],
   );
 
   const hideAll = (s?: SVGSVGElement): void => {
@@ -155,7 +158,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
 
     hideAll();
     if (hasClaymationSteps(s)) setIsNested(true);
-    showScene('scene0', s);
+    showScene('scene0', s, !animate, animate);
   };
 
   const svgLoaded = async (): Promise<void> => {
@@ -288,8 +291,10 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   );
 
   useEffect(() => {
-    setStartFrame(!animate);
-    if (!animate) return;
+    if (!animate) {
+      setStartFrame(!animate);
+      return;
+    }
     if (isVisible && scrollPosition > 300) {
       setIsPlayable(true);
     } else {
