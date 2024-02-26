@@ -122,7 +122,6 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
         _hover={{
           textDecoration: 'none',
         }}
-        style={{ textWrap: 'balance' }}
       >
         {text}
       </Text>
@@ -146,7 +145,7 @@ const Cases: FunctionComponent = () => (
       w="full"
       mb={{ base: 12, lg: 16 }}
     >
-      <Heading as="h2" size="h2" mt={0} mb={0} letterSpacing="-2px">
+      <Heading as="h2" size="xl" mt={0} mb={0} letterSpacing="-2px">
         {TITLE}
       </Heading>
     </Flex>
@@ -161,7 +160,7 @@ const Cases: FunctionComponent = () => (
     >
       {CASES_CARDS.map((item, index) => (
         <Box
-          width={{ base: '100%', md: '23%' }}
+          width={{ base: '100%', md: '45%', lg: '45%', xl: '24%' }}
           minW="300px"
           key={`case-${item.title}`}
           my={{ base: '4', md: '0' }}
