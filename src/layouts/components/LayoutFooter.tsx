@@ -98,6 +98,7 @@ const NAV = [
         href: STYLE_GUIDE_PATH,
         isExternal: false,
       },
+      { name: 'Privacy Notice', href: '/policies/privacy', isExternal: false },
     ],
   },
 
