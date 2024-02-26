@@ -66,7 +66,7 @@ const Packages: FunctionComponent = () => {
   }, [] as number[]);
 
   return (
-    <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }}>
+    <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }} px={0} width="100%">
       <Heading
         as="h1"
         fontWeight="extrabold"
