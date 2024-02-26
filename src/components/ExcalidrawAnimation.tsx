@@ -302,7 +302,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       ref={setRefs}
       flexDirection="column"
       h={{
-        base: hero ? 'auto' : '100%',
+        base: hero ? 'auto' : 'auto',
       }}
       w="100%"
       backgroundClip="white"

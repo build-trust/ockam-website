@@ -83,6 +83,8 @@ const SideBySidePanel: FC<Props> = ({
       gap="4"
       width={width || '100%'}
       height={isMinimal ? '100%' : 'auto'}
+      justifyContent={isMinimal ? 'space-between' : 'space-between'}
+      alignItems="center"
       {...panelProps()}
     >
       <Flex
@@ -97,9 +99,8 @@ const SideBySidePanel: FC<Props> = ({
         }
         direction="column"
         alignItems={alignItems || 'center'}
-        justifyContent="center"
       >
-        {children}
+        <LinkOverlay href={href}>{children}</LinkOverlay>
       </Flex>
       <Box
         width={
@@ -111,20 +112,9 @@ const SideBySidePanel: FC<Props> = ({
                 xl: '60%',
               }
         }
-        h={{
-          base: '50vh',
-          lg: 'auto',
-          xl: 'auto',
-        }}
-        maxH={{
-          base: '50vh',
-          lg: 'min-content',
-          xl: 'min-content',
-        }}
       >
-        <LinkOverlay href={href}>
-          <ExcalidrawAnimation src={image} animate={animate || false} aspect={aspect} />
-        </LinkOverlay>
+        <ExcalidrawAnimation src={image} animate={animate || false} aspect={aspect} />
+
         {href && cta_text && <CTALink text={cta_text} href={href} isExternal={false} />}
       </Box>
     </LinkBox>
