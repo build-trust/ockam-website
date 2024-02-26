@@ -67,11 +67,12 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     });
 
   useEffect(() => {
+    if (!animate) return undefined;
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [animate]);
 
   const hasClaymationSteps = useCallback(
     (elem: SVGSVGElement): boolean => elem.querySelectorAll('svg').length > 1,
@@ -119,13 +120,18 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   );
 
   const showScene = useCallback(
-    (id: string, s?: SVGSVGElement): void => {
+    (id: string, s?: SVGSVGElement, jumpToEnd?: boolean): void => {
       const scene = findScene(id, s);
       if (!scene) return;
       scene.dataset.looped = '0';
       if (hasAnimatedDrawings(scene)) {
         const duration = calculateAnimationDuration(scene);
-        const moveTo = duration < 2000 ? duration : 1;
+        let moveTo;
+        if (jumpToEnd) {
+          moveTo = duration;
+        } else {
+          moveTo = duration < 2000 ? duration : 1;
+        }
         scene.setCurrentTime(moveTo);
         scene.pauseAnimations();
         if (isPlayable) scene.unpauseAnimations();
@@ -274,14 +280,21 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     }
   }, [svg, animate, isPlayable, pause, play]);
 
+  const setStartFrame = useCallback(() => {
+    showScene('scene0', undefined, true);
+  }, [showScene]);
+
   useEffect(() => {
-    if (!animate) return;
+    if (!animate) {
+      setStartFrame();
+      return;
+    }
     if (isVisible && scrollPosition > 300) {
       setIsPlayable(true);
     } else {
       setIsPlayable(false);
     }
-  }, [scrollPosition, isVisible, animate]);
+  }, [scrollPosition, isVisible, animate, setStartFrame]);
 
   return (
     <Box
