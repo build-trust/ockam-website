@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Flex, Container, Text, Heading, Box, Link } from '@chakra-ui/react';
 
-import CTALink from '@components/CTALink';
 import Transition from '@root/components/Transition/Transition';
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 
@@ -73,7 +72,6 @@ type CasesCardProps = {
   texts: string[];
   actionText: string;
   actionHref: string;
-  isExternal?: boolean;
   textOrientation: 'left' | 'right';
 };
 
@@ -84,7 +82,6 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
   texts,
   actionText,
   actionHref,
-  isExternal,
   textOrientation,
 }) => (
   <SideBySidePanel
@@ -98,6 +95,7 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
     }}
     aspect={aspect}
     href={actionHref}
+    cta_text={actionText}
   >
     <Link href={actionHref}>
       <Heading
@@ -121,13 +119,14 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
           base: 'left',
           lg: textOrientation,
         }}
+        _hover={{
+          textDecoration: 'none',
+        }}
         style={{ textWrap: 'balance' }}
       >
         {text}
       </Text>
     ))}
-
-    <CTALink text={actionText} href={actionHref} isExternal={isExternal} />
   </SideBySidePanel>
 );
 

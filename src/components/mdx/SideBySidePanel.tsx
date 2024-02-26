@@ -1,8 +1,9 @@
-import { Box, Flex, Link, ResponsiveValue } from '@chakra-ui/react';
+import { Box, Flex, LinkBox, LinkOverlay, ResponsiveValue } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 import type { Property } from 'csstype';
 
 import ExcalidrawAnimation from '../ExcalidrawAnimation';
+import CTALink from '../CTALink';
 
 type Props = {
   textOrientation: 'left' | 'right';
@@ -15,6 +16,7 @@ type Props = {
   isMinimal?: boolean;
   href?: string;
   width?: ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>;
+  cta_text?: string;
 };
 
 const SideBySidePanel: FC<Props> = ({
@@ -28,6 +30,7 @@ const SideBySidePanel: FC<Props> = ({
   isMinimal,
   href,
   width,
+  cta_text,
 }) => {
   const direction = (): ResponsiveValue<Property.FlexDirection> => {
     if (isMinimal) return 'column';
@@ -73,8 +76,10 @@ const SideBySidePanel: FC<Props> = ({
   };
 
   return (
-    <Flex
-      direction={direction()}
+    <LinkBox
+      as="div"
+      display="flex"
+      flexDirection={direction()}
       gap="4"
       width={width || '100%'}
       height={isMinimal ? '100%' : 'auto'}
@@ -117,11 +122,12 @@ const SideBySidePanel: FC<Props> = ({
           xl: 'min-content',
         }}
       >
-        <Link href={href}>
+        <LinkOverlay href={href}>
           <ExcalidrawAnimation src={image} animate={animate || false} aspect={aspect} />
-        </Link>
+        </LinkOverlay>
+        {href && cta_text && <CTALink text={cta_text} href={href} isExternal={false} />}
       </Box>
-    </Flex>
+    </LinkBox>
   );
 };
 
