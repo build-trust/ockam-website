@@ -130,7 +130,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
         if (jumpToEnd) {
           moveTo = duration;
         } else {
-          moveTo = duration < 2000 ? duration : 1;
+          moveTo = duration < 2000 ? duration : 1.1;
         }
         scene.setCurrentTime(moveTo);
         scene.pauseAnimations();
@@ -280,15 +280,16 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     }
   }, [svg, animate, isPlayable, pause, play]);
 
-  const setStartFrame = useCallback(() => {
-    showScene('scene0', undefined, true);
-  }, [showScene]);
+  const setStartFrame = useCallback(
+    (jumpToEnd: boolean) => {
+      showScene('scene0', undefined, jumpToEnd);
+    },
+    [showScene],
+  );
 
   useEffect(() => {
-    if (!animate) {
-      setStartFrame();
-      return;
-    }
+    setStartFrame(!animate);
+    if (!animate) return;
     if (isVisible && scrollPosition > 300) {
       setIsPlayable(true);
     } else {

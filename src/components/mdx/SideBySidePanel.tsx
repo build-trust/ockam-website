@@ -1,5 +1,5 @@
 import { Box, Flex, LinkBox, LinkOverlay, ResponsiveValue, useTheme } from '@chakra-ui/react';
-import { FC, ReactNode } from 'react';
+import { FC, ReactElement, ReactNode } from 'react';
 import type { Property } from 'csstype';
 
 import ExcalidrawAnimation from '../ExcalidrawAnimation';
@@ -86,19 +86,13 @@ const SideBySidePanel: FC<Props> = ({
       };
     return {};
   };
-  return (
-    <LinkBox
-      as="div"
-      display="flex"
-      flexDirection={direction()}
-      gap="4"
-      width={width || '100%'}
-      height={isMinimal ? '100%' : 'auto'}
-      justifyContent={isMinimal ? 'space-between' : 'space-between'}
-      alignItems="center"
-      _hover={hoverStyle()}
-      {...panelProps()}
-    >
+
+  const linkOverlay = (): ReactElement => {
+    if (href) return <LinkOverlay href={href}>{children}</LinkOverlay>;
+    return <>{children}</>;
+  };
+  const content = (): ReactElement => (
+    <>
       <Flex
         width={
           isMinimal
@@ -112,7 +106,7 @@ const SideBySidePanel: FC<Props> = ({
         direction="column"
         alignItems={alignItems || 'center'}
       >
-        <LinkOverlay href={href}>{children}</LinkOverlay>
+        {linkOverlay()}
       </Flex>
       <Box
         width={
@@ -129,8 +123,45 @@ const SideBySidePanel: FC<Props> = ({
 
         {href && cta_text && <CTALink text={cta_text} href={href} isExternal={false} />}
       </Box>
-    </LinkBox>
+    </>
   );
+
+  const component = (): ReactElement => {
+    if (href) {
+      return (
+        <LinkBox
+          as="div"
+          display="flex"
+          flexDirection={direction()}
+          gap="4"
+          width={width || '100%'}
+          height={isMinimal ? '100%' : 'auto'}
+          justifyContent={isMinimal ? 'space-between' : 'space-between'}
+          alignItems="center"
+          _hover={hoverStyle()}
+          {...panelProps()}
+        >
+          {content()}
+        </LinkBox>
+      );
+    }
+    return (
+      <Flex
+        direction={direction()}
+        gap="4"
+        width={width || '100%'}
+        height={isMinimal ? '100%' : 'auto'}
+        justifyContent={isMinimal ? 'space-between' : 'space-between'}
+        alignItems="center"
+        _hover={hoverStyle()}
+        {...panelProps()}
+      >
+        {content()}
+      </Flex>
+    );
+  };
+
+  return component();
 };
 
 export default SideBySidePanel;
