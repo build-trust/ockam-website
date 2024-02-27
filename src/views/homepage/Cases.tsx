@@ -3,8 +3,9 @@ import { Flex, Container, Text, Heading, Box } from '@chakra-ui/react';
 
 import Transition from '@root/components/Transition/Transition';
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
+import GradientContainer from '@root/layouts/components/GradientContainer';
 
-const TITLE = 'Use cases for Ockam';
+import Hero from './Hero';
 
 const CASES_CARDS: {
   image: string;
@@ -129,48 +130,59 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
 );
 
 const Cases: FunctionComponent = () => (
-  <Container
-    variant="section"
-    id="use-cases"
-    pt={{ base: 0, lg: 0 }}
-    pb={{ base: 12, lg: 12 }}
-    px={0}
-    mt={16}
+  <Flex
+    flexDir="column"
+    alignContent="center"
+    justifyContent="center"
+    mt={20}
+    width="100%"
+    id="magic"
   >
-    <Flex
-      direction="column"
-      alignItems="center"
-      textAlign="center"
-      w="full"
-      mb={{ base: 12, lg: 16 }}
+    <GradientContainer
+      minH="35em"
+      flexDir="column"
+      justifyContent="flex-start"
+      pt={{ base: '10%', sm: '10%', md: '10%', lg: '8%' }}
+      mb={{ base: '-15em', sm: '-20em', md: '-16em', lg: '-14em' }}
     >
-      <Heading as="h2" size="xl" mt={0} mb={0} letterSpacing="-2px">
-        {TITLE}
-      </Heading>
-    </Flex>
+      <Hero
+        text="Use _Cases_"
+        subtext="Start using Ockam and you can stop <punching holes in firewalls|sending plaintext data through kafka|connecting private databases to the internet|asking your customers to setup VPNs|asking your customers to setup PrivateLink|exposing data via reverse proxies>."
+        darkGradient
+      />
+    </GradientContainer>
 
-    <Flex
-      direction="row"
-      width="100%"
-      gap={{ base: '4', md: '4' }}
-      alignItems="stretch"
-      flexWrap="wrap"
-      justify="space-around"
+    <Container
+      variant="section"
+      id="use-cases"
+      pt={{ base: 0, lg: 0 }}
+      pb={{ base: 12, lg: 12 }}
+      px={0}
+      mt={16}
     >
-      {CASES_CARDS.map((item, index) => (
-        <Box
-          width={{ base: '100%', md: '45%', lg: '45%', xl: '24%' }}
-          minW="300px"
-          key={`case-${item.title}`}
-          my={{ base: '4', md: '0' }}
-        >
-          <Transition key={item.title} delay={(index + 1) * 300} duration={500} height="100%">
-            <CasesCard {...item} textOrientation="left" />
-          </Transition>
-        </Box>
-      ))}
-    </Flex>
-  </Container>
+      <Flex
+        direction="row"
+        width="100%"
+        gap={{ base: '4', md: '4' }}
+        alignItems="stretch"
+        flexWrap="wrap"
+        justify="space-around"
+      >
+        {CASES_CARDS.map((item, index) => (
+          <Box
+            width={{ base: '100%', md: '45%', lg: '45%', xl: '24%' }}
+            minW="300px"
+            key={`case-${item.title}`}
+            my={{ base: '4', md: '0' }}
+          >
+            <Transition key={item.title} delay={(index + 1) * 300} duration={500} height="100%">
+              <CasesCard {...item} textOrientation="left" />
+            </Transition>
+          </Box>
+        ))}
+      </Flex>
+    </Container>
+  </Flex>
 );
 
 export default Cases;
