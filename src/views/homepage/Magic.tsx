@@ -5,7 +5,8 @@ import styled from 'styled-components';
 
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 import CodeBlock from '@root/components/mdx/CodeBlock';
-import { HeroHeading } from '@root/components/mdx/Headings';
+
+import Hero from './Hero';
 
 const components = {
   p: (props: TextProps): JSX.Element => <Text mb={8} color="inherit" {...props} width="100%" />,
@@ -70,27 +71,17 @@ const Magic: FunctionComponent<Props> = ({ magic }) => (
     id="magic"
   >
     <GradientContainer
-      minH="70vh"
+      minH="35em"
       flexDir="column"
       justifyContent="flex-start"
       pt={{ base: '10%', sm: '10%', md: '10%', lg: '8%' }}
       mb={{ base: '-15em', sm: '-20em', md: '-16em', lg: '-11em' }}
     >
-      <HeroHeading>The magic behind Ockam</HeroHeading>
-
-      <HeroHeading
-        as="h2"
-        fontWeight="medium"
-        size={{ base: 'lg', lg: 'xl' }}
-        letterSpacing={{ base: '-1.7px', md: '-2px', lg: '-1.7px' }}
-        lineHeight={{ base: 1, md: 1.2, lg: 1 }}
-        mt={{ base: 5, lg: 1 }}
-        mx="20"
-        mb="20"
-      >
-        Orchestrate end-to-end encryption, mutual authentication, key management, credential
-        management, and authorization policy enforcement &mdash; at massive scale.
-      </HeroHeading>
+      <Hero
+        text="The _Magic_"
+        subtext="Orchestrate <end-to-end encryption|mutual authentication|key management|credential management|authorization policy enforcement> &mdash; at massive&nbsp;scale."
+        darkGradient
+      />
     </GradientContainer>
     <Container id="pricing" variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
       <Box

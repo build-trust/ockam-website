@@ -58,9 +58,9 @@ const RotatingHeading: FC<Props> = ({ text }) => {
         color="rgba(255, 255, 255, 0.8)"
         letterSpacing="-0.08em"
         lineHeight={{ base: 1, lg: 1.2 }}
-        maxW="15em"
         mx="auto"
         style={{ textWrap: 'balance' }}
+        maxW="20em"
       >
         {message()}
       </Heading>

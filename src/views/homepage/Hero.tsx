@@ -48,8 +48,17 @@ type Props = {
   landingPage?: boolean;
   animate?: boolean;
   aspect?: 'width' | 'height';
+  darkGradient?: boolean;
 };
-const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, animate, aspect }) => {
+const Hero: FunctionComponent<Props> = ({
+  text,
+  subtext,
+  image,
+  landingPage,
+  animate,
+  aspect,
+  darkGradient,
+}) => {
   const { gradients } = useTheme();
 
   const heroText = (): JSX.Element => {
@@ -72,7 +81,7 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, ani
             return (
               <Box
                 as="span"
-                bgImage={gradients.primary}
+                bgImage={darkGradient ? gradients.dark : gradients.primary}
                 bgClip="text"
                 key={`highlight-${sha512(highlight[1])}`}
               >
@@ -155,13 +164,13 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, ani
     <HeroBox>
       <Container
         variant="section"
-        pt={{ base: 10, lg: 16 }}
+        pt={{ base: 0, lg: 0 }}
         pb={{ base: 0, lg: 0 }}
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
       >
-        <Box>
+        <Box width="100%">
           <Heading
             as="h1"
             size={calculatedHeadingSize()}
@@ -169,8 +178,9 @@ const Hero: FunctionComponent<Props> = ({ text, subtext, image, landingPage, ani
             textAlign="center"
             color="white"
             letterSpacing="-0.06em"
-            mt={16}
+            mt={0}
             lineHeight={calculatedLineHeight()}
+            width="100%"
           >
             <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>
               {heroText()}

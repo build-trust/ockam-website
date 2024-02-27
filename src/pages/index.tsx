@@ -106,7 +106,7 @@ interface StaticProps {
 }
 
 const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
-  <Box pt={{ base: 0 }}>
+  <Box pt={{ base: 32 }}>
     <Hero subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere" />
     <Box
       pt={{ base: 4, lg: 4 }}
