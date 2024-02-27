@@ -143,7 +143,7 @@ const Cases: FunctionComponent = () => (
       flexDir="column"
       justifyContent="flex-start"
       pt={{ base: '10%', sm: '10%', md: '10%', lg: '8%' }}
-      mb={{ base: '-15em', sm: '-20em', md: '-16em', lg: '-14em' }}
+      mb={{ base: '-15em', sm: '-25em', md: '-20em', lg: '-14em' }}
     >
       <Hero
         text="Use _Cases_"
