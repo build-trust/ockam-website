@@ -98,7 +98,7 @@ const Hero: FunctionComponent<Props> = ({
   const calculatedHeadingSize = ():
     | ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>
     | undefined => {
-    const standard = { base: '3xl', lg: 'h1' };
+    const standard = { base: '7xl', lg: 'h1' };
     if (!text) return standard;
     if (text?.length > 40) return { base: '3xl', lg: '4xl' };
     return standard;
@@ -173,7 +173,7 @@ const Hero: FunctionComponent<Props> = ({
         <Box width="100%">
           <Heading
             as="h1"
-            size={calculatedHeadingSize()}
+            fontSize={calculatedHeadingSize()}
             fontWeight="extrabold"
             textAlign="center"
             color="white"
@@ -181,6 +181,7 @@ const Hero: FunctionComponent<Props> = ({
             mt={0}
             lineHeight={calculatedLineHeight()}
             width="100%"
+            mb={4}
           >
             <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>
               {heroText()}

@@ -23,16 +23,17 @@ const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> 
 };
 
 const Networkless: FC = () => (
-  <Container variant="section" mb="12">
+  <Container variant="section" mb={{ base: 40, sm: 40, md: 12 }} pt={{ base: 16, sm: 16, md: 0 }}>
     <Flex direction="column" alignItems="flex-start" justifyContent="space-between" width="100%">
       <Box
         width={{ base: '70%', sm: '33%' }}
         marginLeft={{ base: '30%', sm: '70%', md: '50%', lg: '50%' }}
         height="180px"
+        display={{ base: 'none', sm: 'none', md: 'block' }}
       >
         <ItsSimple width="100%" preserveAspectRatio="xMinYMin meet" />
       </Box>
-      <Box flexGrow="1" mt={{ sm: '-20%', md: '-5%', lg: '0' }}>
+      <Box flexGrow="1" mt={{ sm: 8, md: '-5%', lg: '0' }}>
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Networkless connectivity
         </Heading>
@@ -64,17 +65,26 @@ const Networkless: FC = () => (
 );
 
 const SecureByDesign: FC = () => (
-  <Container variant="section" style={{ clear: 'both' }}>
+  <Container
+    variant="section"
+    style={{ clear: 'both' }}
+    mb={{ base: 40, sm: 40, md: 12 }}
+    pt={{ base: 16, sm: 16, md: 0 }}
+  >
     <Flex direction="row" alignItems="flex-start" justifyContent="space-between" width="100%">
-      <Box width={{ base: '100%', sm: '53%' }} ml={{ base: '0', sm: '10%', md: '10%', lg: '25%' }}>
+      <Box
+        width={{ base: '100%', sm: '53%' }}
+        ml={{ base: '0', sm: '10%', md: '10%', lg: '25%' }}
+        display={{ base: 'none', sm: 'none', md: 'block' }}
+      >
         <AndIts width="100%" preserveAspectRatio="xMinYMin meet" />
       </Box>
 
       <Box
         flexGrow="1"
-        pt="160px"
-        ml={{ base: '0', sm: '8' }}
-        mt={{ base: '-25%', sm: '-15%', md: '-10%', lg: '-5%' }}
+        pt={{ base: 0, sm: 0, md: '160px' }}
+        ml={{ base: 0, sm: 0, md: 8 }}
+        mt={{ base: 0, sm: 0, md: '-10%', lg: '-5%' }}
         w={{ base: '100%' }}
       >
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
@@ -109,6 +119,7 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
   <Box pt={{ base: 32 }}>
     <Hero subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere" />
     <Box
+      mt={{ base: 16, sm: 16, md: 0 }}
       pt={{ base: 4, lg: 4 }}
       pb={{ base: 20, lg: 24 }}
       boxShadow="2xl"

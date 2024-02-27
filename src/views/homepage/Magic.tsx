@@ -37,7 +37,7 @@ const Magic: FunctionComponent<Props> = ({ magic }) => (
       minH="35em"
       flexDir="column"
       justifyContent="flex-start"
-      pt={{ base: '10%', sm: '10%', md: '10%', lg: '8%' }}
+      pt={{ base: '4em', sm: '4em', md: '10%', lg: '8%' }}
       mb={{ base: '-15em', sm: '-20em', md: '-16em', lg: '-11em' }}
     >
       <Hero
