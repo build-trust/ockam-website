@@ -147,7 +147,7 @@ const Cases: FunctionComponent = () => (
     >
       <Hero
         text="Use _Cases_"
-        subtext="Start using Ockam and you can stop <punching holes in firewalls|sending plaintext data through kafka|connecting private databases to the internet|asking your customers to setup VPNs|asking your customers to setup PrivateLink|exposing data via reverse proxies>."
+        subtext="Start using Ockam and you can <stop punching holes in firewalls|stop sending plaintext data through kafka|stop exposing private databases|stop asking your customers to setup VPNs|skip the need for PrivateLink|stop exposing data via reverse proxies>."
         darkGradient
       />
     </GradientContainer>
