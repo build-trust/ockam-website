@@ -22,17 +22,15 @@ const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> 
 
 interface Props {
   install: MDXRemoteSerializeResult;
-  portals: MDXRemoteSerializeResult;
-  enroll: MDXRemoteSerializeResult;
 }
 interface StaticProps {
   props: Props;
 }
 
-const DownloadPage: NextPageWithLayout<Props> = ({ enroll, install, portals }) => (
+const DownloadPage: NextPageWithLayout<Props> = ({ install }) => (
   <Box pt={{ base: 10, lg: 10 }}>
     <SEOHead title="Download Ockam - Get started for free" />
-    <SignupFlowManager enroll={enroll} install={install} portals={portals} />
+    <SignupFlowManager install={install} />
   </Box>
 );
 
@@ -46,21 +44,9 @@ export async function getStaticProps(): Promise<StaticProps> {
   curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash
   `;
 
-  const portals = `
-  \`\`\`sh
-  brew update && brew install build-trust/ockam/portals  
-  `;
-
-  const enroll = `
-  \`\`\`sh
-  ockam enroll
-  `;
-
   return {
     props: {
       install: await mdxSerialize(install),
-      portals: await mdxSerialize(portals),
-      enroll: await mdxSerialize(enroll),
     },
   };
 }
