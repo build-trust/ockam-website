@@ -24,6 +24,7 @@ import {
   STYLE_GUIDE_PATH,
   TEAM_PATH,
 } from '@consts/paths';
+import { isSignedIn } from '@root/components/Auth';
 
 const NAV = [
   {
@@ -130,6 +131,8 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
     return CONTACT_FORM_PATH;
   };
 
+  const signedIn = async (): Promise<boolean> => isSignedIn();
+
   const contentLinks = (): JSX.Element => {
     if (landingPage) return <></>;
     const links = (
@@ -188,20 +191,22 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
           </chakra.span>
         </Heading>
         <Box>
-          <Button
-            as="a"
-            href={SIGNUP_PATH}
-            textAlign="center"
-            target="_blank"
-            colorScheme="avocado"
-            color="black"
-            size="lg"
-            display={{ base: 'block', lg: 'inline-block' }}
-            mr={{ base: 0, lg: 8 }}
-            my={{ base: 2, lg: 0 }}
-          >
-            Sign Up
-          </Button>
+          {!signedIn && (
+            <Button
+              as="a"
+              href={SIGNUP_PATH}
+              textAlign="center"
+              target="_blank"
+              colorScheme="avocado"
+              color="black"
+              size="lg"
+              display={{ base: 'block', lg: 'inline-block' }}
+              mr={{ base: 0, lg: 8 }}
+              my={{ base: 2, lg: 0 }}
+            >
+              Sign Up
+            </Button>
+          )}
           <Button
             as="a"
             href={contactFormPath()}

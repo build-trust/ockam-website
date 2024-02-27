@@ -58,6 +58,17 @@ const isSignedIn = async (): Promise<boolean> => {
   }
 };
 
+const isSignedUp = async (): Promise<boolean> => {
+  try {
+    const user = await currentUser();
+    return !!user && !!user?.token;
+    // eslint-disable-next-line
+  } catch (e: any) {
+    if (e?.message === 'Login required') return false;
+    throw e;
+  }
+};
+
 const trackSignup = (user: User): void => {
   const signup = window.sessionStorage.getItem('signup') as string | undefined;
   if (signup !== '1') {
@@ -185,5 +196,5 @@ const Auth: FunctionComponent<Props> = ({
 };
 
 export type { User };
-export { currentUser, isSignedIn, identify };
+export { currentUser, isSignedIn, isSignedUp, identify };
 export default Auth;
