@@ -191,6 +191,7 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
           <Button
             as="a"
             href={SIGNUP_PATH}
+            textAlign="center"
             target="_blank"
             colorScheme="avocado"
             color="black"
