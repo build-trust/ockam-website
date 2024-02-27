@@ -101,6 +101,7 @@ const ChoosePlan: FC<Props> = ({
   useEffect(() => {
     if (setupMarketplace || setupSponsorship) {
       showNext();
+      window.scrollTo(0, 0);
     } else {
       hideNext();
       alreadySelected();

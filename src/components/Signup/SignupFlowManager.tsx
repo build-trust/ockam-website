@@ -92,6 +92,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     const generatedUrl = `${window.location.protocol}//${window.location.host}/${window.location.pathname}/${stepName}`;
     // @ts-ignore window.analytics undefined below
     window.analytics.page(generatedUrl);
+    window.scrollTo(0, 0);
   }, [steps, activeStep]);
 
   const hideNext = (): void => {
