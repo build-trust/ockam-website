@@ -8,12 +8,13 @@ const Deploy: FC = () => (
     </Heading>
 
     <Text mb="4">
-      Now you&apos;re ready to build! Now you can take a look at the various{' '}
-      <Link href="https://docs.ockam.io/guides/use-cases" color="brand.500">
-        Ockam use cases
+      Now you&apos;re ready to build! Now you can take a look at the{' '}
+      <Link href="https://docs.ockam.io/" color="brand.500">
+        Ockam documentation
       </Link>{' '}
-      and follow one of associated example guides to how to implement it. Also make sure you connect
-      with us to stay updated on the latest changes or to get any help you may need:
+      and follow one of associated example guides on how to implement it in your production
+      environment. Also make sure you connect with us to stay updated on the latest changes or to
+      get any help you may need:
     </Text>
     <UnorderedList spacing="2">
       <ListItem>

@@ -10,23 +10,21 @@ import { User, currentUser, isSignedIn } from '@root/components/Auth';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
-import Enroll from './Enroll';
 import Deploy from './Deploy';
 import Welcome from './Welcome';
+import Experience from './Experience';
 
 type Props = {
   install: MDXRemoteSerializeResult;
-  portals: MDXRemoteSerializeResult;
-  enroll: MDXRemoteSerializeResult;
 };
 
-const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElement => {
+const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const steps = useMemo(
     () => [
       { title: 'Get started', description: 'Setup your account' },
       { title: 'Choose a plan', description: 'Right-size to your needs' },
       { title: 'Download', description: 'Download & Install Ockam' },
-      { title: 'Enroll', description: 'Connect your first node' },
+      { title: 'Experience', description: 'Try a hands-on example' },
       { title: 'Deploy', description: 'Create a secure channel' },
     ],
     [],
@@ -146,10 +144,10 @@ const SignupFlowManager: FC<Props> = ({ enroll, install, portals }): ReactElemen
         );
         break;
       case 2:
-        return <Download install={install} portals={portals} />;
+        return <Download install={install} />;
         break;
       case 3:
-        return <Enroll enroll={enroll} />;
+        return <Experience />;
         break;
       case 4:
         return <Deploy />;
