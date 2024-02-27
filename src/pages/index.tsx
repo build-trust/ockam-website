@@ -148,7 +148,7 @@ export async function getStaticProps(): Promise<StaticProps> {
           mdx: await mdxSerialize(`
           The magical thing that Ockam unlocks via Portals is what we call Virtual Adjacency. 
 
-          The Portal connects your application a remote application, and _virtually_ 
+          The Portal connects your application to a remote application, and _virtually_ 
           pulls it through the portal so that it appears as though they sit next
           to each other on the same machine. That means applications are available 
           to each other on \`localhost\` in a peer-to-peer way. 
