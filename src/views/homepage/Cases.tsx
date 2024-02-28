@@ -148,7 +148,7 @@ const Cases: FunctionComponent<FlexProps> = ({ ...restProps }) => (
     >
       <Hero
         text="Use _Cases_"
-        subtext="Start using Ockam and you can <stop punching holes in firewalls|stop sending plaintext data through kafka|stop exposing private databases|stop asking your customers to setup VPNs|skip the need for PrivateLink|stop exposing data via reverse proxies>"
+        subtext="To orchestrate <end-to-end encryption|mutual authentication|key management|credential management|authorization policy enforcement> &mdash; at massive&nbsp;scale"
         darkGradient
       />
     </GradientContainer>

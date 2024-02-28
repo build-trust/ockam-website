@@ -45,7 +45,7 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
     >
       <Hero
         text="The _Magic_"
-        subtext="Orchestrate <end-to-end encryption|mutual authentication|key management|credential management|authorization policy enforcement> &mdash; at massive&nbsp;scale"
+        subtext="That means you can <stop punching holes in firewalls|stop sending plaintext data through kafka|stop exposing private databases|stop asking your customers to setup VPNs|skip the need for PrivateLink|stop exposing data via reverse proxies>"
         darkGradient
       />
     </GradientContainer>
