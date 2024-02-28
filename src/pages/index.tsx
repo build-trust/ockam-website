@@ -12,6 +12,7 @@ import ItsSimple from '@assets/images/its-simple-with.svg';
 import AndIts from '@assets/images/and-its.svg';
 import RotatingText from '@root/components/RotatingText';
 import Magic, { FeatureType } from '@root/views/homepage/Magic';
+import GradientContainer from '@root/layouts/components/GradientContainer';
 
 const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> => {
   const result = await serialize(content, {
@@ -116,18 +117,27 @@ interface StaticProps {
 }
 
 const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
-  <Box pt={{ base: 32 }}>
-    <Hero subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere" />
+  <Box pt={0}>
+    <GradientContainer
+      bottomOnly
+      pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}
+      minH="100vh"
+    >
+      <Hero
+        subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere"
+        minH="40vh"
+      />
+    </GradientContainer>
     <Box
-      mt={{ base: 16, sm: 16, md: 0 }}
       pt={{ base: 4, lg: 4 }}
       pb={{ base: 20, lg: 24 }}
       boxShadow="2xl"
-      borderRadius="15"
+      borderRadius={{ base: 0, lg: '15' }}
       borderStyle="none"
       background="white"
       maxW="container.max"
       mx={{ base: 0, xl: 'auto' }}
+      mt="-14em"
     >
       <Networkless />
       <SecureByDesign />

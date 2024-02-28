@@ -53,7 +53,8 @@ const RotatingHeading: FC<Props> = ({ text }) => {
     <Box mb={10}>
       <Heading
         as="h1"
-        size={{ base: 'h3', lg: 'h2' }}
+        fontSize={{ base: '2em', sm: '3em', md: '3em', lg: '3em' }}
+        // size={{ base: 'h3', lg: 'h2' }}
         fontWeight="medium"
         textAlign="center"
         color="rgba(255, 255, 255, 0.8)"

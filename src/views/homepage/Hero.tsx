@@ -49,6 +49,7 @@ type Props = {
   animate?: boolean;
   aspect?: 'width' | 'height';
   darkGradient?: boolean;
+  minH?: ResponsiveValue<string & {}>;
 };
 const Hero: FunctionComponent<Props> = ({
   text,
@@ -58,6 +59,7 @@ const Hero: FunctionComponent<Props> = ({
   animate,
   aspect,
   darkGradient,
+  minH,
 }) => {
   const { gradients } = useTheme();
 
@@ -98,7 +100,7 @@ const Hero: FunctionComponent<Props> = ({
   const calculatedHeadingSize = ():
     | ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>
     | undefined => {
-    const standard = { base: '7xl', lg: 'h1' };
+    const standard = { base: '5em', sm: '6em', md: '8em', lg: '10em' };
     if (!text) return standard;
     if (text?.length > 40) return { base: '3xl', lg: '4xl' };
     return standard;
@@ -161,7 +163,7 @@ const Hero: FunctionComponent<Props> = ({
     return <></>;
   };
   return (
-    <HeroBox>
+    <HeroBox minH={minH}>
       <Container
         variant="section"
         pt={{ base: 0, lg: 0 }}
