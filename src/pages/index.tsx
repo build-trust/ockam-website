@@ -25,16 +25,20 @@ const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> 
 
 const Networkless: FC = () => (
   <Container variant="section" mb={{ base: 40, sm: 40, md: 12 }} pt={{ base: 16, sm: 16, md: 0 }}>
-    <Flex direction="column" alignItems="flex-start" justifyContent="space-between" width="100%">
+    <Flex
+      direction="row-reverse"
+      width="100%"
+      justifyContent={{ base: 'flex-end', sm: 'flex-end', md: 'space-evenly' }}
+    >
       <Box
-        width={{ base: '70%', sm: '33%' }}
-        marginLeft={{ base: '30%', sm: '70%', md: '50%', lg: '50%' }}
-        height="180px"
+        // width={{ base: '70%', sm: '33%' }}
+        // marginLeft={{ base: '30%', sm: '70%', md: '50%', lg: '50%' }}
+        // height="180px"
         display={{ base: 'none', sm: 'none', md: 'block' }}
       >
-        <ItsSimple width="100%" preserveAspectRatio="xMinYMin meet" />
+        <ItsSimple width="100%" preserveAspectRatio="xMinYMin meet" height="239px" />
       </Box>
-      <Box flexGrow="1" mt={{ sm: 8, md: '-5%', lg: '0' }}>
+      <Box mt={{ base: '180px' }}>
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Networkless connectivity
         </Heading>
@@ -72,21 +76,25 @@ const SecureByDesign: FC = () => (
     mb={{ base: 40, sm: 40, md: 12 }}
     pt={{ base: 16, sm: 16, md: 0 }}
   >
-    <Flex direction="row" alignItems="flex-start" justifyContent="space-between" width="100%">
+    <Flex
+      direction="row"
+      width="100%"
+      justifyContent={{ base: 'flex-start', sm: 'flex-start', md: 'space-evenly' }}
+    >
       <Box
-        width={{ base: '100%', sm: '53%' }}
-        ml={{ base: '0', sm: '10%', md: '10%', lg: '25%' }}
+        // width={{ base: '100%', sm: '53%' }}
+        // ml={{ base: '0', sm: '10%', md: '10%', lg: '25%' }}
         display={{ base: 'none', sm: 'none', md: 'block' }}
       >
-        <AndIts width="100%" preserveAspectRatio="xMinYMin meet" />
+        <AndIts width="100%" preserveAspectRatio="xMinYMin meet" height="180px" />
       </Box>
 
       <Box
-        flexGrow="1"
-        pt={{ base: 0, sm: 0, md: '160px' }}
-        ml={{ base: 0, sm: 0, md: 8 }}
-        mt={{ base: 0, sm: 0, md: '-10%', lg: '-5%' }}
-        w={{ base: '100%' }}
+        // flexGrow="1"
+        pt={{ base: '160px' }}
+        // ml={{ base: 0, sm: 0, md: 8 }}
+        // mt={{ base: 0, sm: 0, md: '-10%', lg: '-5%' }}
+        // w={{ base: '100%' }}
       >
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Secure-by-design
