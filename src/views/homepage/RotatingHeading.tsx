@@ -5,8 +5,9 @@ import RotatingText from '@root/components/RotatingText';
 
 type Props = {
   text?: string;
+  size?: ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>;
 };
-const RotatingHeading: FC<Props> = ({ text }) => {
+const RotatingHeading: FC<Props> = ({ text, size }) => {
   const { gradients } = useTheme();
   const re = /<(.+)>/;
 
@@ -52,7 +53,7 @@ const RotatingHeading: FC<Props> = ({ text }) => {
     <Box mb={10}>
       <Heading
         as="h1"
-        fontSize={{ base: '2em', sm: '3em', md: '3em', lg: '3em' }}
+        fontSize={size || { base: '2em', sm: '3em', md: '3em', lg: '3em' }}
         fontWeight="medium"
         textAlign="center"
         color="rgba(255, 255, 255, 0.8)"

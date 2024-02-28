@@ -52,6 +52,12 @@ type Props = {
   aspect?: 'width' | 'height';
   darkGradient?: boolean;
   animationStartAt?: number;
+  textSize?: ResponsiveValue<
+    (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
+  >;
+  subtextSize?: ResponsiveValue<
+    (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
+  >;
 } & BoxProps;
 
 const Hero: FunctionComponent<Props> = ({
@@ -59,6 +65,8 @@ const Hero: FunctionComponent<Props> = ({
   subtext,
   image,
   landingPage,
+  textSize,
+  subtextSize,
   animate,
   aspect,
   darkGradient,
@@ -104,6 +112,7 @@ const Hero: FunctionComponent<Props> = ({
   const calculatedHeadingSize = ():
     | ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>
     | undefined => {
+    if (textSize) return textSize;
     const standard = { base: '5em', sm: '6em', md: '8em', lg: '10em' };
     if (!text) return standard;
     if (text?.length > 33) return { base: '3em', md: '5em', lg: '8em' };
@@ -194,7 +203,7 @@ const Hero: FunctionComponent<Props> = ({
             </ChakraLink>
           </Heading>
           {ctas()}
-          <RotatingHeading text={subtext} />
+          <RotatingHeading text={subtext} size={subtextSize} />
         </Box>
         {image && (
           <Box

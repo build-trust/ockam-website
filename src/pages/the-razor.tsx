@@ -44,11 +44,11 @@ const TheRazorSignupPage: NextPageWithLayout<PageProps> = ({
       height="350px"
       src="https://cdn.forms-content.sg-form.com/c0e4f080-70c9-11ee-8f0b-1239171df302"
     />
-    <Box maxW="4xl" mx="auto" pb={8} textAlign="center">
+    <Box maxW="container.max" mx="auto" pb={8} textAlign="center">
       <Heading mb={2}>Previous episodes</Heading>
       <List>
         {previousEpisodes.map((data) => (
-          <ListItem>
+          <ListItem my={4}>
             {data.data.title} &mdash;{' '}
             <Link
               href={`/the-razor/${data.filePath.replace(/\.mdx$/, '')}`}

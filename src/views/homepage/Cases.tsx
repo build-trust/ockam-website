@@ -131,12 +131,12 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
 
 const Cases: FunctionComponent<FlexProps> = ({ ...restProps }) => (
   <Flex
+    id="use-cases"
     flexDir="column"
     alignContent="center"
     justifyContent="center"
     mt={20}
     width="100%"
-    id="magic"
     {...restProps}
   >
     <GradientContainer
@@ -153,14 +153,7 @@ const Cases: FunctionComponent<FlexProps> = ({ ...restProps }) => (
       />
     </GradientContainer>
 
-    <Container
-      variant="section"
-      id="use-cases"
-      pt={{ base: 0, lg: 0 }}
-      pb={{ base: 12, lg: 12 }}
-      px={0}
-      mt={16}
-    >
+    <Container variant="section" pt={{ base: 0, lg: 0 }} pb={{ base: 12, lg: 12 }} px={0} mt={16}>
       <Flex
         direction="row"
         width="100%"
