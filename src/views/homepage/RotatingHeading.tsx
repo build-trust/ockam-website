@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Box, Heading, useTheme } from '@chakra-ui/react';
+import { Box, Heading, ResponsiveValue, useTheme } from '@chakra-ui/react';
 
 import RotatingText from '@root/components/RotatingText';
 
