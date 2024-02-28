@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box, Container, Flex, Text, Heading, TextProps } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, Heading, TextProps, FlexProps } from '@chakra-ui/react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
@@ -22,9 +22,10 @@ type FeatureType = {
 };
 type Props = {
   magic: FeatureType[];
-};
+  zIndex?: number | string;
+} & FlexProps;
 
-const Magic: FunctionComponent<Props> = ({ magic }) => (
+const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
   <Flex
     flexDir="column"
     alignContent="center"
@@ -32,13 +33,15 @@ const Magic: FunctionComponent<Props> = ({ magic }) => (
     mt={20}
     width="100%"
     id="magic"
+    {...restProps}
   >
     <GradientContainer
-      minH="35em"
+      minH="80vh"
       flexDir="column"
       justifyContent="flex-start"
-      pt={{ base: '4em', sm: '4em', md: '10%', lg: '8%' }}
-      mb={{ base: '-15em', sm: '-20em', md: '-16em', lg: '-11em' }}
+      pt={0}
+      // pt={{ base: '4em', sm: '4em', md: '10%', lg: '8%' }}
+      mb={{ base: '0', sm: '-11em', md: '-10em', lg: '-11em' }}
     >
       <Hero
         text="The _Magic_"

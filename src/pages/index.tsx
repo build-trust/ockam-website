@@ -146,11 +146,13 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
       maxW="container.max"
       mx={{ base: 0, xl: 'auto' }}
       mt="-14em"
+      position="relative"
+      zIndex={2}
     >
       <Networkless />
       <SecureByDesign />
     </Box>
-    <Magic magic={magic} />
+    <Magic magic={magic} zIndex={1} marginTop="-3em" />
     <Cases />
   </Box>
 );
