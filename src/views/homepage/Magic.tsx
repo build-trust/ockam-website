@@ -36,11 +36,12 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
     {...restProps}
   >
     <GradientContainer
-      minH="80vh"
+      height="75vh"
+      minH="50em"
       flexDir="column"
       justifyContent="flex-start"
       pt={0}
-      mb={{ base: '0', sm: '-11em', md: '-10em', lg: '-11em' }}
+      mb={{ base: '-8em', sm: '-11em', md: '-10em', lg: '-11em' }}
     >
       <Hero
         text="The _Magic_"
@@ -48,7 +49,7 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
         darkGradient
       />
     </GradientContainer>
-    <Container id="pricing" variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
+    <Container id="magic" variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
       <Box
         pt={{ base: 16, lg: 4 }}
         pb={{ base: 4, lg: 4 }}
@@ -60,7 +61,7 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
         mx="auto"
       >
         <Container variant="section">
-          <Box id="features" visibility="hidden" position="absolute" left={0} top="-80px" />
+          <Box id="magic-parts" visibility="hidden" position="absolute" left={0} top="-80px" />
 
           {magic.map((card, ix) => (
             <SideBySidePanel

@@ -25,7 +25,6 @@ const GradientContainer = styled(Flex)<Props>`
         rgba(0, 0, 0, 0.07) 70%,
         transparent 70%
       ),
-    linear-gradient(#f9f9f9, #f9f9f9),
     linear-gradient(to right, #52c7ea, #4fdab8);
   background-repeat:
     ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined =>
@@ -34,7 +33,6 @@ const GradientContainer = styled(Flex)<Props>`
     ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined =>
         !bottomOnly && css`no-repeat,`}
       no-repeat,
-    repeat-x,
     no-repeat,
     no-repeat;
   background-size:
@@ -43,16 +41,14 @@ const GradientContainer = styled(Flex)<Props>`
       100%,
     ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined => !bottomOnly && css`100%,`}
       100% 100%,
-    100% 100%,
     100%,
-    100% 100%,
+    100%,
     100% 100%;
   background-position:
     ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined => !bottomOnly && css`0 0,`}
       0 0,
     ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined => !bottomOnly && css`0 0,`}
       0 0,
-    calc(1px - 1px) calc(110vh - 0px),
     calc(1px - 1px),
     calc(1px - 1px),
     0 0;

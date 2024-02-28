@@ -140,10 +140,11 @@ const Cases: FunctionComponent<FlexProps> = ({ ...restProps }) => (
     {...restProps}
   >
     <GradientContainer
-      minH="80vh"
+      h="80vh"
+      minH="40em"
       flexDir="column"
       justifyContent="flex-start"
-      mb={{ base: 0, sm: '-14em', md: '-14em', lg: '-14em' }}
+      mb={{ base: '-14em', sm: '-14em', md: '-14em', lg: '-14em' }}
     >
       <Hero
         text="Use _Cases_"
