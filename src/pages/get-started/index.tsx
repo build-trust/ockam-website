@@ -28,7 +28,7 @@ interface StaticProps {
 }
 
 const DownloadPage: NextPageWithLayout<Props> = ({ install }) => (
-  <Box pt={{ base: 10, lg: 10 }}>
+  <Box pt={{ base: '120px' }}>
     <SEOHead title="Download Ockam - Get started for free" />
     <SignupFlowManager install={install} />
   </Box>
