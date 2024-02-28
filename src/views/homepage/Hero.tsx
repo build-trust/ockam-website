@@ -50,6 +50,7 @@ type Props = {
   aspect?: 'width' | 'height';
   darkGradient?: boolean;
   minH?: ResponsiveValue<string & {}>;
+  animationStartAt?: number;
 };
 const Hero: FunctionComponent<Props> = ({
   text,
@@ -60,6 +61,7 @@ const Hero: FunctionComponent<Props> = ({
   aspect,
   darkGradient,
   minH,
+  animationStartAt,
 }) => {
   const { gradients } = useTheme();
 
@@ -201,7 +203,13 @@ const Hero: FunctionComponent<Props> = ({
             borderTopLeftRadius="3xl"
             borderTopRightRadius="3xl"
           >
-            <ExcalidrawAnimation src={image} animate={!!animate} hero aspect={aspect} />
+            <ExcalidrawAnimation
+              src={image}
+              animate={!!animate}
+              hero
+              aspect={aspect}
+              startAt={animationStartAt}
+            />
           </Box>
         )}
       </Container>

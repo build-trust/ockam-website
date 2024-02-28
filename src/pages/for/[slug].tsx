@@ -71,6 +71,8 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   const animate = frontMatter?.hero_animated as boolean;
   const imageAspect = frontMatter?.hero_aspect_priority as 'width' | 'height';
   const subtext = frontMatter?.subtext as string;
+  const animationStartAt = frontMatter?.hero_animation_start_at as number;
+
   const listFeatures = (
     typeof frontMatter?.list_features === 'undefined' ? true : frontMatter?.list_features
   ) as boolean;
@@ -114,6 +116,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
         landingPage
         animate={animate || false}
         aspect={imageAspect}
+        animationStartAt={animationStartAt}
       />
 
       <Flex

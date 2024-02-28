@@ -3,6 +3,7 @@ title: Secure connections with your SaaS vendors
 hero_text: Keep your _private_ data _private_
 hero_image: private-databases
 hero_animated: true
+hero_animation_start_at: 1.8
 hero_aspect_priority: width
 subtext: Manage access to any system with application-level controls
 list_features: false
@@ -21,7 +22,7 @@ features:
 Meeting modern data control expectations requires guarantees that the intended applications are exclusively the apps that can connect to your systems. Ockam moves trust to the application layer by building a mutually authenticated and encrypted communication channel between those systems.
 </SideBySidePanel>
 
-<SideBySidePanel textOrientation="right" image="kafka-key-layers" animate>
+<SideBySidePanel textOrientation="right" image="kafka-key-layers" animate startAt={0}>
 ## No more shared secret keys
 
 Sharing secret keys across many apps and services increases the likelihood of secret keys leaking, in addition to eroding any guarantees that only intended apps can access sensitive data. Teams then layer in additional credential management approaches, network-level controls, and various other security approaches in an attempt to have a somewhat reliable assumption that only the intended app(s) were able to use the shared secret keys.

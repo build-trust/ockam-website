@@ -9,12 +9,14 @@ type Props = {
   animate: boolean;
   hero?: boolean;
   aspect?: 'width' | 'height';
+  startAt?: number;
 };
 const ExcalidrawAnimation: FunctionComponent<Props> = ({
   src,
   animate,
   hero,
   aspect,
+  startAt,
 }): ReactElement | null => {
   const ref = useRef<HTMLDivElement>();
   const [svg, setSvg] = useState<SVGSVGElement>();
@@ -120,7 +122,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   );
 
   const showScene = useCallback(
-    (id: string, s?: SVGSVGElement, jumpToEnd?: boolean, jumpToDrawn?: boolean): void => {
+    (id: string, s?: SVGSVGElement, jumpToEnd?: boolean): void => {
       const scene = findScene(id, s);
       if (!scene) return;
       if (scene.style.display === 'block' && scene.dataset.looped) return;
@@ -128,10 +130,11 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       if (hasAnimatedDrawings(scene)) {
         const duration = calculateAnimationDuration(scene);
         let moveTo;
+
         if (jumpToEnd) {
           moveTo = duration;
-        } else if (jumpToDrawn && !isNested) {
-          moveTo = 1.2;
+        } else if (startAt !== undefined && !isNested) {
+          moveTo = startAt;
         } else {
           moveTo = duration < 2000 ? duration : 1.1;
         }
@@ -141,7 +144,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       }
       scene.style.display = 'block';
     },
-    [findScene, isPlayable, isNested],
+    [findScene, isPlayable, isNested, startAt],
   );
 
   const hideAll = (s?: SVGSVGElement): void => {
@@ -158,7 +161,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
 
     hideAll();
     if (hasClaymationSteps(s)) setIsNested(true);
-    showScene('scene0', s, !animate, animate);
+    showScene('scene0', s, !animate);
   };
 
   const svgLoaded = async (): Promise<void> => {
