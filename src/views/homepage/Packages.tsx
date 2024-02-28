@@ -67,31 +67,6 @@ const Packages: FunctionComponent = () => {
 
   return (
     <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }} px={0} width="100%">
-      <Heading
-        as="h1"
-        fontWeight="extrabold"
-        textAlign="center"
-        color="white"
-        size={{ base: '2xl', lg: '3xl' }}
-        letterSpacing={{ base: '-1.5px', lg: '-1.5px' }}
-        lineHeight={{ base: 1, lg: 1.5 }}
-      >
-        Plans for any scale
-      </Heading>
-      <Heading
-        as="h2"
-        textAlign="center"
-        fontWeight="medium"
-        color="rgba(255, 255, 255, 0.8)"
-        size={{ base: 'lg', lg: 'xl' }}
-        letterSpacing={{ base: '-1.7px', md: '-2px', lg: '-1.7px' }}
-        lineHeight={{ base: 1, md: 1.2, lg: 1 }}
-        mt={{ base: 5, lg: 1 }}
-        mx="20"
-        mb="20"
-      >
-        Start free &mdash; with predictable pricing that scales when you need
-      </Heading>
       <Box as="section" py="14" px={{ base: '4', md: '8' }} style={{ width: '100%' }}>
         <Accordion style={{ width: '100%' }} allowMultiple defaultIndex={expanded}>
           {SEGMENTS.map((segment) => (

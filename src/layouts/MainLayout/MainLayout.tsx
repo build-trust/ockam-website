@@ -9,18 +9,22 @@ import MainLayoutHeader from './MainLayoutHeader';
 
 type LayoutProps = {
   gradient?: string[];
+  hasGradient?: boolean;
   children?: ReactNode;
   backgroundColor?: string;
 };
 
-const MainLayout: FunctionComponent<LayoutProps> = ({ gradient, backgroundColor, children }) => {
+const MainLayout: FunctionComponent<LayoutProps> = ({
+  gradient,
+  hasGradient,
+  backgroundColor,
+  children,
+}) => {
   const headerRef = useRef<HTMLDivElement>(null);
-  const hasGradient = !!gradient;
-
   return (
     <MobileNavbarProvider>
       {/* @ts-ignore */}
-      <MainLayoutHeader ref={headerRef} hasGradient={hasGradient} />
+      <MainLayoutHeader ref={headerRef} hasGradient={hasGradient || !!gradient} />
       <Box as="main" flex={1} w="full" pt={{ base: 0 }} backgroundColor="#f9f9f9">
         {children}
       </Box>

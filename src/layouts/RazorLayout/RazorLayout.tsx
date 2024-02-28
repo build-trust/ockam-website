@@ -4,6 +4,8 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import { MainLayout } from '@root/layouts';
 import { Hero } from '@views/homepage';
 
+import GradientContainer from '../components/GradientContainer';
+
 type RazorProps = {
   title?: string;
   subtext?: string;
@@ -38,16 +40,22 @@ const RazorLayout: FunctionComponent<RazorProps> = ({ children, title, subtext, 
   );
 
   return (
-    <MainLayout gradient={['#4FDAB8', '#52C7EA']} backgroundColor="#ECFDF9" noslice>
-      {!isEpisode && (
-        <Hero
-          text={title || 'The Razor'}
-          subtext={
-            subtext ||
-            'The latest & most interesting news about secure-by-design systems, developer experience, and related tooling'
-          }
-        />
-      )}
+    <MainLayout backgroundColor="#ECFDF9" hasGradient>
+      <GradientContainer
+        bottomOnly
+        pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}
+        minH="100vh"
+      >
+        {!isEpisode && (
+          <Hero
+            text={title || 'The Razor'}
+            subtext={
+              subtext ||
+              'The latest & most interesting news about secure-by-design systems, developer experience, and related tooling'
+            }
+          />
+        )}
+      </GradientContainer>
       {children}
       <Box width="100%" p={0} m={0} backgroundColor="#ECFDF9" letterSpacing="-0.03em">
         <Heading maxW="2xl" mx="auto" mb={2}>
