@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Flex, Container, Text, Heading, Box } from '@chakra-ui/react';
+import { Flex, Container, Text, Heading, Box, FlexProps } from '@chakra-ui/react';
 
 import Transition from '@root/components/Transition/Transition';
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
@@ -129,7 +129,7 @@ const CasesCard: FunctionComponent<CasesCardProps> = ({
   </SideBySidePanel>
 );
 
-const Cases: FunctionComponent = () => (
+const Cases: FunctionComponent<FlexProps> = ({ ...restProps }) => (
   <Flex
     flexDir="column"
     alignContent="center"
@@ -137,17 +137,17 @@ const Cases: FunctionComponent = () => (
     mt={20}
     width="100%"
     id="magic"
+    {...restProps}
   >
     <GradientContainer
-      minH="35em"
+      minH="80vh"
       flexDir="column"
       justifyContent="flex-start"
-      pt={{ base: '10%', sm: '10%', md: '10%', lg: '8%' }}
-      mb={{ base: '-15em', sm: '-25em', md: '-20em', lg: '-14em' }}
+      mb={{ base: 0, sm: '-14em', md: '-14em', lg: '-14em' }}
     >
       <Hero
         text="Use _Cases_"
-        subtext="Start using Ockam and you can <stop punching holes in firewalls|stop sending plaintext data through kafka|stop exposing private databases|stop asking your customers to setup VPNs|skip the need for PrivateLink|stop exposing data via reverse proxies>."
+        subtext="Start using Ockam and you can <stop punching holes in firewalls|stop sending plaintext data through kafka|stop exposing private databases|stop asking your customers to setup VPNs|skip the need for PrivateLink|stop exposing data via reverse proxies>"
         darkGradient
       />
     </GradientContainer>

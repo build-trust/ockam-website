@@ -40,12 +40,11 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
       flexDir="column"
       justifyContent="flex-start"
       pt={0}
-      // pt={{ base: '4em', sm: '4em', md: '10%', lg: '8%' }}
       mb={{ base: '0', sm: '-11em', md: '-10em', lg: '-11em' }}
     >
       <Hero
         text="The _Magic_"
-        subtext="Orchestrate <end-to-end encryption|mutual authentication|key management|credential management|authorization policy enforcement> &mdash; at massive&nbsp;scale."
+        subtext="Orchestrate <end-to-end encryption|mutual authentication|key management|credential management|authorization policy enforcement> &mdash; at massive&nbsp;scale"
         darkGradient
       />
     </GradientContainer>
@@ -54,7 +53,7 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
         pt={{ base: 16, lg: 4 }}
         pb={{ base: 4, lg: 4 }}
         boxShadow="2xl"
-        borderRadius="15"
+        borderRadius={{ base: 0, lg: '15' }}
         borderStyle="none"
         background="white"
         width="100%"

@@ -153,7 +153,7 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
       <SecureByDesign />
     </Box>
     <Magic magic={magic} zIndex={1} marginTop="-3em" />
-    <Cases />
+    <Cases marginTop="-3em" />
   </Box>
 );
 

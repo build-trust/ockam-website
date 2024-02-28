@@ -56,7 +56,7 @@ const SideBySidePanel: FC<Props> = ({
       };
     if (isMinimal) {
       return {
-        borderRadius: '2xl',
+        borderRadius: { sm: 0, md: '2xl' },
         backgroundColor: 'white',
         boxShadow: '2xl',
         overflow: 'hidden',

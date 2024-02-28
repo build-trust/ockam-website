@@ -44,7 +44,6 @@ const RotatingHeading: FC<Props> = ({ text }) => {
         }
         return p;
       });
-      return parts.join();
     }
     return text;
   };
@@ -64,7 +63,7 @@ const RotatingHeading: FC<Props> = ({ text }) => {
         style={{ textWrap: 'balance' }}
         maxW="20em"
       >
-        {message()}&nbsp;
+        {message()}
       </Heading>
     </Box>
   );
