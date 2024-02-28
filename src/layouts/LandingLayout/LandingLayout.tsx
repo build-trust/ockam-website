@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode, useRef } from 'react';
-import { Box, Flex, ResponsiveValue } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 import MobileNavbarProvider from '@contextProviders/MobileNavbarProvider';
 
@@ -14,24 +14,18 @@ type Props = {
 };
 const LandingLayout: FunctionComponent<Props> = ({ hideNav, children }) => {
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerHeight = `${headerRef.current?.clientHeight || 40}px`;
 
   const nav = (): ReactNode => {
     if (hideNav) return <></>;
     /* @ts-ignore */
     return <LandingLayoutHeader ref={headerRef} />;
   };
-  const headerPadding = (): ResponsiveValue<
-    ((string & {}) | number) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
-  > => {
-    if (hideNav) return { base: 0, lg: 0 };
-    return { base: 0, lg: headerHeight };
-  };
+
   return (
     <MobileNavbarProvider>
       {nav()}
       <Flex direction="column" minH="full" w="full" overflowX="hidden" className={styles.container}>
-        <Box as="main" flex={1} w="full" pt={headerPadding()}>
+        <Box as="main" flex={1} w="full" pt={0}>
           {children}
         </Box>
 

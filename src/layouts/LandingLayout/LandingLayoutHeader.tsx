@@ -1,20 +1,17 @@
-import { FunctionComponent, useContext, RefObject } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { Box, Container, Flex, forwardRef } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import LogoDark from '@assets/logo-dark.svg';
 import MainLayoutMobileNav from '@layouts/MainLayout/MainLayoutMobileNav';
 import { MainLayoutDesktopNav } from '@layouts/MainLayout/MainLayoutDesktopNav';
-import useScroll from '@hooks/useScroll';
 import { HOME_PATH } from '@consts/paths';
 import { MobileNavbarContext } from '@contextProviders/MobileNavbarProvider';
 
 import LayoutMobileHeader from '../components/LayoutMobileHeader';
 
 const LandingLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
-  const { isScrolled } = useScroll(40, true, ref as RefObject<HTMLDivElement>);
   const { isBelowSmallLaptop } = useContext(MobileNavbarContext);
-  const headerDesktopPaddingY = isScrolled ? 5 : 8;
 
   if (isBelowSmallLaptop) {
     return (
@@ -33,8 +30,8 @@ const LandingLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
       top={0}
       zIndex={10}
       bgColor="white"
-      boxShadow={isScrolled ? 'md' : 'none'}
-      py={{ base: 4, lg: headerDesktopPaddingY }}
+      boxShadow="md"
+      py={{ base: 4 }}
       transition="all 400ms ease-in-out"
     >
       <Container variant="section" display="flex" w="full">
@@ -45,8 +42,8 @@ const LandingLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
                 as={LogoDark}
                 alt="Homepage link"
                 transition="all 400ms ease-in-out"
-                w={{ base: '7.875rem', lg: isScrolled ? '8.75rem' : '11rem' }}
-                h={{ base: '2.25rem', lg: isScrolled ? '2.5rem' : '3.125rem' }}
+                w={{ base: '7.875rem', lg: '8.75rem' }}
+                h={{ base: '2.25rem', lg: '2.5rem' }}
               />
             </Box>
           </Link>

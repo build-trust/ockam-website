@@ -6,6 +6,7 @@ import {
   Link as ChakraLink,
   ResponsiveValue,
   useTheme,
+  BoxProps,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
@@ -41,6 +42,7 @@ const HeroBox = styled(Box)`
   overflow: hidden;
   position: relative;
 `;
+
 type Props = {
   text?: string;
   subtext?: string;
@@ -49,9 +51,9 @@ type Props = {
   animate?: boolean;
   aspect?: 'width' | 'height';
   darkGradient?: boolean;
-  minH?: ResponsiveValue<string & {}>;
   animationStartAt?: number;
-};
+} & BoxProps;
+
 const Hero: FunctionComponent<Props> = ({
   text,
   subtext,
@@ -60,8 +62,8 @@ const Hero: FunctionComponent<Props> = ({
   animate,
   aspect,
   darkGradient,
-  minH,
   animationStartAt,
+  ...restProps
 }) => {
   const { gradients } = useTheme();
 
@@ -104,7 +106,7 @@ const Hero: FunctionComponent<Props> = ({
     | undefined => {
     const standard = { base: '5em', sm: '6em', md: '8em', lg: '10em' };
     if (!text) return standard;
-    if (text?.length > 40) return { base: '3xl', lg: '4xl' };
+    if (text?.length > 33) return { base: '3em', md: '5em', lg: '8em' };
     return standard;
   };
   const calculatedLineHeight = (): ResponsiveValue<number> => {
@@ -165,7 +167,7 @@ const Hero: FunctionComponent<Props> = ({
     return <></>;
   };
   return (
-    <HeroBox minH={minH}>
+    <HeroBox {...restProps}>
       <Container
         variant="section"
         pt={{ base: 0, lg: 0 }}

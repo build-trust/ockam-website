@@ -107,7 +107,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   )}&template=landing&features=${encodeURIComponent(feats)}`;
 
   return (
-    <Box pt={{ base: 0, lg: 10 }}>
+    <Box pt={{ base: 0 }}>
       <SEOHead title={title} ogImageSrc={ogImage} />
       <Hero
         text={text}
@@ -117,6 +117,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
         animate={animate || false}
         aspect={imageAspect}
         animationStartAt={animationStartAt}
+        pt={32}
       />
 
       <Flex
