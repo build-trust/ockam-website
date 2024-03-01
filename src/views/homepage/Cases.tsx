@@ -139,13 +139,7 @@ const Cases: FunctionComponent<FlexProps> = ({ ...restProps }) => (
     width="100%"
     {...restProps}
   >
-    <GradientContainer
-      h="80vh"
-      minH="40em"
-      flexDir="column"
-      justifyContent="flex-start"
-      mb={{ base: '-14em', sm: '-14em', md: '-14em', lg: '-14em' }}
-    >
+    <GradientContainer flexDir="column" justifyContent="flex-start" pt={32} h1={14} h2={6}>
       <Hero
         text="Use _Cases_"
         subtext="To orchestrate <end-to-end encryption|mutual authentication|key management|credential management|authorization policy enforcement> &mdash; at massive&nbsp;scale"

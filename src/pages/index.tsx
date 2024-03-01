@@ -126,15 +126,8 @@ interface StaticProps {
 
 const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
   <Box pt={0}>
-    <GradientContainer
-      bottomOnly
-      pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}
-      minH="100vh"
-    >
-      <Hero
-        subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere"
-        minH="40vh"
-      />
+    <GradientContainer bottomOnly pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}>
+      <Hero subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere" />
     </GradientContainer>
     <Box
       pt={{ base: 4, lg: 4 }}
@@ -145,7 +138,7 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
       background="white"
       maxW="container.max"
       mx={{ base: 0, xl: 'auto' }}
-      mt="-14em"
+      mt="-17em"
       position="relative"
       zIndex={2}
     >

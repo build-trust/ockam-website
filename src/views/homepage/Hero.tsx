@@ -203,7 +203,7 @@ const Hero: FunctionComponent<Props> = ({
             </ChakraLink>
           </Heading>
           {ctas()}
-          <RotatingHeading text={subtext} size={subtextSize} />
+          <RotatingHeading text={subtext} size={subtextSize} as="h2" />
         </Box>
         {image && (
           <Box

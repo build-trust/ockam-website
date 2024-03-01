@@ -35,14 +35,7 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
     id="magic"
     {...restProps}
   >
-    <GradientContainer
-      height="75vh"
-      minH="50em"
-      flexDir="column"
-      justifyContent="flex-start"
-      pt={0}
-      mb={{ base: '-8em', sm: '-11em', md: '-10em', lg: '-11em' }}
-    >
+    <GradientContainer flexDir="column" justifyContent="flex-start" pt={32} h1={14} h2={6}>
       <Hero
         text="The _Magic_"
         subtext="That means you can <stop punching holes in firewalls|stop sending plaintext data through kafka|stop exposing private databases|stop asking your customers to setup VPNs|skip the need for PrivateLink|stop exposing data via reverse proxies>"

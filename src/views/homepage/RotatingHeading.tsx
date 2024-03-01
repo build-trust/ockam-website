@@ -1,13 +1,14 @@
 import { FC, ReactNode } from 'react';
-import { Box, Heading, ResponsiveValue, useTheme } from '@chakra-ui/react';
+import { As, Box, Heading, ResponsiveValue, useTheme } from '@chakra-ui/react';
 
 import RotatingText from '@root/components/RotatingText';
 
 type Props = {
   text?: string;
   size?: ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>;
+  as?: As;
 };
-const RotatingHeading: FC<Props> = ({ text, size }) => {
+const RotatingHeading: FC<Props> = ({ text, size, as }) => {
   const { gradients } = useTheme();
   const re = /<(.+)>/;
 
@@ -52,7 +53,7 @@ const RotatingHeading: FC<Props> = ({ text, size }) => {
   return (
     <Box mb={10}>
       <Heading
-        as="h1"
+        as={as || 'h1'}
         fontSize={size || { base: '2em', sm: '3em', md: '3em', lg: '3em' }}
         fontWeight="medium"
         textAlign="center"
