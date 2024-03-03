@@ -13,9 +13,6 @@ import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import crypto from 'crypto';
 
-// import { BUILD_DEMO } from '@root/consts/externalResources';
-// import { CONTACT_FORM_PATH } from '@root/consts/paths';
-
 import ExcalidrawAnimation from '@root/components/ExcalidrawAnimation';
 
 import RotatingHeading from './RotatingHeading';
@@ -109,15 +106,6 @@ const Hero: FunctionComponent<Props> = ({
     );
   };
 
-  const calculatedHeadingSize = ():
-    | ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>
-    | undefined => {
-    if (textSize) return textSize;
-    const standard = { base: '5em', sm: '6em', md: '8em', lg: '10em' };
-    if (!text) return standard;
-    if (text?.length > 33) return { base: '3em', md: '5em', lg: '8em' };
-    return standard;
-  };
   const calculatedLineHeight = (): ResponsiveValue<number> => {
     const standard = { base: 1, lg: 1 };
     if (!text) return standard;
@@ -179,31 +167,22 @@ const Hero: FunctionComponent<Props> = ({
     <HeroBox {...restProps}>
       <Container
         variant="section"
+        px={0}
         pt={{ base: 0, lg: 0 }}
         pb={{ base: 0, lg: 0 }}
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
+        maxW="unset"
       >
         <Box width="100%">
-          <Heading
-            as="h1"
-            fontSize={calculatedHeadingSize()}
-            fontWeight="extrabold"
-            textAlign="center"
-            color="white"
-            letterSpacing="-0.06em"
-            mt={0}
-            lineHeight={calculatedLineHeight()}
-            width="100%"
-            mb={4}
-          >
+          <Heading as="h1" variant="dynamicSizeh1" lineHeight={calculatedLineHeight()}>
             <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>
               {heroText()}
             </ChakraLink>
           </Heading>
           {ctas()}
-          <RotatingHeading text={subtext} size={subtextSize} as="h2" />
+          <RotatingHeading text={subtext} as="h2" />
         </Box>
         {image && (
           <Box
@@ -213,6 +192,7 @@ const Hero: FunctionComponent<Props> = ({
             background="white"
             borderTopLeftRadius="3xl"
             borderTopRightRadius="3xl"
+            maxW="container.max"
           >
             <ExcalidrawAnimation
               src={image}

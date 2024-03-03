@@ -124,7 +124,6 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
         w="full"
         pt={{ base: 12, md: 24 }}
         pb={{ base: 24, md: 32 }}
-        maxW="container.max"
         px={{
           base: 5,
           lg: 20,

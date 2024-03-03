@@ -21,6 +21,39 @@ const Heading = {
       fontSize: { base: 'xl', lg: '2xl' },
     },
   },
+  variants: {
+    dynamicSizeh1: {
+      fontWeight: 'extrabold',
+      textAlign: 'center',
+      color: 'white',
+      letterSpacing: '-0.06em',
+      width: '100%',
+      mb: 4,
+      mt: 0,
+      '@media (orientation: landscape)': {
+        fontSize: '18vh',
+      },
+      '@media (orientation: portrait)': {
+        fontSize: '20vw',
+      },
+    },
+    dynamicSizeh2: {
+      textWrap: 'balance',
+      letterSpacing: '-0.08em',
+      color: 'rgba(255, 255, 255, 0.8)',
+      textAlign: 'center',
+      fontWeight: 'medium',
+      mx: 'auto',
+      maxW: '20em',
+      lineHeight: '1.2em',
+      '@media (orientation: landscape)': {
+        fontSize: '5vh',
+      },
+      '@media (orientation: portrait)': {
+        fontSize: '6vw',
+      },
+    },
+  },
 };
 
 export default Heading;

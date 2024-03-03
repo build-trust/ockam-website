@@ -1,14 +1,14 @@
 import { FC, ReactNode } from 'react';
-import { As, Box, Heading, ResponsiveValue, useTheme } from '@chakra-ui/react';
+import { As, Box, Heading, useTheme } from '@chakra-ui/react';
 
 import RotatingText from '@root/components/RotatingText';
 
 type Props = {
   text?: string;
-  size?: ResponsiveValue<(string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'>;
   as?: As;
 };
-const RotatingHeading: FC<Props> = ({ text, size, as }) => {
+
+const RotatingHeading: FC<Props> = ({ text, as }) => {
   const { gradients } = useTheme();
   const re = /<(.+)>/;
 
@@ -52,22 +52,12 @@ const RotatingHeading: FC<Props> = ({ text, size, as }) => {
 
   return (
     <Box mb={10}>
-      <Heading
-        as={as || 'h1'}
-        fontSize={size || { base: '2em', sm: '3em', md: '3em', lg: '3em' }}
-        fontWeight="medium"
-        textAlign="center"
-        color="rgba(255, 255, 255, 0.8)"
-        letterSpacing="-0.08em"
-        lineHeight={{ base: 1, lg: 1.2 }}
-        mx="auto"
-        style={{ textWrap: 'balance' }}
-        maxW="20em"
-      >
+      <Heading as={as || 'h1'} variant={`dynamicSize${as || 'h1'}`}>
         {message()}
       </Heading>
     </Box>
   );
 };
 
+export type { Props };
 export default RotatingHeading;

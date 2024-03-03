@@ -29,7 +29,6 @@ const AnimatedContainer = styled(animated.div)`
   overflow-x: visible;
   overflow-y: hidden;
   display: inline-block;
-  font-size: 1em;
   height: 1.4em;
   width: auto;
   vertical-align: middle;
