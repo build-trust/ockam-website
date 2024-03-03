@@ -9,7 +9,7 @@ import {
   BoxProps,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 import styled from 'styled-components';
 import crypto from 'crypto';
 
@@ -49,6 +49,7 @@ type Props = {
   aspect?: 'width' | 'height';
   darkGradient?: boolean;
   animationStartAt?: number;
+  ctas?: ReactElement;
   textSize?: ResponsiveValue<
     (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
   >;
@@ -68,6 +69,7 @@ const Hero: FunctionComponent<Props> = ({
   aspect,
   darkGradient,
   animationStartAt,
+  ctas,
   ...restProps
 }) => {
   const { gradients } = useTheme();
@@ -113,7 +115,8 @@ const Hero: FunctionComponent<Props> = ({
     return standard;
   };
 
-  const ctas = (): JSX.Element => {
+  const insertctas = (): JSX.Element => {
+    if (ctas) return ctas;
     if (landingPage) {
       return (
         <Box textAlign="center" my={14}>
@@ -181,8 +184,8 @@ const Hero: FunctionComponent<Props> = ({
               {heroText()}
             </ChakraLink>
           </Heading>
-          {ctas()}
           <RotatingHeading text={subtext} as="h2" />
+          {insertctas()}
         </Box>
         {image && (
           <Box

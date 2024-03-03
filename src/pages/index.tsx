@@ -1,9 +1,10 @@
 import { FC, ReactElement, ReactNode } from 'react';
-import { Box, Container, Flex, Heading } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Heading } from '@chakra-ui/react';
 import { serialize } from 'next-mdx-remote/serialize';
 import RemarkGFM from 'remark-gfm';
 import RemarkPrism from 'remark-prism';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import Link from 'next/link';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
@@ -13,6 +14,7 @@ import AndIts from '@assets/images/and-its.svg';
 import RotatingText from '@root/components/RotatingText';
 import Magic, { FeatureType } from '@root/views/homepage/Magic';
 import GradientContainer from '@root/layouts/components/GradientContainer';
+import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@root/consts/paths';
 
 const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> => {
   const result = await serialize(content, {
@@ -124,31 +126,55 @@ interface StaticProps {
   props: Props;
 }
 
-const HomePage: NextPageWithLayout<Props> = ({ magic }) => (
-  <Box pt={0}>
-    <GradientContainer bottomOnly pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}>
-      <Hero subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere" />
-    </GradientContainer>
-    <Box
-      pt={{ base: 4, lg: 4 }}
-      pb={{ base: 20, lg: 24 }}
-      boxShadow="2xl"
-      borderRadius={{ base: 0, lg: '15' }}
-      borderStyle="none"
-      background="white"
-      maxW="container.max"
-      mx={{ base: 0, xl: 'auto' }}
-      mt="-17em"
-      position="relative"
-      zIndex={2}
-    >
-      <Networkless />
-      <SecureByDesign />
+const HomePage: NextPageWithLayout<Props> = ({ magic }) => {
+  const buttonStyles = {
+    borderColor: 'white',
+    color: 'white',
+    _hover: {
+      background: 'white',
+      color: 'avocado.500',
+    },
+  };
+  const heroCTAs = (): ReactElement => (
+    <Flex width="100%" justifyContent="space-evenly">
+      <Button as={Link} href={SIGNUP_PATH} variant="outline" {...buttonStyles}>
+        Get Started
+      </Button>
+      <Button as={Link} href={CONTACT_PAGE_PATH} variant="outline" {...buttonStyles}>
+        Contact Us
+      </Button>
+    </Flex>
+  );
+
+  return (
+    <Box pt={0}>
+      <GradientContainer bottomOnly pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}>
+        <Hero
+          subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere"
+          ctas={heroCTAs()}
+        />
+      </GradientContainer>
+      <Box
+        pt={{ base: 4, lg: 4 }}
+        pb={{ base: 20, lg: 24 }}
+        boxShadow="2xl"
+        borderRadius={{ base: 0, lg: '15' }}
+        borderStyle="none"
+        background="white"
+        maxW="container.max"
+        mx={{ base: 0, xl: 'auto' }}
+        mt="-17em"
+        position="relative"
+        zIndex={2}
+      >
+        <Networkless />
+        <SecureByDesign />
+      </Box>
+      <Magic magic={magic} zIndex={1} marginTop="-3em" />
+      <Cases marginTop="-3em" />
     </Box>
-    <Magic magic={magic} zIndex={1} marginTop="-3em" />
-    <Cases marginTop="-3em" />
-  </Box>
-);
+  );
+};
 
 export async function getStaticProps(): Promise<StaticProps> {
   return {
