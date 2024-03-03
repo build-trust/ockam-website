@@ -1,5 +1,5 @@
-import { FC, ReactElement, ReactNode } from 'react';
-import { Box, Button, Container, Flex, Heading } from '@chakra-ui/react';
+import { ReactElement, ReactNode } from 'react';
+import { Box, Button, Flex } from '@chakra-ui/react';
 import { serialize } from 'next-mdx-remote/serialize';
 import RemarkGFM from 'remark-gfm';
 import RemarkPrism from 'remark-prism';
@@ -8,11 +8,8 @@ import Link from 'next/link';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
-import { Hero, Cases } from '@views/homepage';
-import ItsSimple from '@assets/images/its-simple-with.svg';
-import AndIts from '@assets/images/and-its.svg';
-import RotatingText from '@root/components/RotatingText';
-import Magic, { FeatureType } from '@root/views/homepage/Magic';
+import { Hero, Cases, SecureByDesign, Networkless, Magic } from '@views/homepage';
+import { FeatureType } from '@root/views/homepage/Magic';
 import GradientContainer from '@root/layouts/components/GradientContainer';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@root/consts/paths';
 
@@ -24,99 +21,6 @@ const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> 
   });
   return result;
 };
-
-const Networkless: FC = () => (
-  <Container variant="section" mb={{ base: 40, sm: 40, md: 12 }} pt={{ base: 16, sm: 16, md: 0 }}>
-    <Flex
-      direction="row-reverse"
-      width="100%"
-      justifyContent={{ base: 'flex-end', sm: 'flex-end', md: 'space-evenly' }}
-    >
-      <Box
-        // width={{ base: '70%', sm: '33%' }}
-        // marginLeft={{ base: '30%', sm: '70%', md: '50%', lg: '50%' }}
-        // height="180px"
-        display={{ base: 'none', sm: 'none', md: 'block' }}
-      >
-        <ItsSimple width="100%" preserveAspectRatio="xMinYMin meet" height="239px" />
-      </Box>
-      <Box mt={{ base: '180px' }}>
-        <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
-          Networkless connectivity
-        </Heading>
-        <Heading size="h4" as="h3">
-          Ockam works at the application layer.
-        </Heading>
-        <Heading as="h3" size="md" color="gray.500" fontWeight="500" letterSpacing="-0.07em">
-          When application security is decoupled from your network, <br />
-          you can skip the pain of{' '}
-          <RotatingText
-            interval={3000}
-            delay={4000}
-            words={[
-              'implicit trust in your network',
-              'firewalls',
-              'VPNs',
-              'reverse proxies',
-              'certificate management',
-              'IP lists',
-              'IT backlogs',
-              'sysadmins',
-            ]}
-          />
-          .
-        </Heading>
-      </Box>
-    </Flex>
-  </Container>
-);
-
-const SecureByDesign: FC = () => (
-  <Container
-    variant="section"
-    style={{ clear: 'both' }}
-    mb={{ base: 40, sm: 40, md: 12 }}
-    pt={{ base: 16, sm: 16, md: 0 }}
-  >
-    <Flex
-      direction="row"
-      width="100%"
-      justifyContent={{ base: 'flex-start', sm: 'flex-start', md: 'space-evenly' }}
-    >
-      <Box
-        // width={{ base: '100%', sm: '53%' }}
-        // ml={{ base: '0', sm: '10%', md: '10%', lg: '25%' }}
-        display={{ base: 'none', sm: 'none', md: 'block' }}
-      >
-        <AndIts width="100%" preserveAspectRatio="xMinYMin meet" height="180px" />
-      </Box>
-
-      <Box
-        // flexGrow="1"
-        pt={{ base: '160px' }}
-        // ml={{ base: 0, sm: 0, md: 8 }}
-        // mt={{ base: 0, sm: 0, md: '-10%', lg: '-5%' }}
-        // w={{ base: '100%' }}
-      >
-        <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
-          Secure-by-design
-        </Heading>
-        <Heading size="h4" as="h3">
-          Ockam is{' '}
-          <RotatingText
-            interval={3000}
-            delay={4000}
-            words={['audited', 'point-to-point', 'open source', 'zero trust']}
-          />
-          .
-        </Heading>
-        <Heading as="h3" size="md" color="gray.500" fontWeight="500" letterSpacing="-0.07em">
-          So your applications can be secure too.
-        </Heading>
-      </Box>
-    </Flex>
-  </Container>
-);
 
 interface Props {
   magic: FeatureType[];
