@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { CONTACT_FORM_PATH, SIGNUP_PATH } from '@consts/paths';
+import { isSignedIn } from '@root/components/Auth';
 
 const SignUpButton = styled(Button)`
   background: white;
@@ -42,7 +43,8 @@ const MainLayoutCtaButtons: FunctionComponent<Props> = ({ landingPage }) => {
         </Link>
       );
     }
-    return <>{signup()}</>;
+    if (!isSignedIn()) return <>{signup()}</>;
+    return <></>;
   };
 
   return (
