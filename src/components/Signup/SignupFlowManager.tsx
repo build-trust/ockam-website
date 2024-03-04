@@ -165,7 +165,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const displayBack = (): boolean => activeStep > 0;
 
   return (
-    <Flex mx="auto" mb="32" p={8} direction={{ base: 'row' }} w="100%">
+    <Flex mx="auto" pb="32" p={8} direction={{ base: 'row' }} w="100%">
       <Box>
         <Steps
           variant="circles"

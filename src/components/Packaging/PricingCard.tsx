@@ -52,6 +52,7 @@ interface PricingCardProps extends CardProps {
   slim?: boolean;
   fade?: boolean;
   current?: boolean;
+  showPrice?: boolean;
 }
 
 interface PriceProps {
@@ -62,9 +63,10 @@ interface PriceProps {
   onlyFloor?: boolean;
   segmentColor: string;
   slim?: boolean;
+  showPrice?: boolean;
 }
 const Price = (props: PriceProps): JSX.Element => {
-  const { price, unit, interval, floor, onlyFloor, segmentColor, slim } = props;
+  const { price, unit, interval, floor, onlyFloor, segmentColor, slim, showPrice } = props;
 
   const fontSize = (): ResponsiveValue<
     (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
@@ -133,6 +135,7 @@ const Price = (props: PriceProps): JSX.Element => {
     return undefined;
   };
 
+  if (showPrice === false) return <></>;
   return (
     <VStack my={slim ? 0 : 4} align="left">
       {onlyFloor && <Text fontSize="xs">Starting at</Text>}
@@ -164,6 +167,7 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
     slim,
     fade,
     current,
+    showPrice,
     ...rest
   } = props;
   const { features, price, priceUnit, priceInterval, name, floor, onlyFloor } = data;
@@ -224,6 +228,7 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
           onlyFloor={onlyFloor}
           segmentColor={segmentColor}
           slim={slim}
+          showPrice={showPrice}
         />
       </Stack>
       {button}

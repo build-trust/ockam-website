@@ -13,7 +13,16 @@ import {
 } from '@chakra-ui/react';
 import { HiCheck } from 'react-icons/hi';
 
-import { SEGMENTS, TIERS, Tier, darken, gentlyLighten } from '@root/components/Packaging/tiers';
+import {
+  FEATURES,
+  Feature,
+  SEGMENTS,
+  TIERS,
+  Tier,
+  darken,
+  gentlyLighten,
+  tierLimit,
+} from '@root/components/Packaging/tiers';
 import PricingCard from '@root/components/Packaging/PricingCard';
 import ActionButton from '@root/components/Packaging/ActionButton';
 import { User } from '@root/components/Auth';
@@ -123,6 +132,41 @@ const ChoosePlan: FC<Props> = ({
     return p;
   }, [] as number[]);
 
+  const hasFeature = (tier: Tier, feature: Feature): boolean => {
+    if (feature.tiers.indexOf('*') >= 0) return true;
+    if (feature.tiers.indexOf(tier.name) >= 0) return true;
+    return false;
+  };
+
+  const CARDS = TIERS.filter((tier) => !['Platform'].includes(tier.name)).map((tier, idx) => {
+    const features = FEATURES.filter((f) => f.onCard)
+      .filter((feature) => {
+        const segment = SEGMENTS.find((s) => s.tiers.includes(tier.name));
+        if (idx > 0) {
+          if (feature.hasLimits) {
+            if (tierLimit(tier, feature) === tierLimit(TIERS[idx - 1], feature)) {
+              return false;
+            }
+            return true;
+          }
+          // if (feature.tiers.indexOf('*') >= 0) return false;
+          if (hasFeature(TIERS[idx - 1], feature) && segment?.tiers.includes(TIERS[idx - 1].name))
+            return false;
+        }
+        if (feature.tiers.indexOf('*') >= 0) return true;
+        if (feature.tiers.indexOf(tier.name) >= 0) return true;
+        return false;
+      })
+      .map((feature) => {
+        const f = { ...feature };
+        if (f.hasLimits) {
+          f.limits = tierLimit(tier, feature);
+        }
+        return f;
+      });
+    return { ...tier, features, tier };
+  });
+
   const planSelection = (): ReactElement => (
     <>
       <Heading as="h2" size="h2" mb="8">
@@ -172,41 +216,51 @@ const ChoosePlan: FC<Props> = ({
               <Flex
                 direction={{ base: 'column', xl: 'row' }}
                 gap={4}
-                alignItems={{ base: 'start' }}
+                alignItems={{ base: 'stretch' }}
                 mt={4}
               >
-                {TIERS.filter((tier) => segment.tiers.includes(tier.name)).map((tier) => (
+                {CARDS.filter((card) => segment.tiers.includes(card.name)).map((card) => (
                   <PricingCard
-                    key={tier.name}
-                    slim
-                    fade={purchasing && purchasedPlan !== tier.name}
+                    key={card.name}
                     data={{
-                      price: tier.price,
-                      name: tier.name,
-                      priceUnit: tier.price_unit,
-                      priceInterval: tier.price_interval,
-                      floor: tier.floor,
-                      onlyFloor: tier.onlyFloor,
+                      price: card.price,
+                      name: card.name,
+                      priceUnit: card.price_unit,
+                      priceInterval: card.price_interval,
+                      features: card.features,
+                      floor: card.floor,
+                      onlyFloor: card.onlyFloor,
                     }}
-                    current={currentPlan === tier.name}
+                    fade={purchasing && purchasedPlan !== card.name}
+                    showPrice={segment.name !== 'Companies'}
                     segmentColor={segment.color}
                     borderStyle="solid"
                     borderColor="#ddd"
                     borderWidth="1px"
                     borderRadius={15}
-                    isPopular={tier.isPopular}
+                    isPopular={card.isPopular}
                     display="flex"
                     flexDirection="column"
+                    previousTier={
+                      TIERS[
+                        TIERS.findIndex(
+                          (tier: Tier) =>
+                            tier.name ===
+                            segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
+                        )
+                      ]
+                    }
                     button={
                       <ActionButton
                         variant="outline"
                         borderWidth="2px"
                         href="#"
                         onClick={onClick}
-                        data-plan={tier.name}
+                        data-plan={card.name}
                         border="none"
                         mt="4"
-                        isLoading={!purchased && purchasedPlan === tier.name}
+                        mb={8}
+                        isLoading={!purchased && purchasedPlan === card.name}
                         leftIcon={purchased ? <HiCheck /> : undefined}
                         borderColor={darken(segment.color)}
                         color={darken(segment.color)}
@@ -216,7 +270,7 @@ const ChoosePlan: FC<Props> = ({
                           color: gentlyLighten(segment.color),
                         }}
                       >
-                        {!purchased && cta(tier, currentPlan)}
+                        {!purchased && cta(card.tier, currentPlan)}
                       </ActionButton>
                     }
                   />

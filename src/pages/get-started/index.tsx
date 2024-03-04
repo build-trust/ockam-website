@@ -34,7 +34,9 @@ const DownloadPage: NextPageWithLayout<Props> = ({ install }) => (
   </Box>
 );
 
-DownloadPage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
+DownloadPage.getLayout = (page: ReactElement): ReactNode => (
+  <MainLayout backgroundColor="#f9f9f9">{page}</MainLayout>
+);
 
 export async function getStaticProps(): Promise<StaticProps> {
   // MDX text - can be from a local file, database, anywhere
