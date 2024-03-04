@@ -34,8 +34,9 @@ const Video: FC<Props> = ({ title, videoId, ...restProps }) => {
         onClick={onOpen}
         variant="link"
         p={4}
+        mb={4}
         boxShadow="2xl"
-        borderRadius={{ base: 0, lg: '15' }}
+        borderRadius="15"
         borderStyle="none"
         background="white"
         position="relative"
@@ -104,9 +105,9 @@ const Videos: FC = () => (
       />
     </GradientContainer>
     <Container variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
-      <Flex width="100%" justifyContent="space-evenly">
+      <Flex width="100%" justifyContent="space-evenly" flexWrap="wrap">
         {vids.map(({ title, id }) => (
-          <Video title={title} videoId={id} maxW="23%" />
+          <Video title={title} videoId={id} maxW="23%" minW="400px" />
         ))}
       </Flex>
     </Container>
