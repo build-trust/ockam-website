@@ -66,8 +66,8 @@ const Packages: FunctionComponent = () => {
   }, [] as number[]);
 
   return (
-    <Container id="pricing" variant="section" py={{ base: 16, lg: 24 }} px={0} width="100%">
-      <Box as="section" py="14" px={{ base: '4', md: '8' }} style={{ width: '100%' }}>
+    <Container id="pricing" variant="section" pt={0} pb={{ base: 16, lg: 24 }} px={0} width="100%">
+      <Box as="section" py={0} px={{ base: '4', md: '8' }} style={{ width: '100%' }}>
         <Accordion style={{ width: '100%' }} allowMultiple defaultIndex={expanded}>
           {SEGMENTS.map((segment) => (
             <AccordionItem

@@ -22,11 +22,8 @@ const PricingPage: NextPageWithLayout = () => (
     <GradientContainer
       bottomOnly
       pt={{ base: '15em' }}
-      h="85vh"
-      minH="40em"
       flexDir="column"
       style={{ justifyContent: 'flex-start' }}
-      mb="-25em"
     >
       <Heading
         as="h1"
