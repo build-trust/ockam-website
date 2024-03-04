@@ -46,7 +46,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     if (user) {
       const r = await Auth0Api.managementApi.getUserMetadata(user.token, user.userId);
       if (r) {
-        return r.data.user_metadata.plan;
+        return r.data.user_metadata?.plan;
       }
     }
     return undefined;

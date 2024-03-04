@@ -178,15 +178,7 @@ const TIERS: Tier[] = [
 ];
 
 const FEATURES: Feature[] = [
-  { name: 'Secure Channels', tiers: ['*'], hasLimits: true, onCard: true },
-  { name: 'Projects', tiers: ['*'], hasLimits: true, onCard: true },
-
-  { name: 'Attribute-based access controls', tiers: ['*'] },
-  { name: 'Ockam Command', tiers: ['*'] },
-  { name: 'Portals for Mac', tiers: ['*'] },
-  { name: 'Programming libraries', tiers: ['*'] },
-  { name: 'Community-based support', tiers: ['Free', 'Premium'], onCard: true },
-  { name: 'Ockam support', tiers: ['Bronze', 'Silver'], onCard: true },
+  { name: 'Bring Your Own Cloud (BYOC)', tiers: ['Business Critical'], onCard: true },
   {
     name: 'Ockam support with Service Level Agreement',
     tiers: ['Gold', 'Business Critical'],
@@ -199,13 +191,22 @@ const FEATURES: Feature[] = [
   },
   { name: 'Long-term contracts', tiers: ['Gold', 'Business Critical'], onCard: true },
   { name: 'Customized terms', tiers: ['Gold', 'Business Critical'] },
-  { name: 'Bring Your Own Cloud (BYOC)', tiers: ['Business Critical'], onCard: true },
-  { name: 'Data transfer cap', tiers: ['Free', 'Premium'], hasLimits: true },
+  { name: 'Ockam support', tiers: ['Bronze', 'Silver', 'Gold', 'Business Critical'], onCard: true },
+  { name: 'Community-based support', tiers: ['*'], onCard: true },
+
+  { name: 'Attribute-based access controls', tiers: ['*'] },
+  { name: 'Ockam Command', tiers: ['*'] },
+  { name: 'Portals for Mac', tiers: ['*'] },
+  { name: 'Programming libraries', tiers: ['*'] },
+  { name: 'Secure Channels', tiers: ['*'], hasLimits: true, onCard: true },
+  { name: 'Projects', tiers: ['*'], hasLimits: true, onCard: true },
+
   {
     name: 'Data transfer',
     tiers: ['Bronze', 'Silver', 'Gold', 'Business Critical'],
     hasLimits: true,
   },
+  { name: 'Data transfer cap', tiers: ['Free', 'Premium'], hasLimits: true },
 ];
 
 const LIMITS: { [id: string]: { [id: string]: string } } = {
