@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
-import { Hero, Cases, SecureByDesign, Networkless, Magic } from '@views/homepage';
+import { Hero, Cases, SecureByDesign, Networkless, Magic, Videos } from '@views/homepage';
 import { FeatureType } from '@root/views/homepage/Magic';
 import GradientContainer from '@root/layouts/components/GradientContainer';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@root/consts/paths';
@@ -76,6 +76,7 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => {
       </Box>
       <Magic magic={magic} zIndex={1} marginTop="-3em" />
       <Cases marginTop="-3em" />
+      <Videos />
     </Box>
   );
 };
@@ -119,7 +120,9 @@ export async function getStaticProps(): Promise<StaticProps> {
 }
 
 HomePage.getLayout = (page: ReactElement): ReactNode => (
-  <MainLayout gradient={['#4FDAB8', '#52C7EA']}>{page}</MainLayout>
+  <MainLayout gradient={['#4FDAB8', '#52C7EA']} backgroundColor="#f9f9f9">
+    {page}
+  </MainLayout>
 );
 
 export default HomePage;

@@ -42,7 +42,7 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
         darkGradient
       />
     </GradientContainer>
-    <Container id="magic" variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
+    <Container variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
       <Box
         pt={{ base: 16, lg: 4 }}
         pb={{ base: 4, lg: 4 }}
