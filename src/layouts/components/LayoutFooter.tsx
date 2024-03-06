@@ -18,7 +18,6 @@ import LogoGray from '@assets/logo-gray.svg';
 import { LINKEDIN, TWITTER, DISCUSSION, DISCORD } from '@consts/externalResources';
 import {
   CONTACT_FORM_PATH,
-  CONTACT_PAGE_PATH,
   MISSION_AND_VISION_PATH,
   SIGNUP_PATH,
   STYLE_GUIDE_PATH,
@@ -110,7 +109,7 @@ const NAV = [
       { name: 'Build Trust community Discord', href: DISCORD.href, isExternal: true },
       {
         name: 'Support',
-        href: CONTACT_PAGE_PATH,
+        href: CONTACT_FORM_PATH,
         isExternal: false,
       },
       { ...LINKEDIN, isExternal: true },

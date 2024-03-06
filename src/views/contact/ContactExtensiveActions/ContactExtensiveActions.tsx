@@ -36,7 +36,7 @@ const CONTACT_EXTENSIVE_ACTIONS_CARDS = [
 ];
 
 const ContactExtensiveActions: FunctionComponent = () => (
-  <Box w="full" mt={{ base: 14, lg: 30 }} mb={5} py={{ base: 16, lg: 24 }} bgColor="gray.50">
+  <Box w="full" mt={{ base: 14, lg: 30 }} mb={5} py={{ base: 16, lg: 24 }} bgColor="white">
     <Container variant="section">
       <SimpleGrid columns={{ base: 1, lg: 3 }} rowGap={{ base: 10, lg: 0 }} w={{ lg: 'full' }}>
         {CONTACT_EXTENSIVE_ACTIONS_CARDS.map((card) => (
