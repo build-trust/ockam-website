@@ -11,7 +11,7 @@ import MainLayout from '@layouts/MainLayout';
 import { Hero, Cases, SecureByDesign, Networkless, Magic, Videos } from '@views/homepage';
 import { FeatureType } from '@root/views/homepage/Magic';
 import GradientContainer from '@root/layouts/components/GradientContainer';
-import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@root/consts/paths';
+import { CONTACT_FORM_PATH, SIGNUP_PATH } from '@root/consts/paths';
 import { AllPageMessage } from '@root/components/AllPageNotice';
 import allPageMessage from '@root/utils/appPageMessage';
 
@@ -47,7 +47,7 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => {
       <Button as={Link} href={SIGNUP_PATH} variant="outline" {...buttonStyles}>
         Get Started
       </Button>
-      <Button as={Link} href={CONTACT_PAGE_PATH} variant="outline" {...buttonStyles}>
+      <Button as={Link} href={CONTACT_FORM_PATH} variant="outline" {...buttonStyles}>
         Contact Us
       </Button>
     </Flex>
