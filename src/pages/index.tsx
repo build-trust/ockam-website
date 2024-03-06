@@ -92,11 +92,15 @@ export async function getStaticProps(): Promise<StaticProps> {
           image: 'portals',
           title: 'Portals',
           mdx: await mdxSerialize(`
-          Portals carry various protocols over end-to-end encrypted Ockam secure channels. They work at the application level and 
-          abstract away the setup, management, and security of the network layer. When application connectivity and security is 
-          decoupled from your network, you no longer need to wait for your IT team to give you permissions to build connections.
+          Portals carry various protocols over end-to-end encrypted Ockam secure 
+          channels. They work at the application level and abstract away the 
+          setup, management, and security of the network layer. 
+
+          When you decouple application connectivity and security from your 
+          network, you can build secure systems without touching the network.
           
-          No port forwarding, no changes to firewalls, no VPNs, no reverse proxies, no Private Link&hellip; get systems connected within minutes.
+          No port forwarding, no changes to firewalls, no VPNs, no reverse 
+          proxies, no Private Link… get systems connected within minutes.
           `),
         },
 
@@ -104,18 +108,19 @@ export async function getStaticProps(): Promise<StaticProps> {
           image: 'virtual-adjacency',
           title: 'Virtual Adjacency',
           mdx: await mdxSerialize(`
-          The magical thing that Ockam unlocks via Portals is what we call Virtual Adjacency. 
+          The magical thing that Ockam unlocks using Portals is what's called 
+          Virtual Adjacency.
 
-          The Portal connects your application to a remote application, and _virtually_ 
-          pulls it through the portal so that it appears as though they sit next
-          to each other on the same machine. That means applications are available 
-          to each other on \`localhost\` in a peer-to-peer way. 
-          
-          What we don't have to do in this scenario is change any of the network 
-          layer configurations or really need to understand anything at the 
-          network layer at all. 
-          
-          In this way we say Ockam is networkless.`),
+          A Portal connects your app to a remote application and virtually pulls 
+          it through the Portal. It appears as though they sit next to each 
+          other on the same machine. That means applications are available to 
+          each other on \`localhost\` in a peer-to-peer way.
+
+          You don't have to change any of the network layer configurations. 
+          There's no need to understand anything at the network layer at all.
+
+          In this way we say: **"Ockam is Networkless."**
+          `),
         },
       ],
       allPageMessage: await allPageMessage,
