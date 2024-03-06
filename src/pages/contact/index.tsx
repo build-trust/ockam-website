@@ -39,7 +39,7 @@ const ContactPage: NextPageWithLayout = () => {
   }, [onSuccessContactFormSending, router?.query.contactFormStatus]);
 
   return (
-    <Box pt={{ base: 10, lg: 20 }}>
+    <Box>
       <SEOHead subTitle="Contact" />
 
       <Hero />
@@ -48,6 +48,10 @@ const ContactPage: NextPageWithLayout = () => {
   );
 };
 
-ContactPage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
+ContactPage.getLayout = (page: ReactElement): ReactNode => (
+  <MainLayout backgroundColor="#ffffff" paddingTop={{ base: 20, md: 36 }}>
+    {page}
+  </MainLayout>
+);
 
 export default ContactPage;
