@@ -47,16 +47,6 @@ export const MEMBERS = enhanceTeamMembers([
     description: 'Enjoys snowboarding, fishing and surfing',
   },
   {
-    name: 'Nazmul',
-    surname: 'Idris',
-    position: 'Software Engineer',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'nazmul-idris.png',
-    description:
-      'Loves driving fast cars, Rust, developer experience, open source, community, empathy, empowerment',
-  },
-  {
     name: 'Oleksandr',
     surname: 'Deundiak',
     position: 'Engineer',
@@ -118,7 +108,8 @@ export const MEMBERS = enhanceTeamMembers([
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'CA',
     photo: 'sanjeev-nithyanandam.png',
-    description: 'Adventurer who loves biking, hiking and exploring new experiences, all while savoring delicious food along the way',
+    description:
+      'Adventurer who loves biking, hiking and exploring new experiences, all while savoring delicious food along the way',
   },
   {
     name: 'Chris',
@@ -145,7 +136,8 @@ export const MEMBERS = enhanceTeamMembers([
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'US',
     photo: 'chris-hildebrand.png',
-    description: 'Enjoys spending time with family, including two large bernadoodles, and listening to probably too many podcasts.',
+    description:
+      'Enjoys spending time with family, including two large bernadoodles, and listening to probably too many podcasts.',
   },
   {
     name: 'Maryanna',
