@@ -100,6 +100,7 @@ const NAV = [
         isExternal: false,
       },
       { name: 'Privacy Notice', href: '/policies/privacy', isExternal: false },
+      { name: 'Terms of Service', href: '/policies/terms', isExternal: false },
     ],
   },
 

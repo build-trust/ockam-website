@@ -1,7 +1,16 @@
 import { ReactElement, ReactNode } from 'react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { Box, ListItem, ListItemProps, Text, TextProps } from '@chakra-ui/react';
+import {
+  Box,
+  ListItem,
+  ListItemProps,
+  Text,
+  TextProps,
+  OrderedList,
+  ListProps,
+} from '@chakra-ui/react';
 import path from 'path';
+import styled from 'styled-components';
 
 import { generateSlugFromPath, getPageBySlug, pageFilePaths } from '@api/mdxApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
@@ -11,8 +20,34 @@ import mdxComponents from '@components/mdx';
 
 export const POLICIES_PAGE_PATH = path.join(process.cwd(), 'src/content/policies');
 
+const OL = styled(OrderedList)`
+  counter-reset: item;
+
+  & > li {
+    counter-increment: item;
+  }
+
+  & ol > li::marker {
+    content: counters(item, '.') '. ';
+    // margin-left: -20px;
+  }
+
+  & ol ol {
+    // counter-reset: letter;
+    // counter-increment: letter;
+  }
+
+  & ol ol > li {
+    // counter-increment: letter;
+  }
+  & ol ol > li::marker {
+    content: '(' counter(item, lower-alpha) ') ';
+  }
+`;
+
 if (mdxComponents) {
   mdxComponents.p = (props: TextProps): JSX.Element => <Text mb={8} color="inherit" {...props} />;
+  mdxComponents.ol = (props: ListProps): JSX.Element => <OL {...props} />;
   mdxComponents.li = (props: ListItemProps): JSX.Element => (
     <ListItem {...props} mb={2} lineHeight="1.5em" />
   );
