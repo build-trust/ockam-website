@@ -121,15 +121,6 @@ export const MEMBERS = enhanceTeamMembers([
     description: 'Loves big dogs, beach fishing, and restoring cars.',
   },
   {
-    name: 'Colin',
-    surname: 'Lyon',
-    position: 'Account Executive',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'colin-lyon.png',
-    description: 'Loves art, the mountains and building relationships.',
-  },
-  {
     name: 'Chris',
     surname: 'Hildebrand',
     position: 'Engineer',
