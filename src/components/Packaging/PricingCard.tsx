@@ -182,10 +182,10 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
   };
 
   const previousFeatures = (): JSX.Element => {
-    let text = 'Features';
-    if (previousTier) {
-      text = `Everything in ${previousTier.name}, plus`;
-    }
+    const text = 'Features';
+    // if (previousTier) {
+    //   text = `Everything in ${previousTier.name}, plus`;
+    // }
     return (
       <Heading as="h4" size="md" letterSpacing="-0.5px" mb="2">
         {text}
