@@ -55,14 +55,14 @@ const SEGMENTS: Segment[] = [
   },
   {
     name: 'Companies',
-    tiers: ['Bronze', 'Silver', 'Gold'],
+    tiers: ['Bronze', 'Silver', 'Gold', 'Platinum'],
     color: '#3AC6A3',
     expanded: true,
     text: 'Ockam Orchestrator’s Company Editions are enterprise ready, with direct support from the Ockam team, and can elastically scale to your production needs. This product purchased through your cloud marketplace vendor, so you can start building today with your 14 day free trial.',
   },
   {
     name: 'Enterprises',
-    tiers: ['Business Critical'],
+    tiers: ['Enterprise', 'Business Critical'],
     color: '#744D95',
     expanded: false,
     text: 'Ockam Orchestrator is offered in a bring-your-own-cloud (BYOC) Enterprise Edition for companies that are committed to running software entirely within their own network boundaries. These plans are highly customizable. Please contact Ockam’s sales team for a technical consultation.',
@@ -164,10 +164,34 @@ const TIERS: Tier[] = [
   },
 
   {
+    name: 'Platinum',
+    text: 'The Tools for Builders',
+    price: '250000',
+    price_interval: 'yr',
+    onlyFloor: true,
+    cta: {
+      text: 'Talk to sales →',
+      url: `${CONTACT_FORM_PATH}`,
+    },
+    contactSalesOnly: true,
+  },
+  {
+    name: 'Enterprise',
+    text: '',
+    price: '500000',
+    price_interval: 'yr',
+    onlyFloor: true,
+    cta: {
+      text: 'Talk to sales →',
+      url: `${CONTACT_FORM_PATH}`,
+    },
+    contactSalesOnly: true,
+  },
+  {
     name: 'Business Critical',
     text: 'The Tools for Builders',
-    price: '50000',
-    price_interval: 'mo',
+    price: '1000000',
+    price_interval: 'yr',
     onlyFloor: true,
     cta: {
       text: 'Talk to sales →',
@@ -178,27 +202,36 @@ const TIERS: Tier[] = [
 ];
 
 const FEATURES: Feature[] = [
-  { name: 'Bring Your Own Cloud (BYOC)', tiers: ['Business Critical'], onCard: true },
+  { name: 'Bring Your Own Cloud (BYOC) Relays', tiers: ['Business Critical'], onCard: true },
+  {
+    name: 'Bring Your Own Cloud (BYOC) Credential Authorities',
+    tiers: ['Business Critical'],
+    onCard: true,
+  },
   {
     name: 'Ockam support with Service Level Agreement',
-    tiers: ['Gold', 'Business Critical'],
+    tiers: ['Gold', 'Platinum', 'Enterprise', 'Business Critical'],
     onCard: true,
   },
   {
     name: 'Uptime Service Level Agreement',
-    tiers: ['Gold', 'Business Critical'],
+    tiers: ['Gold', 'Platinum', 'Enterprise', 'Business Critical'],
     onCard: true,
   },
   { name: 'Uptime Service Level Objectives', tiers: ['Silver'], onCard: true },
-  { name: 'Pay-as-you-go', tiers: ['*'], onCard: true },
+  { name: 'Pay-as-you-go', tiers: ['Free', 'Premium', 'Bronze', 'Silver', 'Gold'], onCard: true },
   {
     name: 'Production License',
-    tiers: ['Bronze', 'Silver', 'Gold', 'Business Critical'],
+    tiers: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
     onCard: true,
   },
   // { name: 'Long-term contracts', tiers: ['Gold', 'Business Critical'], onCard: true },
-  { name: 'Customized terms', tiers: ['Gold', 'Business Critical'] },
-  { name: 'Ockam support', tiers: ['Bronze', 'Silver', 'Gold', 'Business Critical'], onCard: true },
+  { name: 'Customized terms', tiers: ['Platinum', 'Enterprise', 'Business Critical'] },
+  {
+    name: 'Ockam support',
+    tiers: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
   { name: 'Community-based support', tiers: ['*'], onCard: true },
   { name: 'Dedicated nodes', tiers: ['Gold'], onCard: true },
 
@@ -208,7 +241,28 @@ const FEATURES: Feature[] = [
   { name: 'Programming libraries', tiers: ['*'] },
   { name: 'Secure Channels', tiers: ['*'], hasLimits: true },
   { name: 'Projects', tiers: ['*'], hasLimits: true },
-
+  {
+    name: 'Custom Branding / Whitelabel',
+    tiers: ['Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
+  {
+    name: 'High Availability Relays',
+    tiers: ['Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
+  {
+    name: 'High Availability Credential Authorities',
+    tiers: ['Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
+  { name: 'High Availability Multi-region', tiers: ['Enterprise'], onCard: true },
+  {
+    name: 'High Availability Rendezvous Routing',
+    tiers: ['Enterprise', 'Business Critical'],
+    onCard: true,
+  },
+  { name: 'Custom Routes', tiers: ['Enterprise', 'Business Critical'], onCard: true },
   {
     name: 'Data transfer',
     tiers: ['Bronze', 'Silver', 'Gold', 'Business Critical'],
