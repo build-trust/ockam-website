@@ -189,17 +189,25 @@ const FEATURES: Feature[] = [
     tiers: ['Gold', 'Business Critical'],
     onCard: true,
   },
-  { name: 'Long-term contracts', tiers: ['Gold', 'Business Critical'], onCard: true },
+  { name: 'Uptime Service Level Objectives', tiers: ['Silver'], onCard: true },
+  { name: 'Pay-as-you-go', tiers: ['*'], onCard: true },
+  {
+    name: 'Production License',
+    tiers: ['Bronze', 'Silver', 'Gold', 'Business Critical'],
+    onCard: true,
+  },
+  // { name: 'Long-term contracts', tiers: ['Gold', 'Business Critical'], onCard: true },
   { name: 'Customized terms', tiers: ['Gold', 'Business Critical'] },
   { name: 'Ockam support', tiers: ['Bronze', 'Silver', 'Gold', 'Business Critical'], onCard: true },
   { name: 'Community-based support', tiers: ['*'], onCard: true },
+  { name: 'Dedicated nodes', tiers: ['Gold'], onCard: true },
 
   { name: 'Attribute-based access controls', tiers: ['*'] },
   { name: 'Ockam Command', tiers: ['*'] },
   { name: 'Portals for Mac', tiers: ['*'] },
   { name: 'Programming libraries', tiers: ['*'] },
-  { name: 'Secure Channels', tiers: ['*'], hasLimits: true, onCard: true },
-  { name: 'Projects', tiers: ['*'], hasLimits: true, onCard: true },
+  { name: 'Secure Channels', tiers: ['*'], hasLimits: true },
+  { name: 'Projects', tiers: ['*'], hasLimits: true },
 
   {
     name: 'Data transfer',
