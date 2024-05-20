@@ -96,14 +96,17 @@ const Packages: FunctionComponent = () => {
                   {segment.text}
                 </Text>
                 <SimpleGrid
-                  // columns={[1, null]}
-                  minChildWidth={{ base: 'xxs', lg: 'xs' }}
-                  spacing={{ base: '8', lg: '0' }}
-                  maxW="7xl"
-                  mx="auto"
+                  columns={{ base: 1, lg: 2 }}
+                  // minChildWidth={{ base: 'xxs', lg: 'xs' }}
+                  // spacing={{ base: '8', lg: '0' }}
+                  spacingX="000px"
+                  spacingY="8"
+                  maxW="4xl"
+                  // mx="auto"
                   justifyItems="center"
-                  alignItems="stretch"
+                  // alignItems="stretch"
                   mt="8"
+                  mx="auto"
                   gap={{ base: '4', lg: '8' }}
                 >
                   {CARDS.filter((card) => segment.tiers.includes(card.name)).map((card) => (
