@@ -182,7 +182,7 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
   };
 
   const previousFeatures = (): JSX.Element => {
-    const text = 'Features';
+    const text = 'Includes:';
     // if (previousTier) {
     //   text = `Everything in ${previousTier.name}, plus`;
     // }

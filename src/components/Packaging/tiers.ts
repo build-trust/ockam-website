@@ -51,21 +51,21 @@ const SEGMENTS: Segment[] = [
     tiers: ['Free', 'Premium'],
     color: '#52C7EA',
     expanded: false,
-    text: 'The Developer editions of Ockam Orchestrator are intended to be used by individual developers, that are working on hobby projects, and not by companies. Support is via our community in Discord and GitHub, and does not come with an SLA. If you are using Portals for Mac you will need a developer edition license to use the application.',
+    text: 'The Developer editions of Ockam are intended to be used by individual developers, that are working on hobby projects, and not by companies. Support is via our community in Discord and GitHub, and does not come with an SLA. If you are using Portals for Mac you will need a developer edition license to use the application.',
   },
   {
     name: 'Companies',
     tiers: ['Bronze', 'Silver', 'Gold', 'Platinum'],
     color: '#3AC6A3',
     expanded: true,
-    text: 'Ockam Orchestrator’s Company Editions are enterprise ready, with direct support from the Ockam team, and can elastically scale to your production needs. This product purchased through your cloud marketplace vendor, so you can start building today with your 14 day free trial.',
+    text: "Ockam's Company Editions are built for production workloads, with direct support from the Ockam team, and can elastically scale to your needs. This product is purchased through your cloud marketplace vendor, so you can start building today with your 14 day free trial.",
   },
   {
     name: 'Enterprises',
     tiers: ['Enterprise', 'Business Critical'],
     color: '#744D95',
     expanded: false,
-    text: 'Ockam Orchestrator is offered in a bring-your-own-cloud (BYOC) Enterprise Edition for companies that are committed to running software entirely within their own network boundaries. These plans are highly customizable. Please contact Ockam’s sales team for a technical consultation.',
+    text: 'Ockam is offered in a bring-your-own-cloud (BYOC) Enterprise Edition for companies that are committed to running software entirely within their own network boundaries. These plans are highly customizable. Please contact Ockam’s sales team for a technical consultation.',
   },
 ];
 const TIERS: Tier[] = [
@@ -202,6 +202,12 @@ const TIERS: Tier[] = [
 ];
 
 const FEATURES: Feature[] = [
+  {
+    name: 'Production License',
+    tiers: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
+  { name: 'Pay-as-you-go', tiers: ['Free', 'Premium', 'Bronze', 'Silver', 'Gold'], onCard: true },
   { name: 'Bring Your Own Cloud (BYOC) Relays', tiers: ['Business Critical'], onCard: true },
   {
     name: 'Bring Your Own Cloud (BYOC) Credential Authorities',
@@ -209,31 +215,39 @@ const FEATURES: Feature[] = [
     onCard: true,
   },
   {
-    name: 'Ockam support with Service Level Agreement',
-    tiers: ['Gold', 'Platinum', 'Enterprise', 'Business Critical'],
-    onCard: true,
-  },
-  {
-    name: 'Uptime Service Level Agreement',
-    tiers: ['Gold', 'Platinum', 'Enterprise', 'Business Critical'],
-    onCard: true,
-  },
-  { name: 'Uptime Service Level Objectives', tiers: ['Silver'], onCard: true },
-  { name: 'Pay-as-you-go', tiers: ['Free', 'Premium', 'Bronze', 'Silver', 'Gold'], onCard: true },
-  {
-    name: 'Production License',
-    tiers: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
-    onCard: true,
-  },
-  // { name: 'Long-term contracts', tiers: ['Gold', 'Business Critical'], onCard: true },
-  { name: 'Customized terms', tiers: ['Platinum', 'Enterprise', 'Business Critical'] },
-  {
     name: 'Ockam support',
-    tiers: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
+    tiers: ['Bronze'],
     onCard: true,
   },
-  { name: 'Community-based support', tiers: ['*'], onCard: true },
-  { name: 'Dedicated nodes', tiers: ['Gold'], onCard: true },
+  {
+    name: 'Ockam support - 24hr response time SLA',
+    tiers: ['Silver'],
+    onCard: true,
+  },
+  {
+    name: 'Ockam support - 4hr response time SLA',
+    tiers: ['Gold', 'Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
+
+  {
+    name: 'Uptime 99% SLA',
+    tiers: ['Silver'],
+    onCard: true,
+  },
+  {
+    name: 'Uptime 99.95% SLA',
+    tiers: ['Gold', 'Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
+
+  // { name: 'Long-term contracts', tiers: ['Gold', 'Business Critical'], onCard: true },
+  // { name: 'Customized terms', tiers: ['Platinum', 'Enterprise', 'Business Critical'] },
+
+  { name: 'Community-based support', tiers: ['Free', 'Premium'], onCard: true },
+  { name: 'Dedicated nodes', tiers: ['Silver'], onCard: true },
+  { name: 'Throughput optimized nodes', tiers: ['Gold', 'Platinum'], onCard: true },
+  { name: 'Yearly commit - 20% discount included ', tiers: ['Platinum'], onCard: true },
 
   { name: 'Attribute-based access controls', tiers: ['*'] },
   { name: 'Ockam Command', tiers: ['*'] },

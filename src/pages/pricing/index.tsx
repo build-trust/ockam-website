@@ -48,7 +48,7 @@ const PricingPage: NextPageWithLayout = () => (
         mx="20"
         mb="20"
       >
-        Start free &mdash; with predictable pricing that scales when you need
+        Predictable pricing that scales when you need &mdash; no calculator needed
       </Heading>
     </GradientContainer>
     <Packages />
