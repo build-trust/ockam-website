@@ -246,14 +246,23 @@ const FEATURES: Feature[] = [
 
   { name: 'Community-based support', tiers: ['Free', 'Premium'], onCard: true },
   { name: 'Dedicated nodes', tiers: ['Silver'], onCard: true },
-  { name: 'Throughput optimized nodes', tiers: ['Gold', 'Platinum'], onCard: true },
-  { name: 'Yearly commit - 20% discount included ', tiers: ['Platinum'], onCard: true },
+  {
+    name: 'Throughput optimized nodes',
+    tiers: ['Gold', 'Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
+  {
+    name: 'Yearly commit - 20% discount included ',
+    tiers: ['Platinum', 'Enterprise', 'Business Critical'],
+    onCard: true,
+  },
 
   { name: 'Attribute-based access controls', tiers: ['*'] },
   { name: 'Ockam Command', tiers: ['*'] },
   { name: 'Portals for Mac', tiers: ['*'] },
   { name: 'Programming libraries', tiers: ['*'] },
   { name: 'Secure Channels', tiers: ['*'], hasLimits: true },
+  { name: 'Secure Channels supported within SLAs', tiers: ['*'], hasLimits: true },
   { name: 'Projects', tiers: ['*'], hasLimits: true },
   {
     name: 'Custom Branding / Whitelabel',
@@ -270,7 +279,11 @@ const FEATURES: Feature[] = [
     tiers: ['Platinum', 'Enterprise', 'Business Critical'],
     onCard: true,
   },
-  { name: 'High Availability Multi-region', tiers: ['Enterprise'], onCard: true },
+  {
+    name: 'High Availability Multi-region',
+    tiers: ['Enterprise', 'Business Critical'],
+    onCard: true,
+  },
   {
     name: 'High Availability Rendezvous Routing',
     tiers: ['Enterprise', 'Business Critical'],
@@ -279,7 +292,7 @@ const FEATURES: Feature[] = [
   { name: 'Custom Routes', tiers: ['Enterprise', 'Business Critical'], onCard: true },
   {
     name: 'Data transfer',
-    tiers: ['Bronze', 'Silver', 'Gold', 'Business Critical'],
+    tiers: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
     hasLimits: true,
   },
   { name: 'Data transfer cap', tiers: ['Free', 'Premium'], hasLimits: true },
@@ -292,14 +305,25 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
     Bronze: '1',
     Silver: '3',
     Gold: '10',
+    Platinum: 'Unlimited',
+    Enterprise: 'Unlimited',
     'Business Critical': 'Unlimited',
   },
   'Secure Channels': {
     Free: '1',
     Premium: '5',
     Bronze: '10',
+    Silver: 'Unlimited',
+    Gold: 'Unlimited',
+    Platinum: 'Unlimited',
+    Enterprise: 'Unlimited',
+    'Business Critical': 'Unlimited',
+  },
+  'Secure Channels supported within SLAs': {
     Silver: '100',
     Gold: '1000',
+    Platinum: 'Unlimited',
+    Enterprise: 'Unlimited',
     'Business Critical': 'Unlimited',
   },
 
@@ -327,6 +351,8 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
     Bronze: '$0.10/GB',
     Silver: '$0.10/GB',
     Gold: '$0.10/GB',
+    Platinum: '$0.00 - $0.10/GB',
+    Enterprise: '$0.00 - $0.10/GB',
     'Business Critical': '$0.00 - $0.10/GB',
   },
 };

@@ -1,4 +1,4 @@
-import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Link } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Box } from '@chakra-ui/react';
 import { FunctionComponent, ReactNode } from 'react';
 import { PiCheckCircleDuotone as Check } from 'react-icons/pi';
 
@@ -60,6 +60,8 @@ const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features, segmen
           </Th>
           {segments.map((segment) => (
             <Th
+              whiteSpace="nowrap"
+              height="10em"
               colSpan={segment.tiers.length}
               textAlign="center"
               key={`${segment.name}-a`}
@@ -70,7 +72,9 @@ const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features, segmen
               p={{ base: 2 }}
               px={{ base: 2, lg: 10 }}
             >
+              {/* <Box style={{ transform: " rotate(315deg)", }}> */}
               {segment.name}
+              {/* </Box> */}
             </Th>
           ))}
         </Tr>
@@ -88,7 +92,7 @@ const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features, segmen
           </Th>
           {tiers.map((tier) => (
             <Th
-              textAlign="center"
+              textAlign="left"
               key={tier.name}
               background={tierColorLight(tier)}
               color={tierColorDark(tier)}
@@ -96,8 +100,9 @@ const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features, segmen
               style={{ top: 0 }}
               p={{ base: 2 }}
               px={{ base: 2, lg: 10 }}
+              height="11em"
             >
-              {tier.name}
+              <Box style={{ transform: 'rotate(-55deg)' }}>{tier.name}</Box>
             </Th>
           ))}
         </Tr>
@@ -143,7 +148,7 @@ const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features, segmen
           </Tr>
         ))}
       </Tbody>
-      <Tfoot>
+      {/* <Tfoot>
         <Tr>
           <Th key="blank-footer-column-1" background="white" position="sticky" style={{ left: 0 }}>
             &nbsp;
@@ -155,11 +160,11 @@ const FeatureTable: FunctionComponent<FeatureProps> = ({ tiers, features, segmen
               p={{ base: 2 }}
               textAlign="center"
             >
-              <Link href={tier.cta.url}>{tier.cta.text}</Link>
+              <Link href={tier.cta.url}>{tier.cta.text}</Link> 
             </Th>
           ))}
         </Tr>
-      </Tfoot>
+      </Tfoot> */}
     </Table>
   </TableContainer>
 );
