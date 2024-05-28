@@ -8,6 +8,7 @@ const Intercom: FC = () => (
         window.intercomSettings = {
             api_base: "https://api-iam.intercom.io",
             app_id: "rovmcv5s",
+            hide_default_launcher: true,
         };
         `}
     </Script>
