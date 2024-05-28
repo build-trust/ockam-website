@@ -15,6 +15,7 @@ import { ContactForm } from '@views/contact-form';
 import { Feature } from '@root/views/homepage/Features';
 import { BUILD_DEMO } from '@root/consts/externalResources';
 import Paragraph from '@root/components/mdx/Paragraph';
+import Card from '@root/components/Card';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
 
@@ -64,6 +65,11 @@ type FrontmatterFeature = {
   title: string;
   text: string;
 };
+
+type Example = {
+  name: string;
+  url: string;
+};
 const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter }) => {
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const text = frontMatter?.hero_text as string;
@@ -72,6 +78,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   const imageAspect = frontMatter?.hero_aspect_priority as 'width' | 'height';
   const subtext = frontMatter?.subtext as string;
   const animationStartAt = frontMatter?.hero_animation_start_at as number;
+  const examples = frontMatter?.examples as Example[];
 
   const listFeatures = (
     typeof frontMatter?.list_features === 'undefined' ? true : frontMatter?.list_features
@@ -98,6 +105,60 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
           />
         ))}
       </SimpleGrid>
+    );
+  };
+
+  const displayExamples = (): JSX.Element => {
+    if (!examples || examples.length === 0) {
+      return (
+        <>
+          <Heading mx="auto" mt="16" id="contact" textAlign="center">
+            It&apos;s time to&hellip;
+          </Heading>
+          <Box my="16">
+            <Link href={BUILD_DEMO.href} passHref legacyBehavior>
+              <Button
+                mx={0}
+                colorScheme="avocado"
+                color="rgb(40, 40, 40)"
+                border="1px solid white"
+                flexDirection="column"
+                _hover={{
+                  backgroundColor: 'rgb(10, 10, 10)',
+                  color: 'white',
+                }}
+                py={6}
+                px={30}
+                size="lg"
+              >
+                Start Building
+                <SubButton>(for free!)</SubButton>
+              </Button>
+            </Link>
+          </Box>
+        </>
+      );
+    }
+    return (
+      <>
+        <Heading mx="auto" mt="16" id="contact" textAlign="center">
+          It&apos;s time to start building&hellip;
+        </Heading>
+        <SimpleGrid
+          id="examples"
+          columns={{ base: 3, md: 3, lg: 3 }}
+          spacingX={{ base: 8, md: 20, lg: 24 }}
+          spacingY={{ base: 8, md: 12, lg: 12 }}
+        >
+          {examples.map((example) => (
+            <Link href={example.url} passHref legacyBehavior>
+              <Card px={2} py={2} cursor="pointer">
+                <Heading size="lg">{example.name}</Heading>
+              </Card>
+            </Link>
+          ))}
+        </SimpleGrid>
+      </>
     );
   };
 
@@ -138,31 +199,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
       >
         <MDXRemote {...source} components={mdxComponents} />
         {displayFeatures()}
-
-        <Heading mx="auto" mt="16" id="contact" textAlign="center">
-          It&apos;s time to&hellip;
-        </Heading>
-        <Box my="16">
-          <Link href={BUILD_DEMO.href} passHref legacyBehavior>
-            <Button
-              mx={0}
-              colorScheme="avocado"
-              color="rgb(40, 40, 40)"
-              border="1px solid white"
-              flexDirection="column"
-              _hover={{
-                backgroundColor: 'rgb(10, 10, 10)',
-                color: 'white',
-              }}
-              py={6}
-              px={30}
-              size="lg"
-            >
-              Start Building
-              <SubButton>(for free!)</SubButton>
-            </Button>
-          </Link>
-        </Box>
+        {displayExamples()}
         <Heading textAlign="center">&hellip; or, ask our team a question</Heading>
         <Paragraph textAlign="center">
           We&apos;ll get back to you within one business day.
