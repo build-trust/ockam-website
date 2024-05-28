@@ -3,7 +3,15 @@ const Button = {
     lineHeight: 1,
     borderRadius: 'base',
   },
-
+  variants: {
+    primary: {
+      backgroundColor: 'avocado.500',
+      color: 'gray.700',
+      _hover: {
+        backgroundColor: 'avocado.600',
+      },
+    },
+  },
   sizes: {
     sm: {
       h: 8,

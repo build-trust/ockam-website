@@ -43,8 +43,8 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => {
     },
   };
   const heroCTAs = (): ReactElement => (
-    <Flex width="100%" justifyContent="space-evenly">
-      <Button as={Link} href={SIGNUP_PATH} variant="outline" {...buttonStyles}>
+    <Flex width="100%" justifyContent="center" gap="2.5rem">
+      <Button as={Link} href={SIGNUP_PATH} variant="primary">
         Get Started
       </Button>
       <Button as={Link} href={CONTACT_FORM_PATH} variant="outline" {...buttonStyles}>
