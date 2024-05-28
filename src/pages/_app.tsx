@@ -20,6 +20,7 @@ import theme from '@theme';
 import { clearTrailingSlashes } from '@utils/seoUtils';
 import '../utils/segmentAnalytics';
 import ScrollTracking from '@utils/scrollTracking';
+import Intercom from '@root/utils/Intercom';
 
 ScrollTracking();
 
@@ -84,7 +85,12 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   };
   const postAnalytics = (): JSX.Element => {
     if (isDev()) return <></>;
-    return <GoogleAnalytics trackPageViews />;
+    return (
+      <>
+        <GoogleAnalytics trackPageViews />
+        <Intercom />
+      </>
+    );
   };
 
   return (
