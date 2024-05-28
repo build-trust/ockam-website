@@ -19,7 +19,7 @@ const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
   const { isBelowSmallLaptop } = useContext(MobileNavbarContext);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const headerDesktopPaddingY = isScrolled ? 5 : 8;
-  const StartLogo = hasGradient ? LogoGray : LogoDark;
+
   const startbg = hasGradient ? 'transparent' : 'white';
   const scrolledProps = isScrolled
     ? {
@@ -69,11 +69,11 @@ const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
                 h="auto"
               >
                 <Box
-                  as={isScrolled ? LogoDark : StartLogo}
+                  as={isScrolled ? LogoDark : LogoGray}
                   alt="Homepage link"
                   transition="all 400ms ease-in-out"
-                  w={{ base: '7.875rem', lg: isScrolled ? '8.75rem' : '11rem' }}
-                  h={{ base: '2.25rem', lg: isScrolled ? '2.5rem' : '3.125rem' }}
+                  w={{ base: '7.875rem', lg: '8.75rem' }}
+                  h={{ base: '2.25rem', lg: '2.5rem' }}
                   onContextMenu={handleLogoContextClick}
                 />
               </Link>
