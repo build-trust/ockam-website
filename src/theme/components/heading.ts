@@ -26,7 +26,7 @@ const Heading = {
       fontWeight: 'extrabold',
       textAlign: 'center',
       color: 'white',
-      letterSpacing: '-0.06em',
+      letterSpacing: '-0.03em',
       width: '100%',
       mb: 4,
       mt: 0,
