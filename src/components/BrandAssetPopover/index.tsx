@@ -1,4 +1,3 @@
-// import { FunctionComponent, useContext, RefObject } from 'react';
 import {
   Popover,
   PopoverContent,
@@ -6,44 +5,49 @@ import {
   PopoverCloseButton,
   PopoverHeader,
   PopoverBody,
+  PopoverTrigger,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { ReactNode } from 'react';
 
 const BrandColorLink = styled(Link)`
-  text-decoration: none;
-  color: #51cbdd;
+  text-decoration: underline;
   font-weight: bold;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
+
 type BrandAssetHelperProps = {
+  children: ReactNode;
   isOpen: boolean | undefined;
   onClose(): void;
 };
-const BrandAssetPopover = (props: BrandAssetHelperProps): JSX.Element | null => {
-  const { isOpen, onClose } = props;
-  return (
-    <Popover
-      returnFocusOnClose={false}
-      isOpen={isOpen}
-      onClose={onClose}
-      placement="right"
-      closeOnBlur
-    >
-      <PopoverContent>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <PopoverHeader>Looking for our logo?</PopoverHeader>
-        <PopoverBody>
-          You can find our logo and the rest of our brand assets over in the{' '}
-          <BrandColorLink href="/style-guide">style guide</BrandColorLink>
-        </PopoverBody>
-      </PopoverContent>
-    </Popover>
-  );
-};
+const BrandAssetPopover = ({
+  children,
+  isOpen,
+  onClose,
+}: BrandAssetHelperProps): JSX.Element | null => (
+  <Popover
+    returnFocusOnClose={false}
+    placement="bottom"
+    closeOnBlur
+    isOpen={isOpen}
+    onClose={onClose}
+  >
+    {children}
+    <PopoverContent bg="white">
+      <PopoverArrow bg="white" />
+      <PopoverCloseButton />
+      <PopoverHeader>Looking for our logo?</PopoverHeader>
+      <PopoverBody>
+        You can find our logo and the rest of our brand assets over in the{' '}
+        <BrandColorLink href="/style-guide" onClick={onClose}>
+          style guide
+        </BrandColorLink>
+      </PopoverBody>
+    </PopoverContent>
+  </Popover>
+);
+
+export const BrandAssetPopoverTrigger = PopoverTrigger;
 
 export default BrandAssetPopover;
