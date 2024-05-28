@@ -30,12 +30,6 @@ const Heading = {
       width: '100%',
       mb: 4,
       mt: 0,
-      '@media (orientation: landscape)': {
-        fontSize: '18vh',
-      },
-      '@media (orientation: portrait)': {
-        fontSize: '20vw',
-      },
     },
     dynamicSizeh2: {
       textWrap: 'balance',
@@ -46,12 +40,6 @@ const Heading = {
       mx: 'auto',
       maxW: '20em',
       lineHeight: '1.2em',
-      '@media (orientation: landscape)': {
-        fontSize: '5vh',
-      },
-      '@media (orientation: portrait)': {
-        fontSize: '6vw',
-      },
     },
   },
 };

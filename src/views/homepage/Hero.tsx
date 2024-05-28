@@ -180,7 +180,7 @@ const Hero: FunctionComponent<Props> = ({
         maxW="unset"
       >
         <Box width="100%">
-          <Heading as="h1" variant="dynamicSizeh1" lineHeight={calculatedLineHeight()}>
+          <Heading size="h1" as="h1" variant="dynamicSizeh1" lineHeight={calculatedLineHeight()}>
             <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>
               {heroText()}
             </ChakraLink>
