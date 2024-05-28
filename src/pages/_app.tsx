@@ -61,6 +61,32 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
     sync();
   }, [events, isBrowser, initialRouteTracked]);
 
+  const isDev = (): boolean => ['development', 'test'].includes(process.env.NODE_ENV);
+
+  const preAnalytics = (): JSX.Element => {
+    if (isDev()) return <></>;
+    return (
+      <>
+        <Script
+          id="6senseWebTag"
+          async
+          src="https://j.6sc.co/j/fdf9f91d-ec8b-4daf-b254-b8960c0e3c2e.js"
+        />
+        <Script
+          async
+          src="https://tag.clearbitscripts.com/v1/pk_29cb8603dd5cf9cfebe03cb5cdb56049/tags.js"
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+        <Script async defer src="https://buttons.github.io/buttons.js" />
+        <RedditPixel />
+      </>
+    );
+  };
+  const postAnalytics = (): JSX.Element => {
+    if (isDev()) return <></>;
+    return <GoogleAnalytics trackPageViews />;
+  };
+
   return (
     <Auth
       signinPath="/auth/signin"
@@ -90,24 +116,13 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
-      <Script
-        id="6senseWebTag"
-        async
-        src="https://j.6sc.co/j/fdf9f91d-ec8b-4daf-b254-b8960c0e3c2e.js"
-      />
-      <Script
-        async
-        src="https://tag.clearbitscripts.com/v1/pk_29cb8603dd5cf9cfebe03cb5cdb56049/tags.js"
-        referrerPolicy="strict-origin-when-cross-origin"
-      />
-      <Script async defer src="https://buttons.github.io/buttons.js" />
-      <RedditPixel />
+      {preAnalytics()}
       <StylesProvider>
         <MobileNavbarProvider>
           <NextNprogress color={theme.colors.brand[500]} height={3} />
           {getLayout(<Component {...pageProps} />)}
         </MobileNavbarProvider>
-        <GoogleAnalytics trackPageViews />
+        {postAnalytics()}
       </StylesProvider>
     </Auth>
   );
