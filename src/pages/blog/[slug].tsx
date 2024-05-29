@@ -12,6 +12,7 @@ import SEOHead from '@components/SEOHead';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { BLOG_PATH } from '@consts/paths';
 import BlogsPagination from '@root/components/BlogsPagination';
+import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
 
 const RIGHT_SIDEBAR_WIDTH = '16rem';
 
@@ -19,9 +20,15 @@ type BlogPostPageProps = {
   source: MDXRemoteSerializeResult;
   frontMatter: { [key: string]: string | number | boolean };
   posts: BlogPost[];
+  allPageMessage?: AllPageMessage | null;
 };
 
-const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts }) => {
+const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({
+  source,
+  frontMatter,
+  posts,
+  allPageMessage,
+}) => {
   const router = useRouter();
   const blogPostBodyRef = useRef<HTMLDivElement | null>(null);
 
@@ -38,7 +45,7 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
   )}`;
 
   return (
-    <BlogLayout blogPosts={posts} newsletterPopup={newsletterPopup}>
+    <BlogLayout blogPosts={posts} newsletterPopup={newsletterPopup} allPage={allPageMessage}>
       <SEOHead
         subTitle={title}
         description={description}
@@ -100,6 +107,7 @@ export const getStaticProps = async ({
       source,
       frontMatter,
       posts: postsWithSlug,
+      allPageMessage: await allPageMessageProps,
     },
   };
 };

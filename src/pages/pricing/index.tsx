@@ -6,11 +6,16 @@ import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { MainLayout } from '@root/layouts';
 import SEOHead from '@root/components/SEOHead';
 import GradientContainer from '@root/layouts/components/GradientContainer';
+import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
   '||',
 );
-const PricingPage: NextPageWithLayout = () => (
+interface Props {
+  allPageMessage: AllPageMessage | null;
+}
+
+const PricingPage: NextPageWithLayout<Props> = () => (
   <Box pt={0}>
     <SEOHead
       title="Pricing & Packages - Get started for free"
@@ -55,8 +60,22 @@ const PricingPage: NextPageWithLayout = () => (
   </Box>
 );
 
-PricingPage.getLayout = (page: ReactElement): ReactNode => (
-  <MainLayout hasGradient>{page}</MainLayout>
+interface StaticProps {
+  props: Props;
+}
+
+export async function getStaticProps(): Promise<StaticProps> {
+  return {
+    props: {
+      allPageMessage: await allPageMessageProps,
+    },
+  };
+}
+
+PricingPage.getLayout = (page: ReactElement, pageProps?: Props): ReactNode => (
+  <MainLayout hasGradient allPage={pageProps?.allPageMessage}>
+    {page}
+  </MainLayout>
 );
 
 export default PricingPage;

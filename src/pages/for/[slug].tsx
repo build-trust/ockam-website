@@ -16,6 +16,7 @@ import { Feature } from '@root/views/homepage/Features';
 import { BUILD_DEMO } from '@root/consts/externalResources';
 import Paragraph from '@root/components/mdx/Paragraph';
 import Card from '@root/components/Card';
+import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
 
@@ -46,6 +47,7 @@ type PageProps = {
   slug: string;
   source: MDXRemoteSerializeResult;
   frontMatter: { [key: string]: string | number | boolean };
+  allPageMessage: AllPageMessage;
 };
 
 export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: PageProps }> => {
@@ -56,6 +58,7 @@ export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: P
       slug,
       source,
       frontMatter,
+      allPageMessage: await allPageMessageProps,
     },
   };
 };
@@ -210,6 +213,8 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   );
 };
 
-LandingPage.getLayout = (page: ReactElement): ReactNode => <LandingLayout>{page}</LandingLayout>;
+LandingPage.getLayout = (page: ReactElement, pageProps?: PageProps): ReactNode => (
+  <LandingLayout allPage={pageProps?.allPageMessage}>{page}</LandingLayout>
+);
 
 export default LandingPage;

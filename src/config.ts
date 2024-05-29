@@ -52,4 +52,8 @@ export default {
     clientId: process.env.AUTH0_CLIENT_ID,
     baseUrl: process.env.AUTH0_BASE_URL || '',
   },
+  allPageMessage: {
+    // message: `📣 **Just announced:** Partnership with Redpanda for **[zero-trust stuff](/)**! 🎉`,
+    // except: '/'
+  },
 };

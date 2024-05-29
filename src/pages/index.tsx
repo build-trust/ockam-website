@@ -12,6 +12,8 @@ import { Hero, Cases, SecureByDesign, Networkless, Magic, Videos } from '@views/
 import { FeatureType } from '@root/views/homepage/Magic';
 import GradientContainer from '@root/layouts/components/GradientContainer';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@root/consts/paths';
+import { AllPageMessage } from '@root/components/AllPageNotice';
+import allPageMessage from '@root/utils/appPageMessage';
 
 const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> => {
   const result = await serialize(content, {
@@ -24,6 +26,7 @@ const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> 
 
 interface Props {
   magic: FeatureType[];
+  allPageMessage: AllPageMessage;
 }
 
 interface StaticProps {
@@ -115,12 +118,17 @@ export async function getStaticProps(): Promise<StaticProps> {
           In this way we say Ockam is networkless.`),
         },
       ],
+      allPageMessage: await allPageMessage,
     },
   };
 }
 
-HomePage.getLayout = (page: ReactElement): ReactNode => (
-  <MainLayout gradient={['#4FDAB8', '#52C7EA']} backgroundColor="#f9f9f9">
+HomePage.getLayout = (page: ReactElement, pageProps?: Props): ReactNode => (
+  <MainLayout
+    gradient={['#4FDAB8', '#52C7EA']}
+    backgroundColor="#f9f9f9"
+    allPage={pageProps?.allPageMessage}
+  >
     {page}
   </MainLayout>
 );

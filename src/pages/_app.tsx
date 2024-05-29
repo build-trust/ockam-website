@@ -126,7 +126,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
       <StylesProvider>
         <MobileNavbarProvider>
           <NextNprogress color={theme.colors.brand[500]} height={3} />
-          {getLayout(<Component {...pageProps} />)}
+          {getLayout(<Component {...pageProps} />, pageProps)}
         </MobileNavbarProvider>
         {postAnalytics()}
       </StylesProvider>
