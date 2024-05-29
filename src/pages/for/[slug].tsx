@@ -47,7 +47,7 @@ type PageProps = {
   slug: string;
   source: MDXRemoteSerializeResult;
   frontMatter: { [key: string]: string | number | boolean };
-  allPageMessage: AllPageMessage;
+  allPageMessage?: AllPageMessage | null;
 };
 
 export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: PageProps }> => {

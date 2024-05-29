@@ -16,15 +16,20 @@ const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> 
 };
 
 const allPageMessage: Promise<AllPageMessage | null> = new Promise((resolve) => {
-  if (CONFIG.allPageMessage && CONFIG.allPageMessage.message) {
-    mdxSerialize(CONFIG.allPageMessage?.message).then((msg) => {
-      resolve({
-        message: msg,
-        except: CONFIG.allPageMessage?.except,
-      });
-    });
-  } else {
+  const msgConfig = CONFIG.allPageMessage as
+    | null
+    | undefined
+    | { message: string; except: string | string[] };
+  if (!msgConfig) {
     resolve(null);
+  } else if (!msgConfig.message) {
+    resolve(null);
+  } else {
+    mdxSerialize(msgConfig.message).then((msg) => {
+      const data: AllPageMessage = { message: msg };
+      if (Object.hasOwn(CONFIG.allPageMessage, 'except')) data.except = msgConfig.except;
+      resolve(data);
+    });
   }
 });
 

@@ -13,7 +13,7 @@ type LayoutProps = {
   hasGradient?: boolean;
   children?: ReactNode;
   backgroundColor?: string;
-  allPage?: AllPageMessage;
+  allPage?: AllPageMessage | null;
 };
 
 const MainLayout: FunctionComponent<LayoutProps> = ({

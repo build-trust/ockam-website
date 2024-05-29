@@ -26,7 +26,7 @@ type BlogLayoutProps = {
   children?: ReactNode;
   blogPosts: BlogPost[];
   newsletterPopup?: boolean;
-  allPage?: AllPageMessage;
+  allPage?: AllPageMessage | null;
 };
 
 const BlogLayout: FunctionComponent<BlogLayoutProps> = ({

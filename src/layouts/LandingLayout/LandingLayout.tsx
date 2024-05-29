@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 type Props = {
   hideNav?: boolean;
   children: ReactNode;
-  allPage?: AllPageMessage;
+  allPage?: AllPageMessage | null;
 };
 const LandingLayout: FunctionComponent<Props> = ({ hideNav, children, allPage }) => {
   const headerRef = useRef<HTMLDivElement>(null);

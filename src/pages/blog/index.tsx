@@ -10,7 +10,7 @@ import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage'
 
 type BlogPageProps = {
   posts: BlogPost[];
-  allPageMessage?: AllPageMessage;
+  allPageMessage?: AllPageMessage | null;
 };
 
 const BlogPage: NextPageWithLayout<BlogPageProps> = ({ posts, allPageMessage }) => (

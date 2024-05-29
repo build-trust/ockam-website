@@ -26,7 +26,7 @@ const mdxSerialize = async (content: string): Promise<MDXRemoteSerializeResult> 
 
 interface Props {
   magic: FeatureType[];
-  allPageMessage: AllPageMessage;
+  allPageMessage?: AllPageMessage | null;
 }
 
 interface StaticProps {
