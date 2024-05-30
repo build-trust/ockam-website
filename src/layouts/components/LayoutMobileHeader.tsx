@@ -6,7 +6,7 @@ import { HOME_PATH } from '@consts/paths';
 import LogoDark from '@assets/logo-dark.svg';
 import { MobileNavbarContext } from '@contextProviders/MobileNavbarProvider';
 import useScroll from '@hooks/useScroll';
-import BrandAssetPopover from '@root/components/BrandAssetPopover';
+import BrandAssetPopover, { BrandAssetPopoverTrigger } from '@root/components/BrandAssetPopover';
 
 import LayoutMobileNav from './LayoutMobileNav';
 import LayoutMobileNavButton from './LayoutMobileNavButton';
@@ -52,12 +52,20 @@ const LayoutMobileHeader: FunctionComponent<LayoutMobileHeaderProps> = ({
         w="full"
       >
         <Flex w="full" px={4} py={4} alignItems="center">
-          <BrandAssetPopover isOpen={isOpen} onClose={onClose} />
-          <Link href={HOME_PATH} passHref legacyBehavior>
-            <Box as="a" flex={0} maxW="11rem" h="auto">
-              <Box as={LogoDark} w="7.875rem" h="2.25rem" onContextMenu={handleLogoContextClick} />
-            </Box>
-          </Link>
+          <BrandAssetPopover isOpen={isOpen} onClose={onClose}>
+            <BrandAssetPopoverTrigger>
+              <Link href={HOME_PATH} passHref legacyBehavior>
+                <Box as="a" flex={0} maxW="11rem" h="auto">
+                  <Box
+                    as={LogoDark}
+                    w="7.875rem"
+                    h="2.25rem"
+                    onContextMenu={handleLogoContextClick}
+                  />
+                </Box>
+              </Link>
+            </BrandAssetPopoverTrigger>
+          </BrandAssetPopover>
 
           <LayoutMobileNavButton isOpenMobileNav={isOpenMobileNav} onClick={onToggleMobileNav} />
         </Flex>
