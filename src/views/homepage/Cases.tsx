@@ -42,7 +42,7 @@ const CASES_CARDS: {
   },
   {
     image: 'no-need-for-complicated-network',
-    title: 'SaaS <> On-Prem Connectivity',
+    title: 'Connect SaaS to On-Prem systems',
     texts: [
       'Unlock new capabilities with enterprise customers.',
       'Stop asking your customers to make network changes.',

@@ -96,6 +96,7 @@ const Hero: FunctionComponent<Props> = ({
                 as="span"
                 bgImage={darkGradient ? gradients.dark : gradients.primary}
                 bgClip="text"
+                pr="0.1em"
                 key={`highlight-${sha512(highlight[1])}`}
               >
                 {highlight[1]}
