@@ -1,5 +1,5 @@
 ---
-title: 'Ockam and Redpanda partner to launch the world\'s first zero-trust streaming data platform.'
+title: Ockam and Redpanda partner to launch the world's first zero-trust streaming data platform.
 category: 'Announcements'
 date: '2024-05-31'
 description: "Redpanda Connect with Ockam announcement"
@@ -11,20 +11,20 @@ isFeatured: true
 featuredOrder: 2
 ---
 
-Ockam teamed up with [Redpanda](https://redpanda.com/redpanda-cloud) to launch *Redpanda Connect with Ockam: the first zero-trust streaming data platform*. This is a natural partnership because both companies have the same ethos; to enable every developer to build distributed systems, at scale, with simple tools. Both companies\' products are based on popular open source projects and are built by veteran, high-performing teams. 
+Ockam teamed up with [Redpanda](https://redpanda.com/redpanda-cloud) to launch *Redpanda Connect with Ockam: the first zero-trust streaming data platform*. This is a natural partnership because both companies have the same ethos; to enable every developer to build distributed systems, at scale, with simple tools. Both companies\' products are based on popular open source projects and are built by veteran, high-performing teams.
 
 *Redpanda Connect with Ockam is the only enterprise-scale, zero-trust, streaming data platform that is simultaneously easy to deploy, secure-by-design, and highly performant.*
 
-“Enterprise executives tell me that their high value streaming applications take a long time to build and to ship,” said Matthew Gregory, Ockam\’s CEO. “Their biggest obstacle is the construction of secure streaming data connections across their siloed enterprise, and between partner companies. Secure data streaming is now simple to set up, trivial to maintain, and almost impossible to mess up. We\’ve unlocked data so application development can move fast.” 
+“Enterprise executives tell me that their high value streaming applications take a long time to build and to ship,” said Matthew Gregory, Ockam\’s CEO. “Their biggest obstacle is the construction of secure streaming data connections across their siloed enterprise, and between partner companies. Secure data streaming is now simple to set up, trivial to maintain, and almost impossible to mess up. We\’ve unlocked data so application development can move fast.”
 
 Enterprise Kafka product vendors defer zero-trust implementation details to their customers. It is difficult, even for sophisticated engineering organizations, to pull together a team that can choose and assemble the dozens of parts required to build a secure-by-design streaming data platform. Redpanda Connect with Ockam empowers a single developer to easily create end-to-end encrypted streaming pipelines that can connect 100\’s of applications across clouds and hybrid infrastructure. It builds trust in data streams, eliminates sources of risk to critical data, and removes the operational complexities inherent in managing keys at scale.
 
 Redpanda provides a declarative data streaming service that enables developers and organizations to build simple, chained, and stateless processing steps for their data pipelines. Our partnership with Redpanda brings a truly zero-trust capability to these pipelines. Ockam\’s cryptographic protocols and data integrity guarantees remove the risk of MITM and supply-chain attacks that could otherwise tamper with data inflight and lead to data poisoning; highlighted as one of the OWASP Top 10 risks for companies that leverage AI and Large Language Model (LLM) systems. The mutual authentication and encrypted data protocols that Ockam provides also mean organizations can transmit highly sensitive data with cryptographic guarantees so only the intended recipients will be able to decrypt and process it. This will unlock new high value applications that businesses may have been unwilling to explore due to privacy and governance risk, or complexity.
 
-“We help the world\’s largest companies build and scale streaming applications," said Alex Gallego, Redpanda’s CEO. "Redpanda Connect with Ockam was conceived to empower our customers to build streaming data applications with ease. Redpanda Connect comes with over 200 pre-built integrations that will quickly connect to and unlock your data silos. Ockam provides the mutual authentication and end-to-end encryption that zero-trust streaming data applications require. Together with Ockam, we\’ve abstracted away all of the complex pieces that cause engineering teams to stumble.” 
+“We help the world\’s largest companies build and scale streaming applications," said Alex Gallego, Redpanda’s CEO. "Redpanda Connect with Ockam was conceived to empower our customers to build streaming data applications with ease. Redpanda Connect comes with over 200 pre-built integrations that will quickly connect to and unlock your data silos. Ockam provides the mutual authentication and end-to-end encryption that zero-trust streaming data applications require. Together with Ockam, we\’ve abstracted away all of the complex pieces that cause engineering teams to stumble.”
 
 Confluent\’s “[2023 Data Streaming Report: Moving Up the Maturity Curve](https://assets.confluent.io/m/52436fc9cd4844f4/original/20230510-RPT-Data_Streaming_Report.pdf)” recently surveyed 2,250 IT and engineering leaders from organizations that use streaming data.
- 
+
 * 74\% cited that their streaming data applications are blocked because of fragmented projects, uncoordinated teams, and constrained engineering budgets.
 * 32\% claim that they successfully “reduced security risks” after implementing data streaming services across their applications. However, 94\% have high-security expectations for these same applications.
 
@@ -38,7 +38,7 @@ Redpanda Connect with Ockam aims to move these numbers to 0\% and 100\%, respect
 
 Redpanda Connect empowers engineers to build connectors and integrations to over 200 applications, including SQL, Mongo, Snowflake, Cassandra, Redis, Splunk, AWS Lambda, Azure CosmosDB, and GCP Cloud Storage. Redpanda Connect can process streaming data with transforms, mapping, filtering, hydration, and enrichment capabilities.
 
-### Secure with Ockam. 
+### Secure with Ockam.
 
 Zero-trust in your data streaming infrastructure allows you to have absolute-trust in your data and applications. Ockam adds the guarantees of data confidentiality, integrity, and authenticity, so you can enforce data governance and privacy policies at scale.
 
@@ -46,7 +46,7 @@ Each producer creates its own unique cryptographically provable identity and enc
 
 Ockam makes it simple to Build Trust across your entire data layer - in a way that is almost impossible to mess up.
 
-### Stream with Redpanda Cloud. 
+### Stream with Redpanda Cloud.
 
 Redpanda Cloud is a complete streaming data platform delivered as a fully-managed service with automated upgrades and patching, data and partition balancing, and 24x7 support. It continuously monitors and maintains your clusters along with the underlying infrastructure to meet strict performance, availability, reliability, and security requirements.
 
@@ -54,3 +54,94 @@ Redpanda Cloud is a complete streaming data platform delivered as a fully-manage
 ## Give it a try.
 
 The example will post here...stand by.
+
+
+```yaml
+# consumer.yaml
+
+input:
+  ockam_kafka:
+    seed_brokers: [rp-node-0:9092]
+    topics: [topic_A]
+    consumer_group: example_group
+    ockam_allow_producer: producer
+    ockam_relay: consumer_relay
+    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+
+pipeline:
+  processors:
+    - bloblang: |
+        root = this
+        root.data.message = this.data.message.uppercase()
+
+output:
+  stdout: {}
+
+  # snowflake_put:
+  #   account: acme
+  #   ...
+
+```
+
+```yaml
+# producer.yaml
+
+input:
+  generate:
+    count: 1000
+    interval: "@every 1s"
+    mapping: |
+      root = {
+        "_producer": hostname(),
+        "data": { "email": fake("email"), "message": fake("sentence") }
+      }
+
+  # mongodb:
+  #   url: mongodb://localhost
+  #   database: orders
+  #   ...
+
+output:
+  ockam_kafka:
+    seed_brokers: [rp-node-0:9092]
+    topic: topic_A
+    ockam_route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
+    ockam_allow_consumer: consumer
+    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+
+```
+
+```shell
+
+# Setup Redpanda
+brew install redpanda-data/tap/redpanda
+rpk container start
+
+# Setup Ockam
+brew install build-trust/ockam/ockam
+ockam enroll
+
+# Setup Consumer
+ockam project ticket --usage-count 1 --expires-in 10m --attribute consumer --relay consumer_relay > ticket
+docker run --rm --network redpanda --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
+  -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
+
+# Setup Producers (in a new terminal window)
+for i in $(seq 1 3); do
+    ockam project ticket --usage-count 1 --expires-in 10m --attribute producer > ticket
+    docker run --rm -d --network redpanda --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
+        -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
+done
+
+# It can take a minute or so for the messages to start flowing.
+# Observe that the above consumer can decrypt and transform messages.
+
+# However, if you look at the messages inside redpanda console at localhost:8080
+# or using the below rpk command, you'll notice that the messages are encrypted.
+rpk topic consume topic_A
+
+# Cleanup
+docker stop $(docker ps -q --filter "name=producer" --filter "name=consumer")
+rpk container purge
+
+```
