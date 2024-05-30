@@ -17,3 +17,6 @@ exceptions:
  - Denial of Service
  - Public Key Infrastructure
  - DX
+ - Redpanda Connect
+ - Benthos
+ - Redpanda Cloud
