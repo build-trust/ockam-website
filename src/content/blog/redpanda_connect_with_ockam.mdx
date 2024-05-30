@@ -53,7 +53,7 @@ Redpanda Cloud is a complete streaming data platform delivered as a fully-manage
 
 ## Give it a try.
 
-The example will post here...stand by.
+
 
 
 ```yaml
@@ -145,3 +145,20 @@ docker stop $(docker ps -q --filter "name=producer" --filter "name=consumer")
 rpk container purge
 
 ```
+
+Let’s dig in to see how simple it is to build an end-to-end encrypted, streaming data ingestion pipeline. In this diagram we will stream data from 3 sources; Mongo, AWS S3 buckets, and <something> to our datalake provider, Snowflake.
+
+
+
+Let’s dig in to see how simple it is to build an enterprise streaming application to process transactional data. In this diagram we will stream data from 3 sources; Mongo, AWS S3 buckets, and <something> to our datalake provider, Snowflake.
+
+To build the connections on the input side all we need to do is to install the RedPanda Connect binary next to each producer, and run the following configuration. RedPanda Connect will automagically establish connections to the input, start and configure an Ockam Node.
+
+Next, we will build the connection to Snowflake. Again, we install Redpanda Connect next to Snowflake, and run the following configuration. RedPanda Connect will automagically establish connections to Snowflake, start and configure an Ockam Node.
+
+We then subscribe to (Ockam Orchestrator)[https://www.ockam.io/signup], and to (Redpanda Cloud)[https://redpanda.com/try-redpanda]. 
+
+Finally, we run the following commands on our local Ockam node, Admin, at each input node, #Producer, and at the #Consumer 
+
+
+
