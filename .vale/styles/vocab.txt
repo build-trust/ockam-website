@@ -23,3 +23,12 @@ APIs
 misconfigurations
 VPNs
 iMessage
+Splunk
+Redpanda
+automagically
+performant
+siloed
+Gallego
+Confluent
+Confluent's
+Redpanda's
