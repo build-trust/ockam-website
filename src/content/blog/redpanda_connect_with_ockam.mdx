@@ -86,8 +86,8 @@ input:
 pipeline:
   processors:
     - bloblang: |
-      root = this
-      root.data.message = this.data.message.uppercase()
+        root = this
+        root.data.message = this.data.message.uppercase()
 
 output:
   stdout: {}
