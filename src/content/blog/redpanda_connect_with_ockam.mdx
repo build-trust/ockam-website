@@ -367,9 +367,9 @@ the Ockam Orchestrator project.
 Now everything is setup and running. You'll see in the log output that the
 consumer is receiving data, from different hosts, and that the
 `message` in each payload is upper-case. If you open the
-[Redpanda Console](http://localhost:8080) you'll see that the encrypted messages 
-in `topic_A` are not readable by the broker or anybody else that might have 
-access to the topic.
+[Redpanda Console](http://localhost:8080) or run `rpk topic consume topic_A` 
+you'll see that the encrypted messages in `topic_A` are not readable by the 
+broker or anybody else that might have access to the topic.
 
 By adding or changing a few lines in the `consumer.yaml` and `producer.yaml`
 files it's possible to:
