@@ -56,7 +56,7 @@ Redpanda Connect empowers engineers to build connectors and integrations to over
 
 Zero-trust in your data streaming infrastructure allows you to have absolute-trust in your data and applications. Ockam adds the guarantees of data confidentiality, integrity, and authenticity, so you can enforce data governance and privacy policies at scale.
 
-Each producer creates its own unique cryptographically provable identity and encryption keys. The producers use their keys to establish trusted secure channels through Redpanda Cloud and to the consumers across the streaming platform. All the data that moves though your streaming data platform is encrypted in motion - even when it's passing through a broker. Keys, enrollments, and credentials are safely created, stored, rotated, and revoked automagically so there's almost nothing to manage.
+Each producer creates its own unique cryptographically provable identity and encryption keys. The producers use their keys to establish trusted secure channels through Redpanda Cloud and to the consumers across the streaming platform. All the data that moves through your streaming data platform is encrypted in motion - even when it's passing through a broker. Keys, enrollments, and credentials are safely created, stored, rotated, and revoked automagically so there's almost nothing to manage.
 
 Ockam makes it simple to Build Trust across your entire data layer - in a way that's almost impossible to mess up.
 
@@ -68,7 +68,7 @@ Redpanda Cloud is a complete streaming data platform delivered as a fully manage
 
 ## Give it a try
 
-The example below will show you how to use Ockam to connect any input sources (e.g., MongoDB, Postgresql, a Kafka stream, etc.) to any output (e.g., Snowflake, S3, Splunk, etc.), automatically encrypting all your data in motion. You can run this complete example locally in less than 2 minutes by copying the relevant sections below. To understand in more detail what each configuration and command, and how to extend this for other uses, read on below.
+The example below will show you how to use Ockam to connect any input sources (e.g., MongoDB, Postgresql, a Kafka stream, etc.) to any output (e.g., Snowflake, S3, Splunk, etc.), automatically encrypting all your data in motion. You can run this complete example locally in less than 2 minutes by copying the relevant sections below. To understand in more detail each configuration and command, and how to extend this for other uses, read on below.
 
 First, copy the code block below and save it to a file named `consumer.yaml`:
 
@@ -210,13 +210,13 @@ ockam project ticket --usage-count 1 \
 The `ockam project ticket` command is how you generate a ticket that will admit
 another node into your project. The arguments here specify that:
 
-* The ticket can is valid for use `1` time. This ensures that ticket is for the 
+* The ticket is valid for use `1` time. This ensures that the ticket is for the 
 desired purposes and if it's inadvertently leaked there is no
 opportunity for an attacker to re-use it to gain access to your project.
 * A time-to-live (TTL)/expiry period of `10` minutes. This also reduces the risk
 posed by a ticket leaking, you can adjust it to any time window that's
 appropriate for your use case.
-* An attribute of `consumer`. This will add a attribute to any node that enrolls
+* An attribute of `consumer`. This will add an attribute to any node that enrolls
 with this ticket, and policy definitions can then use those attributes to apply 
 Attribute Based Access Controls and restrict which nodes can communicate with 
 each other.
