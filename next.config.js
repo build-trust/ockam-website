@@ -21,6 +21,11 @@ const nextConfig = {
   },
   redirects: async () => [
     {
+      source: '/blog/redpanda_connect_w_ockam',
+      destination: '/blog/redpanda_connect_with_ockam',
+      permanent: true,
+    },
+    {
       source: '/download',
       destination: '/get-started',
       permanent: true,
