@@ -109,9 +109,9 @@ Redpanda Cloud is a complete streaming data platform delivered as a fully manage
 
  ```
 
- ```shell
-
+ ```bash
  # Setup Redpanda
+
  brew install redpanda-data/tap/redpanda
  rpk container start
 
@@ -120,22 +120,34 @@ Redpanda Cloud is a complete streaming data platform delivered as a fully manage
  ockam enroll
 
  # Setup Consumer
- ockam project ticket --usage-count 1 --expires-in 10m --attribute consumer --relay consumer_relay > ticket
- docker run --rm --network redpanda --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
-   -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
+ ockam project ticket --usage-count 1 \
+   --expires-in 10m --attribute consumer \
+   --relay consumer_relay > ticket
+ docker run --rm --network redpanda \
+   --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
+   -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/ \
+   redpanda-connect
 
- # Setup Producers (in a new terminal window)
+ # The previous command will tail the output so you can see 
+ # the messages flowing through the system. Run the following 
+ # commands in a new terminal window.
+
+ # Setup Producers
  for i in $(seq 1 3); do
-     ockam project ticket --usage-count 1 --expires-in 10m --attribute producer > ticket
-     docker run --rm -d --network redpanda --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
-         -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
+     ockam project ticket --usage-count 1 --expires-in 10m \
+       --attribute producer > ticket
+     docker run --rm -d --network redpanda \
+       --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
+       -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/ \
+       redpanda-connect
  done
 
  # It can take a minute or so for the messages to start flowing.
  # Observe that the above consumer can decrypt and transform messages.
 
- # However, if you look at the messages inside redpanda console at localhost:8080
- # or using the below rpk command, you'll notice that the messages are encrypted.
+ # However, if you look at the messages inside redpanda console at 
+ # localhost:8080 or using the below rpk command, you'll notice that 
+ # the messages are encrypted.
  rpk topic consume topic_A
 
  # Cleanup
@@ -144,16 +156,16 @@ Redpanda Cloud is a complete streaming data platform delivered as a fully manage
 
  ```
 
- Let's dig in to see how simple it is to build an end-to-end encrypted, streaming data ingestion pipeline. In this diagram we will stream data from 3 sources; Mongo, AWS S3 buckets, and <something> to our datalake provider, Snowflake.
+ Let's dig in to see how simple it is to build an end-to-end encrypted, streaming data ingestion pipeline. In this diagram we will stream data from 3 sources; Mongo, AWS S3 buckets, and ?something? to our datalake provider, Snowflake.
 
 
 
- Let's dig in to see how simple it is to build an enterprise streaming application to process transactional data. In this diagram we will stream data from 3 sources; Mongo, AWS S3 buckets, and <something> to our datalake provider, Snowflake.
+ Let's dig in to see how simple it is to build an enterprise streaming application to process transactional data. In this diagram we will stream data from 3 sources; Mongo, AWS S3 buckets, and ?something? to our datalake provider, Snowflake.
 
  To build the connections on the input side all we need to do is to install the RedPanda Connect binary next to each producer, and run the following configuration. RedPanda Connect will automagically establish connections to the input, start and configure an Ockam Node.
 
  Next, we will build the connection to Snowflake. Again, we install Redpanda Connect next to Snowflake, and run the following configuration. RedPanda Connect will automagically establish connections to Snowflake, start and configure an Ockam Node.
 
- We then subscribe to (Ockam Orchestrator)[https://www.ockam.io/signup], and to (Redpanda Cloud)[https://redpanda.com/try-redpanda]. 
+ We then subscribe to [Ockam Orchestrator](https://www.ockam.io/signup), and to [Redpanda Cloud](https://redpanda.com/try-redpanda). 
 
  Finally, we run the following commands on our local Ockam node, Admin, at each input node, #Producer, and at the #Consumer 
