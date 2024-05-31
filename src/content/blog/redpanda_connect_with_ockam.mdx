@@ -11,6 +11,8 @@ isFeatured: true
 featuredOrder: 2
 ---
 
+{/* <!-- vale off --> */}
+
 Ockam teamed up with [Redpanda](https://redpanda.com/redpanda-cloud) to launch *Redpanda Connect with Ockam: the first zero-trust streaming data platform*. This is a natural partnership because both companies have the same ethos; to enable every developer to build distributed systems, at scale, with simple tools. Both companies\' products are based on popular open source projects and are built by veteran, high-performing teams. 
 
 *Redpanda Connect with Ockam is the only enterprise-scale, zero-trust, streaming data platform that's simultaneously easy to deploy, secure-by-design, and highly performant.*
@@ -53,4 +55,85 @@ Redpanda Cloud is a complete streaming data platform delivered as a fully manage
 
 ## Give it a try
 
-The example will post here&hellip; stand by.
+### Consumer
+
+```yaml
+# consumer.yaml
+
+input:
+  ockam_kafka:
+    seed_brokers: [rp-node-0:9092]
+    topics: [topic_A]
+    consumer_group: example_group
+    ockam_allow_producer: producer
+    ockam_relay: consumer_relay
+    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+
+pipeline:
+  processors:
+    - bloblang: |
+        root = this
+        root.data.message = this.data.message.uppercase()
+
+output:
+  stdout: {}
+```
+
+### Producer
+
+```yaml
+# producer.yaml
+
+input:
+  generate:
+    count: 1000
+    interval: "@every 1s"
+    mapping: |
+      root = {
+        "_producer": hostname(),
+        "data": { "email": fake("email"), "message": fake("sentence") }
+      }
+
+output:
+  ockam_kafka:
+    seed_brokers: [rp-node-0:9092]
+    topic: topic_A
+    ockam_route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
+    ockam_allow_consumer: consumer
+    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+```
+
+### Run
+
+```sh
+# Setup Redpanda
+brew install redpanda-data/tap/redpanda
+rpk container start
+
+# Setup Ockam
+brew install build-trust/ockam/ockam
+ockam enroll
+
+# Setup Consumer
+ockam project ticket --usage-count 1 --expires-in 10m --attribute consumer --relay consumer_relay > ticket
+docker run --rm --network redpanda --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
+  -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
+
+# Setup Producers (in a new terminal window)
+for i in $(seq 1 3); do
+    ockam project ticket --usage-count 1 --expires-in 10m --attribute producer > ticket
+    docker run --rm -d --network redpanda --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
+        -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
+done
+
+# It can take a minute or so for the messages to start flowing.
+# Observe that the above consumer can decrypt and transform messages.
+
+# However, if you look at the messages inside redpanda console at localhost:8080
+# or using the below rpk command, you'll notice that the messages are encrypted.
+rpk topic consume topic_A
+
+# Cleanup
+docker stop $(docker ps -q --filter "name=producer" --filter "name=consumer")
+rpk container purge
+```
