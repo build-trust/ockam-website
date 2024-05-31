@@ -55,117 +55,314 @@ Redpanda Cloud is a complete streaming data platform delivered as a fully manage
 
 ## Give it a try
 
+The example below will show you how to use Ockam to connect any input sources (e.g., MongoDB, Postgresql, a Kafka stream, etc.) to any output (e.g., Snowflake, S3, Splunk, etc.), automatically encrypting all your data in motion. You can run this complete example locally in less than 2 minutes by copying the relevant sections below. To understand in more detail what each configuration and command, and how to extend this for other uses, read on below.
 
- ```yaml
- # consumer.yaml
+First, copy the code block below and save it to a file named `consumer.yaml`:
 
- input:
-   ockam_kafka:
-     seed_brokers: [rp-node-0:9092]
-     topics: [topic_A]
-     consumer_group: example_group
-     ockam_allow_producer: producer
-     ockam_relay: consumer_relay
-     ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+```yaml
+# consumer.yaml
 
- pipeline:
-   processors:
-     - bloblang: |
-         root = this
-         root.data.message = this.data.message.uppercase()
- output:
-   stdout: {}
+input:
+  ockam_kafka:
+    seed_brokers: [rp-node-0:9092]
+    topics: [topic_A]
+    consumer_group: example_group
+    ockam_allow_producer: producer
+    ockam_relay: consumer_relay
+    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
 
-   # snowflake_put:
-   #   account: acme
-   #   ...
+pipeline:
+  processors:
+    - bloblang: |
+      root = this
+      root.data.message = this.data.message.uppercase()
 
- ```
+output:
+  stdout: {}
+  # snowflake_put:
+  #   account: acme
+  #   ...
+```
 
- ```yaml
- # producer.yaml
+Next, save the code block below to `producer.yaml`
 
- input:
-   generate:
-     count: 1000
-     interval: "@every 1s"
-     mapping: |
-       root = {
-         "_producer": hostname(),
-         "data": { "email": fake("email"), "message": fake("sentence") }
-       }
-   # mongodb:
-   #   url: mongodb://localhost
-   #   database: orders
-   #   ...
+```yaml
+# producer.yaml
 
- output:
-   ockam_kafka:
-     seed_brokers: [rp-node-0:9092]
-     topic: topic_A
-     ockam_route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
-     ockam_allow_consumer: consumer
-     ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+input:
+  generate:
+    count: 1000
+    interval: "@every 1s"
+    mapping: |
+      root = {
+        "_producer": hostname(),
+        "data": { "email": fake("email"), "message": fake("sentence") }
+      }
+  # mongodb:
+  #   url: mongodb://localhost
+  #   database: orders
+  #   ...
 
- ```
+output:
+  ockam_kafka:
+    seed_brokers: [rp-node-0:9092]
+    topic: topic_A
+    ockam_route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
+    ockam_allow_consumer: consumer
+    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+```
 
- ```bash
- # Setup Redpanda
+All that's left is to run the commands below to start the services and data will start flowing:
 
- brew install redpanda-data/tap/redpanda
- rpk container start
+```bash
+# Setup Redpanda
 
- # Setup Ockam
- brew install build-trust/ockam/ockam
- ockam enroll
+brew install redpanda-data/tap/redpanda
+rpk container start
 
- # Setup Consumer
- ockam project ticket --usage-count 1 \
-   --expires-in 10m --attribute consumer \
-   --relay consumer_relay > ticket
- docker run --rm --network redpanda \
-   --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
-   -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/ \
-   redpanda-connect
+# Setup Ockam
+brew install build-trust/ockam/ockam
+ockam enroll
 
- # The previous command will tail the output so you can see 
- # the messages flowing through the system. Run the following 
- # commands in a new terminal window.
+# Setup Consumer
+ockam project ticket --usage-count 1 \
+  --expires-in 10m --attribute consumer \
+  --relay consumer_relay > ticket
 
- # Setup Producers
- for i in $(seq 1 3); do
-     ockam project ticket --usage-count 1 --expires-in 10m \
-       --attribute producer > ticket
-     docker run --rm -d --network redpanda \
-       --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
-       -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/ \
-       redpanda-connect
- done
+docker run --rm --network redpanda \
+  --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
+  -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
 
- # It can take a minute or so for the messages to start flowing.
- # Observe that the above consumer can decrypt and transform messages.
+# The previous command will tail the output so you can see 
+# the messages flowing through the system. Run the following 
+# commands in a new terminal window.
 
- # However, if you look at the messages inside redpanda console at 
- # localhost:8080 or using the below rpk command, you'll notice that 
- # the messages are encrypted.
- rpk topic consume topic_A
+# Setup Producers
+for i in $(seq 1 3); do
+  ockam project ticket --usage-count 1 --expires-in 10m \
+    --attribute producer > ticket
 
- # Cleanup
- docker stop $(docker ps -q --filter "name=producer" --filter "name=consumer")
- rpk container purge
+  docker run --rm -d --network redpanda \
+    --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
+    -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
+done
 
- ```
+# It can take a minute or so for the messages to start flowing.
+# Observe that the above consumer can decrypt and transform messages.
 
- Let's dig in to see how simple it is to build an end-to-end encrypted, streaming data ingestion pipeline. In this diagram we will stream data from 3 sources; Mongo, AWS S3 buckets, and ?something? to our datalake provider, Snowflake.
+# However, if you look at the messages inside redpanda console at 
+# localhost:8080 or using the below rpk command, you'll notice that 
+# the messages are encrypted.
+rpk topic consume topic_A
 
+# Cleanup
+docker stop $(docker ps -q --filter "name=producer" --filter "name=consumer")
+rpk container purge
+```
 
+### Detailed explanation of each step
 
- Let's dig in to see how simple it is to build an enterprise streaming application to process transactional data. In this diagram we will stream data from 3 sources; Mongo, AWS S3 buckets, and ?something? to our datalake provider, Snowflake.
+Walking through the commands one-by-one will explain what each step achieves. 
+Starting with getting Redpanda running locally:
 
- To build the connections on the input side all we need to do is to install the RedPanda Connect binary next to each producer, and run the following configuration. RedPanda Connect will automagically establish connections to the input, start and configure an Ockam Node.
+```bash
+brew install redpanda-data/tap/redpanda
+rpk container start
+```
 
- Next, we will build the connection to Snowflake. Again, we install Redpanda Connect next to Snowflake, and run the following configuration. RedPanda Connect will automagically establish connections to Snowflake, start and configure an Ockam Node.
+These two commands install Redpanda and start a container. Now there is a
+broker running in a container that we will use to stream and process data with
+Redpanda Connect.
 
- We then subscribe to [Ockam Orchestrator](https://www.ockam.io/signup), and to [Redpanda Cloud](https://redpanda.com/try-redpanda). 
+```bash
+brew install build-trust/ockam/ockam
+ockam enroll
+```
 
- Finally, we run the following commands on our local Ockam node, Admin, at each input node, #Producer, and at the #Consumer 
+The `brew` command is how you install Ockam Command into your local environment. 
+`ockam enroll` will open a browser window and guide you through either [signing up
+or signing in to Ockam Orchestrator](https://www.ockam.io/signup). Ockam
+Orchestrator will allow you to securely manage the enrollment of thousands or more 
+processing nodes without the need to manually push identities, keys, or 
+credentials to each node. This initial `enroll` will establish your local machine
+as an Administrator within the project that has been setup for you within Ockam
+Orchestrator.
+
+```bash
+ockam project ticket --usage-count 1 \
+  --expires-in 10m --attribute consumer \
+  --relay consumer_relay > ticket
+```
+
+The `ockam project ticket` command is how you generate a ticket that will admit
+another node into your project. The arguments here specify that:
+
+* The ticket can is valid for use `1` time. This ensures that ticket is for the 
+desired purposes and if it's inadvertently leaked there is no
+opportunity for an attacker to re-use it to gain access to your project.
+* A time-to-live (TTL)/expiry period of `10` minutes. This also reduces the risk
+posed by a ticket leaking, you can adjust it to any time window that's
+appropriate for your use case.
+* An attribute of `consumer`. This will add a attribute to any node that enrolls
+with this ticket, and policy definitions can then use those attributes to apply 
+Attribute Based Access Controls and restrict which nodes can communicate with 
+each other.
+* Setup a relay named `consumer_relay`. This provides a named route for other
+nodes to find this node, even if both nodes are on different network.
+
+The output of that command, the enrollment ticket, is then redirected out to
+a file named `ticket`.
+
+```bash
+docker run --rm --network redpanda \
+  --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
+  -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
+```
+
+This is where you start your consumer with Redpanda Connect. It uses Docker to 
+start a new container named `consumer`, on an isolated network named `redpanda`, 
+passing in the `consumer.yaml` and `ticket` files. 
+
+The `consumer.yaml` file defines how to process any data it receives:
+
+```yaml
+input:
+  ockam_kafka:
+    seed_brokers: [rp-node-0:9092]
+    topics: [topic_A]
+    consumer_group: example_group
+    ockam_allow_producer: producer
+    ockam_relay: consumer_relay
+    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+```
+
+This input block shows the standard kafka configuration options that specify the
+broker, topics, and consumer group to use. The following three lines are the 
+Ockam-specific additions that allow this input source to receive and process
+end-to-end encrypted data streams:
+
+* `ockam_allow_producer`: the attribute that needs to exist on the other node before
+allowing each node to establish a trusted connection between each other.
+* `ockam_relay`: the name of the relay to connect this node to.
+* `ockam_enrollment_ticket`: the enrollment ticket to use to admit this node into
+the Ockam Orchestrator project.
+
+```yaml
+pipeline:
+  processors:
+    - bloblang: |
+      root = this
+      root.data.message = this.data.message.uppercase()
+```
+
+The pipeline and processors block does a basic transformation of receiving the
+data, and converting the `message` attribute to be all in upper-case. While not
+an entirely useful transformation in production, this allows you to independently
+verify that the consumer was able to decrypt and process the data.
+
+```yaml
+output:
+  stdout: {}
+  # snowflake_put:
+  #   account: acme
+  #   ...
+```
+
+The last part of the `consumer.yaml` configuration is the output block. This
+example implements a single `stdout` output. As the commented-out Snowflake block
+highlights, other destinations can receive your final processed data stream by
+providing their configuration settings alongside this example.
+
+The code snippet for starting a data producer shows how Ockam makes enrolling any 
+number of nodes painless: 
+
+```bash
+for i in $(seq 1 3); do
+  ockam project ticket --usage-count 1 --expires-in 10m \
+    --attribute producer > ticket
+
+  docker run --rm -d --network redpanda \
+    --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
+    -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
+done
+```
+
+The `for i in $(seq 1 3); do` line creates a `for` loop that will create `3` 
+separate containers. Each container will generate a unique identity, enroll into
+the Ockam Orchestrator project, and establish a secure channel with the consumer
+node. If you feel ambitious you can increase that `3` to a higher number, just
+be aware Docker will run a new container for each node so you could quickly
+exhaust your local system resources.
+
+The `ockam project ticket` command generates an enrollment ticket, just as it 
+did in the earlier section that explained the setup of the consumer. The primary
+difference with this ticket is that the attribute is set to `producer` and there
+is no need to setup a relay for a producer.
+
+The `docker run` command runs the same image as before, on the same network,
+giving each image unique name with a prefix of `producer`, and passing in
+the `producer.yaml` and `ticket` for each node.
+
+The `producer.yaml` configuration file has two blocks of importance:
+
+```yaml
+input:
+  generate:
+    count: 1000
+    interval: "@every 1s"
+    mapping: |
+      root = {
+        "_producer": hostname(),
+        "data": { "email": fake("email"), "message": fake("sentence") }
+      }
+  # mongodb:
+  #   url: mongodb://localhost
+  #   database: orders
+  #   ...
+```
+
+The input block here is generating random data, useful for the sake of a self-
+contained demo but something you would replace in a real-world use case. On a
+1 second interval new data that includes the `hostname` 
+(allowing you to verify that there is 3 separate nodes producing data), and
+ fake data for the `email` and `message` attributes in the payload, is sent to
+the output. If you recall the explanation earlier, the `message` field is later 
+processed by the consumer to be entirely in upper-case before being output 
+to `stdout`.
+
+For a real-world use case, the commented out block gives an example of how to 
+use a Mongo database as the input source for a producer.
+
+```yaml
+output:
+  ockam_kafka:
+    seed_brokers: [rp-node-0:9092]
+    topic: topic_A
+    ockam_route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
+    ockam_allow_consumer: consumer
+    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+```
+
+The output block in `producer.yaml` contains the standard kafka configuration,
+along with three Ockam-specific options:
+
+* `ockam_route_to_consumer`: the full path to the relay that was setup for the consumer.
+* `ockam_allow_consumer`: the attribute that needs to exist on the other node before
+allowing each node to establish a trusted connection between each other.
+* `ockam_enrollment_ticket`: the enrollment ticket to use to admit this node into
+the Ockam Orchestrator project.
+
+Now everything is setup and running. You'll see in the log output that the
+consumer is receiving data, from different hosts, and that the
+`message` in each payload is upper-case. If you open the
+[Redpanda Console](http://localhost:8080) you'll see that the encrypted messages 
+in `topic_A` are not readable by the broker or anybody else that might have 
+access to the topic.
+
+By adding or changing a few lines in the `consumer.yaml` and `producer.yaml`
+files it's possible to:
+
+* Use an existing self-hosted Redpanda broker or Redpanda Cloud instance.
+* Add more inputs into `producer.yaml` and/or outputs `consumer.yaml` to 
+connect, secure, and stream data between any of the hundreds
+of different integrations supported by Redpanda Connect.
