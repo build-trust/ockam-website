@@ -33,7 +33,8 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
     Component,
     pageProps: { session, ...pageProps },
   } = props;
-  const { getLayout = (page: ReactElement): ReactNode => page } = Component;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-shadow,@typescript-eslint/no-unused-vars
+  const { getLayout = (page: ReactElement, pageProps: any): ReactNode => page } = Component;
   const isBrowser = typeof window !== 'undefined';
   const [initialRouteTracked, setInitialRouteTracked] = useState(false);
 
@@ -126,7 +127,7 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
       <StylesProvider>
         <MobileNavbarProvider>
           <NextNprogress color={theme.colors.brand[500]} height={3} />
-          {getLayout(<Component {...pageProps} />)}
+          {getLayout(<Component {...pageProps} />, pageProps)}
         </MobileNavbarProvider>
         {postAnalytics()}
       </StylesProvider>

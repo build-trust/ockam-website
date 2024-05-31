@@ -26,7 +26,6 @@ const AllPageNotice: FC<Props> = ({ message, except }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const stateKey = 'allpagenotice';
   const pathname = usePathname();
-  // const { pathname } = router;
 
   const shouldShowMessage = useCallback((): boolean => {
     if (except) {
