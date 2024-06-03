@@ -26,8 +26,7 @@ const sha512 = (input: string): string => {
 const HeroBox = styled(Box)`
   &:before {
     content: '';
-    background: rgb(10, 10, 10);
-    background-image: linear-gradient(0deg, rgb(40, 40, 40), rgb(10, 10, 10));
+
     position: absolute;
     top: 0;
     left: 0;
@@ -35,7 +34,7 @@ const HeroBox = styled(Box)`
     bottom: 0;
     z-index: -1;
   }
-  color: white;
+  color: #c00;
   overflow: hidden;
   position: relative;
 `;
@@ -180,23 +179,31 @@ const Hero: FunctionComponent<Props> = ({
         maxW="unset"
       >
         <Box width="100%">
-          <Heading size="h1" as="h1" variant="dynamicSizeh1" lineHeight={calculatedLineHeight()}>
+          <Heading
+            size="h1"
+            as="h1"
+            variant="dynamicSizeh1"
+            lineHeight={calculatedLineHeight()}
+
+          >
             <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>
               {heroText()}
             </ChakraLink>
           </Heading>
-          <RotatingHeading text={subtext} as="h2" />
+          <RotatingHeading text={subtext} as="h2" color="#242A31" />
           {insertctas()}
         </Box>
         {image && (
           <Box
-            width="100%"
+            width="auto"
             height="auto"
+            maxH="80vh"
+            maxW="80%"
             overflow="hidden"
             background="white"
             borderTopLeftRadius="3xl"
             borderTopRightRadius="3xl"
-            maxW="container.max"
+            // maxW="container.max"
           >
             <ExcalidrawAnimation
               src={image}

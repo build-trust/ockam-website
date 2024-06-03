@@ -214,7 +214,9 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
 };
 
 LandingPage.getLayout = (page: ReactElement, pageProps?: PageProps): ReactNode => (
-  <LandingLayout allPage={pageProps?.allPageMessage}>{page}</LandingLayout>
+  <LandingLayout allPage={pageProps?.allPageMessage} hideNav>
+    {page}
+  </LandingLayout>
 );
 
 export default LandingPage;
