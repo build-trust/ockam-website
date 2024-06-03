@@ -155,6 +155,8 @@ const SideBySidePanel: FC<Props> = ({
         height={isMinimal ? '100%' : 'auto'}
         justifyContent={isMinimal ? 'space-between' : 'space-between'}
         alignItems="center"
+        scrollSnapAlign="start"
+        scrollMargin="0"
         _hover={hoverStyle()}
         {...panelProps()}
       >

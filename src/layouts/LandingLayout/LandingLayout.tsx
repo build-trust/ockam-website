@@ -27,12 +27,21 @@ const LandingLayout: FunctionComponent<Props> = ({ hideNav, children, allPage })
     <MobileNavbarProvider>
       <AllPageNotice message={allPage?.message} except={allPage?.except} />
       {nav()}
-      <Flex direction="column" minH="full" w="full" overflowX="hidden" className={styles.container}>
-        <Box as="main" flex={1} w="full" pt={0}>
+      <Flex
+        direction="column"
+        minH="full"
+        w="full"
+        overflowX="hidden"
+        className={styles.container}
+        h="100vh"
+        overflowY="scroll"
+        scrollSnapType="y mandatory"
+      >
+        <Box as="main" flex={1} w="full" pt={0} scrollSnapAlign="start">
           {children}
         </Box>
 
-        <LayoutFooter />
+        <LayoutFooter scrollSnapAlign="center" />
       </Flex>
     </MobileNavbarProvider>
   );

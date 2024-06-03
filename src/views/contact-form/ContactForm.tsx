@@ -148,7 +148,7 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
   };
 
   return (
-    <Card w="full" maxW="2xl" p={10}>
+    <Card w="full" maxW="2xl" p={10} scrollSnapAlign="start">
       {(featureRequest || contactReason) && (
         <Alert status="info" variant="solid" borderRadius="base" mb="8">
           <>
