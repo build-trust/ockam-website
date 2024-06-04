@@ -34,7 +34,6 @@ const HeroBox = styled(Box)`
     bottom: 0;
     z-index: -1;
   }
-  color: #c00;
   overflow: hidden;
   position: relative;
 `;
@@ -55,6 +54,7 @@ type Props = {
   subtextSize?: ResponsiveValue<
     (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
   >;
+  color?: string;
 } & BoxProps;
 
 const Hero: FunctionComponent<Props> = ({
@@ -69,6 +69,7 @@ const Hero: FunctionComponent<Props> = ({
   darkGradient,
   animationStartAt,
   ctas,
+  color,
   ...restProps
 }) => {
   const { gradients } = useTheme();
@@ -184,13 +185,13 @@ const Hero: FunctionComponent<Props> = ({
             as="h1"
             variant="dynamicSizeh1"
             lineHeight={calculatedLineHeight()}
-
+            color={color || 'white'}
           >
             <ChakraLink href="#why" _hover={{ textDecoration: 'none', cursor: 'default' }}>
               {heroText()}
             </ChakraLink>
           </Heading>
-          <RotatingHeading text={subtext} as="h2" />
+          <RotatingHeading text={subtext} as="h2" color={color || 'white'} />
           {insertctas()}
         </Box>
         {image && (
