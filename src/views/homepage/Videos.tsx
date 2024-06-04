@@ -1,21 +1,5 @@
 import { FC } from 'react';
-import {
-  AspectRatio,
-  Box,
-  BoxProps,
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Box, BoxProps, Container, Flex, Heading } from '@chakra-ui/react';
 
 import GradientContainer from '@root/layouts/components/GradientContainer';
 
@@ -26,52 +10,35 @@ type Props = {
   videoId: string;
 } & BoxProps;
 
-const Video: FC<Props> = ({ title, videoId, ...restProps }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <Box {...restProps}>
-      <Button
-        onClick={onOpen}
-        variant="link"
-        p={4}
-        mb={4}
-        boxShadow="2xl"
-        borderRadius="15"
-        borderStyle="none"
-        background="white"
-        position="relative"
-        border="2px solid none"
-        _hover={{
-          boxShadow: 'xl',
-        }}
-      >
-        <Flex direction="column">
-          <Heading size="md" mb={2}>
-            {title}
-          </Heading>
-          <Image src={`http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`} width="100%" />
-        </Flex>
-      </Button>
-
-      <Modal isOpen={isOpen} onClose={onClose} size="full">
-        <ModalOverlay bg="blackAlpha.800" />
-        <ModalContent>
-          <ModalHeader color="white">{title}</ModalHeader>
-          <ModalCloseButton color="white" />
-          <ModalBody>
-            <AspectRatio maxH="80vh" ratio={1}>
-              <iframe
-                title="naruto"
-                src={`https://www.youtube.com/embed/${videoId}`}
-                allowFullScreen
-              />
-            </AspectRatio>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+const Video: FC<Props> = ({ title, videoId, ...restProps }) => (
+  <Box {...restProps}>
+    <Box
+      p={4}
+      mb={4}
+      boxShadow="2xl"
+      borderRadius="15"
+      borderStyle="none"
+      background="white"
+      position="relative"
+      border="2px solid none"
+      _hover={{
+        boxShadow: 'xl',
+      }}
+    >
+      <Flex direction="column">
+        <Heading size="md" mb={2}>
+          {title}
+        </Heading>
+        <iframe
+          height={207}
+          title={title}
+          src={`https://www.youtube.com/embed/${videoId}`}
+          allowFullScreen
+        />
+      </Flex>
     </Box>
-  );
-};
+  </Box>
+);
 
 const vids = [
   {
@@ -107,7 +74,7 @@ const Videos: FC = () => (
     <Container variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
       <Flex width="100%" justifyContent="space-evenly" flexWrap="wrap">
         {vids.map(({ title, id }) => (
-          <Video title={title} videoId={id} maxW="400px" w="100%" mx="0.5rem" />
+          <Video title={title} videoId={id} maxW="400px" w="100%" mx="auto" />
         ))}
       </Flex>
     </Container>
