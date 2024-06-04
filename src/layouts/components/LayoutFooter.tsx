@@ -23,6 +23,7 @@ import {
   SIGNUP_PATH,
   STYLE_GUIDE_PATH,
   TEAM_PATH,
+  TEAM_PATH_TEAM_SECTION,
 } from '@consts/paths';
 import { isSignedIn } from '@root/components/Auth';
 
@@ -59,7 +60,7 @@ const NAV = [
   },
 
   {
-    heading: 'Use cases',
+    heading: 'Use Cases',
     links: [
       {
         name: 'Database protection',
@@ -79,7 +80,7 @@ const NAV = [
       },
       {
         name: 'Confluent Cloud compliance',
-        href: 'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
+        href: 'https://docs.ockam.io/portals/kafka/confluent/confluent',
         isExternal: true,
       },
     ],
@@ -88,9 +89,9 @@ const NAV = [
   {
     heading: 'Company',
     links: [
-      { name: 'Open roles', href: `${TEAM_PATH}#open-roles`, isExternal: false },
-      { name: 'Our mission & values', href: MISSION_AND_VISION_PATH, isExternal: false },
-      { name: 'The team', href: TEAM_PATH, isExternal: false },
+      { name: 'Open Roles', href: `${TEAM_PATH}#open-roles`, isExternal: false },
+      { name: 'Our Mission & Values', href: MISSION_AND_VISION_PATH, isExternal: false },
+      { name: 'The Team', href: TEAM_PATH_TEAM_SECTION, isExternal: false },
       { name: 'Team handbook', href: '/blog/team_handbook', isExternal: false },
       { name: 'Compliance & audit reports', href: 'https://audits.ockam.io/', isExternal: true },
       { name: 'Orchestrator status', href: 'https://status.ockam.io/', isExternal: true },
