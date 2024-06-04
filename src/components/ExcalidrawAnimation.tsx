@@ -19,6 +19,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   startAt,
 }): ReactElement | null => {
   const ref = useRef<HTMLDivElement>();
+  const scrollContainer = useRef<Element>();
   const [svg, setSvg] = useState<SVGSVGElement>();
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -27,8 +28,33 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   const [isNested, setIsNested] = useState(false);
   const [interval, setInter] = useState<NodeJS.Timer>();
 
+  const isScrollable = useCallback((node: Element): boolean => {
+    if (!(node instanceof HTMLElement || node instanceof SVGElement)) {
+      return false;
+    }
+    const style = getComputedStyle(node);
+    return ['overflow', 'overflow-x', 'overflow-y'].some((propertyName) => {
+      const value = style.getPropertyValue(propertyName);
+      return value === 'auto' || value === 'scroll';
+    });
+  }, []);
+
+  const getScrollParent = useCallback(
+    (node: Element) => {
+      let currentParent = node.parentElement;
+      while (currentParent) {
+        if (isScrollable(currentParent)) {
+          return currentParent;
+        }
+        currentParent = currentParent.parentElement;
+      }
+      return document.scrollingElement || document.documentElement;
+    },
+    [isScrollable],
+  );
+
   const handleScroll = (): void => {
-    const position = window.scrollY;
+    const position = scrollContainer?.current?.scrollY || scrollContainer?.current?.scrollTop;
     setScrollPosition(position);
   };
 
@@ -70,11 +96,14 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
 
   useEffect(() => {
     if (!animate) return undefined;
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    if (!ref.current) return undefined;
+    scrollContainer.current = getScrollParent(ref.current);
+    if (!scrollContainer.current) return undefined;
+    scrollContainer.current.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      scrollContainer?.current?.removeEventListener('scroll', handleScroll);
     };
-  }, [animate]);
+  }, [animate, getScrollParent]);
 
   const hasClaymationSteps = useCallback(
     (elem: SVGSVGElement): boolean => elem.querySelectorAll('svg').length > 1,
