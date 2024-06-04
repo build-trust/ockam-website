@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { Box, Container, Flex, Text, Heading, TextProps, FlexProps } from '@chakra-ui/react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
-import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 import CodeBlock from '@root/components/mdx/CodeBlock';
 import GradientContainer from '@root/layouts/components/GradientContainer';
+import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
 
 import Hero from './Hero';
 
@@ -56,20 +56,27 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
         <Container variant="section">
           <Box id="magic-parts" visibility="hidden" position="absolute" left={0} top="-80px" />
 
-          {magic.map((card, ix) => (
-            <SideBySidePanel
-              image={card.image}
-              textOrientation={ix % 2 === 0 ? 'left' : 'right'}
-              animate
-              key={card.title}
-            >
-              <Heading width="100%" mb={4}>
-                {card.title}
-              </Heading>
-              {card.mdx && <MDXRemote {...card.mdx} components={components} />}
-              {card.text && <Text>{card.text}</Text>}
-            </SideBySidePanel>
-          ))}
+          <Flex direction="column" py="0.5rem" gap="5rem">
+            {magic.map((card, index) => (
+              <Flex
+                gap="1.5rem"
+                key={card.title}
+                // First row has text on the left, image on the right, second row is reversed.
+                flexDirection={{ base: 'column', lg: index === 0 ? 'row' : 'row-reverse' }}
+              >
+                <Box flex={1}>
+                  <Heading width="100%" mb={4}>
+                    {card.title}
+                  </Heading>
+                  {card.mdx && <MDXRemote {...card.mdx} components={components} />}
+                  {card.text && <Text>{card.text}</Text>}
+                </Box>
+                <Box flex={1}>
+                  <ExcalidrawAnimation src={card.image} animate />
+                </Box>
+              </Flex>
+            ))}
+          </Flex>
         </Container>
       </Box>
     </Container>
