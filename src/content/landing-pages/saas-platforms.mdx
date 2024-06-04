@@ -10,9 +10,32 @@ features:
     title: Supports multi-cloud & on-prem
   - icon: shieldcheck
     title: Independently audited security
+steps:
+  - heading: Create an agent
+    text: | 
+      Either add Ockam to your existing distribution, or wrap one of our existing
+      deployment options with your own branding to a custom package within minutes. 
+    image: placeholder
+  - heading: Words for do customer stuff
+    text: |
+      Add a way for a customer to request a ticker. They then run your agent, 
+      passing in the ticket. That's all they have to do! No managing hostnames 
+      or routes, changing ingress rules on firewalls.
+    image: placeholder
+  - heading: Connect to your customer
+    text: | 
+      Whenever you need to connect to the customer system start an Ockam Inlet. A 
+      mutually authenticated secure portal will be immediately established. 
+      And via what we call [virtual adjacency](/) the customer system will be 
+      accessible as though it was running on `localhost`. All without the need to 
+      for the customer to make their systems reachable from the public internet. And
+      without the risk of you being able to reach anything else in their network due 
+      to a misconfiguration on their end. A true point to point connection. Exactly
+      what you need, and nothing more.
+    image: placeholder
 ---
 
-<SideBySidePanel textOrientation="left" image="placeholder">
+<SideBySidePanel textOrientation="left" image="integrate-customer-systems">
 ## Unlock new product growth
 
 If you're running a SaaS platform, Ockam allows you to offer new capabilities
@@ -93,4 +116,3 @@ approach for the majority of customers. For those with specific self-managed
 deployment requirements, Ockam Business Critical provides options for running
 entirely within your own VPC or on-prem.
 </SideBySidePanel>
-
