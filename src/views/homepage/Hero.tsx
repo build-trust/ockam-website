@@ -190,7 +190,7 @@ const Hero: FunctionComponent<Props> = ({
               {heroText()}
             </ChakraLink>
           </Heading>
-          <RotatingHeading text={subtext} as="h2" color="#242A31" />
+          <RotatingHeading text={subtext} as="h2" />
           {insertctas()}
         </Box>
         {image && (
