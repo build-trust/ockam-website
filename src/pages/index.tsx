@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import { serialize } from 'next-mdx-remote/serialize';
 import RemarkGFM from 'remark-gfm';
 import RemarkPrism from 'remark-prism';
@@ -61,22 +61,24 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => {
           ctas={heroCTAs()}
         />
       </GradientContainer>
-      <Box
-        pt={{ base: 4, lg: 4 }}
-        pb={{ base: 20, lg: 24 }}
+      <Container
+        variant="section"
+        py="2rem"
         boxShadow="2xl"
         borderRadius={{ base: 0, lg: '15' }}
         borderStyle="none"
         background="white"
         maxW="container.max"
-        mx={{ base: 0, xl: 'auto' }}
+        mx="auto"
         mt="-17em"
         position="relative"
         zIndex={2}
       >
-        <Networkless />
-        <SecureByDesign />
-      </Box>
+        <Flex direction="column" gap={{ base: '2rem', md: '4rem' }} w="100%" px="2rem">
+          <Networkless />
+          <SecureByDesign />
+        </Flex>
+      </Container>
       <Magic magic={magic} zIndex={1} marginTop="-3em" />
       <Cases marginTop="-3em" />
       <Videos />

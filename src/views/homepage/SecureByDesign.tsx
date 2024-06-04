@@ -1,26 +1,17 @@
-import { Box, Container, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import { FC } from 'react';
 
 import AndIts from '@assets/images/and-its.svg';
 import RotatingText from '@root/components/RotatingText';
 
 const SecureByDesign: FC = () => (
-  <Container
-    variant="section"
-    style={{ clear: 'both' }}
-    mb={{ base: 40, sm: 40, md: 12 }}
-    pt={{ base: 16, sm: 16, md: 0 }}
-  >
-    <Flex
-      direction="row"
-      width="100%"
-      justifyContent={{ base: 'flex-start', sm: 'flex-start', md: 'space-evenly' }}
-    >
-      <Box display={{ base: 'none', sm: 'none', md: 'block' }}>
-        <AndIts width="100%" preserveAspectRatio="xMinYMin meet" height="180px" />
+  <>
+    <Flex direction="row" gap="1rem" mx={{ base: 0, md: 'auto' }}>
+      <Box display={{ base: 'none', md: 'block' }}>
+        <AndIts width="100%" preserveAspectRatio="xMinYMin meet" height="160px" />
       </Box>
 
-      <Box pt={{ base: '160px' }}>
+      <Box mt="1.5rem">
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Secure-by-design
         </Heading>
@@ -38,7 +29,7 @@ const SecureByDesign: FC = () => (
         </Heading>
       </Box>
     </Flex>
-  </Container>
+  </>
 );
 
 export default SecureByDesign;
