@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 import path from 'path';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Link from 'next/link';
@@ -17,6 +17,7 @@ import { BUILD_DEMO } from '@root/consts/externalResources';
 import Paragraph from '@root/components/mdx/Paragraph';
 import Card from '@root/components/Card';
 import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
+import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
 
@@ -73,6 +74,12 @@ type Example = {
   name: string;
   url: string;
 };
+
+type Step = {
+  heading: string;
+  text: string;
+  image: string;
+};
 const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter }) => {
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const text = frontMatter?.hero_text as string;
@@ -82,6 +89,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   const subtext = frontMatter?.subtext as string;
   const animationStartAt = frontMatter?.hero_animation_start_at as number;
   const examples = frontMatter?.examples as unknown as Example[];
+  const steps = frontMatter?.steps as unknown as Step[];
 
   const listFeatures = (
     typeof frontMatter?.list_features === 'undefined' ? true : frontMatter?.list_features
@@ -165,6 +173,21 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
     );
   };
 
+  const displaySteps = (): JSX.Element | JSX.Element[] => {
+    if (!steps || steps.length === 0) return <></>;
+    const ss = steps.map((step) => (
+      <SideBySidePanel textOrientation="left" image={step.image}>
+        <Heading>{step.heading}</Heading>
+        <Text>{step.text}</Text>
+      </SideBySidePanel>
+    ));
+    ss.unshift(
+      <Heading fontSize="5vh" textAlign="center" width="100%">
+        It&apos;s as simple as
+      </Heading>,
+    );
+    return ss;
+  };
   const feats = features.map((feature) => feature.title).join('||');
   const ogImage = `/api/og?title=${encodeURIComponent(
     text.replaceAll('_', ''),
@@ -182,6 +205,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
         aspect={imageAspect}
         animationStartAt={animationStartAt}
         pt={32}
+        color="#242A31"
       />
 
       <Flex
@@ -201,8 +225,10 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
         id="why"
       >
         <MDXRemote {...source} components={mdxComponents} />
+        {displaySteps()}
         {displayFeatures()}
         {displayExamples()}
+
         <Heading textAlign="center">&hellip; or, ask our team a question</Heading>
         <Paragraph textAlign="center">
           We&apos;ll get back to you within one business day.

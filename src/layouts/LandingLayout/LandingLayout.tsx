@@ -35,7 +35,7 @@ const LandingLayout: FunctionComponent<Props> = ({ hideNav, children, allPage })
         className={styles.container}
         h="100vh"
         overflowY="scroll"
-        scrollSnapType="y mandatory"
+        scrollSnapType="y proximity"
       >
         <Box as="main" flex={1} w="full" pt={0} scrollSnapAlign="start">
           {children}
