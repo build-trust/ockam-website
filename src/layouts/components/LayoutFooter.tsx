@@ -20,10 +20,10 @@ import {
   CONTACT_FORM_PATH,
   CONTACT_PAGE_PATH,
   MISSION_AND_VISION_PATH,
+  MISSION_AND_VISION_TEAM_SECTION,
   SIGNUP_PATH,
   STYLE_GUIDE_PATH,
   TEAM_PATH,
-  TEAM_PATH_TEAM_SECTION,
 } from '@consts/paths';
 import { isSignedIn } from '@root/components/Auth';
 
@@ -91,7 +91,7 @@ const NAV = [
     links: [
       { name: 'Open Roles', href: `${TEAM_PATH}#open-roles`, isExternal: false },
       { name: 'Our Mission & Values', href: MISSION_AND_VISION_PATH, isExternal: false },
-      { name: 'The Team', href: TEAM_PATH_TEAM_SECTION, isExternal: false },
+      { name: 'The Team', href: MISSION_AND_VISION_TEAM_SECTION, isExternal: false },
       { name: 'Team handbook', href: '/blog/team_handbook', isExternal: false },
       { name: 'Compliance & audit reports', href: 'https://audits.ockam.io/', isExternal: true },
       { name: 'Orchestrator status', href: 'https://status.ockam.io/', isExternal: true },
