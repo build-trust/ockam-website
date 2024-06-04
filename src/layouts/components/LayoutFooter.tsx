@@ -127,10 +127,6 @@ interface Props extends BoxProps {
 }
 const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) => {
   const { gradients } = useTheme();
-  const contactFormPath = (): string => {
-    if (landingPage) return '#contact';
-    return CONTACT_FORM_PATH;
-  };
 
   const signedIn = async (): Promise<boolean> => isSignedIn();
 
@@ -210,13 +206,15 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
           )}
           <Button
             as="a"
-            href={contactFormPath()}
+            href={CONTACT_PAGE_PATH}
             colorScheme="avocado"
             color="black"
-            size="lg"
+            fontSize="1rem"
+            px="1.5rem"
+            py="1rem"
+            size="md"
+            height="auto"
             display={{ base: 'block', lg: 'inline-block' }}
-            mr={{ base: 0, lg: 0 }}
-            my={{ base: 2, lg: 0 }}
           >
             Get a Demo
           </Button>
