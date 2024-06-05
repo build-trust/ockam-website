@@ -32,7 +32,7 @@ const NAV = [
     heading: 'Learn',
     links: [
       {
-        name: 'Get started',
+        name: 'Get Started',
         href: 'https://docs.ockam.io/#quick-start',
         isExternal: true,
       },
@@ -42,12 +42,12 @@ const NAV = [
         isExternal: true,
       },
       {
-        name: 'Programming libraries',
+        name: 'Programming Libraries',
         href: 'https://docs.ockam.io/reference/libraries',
         isExternal: true,
       },
       {
-        name: 'Cryptographic & messaging protocols',
+        name: 'Cryptographic & Messaging Protocols',
         href: 'https://docs.ockam.io/reference/protocols',
         isExternal: true,
       },
@@ -92,9 +92,9 @@ const NAV = [
       { name: 'Open Roles', href: `${TEAM_PATH}#open-roles`, isExternal: false },
       { name: 'Our Mission & Values', href: MISSION_AND_VISION_PATH, isExternal: false },
       { name: 'The Team', href: MISSION_AND_VISION_TEAM_SECTION, isExternal: false },
-      { name: 'Team handbook', href: '/blog/team_handbook', isExternal: false },
-      { name: 'Compliance & audit reports', href: 'https://audits.ockam.io/', isExternal: true },
-      { name: 'Orchestrator status', href: 'https://status.ockam.io/', isExternal: true },
+      { name: 'Team Handbook', href: '/blog/team_handbook', isExternal: false },
+      { name: 'Compliance & Audit Reports', href: 'https://audits.ockam.io/', isExternal: true },
+      { name: 'Orchestrator Status', href: 'https://status.ockam.io/', isExternal: true },
       {
         name: 'Style Guide',
         href: STYLE_GUIDE_PATH,
@@ -109,7 +109,7 @@ const NAV = [
     heading: 'Contact',
     links: [
       { ...DISCUSSION, isExternal: true },
-      { name: 'Build Trust community Discord', href: DISCORD.href, isExternal: true },
+      { name: 'Build Trust Community Discord', href: DISCORD.href, isExternal: true },
       {
         name: 'Support',
         href: CONTACT_PAGE_PATH,
