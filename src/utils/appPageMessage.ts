@@ -34,4 +34,5 @@ const allPageMessage: Promise<AllPageMessage | null> = new Promise((resolve) => 
 });
 
 export type { AllPageMessage };
+export { mdxSerialize };
 export default allPageMessage;

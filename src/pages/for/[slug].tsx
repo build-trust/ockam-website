@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Button, Flex, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
 import path from 'path';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ import { Feature } from '@root/views/homepage/Features';
 import { BUILD_DEMO } from '@root/consts/externalResources';
 import Paragraph from '@root/components/mdx/Paragraph';
 import Card from '@root/components/Card';
-import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
+import allPageMessageProps, { AllPageMessage, mdxSerialize } from '@root/utils/appPageMessage';
 import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
@@ -51,14 +51,35 @@ type PageProps = {
   allPageMessage?: AllPageMessage | null;
 };
 
+type Frontmatter = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+};
+
+const fieldsToMdx = async (fields: string[], frontmatter: Frontmatter): Promise<Frontmatter> => {
+  const mdxFrontmatter = frontmatter;
+  await fields.forEach(async (field) => {
+    const [name, attr] = field.split('.', 2);
+    if (name.indexOf('[]') > 0) {
+      const n = name.replace('[]', '');
+      await frontmatter[n].forEach(async (obj: Frontmatter, idx: number) => {
+        const val = obj[attr];
+        mdxFrontmatter[n][idx][`mdx${attr}`] = await mdxSerialize(val);
+      });
+    }
+  });
+  return mdxFrontmatter;
+};
+
 export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: PageProps }> => {
+  const frontmatterMdxFields = ['steps[].text'];
   const { source, frontMatter } = await getPageBySlug(LANDING_PAGE_PATH, params.slug);
   const { slug } = params;
   return {
     props: {
       slug,
       source,
-      frontMatter,
+      frontMatter: await fieldsToMdx(frontmatterMdxFields, frontMatter),
       allPageMessage: await allPageMessageProps,
     },
   };
@@ -78,6 +99,7 @@ type Example = {
 type Step = {
   heading: string;
   text: string;
+  mdxtext?: MDXRemoteSerializeResult;
   image: string;
 };
 const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter }) => {
@@ -178,7 +200,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
     const ss = steps.map((step) => (
       <SideBySidePanel textOrientation="left" image={step.image}>
         <Heading>{step.heading}</Heading>
-        <Text>{step.text}</Text>
+        {step.mdxtext && <MDXRemote {...step.mdxtext} components={mdxComponents} />}
       </SideBySidePanel>
     ));
     ss.unshift(
