@@ -63,7 +63,7 @@ const NAV = [
     heading: 'Use Cases',
     links: [
       {
-        name: 'Database protection',
+        name: 'Database Protection',
         href: '/for/private-connectivity',
         isExternal: false,
       },
@@ -79,8 +79,8 @@ const NAV = [
         isExternal: false,
       },
       {
-        name: 'Confluent Cloud compliance',
-        href: 'https://docs.ockam.io/portals/kafka/confluent/confluent',
+        name: 'Zero-trust Streaming Data',
+        href: 'https://www.ockam.io/blog/redpanda_connect_with_ockam',
         isExternal: true,
       },
     ],
