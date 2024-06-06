@@ -24,7 +24,8 @@
     "excalidraw-animate": "node ./bin/excalidraw-animate.js",
     "cypress:open": "cypress open",
     "e2e": "start-server-and-test dev http://localhost:3001 \"cypress open --e2e\"",
-    "e2e:headless": "start-server-and-test dev http://localhost:3001 \"cypress run --e2e\""
+    "e2e:headlessold": "start-server-and-test dev http://localhost:3001 \"cypress run --e2e\"",
+    "e2e:headless": "cypress run --e2e --browser=chrome"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [

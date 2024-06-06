@@ -1,0 +1,59 @@
+name: "comment-on-pr"
+
+on:
+  pull_request:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start the server
+        run: npm run build && npm run start &
+        env:
+          NODE_ENV: development
+
+      - name: Run Cypress tests
+        run: npx cypress run --e2e
+        env:
+          CI: true
+
+      - name: Archive screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+  post-cypress:
+    needs: cypress-run
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download screenshots
+        uses: actions/download-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: ./screenshots
+
+      - name: Create comment with screenshots
+        run: |
+          for file in ./screenshots/**/*; do
+            echo "![Screenshot](https://github.com/${{ github.repository }}/raw/${{ github.sha }}/$file)" >> comment.md
+          done
+          gh pr comment ${{ github.event.pull_request.number }} --body "$(cat comment.md)"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

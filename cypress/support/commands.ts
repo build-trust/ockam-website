@@ -40,3 +40,23 @@ addCompareScreenshotCommand({});
 //     }
 //   }
 // }
+
+Cypress.Screenshot.defaults({
+  scale: true,
+  onBeforeScreenshot($el) {
+    $el.find('html, body').css('height', 'auto');
+    $el.find('html, body').css('scroll-behavior', 'auto');
+    $el.find('header').css('display', 'none');
+    cy.window().then((win) => {
+      win.scrollTo({
+        top: 0,
+        left: document.body.scrollHeight,
+        behavior: 'smooth',
+      });
+      win.scrollTo(0, 0);
+    });
+  },
+  onAfterScreenshot($el) {
+    $el.find('header').css('display', 'block');
+  },
+});

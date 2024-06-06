@@ -87,7 +87,6 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
-    // @ts-ignore window.analytics undefined below
     window.analytics.track(`Signup - Step - ${stepName}`);
     const generatedUrl = `${window.location.protocol}//${window.location.host}/${window.location.pathname}/${stepName}`;
     // @ts-ignore window.analytics undefined below
