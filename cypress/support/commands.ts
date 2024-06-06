@@ -60,3 +60,5 @@ Cypress.Screenshot.defaults({
     $el.find('header').css('display', 'block');
   },
 });
+
+export default {};
