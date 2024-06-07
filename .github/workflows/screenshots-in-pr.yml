@@ -22,7 +22,7 @@ jobs:
           NEXT_TELEMETRY_DISABLED: 1
 
       - name: Run Cypress tests
-        run: npx cypress run --e2e
+        run: npx cypress run --e2e --browser=chrome
         env:
           CI: true
 
