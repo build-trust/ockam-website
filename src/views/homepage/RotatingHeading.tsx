@@ -52,7 +52,7 @@ const RotatingHeading: FC<Props> = ({ text, as }) => {
 
   return (
     <Box mb={10}>
-      <Heading as={as || 'h1'} variant={`dynamicSize${as || 'h1'}`}>
+      <Heading size="h2" as={as || 'h1'} variant={`dynamicSize${as || 'h1'}`}>
         {message()}
       </Heading>
     </Box>

@@ -7,7 +7,7 @@ import SEOHead from '@components/SEOHead';
 import { Hero, ContactForm, Quote } from '@views/contact-form';
 
 const ContactFormPage: NextPageWithLayout = () => (
-  <Container variant="section" pt={{ base: 10, lg: 20 }}>
+  <Container variant="section" pt={{ base: 16, sm: 16, md: 20, lg: 36 }}>
     <SEOHead subTitle="Contact Form" />
 
     <Hero />

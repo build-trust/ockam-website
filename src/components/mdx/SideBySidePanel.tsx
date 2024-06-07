@@ -50,6 +50,7 @@ const SideBySidePanel: FC<Props> = ({
   const panelProps = (): {} => {
     if (!isPanel)
       return {
+        border: '2px solid transparent',
         mb: { base: '32' },
         px: { base: '8', lg: '0' },
         width: width || '100%',
@@ -58,10 +59,10 @@ const SideBySidePanel: FC<Props> = ({
       return {
         borderRadius: { sm: 0, md: '2xl' },
         backgroundColor: 'white',
-        boxShadow: '2xl',
+        boxShadow: { base: 'none', md: '2xl' },
         overflow: 'hidden',
-        transition: 'border-color 2s linear',
-        border: '2px solid none',
+        transition: 'all 0.3s linear',
+        border: '2px solid transparent',
         px: { base: '8', lg: '8' },
         py: { base: '8', lg: '8' },
         mx: { base: '0' },
@@ -81,8 +82,8 @@ const SideBySidePanel: FC<Props> = ({
   const hoverStyle = (): {} => {
     if (isMinimal && href)
       return {
-        borderColor: theme.colors.brand[500],
-        boxShadow: 'xl',
+        borderColor: { base: 'transparent', md: theme.colors.gray[200] },
+        boxShadow: { base: 'none', md: 'xl' },
       };
     return {};
   };

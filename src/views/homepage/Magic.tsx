@@ -38,7 +38,7 @@ const Magic: FunctionComponent<Props> = ({ magic, ...restProps }) => (
     <GradientContainer flexDir="column" justifyContent="flex-start" pt={32} h1={14} h2={6}>
       <Hero
         text="The _Magic_"
-        subtext="That means you can <stop punching holes in firewalls|stop sending plaintext data through kafka|stop exposing private databases|stop asking your customers to setup VPNs|skip the need for PrivateLink|stop exposing data via reverse proxies>"
+        subtext="of Ockam means you can stop <punching holes in firewalls|sending plaintext through kafka brokers|exposing private databases|asking customers to setup VPNs|waiting for IT to set up a PrivateLink|exposing data via reverse proxies>"
         darkGradient
       />
     </GradientContainer>

@@ -135,11 +135,11 @@ const Cases: FunctionComponent<FlexProps> = ({ ...restProps }) => (
       />
     </GradientContainer>
 
-    <Container variant="section" pt={{ base: 0, lg: 0 }} pb={{ base: 12, lg: 12 }} px={0} mt={16}>
+    <Container variant="section" pt={{ base: 0, lg: 0 }} px={0} mt={16}>
       <Flex
         direction="row"
         width="100%"
-        gap={{ base: '4', md: '4' }}
+        gap={{ base: 0, md: '4' }}
         alignItems="stretch"
         flexWrap="wrap"
         justify="space-around"
@@ -149,7 +149,6 @@ const Cases: FunctionComponent<FlexProps> = ({ ...restProps }) => (
             width={{ base: '100%', md: '45%', lg: '45%', xl: '24%' }}
             minW="300px"
             key={`case-${item.title}`}
-            my={{ base: '4', md: '0' }}
           >
             <Transition key={item.title} delay={(index + 1) * 300} duration={500} height="100%">
               <CasesCard {...item} textOrientation="left" />

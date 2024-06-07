@@ -18,8 +18,8 @@ import LogoGray from '@assets/logo-gray.svg';
 import { LINKEDIN, TWITTER, DISCUSSION, DISCORD } from '@consts/externalResources';
 import {
   CONTACT_FORM_PATH,
-  CONTACT_PAGE_PATH,
   MISSION_AND_VISION_PATH,
+  MISSION_AND_VISION_TEAM_SECTION,
   SIGNUP_PATH,
   STYLE_GUIDE_PATH,
   TEAM_PATH,
@@ -31,7 +31,7 @@ const NAV = [
     heading: 'Learn',
     links: [
       {
-        name: 'Get started',
+        name: 'Get Started',
         href: 'https://docs.ockam.io/#quick-start',
         isExternal: true,
       },
@@ -41,12 +41,12 @@ const NAV = [
         isExternal: true,
       },
       {
-        name: 'Programming libraries',
+        name: 'Programming Libraries',
         href: 'https://docs.ockam.io/reference/libraries',
         isExternal: true,
       },
       {
-        name: 'Cryptographic & messaging protocols',
+        name: 'Cryptographic & Messaging Protocols',
         href: 'https://docs.ockam.io/reference/protocols',
         isExternal: true,
       },
@@ -59,10 +59,10 @@ const NAV = [
   },
 
   {
-    heading: 'Use cases',
+    heading: 'Use Cases',
     links: [
       {
-        name: 'Database protection',
+        name: 'Database Protection',
         href: '/for/private-connectivity',
         isExternal: false,
       },
@@ -78,8 +78,8 @@ const NAV = [
         isExternal: false,
       },
       {
-        name: 'Confluent Cloud compliance',
-        href: 'https://docs.ockam.io/guides/use-cases/end-to-end-encryption-through-confluent-cloud',
+        name: 'Zero-trust Streaming Data',
+        href: 'https://www.ockam.io/blog/redpanda_connect_with_ockam',
         isExternal: true,
       },
     ],
@@ -88,12 +88,12 @@ const NAV = [
   {
     heading: 'Company',
     links: [
-      { name: 'Open roles', href: `${TEAM_PATH}#open-roles`, isExternal: false },
-      { name: 'Our mission & values', href: MISSION_AND_VISION_PATH, isExternal: false },
-      { name: 'The team', href: TEAM_PATH, isExternal: false },
-      { name: 'Team handbook', href: '/blog/team_handbook', isExternal: false },
-      { name: 'Compliance & audit reports', href: 'https://audits.ockam.io/', isExternal: true },
-      { name: 'Orchestrator status', href: 'https://status.ockam.io/', isExternal: true },
+      { name: 'Open Roles', href: `${TEAM_PATH}#open-roles`, isExternal: false },
+      { name: 'Our Mission & Values', href: MISSION_AND_VISION_PATH, isExternal: false },
+      { name: 'The Team', href: MISSION_AND_VISION_TEAM_SECTION, isExternal: false },
+      { name: 'Team Handbook', href: '/blog/team_handbook', isExternal: false },
+      { name: 'Compliance & Audit Reports', href: 'https://audits.ockam.io/', isExternal: true },
+      { name: 'Orchestrator Status', href: 'https://status.ockam.io/', isExternal: true },
       {
         name: 'Style Guide',
         href: STYLE_GUIDE_PATH,
@@ -108,10 +108,10 @@ const NAV = [
     heading: 'Contact',
     links: [
       { ...DISCUSSION, isExternal: true },
-      { name: 'Build Trust community Discord', href: DISCORD.href, isExternal: true },
+      { name: 'Build Trust Community Discord', href: DISCORD.href, isExternal: true },
       {
         name: 'Support',
-        href: CONTACT_PAGE_PATH,
+        href: CONTACT_FORM_PATH,
         isExternal: false,
       },
       { ...LINKEDIN, isExternal: true },
