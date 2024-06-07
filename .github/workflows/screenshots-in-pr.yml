@@ -16,10 +16,10 @@ jobs:
       - name: Start the server
         run: |
           npm run build 
-          npm run start
-          npx wait-on http://localhost:3001
+          npm run start & npx wait-on http://localhost:3001
         env:
           NODE_ENV: test
+          NEXT_TELEMETRY_DISABLED: 1
 
       - name: Run Cypress tests
         run: npx cypress run --e2e
