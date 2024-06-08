@@ -125,11 +125,11 @@ output:
     ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
 ```
 
-All that's left is to run the commands below to start the services and data will start flowing:
+All that's left is to run the commands below to start the services, and data will start flowing.
+These commands use Homebrew to install tools and Docker to run containers, so before you begin, please set up Homebrew and Docker on your machine.
 
 ```bash
 # Setup Redpanda
-
 brew install redpanda-data/tap/redpanda
 rpk container start
 
@@ -138,25 +138,25 @@ brew install build-trust/ockam/ockam
 ockam enroll
 
 # Setup Consumer
-ockam project ticket --usage-count 1 \
-  --expires-in 10m --attribute consumer \
-  --relay consumer_relay > ticket
+ockam project ticket --usage-count 1 --expires-in 10m \
+  --attribute consumer --relay consumer_relay > ticket
 
-docker run --rm --network redpanda \
-  --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
+docker run --rm --network redpanda --name consumer \
+  -v "$(pwd)/consumer.yaml:/connect.yaml" \
   -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
 
-# The previous command will tail the output so you can see 
-# the messages flowing through the system. Run the following 
-# commands in a new terminal window.
+# The previous command will block and print the output so you can see 
+# the messages being consumed by the consumer.
+#
+# Run the following commands in a new terminal window.
 
 # Setup Producers
 for i in $(seq 1 3); do
   ockam project ticket --usage-count 1 --expires-in 10m \
     --attribute producer > ticket
 
-  docker run --rm -d --network redpanda \
-    --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
+  docker run --rm -d --network redpanda --name "producer$i" \
+    -v "$(pwd)/producer.yaml:/connect.yaml" \
     -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
 done
 
@@ -202,9 +202,8 @@ as an Administrator within the project that has been setup for you within Ockam
 Orchestrator.
 
 ```bash
-ockam project ticket --usage-count 1 \
-  --expires-in 10m --attribute consumer \
-  --relay consumer_relay > ticket
+ockam project ticket --usage-count 1 --expires-in 10m \
+  --attribute consumer --relay consumer_relay > ticket
 ```
 
 The `ockam project ticket` command is how you generate a ticket that will admit
@@ -220,23 +219,24 @@ appropriate for your use case.
 with this ticket, and policy definitions can then use those attributes to apply 
 Attribute Based Access Controls and restrict which nodes can communicate with 
 each other.
-* Setup a relay named `consumer_relay`. This provides a named route for other
-nodes to find this node, even if both nodes are on different network.
+* Allow any node, that enrolls with this ticket, to setup a relay named `consumer_relay`.
+This provides a named route for other nodes to find this node, even if both nodes are on
+different network.
 
 The output of that command, the enrollment ticket, is then redirected out to
 a file named `ticket`.
 
 ```bash
-docker run --rm --network redpanda \
-  --name consumer -v "$(pwd)/consumer.yaml:/connect.yaml" \
+docker run --rm --network redpanda --name consumer \
+  -v "$(pwd)/consumer.yaml:/connect.yaml" \
   -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
 ```
 
 This is where you start your consumer with Redpanda Connect. It uses Docker to 
-start a new container named `consumer`, on an isolated network named `redpanda`, 
-passing in the `consumer.yaml` and `ticket` files. 
+start a new container named `consumer`, on an isolated network named `redpanda`
+where the broker is available, passing in the `consumer.yaml` and `ticket` files. 
 
-The `consumer.yaml` file defines how to process any data it receives:
+The `consumer.yaml` file defines how to receive the data:
 
 ```yaml
 input:
@@ -255,7 +255,7 @@ Ockam-specific additions that allow this input source to receive and process
 end-to-end encrypted data streams:
 
 * `ockam_allow_producer`: the attribute that needs to exist on the other node before
-allowing each node to establish a trusted connection between each other.
+allowing each node to establish a trusted channel between each other.
 * `ockam_relay`: the name of the relay to connect this node to.
 * `ockam_enrollment_ticket`: the enrollment ticket to use to admit this node into
 the Ockam Orchestrator project.
@@ -268,8 +268,8 @@ pipeline:
       root.data.message = this.data.message.uppercase()
 ```
 
-The pipeline and processors block does a basic transformation of receiving the
-data, and converting the `message` attribute to be all in upper-case. While not
+The pipeline and processors block does a basic transformation of received
+data, and converts the `message` attribute to be all in upper-case. While not
 an entirely useful transformation in production, this allows you to independently
 verify that the consumer was able to decrypt and process the data.
 
@@ -282,11 +282,11 @@ output:
 ```
 
 The last part of the `consumer.yaml` configuration is the output block. This
-example implements a single `stdout` output. As the commented-out Snowflake block
+example implements a simple `stdout` output. As the commented-out Snowflake block
 highlights, other destinations can receive your final processed data stream by
-providing their configuration settings alongside this example.
+providing their configuration settings.
 
-The code snippet for starting a data producer shows how Ockam makes enrolling any 
+The code snippet for starting data producers shows how Ockam makes enrolling any 
 number of nodes painless: 
 
 ```bash
@@ -294,18 +294,18 @@ for i in $(seq 1 3); do
   ockam project ticket --usage-count 1 --expires-in 10m \
     --attribute producer > ticket
 
-  docker run --rm -d --network redpanda \
-    --name "producer$i" -v "$(pwd)/producer.yaml:/connect.yaml" \
+  docker run --rm -d --network redpanda --name "producer$i" \
+    -v "$(pwd)/producer.yaml:/connect.yaml" \
     -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
 done
 ```
 
 The `for i in $(seq 1 3); do` line creates a `for` loop that will create `3` 
-separate containers. Each container will generate a unique identity, enroll into
+separate producers. Each prodcucer will generate a unique identity, enroll into
 the Ockam Orchestrator project, and establish a secure channel with the consumer
 node. If you feel ambitious you can increase that `3` to a higher number, just
-be aware Docker will run a new container for each node so you could quickly
-exhaust your local system resources.
+be aware the script will run a new docker container for each producer so you could
+quickly exhaust your local system resources.
 
 The `ockam project ticket` command generates an enrollment ticket, just as it 
 did in the earlier section that explained the setup of the consumer. The primary
@@ -335,10 +335,10 @@ input:
 ```
 
 The input block here is generating random data, useful for the sake of a self-
-contained demo but something you would replace in a real-world use case. On a
+contained example but something you would replace in a real-world use case. On a
 1 second interval new data that includes the `hostname` 
 (allowing you to verify that there is 3 separate nodes producing data), and
- fake data for the `email` and `message` attributes in the payload, is sent to
+fake data for the `email` and `message` attributes in the payload, is sent to
 the output. If you recall the explanation earlier, the `message` field is later 
 processed by the consumer to be entirely in upper-case before being output 
 to `stdout`.
@@ -359,9 +359,9 @@ output:
 The output block in `producer.yaml` contains the standard kafka configuration,
 along with three Ockam-specific options:
 
-* `ockam_route_to_consumer`: the full path to the relay that was setup for the consumer.
+* `ockam_route_to_consumer`: the full route to the relay that was setup for the consumer.
 * `ockam_allow_consumer`: the attribute that needs to exist on the other node before
-allowing each node to establish a trusted connection between each other.
+allowing each node to establish a trusted channel between each other.
 * `ockam_enrollment_ticket`: the enrollment ticket to use to admit this node into
 the Ockam Orchestrator project.
 
