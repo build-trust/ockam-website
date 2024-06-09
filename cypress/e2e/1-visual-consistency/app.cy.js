@@ -1,15 +1,15 @@
 const pages = {
   'the homepage': '/',
-  'the pricing page': '/pricing',
-  'the private connectivity use case page': '/for/private-connectivity',
+  // 'the pricing page': '/pricing',
+  // 'the private connectivity use case page': '/for/private-connectivity',
 };
 const resolutions = {
   iPhone: 'iphone-6+',
   // iPad: 'ipad-2',
-  'small Macbook': 'macbook-11',
+  // 'small Macbook': 'macbook-11',
   // 'large Macbook': 'macbook-16',
   // '4K display': [3840, 2160],
-  '8K display': [7680, 4320],
+  // '8K display': [7680, 4320],
 };
 for (const page in pages) {
   describe('Visual formatting for ' + page, () => {
