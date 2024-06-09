@@ -26,11 +26,11 @@ jobs:
         env:
           CI: true
 
-      # - name: Archive screenshots
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: cypress-screenshots
-      #     path: cypress/screenshots
+      - name: Archive screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
 
   post-cypress:
     needs: cypress-run
@@ -40,11 +40,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # - name: Download screenshots
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: cypress-screenshots
-      #     path: ./screenshots
+      - name: Download screenshots
+        uses: actions/download-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: ./screenshots
 
       - name: Create comment with screenshots
         run: |
