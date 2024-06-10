@@ -84,7 +84,7 @@ const activeTabItemStyle = {
 
 const Virtues: FunctionComponent = () => (
   <Box id="virtues" bgColor="gray.50" pt={{ base: 16, lg: 20 }} pb={{ base: 20, lg: 30 }}>
-    <Container variant="section" px={{ base: 5, lg: 220 }}>
+    <Container variant="section" px={{ base: 5 }}>
       <Box maxW="3xl" mb={{ base: 16, lg: 14 }} textAlign={{ base: 'left', lg: 'center' }}>
         <Heading as="h2" size="h2" mb={6}>
           Ockam&apos;s Virtues
