@@ -19,7 +19,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
   startAt,
 }): ReactElement | null => {
   const ref = useRef<HTMLDivElement>();
-  const scrollContainer = useRef<Element>();
+  const scrollContainer = useRef<Element | Window>();
   const [svg, setSvg] = useState<SVGSVGElement>();
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -53,10 +53,15 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     [isScrollable],
   );
 
-  const handleScroll = (): void => {
-    const position = scrollContainer?.current?.scrollY || scrollContainer?.current?.scrollTop;
+  const isWindow = (container: Element | Window): container is Window =>
+    (container as Window).scrollY !== undefined;
+
+  const handleScroll = useCallback((): void => {
+    if (!scrollContainer?.current) return;
+    const c = scrollContainer.current;
+    const position = isWindow(c) ? c.scrollY : c.scrollTop;
     setScrollPosition(position);
-  };
+  }, [setScrollPosition]);
 
   const { ref: inViewRef } = useInView({
     threshold: 0.35,
@@ -103,7 +108,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     return () => {
       scrollContainer?.current?.removeEventListener('scroll', handleScroll);
     };
-  }, [animate, getScrollParent]);
+  }, [animate, getScrollParent, handleScroll]);
 
   const hasClaymationSteps = useCallback(
     (elem: SVGSVGElement): boolean => elem.querySelectorAll('svg').length > 1,
