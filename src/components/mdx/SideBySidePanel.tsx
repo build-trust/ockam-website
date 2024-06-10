@@ -119,7 +119,7 @@ const SideBySidePanel: FC<Props> = ({
                 xl: '60%',
               }
         }
-        px={20}
+        px={isMinimal ? 0 : 20}
       >
         <ExcalidrawAnimation src={image} animate={animate || false} aspect={aspect} />
 
