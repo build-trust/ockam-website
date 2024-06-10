@@ -97,7 +97,7 @@ const Virtues: FunctionComponent = () => (
         ))}
       </Box>
 
-      <VStack spacing={8} display={{ base: 'block', lg: 'none' }}>
+      <VStack spacing={8} display={{ base: 'flex', lg: 'none' }}>
         {VIRTUES_TABS.map(({ title, panel }) => (
           <VirtuesCard key={title} title={title} panel={panel} maxW="lg" />
         ))}
