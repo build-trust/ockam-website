@@ -6,6 +6,7 @@ import RotatingText from '@root/components/RotatingText';
 type Props = {
   text?: string;
   as?: As;
+  color?: string;
 };
 
 const RotatingHeading: FC<Props> = ({ text, as, ...rest }) => {
