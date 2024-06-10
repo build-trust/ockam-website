@@ -5,7 +5,7 @@ import ItsSimple from '@assets/images/its-simple-with.svg';
 import RotatingText from '@root/components/RotatingText';
 
 const Networkless: FC = () => (
-  <Container variant="section" mb={{ base: 40, sm: 40, md: 12 }} pt={{ base: 16, sm: 16, md: 0 }}>
+  <Container variant="section" mb={{ base: 0, md: 12 }}>
     <Flex
       direction="row-reverse"
       width="100%"
@@ -14,7 +14,7 @@ const Networkless: FC = () => (
       <Box display={{ base: 'none', sm: 'none', md: 'block' }}>
         <ItsSimple width="100%" preserveAspectRatio="xMinYMin meet" height="239px" />
       </Box>
-      <Box mt={{ base: '180px' }}>
+      <Box mt={{ base: 0, md: '180px' }}>
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Networkless connectivity
         </Heading>

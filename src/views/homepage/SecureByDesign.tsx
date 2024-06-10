@@ -5,12 +5,7 @@ import AndIts from '@assets/images/and-its.svg';
 import RotatingText from '@root/components/RotatingText';
 
 const SecureByDesign: FC = () => (
-  <Container
-    variant="section"
-    style={{ clear: 'both' }}
-    mb={{ base: 40, sm: 40, md: 12 }}
-    pt={{ base: 16, sm: 16, md: 0 }}
-  >
+  <Container variant="section" style={{ clear: 'both' }} mb={{ base: 0, md: 12 }}>
     <Flex
       direction="row"
       width="100%"
@@ -20,7 +15,7 @@ const SecureByDesign: FC = () => (
         <AndIts width="100%" preserveAspectRatio="xMinYMin meet" height="180px" />
       </Box>
 
-      <Box pt={{ base: '160px' }}>
+      <Box mt={{ base: 18, md: '180px' }}>
         <Heading as="h2" size="h2" lineHeight={1.3} mb={{ base: 6, lg: 8 }} letterSpacing="-2px">
           Secure-by-design
         </Heading>

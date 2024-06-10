@@ -62,8 +62,7 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => {
         />
       </GradientContainer>
       <Box
-        pt={{ base: 4, lg: 4 }}
-        pb={{ base: 20, lg: 24 }}
+        py={12}
         boxShadow="2xl"
         borderRadius={{ base: 0, lg: '15' }}
         borderStyle="none"
