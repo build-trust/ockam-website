@@ -198,7 +198,6 @@ const Hero: FunctionComponent<Props> = ({
           <Box
             width="auto"
             height="auto"
-            maxH="80vh"
             maxW="80%"
             overflow="hidden"
             background="white"
