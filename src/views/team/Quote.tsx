@@ -30,11 +30,26 @@ const Quote: FunctionComponent = () => (
 
         <Flex direction="column" justify="center" pt={{ base: 8, lg: 0 }}>
           <Icon as={QuoteIcon} w={10} h={8} color="avocado.500" />
-          <Heading as="h2" size="h2" mt={6} mb={4} maxW="lg" lineHeight={1.3}>
+          <Heading
+            as="h2"
+            size="h2"
+            mt={6}
+            mb={4}
+            maxW="lg"
+            lineHeight={1.3}
+            fontSize={{ base: '1.75rem', md: '2.25rem' }}
+          >
             Everything The Team does is based on <chakra.span color="brand.400">Trust</chakra.span>.
           </Heading>
 
-          <Heading as="h2" size="h2" mb={8} maxW="lg" lineHeight={1.3}>
+          <Heading
+            as="h2"
+            size="h2"
+            mb={8}
+            maxW="lg"
+            lineHeight={1.3}
+            fontSize={{ base: '1.75rem', md: '2.25rem' }}
+          >
             That’s why <chakra.span color="avocado.300">Trust</chakra.span> is our one-and-only
             value.
           </Heading>
