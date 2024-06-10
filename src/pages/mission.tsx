@@ -7,7 +7,7 @@ import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import MainLayout from '@layouts/MainLayout';
 
 const MissionAndVisionPage: NextPageWithLayout = () => (
-  <Box pt={{ base: 10, lg: 20 }}>
+  <Box pt={{ base: 10, lg: 32 }}>
     <SEOHead subTitle="Our Mission" />
 
     <Hero />
