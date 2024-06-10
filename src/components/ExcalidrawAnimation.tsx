@@ -53,15 +53,18 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
     [isScrollable],
   );
 
-  const isWindow = (container: Element | Window): container is Window =>
-    (container as Window).scrollY !== undefined;
+  const isWindow = useCallback(
+    (container: Element | Window): container is Window =>
+      (container as Window).scrollY !== undefined,
+    [],
+  );
 
   const handleScroll = useCallback((): void => {
     if (!scrollContainer?.current) return;
     const c = scrollContainer.current;
     const position = isWindow(c) ? c.scrollY : c.scrollTop;
     setScrollPosition(position);
-  }, [setScrollPosition]);
+  }, [scrollContainer, isWindow, setScrollPosition]);
 
   const { ref: inViewRef } = useInView({
     threshold: 0.35,
