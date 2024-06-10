@@ -10,6 +10,9 @@ const OpenRolesButton: FunctionComponent = () => (
     size="lg"
     colorScheme="avocado"
     color="black"
+    fontSize="1rem"
+    px="1.5rem"
+    py="1rem"
     href={`${TEAM_PATH}#open-roles`}
     passHref
   >
