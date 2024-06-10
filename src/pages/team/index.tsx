@@ -9,7 +9,7 @@ import { LeverPostingsGroup } from '@typings/lever';
 import SEOHead from '@components/SEOHead';
 
 const OpenRolesPage: NextPageWithLayout<{ openRoles: LeverPostingsGroup[] }> = ({ openRoles }) => (
-  <Box pt={{ base: 10, lg: 20 }}>
+  <Box pt={{ base: 10, lg: 32 }}>
     <SEOHead subTitle="Open Roles" />
 
     <Hero />
