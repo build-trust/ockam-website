@@ -211,13 +211,7 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
         alignItems={slim ? 'end' : 'start'}
         justifyContent={slim ? 'space-between' : 'start'}
       >
-        <Heading
-          size="md"
-          fontWeight="extrabold"
-          key={`price-head-${name}`}
-          color={segmentColor}
-          width="min-content"
-        >
+        <Heading size="md" fontWeight="extrabold" key={`price-head-${name}`} color={segmentColor}>
           {name}
         </Heading>
         <Price
