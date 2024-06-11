@@ -26,7 +26,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
     />
     <GradientContainer
       bottomOnly
-      pt={{ base: '15em' }}
+      pt={{ base: '5rem', lg: '15rem' }}
       flexDir="column"
       style={{ justifyContent: 'flex-start' }}
     >
