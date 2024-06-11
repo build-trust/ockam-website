@@ -44,6 +44,9 @@ const FIELDS = [
     placeholder: 'johndoe@mail.com',
     label: 'E-mail',
     errorMsg: 'Please use valid e-mail',
+    wrapperStyles: {
+      gridColumn: '1/-1',
+    },
   },
   {
     name: 'company',
@@ -214,27 +217,7 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
             </GridItem>
           )}
 
-          <GridItem colStart={{ md: 1 }}>
-            <FormControl isInvalid={!!errors.recaptcha}>
-              <ReCAPTCHA
-                sitekey={CONFIG.app.recaptchaSiteKey}
-                onChange={(recaptchaValue): void => setValue('recaptcha', recaptchaValue)}
-              />
-              <input
-                type="hidden"
-                {...register('recaptcha', { required: 'Recaptcha is required' })}
-              />
-              {/* @ts-ignore */}
-              <FormErrorMessage>{errors?.recaptcha?.message}</FormErrorMessage>
-            </FormControl>
-          </GridItem>
-
-          <GridItem
-            colStart={{ md: 2 }}
-            justifySelf="end"
-            mt={{ base: 2, md: 1 }}
-            w={{ base: 'full', md: '80%' }}
-          >
+          <GridItem gridColumn="1/-1" justifySelf="end" mt={{ base: 2, md: 1 }} w="full">
             <Button
               colorScheme="avocado"
               type="submit"
@@ -246,6 +229,21 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
             >
               Submit
             </Button>
+          </GridItem>
+
+          <GridItem gridColumn="1/-1">
+            <FormControl display="flex" justifyContent="center" isInvalid={!!errors.recaptcha}>
+              <ReCAPTCHA
+                sitekey={CONFIG.app.recaptchaSiteKey}
+                onChange={(recaptchaValue): void => setValue('recaptcha', recaptchaValue)}
+              />
+              <input
+                type="hidden"
+                {...register('recaptcha', { required: 'Recaptcha is required' })}
+              />
+              {/* @ts-ignore */}
+              <FormErrorMessage>{errors?.recaptcha?.message}</FormErrorMessage>
+            </FormControl>
           </GridItem>
         </SimpleGrid>
       </chakra.form>
