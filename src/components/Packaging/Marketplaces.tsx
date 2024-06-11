@@ -50,7 +50,7 @@ const GCP: FC<Props> = ({ plan }) => (
   </Link>
 );
 const Marketplaces: FunctionComponent = () => (
-  <Box textAlign="center" mt="10" mb="20">
+  <Box textAlign="center" mt="10">
     <Heading
       as="h4"
       letterSpacing="-1px"
