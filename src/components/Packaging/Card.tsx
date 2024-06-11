@@ -10,9 +10,7 @@ const Card = (props: CardProps): JSX.Element => {
     <Box
       bg={useColorModeValue('white', 'gray.700')}
       position="relative"
-      px="6"
-      pb="6"
-      pt="16"
+      p="1.5rem"
       overflow="hidden"
       maxW="md"
       width="100%"

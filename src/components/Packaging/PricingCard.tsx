@@ -197,7 +197,6 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
     <Card
       {...rest}
       isPopular={isPopular}
-      pt={4}
       width={slim ? { base: 'xs' } : '100%'}
       opacity={fade ? 0.2 : 1}
       transition="opacity 0.8s ease-in-out"
