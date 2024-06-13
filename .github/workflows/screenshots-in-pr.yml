@@ -38,10 +38,13 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+          retention-days: 7
 
   post-cypress:
     needs: cypress-run
     runs-on: ubuntu-20.04
+    permissions:
+      issues: write
 
     steps:
       - name: Checkout repository
