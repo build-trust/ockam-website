@@ -126,6 +126,7 @@ const Auth: FunctionComponent<Props> = ({
       authorizationParams: {
         scope,
         audience,
+        source: 'ockam-website',
       },
     });
   };
@@ -136,6 +137,7 @@ const Auth: FunctionComponent<Props> = ({
         scope,
         audience,
         screen_hint: 'signup',
+        source: 'ockam-website',
       },
     });
   };
