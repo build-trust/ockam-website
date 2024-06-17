@@ -1,10 +1,21 @@
 import CONFIG from '@config';
 
-if (typeof window !== "undefined") {
+const isDev = () => ['development', 'test'].includes(process.env.NODE_ENV);
+
+if (typeof window !== 'undefined') {
   segmentAnalytics();
 }
 
 function segmentAnalytics() {
+  if (isDev()) {
+    const mocked = {
+      page: () => {},
+      track: () => {},
+      identify: () => {},
+    };
+    window.analytics = mocked;
+    return;
+  }
   var analytics = (window.analytics = window?.analytics || []);
   if (!analytics.initialize)
     if (analytics.invoked)

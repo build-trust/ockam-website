@@ -15,6 +15,7 @@ import {
 
 import BlogPostsProvider from '@contextProviders/BlogPostsProvider';
 import { BlogPost } from '@root/typings/BlogPost';
+import AllPageNotice, { AllPageMessage } from '@root/components/AllPageNotice';
 
 import LayoutFooter from '../components/LayoutFooter';
 
@@ -25,12 +26,16 @@ type BlogLayoutProps = {
   children?: ReactNode;
   blogPosts: BlogPost[];
   newsletterPopup?: boolean;
+  allPage?: AllPageMessage | null;
+  codetour?: boolean;
 };
 
 const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
   children,
   blogPosts,
   newsletterPopup,
+  allPage,
+  codetour,
 }) => {
   const theme = useTheme();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -61,8 +66,9 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
 
   return (
     <BlogPostsProvider blogPosts={blogPosts}>
+      <AllPageNotice message={allPage?.message} except={allPage?.except} />
       <BlogLayoutMobileNav />
-      <BlogLayoutSidebar display={{ base: 'none', lg: 'flex' }} />
+      <BlogLayoutSidebar display={{ base: 'none', lg: codetour ? 'none' : 'flex' }} />
 
       <>
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -88,8 +94,12 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
         </Modal>
       </>
 
-      <Flex w="full" direction="column" pl={{ base: 'none', lg: theme.sizes.container.sidebar }}>
-        <Box w="full" maxW="container.blogBodyMax" mx="auto">
+      <Flex
+        w="full"
+        direction="column"
+        pl={{ base: 'none', lg: codetour ? 'none' : theme.sizes.container.sidebar }}
+      >
+        <Box w="full" maxW={!codetour ? 'container.blogBodyMax' : ''} mx="auto">
           <Box as="main" w="full" h="full" mx="auto" px={{ base: 5, md: 4, '1.5xl': 12 }}>
             {children}
           </Box>

@@ -1,7 +1,10 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { Flex } from '@chakra-ui/react';
+import { Flex, ImageProps, TextProps } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
+// eslint-disable-next-line import/extensions
+import { CH } from '@code-hike/mdx/dist/components.cjs.js';
+import '@code-hike/mdx/styles.css';
 
 import { generateSlugFromPath, getAllPosts, getPostBySlug, postFilePaths } from '@api/mdxApi';
 import mdxComponents from '@components/mdx';
@@ -13,9 +16,20 @@ import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import { BLOG_PATH } from '@consts/paths';
 import BlogsPagination from '@root/components/BlogsPagination';
 import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
+import Strong from '@root/components/mdx/Strong';
+import LinkedImage from '@root/components/mdx/LinkedImage';
 
 const RIGHT_SIDEBAR_WIDTH = '16rem';
 
+if (mdxComponents) {
+  mdxComponents.strong = (props: TextProps): JSX.Element => (
+    <Strong fontWeight="black" {...props} />
+  );
+  mdxComponents.CH = CH;
+  mdxComponents.img = (props: ImageProps): JSX.Element => (
+    <LinkedImage maxW="min(40em, 100%)" {...props} />
+  );
+}
 type BlogPostPageProps = {
   source: MDXRemoteSerializeResult;
   frontMatter: { [key: string]: string | number | boolean };
@@ -23,7 +37,7 @@ type BlogPostPageProps = {
   allPageMessage?: AllPageMessage | null;
 };
 
-const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts }) => {
+const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts, allPageMessage }) => {
   const router = useRouter();
   const blogPostBodyRef = useRef<HTMLDivElement | null>(null);
 
@@ -40,7 +54,12 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatt
   )}`;
 
   return (
-    <BlogLayout blogPosts={posts} newsletterPopup={newsletterPopup}>
+    <BlogLayout
+      blogPosts={posts}
+      newsletterPopup={newsletterPopup}
+      allPage={allPageMessage}
+      codetour={frontMatter?.codetour as boolean}
+    >
       <SEOHead
         subTitle={title}
         description={description}

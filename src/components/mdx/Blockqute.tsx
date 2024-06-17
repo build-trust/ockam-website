@@ -8,6 +8,7 @@ const Blockquote = chakra('blockquote', {
     borderColor: 'brand.500',
     ml: 0,
     pl: '2rem',
+    mb: 8,
   },
 });
 

@@ -3,7 +3,9 @@
  * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax
  * @author Pranay Chauhan (@PranayChauhan2516)
  */
-
+:root {
+	--ch-scrollycoding-sticker-width: 50%;
+}
 div.remark-highlight {
 	margin-top: calc(var(--chakra-space-6) * -1);
 	position: relative;
@@ -41,13 +43,26 @@ pre[class*="language-"] {
 	border-radius: 0.3em;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
+:not(pre):not(div.ch-code):not(div.ch-code-wrapper) > code[class*="language-"],
+pre[class*="language-"], code[data-ch-lang] {
 	background: #002b36;
+}
+.ch-codeblock.not-prose {
+	max-width: 40em;
+}
+
+.ch-scrollycoding-step-content {
+	transition: opacity 0.7s ease-in-out;
+	opacity: 0.15;
+}
+
+.ch-scrollycoding-step-content[data-selected] {
+	opacity: 1;
+	border-color: transparent !important;
 }
 
 /* Inline code */
-:not(pre) > code {
+:not(pre):not(div.ch-code):not(div.ch-code-wrapper) > code {
 	padding: .3em;
 	border-radius: .3em;
 	font-size: 0.8em;
