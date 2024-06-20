@@ -93,7 +93,7 @@ const TermsPage: NextPageWithLayout<PageProps> = ({ source, frontMatter }) => {
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
 
   return (
-    <Box pt={{ base: 10, lg: 20 }} px={10}>
+    <Box pt={{ base: 10, lg: 30 }} px={10}>
       <SEOHead subTitle={title} />
 
       <MDXRemote {...source} components={mdxComponents} />
