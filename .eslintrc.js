@@ -21,5 +21,9 @@ module.exports = {
     'prefer-arrow-callback': 'off',
     'no-restricted-exports': 'warn',
     'react/jsx-no-useless-fragment': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['**/*.test.js', '**/*.spec.js', 'cypress/**/*', 'cypress.config.ts'] },
+    ],
   },
 };

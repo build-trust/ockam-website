@@ -1,7 +1,14 @@
 import CONFIG from '@config';
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined' && CONFIG.app_env === 'production') {
   segmentAnalytics();
+} else if (typeof window !== 'undefined') {
+  segmentAnalytics();
+  // window.analytics = {
+  //   track: () => {},
+  //   page: () => {},
+  //   identify: () => {},
+  // }
 }
 
 function segmentAnalytics() {

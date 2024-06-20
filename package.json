@@ -21,7 +21,11 @@
     "grammar:setup": "vale sync",
     "grammar:vale": "vale src/content/**/*.mdx",
     "grammar": "npm run grammar:vale",
-    "excalidraw-animate": "node ./bin/excalidraw-animate.js"
+    "excalidraw-animate": "node ./bin/excalidraw-animate.js",
+    "cypress:open": "cypress open",
+    "e2e": "start-server-and-test dev http://localhost:3001 \"cypress open --e2e\"",
+    "e2e:headlessold": "start-server-and-test dev http://localhost:3001 \"cypress run --e2e\"",
+    "e2e:headless": "cypress run --e2e --browser=chrome"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -96,6 +100,8 @@
     "@types/styled-components": "^5.1.26",
     "babel-plugin-styled-components": "^2.0.7",
     "cheerio": "^1.0.0-rc.12",
+    "cypress": "^13.10.0",
+    "cypress-odiff": "^1.1.3",
     "eslint": "8.56.0",
     "eslint-config-next": "^14.0.4",
     "eslint-config-prettier": "8.5.0",

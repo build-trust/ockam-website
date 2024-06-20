@@ -1,0 +1,67 @@
+name: "comment-on-pr"
+
+on: 
+  pull_request:
+    types: 
+      - opened
+      - edited
+      - synchronize
+    paths:
+      - 'src/**/*'
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start the server
+        run: |
+          npm run build 
+          npm run start & npx wait-on http://localhost:3001
+        env:
+          NODE_ENV: test
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: Run Cypress tests
+        run: npx cypress run --e2e --browser=chrome
+        env:
+          CI: true
+
+      - name: Archive screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          retention-days: 7
+
+  post-cypress:
+    needs: cypress-run
+    runs-on: ubuntu-20.04
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download screenshots
+        uses: actions/download-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: ./screenshots
+
+      - name: Create comment with screenshots
+        run: |
+          for file in ./screenshots/**/*; do
+            echo "![Screenshot](https://github.com/${{ github.repository }}/raw/${{ github.sha }}/$file)" >> comment.md
+          done
+          gh pr comment ${{ github.event.pull_request.number }} --body "$(cat comment.md)"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
