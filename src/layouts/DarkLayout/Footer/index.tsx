@@ -8,7 +8,7 @@ import FOOTER_LINKS from './consts/navLinks';
 
 const Footer = (): ReactElement => (
   <Box as="footer" bg="brand.800" color="white" px={{ base: '0.75rem' }} py={{ base: '2.5rem' }}>
-    <Stack gap={{ base: '3.125rem' }} maxW="70rem" mx="auto">
+    <Stack gap={{ base: '3.125rem', lg: '4rem' }} maxW="70rem" mx="auto">
       {/* Heading + Contact Button */}
       <Flex
         gap={{ base: '1.25rem' }}
