@@ -3,8 +3,9 @@ import { ReactElement, ReactNode } from 'react';
 import NextLink from 'next/link';
 
 import { CONTACT_PAGE_PATH } from '@consts/paths';
+import { GITHUB, LINKEDIN, TWITTER } from '@consts/externalResources';
 
-import FOOTER_LINKS from './consts/navLinks';
+import { FOOTER_LINKS, SOCIAL_LINKS } from './consts/navLinks';
 import YoutubeIcon from './assets/youtube.svg';
 import LinkedInIcon from './assets/linkedin.svg';
 import XIcon from './assets/x.svg';
@@ -86,8 +87,9 @@ const Footer = (): ReactElement => (
           gap={{ base: '1rem' }}
           justifyContent={{ base: 'center', lg: 'flex-end' }}
         >
-          <NavigationLink href="https://">Privacy Notice</NavigationLink>
-          <NavigationLink href="https://">Terms of Service</NavigationLink>
+          {SOCIAL_LINKS.map(({ name, href }) => (
+            <NavigationLink href={href}>{name}</NavigationLink>
+          ))}
         </Flex>
         <Flex
           w={{ base: 'full' }}
@@ -98,13 +100,13 @@ const Footer = (): ReactElement => (
           <NavigationLink href="https://www.youtube.com/channel/UCvIHPuSfG4-vpsNFHZZaI8Q">
             <YoutubeIcon />
           </NavigationLink>
-          <NavigationLink href="https://www.linkedin.com/company/ockam.io">
+          <NavigationLink href={LINKEDIN.href}>
             <LinkedInIcon />
           </NavigationLink>
-          <NavigationLink href="https://x.com/Ockam">
+          <NavigationLink href={TWITTER.href}>
             <XIcon />
           </NavigationLink>
-          <NavigationLink href="https://github.com/build-trust">
+          <NavigationLink href={GITHUB.href}>
             <GitHubIcon />
           </NavigationLink>
         </Flex>

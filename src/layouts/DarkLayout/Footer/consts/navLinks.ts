@@ -7,7 +7,7 @@ import {
 } from '@consts/paths';
 import { DISCORD, DISCUSSION, LINKEDIN, TWITTER } from '@consts/externalResources';
 
-const FOOTER_LINKS = [
+export const FOOTER_LINKS = [
   {
     heading: 'Learn',
     links: [
@@ -70,8 +70,6 @@ const FOOTER_LINKS = [
         name: 'Style Guide',
         href: STYLE_GUIDE_PATH,
       },
-      { name: 'Privacy Notice', href: '/policies/privacy' },
-      { name: 'Terms of Service', href: '/policies/terms' },
     ],
   },
 
@@ -91,4 +89,7 @@ const FOOTER_LINKS = [
   },
 ];
 
-export default FOOTER_LINKS;
+export const SOCIAL_LINKS = [
+  { name: 'Privacy Notice', href: '/policies/privacy' },
+  { name: 'Terms of Service', href: '/policies/terms' },
+];
