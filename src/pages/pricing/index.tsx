@@ -3,10 +3,10 @@ import { Box, Heading } from '@chakra-ui/react';
 
 import { Packages } from '@root/views/homepage';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
-import { MainLayout } from '@root/layouts';
 import SEOHead from '@root/components/SEOHead';
 import GradientContainer from '@root/layouts/components/GradientContainer';
 import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
+import DarkLayout from '@layouts/DarkLayout';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
   '||',
@@ -73,9 +73,12 @@ export async function getStaticProps(): Promise<StaticProps> {
 }
 
 PricingPage.getLayout = (page: ReactElement, pageProps?: Props): ReactNode => (
-  <MainLayout hasGradient allPage={pageProps?.allPageMessage}>
+  <DarkLayout
+    message={pageProps?.allPageMessage?.message}
+    except={pageProps?.allPageMessage?.except}
+  >
     {page}
-  </MainLayout>
+  </DarkLayout>
 );
 
 export default PricingPage;
