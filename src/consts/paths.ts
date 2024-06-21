@@ -1,4 +1,6 @@
 export const HOME_PATH = '/';
+export const MAGIC_PATH = '/#magic';
+export const FEATURES_PATH = '/#features';
 export const TEAM_PATH = '/team';
 export const MISSION_AND_VISION_PATH = '/mission';
 export const MISSION_AND_VISION_TEAM_SECTION = `${MISSION_AND_VISION_PATH}#team`;
@@ -7,6 +9,7 @@ export const OPEN_ROLES_PATH = `${TEAM_PATH}#open-roles`;
 export const OPEN_ROLE_PATH = '/team';
 export const CONTACT_PAGE_PATH = '/contact/form';
 export const STYLE_GUIDE_PATH = '/style-guide';
+export const PRICING_PATH = '/pricing';
 export const CONTACT_FORM_PATH = `${CONTACT_PAGE_PATH}`;
 export const SIGNUP_PATH = '/signup';
 export const SIGNIN_PATH = '/signin';
