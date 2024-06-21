@@ -18,6 +18,7 @@ const BrandColorLink = styled(Link)`
 
 type BrandAssetHelperProps = {
   children: ReactNode;
+  bg?: string;
   isOpen: boolean | undefined;
   onClose(): void;
 };
@@ -25,6 +26,7 @@ const BrandAssetPopover = ({
   children,
   isOpen,
   onClose,
+  bg = 'white',
 }: BrandAssetHelperProps): JSX.Element | null => (
   <Popover
     returnFocusOnClose={false}
@@ -34,10 +36,10 @@ const BrandAssetPopover = ({
     onClose={onClose}
   >
     {children}
-    <PopoverContent bg="white">
-      <PopoverArrow bg="white" />
+    <PopoverContent bg={bg}>
+      <PopoverArrow bg={bg} />
       <PopoverCloseButton />
-      <PopoverHeader>Looking for our logo?</PopoverHeader>
+      <PopoverHeader borderBottom="none">Looking for our logo?</PopoverHeader>
       <PopoverBody>
         You can find our logo and the rest of our brand assets over in the{' '}
         <BrandColorLink href="/style-guide" onClick={onClose}>
