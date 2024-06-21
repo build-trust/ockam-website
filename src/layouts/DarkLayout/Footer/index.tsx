@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, VStack, Link, Button, Stack, LinkProps } from '@chakra-ui/react';
+import { Box, Flex, Heading, VStack, Link, Button, Stack, LinkProps, Text } from '@chakra-ui/react';
 import { ReactElement, ReactNode } from 'react';
 import NextLink from 'next/link';
 
@@ -10,6 +10,7 @@ import YoutubeIcon from './assets/youtube.svg';
 import LinkedInIcon from './assets/linkedin.svg';
 import XIcon from './assets/x.svg';
 import GitHubIcon from './assets/github.svg';
+import OckamLogo from './assets/ockam.svg';
 
 interface NavLinkProps extends LinkProps {
   children: ReactNode;
@@ -30,7 +31,12 @@ const NavigationLink = ({ children, href, ...props }: NavLinkProps): ReactElemen
 
 const Footer = (): ReactElement => (
   <Box as="footer" bg="brand.800" color="white" px={{ base: '0.75rem' }} py={{ base: '2.5rem' }}>
-    <Stack gap={{ base: '3.125rem', lg: '4rem' }} maxW="70rem" mx="auto">
+    <Stack
+      gap={{ base: '3.125rem', lg: '4rem' }}
+      maxW="70rem"
+      mx="auto"
+      whiteSpace={{ base: 'initial', lg: 'nowrap' }}
+    >
       {/* Heading + Contact Button */}
       <Flex
         gap={{ base: '1.25rem' }}
@@ -81,7 +87,11 @@ const Footer = (): ReactElement => (
       </Flex>
 
       {/* Socials */}
-      <Flex gap={{ base: '1rem' }} flexDirection={{ base: 'column', lg: 'row' }}>
+      <Flex
+        gap={{ base: '1rem' }}
+        flexDirection={{ base: 'column', lg: 'row' }}
+        alignItems={{ base: 'initial', lg: 'flex-end' }}
+      >
         <Flex
           w={{ base: 'full' }}
           gap={{ base: '1rem' }}
@@ -112,7 +122,23 @@ const Footer = (): ReactElement => (
         </Flex>
 
         {/* Copy Right */}
-        <Flex order={{ base: 'initial', lg: -1 }}>Witam</Flex>
+        <Flex
+          order={{ base: 'initial', lg: -1 }}
+          flexDirection={{ base: 'column', lg: 'row' }}
+          mt={{ base: '2.5rem', lg: 'unset' }}
+          gap={{ base: '0.625rem', lg: '1.25rem' }}
+          alignItems={{ base: 'center', lg: 'unset' }}
+        >
+          <Box as={OckamLogo} width={{ base: '9.625rem', lg: '10.25rem' }} height="auto" />
+          <Text
+            textAlign={{ base: 'center', lg: 'initial' }}
+            color="white"
+            fontWeight={400}
+            alignSelf={{ base: 'unset', lg: 'end' }}
+          >
+            © {new Date().getFullYear()} Ockam.io All Rights Reserved
+          </Text>
+        </Flex>
       </Flex>
     </Stack>
   </Box>
