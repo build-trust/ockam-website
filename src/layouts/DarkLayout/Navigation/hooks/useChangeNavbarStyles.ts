@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const baseVariables = {
-  '--navbar-bg': 'rgba(31, 82, 111, 0.8)',
+  '--navbar-bg': '#19374C',
   '--navbar-text': 'white',
 };
 
