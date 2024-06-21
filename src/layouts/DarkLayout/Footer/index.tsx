@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from 'react';
 import NextLink from 'next/link';
 
 import { CONTACT_PAGE_PATH } from '@consts/paths';
-import { GITHUB, LINKEDIN, TWITTER } from '@consts/externalResources';
+import { GITHUB, LINKEDIN, TWITTER, YOUTUBE } from '@consts/externalResources';
 
 import { FOOTER_LINKS, SOCIAL_LINKS } from './consts/navLinks';
 import YoutubeIcon from './assets/youtube.svg';
@@ -97,7 +97,7 @@ const Footer = (): ReactElement => (
           flex={{ base: 'initial', lg: 0 }}
           justifyContent={{ base: 'center', lg: 'flex-end' }}
         >
-          <NavigationLink href="https://www.youtube.com/channel/UCvIHPuSfG4-vpsNFHZZaI8Q">
+          <NavigationLink href={YOUTUBE.href}>
             <YoutubeIcon />
           </NavigationLink>
           <NavigationLink href={LINKEDIN.href}>

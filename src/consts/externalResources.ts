@@ -23,6 +23,10 @@ export const TWITTER = {
   icon: TwitterIcon,
 };
 
+export const YOUTUBE = {
+  name: 'YouTube',
+  href: 'https://www.youtube.com/channel/UCvIHPuSfG4-vpsNFHZZaI8Q',
+};
 export const GITHUB = { name: 'GitHub', href: 'https://github.com/build-trust', icon: GitHubIcon };
 export const GITHUB_REPO_OCKAM = { href: 'https://github.com/build-trust/ockam', icon: HiStar };
 
