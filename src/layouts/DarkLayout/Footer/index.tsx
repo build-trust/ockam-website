@@ -110,9 +110,10 @@ const Footer = (): ReactElement => (
             <GitHubIcon />
           </NavigationLink>
         </Flex>
-      </Flex>
 
-      {/* Copy Right */}
+        {/* Copy Right */}
+        <Flex order={{ base: 'initial', lg: -1 }}>Witam</Flex>
+      </Flex>
     </Stack>
   </Box>
 );
