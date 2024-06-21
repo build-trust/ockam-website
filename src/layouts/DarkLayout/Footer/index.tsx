@@ -1,10 +1,31 @@
-import { Box, Flex, Heading, VStack, Link, Button, Stack } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import { Box, Flex, Heading, VStack, Link, Button, Stack, LinkProps } from '@chakra-ui/react';
+import { ReactElement, ReactNode } from 'react';
 import NextLink from 'next/link';
 
 import { CONTACT_PAGE_PATH } from '@consts/paths';
 
 import FOOTER_LINKS from './consts/navLinks';
+import YoutubeIcon from './assets/youtube.svg';
+import LinkedInIcon from './assets/linkedin.svg';
+import XIcon from './assets/x.svg';
+import GitHubIcon from './assets/github.svg';
+
+interface NavLinkProps extends LinkProps {
+  children: ReactNode;
+  href: string;
+}
+const NavigationLink = ({ children, href, ...props }: NavLinkProps): ReactElement => (
+  <Link
+    fontSize={{ base: '0.875rem' }}
+    color="white"
+    href={href}
+    as={NextLink}
+    fontWeight={{ base: 400 }}
+    {...props}
+  >
+    {children}
+  </Link>
+);
 
 const Footer = (): ReactElement => (
   <Box as="footer" bg="brand.800" color="white" px={{ base: '0.75rem' }} py={{ base: '2.5rem' }}>
@@ -50,20 +71,46 @@ const Footer = (): ReactElement => (
               {section.heading}
             </Heading>
             {section.links.map((link) => (
-              <Link
-                fontSize={{ base: '0.875rem' }}
-                color="white"
-                key={link.name}
-                href={link.href}
-                as={NextLink}
-                fontWeight={{ base: 400 }}
-              >
+              <NavigationLink key={link.name} href={link.href}>
                 {link.name}
-              </Link>
+              </NavigationLink>
             ))}
           </VStack>
         ))}
       </Flex>
+
+      {/* Socials */}
+      <Flex gap={{ base: '1rem' }} flexDirection={{ base: 'column', lg: 'row' }}>
+        <Flex
+          w={{ base: 'full' }}
+          gap={{ base: '1rem' }}
+          justifyContent={{ base: 'center', lg: 'flex-end' }}
+        >
+          <NavigationLink href="https://">Privacy Notice</NavigationLink>
+          <NavigationLink href="https://">Terms of Service</NavigationLink>
+        </Flex>
+        <Flex
+          w={{ base: 'full' }}
+          gap={{ base: '1rem' }}
+          flex={{ base: 'initial', lg: 0 }}
+          justifyContent={{ base: 'center', lg: 'flex-end' }}
+        >
+          <NavigationLink href="https://www.youtube.com/channel/UCvIHPuSfG4-vpsNFHZZaI8Q">
+            <YoutubeIcon />
+          </NavigationLink>
+          <NavigationLink href="https://www.linkedin.com/company/ockam.io">
+            <LinkedInIcon />
+          </NavigationLink>
+          <NavigationLink href="https://x.com/Ockam">
+            <XIcon />
+          </NavigationLink>
+          <NavigationLink href="https://github.com/build-trust">
+            <GitHubIcon />
+          </NavigationLink>
+        </Flex>
+      </Flex>
+
+      {/* Copy Right */}
     </Stack>
   </Box>
 );
