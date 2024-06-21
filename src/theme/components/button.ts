@@ -1,9 +1,19 @@
-const Button = {
+import { defineStyleConfig } from '@chakra-ui/react';
+
+const Button = defineStyleConfig({
   baseStyle: {
     lineHeight: 1,
     borderRadius: 'base',
   },
-
+  variants: {
+    primary: {
+      bg: 'avocado.200',
+      color: 'brand.800',
+      _hover: {
+        bg: '#81F5D9',
+      },
+    },
+  },
   sizes: {
     sm: {
       h: 8,
@@ -27,6 +37,6 @@ const Button = {
       fontSize: 'lg', // 18px
     },
   },
-};
+});
 
 export default Button;

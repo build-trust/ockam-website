@@ -1,30 +1,45 @@
+import { DOCS } from '@consts/externalResources';
+import {
+  BLOG_PATH,
+  FEATURES_PATH,
+  MAGIC_PATH,
+  MISSION_AND_VISION_PATH,
+  PRICING_PATH,
+  SIGNUP_PATH,
+  TEAM_PATH,
+} from '@consts/paths';
+
 export const NAV_ITEMS = [
   {
     name: 'Features',
-    href: '/#magic',
+    href: MAGIC_PATH,
   },
   {
     name: 'Use Cases',
-    href: '/#features',
+    href: FEATURES_PATH,
   },
   {
     name: 'Pricing',
-    href: '/pricing',
+    href: PRICING_PATH,
   },
   {
     name: 'Team',
     items: [
-      { name: 'Open Roles', href: '/team' },
-      { name: 'Our Mission & Vision', href: '/mission' },
+      { name: 'Open Roles', href: TEAM_PATH },
+      { name: 'Our Mission & Vision', href: MISSION_AND_VISION_PATH },
     ],
   },
   {
     name: 'Blog',
-    href: '/blog',
+    href: BLOG_PATH,
+  },
+  {
+    name: 'Login',
+    href: SIGNUP_PATH,
   },
   {
     name: 'Docs',
-    href: 'https://docs.ockam.io',
+    href: DOCS.href,
   },
 ];
 

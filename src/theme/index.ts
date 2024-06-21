@@ -1,5 +1,7 @@
 import { extendTheme, theme as base } from '@chakra-ui/react';
 
+import { neutraface } from '@theme/fonts/neutraface';
+
 import colors from './colors';
 import { globalStyles } from './styles';
 import components from './components';
@@ -7,6 +9,7 @@ import components from './components';
 const fontFamily = {
   inter: `'Inter', sans-serif`,
   blogPostBody: `'Source Serif Pro', serif`,
+  neutraface: `${neutraface.style.fontFamily}, sans-serif`,
 } as const;
 
 const fontWeights = {
@@ -55,6 +58,7 @@ const themeExtension = {
     body: `${fontFamily.inter}, ${base.fonts.body}`,
     heading: `${fontFamily.inter}, ${base.fonts.heading}`,
     blogPostBody: `${fontFamily.blogPostBody}, ${base.fonts.body}`,
+    neutraface: `${fontFamily.neutraface}`,
   },
   components,
   breakpoints,
