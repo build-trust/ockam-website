@@ -23,7 +23,7 @@ const PricingCard = ({
   ...cardProps
 }: PricingCardProps): ReactElement => (
   <Card
-    borderRadius={{ base: '0.25rem', lg: '0.75rem' }}
+    borderRadius={{ base: '0.75rem' }}
     p={{ base: '1rem', lg: '1.5rem' }}
     border="1px solid"
     borderColor="gray.200"
@@ -40,7 +40,7 @@ const PricingCard = ({
         <Text
           fontFamily="neutraface"
           color="brand.800"
-          fontSize={{ base: '1.5rem' }}
+          fontSize={{ base: '1.5rem', lg: '2.5rem' }}
           fontWeight={{ base: 700 }}
         >
           {price}

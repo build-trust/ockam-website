@@ -17,6 +17,8 @@ import SEOHead from '@root/components/SEOHead';
 import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
 import DarkLayout from '@layouts/DarkLayout';
 import PricingCard from '@views/pricing/components/PricingCard';
+import { FOR_DEVELOPERS } from '@views/pricing/components/PricingCard/consts/pricings';
+import DescriptionText from '@views/pricing/components/DescriptionText';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
   '||',
@@ -60,7 +62,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
         Predictable pricing that scales when you need — no calculator needed
       </Text>
     </Stack>
-    <Box maxW="54rem" mx="auto" px={{ base: '0.75rem' }}>
+    <Box mx="auto" px={{ base: '0.75rem' }} maxW="71rem" pb={{ base: '2.5rem', lg: '6.25rem' }}>
       <Tabs variant="ockam">
         <TabList mx={{ base: 'auto' }} maxW={{ base: '28rem' }}>
           <Tab>Developers</Tab>
@@ -69,15 +71,32 @@ const PricingPage: NextPageWithLayout<Props> = () => (
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Flex gap={{ base: 0, lg: '1.5rem' }}>
-              <PricingCard
-                flex={1}
-                title="Bronze"
-                description="starting at / mo"
-                price="$500"
-                button={{ title: 'Start Trial', href: 'https://google.com' }}
-                features={['Test', 'Test2']}
-              />
+            <Flex
+              margin="auto"
+              flexDirection="column"
+              gap={{ base: '1.25rem', lg: '1.5rem' }}
+              maxW="34rem"
+            >
+              <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
+                {FOR_DEVELOPERS.map((cardProps) => (
+                  <PricingCard
+                    {...cardProps}
+                    scrollSnapAlign="center"
+                    maxW={{ base: '16.375rem' }}
+                    flexGrow={1}
+                    flexShrink={0}
+                  />
+                ))}
+              </Flex>
+              <DescriptionText>
+                <Box as="span" color="avocado.200">
+                  The Developer editions
+                </Box>{' '}
+                of Ockam are intended to be used by individual developers, that are working on hobby
+                projects, and not by companies. Support is via our community in Discord and GitHub,
+                and does not come with an SLA. If you are using Portals for Mac you will need a
+                developer edition license to use the application with your 14 day free trial.
+              </DescriptionText>
             </Flex>
           </TabPanel>
         </TabPanels>
