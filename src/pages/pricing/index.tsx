@@ -11,6 +11,7 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import SEOHead from '@root/components/SEOHead';
@@ -23,6 +24,7 @@ import {
   FOR_ENTERPRISES,
 } from '@views/pricing/components/PricingCard/consts/pricings';
 import DescriptionText from '@views/pricing/components/DescriptionText';
+import circlesBackground from '@views/pricing/assets/circles-pricing-background.png';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
   '||',
@@ -32,7 +34,14 @@ interface Props {
 }
 
 const PricingPage: NextPageWithLayout<Props> = () => (
-  <Box bg="brand.800">
+  <Box
+    bg="brand.800"
+    position="relative"
+    bgImage={`url(${circlesBackground.src})`}
+    backgroundPosition={{ base: '50% 0px', lg: 'center -200px' }}
+    backgroundRepeat="no-repeat"
+    backgroundSize={{ base: '100%', lg: '1428px 1158px' }}
+  >
     <SEOHead
       title="Pricing & Packages - Get started for free"
       description="Ockam's pricing is designed to get you started quickly, and support you as you grow in the future. You can even sign up through your preferred cloud marketplace to unify billing & leverage existing commitments."
