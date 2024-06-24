@@ -11,7 +11,6 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react';
-import Image from 'next/image';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import SEOHead from '@root/components/SEOHead';
@@ -25,6 +24,7 @@ import {
 } from '@views/pricing/components/PricingCard/consts/pricings';
 import DescriptionText from '@views/pricing/components/DescriptionText';
 import circlesBackground from '@views/pricing/assets/circles-pricing-background.png';
+import gradientBackground from '@views/pricing/assets/gradient-pricing-background.png';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
   '||',
@@ -37,10 +37,14 @@ const PricingPage: NextPageWithLayout<Props> = () => (
   <Box
     bg="brand.800"
     position="relative"
-    bgImage={`url(${circlesBackground.src})`}
-    backgroundPosition={{ base: '50% 0px', lg: 'center -200px' }}
+    minHeight={{ base: '64rem', lg: '76.25rem' }}
+    // Chakra issue with multiple backgrounds, the empty comment prefix is needed.
+    // https://github.com/chakra-ui/chakra-ui/issues/7548#issuecomment-1684034030
+    bgImage={`/**/url(${circlesBackground.src}), url(${gradientBackground.src})`}
+    backgroundPosition={{ base: '50% 0px, center 471px', lg: 'center -200px, center 667px' }}
     backgroundRepeat="no-repeat"
-    backgroundSize={{ base: '100%', lg: '1428px 1158px' }}
+    backgroundSize={{ base: '100%, 2313px 1333px', lg: '1428px 1158px, 2313px 1333px' }}
+    overflow="hidden"
   >
     <SEOHead
       title="Pricing & Packages - Get started for free"
