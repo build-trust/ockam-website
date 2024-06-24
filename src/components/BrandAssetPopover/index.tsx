@@ -36,7 +36,7 @@ const BrandAssetPopover = ({
     onClose={onClose}
   >
     {children}
-    <PopoverContent bg={bg}>
+    <PopoverContent bg={bg} maxW="100vw">
       <PopoverArrow bg={bg} />
       <PopoverCloseButton />
       <PopoverHeader borderBottom="none">Looking for our logo?</PopoverHeader>
