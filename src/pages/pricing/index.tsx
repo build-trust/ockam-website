@@ -1,10 +1,8 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Stack, Text } from '@chakra-ui/react';
 
-import { Packages } from '@root/views/homepage';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import SEOHead from '@root/components/SEOHead';
-import GradientContainer from '@root/layouts/components/GradientContainer';
 import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
 import DarkLayout from '@layouts/DarkLayout';
 
@@ -16,7 +14,7 @@ interface Props {
 }
 
 const PricingPage: NextPageWithLayout<Props> = () => (
-  <Box pt={0}>
+  <Box bg="brand.800">
     <SEOHead
       title="Pricing & Packages - Get started for free"
       description="Ockam's pricing is designed to get you started quickly, and support you as you grow in the future. You can even sign up through your preferred cloud marketplace to unify billing & leverage existing commitments."
@@ -24,39 +22,32 @@ const PricingPage: NextPageWithLayout<Props> = () => (
         'Simple pricing that scales with you',
       )}&features=${encodeURIComponent(ogFeatures)}&template=nocheck`}
     />
-    <GradientContainer
-      bottomOnly
-      pt={{ base: '15em' }}
-      flexDir="column"
-      style={{ justifyContent: 'flex-start' }}
+    <Stack
+      px={{ base: '0.75rem' }}
+      gap={{ base: '0.75rem', lg: '0.5rem' }}
+      pt={{ base: '2.5rem', lg: '5rem' }}
+      pb={{ base: '3.75rem', lg: '4rem' }}
+      textAlign={{ base: 'center' }}
+      alignItems={{ base: 'center' }}
     >
       <Heading
-        as="h1"
-        fontWeight="extrabold"
-        textAlign="center"
+        maxW={{ base: '15rem', lg: 'unset' }}
+        lineHeight={{ base: '95%' }}
         color="white"
-        size={{ base: '2xl', lg: '3xl' }}
-        letterSpacing={{ base: '-1.5px', lg: '-1.5px' }}
-        lineHeight={{ base: 1, lg: 1.5 }}
+        fontFamily="neutraface"
+        as="h1"
+        fontSize={{ base: '2.5rem', lg: '5.5rem' }}
+        fontWeight={{ base: 700 }}
       >
-        Plans for any scale
+        Plans for any{' '}
+        <Box as="span" color="avocado.200">
+          sale
+        </Box>
       </Heading>
-      <Heading
-        as="h2"
-        textAlign="center"
-        fontWeight="medium"
-        color="rgba(255, 255, 255, 0.8)"
-        size={{ base: 'lg', lg: 'xl' }}
-        letterSpacing={{ base: '-1.7px', md: '-2px', lg: '-1.7px' }}
-        lineHeight={{ base: 1, md: 1.2, lg: 1 }}
-        mt={{ base: 5, lg: 1 }}
-        mx="20"
-        mb="20"
-      >
-        Predictable pricing that scales when you need &mdash; no calculator needed
-      </Heading>
-    </GradientContainer>
-    <Packages />
+      <Text fontSize={{ base: '1.125rem', lg: '1.25rem' }} color="white">
+        Predictable pricing that scales when you need — no calculator needed
+      </Text>
+    </Stack>
   </Box>
 );
 
