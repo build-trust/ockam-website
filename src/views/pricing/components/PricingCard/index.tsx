@@ -27,6 +27,7 @@ const PricingCard = ({
     p={{ base: '1rem', lg: '1.5rem' }}
     border="1px solid"
     borderColor="gray.200"
+    width="16.5rem"
     {...cardProps}
   >
     <Stack gap={{ base: '0.75rem', lg: '1rem' }}>

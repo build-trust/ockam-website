@@ -84,3 +84,52 @@ export const FOR_COMPANIES = [
     ],
   },
 ];
+
+export const FOR_ENTERPRISES = [
+  {
+    title: 'Enterprise',
+    description: 'starting at / year',
+    price: '$500 000',
+    button: {
+      title: 'Talk to sales',
+      href: '/contact/form',
+    },
+    features: [
+      'Production Licence',
+      'Ockam support - 4hr response time SLA',
+      'Uptime 99.95% SLA',
+      'Throughput optimized nodes',
+      'Yearly commit - 20% discount included',
+      'Custom Branding / Whitelabel',
+      'High Availability Relays',
+      'High Availability Credential Authorities',
+      'High Availability Multi-region',
+      'High Availability Rendezvous Routing',
+      'Custom Routes',
+    ],
+  },
+  {
+    title: 'Business Critical',
+    description: 'starting at / year',
+    price: '$1 000 000',
+    button: {
+      title: 'Talk to sales',
+      href: '/contact/form',
+    },
+    features: [
+      'Production Licence',
+      'Bring Your Own Cloud (BYOC) Relays',
+      'Bring Your Own Cloud (BYOC) Credential Authorities',
+      'Ockam support - 4hr response time SLA',
+      'Uptime 99.95% SLA',
+      'Throughput optimized nodes',
+      'Yearly commit - 20% discount included',
+      'Custom Branding / Whitelabel',
+      'High Availability Relays',
+      'High Availability Credential Authorities',
+      'High Availability Multi-region',
+      'High Availability Rendezvous Routing',
+      'Custom Routes',
+    ],
+  },
+];

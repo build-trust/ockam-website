@@ -20,6 +20,7 @@ import PricingCard from '@views/pricing/components/PricingCard';
 import {
   FOR_COMPANIES,
   FOR_DEVELOPERS,
+  FOR_ENTERPRISES,
 } from '@views/pricing/components/PricingCard/consts/pricings';
 import DescriptionText from '@views/pricing/components/DescriptionText';
 
@@ -66,7 +67,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
       </Text>
     </Stack>
     <Box mx="auto" px={{ base: '0.75rem' }} maxW="71rem" pb={{ base: '2.5rem', lg: '6.25rem' }}>
-      <Tabs variant="ockam">
+      <Tabs defaultIndex={1} variant="ockam">
         <TabList mx={{ base: 'auto' }} maxW={{ base: '28rem' }}>
           <Tab>Developers</Tab>
           <Tab>Companies</Tab>
@@ -108,12 +109,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
             >
               <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
                 {FOR_COMPANIES.map((cardProps) => (
-                  <PricingCard
-                    {...cardProps}
-                    flexGrow={1}
-                    flexShrink={{ base: 0, lg: 1 }}
-                    width="16.5rem"
-                  />
+                  <PricingCard {...cardProps} flexGrow={1} flexShrink={{ base: 0, lg: 1 }} />
                 ))}
               </Flex>
               <DescriptionText>
@@ -123,6 +119,31 @@ const PricingPage: NextPageWithLayout<Props> = () => (
                 are built for production workloads, with direct support from the Ockam team, and can
                 elastically scale to your needs. This product is purchased through your cloud
                 marketplace vendor, so you can start building today with your 14 day free trial.
+              </DescriptionText>
+            </Flex>
+          </TabPanel>
+
+          {/* Enterprises Panel */}
+          <TabPanel>
+            <Flex
+              margin="auto"
+              flexDirection="column"
+              gap={{ base: '1.25rem', lg: '1.5rem' }}
+              maxW="54rem"
+            >
+              <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
+                {FOR_ENTERPRISES.map((cardProps) => (
+                  <PricingCard {...cardProps} flexGrow={1} flexShrink={{ base: 0, lg: 1 }} />
+                ))}
+              </Flex>
+              <DescriptionText>
+                Ockam is offered in a bring-your-own-cloud (BYOC){' '}
+                <Box as="span" color="avocado.200">
+                  Enterprise Edition
+                </Box>{' '}
+                for companies that are committed to running software entirely within their own
+                network boundaries. These plans are highly customizable. Please contact Ockam’s
+                sales team for a technical consultation.
               </DescriptionText>
             </Flex>
           </TabPanel>
