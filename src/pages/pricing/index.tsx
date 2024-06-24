@@ -1,10 +1,22 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from '@chakra-ui/react';
 
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import SEOHead from '@root/components/SEOHead';
 import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
 import DarkLayout from '@layouts/DarkLayout';
+import PricingCard from '@views/pricing/components/PricingCard';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
   '||',
@@ -48,6 +60,29 @@ const PricingPage: NextPageWithLayout<Props> = () => (
         Predictable pricing that scales when you need — no calculator needed
       </Text>
     </Stack>
+    <Box maxW="54rem" mx="auto" px={{ base: '0.75rem' }}>
+      <Tabs variant="ockam">
+        <TabList mx={{ base: 'auto' }} maxW={{ base: '28rem' }}>
+          <Tab>Developers</Tab>
+          <Tab>Companies</Tab>
+          <Tab>Enterprises</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <Flex gap={{ base: 0, lg: '1.5rem' }}>
+              <PricingCard
+                flex={1}
+                title="Bronze"
+                description="starting at / mo"
+                price="$500"
+                button={{ title: 'Start Trial', href: 'https://google.com' }}
+                features={['Test', 'Test2']}
+              />
+            </Flex>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Box>
   </Box>
 );
 

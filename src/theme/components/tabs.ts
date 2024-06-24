@@ -14,6 +14,7 @@ const Tabs = defineMultiStyleConfig({
         borderRadius: '6.25rem',
         justifyContent: 'space-between',
         marginBottom: { base: '1rem', lg: '1.5rem' },
+        overflow: 'scroll',
       },
       tabpanel: {
         padding: 0,
