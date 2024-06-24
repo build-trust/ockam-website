@@ -49,11 +49,9 @@ const Navigation = (): ReactElement => {
     <Box
       zIndex={100}
       as="nav"
-      pos="fixed"
+      pos="sticky"
       top={0}
       transition="background 0.4s linear"
-      left={0}
-      right={0}
       style={{ ...cssVariables }}
       bg="var(--navbar-bg)"
       color="var(--navbar-text)"

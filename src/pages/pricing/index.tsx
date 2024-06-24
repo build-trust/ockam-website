@@ -1,12 +1,30 @@
 import { ReactElement, ReactNode } from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Stack,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from '@chakra-ui/react';
 
-import { Packages } from '@root/views/homepage';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import SEOHead from '@root/components/SEOHead';
-import GradientContainer from '@root/layouts/components/GradientContainer';
 import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
 import DarkLayout from '@layouts/DarkLayout';
+import PricingCard from '@views/pricing/components/PricingCard';
+import {
+  FOR_COMPANIES,
+  FOR_DEVELOPERS,
+  FOR_ENTERPRISES,
+} from '@views/pricing/components/PricingCard/consts/pricings';
+import DescriptionText from '@views/pricing/components/DescriptionText';
+import circlesBackground from '@views/pricing/assets/circles-pricing-background.png';
+import gradientBackground from '@views/pricing/assets/gradient-pricing-background.png';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
   '||',
@@ -16,7 +34,18 @@ interface Props {
 }
 
 const PricingPage: NextPageWithLayout<Props> = () => (
-  <Box pt={0}>
+  <Box
+    bg="brand.800"
+    position="relative"
+    minHeight={{ base: '64rem', lg: '76.25rem' }}
+    // Chakra issue with multiple backgrounds, the empty comment prefix is needed.
+    // https://github.com/chakra-ui/chakra-ui/issues/7548#issuecomment-1684034030
+    bgImage={`/**/url(${circlesBackground.src}), url(${gradientBackground.src})`}
+    backgroundPosition={{ base: '50% 0px, center 471px', lg: 'center -200px, center 667px' }}
+    backgroundRepeat="no-repeat"
+    backgroundSize={{ base: '100%, 2313px 1333px', lg: '1428px 1158px, 2313px 1333px' }}
+    overflow="hidden"
+  >
     <SEOHead
       title="Pricing & Packages - Get started for free"
       description="Ockam's pricing is designed to get you started quickly, and support you as you grow in the future. You can even sign up through your preferred cloud marketplace to unify billing & leverage existing commitments."
@@ -24,39 +53,116 @@ const PricingPage: NextPageWithLayout<Props> = () => (
         'Simple pricing that scales with you',
       )}&features=${encodeURIComponent(ogFeatures)}&template=nocheck`}
     />
-    <GradientContainer
-      $bottomonly
-      pt={{ base: '15em' }}
-      flexDir="column"
-      style={{ justifyContent: 'flex-start' }}
+    <Stack
+      px={{ base: '0.75rem' }}
+      gap={{ base: '0.75rem', lg: '0.5rem' }}
+      pt={{ base: '2.5rem', lg: '5rem' }}
+      pb={{ base: '3.75rem', lg: '4rem' }}
+      textAlign={{ base: 'center' }}
+      alignItems={{ base: 'center' }}
     >
       <Heading
-        as="h1"
-        fontWeight="extrabold"
-        textAlign="center"
+        maxW={{ base: '15rem', lg: 'unset' }}
+        lineHeight={{ base: '95%' }}
         color="white"
-        size={{ base: '2xl', lg: '3xl' }}
-        letterSpacing={{ base: '-1.5px', lg: '-1.5px' }}
-        lineHeight={{ base: 1, lg: 1.5 }}
+        fontFamily="neutraface"
+        as="h1"
+        fontSize={{ base: '2.5rem', lg: '5.5rem' }}
+        fontWeight={{ base: 700 }}
       >
-        Plans for any scale
+        Plans for any{' '}
+        <Box as="span" color="avocado.200">
+          sale
+        </Box>
       </Heading>
-      <Heading
-        as="h2"
-        textAlign="center"
-        fontWeight="medium"
-        color="rgba(255, 255, 255, 0.8)"
-        size={{ base: 'lg', lg: 'xl' }}
-        letterSpacing={{ base: '-1.7px', md: '-2px', lg: '-1.7px' }}
-        lineHeight={{ base: 1, md: 1.2, lg: 1 }}
-        mt={{ base: 5, lg: 1 }}
-        mx="20"
-        mb="20"
-      >
-        Predictable pricing that scales when you need &mdash; no calculator needed
-      </Heading>
-    </GradientContainer>
-    <Packages />
+      <Text fontSize={{ base: '1.125rem', lg: '1.25rem' }} color="white">
+        Predictable pricing that scales when you need — no calculator needed
+      </Text>
+    </Stack>
+    <Box mx="auto" px={{ base: '0.75rem' }} maxW="71rem" pb={{ base: '2.5rem', lg: '6.25rem' }}>
+      <Tabs defaultIndex={1} variant="ockam">
+        <TabList mx={{ base: 'auto' }} maxW={{ base: '28rem' }}>
+          <Tab>Developers</Tab>
+          <Tab>Companies</Tab>
+          <Tab>Enterprises</Tab>
+        </TabList>
+        <TabPanels>
+          {/* Developers Panel */}
+          <TabPanel>
+            <Flex
+              margin="auto"
+              flexDirection="column"
+              gap={{ base: '1.25rem', lg: '1.5rem' }}
+              maxW="34rem"
+            >
+              <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
+                {FOR_DEVELOPERS.map((cardProps) => (
+                  <PricingCard {...cardProps} flexGrow={1} flexShrink={0} />
+                ))}
+              </Flex>
+              <DescriptionText>
+                <Box as="span" color="avocado.200">
+                  The Developer editions
+                </Box>{' '}
+                of Ockam are intended to be used by individual developers, that are working on hobby
+                projects, and not by companies. Support is via our community in Discord and GitHub,
+                and does not come with an SLA. If you are using Portals for Mac you will need a
+                developer edition license to use the application with your 14 day free trial.
+              </DescriptionText>
+            </Flex>
+          </TabPanel>
+
+          {/* Companies Panel */}
+          <TabPanel>
+            <Flex
+              margin="auto"
+              flexDirection="column"
+              gap={{ base: '1.25rem', lg: '1.5rem' }}
+              maxW="75rem"
+            >
+              <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
+                {FOR_COMPANIES.map((cardProps) => (
+                  <PricingCard {...cardProps} flexGrow={1} flexShrink={{ base: 0, lg: 1 }} />
+                ))}
+              </Flex>
+              <DescriptionText>
+                <Box as="span" color="avocado.200">
+                  Ockam&apos;s Company Editions
+                </Box>{' '}
+                are built for production workloads, with direct support from the Ockam team, and can
+                elastically scale to your needs. This product is purchased through your cloud
+                marketplace vendor, so you can start building today with your 14 day free trial.
+              </DescriptionText>
+            </Flex>
+          </TabPanel>
+
+          {/* Enterprises Panel */}
+          <TabPanel>
+            <Flex
+              margin="auto"
+              flexDirection="column"
+              gap={{ base: '1.25rem', lg: '1.5rem' }}
+              maxW="54rem"
+            >
+              <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
+                {FOR_ENTERPRISES.map((cardProps) => (
+                  <PricingCard {...cardProps} flexGrow={1} flexShrink={{ base: 0, lg: 1 }} />
+                ))}
+              </Flex>
+              <DescriptionText>
+                Ockam is offered in a bring-your-own-cloud (BYOC){' '}
+                <Box as="span" color="avocado.200">
+                  Enterprise Edition
+                </Box>{' '}
+                for companies that are committed to running software entirely within their own
+                network boundaries. These plans are highly customizable. Please contact Ockam’s
+                sales team for a technical consultation.
+              </DescriptionText>
+            </Flex>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Box>
   </Box>
 );
 
