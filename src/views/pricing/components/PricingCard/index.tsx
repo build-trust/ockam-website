@@ -60,7 +60,7 @@ const PricingCard = ({
       <Stack gap={{ base: '0.5rem' }}>
         {features.map((feature) => (
           <Flex alignItems={{ base: 'center' }} gap={{ base: '0.5rem' }}>
-            <Box as={CheckIcon} />
+            <Box as={CheckIcon} flexShrink={0} />
             <Text color="brand.800" fontWeight={{ base: 500 }} fontSize={{ base: '0.875rem' }}>
               {feature}
             </Text>
