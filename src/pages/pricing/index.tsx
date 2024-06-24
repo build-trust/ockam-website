@@ -17,7 +17,10 @@ import SEOHead from '@root/components/SEOHead';
 import allPageMessageProps, { AllPageMessage } from '@root/utils/appPageMessage';
 import DarkLayout from '@layouts/DarkLayout';
 import PricingCard from '@views/pricing/components/PricingCard';
-import { FOR_DEVELOPERS } from '@views/pricing/components/PricingCard/consts/pricings';
+import {
+  FOR_COMPANIES,
+  FOR_DEVELOPERS,
+} from '@views/pricing/components/PricingCard/consts/pricings';
 import DescriptionText from '@views/pricing/components/DescriptionText';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
@@ -70,6 +73,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
           <Tab>Enterprises</Tab>
         </TabList>
         <TabPanels>
+          {/* Developers Panel */}
           <TabPanel>
             <Flex
               margin="auto"
@@ -79,13 +83,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
             >
               <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
                 {FOR_DEVELOPERS.map((cardProps) => (
-                  <PricingCard
-                    {...cardProps}
-                    scrollSnapAlign="center"
-                    maxW={{ base: '16.375rem' }}
-                    flexGrow={1}
-                    flexShrink={0}
-                  />
+                  <PricingCard {...cardProps} flexGrow={1} flexShrink={0} />
                 ))}
               </Flex>
               <DescriptionText>
@@ -96,6 +94,35 @@ const PricingPage: NextPageWithLayout<Props> = () => (
                 projects, and not by companies. Support is via our community in Discord and GitHub,
                 and does not come with an SLA. If you are using Portals for Mac you will need a
                 developer edition license to use the application with your 14 day free trial.
+              </DescriptionText>
+            </Flex>
+          </TabPanel>
+
+          {/* Companies Panel */}
+          <TabPanel>
+            <Flex
+              margin="auto"
+              flexDirection="column"
+              gap={{ base: '1.25rem', lg: '1.5rem' }}
+              maxW="75rem"
+            >
+              <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
+                {FOR_COMPANIES.map((cardProps) => (
+                  <PricingCard
+                    {...cardProps}
+                    flexGrow={1}
+                    flexShrink={{ base: 0, lg: 1 }}
+                    width="16.5rem"
+                  />
+                ))}
+              </Flex>
+              <DescriptionText>
+                <Box as="span" color="avocado.200">
+                  Ockam&apos;s Company Editions
+                </Box>{' '}
+                are built for production workloads, with direct support from the Ockam team, and can
+                elastically scale to your needs. This product is purchased through your cloud
+                marketplace vendor, so you can start building today with your 14 day free trial.
               </DescriptionText>
             </Flex>
           </TabPanel>

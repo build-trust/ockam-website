@@ -21,4 +21,66 @@ export const FOR_DEVELOPERS = [
   },
 ];
 
-export const FOR_COMPANIES = [];
+export const FOR_COMPANIES = [
+  {
+    title: 'Bronze',
+    description: 'starting at / mo',
+    price: '$500',
+    button: {
+      title: 'Get started',
+      href: '/download',
+    },
+    features: ['Production Licence', 'Pay-as-you-go', 'Ockam support'],
+  },
+  {
+    title: 'Silver',
+    description: 'starting at / mo',
+    price: '$2500',
+    button: {
+      title: 'Start trial',
+      href: '/download',
+    },
+    features: [
+      'Production Licence',
+      'Pay-as-you-go',
+      'Ockam support - 24h response time SLA',
+      'Uptime 99% SLA',
+      'Dedicated nodes',
+    ],
+  },
+  {
+    title: 'Gold',
+    description: 'starting at / mo',
+    price: '$10 000',
+    button: {
+      title: 'Start trial',
+      href: '/download',
+    },
+    features: [
+      'Production Licence',
+      'Pay-as-you-go',
+      'Ockam support - 24h response time SLA',
+      'Uptime 99.95% SLA',
+      'Throughput optimized nodes',
+    ],
+  },
+  {
+    title: 'Platinum',
+    description: 'starting at / year',
+    price: '$250 000',
+    button: {
+      title: 'Start trial',
+      href: '/download',
+    },
+    features: [
+      'Production Licence',
+      'Ockam support - 4hr response time SLA',
+      'Uptime 99.95% SLA',
+      'Throughput optimized nodes',
+      'Yearly commit - 20% discount included',
+      '️Custom Branding / Whitelabel',
+      'High Availability Relays',
+      'High Availability Credential Authorities',
+    ],
+  },
+];
