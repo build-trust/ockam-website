@@ -37,11 +37,10 @@ const PricingPage: NextPageWithLayout<Props> = () => (
   <Box
     bg="brand.800"
     position="relative"
-    minHeight={{ base: '64rem', lg: '76.25rem' }}
     // Chakra issue with multiple backgrounds, the empty comment prefix is needed.
     // https://github.com/chakra-ui/chakra-ui/issues/7548#issuecomment-1684034030
     bgImage={`/**/url(${circlesBackground.src}), url(${gradientBackground.src})`}
-    backgroundPosition={{ base: '50% 0px, center 471px', lg: 'center -200px, center 667px' }}
+    backgroundPosition={{ base: '50% 0px, center 300px', lg: 'center -200px, center 300px' }}
     backgroundRepeat="no-repeat"
     backgroundSize={{ base: '100%, 2313px 1333px', lg: '1428px 1158px, 2313px 1333px' }}
     overflow="hidden"
