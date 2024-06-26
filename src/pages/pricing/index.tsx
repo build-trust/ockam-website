@@ -25,6 +25,7 @@ import {
 import DescriptionText from '@views/pricing/components/DescriptionText';
 import circlesBackground from '@views/pricing/assets/circles-pricing-background.png';
 import gradientBackground from '@views/pricing/assets/gradient-pricing-background.png';
+import PricingTable from '@views/pricing/components/PricingTable';
 
 const ogFeatures = ['🎉 Start free today', '🌱 Grow to any size', '🛟 Premium support & SLAs'].join(
   '||',
@@ -161,6 +162,18 @@ const PricingPage: NextPageWithLayout<Props> = () => (
           </TabPanel>
         </TabPanels>
       </Tabs>
+    </Box>
+    <Box py="6.25rem" px="0.75rem" display={{ base: 'none', lg: 'block' }} bg="white">
+      <Stack gap="1.5rem" maxW="36.5rem" mx="auto" color="brand.800" textAlign="center" mb="2.5rem">
+        <Heading as="h2" fontSize="5.5rem" fontFamily="neutraface" letterSpacing="0.01rem">
+          Let’s compare
+        </Heading>
+        <Text maxW="31.25rem" mx="auto" fontSize="1.125rem" color="inherit">
+          We’ve gathered all the <strong>plans</strong> in one <strong>place</strong> to help you
+          make an informed decision
+        </Text>
+      </Stack>
+      <PricingTable />
     </Box>
   </Box>
 );

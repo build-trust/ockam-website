@@ -8,6 +8,7 @@ import FormLabel from './label';
 import FormError from './FormError';
 import Steps from './steps';
 import Tabs from './tabs';
+import Table from './table';
 
 const components = {
   Button,
@@ -20,6 +21,7 @@ const components = {
   FormError,
   Steps,
   Tabs,
+  Table,
 };
 
 export default components;
