@@ -53,11 +53,18 @@ const Footer = (): ReactElement => (
           fontWeight={{ base: 700 }}
         >
           Build{' '}
-          <Box as="span" color="avocado.200">
+          <Box as="span" color="brand.500">
             Trust
           </Box>
         </Heading>
-        <Button as={NextLink} href={CONTACT_PAGE_PATH} variant="primary" px="2rem" py="1rem">
+        <Button
+          as={NextLink}
+          href={CONTACT_PAGE_PATH}
+          variant="primary"
+          px="2rem"
+          py="1rem"
+          height="3.5rem"
+        >
           Book a demo
         </Button>
       </Flex>

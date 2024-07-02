@@ -1,5 +1,7 @@
 export const HOME_PATH = '/';
 export const MAGIC_PATH = '/#magic';
+export const USE_CASES_ID = 'use-cases';
+export const USE_CASES_PATH = `/#${USE_CASES_ID}`;
 export const FEATURES_PATH = '/#features';
 export const TEAM_PATH = '/team';
 export const MISSION_AND_VISION_PATH = '/mission';
@@ -14,3 +16,6 @@ export const CONTACT_FORM_PATH = `${CONTACT_PAGE_PATH}`;
 export const SIGNUP_PATH = '/signup';
 export const SIGNIN_PATH = '/signin';
 export const SIGNOUT_PATH = '/signout';
+export const PRIVATE_CONNECTIVITY_PATH = '/for/private-connectivity';
+export const KAFKA_PATH = '/for/kafka';
+export const SAAS_PLATFORMS_PATH = '/for/saas-platforms';
