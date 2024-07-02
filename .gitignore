@@ -39,6 +39,7 @@ build
 .*.swp
 *.pem
 *~
+.tool-versions
 
 # directories used by IDEs
 .idea

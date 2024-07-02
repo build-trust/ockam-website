@@ -5,8 +5,7 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 
-import Auth0Api from '@root/api/auth0Api';
-import { User, currentUser, isSignedIn } from '@root/components/Auth';
+import { User, currentUser, isSignedIn, isAuthenticated } from '@root/components/Auth';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
@@ -30,60 +29,95 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     [],
   );
 
-  const { nextStep, prevStep, activeStep } = useSteps({
+  const { nextStep, prevStep, activeStep, setStep } = useSteps({
     initialStep: 0,
   });
 
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [user, setUser] = useState<User>();
   const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<string>();
   const [currentPlan, setCurrentPlan] = useState<string>();
 
   const getCurrentPlan = useCallback(async (): Promise<string | undefined> => {
     if (user) {
-      const r = await Auth0Api.managementApi.getUserMetadata(user.token, user.userId);
-      if (r) {
-        return r.data.user_metadata?.plan;
+      let userId = user.userId
+      if (!userId) {
+        userId = JSON.parse(localStorage.getItem('ajs_user_id'))
+      }
+      const response = await fetch(`/api/user?userid=${userId}`);
+      if (response) {
+        const data = await response.json();
+        return data.plan;
       }
     }
     return undefined;
   }, [user]);
 
-  const rememberPlanSelection = useCallback(async (): Promise<void> => {
-    const passedPlan = searchParams.get('plan');
-    if (passedPlan) {
-      window.localStorage.setItem('plan', passedPlan);
-      const { pathname, query } = router;
-      // @ts-ignore: this dict type actually works here
-      const params = new URLSearchParams(query);
-      params.delete('plan');
-      router.replace({ pathname, query: params.toString() }, undefined, { shallow: true });
+  const maybeStoreSubDetails = async (params): Promise<void> => {
+    const customer = params.get('customer')
+    const product = params.get('product')
+    if (customer && product) {
+      window.sessionStorage.setItem('customer', customer)
+      window.sessionStorage.setItem('product', product)
     }
-  }, [router, searchParams]);
+  }
+
+  const maybeUpdateSubscription = useCallback(async (u, params): Promise<void> => {
+    const customerId = window.sessionStorage.getItem('customer') || params.get('customer')
+    const productId = window.sessionStorage.getItem('product') || params.get('product')
+    let userId = u.userId
+    if (!userId) {
+      userId = JSON.parse(localStorage.getItem('ajs_user_id'))
+    }
+
+    if (customerId && productId && userId) {
+      const response = await fetch('/api/update_subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, customerId, productId }),
+      })
+
+      if (response) {
+        console.log('Subscription updated')
+        console.log(response.status)
+        const data = await response.json()
+        console.log(data)
+        const { pathname } = router;
+        router.replace({ pathname, query: "" }, undefined, { shallow: true });
+      } else {
+        console.log('Subscription failed')
+      }
+    }
+  }, [router]);
 
   useEffect(() => {
     async function setup(): Promise<void> {
-      await rememberPlanSelection();
-      if (!(await isSignedIn())) router.replace('/auth/signin');
-      const u = await currentUser();
-      const p = window.localStorage.getItem('plan');
-      window.localStorage.removeItem('plan');
-      if (p) setSelectedPlan(p);
-      if (u) setUser(u);
+      const { query } = router;
+
+      if (!isAuthenticated()) {
+        // @ts-ignore: this dict type actually works here
+        const params = new URLSearchParams(query);
+        maybeStoreSubDetails(params)
+
+        router.replace('/auth/signin');
+      } else {
+        const u = await currentUser();
+        console.log(u)
+
+        // @ts-ignore: this dict type actually works here
+        const params = new URLSearchParams(query);
+        maybeUpdateSubscription(u, params)
+
+        const plan = await getCurrentPlan();
+        if (plan) setCurrentPlan(plan);
+        setUser(u);
+      }
     }
     setup();
-  }, [setUser, router, rememberPlanSelection]);
-
-  useEffect(() => {
-    if (user) {
-      getCurrentPlan().then((p) => {
-        if (p) setCurrentPlan(p);
-      });
-    }
-  }, [user, getCurrentPlan]);
+  }, [setUser, router, maybeUpdateSubscription, getCurrentPlan]);
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
@@ -92,7 +126,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     const generatedUrl = `${window.location.protocol}//${window.location.host}/${window.location.pathname}/${stepName}`;
     // @ts-ignore window.analytics undefined below
     window.analytics.page(generatedUrl);
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, [steps, activeStep]);
 
   const hideNext = (): void => {
@@ -121,7 +155,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     }, 1200);
   };
 
-  useEffect(() => {});
+  useEffect(() => { });
   const setPlan = (plan: string): void => {
     setCurrentPlan(plan);
   };
@@ -139,7 +173,6 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
             user={user}
             hideNext={hideNext}
             showNext={showNext}
-            selectedPlan={selectedPlan}
             currentPlan={currentPlan}
           />
         );

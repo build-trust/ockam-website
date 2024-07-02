@@ -26,7 +26,6 @@ import {
 import PricingCard from '@root/components/Packaging/PricingCard';
 import ActionButton from '@root/components/Packaging/ActionButton';
 import { User } from '@root/components/Auth';
-import Auth0Api from '@root/api/auth0Api';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import MarketplaceSetup from './MarketplaceSetup';
@@ -45,7 +44,6 @@ type Props = {
   hideNext: Function;
   showNext: Function;
   currentPlan?: string;
-  selectedPlan?: string;
   user?: User;
 };
 const ChoosePlan: FC<Props> = ({
@@ -55,7 +53,6 @@ const ChoosePlan: FC<Props> = ({
   hideNext,
   showNext,
   currentPlan,
-  selectedPlan,
 }) => {
   const [purchasing, setPurchasing] = useState(false);
   const [purchased, setPurchased] = useState(false);
@@ -68,9 +65,9 @@ const ChoosePlan: FC<Props> = ({
       setPurchasing(true);
       setPurchasedPlan(plan);
       onSelected(plan);
-      if (user) {
-        Auth0Api.managementApi.updateUserMetadata(user.token, user.userId, { plan });
-      }
+      // if (user) {
+      //   Auth0Api.managementApi.updateUserMetadata(user.token, user.userId, { plan });
+      // }
       setPurchasing(true);
       setTimeout(() => {
         const t = TIERS.find((tier) => tier.name === plan);
@@ -82,11 +79,10 @@ const ChoosePlan: FC<Props> = ({
           setSetupSponsorship(true);
         } else if (t?.contactSalesOnly) {
           setPurchased(true);
-          const ctaUrl = `${window.location.protocol}//${
-            window.location.host
-          }${CONTACT_FORM_PATH}?reason=${encodeURI(
-            `The ${plan} plan is only available for purchase via speaking to our sales team.`,
-          )}`;
+          const ctaUrl = `${window.location.protocol}//${window.location.host
+            }${CONTACT_FORM_PATH}?reason=${encodeURI(
+              `The ${plan} plan is only available for purchase via speaking to our sales team.`,
+            )}`;
           setTimeout(() => {
             window.location.href = ctaUrl;
           }, 2000);
@@ -101,21 +97,14 @@ const ChoosePlan: FC<Props> = ({
     [onComplete, onSelected, showNext, user],
   );
 
-  const alreadySelected = useCallback((): void => {
-    if (selectedPlan && !currentPlan) {
-      purchase(selectedPlan);
-    }
-  }, [selectedPlan, currentPlan, purchase]);
-
   useEffect(() => {
     if (setupMarketplace || setupSponsorship) {
       showNext();
       window.scrollTo(0, 0);
     } else {
       hideNext();
-      alreadySelected();
     }
-  }, [hideNext, setupMarketplace, setupSponsorship, showNext, alreadySelected]);
+  }, [hideNext, setupMarketplace, setupSponsorship, showNext]);
 
   const onClick = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault();
@@ -243,11 +232,11 @@ const ChoosePlan: FC<Props> = ({
                     flexDirection="column"
                     previousTier={
                       TIERS[
-                        TIERS.findIndex(
-                          (tier: Tier) =>
-                            tier.name ===
-                            segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
-                        )
+                      TIERS.findIndex(
+                        (tier: Tier) =>
+                          tier.name ===
+                          segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
+                      )
                       ]
                     }
                     button={

@@ -16,12 +16,11 @@ type User = {
   email?: string;
   avatar?: string;
   userId: string;
-  token: string;
 };
 
 const { publicRuntimeConfig } = getConfig();
 const scope = 'read:current_user update:current_user_metadata';
-const audience = 'https://ockam.us.auth0.com/api/v2/';
+const audience = `https://${publicRuntimeConfig.auth0.audience}/api/v2/`;
 
 const Auth0 = new Auth0Client({
   domain: publicRuntimeConfig.auth0.issuerBaseHost as string,
@@ -37,16 +36,13 @@ const currentUser = async (): Promise<User | void> => {
     const email = window.sessionStorage.getItem('email') as string | undefined;
     const avatar = window.sessionStorage.getItem('avatar') as string | undefined;
     const userId = window.sessionStorage.getItem('userId') as string | '';
-    const token = await Auth0.getTokenSilently({
-      authorizationParams: {
-        scope,
-        audience,
-      },
-    });
 
-    return { email, avatar, userId, token };
+    return { email, avatar, userId };
   }
 };
+
+const isAuthenticated = async (): Promise<boolean> => Auth0.isAuthenticated()
+
 const isSignedIn = async (): Promise<boolean> => {
   try {
     const user = await currentUser();
@@ -54,7 +50,7 @@ const isSignedIn = async (): Promise<boolean> => {
     // eslint-disable-next-line
   } catch (e: any) {
     if (e?.message === 'Login required') return false;
-    throw e;
+    throw e
   }
 };
 
@@ -198,5 +194,5 @@ const Auth: FunctionComponent<Props> = ({
 };
 
 export type { User };
-export { currentUser, isSignedIn, isSignedUp, identify };
+export { currentUser, isSignedIn, isSignedUp, identify, isAuthenticated };
 export default Auth;

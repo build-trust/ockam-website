@@ -51,6 +51,7 @@ export default {
     issuerBaseHost: process.env.AUTH0_ISSUER_BASE_HOST || '',
     clientId: process.env.AUTH0_CLIENT_ID,
     baseUrl: process.env.AUTH0_BASE_URL || '',
+    audience: process.env.AUTH0_AUDIENCE || '',
   },
   allPageMessage: {
     message: `📣 **Just announced:** Redpanda Connect with Ockam &mdash; the world's first zero-trust data streaming platform. **[Learn more](/blog/redpanda_connect_with_ockam)**! 🎉`,

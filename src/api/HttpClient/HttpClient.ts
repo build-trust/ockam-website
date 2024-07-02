@@ -19,6 +19,7 @@ class HttpClient {
   }
 
   static responseError(error: AxiosError): ApiError {
+    console.log(error)
     throw new ApiError(error);
   }
 }
