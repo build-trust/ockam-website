@@ -1,22 +1,22 @@
 import { DOCS } from '@consts/externalResources';
 import {
   BLOG_PATH,
-  FEATURES_PATH,
-  MAGIC_PATH,
+  HOME_PATH,
   MISSION_AND_VISION_PATH,
   PRICING_PATH,
   SIGNUP_PATH,
   TEAM_PATH,
+  USE_CASES_PATH,
 } from '@consts/paths';
 
 export const NAV_ITEMS = [
   {
     name: 'Features',
-    href: MAGIC_PATH,
+    href: HOME_PATH,
   },
   {
     name: 'Use Cases',
-    href: FEATURES_PATH,
+    href: USE_CASES_PATH,
   },
   {
     name: 'Pricing',

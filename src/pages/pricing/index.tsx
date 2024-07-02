@@ -71,7 +71,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
         fontWeight={{ base: 700 }}
       >
         Plans for any{' '}
-        <Box as="span" color="avocado.200">
+        <Box as="span" color="brand.500">
           sale
         </Box>
       </Heading>
@@ -101,7 +101,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
                 ))}
               </Flex>
               <DescriptionText>
-                <Box as="span" color="avocado.200">
+                <Box as="span" color="brand.500">
                   The Developer editions
                 </Box>{' '}
                 of Ockam are intended to be used by individual developers, that are working on hobby
@@ -126,7 +126,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
                 ))}
               </Flex>
               <DescriptionText>
-                <Box as="span" color="avocado.200">
+                <Box as="span" color="brand.500">
                   Ockam&apos;s Company Editions
                 </Box>{' '}
                 are built for production workloads, with direct support from the Ockam team, and can
@@ -151,7 +151,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
               </Flex>
               <DescriptionText>
                 Ockam is offered in a bring-your-own-cloud (BYOC){' '}
-                <Box as="span" color="avocado.200">
+                <Box as="span" color="brand.500">
                   Enterprise Edition
                 </Box>{' '}
                 for companies that are committed to running software entirely within their own

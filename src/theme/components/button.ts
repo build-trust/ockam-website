@@ -7,10 +7,10 @@ const Button = defineStyleConfig({
   },
   variants: {
     primary: {
-      bg: 'avocado.200',
+      bg: 'brand.500',
       color: 'brand.800',
       _hover: {
-        bg: '#81F5D9',
+        bg: 'brand.400',
       },
     },
   },
