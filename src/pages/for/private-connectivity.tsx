@@ -4,13 +4,19 @@ import Image from 'next/image';
 
 import allPageMessageProps, { AllPageMessage } from '@utils/appPageMessage';
 import DarkLayout from '@layouts/DarkLayout';
-import { HeroContainer, HeroContentWrapper } from '@views/for/common/HeroContainer';
+import {
+  ButtonContainer,
+  HeroContainer,
+  HeroContentWrapper,
+  TextContainer,
+} from '@views/for/common/HeroContainer';
 import { HeroDescription, HeroHeading } from '@views/for/common/HeroText';
+import heroImageSrc from '@views/for/private-connectivity/assets/hero-image.png';
 
 const PrivateConnectivity = (): ReactElement => (
   <HeroContainer>
     <HeroContentWrapper>
-      <Stack gap="1.5rem">
+      <TextContainer>
         <HeroHeading>
           Keep private <br />
           <Box as="span" color="brand.500">
@@ -22,23 +28,16 @@ const PrivateConnectivity = (): ReactElement => (
           Never expose a private database to the public internet ever again! Manage access to any
           system with application-level controls.
         </HeroDescription>
-        <Stack direction="row" spacing="1.5rem">
+        <ButtonContainer>
           <Button variant="primary" h="3.5rem" w="12.5rem">
             Get started
           </Button>
           <Button h="3.5rem" w="12.5rem">
             Contact us
           </Button>
-        </Stack>
-      </Stack>
-      <Box flexShrink={0}>
-        <Image
-          src="" // Placeholder image, replace with actual path
-          alt="Secure connection illustration"
-          width={500} // Adjust as needed
-          height={300} // Adjust as needed
-        />
-      </Box>
+        </ButtonContainer>
+      </TextContainer>
+      <Box as={Image} mx="auto" src={heroImageSrc} alt="Secure connection illustration" />
     </HeroContentWrapper>
   </HeroContainer>
 );
