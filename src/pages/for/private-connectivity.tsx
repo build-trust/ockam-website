@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { Box, Button, Stack } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import allPageMessageProps, { AllPageMessage } from '@utils/appPageMessage';
