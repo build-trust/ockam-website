@@ -1,7 +1,10 @@
 import {
   CONTACT_FORM_PATH,
+  KAFKA_PATH,
   MISSION_AND_VISION_PATH,
   MISSION_AND_VISION_TEAM_SECTION,
+  PRIVATE_CONNECTIVITY_PATH,
+  SALES_ENGINEERS_PATH,
   STYLE_GUIDE_PATH,
   TEAM_PATH,
 } from '@consts/paths';
@@ -39,16 +42,16 @@ export const FOOTER_LINKS = [
     links: [
       {
         name: 'Database Protection',
-        href: '/for/private-connectivity',
+        href: PRIVATE_CONNECTIVITY_PATH,
       },
       {
         name: 'Kafka Encryption',
-        href: '/for/kafka',
+        href: KAFKA_PATH,
       },
       { name: 'SaaS Connectivity', href: '/for/saas-connectivity' },
       {
         name: 'Sales Engineers',
-        href: '/for/sales-engineers',
+        href: SALES_ENGINEERS_PATH,
       },
       {
         name: 'Zero-trust Streaming Data',
