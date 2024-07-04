@@ -67,6 +67,7 @@ export const SubTitle = ({ children, ...textProps }: TextProps): ReactElement =>
     fontWeight={{ base: 500 }}
     color="brand.800"
     fontSize={{ base: '1rem', lg: '1.125rem' }}
+    maxW={{ base: '26.25rem' }}
     {...textProps}
   >
     {children}
