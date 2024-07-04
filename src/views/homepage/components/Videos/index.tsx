@@ -80,8 +80,7 @@ const Videos = (): ReactElement => (
           <Text
             color="brand.800"
             fontWeight={{ base: 700 }}
-            fontSize={{ base: '1.25rem' }}
-            fontFamily="neutraface"
+            fontSize={{ base: '1.125rem' }}
             textAlign={{ base: 'center', lg: 'left' }}
           >
             {title}
