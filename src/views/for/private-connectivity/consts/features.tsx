@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 
