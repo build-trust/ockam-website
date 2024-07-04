@@ -27,13 +27,13 @@ export const WhiteContainer = ({ children, ...boxProps }: WhiteContainerProps): 
   </Box>
 );
 
-export const StackContainer = ({ children, ...stackProps }: StackProps) => (
-  <Stack maxW="68.375rem" mx="auto" gap={{ base: '3rem', lg: '7.5rem' }}>
+export const StackContainer = ({ children, ...stackProps }: StackProps): ReactElement => (
+  <Stack maxW="68.375rem" mx="auto" gap={{ base: '3rem', lg: '7.5rem' }} {...stackProps}>
     {children}
   </Stack>
 );
 
-export const FlexContainer = ({ children, ...flexProps }: FlexProps) => (
+export const FlexContainer = ({ children, ...flexProps }: FlexProps): ReactElement => (
   <Flex
     gap={{ base: '0.5rem', lg: '4rem' }}
     alignItems={{ base: 'center', lg: 'center' }}
@@ -43,32 +43,44 @@ export const FlexContainer = ({ children, ...flexProps }: FlexProps) => (
   </Flex>
 );
 
-export const TextContainer = ({ children, ...flexProps }: StackProps) => (
-  <Stack maxW="32.875rem" gap={{ base: '1rem' }}>
+export const TextContainer = ({ children, ...flexProps }: StackProps): ReactElement => (
+  <Stack maxW="32.875rem" gap={{ base: '1rem' }} {...flexProps}>
     {children}
   </Stack>
 );
 
-export const Title = ({ children, ...textProps }: TextProps) => (
+export const Title = ({ children, ...textProps }: TextProps): ReactElement => (
   <Text
     fontWeight={{ base: 700 }}
     color="brand.800"
     fontFamily="neutraface"
     fontSize={{ base: '1.375rem', lg: '1.75rem' }}
     mb={{ base: '0.5rem' }}
+    {...textProps}
   >
     {children}
   </Text>
 );
 
-export const SubTitle = ({ children, ...textProps }: TextProps) => (
-  <Text fontWeight={{ base: 500 }} color="brand.800" fontSize={{ base: '1rem', lg: '1.125rem' }}>
+export const SubTitle = ({ children, ...textProps }: TextProps): ReactElement => (
+  <Text
+    fontWeight={{ base: 500 }}
+    color="brand.800"
+    fontSize={{ base: '1rem', lg: '1.125rem' }}
+    {...textProps}
+  >
     {children}
   </Text>
 );
 
-export const Description = ({ children, ...textProps }: TextProps) => (
-  <Text fontWeight={{ base: 400 }} color="gray.500" fontSize={{ base: '1rem' }} textAlign="justify">
+export const Description = ({ children, ...textProps }: TextProps): ReactElement => (
+  <Text
+    fontWeight={{ base: 400 }}
+    color="gray.500"
+    fontSize={{ base: '1rem' }}
+    textAlign="justify"
+    {...textProps}
+  >
     {children}
   </Text>
 );
