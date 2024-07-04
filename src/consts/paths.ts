@@ -19,3 +19,4 @@ export const SIGNOUT_PATH = '/signout';
 export const PRIVATE_CONNECTIVITY_PATH = '/for/private-connectivity';
 export const KAFKA_PATH = '/for/kafka';
 export const SAAS_PLATFORMS_PATH = '/for/saas-platforms';
+export const SALES_ENGINEERS_PATH = '/for/sales-engineers';
