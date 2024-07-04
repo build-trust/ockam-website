@@ -37,7 +37,13 @@ const PrivateConnectivity = (): ReactElement => (
           </Button>
         </ButtonContainer>
       </TextContainer>
-      <Box as={Image} mx="auto" src={heroImageSrc} alt="Secure connection illustration" />
+      <Box
+        as={Image}
+        mx="auto"
+        src={heroImageSrc}
+        alt="Secure connection illustration"
+        width="max-content"
+      />
     </HeroContentWrapper>
   </HeroContainer>
 );
