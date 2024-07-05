@@ -35,6 +35,7 @@ export const StackContainer = ({ children, ...stackProps }: StackProps): ReactEl
 
 export const FlexContainer = ({ children, ...flexProps }: FlexProps): ReactElement => (
   <Flex
+    flexDirection={{ base: 'column-reverse', lg: 'row' }}
     gap={{ base: '0.5rem', lg: '4rem' }}
     alignItems={{ base: 'center', lg: 'center' }}
     {...flexProps}
