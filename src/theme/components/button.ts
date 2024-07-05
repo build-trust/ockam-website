@@ -13,6 +13,15 @@ const Button = defineStyleConfig({
         bg: 'brand.400',
       },
     },
+    ghost: {
+      bg: 'transparent',
+      color: 'white',
+      border: '1px solid',
+      borderColor: 'brand.500',
+      _hover: {
+        bg: 'brand.400',
+      },
+    },
   },
   sizes: {
     sm: {

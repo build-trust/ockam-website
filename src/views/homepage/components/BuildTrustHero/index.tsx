@@ -70,11 +70,8 @@ const BuildTrustHero = (): ReactElement => (
           as={NextLink}
           href={CONTACT_PAGE_PATH}
           w={{ base: '100%', lg: '12.5rem' }}
-          variant="outline"
+          variant="ghost"
           h="3.5rem"
-          borderColor="brand.500"
-          color="white"
-          _hover={{ borderColor: 'brand.500', borderWidth: '2px' }}
         >
           Contact us
         </Button>
