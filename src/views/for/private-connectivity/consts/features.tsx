@@ -3,6 +3,15 @@ import { Box } from '@chakra-ui/react';
 import React from 'react';
 
 import appToTrustSrc from '../assets/app-to-trust.png';
+import sharedSecretsSrc from '../assets/shared-secrets.png';
+import shippingSecrets from '../assets/shipping-secrets.png';
+import keyRotation from '../assets/key-rotation.png';
+import dataAuthenticity from '../assets/data-authenticity.png';
+import trustSrc from '../assets/trust.png';
+import publicKeySrc from '../assets/public-key.png';
+import anyLanguageSrc from '../assets/any-language.png';
+import cloudSupportSrc from '../assets/cloud-support.png';
+import selfManagedSrc from '../assets/self-managed.png';
 
 const FEATURES = [
   {
@@ -54,7 +63,7 @@ const FEATURES = [
         trusted secure channels directly with other authorized apps as required.
       </>
     ),
-    imageSrc: '',
+    imageSrc: sharedSecretsSrc,
     alt: 'Illustration of various security controls and a key',
   },
   {
@@ -73,7 +82,7 @@ const FEATURES = [
         removed.
       </>
     ),
-    imageSrc: '',
+    imageSrc: shippingSecrets,
     alt: 'Illustration showing the risk of transmitting secrets to multiple apps',
   },
   {
@@ -95,7 +104,7 @@ const FEATURES = [
         is difficult— it's built-in from the start.
       </>
     ),
-    imageSrc: '',
+    imageSrc: keyRotation,
     alt: 'Illustration showing automated key rotation with multiple keys',
   },
   {
@@ -111,7 +120,7 @@ const FEATURES = [
         around the authenticity and integrity of the data moving through your system.
       </>
     ),
-    imageSrc: '',
+    imageSrc: dataAuthenticity,
     alt: 'Illustration showing guaranteed authentic data being transferred between two entities',
   },
   {
@@ -140,7 +149,7 @@ const FEATURES = [
         are also available.
       </>
     ),
-    imageSrc: '',
+    imageSrc: trustSrc,
     alt: 'Illustration of five stars representing trust and reliability',
   },
   {
@@ -161,7 +170,7 @@ const FEATURES = [
         your own PKI systems.
       </>
     ),
-    imageSrc: '',
+    imageSrc: publicKeySrc,
     alt: 'Illustration indicating no need for Public Key Infrastructure',
   },
   {
@@ -173,7 +182,7 @@ const FEATURES = [
         of Java, Python, Go, Scala, you name it!
       </>
     ),
-    imageSrc: '',
+    imageSrc: anyLanguageSrc,
     alt: 'Illustration of various programming languages including Java, Python, Go, TypeScript, Ruby, and Rust',
   },
   {
@@ -190,7 +199,7 @@ const FEATURES = [
         it.
       </>
     ),
-    imageSrc: '',
+    imageSrc: cloudSupportSrc,
     alt: 'Illustration showing multi-cloud support with connections to Google Cloud, AWS, and Azure',
   },
   {
@@ -208,7 +217,7 @@ const FEATURES = [
         running entirely within your own VPC or on-prem.
       </>
     ),
-    imageSrc: '',
+    imageSrc: selfManagedSrc,
     alt: 'Illustration showing cloud and on-premise server deployments',
   },
 ];
