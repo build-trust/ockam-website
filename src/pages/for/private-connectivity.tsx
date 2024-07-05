@@ -42,7 +42,7 @@ const PrivateConnectivity = (): ReactElement => (
             <Button variant="primary" h="3.5rem" w="12.5rem">
               Get started
             </Button>
-            <Button h="3.5rem" w="12.5rem">
+            <Button variant="ghost" h="3.5rem" w="12.5rem">
               Contact us
             </Button>
           </ButtonContainer>
