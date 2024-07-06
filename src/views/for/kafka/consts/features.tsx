@@ -2,38 +2,41 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 
+import anyLanguageSrc from '../assets/any-language.png';
+import publicKeySrc from '../assets/public-key.png';
+import dataAuthenticity from '../assets/data-authenticity.png';
+import keyRotation from '../assets/key-rotation.png';
+import shippingSecrets from '../assets/shipping-secrets.png';
 import appToTrustSrc from '../assets/app-to-trust.png';
 import sharedSecretsSrc from '../assets/shared-secrets.png';
-import shippingSecrets from '../assets/shipping-secrets.png';
-import keyRotation from '../assets/key-rotation.png';
-import dataAuthenticity from '../assets/data-authenticity.png';
-import trustSrc from '../assets/trust.png';
-import publicKeySrc from '../assets/public-key.png';
-import anyLanguageSrc from '../assets/any-language.png';
-import cloudSupportSrc from '../assets/cloud-support.png';
+import noAppCodeChangesSrc from '../assets/no-app-code-changes.png';
 import selfManagedSrc from '../assets/self-managed.png';
+import heterogenousDeploymentsSrc from '../assets/heterogenous-deployments.png';
+import getStartedSrc from '../assets/get-started.png';
 
 const FEATURES = [
   {
     title: 'App-to-app trust',
-    subTitle: 'End-to-end guarantees over any multi-top, multi-protocol topology',
+    subTitle: 'An Apache Kafka + Ockam topology',
     description: (
       <>
-        Meeting modern data control expectations requires{' '}
+        Kafka applications that are handling sensitive data require more than encryption to the
+        "end". Where's the "end"? What's needed to meet modern data governance expectations are
+        guarantees that the intended applications are exclusively the apps that can participate in a
+        sensitive message{' '}
         <Box as="span" color="brand.500" fontWeight="700">
-          guarantees
-        </Box>{' '}
-        that the intended applications are exclusively the apps that can connect to your systems.
-        Ockam moves trust to the application layer by building a mutually authenticated and
-        encrypted{' '}
+          stream
+        </Box>
+        . Ockam moves trust to the{' '}
         <Box as="span" color="brand.500" fontWeight="700">
-          communication
+          application layer
         </Box>{' '}
-        channel between those systems.
+        by building a mutually authenticated and encrypted communication channel between all of your
+        Kafka apps through your Kafka brokers.
       </>
     ),
     imageSrc: appToTrustSrc,
-    alt: 'Secure connection illustration',
+    alt: 'Illustration of Apache Kafka topology with Ockam secure channels',
   },
   {
     title: 'No more shared secret keys',
@@ -124,35 +127,6 @@ const FEATURES = [
     alt: 'Illustration showing guaranteed authentic data being transferred between two entities',
   },
   {
-    title: 'Trust your security team can depend on',
-    subTitle: '',
-    description: (
-      <>
-        Ockam's approach uses existing and well-established open source technologies and frameworks.
-        We build trust through transparency so your CISO can be confident everything meets their
-        requirements. The cryptographic and messaging protocols are{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
-          publicly documented
-        </Box>{' '}
-        and the implementations are{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
-          open source and available on GitHub
-        </Box>
-        . We've published an independent third-party audit by the security research firm{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
-          Trail of Bits
-        </Box>
-        . The{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
-          current status of our latest audits and compliance controls
-        </Box>{' '}
-        are also available.
-      </>
-    ),
-    imageSrc: trustSrc,
-    alt: 'Illustration of five stars representing trust and reliability',
-  },
-  {
     title: 'No need to run Public Key Infrastructure (PKI)',
     subTitle: '',
     description: (
@@ -186,39 +160,71 @@ const FEATURES = [
     alt: 'Illustration of various programming languages including Java, Python, Go, TypeScript, Ruby, and Rust',
   },
   {
-    title: 'Complete multi-cloud support',
-    subTitle: '',
+    title: 'No app code changes',
+    subTitle: 'No code changes required',
     description: (
       <>
-        Ockam is agnostic to{' '}
+        Just a single configuration change: update the broker host to point to the secure channel
+        that Ockam sets up on{' '}
         <Box as="span" color="brand.500" fontWeight="700">
-          network-level
+          localhost
         </Box>{' '}
-        and cloud-specific features. Whatever cloud you're on, even if you're running a multi-cloud
-        setup, Ockam is a single approach that will provide secure point-to-point wherever you need
-        it.
+        for each app. It takes a couple of seconds, and won't require you to change any of the
+        business logic or implementation in your apps.
       </>
     ),
-    imageSrc: cloudSupportSrc,
-    alt: 'Illustration showing multi-cloud support with connections to Google Cloud, AWS, and Azure',
+    imageSrc: noAppCodeChangesSrc,
+    alt: 'Illustration of code with a red cross indicating no code changes required',
   },
   {
     title: 'Self-managed deployments',
     subTitle: 'Cloud & On-prem / Bring Your Own Cloud',
     description: (
       <>
-        Ockam Orchestrator is a cloud-based fully managed solution that allows you to be successful
-        within minutes. With SLA guarantees and publicly available historical uptime{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
-          reporting
-        </Box>
-        , it's the preferred deployment approach for the majority of customers. For those with
-        specific self-managed deployment requirements, Ockam Business Critical provides options for
-        running entirely within your own VPC or on-prem.
+        Running Kafka yourself? Maybe a managed offering inside your own VPC? Ockam works wherever
+        you need it.
       </>
     ),
     imageSrc: selfManagedSrc,
     alt: 'Illustration showing cloud and on-premise server deployments',
+  },
+  {
+    title: 'Heterogeneous deployments',
+    subTitle: '',
+    description: (
+      <>
+        Ockam's agnostic to network-level and cloud-specific features. Run a mix of apps across the
+        major cloud vendors to access specific value-add services without the complication of
+        configuring secure cross-cloud access to a specific{' '}
+        <Box as="span" color="brand.500" fontWeight="700">
+          KMS
+        </Box>{' '}
+        or setting services like Private Link or VPC Peering.
+      </>
+    ),
+    imageSrc: heterogenousDeploymentsSrc,
+    alt: 'Illustration showing heterogeneous deployments across multiple cloud vendors including Google Cloud, AWS, and Azure',
+  },
+  {
+    title: 'Available today',
+    subTitle: '',
+    description: (
+      <>
+        All of these features are available and production ready, today. There's no waiting to get
+        accepted into a beta program, for a professional services team to draft a statement of work,
+        or to even speak to our sales team (though we would still love to speak with you!). You can{' '}
+        <Box as="span" color="brand.500" fontWeight="700">
+          create an account for free
+        </Box>{' '}
+        and have{' '}
+        <Box as="span" color="brand.500" fontWeight="700">
+          Ockam securing your Kafka environment within minutes
+        </Box>
+        .
+      </>
+    ),
+    imageSrc: getStartedSrc,
+    alt: 'Illustration of a calendar with a check mark indicating availability today',
   },
 ];
 
