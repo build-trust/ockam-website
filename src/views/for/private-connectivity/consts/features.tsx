@@ -2,6 +2,8 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 
+import { GITHUB_REPO_OCKAM } from '@consts/externalResources';
+
 import appToTrustSrc from '../assets/app-to-trust.png';
 import sharedSecretsSrc from '../assets/shared-secrets.png';
 import shippingSecrets from '../assets/shipping-secrets.png';
@@ -131,19 +133,24 @@ const FEATURES = [
         Ockam's approach uses existing and well-established open source technologies and frameworks.
         We build trust through transparency so your CISO can be confident everything meets their
         requirements. The cryptographic and messaging protocols are{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box
+          as="a"
+          target="_blank"
+          textDecoration="underline"
+          href="https://docs.ockam.io/reference/protocols"
+        >
           publicly documented
         </Box>{' '}
         and the implementations are{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="a" target="_blank" textDecoration="underline" href={GITHUB_REPO_OCKAM.href}>
           open source and available on GitHub
         </Box>
         . We've published an independent third-party audit by the security research firm{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="a" target="_blank" textDecoration="underline" href="https://www.trailofbits.com/">
           Trail of Bits
         </Box>
         . The{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="a" target="_blank" textDecoration="underline" href="https://audits.ockam.io/">
           current status of our latest audits and compliance controls
         </Box>{' '}
         are also available.
