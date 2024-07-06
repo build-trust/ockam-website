@@ -213,11 +213,21 @@ const FEATURES = [
         All of these features are available and production ready, today. There's no waiting to get
         accepted into a beta program, for a professional services team to draft a statement of work,
         or to even speak to our sales team (though we would still love to speak with you!). You can{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box
+          as="a"
+          target="_blank"
+          textDecoration="underline"
+          href="https://docs.ockam.io/download"
+        >
           create an account for free
         </Box>{' '}
         and have{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box
+          as="a"
+          target="_blank"
+          textDecoration="underline"
+          href="https://docs.ockam.io/guides/examples/end-to-end-encrypted-kafka"
+        >
           Ockam securing your Kafka environment within minutes
         </Box>
         .
