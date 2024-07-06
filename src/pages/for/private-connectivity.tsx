@@ -1,6 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import Image from 'next/image';
+import NextLink from 'next/link';
 
 import allPageMessageProps, { AllPageMessage } from '@utils/appPageMessage';
 import DarkLayout from '@layouts/DarkLayout';
@@ -21,6 +22,7 @@ import {
 } from '@views/for/common/WhiteContainer';
 import heroImageSrc from '@views/for/private-connectivity/assets/hero-image.png';
 import FEATURES from '@views/for/private-connectivity/consts/features';
+import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
 
 const PrivateConnectivity = (): ReactElement => (
   <Box>
@@ -39,10 +41,10 @@ const PrivateConnectivity = (): ReactElement => (
             system with application-level controls.
           </HeroDescription>
           <ButtonContainer>
-            <Button variant="primary" h="3.5rem" w="12.5rem">
+            <Button as={NextLink} href={SIGNUP_PATH} variant="primary" h="3.5rem" w="12.5rem">
               Get started
             </Button>
-            <Button variant="ghost" h="3.5rem" w="12.5rem">
+            <Button as={NextLink} href={CONTACT_PAGE_PATH} variant="ghost" h="3.5rem" w="12.5rem">
               Contact us
             </Button>
           </ButtonContainer>
