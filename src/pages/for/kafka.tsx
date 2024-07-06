@@ -77,10 +77,10 @@ const Kafka = (): ReactElement => (
   </Box>
 );
 
-interface PrivateConnectivityProps {
+interface KafkaProps {
   allPageMessage?: AllPageMessage | null;
 }
-export async function getStaticProps(): Promise<{ props: PrivateConnectivityProps }> {
+export async function getStaticProps(): Promise<{ props: KafkaProps }> {
   return {
     props: {
       allPageMessage: await allPageMessageProps,
@@ -88,7 +88,7 @@ export async function getStaticProps(): Promise<{ props: PrivateConnectivityProp
   };
 }
 
-Kafka.getLayout = (page: ReactElement, pageProps?: PrivateConnectivityProps): ReactNode => (
+Kafka.getLayout = (page: ReactElement, pageProps?: KafkaProps): ReactNode => (
   <DarkLayout
     except={pageProps?.allPageMessage?.except}
     message={pageProps?.allPageMessage?.message}
