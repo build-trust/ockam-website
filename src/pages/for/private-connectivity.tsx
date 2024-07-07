@@ -23,6 +23,7 @@ import {
 import heroImageSrc from '@views/for/private-connectivity/assets/hero-image.png';
 import FEATURES from '@views/for/private-connectivity/consts/features';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
+import FormSection from '@views/for/common/FormSection';
 
 const PrivateConnectivity = (): ReactElement => (
   <Box>
@@ -74,6 +75,7 @@ const PrivateConnectivity = (): ReactElement => (
         ))}
       </StackContainer>
     </WhiteContainer>
+    <FormSection />
   </Box>
 );
 
