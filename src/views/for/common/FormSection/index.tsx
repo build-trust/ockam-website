@@ -2,6 +2,7 @@
 import React, { ReactElement } from 'react';
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 
+import ContactForm from './Form';
 import DBLink from './DBLink';
 import backgroundSrc from './assets/background.svg?url';
 
@@ -72,8 +73,16 @@ const FormSection = (): ReactElement => (
             We'll get back to you within one business day
           </Text>
         </Box>
-        <Box border="1px solid #2d3748" borderRadius="md" p="4">
-          <Text>Form will be added here later</Text>
+        <Box
+          bg="linear-gradient(140deg, rgba(5, 39, 75, 0.20) 10.78%, rgba(15, 74, 83, 0.20) 95.69%)"
+          border="1px solid"
+          borderColor="brand.500"
+          borderRadius={{ base: '0.75rem' }}
+          mx="auto"
+          maxW={{ base: '30rem' }}
+          p={{ base: '1rem', lg: '2.5rem' }}
+        >
+          <ContactForm />
         </Box>
       </Stack>
     </Flex>
