@@ -217,12 +217,7 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
           </GridItem>
 
           <GridItem colStart={{ base: 1 }} colEnd={{ base: -1 }}>
-            <FormControl
-              display="flex"
-              overflow="auto"
-              justifyContent={{ base: 'flex-start', lg: 'center' }}
-              isInvalid={!!errors.recaptcha}
-            >
+            <FormControl overflow="auto" isInvalid={!!errors.recaptcha}>
               <ReCAPTCHA
                 sitekey={CONFIG.app.recaptchaSiteKey}
                 onChange={(recaptchaValue): void => setValue('recaptcha', recaptchaValue)}
