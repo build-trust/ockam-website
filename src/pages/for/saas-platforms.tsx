@@ -24,6 +24,7 @@ import {
 import heroImageSrc from '@views/for/saas-platforms/assets/hero-image.png';
 import FEATURES from '@views/for/saas-platforms/consts/features';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
+import FormSection from '@views/for/common/FormSection';
 
 const SaaSPlatforms = (): ReactElement => (
   <Box>
@@ -74,6 +75,7 @@ const SaaSPlatforms = (): ReactElement => (
         ))}
       </StackContainer>
     </WhiteContainer>
+    <FormSection />
   </Box>
 );
 
