@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 
