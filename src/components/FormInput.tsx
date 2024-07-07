@@ -31,13 +31,17 @@ const FormInput: FunctionComponent<FormInputProps> = forwardRef(
       isDisabled,
       ...restProps
     },
-    ref
+    ref,
   ) => {
     const InputComponent = type === 'textarea' ? Textarea : Input;
 
     return (
       <FormControl isInvalid={isInvalid} isDisabled={isDisabled}>
-        {label && <FormLabel variant="form">{label}</FormLabel>}
+        {label && (
+          <FormLabel variant={restProps.variant === 'outline' ? 'form' : restProps.variant}>
+            {label}
+          </FormLabel>
+        )}
 
         <InputComponent
           name={name}
@@ -53,7 +57,7 @@ const FormInput: FunctionComponent<FormInputProps> = forwardRef(
         </FormErrorMessage>
       </FormControl>
     );
-  }
+  },
 );
 
 export default FormInput;
