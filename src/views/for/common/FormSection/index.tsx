@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 
 import DBLink from './DBLink';
 import backgroundSrc from './assets/background.svg?url';
 
-const FormSection = () => (
+const FormSection = (): ReactElement => (
   <Box
     bgImage={`/**/url(${backgroundSrc.src}), linear-gradient(#0D1721, #162535)`}
     bgRepeat="no-repeat"
