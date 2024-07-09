@@ -1,5 +1,6 @@
 import { Box, Stack } from '@chakra-ui/react';
 import { ReactElement } from 'react';
+import NextLink from 'next/link';
 
 import {
   KAFKA_PATH,
@@ -54,7 +55,7 @@ const UseCases = (): ReactElement => (
       mx={{ base: 'auto' }}
       backdropFilter="blur(10px)"
     >
-      <WhiteTile>
+      <WhiteTile as={NextLink} href={PRIVATE_CONNECTIVITY_PATH}>
         <Image src={distributedSrc} alt="Distributed Data visualization" />
         <Stack gap={{ base: '1rem' }}>
           <TitleText>Access Distributed Data</TitleText>
@@ -64,11 +65,11 @@ const UseCases = (): ReactElement => (
             Stop exposing private data to the public internet with service ports. Start isolating
             data exposure to the endpoint of your application.
           </DescriptionText>
-          <LearnMoreLink href={PRIVATE_CONNECTIVITY_PATH} />
+          <LearnMoreLink />
         </Stack>
       </WhiteTile>
 
-      <WhiteTile>
+      <WhiteTile as={NextLink} href={KAFKA_PATH}>
         <Image src={secureKafkaSrc} alt="Secure Kafka Streams visualization" />
         <Stack gap={{ base: '1rem' }}>
           <TitleText>Secure Kafka Streams</TitleText>
@@ -78,11 +79,11 @@ const UseCases = (): ReactElement => (
             Stop exposing the broker to your data streams. Start encrypting data-in-motion through
             Kafka.
           </DescriptionText>
-          <LearnMoreLink href={KAFKA_PATH} />
+          <LearnMoreLink />
         </Stack>
       </WhiteTile>
 
-      <WhiteTile>
+      <WhiteTile as={NextLink} href={SAAS_PLATFORMS_PATH}>
         <Image src={connectSaaSSrc} alt="Connect SaaS visualization" />
         <Stack gap={{ base: '1rem' }}>
           <TitleText>Connect SaaS to On-Prem systems</TitleText>
@@ -90,7 +91,7 @@ const UseCases = (): ReactElement => (
             Unlock new capabilities with enterprise customers. Stop asking your customers to make
             network changes. Integrate into your existing platform within minutes.
           </DescriptionText>
-          <LearnMoreLink href={SAAS_PLATFORMS_PATH} />
+          <LearnMoreLink />
         </Stack>
       </WhiteTile>
     </Stack>
