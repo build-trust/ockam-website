@@ -44,7 +44,7 @@ const BuildTrustHero = (): ReactElement => (
           Between your platform and
           <br />
           every{' '}
-          <Box as="span" color="brand.500">
+          <Box as="span" color="brand.500" fontWeight={{ base: 700 }}>
             application
           </Box>{' '}
           everywhere
@@ -86,7 +86,7 @@ const BuildTrustHero = (): ReactElement => (
               Ockam works at application layer.
               <br />
               When application security is decoupled from your network, you can skip the pain of{' '}
-              <Box as="span" color="brand.500">
+              <Box as="span" color="brand.500" fontWeight={{ base: 700 }}>
                 implicit trust in your network
               </Box>
               .
@@ -99,7 +99,7 @@ const BuildTrustHero = (): ReactElement => (
           description={
             <>
               Ockam is{' '}
-              <Box as="span" color="brand.500">
+              <Box as="span" color="brand.500" fontWeight={{ base: 700 }}>
                 point-to-point
               </Box>
               .
