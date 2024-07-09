@@ -1,11 +1,10 @@
 import { Box, BoxProps, Flex, FlexProps, LinkProps, Text, TextProps } from '@chakra-ui/react';
 import { ReactElement, ReactNode } from 'react';
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
-import Link from 'next/link';
 
 import ArrowRightIcon from './assets/arrow-right.svg';
 
-export interface WhiteTileProps extends FlexProps {
+export interface WhiteTileProps extends FlexProps, Pick<LinkProps, 'href'> {
   children: ReactNode;
 }
 const WhiteTile = ({ children, ...flexProps }: WhiteTileProps): ReactElement => (
@@ -52,10 +51,9 @@ export const Image = (props: ImageProps): ReactElement => (
   <Box as={NextImage} mx="auto" width="fit-content" {...props} />
 );
 
-interface LearnMoreLinkProps extends BoxProps, Pick<LinkProps, 'href'> {}
+interface LearnMoreLinkProps extends BoxProps {}
 export const LearnMoreLink = ({ children, ...props }: LearnMoreLinkProps): ReactElement => (
   <Flex
-    as={Link}
     gap={{ base: '0.5rem' }}
     color="brand.600"
     fontWeight={600}
