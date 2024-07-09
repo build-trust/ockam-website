@@ -34,12 +34,12 @@ export const NAV_ITEMS = [
     href: BLOG_PATH,
   },
   {
-    name: 'Login',
-    href: SIGNUP_PATH,
-  },
-  {
     name: 'Docs',
     href: DOCS.href,
+  },
+  {
+    name: 'Login',
+    href: SIGNUP_PATH,
   },
 ];
 
