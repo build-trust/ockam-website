@@ -1,5 +1,5 @@
 import { chakra, Box, BoxProps } from '@chakra-ui/react';
-import { AnimatePresence, isValidMotionProp, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ReactElement, useEffect, useRef } from 'react';
 
 const variants = {
