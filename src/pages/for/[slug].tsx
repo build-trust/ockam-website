@@ -144,7 +144,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   const displayExamples = (): JSX.Element => {
     if (!examples || examples.length === 0) {
       return (
-        <Box scrollSnapAlign="start">
+        <Box>
           <Heading mx="auto" mt="16" id="contact" textAlign="center">
             It&apos;s time to&hellip;
           </Heading>
@@ -173,7 +173,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
       );
     }
     return (
-      <Box scrollSnapAlign="start">
+      <Box>
         <Heading mx="auto" mt="16" id="contact" textAlign="center">
           It&apos;s time to start building&hellip;
         </Heading>
