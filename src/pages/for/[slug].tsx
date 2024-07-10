@@ -184,7 +184,7 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
           spacingY={{ base: 8, md: 12, lg: 12 }}
         >
           {examples.map((example) => (
-            <Link href={example.url} passHref legacyBehavior>
+            <Link href={example.url} passHref legacyBehavior key={example.name}>
               <Card px={2} py={2} cursor="pointer">
                 <Heading size="lg">{example.name}</Heading>
               </Card>

@@ -87,7 +87,7 @@ const Hero: FunctionComponent<Props> = ({
     }
     return (
       <>
-        {text.split(/(_\w.*?\w_)/).map((string) => {
+        {text.split(/(_\w.*?\w_)/).map((string, ix) => {
           const highlight = string.match(/^_(\w.*?\w)_$/);
 
           if (highlight) {
@@ -97,7 +97,7 @@ const Hero: FunctionComponent<Props> = ({
                 bgImage={darkGradient ? gradients.dark : gradients.primary}
                 bgClip="text"
                 pr="0.1em"
-                key={`highlight-${sha512(highlight[1])}`}
+                key={`highlight-${sha512(highlight[1] + ix.toString())}`}
               >
                 {highlight[1]}
               </Box>
