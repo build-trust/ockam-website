@@ -2,19 +2,19 @@ import { Flex } from '@chakra-ui/react';
 import styled, { FlattenSimpleInterpolation, css } from 'styled-components';
 
 type Props = {
-  bottomOnly?: boolean;
   h1?: number;
   h2?: number;
+  $bottomonly?: string;
 };
 
 const GradientContainer = styled(Flex)<Props>`
   background-image:
-    ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined =>
-        !bottomOnly &&
+    ${(props): false | FlattenSimpleInterpolation | undefined =>
+        !props.$bottomonly &&
         css`radial-gradient(ellipse 300% 140% at bottom, transparent 70%, #f9f9f9 70%),`}
       radial-gradient(ellipse 150% 130% at top, transparent 70%, #f9f9f9 70%),
-    ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined =>
-        !bottomOnly &&
+    ${(props): false | FlattenSimpleInterpolation | undefined =>
+        !props.$bottomonly &&
         css`radial-gradient(
       ellipse 300% 140% at bottom,
       transparent 65%,
@@ -29,28 +29,28 @@ const GradientContainer = styled(Flex)<Props>`
       ),
     linear-gradient(to right, #52c7ea, #4fdab8);
   background-repeat:
-    ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined =>
-        !bottomOnly && css`no-repeat,`}
+    ${(props): false | FlattenSimpleInterpolation | undefined =>
+        !props.$bottomonly && css`no-repeat,`}
       no-repeat,
-    ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined =>
-        !bottomOnly && css`no-repeat,`}
+    ${(props): false | FlattenSimpleInterpolation | undefined =>
+        !props.$bottomonly && css`no-repeat,`}
       no-repeat,
     no-repeat,
     no-repeat;
   background-size:
-    ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined =>
-        !bottomOnly && css`100% 100%,`}
+    ${(props): false | FlattenSimpleInterpolation | undefined =>
+        !props.$bottomonly && css`100% 100%,`}
       100%,
-    ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined => !bottomOnly && css`100%,`}
+    ${(props): false | FlattenSimpleInterpolation | undefined => !props.$bottomonly && css`100%,`}
       100% 100%,
     100%,
     100%,
     100% 100%;
   background-position:
-    ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined => !bottomOnly && css`0 0,`}
-      0 0,
-    ${({ bottomOnly }): false | FlattenSimpleInterpolation | undefined => !bottomOnly && css`0 0,`}
-      0 0,
+    ${(props): false | FlattenSimpleInterpolation | undefined => !props.$bottomonly && css`0 0,`} 0
+      0,
+    ${(props): false | FlattenSimpleInterpolation | undefined => !props.$bottomonly && css`0 0,`} 0
+      0,
     calc(1px - 1px),
     calc(1px - 1px),
     0 0;

@@ -55,7 +55,7 @@ const HomePage: NextPageWithLayout<Props> = ({ magic }) => {
 
   return (
     <Box pt={0}>
-      <GradientContainer bottomOnly pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}>
+      <GradientContainer $bottomonly pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}>
         <Hero
           subtext="Between your platform and every <Application|Database|Repo|Agent|SaaS|Datalake> everywhere"
           ctas={heroCTAs()}

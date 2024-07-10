@@ -25,7 +25,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
       )}&features=${encodeURIComponent(ogFeatures)}&template=nocheck`}
     />
     <GradientContainer
-      bottomOnly
+      $bottomonly
       pt={{ base: '15em' }}
       flexDir="column"
       style={{ justifyContent: 'flex-start' }}

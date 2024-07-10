@@ -45,7 +45,7 @@ const RazorLayout: FunctionComponent<RazorProps> = ({ children, title, subtext, 
       <Box w="100%" background="#f9f9f9" pb={20}>
         <SEOHead title={title || 'The Razor'} />
         <GradientContainer
-          bottomOnly
+          $bottomonly
           pt={{ base: '5em', sm: '10em', md: '10em', lg: '15em' }}
           h="100vh"
           minH="50em"
