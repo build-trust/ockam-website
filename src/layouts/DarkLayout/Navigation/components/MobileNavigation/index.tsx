@@ -31,7 +31,7 @@ function renderMobileNavigationItem({ items, name, href }: NavItem): ReactElemen
   if (items) {
     // Nested Team items, which are rendered as a dropdown.
     return (
-      <Accordion allowToggle key={name}>
+      <Accordion allowToggle>
         <AccordionItem border="none">
           <AccordionButton
             display="flex"

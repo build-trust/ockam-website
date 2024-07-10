@@ -14,7 +14,7 @@ function renderNavigationItem({ items, name, href }: NavItem): ReactElement {
   if (items) {
     // Nested Team items, which are rendered as a dropdown on Desktop.
     return (
-      <Menu key={name}>
+      <Menu>
         <MenuButton
           display="flex"
           alignItems="center"
