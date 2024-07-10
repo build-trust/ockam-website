@@ -3,9 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ReactElement, useEffect, useRef } from 'react';
 
 const variants = {
-  initial: { y: -30, opacity: 0 },
-  animate: { y: 0, opacity: 1 },
-  exit: { y: 30, opacity: 0 },
+  initial: { y: -30 },
+  animate: { y: 0 },
+  exit: { y: 30 },
 };
 
 const MotionText = chakra(motion.span, {
