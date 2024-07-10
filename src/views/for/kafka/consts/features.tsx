@@ -24,11 +24,11 @@ const FEATURES = [
         "end". Where's the "end"? What's needed to meet modern data governance expectations are
         guarantees that the intended applications are exclusively the apps that can participate in a
         sensitive message{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           stream
         </Box>
         . Ockam moves trust to the{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           application layer
         </Box>{' '}
         by building a mutually authenticated and encrypted communication channel between all of your
@@ -45,21 +45,21 @@ const FEATURES = [
       <>
         Sharing secret keys across many apps and services increases the likelihood of secret keys
         leaking, in addition to eroding any guarantees that only intended apps can{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           access
         </Box>{' '}
         sensitive data. Teams then layer in additional credential management approaches,
         network-level controls, and various other security approaches in an attempt to have a
         somewhat reliable assumption that only the intended app(s) were able to use the shared
         secret{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           keys
         </Box>
         .
         <br />
         <br />
         With Ockam, each app generates its own{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           unique
         </Box>{' '}
         cryptographically provable identity and encryption keys, and uses those keys to establish
@@ -77,7 +77,7 @@ const FEATURES = [
         Whether it's reading a credential or secret value from a central source, or transmitting a
         secret key to another app, every time a secret value is transmitted over the wire is another
         opportunity for it to leak. Ockam's approach to secret{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           management
         </Box>{' '}
         means each secret key never needs to leave the place where it was generated. By removing the
@@ -95,13 +95,13 @@ const FEATURES = [
       <>
         Everyone hopes they never have a data breach, but to minimize the impact in case the worst
         happens Ockam apps automatically and regularly{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           rotate
         </Box>{' '}
         their encryption keys. If a secret key is ever leaked the data at risk is reduced to the
         amount sent in the small window of that secret key was active. Don't put your historical and
         future data at risk because rotating secret{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           keys
         </Box>{' '}
         is difficult— it's built-in from the start.
@@ -117,7 +117,7 @@ const FEATURES = [
       <>
         The approach to mutual authentication of every app that Ockam provides results in strong
         data governance{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           guarantees
         </Box>{' '}
         around the authenticity and integrity of the data moving through your system.
@@ -132,7 +132,7 @@ const FEATURES = [
     description: (
       <>
         Nobody loves running their own{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           PKI
         </Box>
         . It's complicated, you still need to work out how to securely handle your root certificate
@@ -166,7 +166,7 @@ const FEATURES = [
       <>
         Just a single configuration change: update the broker host to point to the secure channel
         that Ockam sets up on{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           localhost
         </Box>{' '}
         for each app. It takes a couple of seconds, and won't require you to change any of the
@@ -196,7 +196,7 @@ const FEATURES = [
         Ockam's agnostic to network-level and cloud-specific features. Run a mix of apps across the
         major cloud vendors to access specific value-add services without the complication of
         configuring secure cross-cloud access to a specific{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           KMS
         </Box>{' '}
         or setting services like Private Link or VPC Peering.
