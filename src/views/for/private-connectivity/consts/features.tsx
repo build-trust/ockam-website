@@ -22,13 +22,13 @@ const FEATURES = [
     description: (
       <>
         Meeting modern data control expectations requires{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           guarantees
         </Box>{' '}
         that the intended applications are exclusively the apps that can connect to your systems.
         Ockam moves trust to the application layer by building a mutually authenticated and
         encrypted{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           communication
         </Box>{' '}
         channel between those systems.
@@ -44,21 +44,21 @@ const FEATURES = [
       <>
         Sharing secret keys across many apps and services increases the likelihood of secret keys
         leaking, in addition to eroding any guarantees that only intended apps can{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           access
         </Box>{' '}
         sensitive data. Teams then layer in additional credential management approaches,
         network-level controls, and various other security approaches in an attempt to have a
         somewhat reliable assumption that only the intended app(s) were able to use the shared
         secret{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           keys
         </Box>
         .
         <br />
         <br />
         With Ockam, each app generates its own{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           unique
         </Box>{' '}
         cryptographically provable identity and encryption keys, and uses those keys to establish
@@ -76,7 +76,7 @@ const FEATURES = [
         Whether it's reading a credential or secret value from a central source, or transmitting a
         secret key to another app, every time a secret value is transmitted over the wire is another
         opportunity for it to leak. Ockam's approach to secret{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           management
         </Box>{' '}
         means each secret key never needs to leave the place where it was generated. By removing the
@@ -94,13 +94,13 @@ const FEATURES = [
       <>
         Everyone hopes they never have a data breach, but to minimize the impact in case the worst
         happens Ockam apps automatically and regularly{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           rotate
         </Box>{' '}
         their encryption keys. If a secret key is ever leaked the data at risk is reduced to the
         amount sent in the small window of that secret key was active. Don't put your historical and
         future data at risk because rotating secret{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           keys
         </Box>{' '}
         is difficult— it's built-in from the start.
@@ -116,7 +116,7 @@ const FEATURES = [
       <>
         The approach to mutual authentication of every app that Ockam provides results in strong
         data governance{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           guarantees
         </Box>{' '}
         around the authenticity and integrity of the data moving through your system.
@@ -165,7 +165,7 @@ const FEATURES = [
     description: (
       <>
         Nobody loves running their own{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           PKI
         </Box>
         . It's complicated, you still need to work out how to securely handle your root certificate
@@ -198,7 +198,7 @@ const FEATURES = [
     description: (
       <>
         Ockam is agnostic to{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           network-level
         </Box>{' '}
         and cloud-specific features. Whatever cloud you're on, even if you're running a multi-cloud
@@ -216,7 +216,7 @@ const FEATURES = [
       <>
         Ockam Orchestrator is a cloud-based fully managed solution that allows you to be successful
         within minutes. With SLA guarantees and publicly available historical uptime{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           reporting
         </Box>
         , it's the preferred deployment approach for the majority of customers. For those with

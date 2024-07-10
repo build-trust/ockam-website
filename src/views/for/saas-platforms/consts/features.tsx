@@ -24,11 +24,11 @@ const FEATURES = [
       <>
         If you're running a SaaS platform, Ockam allows you to offer new capabilities to your
         highest value customers. Our{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           zero-trust
         </Box>{' '}
         and{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           networkless
         </Box>{' '}
         approach provides secure point-to-point connections to customer-hosted systems.
@@ -36,7 +36,7 @@ const FEATURES = [
         <br />
         Expand into high ACV customer segments with features that support entirely private
         connectivity demanded by large enterprises. Add new high-value features that integrate into{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           self-hosted
         </Box>{' '}
         systems.
@@ -53,7 +53,7 @@ const FEATURES = [
         Your customers get the user experience they deserve. Instead of pushing all the hard
         connectivity problems, such as setting up VPNs or changing firewall configurations, you can
         offer a holistic solution that feels like a natural{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           part of your product
         </Box>
         .
@@ -72,11 +72,11 @@ const FEATURES = [
     description: (
       <>
         Traditional solutions like{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           peering
         </Box>
         ,{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           VPNs
         </Box>
         , and maintaining allow lists - network-level approaches that connect entire networks to
@@ -85,7 +85,7 @@ const FEATURES = [
         <br />
         <br />
         By elevating trust to the application level, Ockam provides fine-grained{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           access controls
         </Box>{' '}
         that map to actual business needs. There's no long-standing assumptions about networks, and
@@ -150,7 +150,7 @@ const FEATURES = [
       <>
         The approach to mutual authentication of every app that Ockam provides results in strong
         data governance{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           guarantees
         </Box>{' '}
         around the authenticity and integrity of the messages moving through your system.
@@ -166,7 +166,7 @@ const FEATURES = [
       <>
         Ockam Orchestrator is a cloud-based fully managed solution that allows you to be successful
         within minutes. With SLA guarantees and publicly available historical uptime{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           reporting
         </Box>
         , it's the preferred deployment approach for the majority of customers. For those with
@@ -195,7 +195,7 @@ const FEATURES = [
     description: (
       <>
         Add a way for a customer to request a ticket. They then run{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           your agent
         </Box>
         , passing in the ticket. That's all they have to do! No managing hostnames or routes,
@@ -216,7 +216,7 @@ const FEATURES = [
           virtual adjacency
         </Box>{' '}
         the customer system will be accessible as though it was running on{' '}
-        <Box as="span" color="brand.500" fontWeight="700">
+        <Box as="span" color="gray.500" fontWeight="700">
           localhost
         </Box>
         . All without the need to for the customer to make their systems reachable from the public
