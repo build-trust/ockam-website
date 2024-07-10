@@ -9,7 +9,13 @@ const variants = {
 };
 
 const MotionText = chakra(motion.span, {
-  shouldForwardProp: () => true,
+  shouldForwardProp: (prop) => {
+    if (['fontWeight', 'color'].includes(prop)) {
+      return false;
+    }
+
+    return true;
+  },
 });
 
 interface AnimatedTextProps extends Omit<BoxProps, 'transition'> {
