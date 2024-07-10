@@ -107,7 +107,7 @@ const Videos: FC = () => (
     <Container variant="section" py={{ base: 0, lg: 0 }} maxW="container.max" px={0}>
       <Flex width="100%" justifyContent="space-evenly" flexWrap="wrap">
         {vids.map(({ title, id }) => (
-          <Video title={title} videoId={id} maxW="400px" w="100%" mx="0.5rem" />
+          <Video title={title} videoId={id} maxW="400px" w="100%" mx="0.5rem" key={title} />
         ))}
       </Flex>
     </Container>
