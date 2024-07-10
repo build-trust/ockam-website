@@ -47,7 +47,7 @@ function renderMobileNavigationItem({ items, name, href }: NavItem): ReactElemen
             <Stack gap="1rem" alignItems="center">
               {items.map(({ name: nestedItemName, href: nestedItemHref }) => (
                 <NavigationItem
-                  key={href}
+                  key={nestedItemHref}
                   href={nestedItemHref}
                   fontWeight={500}
                   color="gray.200"
