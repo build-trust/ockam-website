@@ -1,27 +1,13 @@
 ---
 title: Trust your AI systems
 hero_text: Secure AI starts with _data you can trust_
-#hero_image: insecure-kafka
-#hero_animated: true
-#hero_animation_start_at: 1.5
-#hero_aspect_priority: width
-subtext: ... and good data
+subtext: 
 list_features: false
 examples:
   - name: Amazon Bedrock
     url: https://docs.ockam.io/portals/ai/amazon_bedrock
   - name: Self-hosted Models
     url: https://docs.ockam.io/portals/ai/amazon_ec2
-#features:
-#  - icon: fingerprint
-#    title: Unique keys per identity
-#    text: Each consumer and producer generates its own cryptographic keys, and is issued its own unique credentials. They then use these to establish a mutually trusted secure channel between each other. By removing the dependency on a third-party service to store or distribute keys you're able to reduce your vulnerability surface area and eliminate single points of failure.
-#  - icon: shieldcheck
-#    title: Tamper-proof data transfer
-#    text: By pushing control of keys to the edges of the system, where authenticated encryption and decryption occurs, no other parties in the supply-chain are able to modify the data in transit. You can be assured that the data you receive at the consumer is exactly what was sent by your producers. You can also be assured that only authorised producers can write to a topic ensuring that the data in your topic is highly trustworthy.
-#  - icon: clock
-#    title: Reduced exposure window
-#    text: Ockam secure channels regularly rotate authentication keys and session secrets. This approach means that if one of those session secrets was exposed your total data exposure window is limited to the small duration that secret was in use. Rotating authentication keys means that even when the identity keys of a producer are compromised - no historical data is compromised. You can selectively remove the compromised producer and its data. With centralised shared key distribution approaches there is the risk that all current and historical data can’t be trusted after a breach because it may have been tampered with or stolen. Ockam's approach eliminates the risk of compromised historical data and minimises the risk to future data using automatically rotating keys.
 ---
 
 {/* <!-- vale off --> */}
