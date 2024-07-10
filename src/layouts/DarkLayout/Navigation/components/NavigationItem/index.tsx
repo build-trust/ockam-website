@@ -1,4 +1,4 @@
-import { Link, LinkProps } from '@chakra-ui/react';
+import { forwardRef, Link, LinkProps } from '@chakra-ui/react';
 import React, { ReactElement } from 'react';
 import NextLink from 'next/link';
 
@@ -11,19 +11,18 @@ export interface NavigationItemProps extends LinkProps {
   children: string;
   href: string;
 }
-export const NavigationItem = ({
-  children,
-  href,
-  ...linkProps
-}: NavigationItemProps): ReactElement => (
-  <Link
-    href={href}
-    as={NextLink}
-    variant="link"
-    color="inherit"
-    {...navItemFontStyles}
-    {...linkProps}
-  >
-    {children}
-  </Link>
+export const NavigationItem = forwardRef(
+  ({ children, href, ...linkProps }: NavigationItemProps, ref): ReactElement => (
+    <Link
+      ref={ref}
+      href={href}
+      as={NextLink}
+      variant="link"
+      color="inherit"
+      {...navItemFontStyles}
+      {...linkProps}
+    >
+      {children}
+    </Link>
+  ),
 );

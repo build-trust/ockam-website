@@ -14,7 +14,7 @@ function renderNavigationItem({ items, name, href }: NavItem): ReactElement {
   if (items) {
     // Nested Team items, which are rendered as a dropdown on Desktop.
     return (
-      <Menu>
+      <Menu key={name}>
         <MenuButton
           display="flex"
           alignItems="center"
@@ -27,7 +27,12 @@ function renderNavigationItem({ items, name, href }: NavItem): ReactElement {
         </MenuButton>
         <MenuList bg="var(--navbar-bg)">
           {items.map(({ name: nestedItemName, href: nestedItemHref }) => (
-            <MenuItem bg="transparent" as={NavigationItem} href={nestedItemHref}>
+            <MenuItem
+              key={nestedItemHref}
+              bg="transparent"
+              as={NavigationItem}
+              href={nestedItemHref}
+            >
               {nestedItemName}
             </MenuItem>
           ))}
@@ -37,7 +42,11 @@ function renderNavigationItem({ items, name, href }: NavItem): ReactElement {
   }
 
   // Rest of the nav is rendered as a link.
-  return <NavigationItem href={href}>{name}</NavigationItem>;
+  return (
+    <NavigationItem key={href} href={href}>
+      {name}
+    </NavigationItem>
+  );
 }
 
 const Navigation = (): ReactElement => {

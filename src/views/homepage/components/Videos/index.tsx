@@ -60,6 +60,7 @@ const Videos = (): ReactElement => (
     >
       {YOUTUBE_VIDEOS.map(({ id, title, description }) => (
         <Stack
+          key={id}
           flex={1}
           padding={{ base: '0.5rem', lg: '1rem' }}
           borderRadius={{ base: '0.75rem' }}
