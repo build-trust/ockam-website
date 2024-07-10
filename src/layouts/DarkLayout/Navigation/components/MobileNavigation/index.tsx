@@ -31,7 +31,7 @@ function renderMobileNavigationItem({ items, name, href }: NavItem): ReactElemen
   if (items) {
     // Nested Team items, which are rendered as a dropdown.
     return (
-      <Accordion allowToggle>
+      <Accordion allowToggle key={name}>
         <AccordionItem border="none">
           <AccordionButton
             display="flex"
@@ -47,6 +47,7 @@ function renderMobileNavigationItem({ items, name, href }: NavItem): ReactElemen
             <Stack gap="1rem" alignItems="center">
               {items.map(({ name: nestedItemName, href: nestedItemHref }) => (
                 <NavigationItem
+                  key={href}
                   href={nestedItemHref}
                   fontWeight={500}
                   color="gray.200"
@@ -63,7 +64,11 @@ function renderMobileNavigationItem({ items, name, href }: NavItem): ReactElemen
   }
 
   // Rest of the nav is rendered as a link.
-  return <NavigationItem href={href}>{name}</NavigationItem>;
+  return (
+    <NavigationItem key={href} href={href}>
+      {name}
+    </NavigationItem>
+  );
 }
 
 interface MobileNavigationProps extends Omit<IconButtonProps, 'aria-label'> {}
@@ -99,7 +104,7 @@ const MobileNavigation = (props: MobileNavigationProps): ReactElement => {
           <DrawerBody display="flex" flexDir="column">
             <Flex direction="column" gap="1.5rem" alignItems="center" mt="auto" pb="1.5rem">
               {NAV_ITEMS.map((item) => (
-                <Box key={item.href} onClick={item.items ? undefined : closeDrawer}>
+                <Box key={item.name} onClick={item.items ? undefined : closeDrawer}>
                   {renderMobileNavigationItem(item)}
                 </Box>
               ))}

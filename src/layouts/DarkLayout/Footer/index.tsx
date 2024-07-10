@@ -105,7 +105,9 @@ const Footer = (): ReactElement => (
           justifyContent={{ base: 'center', lg: 'flex-end' }}
         >
           {SOCIAL_LINKS.map(({ name, href }) => (
-            <NavigationLink href={href}>{name}</NavigationLink>
+            <NavigationLink key={name} href={href}>
+              {name}
+            </NavigationLink>
           ))}
         </Flex>
         <Flex
