@@ -48,7 +48,8 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
         }
         currentParent = currentParent.parentElement;
       }
-      return document.scrollingElement || document.documentElement;
+      return window;
+      // return document.scrollingElement || document.documentElement;
     },
     [isScrollable],
   );
