@@ -1,13 +1,13 @@
 import { Box, Stack } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 
+import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
+
 import HeadingWithLogo from '../HeadingWithLogo';
 import AnimatedText from '../AnimatedText';
 import useCycleStrings from '../AnimatedText/hooks/useCycleStrings';
 
 import WhiteTile, { DescriptionText, TitleText, Image } from './WhiteTile';
-import portalsSrc from './assets/portals.png';
-import virtualSrc from './assets/virtual.png';
 
 const theMagicWords = [
   'waiting for IT to set up a private link',
@@ -54,7 +54,7 @@ const TheMagic = (): ReactElement => {
         backdropFilter="blur(10px)"
       >
         <WhiteTile flexDirection={{ base: 'column', lg: 'row-reverse' }}>
-          <Image src={portalsSrc} alt="Portals visualization" />
+          <ExcalidrawAnimation src="portals" animate aspect="width" flex={1} />
           <Stack flex={1}>
             <TitleText>Portals</TitleText>
             <DescriptionText>
@@ -74,7 +74,7 @@ const TheMagic = (): ReactElement => {
         </WhiteTile>
 
         <WhiteTile flexDirection={{ base: 'column', lg: 'row' }}>
-          <Image src={virtualSrc} alt="Virtual Adjacency visualization" />
+          <ExcalidrawAnimation src="virtual-adjacency" animate aspect="width" flex={1} />
           <Stack flex={1}>
             <TitleText>Virtual Adjacency</TitleText>
             <DescriptionText>

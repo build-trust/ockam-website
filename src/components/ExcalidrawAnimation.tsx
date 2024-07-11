@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 import { FunctionComponent, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -10,13 +10,14 @@ type Props = {
   hero?: boolean;
   aspect?: 'width' | 'height';
   startAt?: number;
-};
+} & BoxProps;
 const ExcalidrawAnimation: FunctionComponent<Props> = ({
   src,
   animate,
   hero,
   aspect,
   startAt,
+  ...boxProps
 }): ReactElement | null => {
   const ref = useRef<HTMLDivElement>();
   const scrollContainer = useRef<Element | Window>();
@@ -360,6 +361,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
         xl: 'min-content',
       }}
       boxSizing={hero ? 'border-box' : 'content-box'}
+      {...boxProps}
     >
       <SvgAnimation name={src} onLoad={svgLoaded} aspect={aspect} />
     </Box>
