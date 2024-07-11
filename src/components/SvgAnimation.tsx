@@ -53,9 +53,6 @@ const SvgAnimation: FunctionComponent<Props> = ({ name, onLoad, aspect }) => {
             display: 'block',
             width: width(),
             height: height(),
-            margin: '15px auto',
-            paddingTop: '15px',
-            paddingBottom: '15px',
             maxHeight: '50vh',
           }}
         />

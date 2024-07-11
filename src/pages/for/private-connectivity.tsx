@@ -11,7 +11,7 @@ import {
   HeroContentWrapper,
   TextContainer,
 } from '@views/for/common/HeroContainer';
-import { HeroDescription, HeroHeading } from '@views/for/common/HeroText';
+import { ExcalidrawImage, HeroDescription, HeroHeading } from '@views/for/common/HeroText';
 import {
   Description,
   FlexContainer,
@@ -50,7 +50,7 @@ const PrivateConnectivity = (): ReactElement => (
             </Button>
           </ButtonContainer>
         </TextContainer>
-        <ExcalidrawAnimation src="private-databases" mx="auto" animate aspect="width" flex={1} />
+        <ExcalidrawImage src="private-databases" />
       </HeroContentWrapper>
     </HeroContainer>
     <WhiteContainer>
