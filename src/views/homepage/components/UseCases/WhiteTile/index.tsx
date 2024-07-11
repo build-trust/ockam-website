@@ -48,7 +48,13 @@ export const DescriptionText = ({ children, ...props }: TextProps): ReactElement
 
 interface ImageProps extends FlexProps, Pick<NextImageProps, 'src' | 'alt'> {}
 export const Image = (props: ImageProps): ReactElement => (
-  <Box as={NextImage} mx="auto" width="fit-content" {...props} />
+  <Box
+    as={NextImage}
+    mx="auto"
+    maxW={{ base: '25rem', lg: 'initial' }}
+    width={{ base: '100%', lg: '50%' }}
+    {...props}
+  />
 );
 
 interface LearnMoreLinkProps extends BoxProps {}
