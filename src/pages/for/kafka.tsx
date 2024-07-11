@@ -56,7 +56,7 @@ const Kafka = (): ReactElement => (
     <WhiteContainer>
       <StackContainer>
         {FEATURES.map(({ title, subTitle, description, animationSrc, alt, imageSrc }) => (
-          <FlexContainer>
+          <FlexContainer key={title}>
             <TextContainer>
               <Box>
                 <Title>{title}</Title>
