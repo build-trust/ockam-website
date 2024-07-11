@@ -7,7 +7,7 @@ import HeadingWithLogo from '../HeadingWithLogo';
 import AnimatedText from '../AnimatedText';
 import useCycleStrings from '../AnimatedText/hooks/useCycleStrings';
 
-import WhiteTile, { DescriptionText, TitleText, Image } from './WhiteTile';
+import WhiteTile, { DescriptionText, TitleText } from './WhiteTile';
 
 const theMagicWords = [
   'waiting for IT to set up a private link',
@@ -54,7 +54,15 @@ const TheMagic = (): ReactElement => {
         backdropFilter="blur(10px)"
       >
         <WhiteTile flexDirection={{ base: 'column', lg: 'row-reverse' }}>
-          <ExcalidrawAnimation src="portals" animate aspect="width" flex={1} />
+          <ExcalidrawAnimation
+            src="portals"
+            animate
+            aspect="width"
+            flex={1}
+            mx="auto"
+            maxWidth={{ base: '35rem', lg: 'initial' }}
+            width={{ base: '100%', lg: '50%' }}
+          />
           <Stack flex={1}>
             <TitleText>Portals</TitleText>
             <DescriptionText>
@@ -74,7 +82,15 @@ const TheMagic = (): ReactElement => {
         </WhiteTile>
 
         <WhiteTile flexDirection={{ base: 'column', lg: 'row' }}>
-          <ExcalidrawAnimation src="virtual-adjacency" animate aspect="width" flex={1} />
+          <ExcalidrawAnimation
+            src="virtual-adjacency"
+            animate
+            aspect="width"
+            flex={1}
+            mx="auto"
+            maxWidth={{ base: '35rem', lg: 'initial' }}
+            width={{ base: '100%', lg: '50%' }}
+          />
           <Stack flex={1}>
             <TitleText>Virtual Adjacency</TitleText>
             <DescriptionText>
