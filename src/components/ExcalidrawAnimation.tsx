@@ -337,7 +337,7 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       setStartFrame(!animate);
       return;
     }
-    if (isVisible && scrollPosition > 300) {
+    if (isVisible) {
       setIsPlayable(true);
     } else {
       setIsPlayable(false);
