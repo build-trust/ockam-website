@@ -55,6 +55,7 @@ const PrivateConnectivity = (): ReactElement => (
           mx="auto"
           src={heroImageSrc}
           alt="Secure connection illustration"
+          maxWidth={{ base: '35rem', lg: 'initial' }}
           width={{ base: '100%', lg: '50%' }}
         />
       </HeroContentWrapper>
@@ -75,6 +76,7 @@ const PrivateConnectivity = (): ReactElement => (
               mx="auto"
               src={imageSrc}
               alt={alt}
+              maxWidth={{ base: '25rem', lg: 'initial' }}
               width={{ base: '100%', lg: '50%' }}
             />
           </FlexContainer>
