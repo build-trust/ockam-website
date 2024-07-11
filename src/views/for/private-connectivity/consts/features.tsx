@@ -65,7 +65,7 @@ const FEATURES = [
         trusted secure channels directly with other authorized apps as required.
       </>
     ),
-    imageSrc: sharedSecretsSrc,
+    animationSrc: 'kafka-key-layers',
     alt: 'Illustration of various security controls and a key',
   },
   {
