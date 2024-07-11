@@ -3,10 +3,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
 
-    console.log("About to call update_subscription")
-    console.log(request.body)
     const res = await fetch(
-        'http://localhost:4050/update_subscription',
+        `${process.env.OCKAM_API_BASE_URL}/update_subscription`,
         {
             method: 'POST',
             headers: {
@@ -16,14 +14,10 @@ export default async function handler(request: NextApiRequest, response: NextApi
             body: JSON.stringify(request.body)
         })
 
-    console.log(res.status)
     if (res.status === 200) {
         const data = await res.json()
-        console.log(data)
         response.json(data);
     } else {
-        response.status(res.status).send()
+        response.status(res.status).send("Error.")
     }
-
-
 }

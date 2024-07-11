@@ -25,14 +25,15 @@ import {
 } from '@root/components/Packaging/tiers';
 import PricingCard from '@root/components/Packaging/PricingCard';
 import ActionButton from '@root/components/Packaging/ActionButton';
-import { User } from '@root/components/Auth';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import MarketplaceSetup from './MarketplaceSetup';
 import Sponsorship from './Sponsorship';
 
+const capitalize = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
+
 const cta = (tier: Tier, currentPlan?: string): string => {
-  if (currentPlan && currentPlan === tier.name) return 'Your current plan';
+  if (currentPlan && capitalize(currentPlan) === tier.name) return 'Your current plan';
   if (tier.price === '$0') return 'Get started';
   if (tier.name === 'Business Critical') return 'Contact Sales';
   return 'Start 14 day trial';
@@ -40,16 +41,12 @@ const cta = (tier: Tier, currentPlan?: string): string => {
 
 type Props = {
   onComplete: Function;
-  onSelected: Function;
   hideNext: Function;
   showNext: Function;
   currentPlan?: string;
-  user?: User;
 };
 const ChoosePlan: FC<Props> = ({
   onComplete,
-  onSelected,
-  user,
   hideNext,
   showNext,
   currentPlan,
@@ -64,7 +61,6 @@ const ChoosePlan: FC<Props> = ({
     async (plan: string): Promise<void> => {
       setPurchasing(true);
       setPurchasedPlan(plan);
-      onSelected(plan);
       // if (user) {
       //   Auth0Api.managementApi.updateUserMetadata(user.token, user.userId, { plan });
       // }
@@ -94,7 +90,7 @@ const ChoosePlan: FC<Props> = ({
         }
       }, 4000);
     },
-    [onComplete, onSelected, showNext, user],
+    [onComplete, showNext],
   );
 
   useEffect(() => {

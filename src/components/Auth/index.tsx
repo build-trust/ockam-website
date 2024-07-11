@@ -41,8 +41,6 @@ const currentUser = async (): Promise<User | void> => {
   }
 };
 
-const isAuthenticated = async (): Promise<boolean> => Auth0.isAuthenticated()
-
 const isSignedIn = async (): Promise<boolean> => {
   try {
     const user = await currentUser();
@@ -57,7 +55,7 @@ const isSignedIn = async (): Promise<boolean> => {
 const isSignedUp = async (): Promise<boolean> => {
   try {
     const user = await currentUser();
-    return !!user && !!user?.token;
+    return !!user && !!user?.userId;
     // eslint-disable-next-line
   } catch (e: any) {
     if (e?.message === 'Login required') return false;
@@ -194,5 +192,5 @@ const Auth: FunctionComponent<Props> = ({
 };
 
 export type { User };
-export { currentUser, isSignedIn, isSignedUp, identify, isAuthenticated };
+export { currentUser, isSignedIn, isSignedUp, identify };
 export default Auth;

@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
 
     const res = await fetch(
-        `http://localhost:4050/enrollment?userid=${request.query.userid}`,
+        `${process.env.OCKAM_API_BASE_URL}/enrollment?userid=${request.query.userid}`,
         {
             method: 'GET',
             headers: {
@@ -13,7 +13,5 @@ export default async function handler(request: NextApiRequest, response: NextApi
             }
         })
     const data = await res.json()
-    console.log(data)
-
     response.json(data);
 }

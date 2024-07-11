@@ -3,9 +3,8 @@ import { FC, ReactElement, useCallback, useEffect, useMemo, useState } from 'rea
 import { Box, Button, Flex, theme } from '@chakra-ui/react';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
 
-import { User, currentUser, isSignedIn, isAuthenticated } from '@root/components/Auth';
+import { User, currentUser } from '@root/components/Auth';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
@@ -39,22 +38,25 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const [nextHidden, setNextHidden] = useState(false);
   const [currentPlan, setCurrentPlan] = useState<string>();
 
-  const getCurrentPlan = useCallback(async (): Promise<string | undefined> => {
-    if (user) {
-      let userId = user.userId
+  const getCurrentPlan = useCallback(async (u: User): Promise<string | undefined> => {
+    if (u) {
+      let { userId } = u
       if (!userId) {
-        userId = JSON.parse(localStorage.getItem('ajs_user_id'))
+        const stored = localStorage.getItem('ajs_user_id')
+        if (!stored) return undefined
+
+        userId = JSON.parse(stored)
       }
       const response = await fetch(`/api/user?userid=${userId}`);
       if (response) {
         const data = await response.json();
-        return data.plan;
+        return data?.subscription?.plan?.name;
       }
     }
     return undefined;
-  }, [user]);
+  }, []);
 
-  const maybeStoreSubDetails = async (params): Promise<void> => {
+  const maybeStoreSubDetails = async (params: URLSearchParams): Promise<void> => {
     const customer = params.get('customer')
     const product = params.get('product')
     if (customer && product) {
@@ -63,12 +65,16 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     }
   }
 
-  const maybeUpdateSubscription = useCallback(async (u, params): Promise<void> => {
+  const maybeUpdateSubscription = useCallback(async (
+    u: { userId: String; },
+    params: URLSearchParams): Promise<void> => {
+
     const customerId = window.sessionStorage.getItem('customer') || params.get('customer')
     const productId = window.sessionStorage.getItem('product') || params.get('product')
-    let userId = u.userId
+    let { userId } = u
     if (!userId) {
-      userId = JSON.parse(localStorage.getItem('ajs_user_id'))
+      const stored = localStorage.getItem('ajs_user_id')
+      if (stored) userId = JSON.parse(stored)
     }
 
     if (customerId && productId && userId) {
@@ -80,15 +86,11 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         body: JSON.stringify({ userId, customerId, productId }),
       })
 
-      if (response) {
-        console.log('Subscription updated')
-        console.log(response.status)
-        const data = await response.json()
-        console.log(data)
+      if (response.status === 200) {
         const { pathname } = router;
+        window.sessionStorage.removeItem('customer')
+        window.sessionStorage.removeItem('product')
         router.replace({ pathname, query: "" }, undefined, { shallow: true });
-      } else {
-        console.log('Subscription failed')
       }
     }
   }, [router]);
@@ -97,27 +99,31 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     async function setup(): Promise<void> {
       const { query } = router;
 
-      if (!isAuthenticated()) {
+      const u = await currentUser();
+      if (u && u.userId) {
+        // @ts-ignore: this dict type actually works here
+        const params = new URLSearchParams(query);
+        maybeUpdateSubscription(u, params)
+
+        const plan = await getCurrentPlan(u);
+        if (plan) {
+          setCurrentPlan(plan);
+          setStep(2);
+        } else {
+          setUser(u);
+          setStep(1);
+        }
+
+      } else {
         // @ts-ignore: this dict type actually works here
         const params = new URLSearchParams(query);
         maybeStoreSubDetails(params)
 
         router.replace('/auth/signin');
-      } else {
-        const u = await currentUser();
-        console.log(u)
-
-        // @ts-ignore: this dict type actually works here
-        const params = new URLSearchParams(query);
-        maybeUpdateSubscription(u, params)
-
-        const plan = await getCurrentPlan();
-        if (plan) setCurrentPlan(plan);
-        setUser(u);
       }
     }
     setup();
-  }, [setUser, router, maybeUpdateSubscription, getCurrentPlan]);
+  }, [router, setStep, setUser, maybeUpdateSubscription, getCurrentPlan, setCurrentPlan]);
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
@@ -156,9 +162,6 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   };
 
   useEffect(() => { });
-  const setPlan = (plan: string): void => {
-    setCurrentPlan(plan);
-  };
 
   const displayStep = (step: number): ReactElement => {
     switch (step) {
@@ -169,8 +172,6 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         return (
           <ChoosePlan
             onComplete={next}
-            onSelected={setPlan}
-            user={user}
             hideNext={hideNext}
             showNext={showNext}
             currentPlan={currentPlan}
