@@ -1,6 +1,7 @@
-import { Box, Flex, FlexProps, Text, TextProps } from '@chakra-ui/react';
+import { Flex, FlexProps, Text, TextProps } from '@chakra-ui/react';
 import { ReactElement, ReactNode } from 'react';
-import NextImage, { ImageProps as NextImageProps } from 'next/image';
+
+import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
 
 export interface WhiteTileProps extends FlexProps {
   children: ReactNode;
@@ -37,15 +38,18 @@ export const DescriptionText = ({ children }: TextProps): ReactElement => (
   </Text>
 );
 
-interface ImageProps extends FlexProps, Pick<NextImageProps, 'src' | 'alt'> {}
-export const Image = (props: ImageProps): ReactElement => (
-  <Box
-    as={NextImage}
+interface ExcalidrawAnimationProps {
+  src: string;
+}
+export const AnimatedSvg = ({ src }: ExcalidrawAnimationProps): ReactElement => (
+  <ExcalidrawAnimation
+    src={src}
+    animate
+    aspect="width"
+    flex={1}
     mx="auto"
     maxWidth={{ base: '35rem', lg: 'initial' }}
     width={{ base: '100%', lg: '50%' }}
-    flex={1}
-    {...props}
   />
 );
 
