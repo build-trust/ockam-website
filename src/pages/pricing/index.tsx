@@ -81,7 +81,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
     </Stack>
     <Box mx="auto" px={{ base: '0.75rem' }} maxW="71rem" pb={{ base: '2.5rem', lg: '6.25rem' }}>
       <Tabs defaultIndex={1} variant="ockam">
-        <TabList mx={{ base: 'auto' }} maxW={{ base: '25rem' }}>
+        <TabList mx={{ base: 'auto' }} maxW={{ base: '25rem' }} overflow="hidden">
           <Tab>Developers</Tab>
           <Tab>Companies</Tab>
           <Tab>Enterprises</Tab>
