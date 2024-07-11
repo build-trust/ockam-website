@@ -354,7 +354,6 @@ const ExcalidrawAnimation: FunctionComponent<Props> = ({
       }}
       w="100%"
       backgroundClip="white"
-      pt="15px"
       maxH={{
         base: 'min-content',
         lg: 'min-content',
