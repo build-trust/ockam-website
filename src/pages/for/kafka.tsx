@@ -25,6 +25,7 @@ import heroImageSrc from '@views/for/kafka/assets/hero-image.png';
 import FEATURES from '@views/for/kafka/consts/features';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
 import FormSection from '@views/for/common/FormSection';
+import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
 
 const Kafka = (): ReactElement => (
   <Box>
@@ -50,19 +51,12 @@ const Kafka = (): ReactElement => (
             </Button>
           </ButtonContainer>
         </TextContainer>
-        <Box
-          as={Image}
-          mx="auto"
-          src={heroImageSrc}
-          alt="Secure connection illustration"
-          maxWidth={{ base: '35rem', lg: 'initial' }}
-          width={{ base: '100%', lg: '50%' }}
-        />
+        <ExcalidrawAnimation src="insecure-kafka" mx="auto" animate aspect="width" flex={1} />
       </HeroContentWrapper>
     </HeroContainer>
     <WhiteContainer>
       <StackContainer>
-        {FEATURES.map(({ title, subTitle, description, alt, imageSrc }) => (
+        {FEATURES.map(({ title, subTitle, description, animationSrc, alt, imageSrc }) => (
           <FlexContainer>
             <TextContainer>
               <Box>
@@ -71,14 +65,27 @@ const Kafka = (): ReactElement => (
               </Box>
               <Description>{description}</Description>
             </TextContainer>
-            <Box
-              as={Image}
-              mx="auto"
-              src={imageSrc}
-              alt={alt}
-              maxWidth={{ base: '25rem', lg: 'initial' }}
-              width={{ base: '100%', lg: '50%' }}
-            />
+            {imageSrc && (
+              <Box
+                as={Image}
+                mx="auto"
+                src={imageSrc}
+                alt={alt}
+                maxWidth={{ base: '25rem', lg: 'initial' }}
+                width={{ base: '100%', lg: '50%' }}
+              />
+            )}
+            {animationSrc && (
+              <ExcalidrawAnimation
+                src={animationSrc}
+                animate
+                aspect="width"
+                mx="auto"
+                flex={1}
+                maxWidth={{ base: '25rem', lg: 'initial' }}
+                width={{ base: '100%', lg: '50%' }}
+              />
+            )}
           </FlexContainer>
         ))}
       </StackContainer>

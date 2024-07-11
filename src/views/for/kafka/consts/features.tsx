@@ -8,7 +8,6 @@ import dataAuthenticity from '../assets/data-authenticity.png';
 import keyRotation from '../assets/key-rotation.png';
 import shippingSecrets from '../assets/shipping-secrets.png';
 import appToTrustSrc from '../assets/app-to-trust.png';
-import sharedSecretsSrc from '../assets/shared-secrets.png';
 import noAppCodeChangesSrc from '../assets/no-app-code-changes.png';
 import selfManagedSrc from '../assets/self-managed.png';
 import heterogenousDeploymentsSrc from '../assets/heterogenous-deployments.png';
@@ -66,7 +65,7 @@ const FEATURES = [
         trusted secure channels directly with other authorized apps as required.
       </>
     ),
-    imageSrc: sharedSecretsSrc,
+    animationSrc: 'kafka-key-layers',
     alt: 'Illustration of various security controls and a key',
   },
   {
