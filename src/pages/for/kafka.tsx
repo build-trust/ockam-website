@@ -55,7 +55,7 @@ const Kafka = (): ReactElement => (
           mx="auto"
           src={heroImageSrc}
           alt="Secure connection illustration"
-          width="max-content"
+          width={{ base: '100%', lg: '50%' }}
         />
       </HeroContentWrapper>
     </HeroContainer>
@@ -70,7 +70,13 @@ const Kafka = (): ReactElement => (
               </Box>
               <Description>{description}</Description>
             </TextContainer>
-            <Box as={Image} mx="auto" src={imageSrc} alt={alt} width="max-content" />
+            <Box
+              as={Image}
+              mx="auto"
+              src={imageSrc}
+              alt={alt}
+              width={{ base: '100%', lg: '50%' }}
+            />
           </FlexContainer>
         ))}
       </StackContainer>

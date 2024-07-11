@@ -39,7 +39,7 @@ export const DescriptionText = ({ children }: TextProps): ReactElement => (
 
 interface ImageProps extends FlexProps, Pick<NextImageProps, 'src' | 'alt'> {}
 export const Image = (props: ImageProps): ReactElement => (
-  <Box as={NextImage} mx="auto" width="fit-content" flex={1} {...props} />
+  <Box as={NextImage} mx="auto" width={{ base: '100%', lg: '50%' }} flex={1} {...props} />
 );
 
 export default WhiteTile;
