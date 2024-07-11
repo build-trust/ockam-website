@@ -56,7 +56,7 @@ const SaaSPlatforms = (): ReactElement => (
     <WhiteContainer>
       <StackContainer>
         {FEATURES.map(({ title, animationSrc, subTitle, description, alt, imageSrc }) => (
-          <FlexContainer>
+          <FlexContainer key={title}>
             <TextContainer>
               <Box>
                 <Title>{title}</Title>
