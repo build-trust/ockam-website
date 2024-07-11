@@ -20,10 +20,10 @@ import {
   Title,
   WhiteContainer,
 } from '@views/for/common/WhiteContainer';
-import heroImageSrc from '@views/for/private-connectivity/assets/hero-image.png';
 import FEATURES from '@views/for/private-connectivity/consts/features';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
 import FormSection from '@views/for/common/FormSection';
+import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
 
 const PrivateConnectivity = (): ReactElement => (
   <Box>
@@ -50,20 +50,13 @@ const PrivateConnectivity = (): ReactElement => (
             </Button>
           </ButtonContainer>
         </TextContainer>
-        <Box
-          as={Image}
-          mx="auto"
-          src={heroImageSrc}
-          alt="Secure connection illustration"
-          maxWidth={{ base: '35rem', lg: 'initial' }}
-          width={{ base: '100%', lg: '50%' }}
-        />
+        <ExcalidrawAnimation src="private-databases" mx="auto" animate aspect="width" flex={1} />
       </HeroContentWrapper>
     </HeroContainer>
     <WhiteContainer>
       <StackContainer>
-        {FEATURES.map(({ title, subTitle, description, alt, imageSrc }) => (
-          <FlexContainer>
+        {FEATURES.map(({ title, subTitle, description, animationSrc, alt, imageSrc }) => (
+          <FlexContainer key={title}>
             <TextContainer>
               <Box>
                 <Title>{title}</Title>
@@ -71,14 +64,27 @@ const PrivateConnectivity = (): ReactElement => (
               </Box>
               <Description>{description}</Description>
             </TextContainer>
-            <Box
-              as={Image}
-              mx="auto"
-              src={imageSrc}
-              alt={alt}
-              maxWidth={{ base: '25rem', lg: 'initial' }}
-              width={{ base: '100%', lg: '50%' }}
-            />
+            {imageSrc && (
+              <Box
+                as={Image}
+                mx="auto"
+                src={imageSrc}
+                alt={alt}
+                maxWidth={{ base: '25rem', lg: 'initial' }}
+                width={{ base: '100%', lg: '50%' }}
+              />
+            )}
+            {animationSrc && (
+              <ExcalidrawAnimation
+                src={animationSrc}
+                animate
+                aspect="width"
+                mx="auto"
+                flex={1}
+                maxWidth={{ base: '25rem', lg: 'initial' }}
+                width={{ base: '100%', lg: '50%' }}
+              />
+            )}
           </FlexContainer>
         ))}
       </StackContainer>
