@@ -52,7 +52,8 @@ const UseCases = (): ReactElement => {
             To orchestrate <br />
             <AnimatedText as="span" color="brand.500" fontWeight={{ base: 700 }}>
               {casesWord}
-            </AnimatedText>{' '}
+            </AnimatedText>
+            <br />
             at massive scale
           </>
         }
