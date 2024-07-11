@@ -5,7 +5,6 @@ import React from 'react';
 import { GITHUB_REPO_OCKAM } from '@consts/externalResources';
 
 import appToTrustSrc from '../assets/app-to-trust.png';
-import sharedSecretsSrc from '../assets/shared-secrets.png';
 import shippingSecrets from '../assets/shipping-secrets.png';
 import keyRotation from '../assets/key-rotation.png';
 import dataAuthenticity from '../assets/data-authenticity.png';
