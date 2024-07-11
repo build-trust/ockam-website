@@ -6,7 +6,6 @@ import NextLink from 'next/link';
 import { GITHUB_REPO_OCKAM } from '@consts/externalResources';
 
 import productGrowthSrc from '../assets/product-growth.png';
-import customerExpSrc from '../assets/customer-exp.png';
 import trustSrc from '../assets/trust.png';
 import multiCloudSrc from '../assets/multi-cloud.png';
 import securitySrc from '../assets/security.png';
@@ -63,7 +62,7 @@ const FEATURES = [
         within minutes.
       </>
     ),
-    imageSrc: customerExpSrc,
+    animationSrc: 'saas-agent',
     alt: 'Illustration showing a secure portal established between a SaaS app and customer data',
   },
   {

@@ -12,7 +12,7 @@ import {
   HeroContentWrapper,
   TextContainer,
 } from '@views/for/common/HeroContainer';
-import { HeroDescription, HeroHeading } from '@views/for/common/HeroText';
+import { ExcalidrawImage, HeroDescription, HeroHeading } from '@views/for/common/HeroText';
 import {
   Description,
   FlexContainer,
@@ -21,10 +21,10 @@ import {
   Title,
   WhiteContainer,
 } from '@views/for/common/WhiteContainer';
-import heroImageSrc from '@views/for/saas-platforms/assets/hero-image.png';
 import FEATURES from '@views/for/saas-platforms/consts/features';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
 import FormSection from '@views/for/common/FormSection';
+import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
 
 const SaaSPlatforms = (): ReactElement => (
   <Box>
@@ -50,19 +50,12 @@ const SaaSPlatforms = (): ReactElement => (
             </Button>
           </ButtonContainer>
         </TextContainer>
-        <Box
-          as={Image}
-          mx="auto"
-          src={heroImageSrc}
-          alt="Secure connection illustration"
-          maxWidth={{ base: '35rem', lg: 'initial' }}
-          width={{ base: '100%', lg: '50%' }}
-        />
+        <ExcalidrawImage src="no-need-for-complicated-network" />
       </HeroContentWrapper>
     </HeroContainer>
     <WhiteContainer>
       <StackContainer>
-        {FEATURES.map(({ title, subTitle, description, alt, imageSrc }) => (
+        {FEATURES.map(({ title, animationSrc, subTitle, description, alt, imageSrc }) => (
           <FlexContainer>
             <TextContainer>
               <Box>
@@ -71,14 +64,27 @@ const SaaSPlatforms = (): ReactElement => (
               </Box>
               <Description>{description}</Description>
             </TextContainer>
-            <Box
-              as={Image}
-              mx="auto"
-              src={imageSrc}
-              alt={alt}
-              maxWidth={{ base: '25rem', lg: 'initial' }}
-              width={{ base: '100%', lg: '50%' }}
-            />
+            {imageSrc && (
+              <Box
+                as={Image}
+                mx="auto"
+                src={imageSrc}
+                alt={alt}
+                maxWidth={{ base: '25rem', lg: 'initial' }}
+                width={{ base: '100%', lg: '50%' }}
+              />
+            )}
+            {animationSrc && (
+              <ExcalidrawAnimation
+                src={animationSrc}
+                animate
+                aspect="width"
+                mx="auto"
+                flex={1}
+                maxWidth={{ base: '25rem', lg: 'initial' }}
+                width={{ base: '100%', lg: '50%' }}
+              />
+            )}
           </FlexContainer>
         ))}
       </StackContainer>

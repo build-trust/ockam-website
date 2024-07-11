@@ -21,7 +21,6 @@ import {
   Title,
   WhiteContainer,
 } from '@views/for/common/WhiteContainer';
-import heroImageSrc from '@views/for/kafka/assets/hero-image.png';
 import FEATURES from '@views/for/kafka/consts/features';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
 import FormSection from '@views/for/common/FormSection';
