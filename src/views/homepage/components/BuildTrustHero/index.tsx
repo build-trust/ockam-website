@@ -108,9 +108,15 @@ const BuildTrustHero = (): ReactElement => {
             maxW={{ base: '17rem', lg: '24.675rem' }}
             description={
               <>
-                Ockam works at application layer.
+                Ockam works at
                 <br />
-                When application security is decoupled from your network, you can skip the pain of{' '}
+                application layer.
+                <br />
+                When application security is
+                <br />
+                decoupled from your network,
+                <br />
+                you can skip the pain of
                 <br />
                 <AnimatedText as="span" color="brand.500" fontWeight={{ base: 700 }}>
                   {networkWord}
@@ -131,7 +137,9 @@ const BuildTrustHero = (): ReactElement => {
                 </AnimatedText>
                 .
                 <br />
-                So your application can be secure too.
+                So your application
+                <br />
+                can be secure too.
               </>
             }
           />
