@@ -7,9 +7,6 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers(tableAnatomy.ke
 const Table = defineMultiStyleConfig({
   variants: {
     pricing: {
-      table: {
-        tableLayout: 'fixed',
-      },
       th: {
         padding: '0 1rem',
         height: '3.75rem',
