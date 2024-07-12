@@ -39,7 +39,7 @@ const BuildTrustHero = (): ReactElement => {
       // Chakra issue with multiple backgrounds, the empty comment prefix is needed.
       // https://github.com/chakra-ui/chakra-ui/issues/7548#issuecomment-1684034030
       bgImage={`/**/url(${heroBgSrc.src}), linear-gradient(#0D1721, #162535)`}
-      bgPosition="center 0"
+      bgPosition="center bottom"
       bgRepeat="no-repeat"
       backgroundSize={{ base: 'cover', lg: 'initial' }}
     >
