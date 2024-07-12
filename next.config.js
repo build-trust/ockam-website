@@ -6,6 +6,7 @@ const { redirectJobs, redirectDocs } = require('./lib/redirects');
 
 const nextConfig = {
   experimental: {
+    scrollRestoration: true,
     forceSwcTransforms: true,
   },
   compiler: {
