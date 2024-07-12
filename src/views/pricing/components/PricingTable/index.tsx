@@ -6,7 +6,7 @@ import BaseCheckIcon from './assets/check.svg';
 const CheckIcon = (): ReactElement => <Box as={BaseCheckIcon} display="inline-block" />;
 
 const PricingTable = (): ReactElement => (
-  <TableContainer overflowX="auto" overflowY="auto" maxH="46.25rem" mx="auto" maxW="68.375rem">
+  <TableContainer maxH="46.25rem" mx="auto" maxW="68.375rem">
     <Table variant="pricing">
       <Thead position="sticky" top={0} bg="white" zIndex={1}>
         <Tr>
