@@ -48,7 +48,7 @@ const Experience: FC = () => {
       </Text>
       <Flex my={12} gap={4}>
         {examples.map(({ title, href, text }) => (
-          <LinkBox width="18%" minW="15em">
+          <LinkBox width="18%" minW="15em" key={title}>
             <Card
               border={`1px solid ${theme.colors.gray[200]}`}
               _hover={{ borderColor: theme.colors.avocado[500] }}
