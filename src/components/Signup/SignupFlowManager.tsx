@@ -4,7 +4,7 @@ import { Box, Button, Flex, theme } from '@chakra-ui/react';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 
-import { User, currentUser } from '@root/components/Auth';
+import { User, currentUser, isSignedIn } from '@root/components/Auth';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
@@ -40,12 +40,12 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const getCurrentPlan = useCallback(async (u: User): Promise<string | undefined> => {
     if (u) {
-      let { userId } = u
+      let { userId } = u;
       if (!userId) {
-        const stored = localStorage.getItem('ajs_user_id')
-        if (!stored) return undefined
+        const stored = localStorage.getItem('ajs_user_id');
+        if (!stored) return undefined;
 
-        userId = JSON.parse(stored)
+        userId = JSON.parse(stored);
       }
       const response = await fetch(`/api/user?userid=${userId}`);
       if (response) {
@@ -57,73 +57,83 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   }, []);
 
   const maybeStoreSubDetails = async (params: URLSearchParams): Promise<void> => {
-    const customer = params.get('customer')
-    const product = params.get('product')
+    const customer = params.get('customer');
+    const product = params.get('product');
     if (customer && product) {
-      window.sessionStorage.setItem('customer', customer)
-      window.sessionStorage.setItem('product', product)
+      window.sessionStorage.setItem('customer', customer);
+      window.sessionStorage.setItem('product', product);
     }
-  }
+  };
 
-  const maybeUpdateSubscription = useCallback(async (
-    u: { userId: String; },
-    params: URLSearchParams): Promise<void> => {
-
-    const customerId = window.sessionStorage.getItem('customer') || params.get('customer')
-    const productId = window.sessionStorage.getItem('product') || params.get('product')
-    let { userId } = u
-    if (!userId) {
-      const stored = localStorage.getItem('ajs_user_id')
-      if (stored) userId = JSON.parse(stored)
-    }
-
-    if (customerId && productId && userId) {
-      const response = await fetch('/api/update_subscription', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId, customerId, productId }),
-      })
-
-      if (response.status === 200) {
-        const { pathname } = router;
-        window.sessionStorage.removeItem('customer')
-        window.sessionStorage.removeItem('product')
-        router.replace({ pathname, query: "" }, undefined, { shallow: true });
+  const maybeUpdateSubscription = useCallback(
+    async (u: { userId: String }, params: URLSearchParams): Promise<void> => {
+      const customerId = window.sessionStorage.getItem('customer') || params.get('customer');
+      const productId = window.sessionStorage.getItem('product') || params.get('product');
+      let { userId } = u;
+      if (!userId) {
+        const stored = localStorage.getItem('ajs_user_id');
+        if (stored) userId = JSON.parse(stored);
       }
-    }
-  }, [router]);
+
+      if (customerId && productId && userId) {
+        const response = await fetch('/api/update_subscription', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId, customerId, productId }),
+        });
+
+        if (response.status === 200) {
+          const { pathname } = router;
+          window.sessionStorage.removeItem('customer');
+          window.sessionStorage.removeItem('product');
+          router.replace({ pathname, query: '' }, undefined, { shallow: true });
+        }
+      }
+    },
+    [router],
+  );
 
   useEffect(() => {
-    async function setup(): Promise<void> {
-      const { query } = router;
-
-      const u = await currentUser();
-      if (u && u.userId) {
-        // @ts-ignore: this dict type actually works here
-        const params = new URLSearchParams(query);
-        maybeUpdateSubscription(u, params)
-
-        const plan = await getCurrentPlan(u);
-        if (plan) {
-          setCurrentPlan(plan);
-          setStep(2);
-        } else {
-          setUser(u);
-          setStep(1);
-        }
-
+    const { query } = router;
+    isSignedIn().then((isIn) => {
+      if (isIn) {
+        currentUser().then((u) => {
+          if (u) {
+            // @ts-ignore: this dict type actually works here
+            const params = new URLSearchParams(query);
+            maybeUpdateSubscription(u, params).then(() => {
+              getCurrentPlan(u).then((plan) => {
+                if (plan) {
+                  setCurrentPlan(plan);
+                  setStep(2);
+                } else if (JSON.stringify(u) !== JSON.stringify(user)) {
+                  setUser(u);
+                  setStep(1);
+                }
+              });
+            });
+          }
+        });
       } else {
         // @ts-ignore: this dict type actually works here
         const params = new URLSearchParams(query);
-        maybeStoreSubDetails(params)
-
-        router.replace('/auth/signin');
+        maybeStoreSubDetails(params).then(() => {
+          router.replace('/auth/signin');
+        });
       }
-    }
-    setup();
-  }, [router, setStep, setUser, maybeUpdateSubscription, getCurrentPlan, setCurrentPlan]);
+    });
+  }, [
+    router,
+    setStep,
+    setUser,
+    user,
+    maybeUpdateSubscription,
+    getCurrentPlan,
+    setCurrentPlan,
+    activeStep,
+  ]);
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
@@ -161,7 +171,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     }, 1200);
   };
 
-  useEffect(() => { });
+  useEffect(() => {});
 
   const displayStep = (step: number): ReactElement => {
     switch (step) {
