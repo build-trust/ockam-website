@@ -64,13 +64,15 @@ const BuildTrustHero = (): ReactElement => {
             </Box>
           </Heading>
           <Text color="inherit" fontSize={{ base: '1.125rem' }} fontWeight={{ base: 500 }}>
-            Between your platform and
+            Between your platform
             <br />
-            every{' '}
+            and every
+            <br />
             <AnimatedText as="span" color="brand.500" fontWeight={{ base: 700 }}>
               {heroWord}
-            </AnimatedText>{' '}
-            everywhere
+            </AnimatedText>
+            <br />
+            everywhere.
           </Text>
         </Stack>
 
@@ -122,7 +124,8 @@ const BuildTrustHero = (): ReactElement => {
             maxW={{ base: '14.5rem', lg: '22.1875rem' }}
             description={
               <>
-                Ockam is{' '}
+                Ockam is
+                <br />
                 <AnimatedText as="span" color="brand.500" fontWeight={{ base: 700 }}>
                   {secureWord}
                 </AnimatedText>
