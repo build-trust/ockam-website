@@ -24,11 +24,9 @@ const networklessWords = [
 const secureWords = ['zero trust', 'audited', 'point-to-point', 'open source'];
 
 const BuildTrustHero = (): ReactElement => {
-  const [heroWord, networkWord, secureWord] = useCycleStrings(
-    heroWords,
-    networklessWords,
-    secureWords,
-  );
+  const [heroWord] = useCycleStrings(heroWords);
+  const [networkWord] = useCycleStrings(networklessWords);
+  const [secureWord] = useCycleStrings(secureWords);
 
   return (
     <Box
@@ -80,7 +78,7 @@ const BuildTrustHero = (): ReactElement => {
           justify="center"
           flexDirection={{ base: 'column', lg: 'row' }}
           gap={{ base: '1rem' }}
-          mb={{ base: '3rem', lg: '4rem' }}
+          mb={{ base: '3rem', lg: '16.25rem' }}
         >
           <Button
             as={NextLink}
@@ -102,7 +100,7 @@ const BuildTrustHero = (): ReactElement => {
           </Button>
         </Flex>
 
-        <Stack gap={{ base: '1rem', lg: '2.5rem' }} alignItems={{ base: 'center' }}>
+        <Stack gap={{ base: '1rem', lg: '16.25rem' }} alignItems={{ base: 'center' }}>
           <ShadowBox
             text="Networkless connectivity"
             maxW={{ base: '17rem', lg: '24.675rem' }}
