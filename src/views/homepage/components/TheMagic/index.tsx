@@ -57,11 +57,11 @@ const TheMagic = (): ReactElement => {
             <TitleText>Portals</TitleText>
             <DescriptionText>
               Portals carry various{' '}
-              <Box as="span" color="brand.500">
+              <Box as="span" color="gray.500" fontWeight={700}>
                 protocols
               </Box>{' '}
               over end-to-end encrypted Ockam secure channels. They work at the{' '}
-              <Box as="span" color="brand.500">
+              <Box as="span" color="gray.500" fontWeight={700}>
                 application
               </Box>{' '}
               level and abstract away the setup, management, and security of the network layer. When
@@ -77,12 +77,12 @@ const TheMagic = (): ReactElement => {
             <TitleText>Virtual Adjacency</TitleText>
             <DescriptionText>
               The magical thing that Ockam{' '}
-              <Box as="span" color="brand.500">
+              <Box as="span" color="gray.500" fontWeight={700}>
                 unlocks
               </Box>{' '}
               via Portals is what we call Virtual Adjacency. The Portal connects your application to
               a remote application, and virtually pulls it through the{' '}
-              <Box as="span" color="brand.500">
+              <Box as="span" color="gray.500" fontWeight={700}>
                 portal
               </Box>{' '}
               so that it appears as though they sit next to each other on the same machine. That
