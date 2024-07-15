@@ -15,7 +15,6 @@ import {
 
 import BlogPostsProvider from '@contextProviders/BlogPostsProvider';
 import { BlogPost } from '@root/typings/BlogPost';
-import AllPageNotice, { AllPageMessage } from '@root/components/AllPageNotice';
 
 import LayoutFooter from '../components/LayoutFooter';
 
@@ -26,14 +25,12 @@ type BlogLayoutProps = {
   children?: ReactNode;
   blogPosts: BlogPost[];
   newsletterPopup?: boolean;
-  allPage?: AllPageMessage | null;
 };
 
 const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
   children,
   blogPosts,
   newsletterPopup,
-  allPage,
 }) => {
   const theme = useTheme();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -64,7 +61,6 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
 
   return (
     <BlogPostsProvider blogPosts={blogPosts}>
-      <AllPageNotice message={allPage?.message} except={allPage?.except} />
       <BlogLayoutMobileNav />
       <BlogLayoutSidebar display={{ base: 'none', lg: 'flex' }} />
 
