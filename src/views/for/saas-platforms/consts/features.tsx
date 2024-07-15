@@ -119,13 +119,20 @@ const FEATURES = [
         <Box
           as="a"
           target="_blank"
-          textDecoration="underline"
+          color="brand.500"
+          fontWeight={700}
           href="https://docs.ockam.io/reference/protocols"
         >
           publicly documented
         </Box>{' '}
         and the implementations are{' '}
-        <Box as="a" target="_blank" textDecoration="underline" href={GITHUB_REPO_OCKAM.href}>
+        <Box
+          as="a"
+          target="_blank"
+          color="brand.500"
+          fontWeight={700}
+          href={GITHUB_REPO_OCKAM.href}
+        >
           open source and available on GitHub
         </Box>
         .
@@ -133,7 +140,13 @@ const FEATURES = [
         <br />
         Also available is a published and independent third-party audit by the security research
         firm{' '}
-        <Box as="a" target="_blank" textDecoration="underline" href="https://www.trailofbits.com/">
+        <Box
+          as="a"
+          target="_blank"
+          color="brand.500"
+          fontWeight={700}
+          href="https://www.trailofbits.com/"
+        >
           Trail of Bits
         </Box>
         .
@@ -211,7 +224,7 @@ const FEATURES = [
       <>
         Whenever you need to connect to the customer system start an Ockam Inlet. A mutually
         authenticated secure portal will be immediately established. And via what we call{' '}
-        <Box as={NextLink} textDecoration="underline" href="/">
+        <Box as={NextLink} color="brand.500" fontWeight={700} href="/">
           virtual adjacency
         </Box>{' '}
         the customer system will be accessible as though it was running on{' '}

@@ -215,7 +215,8 @@ const FEATURES = [
         <Box
           as="a"
           target="_blank"
-          textDecoration="underline"
+          color="brand.500"
+          fontWeight={700}
           href="https://docs.ockam.io/download"
         >
           create an account for free
@@ -224,7 +225,8 @@ const FEATURES = [
         <Box
           as="a"
           target="_blank"
-          textDecoration="underline"
+          color="brand.500"
+          fontWeight={700}
           href="https://docs.ockam.io/guides/examples/end-to-end-encrypted-kafka"
         >
           Ockam securing your Kafka environment within minutes
