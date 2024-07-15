@@ -40,16 +40,22 @@ const AllPageNotice: FC<Props> = ({ message, except }) => {
     return true;
   }, [except, pathname]);
 
-  useEffect(() => {
-    if (message) {
-      if (shouldShowMessage()) setTimeout(onOpen, 2000);
-    }
-  }, [message, onOpen, shouldShowMessage]);
-
-  const close = (): void => {
+  const closeNotice = (): void => {
     window.localStorage.setItem(stateKey, JSON.stringify({ lastClosed: new Date().getTime() }));
+    document.documentElement.style.setProperty('--navbar-offset', '0');
     onClose();
   };
+
+  useEffect(() => {
+    const openNotice = (): void => {
+      document.documentElement.style.setProperty('--navbar-offset', '2.5rem');
+      onOpen();
+    };
+
+    if (message) {
+      if (shouldShowMessage()) setTimeout(openNotice, 2000);
+    }
+  }, [onOpen, message, shouldShowMessage]);
 
   if (!message) return <></>;
 
@@ -73,7 +79,7 @@ const AllPageNotice: FC<Props> = ({ message, except }) => {
         {message && <MDXRemote {...message} components={components} />}
 
         <CloseIcon
-          onClick={close}
+          onClick={closeNotice}
           aria-label="Close notification"
           boxSize={4}
           mx={2}

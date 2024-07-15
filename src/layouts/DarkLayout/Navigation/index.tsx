@@ -59,7 +59,7 @@ const Navigation = (): ReactElement => {
       zIndex={100}
       as="nav"
       pos="sticky"
-      top={0}
+      top="var(--navbar-offset, 0)"
       transition="background 0.4s linear"
       style={{ ...cssVariables }}
       bg="var(--navbar-bg)"

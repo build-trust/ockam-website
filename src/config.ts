@@ -53,6 +53,7 @@ export default {
     baseUrl: process.env.AUTH0_BASE_URL || '',
     audience: process.env.AUTH0_AUDIENCE || '',
   },
+  // Controls global message shown on homepage.
   allPageMessage: {
     message: `📣 **Just announced:** Redpanda Connect with Ockam &mdash; the world's first zero-trust data streaming platform. **[Learn more](/blog/redpanda_connect_with_ockam)**! 🎉`,
     except: '/blog/redpanda_connect_with_ockam',
