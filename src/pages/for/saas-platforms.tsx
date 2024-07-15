@@ -25,10 +25,11 @@ import FEATURES from '@views/for/saas-platforms/consts/features';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
 import FormSection from '@views/for/common/FormSection';
 import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
+import heroImage from '@views/for/saas-platforms/assets/hero.svg?url';
 
 const SaaSPlatforms = (): ReactElement => (
   <Box>
-    <HeroContainer>
+    <HeroContainer backgroundSrc={heroImage.src}>
       <HeroContentWrapper>
         <TextContainer>
           <HeroHeading>
