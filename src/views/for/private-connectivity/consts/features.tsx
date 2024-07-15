@@ -135,21 +135,40 @@ const FEATURES = [
         <Box
           as="a"
           target="_blank"
-          textDecoration="underline"
+          color="brand.500"
+          fontWeight={700}
           href="https://docs.ockam.io/reference/protocols"
         >
           publicly documented
         </Box>{' '}
         and the implementations are{' '}
-        <Box as="a" target="_blank" textDecoration="underline" href={GITHUB_REPO_OCKAM.href}>
+        <Box
+          as="a"
+          target="_blank"
+          color="brand.500"
+          fontWeight={700}
+          href={GITHUB_REPO_OCKAM.href}
+        >
           open source and available on GitHub
         </Box>
         . We've published an independent third-party audit by the security research firm{' '}
-        <Box as="a" target="_blank" textDecoration="underline" href="https://www.trailofbits.com/">
+        <Box
+          as="a"
+          target="_blank"
+          color="brand.500"
+          fontWeight={700}
+          href="https://www.trailofbits.com/"
+        >
           Trail of Bits
         </Box>
         . The{' '}
-        <Box as="a" target="_blank" textDecoration="underline" href="https://audits.ockam.io/">
+        <Box
+          as="a"
+          target="_blank"
+          color="brand.500"
+          fontWeight={700}
+          href="https://audits.ockam.io/"
+        >
           current status of our latest audits and compliance controls
         </Box>{' '}
         are also available.
