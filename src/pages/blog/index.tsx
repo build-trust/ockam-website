@@ -13,8 +13,8 @@ type BlogPageProps = {
   allPageMessage?: AllPageMessage | null;
 };
 
-const BlogPage: NextPageWithLayout<BlogPageProps> = ({ posts, allPageMessage }) => (
-  <BlogLayout blogPosts={posts} allPage={allPageMessage}>
+const BlogPage: NextPageWithLayout<BlogPageProps> = ({ posts }) => (
+  <BlogLayout blogPosts={posts}>
     <Box w="full" pt={{ base: 10, lg: 8 }}>
       <SEOHead subTitle="Blog" />
 

@@ -45,7 +45,7 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({
   )}`;
 
   return (
-    <BlogLayout blogPosts={posts} newsletterPopup={newsletterPopup} allPage={allPageMessage}>
+    <BlogLayout blogPosts={posts} newsletterPopup={newsletterPopup}>
       <SEOHead
         subTitle={title}
         description={description}
