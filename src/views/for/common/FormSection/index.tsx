@@ -25,7 +25,7 @@ const FormSection = (): ReactElement => (
         flex={{ base: 1 }}
         gap={{ base: '1rem', lg: '2rem' }}
         maxW={{ base: '35.8125rem' }}
-        mx="auto"
+        mx={{ base: 'auto', lg: 'initial' }}
       >
         <Text
           textAlign={{ base: 'center', lg: 'left' }}
