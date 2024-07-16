@@ -23,12 +23,7 @@ type BlogPostPageProps = {
   allPageMessage?: AllPageMessage | null;
 };
 
-const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({
-  source,
-  frontMatter,
-  posts,
-  allPageMessage,
-}) => {
+const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts }) => {
   const router = useRouter();
   const blogPostBodyRef = useRef<HTMLDivElement | null>(null);
 
