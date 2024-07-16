@@ -15,7 +15,7 @@ const HeadingWithLogo = ({
   ...stackProps
 }: MagicComponentProps): ReactElement => (
   <Stack gap={{ base: '1.5rem' }} align="center" {...stackProps}>
-    <Image src={logoSmallSrc} alt="" />
+    <Image src={logoSmallSrc} alt="" style={{ width: '47px', height: '50px' }} />
     <Stack spacing={{ base: '0.75rem', lg: '1.5re' }}>
       <Text
         color="brand.900"
