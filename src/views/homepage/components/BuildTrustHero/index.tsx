@@ -61,7 +61,12 @@ const BuildTrustHero = (): ReactElement => {
               Trust
             </Box>
           </Heading>
-          <Text color="inherit" fontSize={{ base: '1.125rem' }} fontWeight={{ base: 500 }}>
+          <Text
+            color="inherit"
+            fontFamily="neutraface"
+            fontSize={{ base: '1.375rem', lg: '1.75rem' }}
+            fontWeight={{ base: 500 }}
+          >
             Between your platform
             <br />
             and every
