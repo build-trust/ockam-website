@@ -63,7 +63,7 @@ const UseCases = (): ReactElement => {
       />
       <Stack
         gap={{ base: '1rem' }}
-        borderRadius={{ base: '0.75rem', lg: '2.5rem' }}
+        borderRadius={{ base: '0.75rem' }}
         padding={{ base: '1rem', lg: '2.5rem' }}
         background="rgba(255, 255, 255, 0.20)"
         maxW={{ base: '61.25rem' }}
