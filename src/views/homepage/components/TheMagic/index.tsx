@@ -44,7 +44,7 @@ const TheMagic = (): ReactElement => {
       />
       <Stack
         gap={{ base: '1rem', lg: '2.5rem' }}
-        borderRadius={{ base: '0.75rem', lg: '2.5rem' }}
+        borderRadius={{ base: '0.75rem' }}
         padding={{ base: '1rem', lg: '2.5rem' }}
         background="linear-gradient(142deg, rgba(79, 218, 184, 0.10) 4.44%, rgba(82, 199, 234, 0.10) 94.64%)"
         maxW={{ base: '68.375rem' }}
