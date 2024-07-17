@@ -1,0 +1,116 @@
+---
+title: Apache Kafka needs encryption - encrypt it the right way
+hero_text: Encrypt Kafka the _right way_
+hero_image: insecure-kafka
+hero_animated: true
+hero_animation_start_at: 1.5
+hero_aspect_priority: width
+subtext: Don't settle for naive end-to-end encryption when you need app-to-app trust
+list_features: false
+examples:
+  - name: Apache Kafka
+    url: https://docs.ockam.io/portals/kafka/apache-kafka
+  - name: Redpanda
+    url: https://docs.ockam.io/portals/kafka/redpanda
+  - name: Confluent
+    url: https://docs.ockam.io/portals/kafka/confluent
+  - name: Warpstream
+    url: https://docs.ockam.io/portals/kafka/warpstream
+  - name: Instaclustr
+    url: https://docs.ockam.io/portals/kafka/instaclustr
+  - name: Aiven
+    url: https://docs.ockam.io/portals/kafka/aiven
+features:
+  - title: App-to-app trust
+    image: kafka-encrypted-ockam
+    text: |
+      Kafka applications that are handling sensitive data require more than 
+      encryption to the "end". Where's the "end"? What's needed to meet modern 
+      data governance expectations are guarantees that the intended applications 
+      are exclusively the apps that can participate in a sensitive message 
+      stream. Ockam moves trust to the application layer by building a 
+      mutually authenticated and encrypted communication channel between all of 
+      your Kafka apps _through_ your Kafka brokers.
+  - title: No more shared secret keys
+    image: kafka-key-layers
+    animate: true
+    text: |
+      Sharing secret keys across many apps and services increases the likelihood 
+      of secret keys leaking, in addition to eroding any guarantees that only intended apps can
+      access sensitive data. Teams then layer in additional credential management 
+      approaches, network-level controls, and various other security approaches in
+      an attempt to have a somewhat reliable assumption that only the intended app(s)
+      were able to use the shared secret keys.
+
+      With Ockam, each Kafka app generates it's own _unique_ cryptographically provable identity 
+      and encryption keys, and uses those keys to establish trusted secure channels directly 
+      with other authorized apps as required.
+  - title: No more shipping secrets
+    image: shared-key-shipping-exposure-risk
+    text: |
+      Whether it's reading a credential or secret value from a central source, or 
+      transmitting a secret key to another app, every time a secret value is transmitted
+      over the wire is another opportunity for it to leak. Ockam's approach to secret 
+      management means each secret key never needs to leave the place where it was 
+      generated. By removing the need to transmit secrets the risk of an attacker 
+      intercepting a secret in transit is also removed.
+  - title: Automated & regular key-rotation
+    image: automated-key-rotation
+    text: |
+      Everyone hopes they never have a data breach, but to minimize the impact incase
+      the worst happens Ockam apps automatically and regularly rotate their encryption
+      keys. If a secret key is ever leaked the data at risk is reduced to the amount sent
+      in the small window of that secret key was active. Don't put your 
+      historical and future data at risk because rotating secret keys is difficult &mdash; 
+      it's built-in from the start.
+  - title: Data authenticity & integrity
+    image: guaranteed-authenticity
+    text: |
+      The approach to mutual authentication of every app that Ockam provides results
+      in strong data governance guarantees around the authenticity and integrity of 
+      the messages moving through your system. 
+  - title: No need to run Public Key Infrastructure (PKI)
+    image: no-pki
+    text: |
+      Nobody loves running their own PKI. It's complicated, you still need to work out
+      how to securely handle your root certificate and keys, have policies around 
+      lifecycle management&hellip; a lot of extra infrastructure and orchestration.
+
+      With Ockam, each app generates keys and establishes trust directly there's no 
+      need to run your own PKI systems.
+  - title: Any language
+    image: kafka-any-language
+    text: |
+      The Kafka add-on for Ockam can work with any language. You've the flexibility
+      to write your producers and consumers in a mix of Java, Python, Go, Scala, you 
+      name it!
+  - title: No app code changes
+    image: no-code-changes
+    text: |
+      Just a single configuration change: update the broker host to point to the secure channel
+      that Ockam sets up on `localhost` for each app. It takes a couple of seconds,
+      and won't require you to change any of the business logic or implementation in your
+      apps.
+  - title: Self-managed deployments
+    image: cloud-on-prem
+    text: |
+      Running Kafka yourself? Maybe a managed offering inside you own VPC? Ockam 
+      works wherever you need it.
+  - title: Heterogeneous deployments
+    image: kafka-heterogeneous
+    text: |
+      Ockam's agnostic to network-level and cloud-specific features. Run a mix of apps
+      across the major cloud vendors to access specific value-add services without 
+      the complication of configuring secure cross-cloud access to a specific KMS or
+      setting services like Private Link or VPC Peering.
+  - title: Available today
+    image: available-today
+    text: |
+      All of these features are available and production ready, today. There's no
+      waiting to get accepted into a beta program, for a professional services
+      team to draft a statement of work, or to even speak to our sales team (though
+      we would still love to speak with you!). You can [create an account for free](https://www.ockam.io/download)
+      and have [Ockam securing your Kafka environment within minutes](https://docs.ockam.io/guides/examples/end-to-end-encrypted-kafka).
+---
+
+{/* <!-- vale off --> */}
