@@ -52,7 +52,7 @@ const AllPageNotice: FC<Props> = ({ message, except }) => {
 
   const closeNotice = (): void => {
     window.localStorage.setItem(stateKey, JSON.stringify({ lastClosed: new Date().getTime() }));
-    document.documentElement.style.setProperty('--navbar-offset', '0');
+    document.documentElement.style.setProperty('--navbar-offset', '0px');
     onClose();
   };
 

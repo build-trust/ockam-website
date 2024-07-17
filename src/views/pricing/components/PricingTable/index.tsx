@@ -7,7 +7,7 @@ const CheckIcon = (): ReactElement => <Box as={BaseCheckIcon} display="inline-bl
 
 const PricingTable = (): ReactElement => (
   <Table variant="pricing" maxW="68.375rem" mx="auto">
-    <Thead position="sticky" top="5.375rem" bg="white" zIndex={1}>
+    <Thead position="sticky" top="calc(5.375rem + var(--navbar-offset, 0px))" bg="white" zIndex={1}>
       <Tr>
         <Th rowSpan={2} width="15.5rem" fontSize="1.75rem">
           Plan Comparison
