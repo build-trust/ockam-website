@@ -1,12 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 
 import ContactForm from './Form';
-import DBLink from './DBLink';
+import ExampleLink from './DBLink';
 import backgroundSrc from './assets/background.svg?url';
 
-const FormSection = (): ReactElement => (
+type Example = {
+  name: string;
+  url: string;
+};
+type Props = {
+  examples?: Example[];
+};
+const FormSection: FC<Props> = ({ examples }): ReactElement => (
   <Box
     bgImage={`/**/url(${backgroundSrc.src}), linear-gradient(#0D1721, #162535)`}
     bgRepeat="no-repeat"
@@ -50,9 +57,8 @@ const FormSection = (): ReactElement => (
           fontWeight={{ base: 700 }}
           fontFamily="neutraface"
         >
-          <DBLink href="https://docs.ockam.io/portals/databases/postgres">PostgreSQL</DBLink>
-          <DBLink href="https://docs.ockam.io/portals/databases/mongodb">MongoDB</DBLink>
-          <DBLink href="https://docs.ockam.io/portals/databases/influxdb">InfluxDB</DBLink>
+          {examples &&
+            examples.map((example) => <ExampleLink href={example.url}>{example.name}</ExampleLink>)}
         </Stack>
       </Stack>
 
@@ -89,4 +95,5 @@ const FormSection = (): ReactElement => (
   </Box>
 );
 
+export type { Example };
 export default FormSection;

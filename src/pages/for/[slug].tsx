@@ -19,7 +19,7 @@ import {
   Title,
   WhiteContainer,
 } from '@views/for/common/WhiteContainer';
-import FormSection from '@views/for/common/FormSection';
+import FormSection, { Example } from '@views/for/common/FormSection';
 import SEOHead from '@root/components/SEOHead';
 import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
 
@@ -37,10 +37,7 @@ type PageProps = {
   allPageMessage?: AllPageMessage | null;
   backgroundImage: string;
 };
-// type Example = {
-//   name: string;
-//   url: string;
-// };
+
 type Step = {
   heading: string;
   text: string;
@@ -122,7 +119,7 @@ const SaaSPlatforms: NextPageWithLayout<PageProps> = ({
   const imageAspect = frontMatter?.hero_aspect_priority as 'width' | 'height';
   const subtext = frontMatter?.subtext as string;
   const animationStartAt = frontMatter?.hero_animation_start_at as number;
-  // const examples = frontMatter?.examples as unknown as Example[];
+  const examples = frontMatter?.examples as unknown as Example[];
   const steps = frontMatter?.steps as unknown as Step[];
   const features: FrontmatterFeature[] =
     (frontMatter?.features as unknown as FrontmatterFeature[]) || [];
@@ -217,7 +214,7 @@ const SaaSPlatforms: NextPageWithLayout<PageProps> = ({
           </StackContainer>
         )}
       </WhiteContainer>
-      <FormSection />
+      <FormSection examples={examples} />
     </Box>
   );
 };
