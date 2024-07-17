@@ -44,7 +44,6 @@ const PricingPage: NextPageWithLayout<Props> = () => (
     backgroundPosition={{ base: '50% 0px, center 300px', lg: 'center -200px, center 300px' }}
     backgroundRepeat="no-repeat"
     backgroundSize={{ base: '100%, 2313px 1333px', lg: '1428px 1158px, 2313px 1333px' }}
-    overflow="hidden"
   >
     <SEOHead
       title="Pricing & Packages - Get started for free"
