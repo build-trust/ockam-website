@@ -33,7 +33,7 @@ const Hero: FC<HeroProps> = ({
         const highlight = string.match(/^_(\w.*?\w)_$/);
         if (highlight) {
           return (
-            <Box as="span" color="brand.500">
+            <Box key={string} as="span" color="brand.500">
               {highlight[1]}
             </Box>
           );
