@@ -10,14 +10,23 @@ import {
 } from '@root/views/for/common/HeroContainer';
 import { ExcalidrawImage, HeroDescription, HeroHeading } from '@root/views/for/common/HeroText';
 import { CONTACT_PAGE_PATH, SIGNUP_PATH } from '@consts/paths';
+import { ExcalidrawAnimationProps } from '@components/ExcalidrawAnimation';
 
-type Props = {
+interface HeroProps extends Pick<ExcalidrawAnimationProps, 'animate' | 'aspect' | 'startAt'> {
   text: string;
   subtext: string;
   image: string;
   backgroundImage: string;
-};
-const Hero: FC<Props> = ({ text, subtext, image, backgroundImage }) => {
+}
+const Hero: FC<HeroProps> = ({
+  text,
+  aspect,
+  startAt,
+  subtext,
+  image,
+  animate,
+  backgroundImage,
+}) => {
   const heroText = (): JSX.Element => (
     <>
       {text.split(/(_\w.*?\w_)/).map((string) => {
@@ -49,7 +58,9 @@ const Hero: FC<Props> = ({ text, subtext, image, backgroundImage }) => {
             </Button>
           </ButtonContainer>
         </TextContainer>
-        {image && <ExcalidrawImage src={image} />}
+        {image && (
+          <ExcalidrawImage startAt={startAt} src={image} animate={animate} aspect={aspect} />
+        )}
       </HeroContentWrapper>
     </HeroContainer>
   );

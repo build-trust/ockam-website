@@ -4,14 +4,14 @@ import { useInView } from 'react-intersection-observer';
 
 import SvgAnimation from './SvgAnimation';
 
-type Props = {
+export type ExcalidrawAnimationProps = {
   src: string;
   animate: boolean;
   hero?: boolean;
   aspect?: 'width' | 'height';
   startAt?: number;
 } & BoxProps;
-const ExcalidrawAnimation: FunctionComponent<Props> = ({
+const ExcalidrawAnimation: FunctionComponent<ExcalidrawAnimationProps> = ({
   src,
   animate,
   hero,
