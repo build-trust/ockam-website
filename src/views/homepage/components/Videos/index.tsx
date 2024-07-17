@@ -8,17 +8,17 @@ import videosBackgroundSrc from './assets/videos-background.svg?url';
 const YOUTUBE_VIDEOS = [
   {
     title: 'What is Ockam?',
-    description: 'Aenean aliquet lectus vestibulum gravida sed vulputate vitae.',
+    description: 'The three things you need to know about Ockam.',
     id: 'psQCvYlQMNw',
   },
   {
     title: 'Networkless',
-    description: 'Aenean aliquet lectus vestibulum gravida sed vulputate vitae.',
+    description: "The magic that means you don't need to change the network.",
     id: 'L9ukFnqGOro',
   },
   {
     title: 'Virtual Adjacencies & Portals',
-    description: 'Aenean aliquet lectus vestibulum gravida sed vulputate vitae.',
+    description: "Make remote services appear as though they're local with Portals.",
     id: 'Gh6153dX3dk',
   },
 ];
