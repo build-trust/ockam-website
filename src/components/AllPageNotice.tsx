@@ -1,7 +1,7 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import { Box, Heading, Slide, Text, TextProps, useDisclosure } from '@chakra-ui/react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
 import { CodeBlock } from './CodeBlock';
@@ -25,6 +25,7 @@ interface Props {
 const AllPageNotice: FC<Props> = ({ message, except }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const stateKey = 'allpagenotice';
+  const noticeRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   const shouldShowMessage = useCallback((): boolean => {
@@ -48,7 +49,8 @@ const AllPageNotice: FC<Props> = ({ message, except }) => {
 
   useEffect(() => {
     const openNotice = (): void => {
-      document.documentElement.style.setProperty('--navbar-offset', '2.5rem');
+      const navbarHeight = `${noticeRef.current?.offsetHeight}px` || '2.5rem';
+      document.documentElement.style.setProperty('--navbar-offset', navbarHeight);
       onOpen();
     };
 
@@ -62,6 +64,7 @@ const AllPageNotice: FC<Props> = ({ message, except }) => {
   return (
     <Slide direction="top" in={isOpen} style={{ zIndex: 1000 }}>
       <Box
+        ref={noticeRef}
         zIndex="1000"
         textAlign="center"
         py={1}

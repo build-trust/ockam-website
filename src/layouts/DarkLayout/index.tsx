@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Box } from '@chakra-ui/react';
 
 import AllPageNotice, { AllPageMessage } from '@components/AllPageNotice';
 
@@ -14,7 +15,9 @@ const DarkLayout = ({ message, except, children }: DarkLayoutProps): JSX.Element
   <>
     <AllPageNotice message={message} except={except} />
     <Navigation />
-    <main>{children}</main>
+    <Box as="main" pt="var(--navbar-offset, 0)">
+      {children}
+    </Box>
     <Footer />
   </>
 );
