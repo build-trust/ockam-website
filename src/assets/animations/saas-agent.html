@@ -65,7 +65,6 @@
         const beginTimeList = beginTimeLists[index];
         const currentTime = svg.getCurrentTime() * 1000;
         let nextTime = beginTimeList.find((t) => t > currentTime + 50);
-        console.log(currentTime, beginTimeList, nextTime);
         if (nextTime) {
           nextTime -= 1;
         } else {
