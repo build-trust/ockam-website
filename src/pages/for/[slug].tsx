@@ -2,9 +2,9 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { existsSync } from 'node:fs';
 import path from 'path';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Text, TextProps } from '@chakra-ui/react';
 import Image from 'next/image';
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { generateSlugFromPath, getPageBySlug, pageFilePaths } from '@api/mdxApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
@@ -22,10 +22,23 @@ import {
 import FormSection, { Example } from '@views/for/common/FormSection';
 import SEOHead from '@root/components/SEOHead';
 import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
+import mdxComponents from '@components/mdx';
 
 import Hero from './Hero';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
+
+if (mdxComponents) {
+  mdxComponents.p = (props: TextProps): JSX.Element => (
+    <Text
+      fontWeight={{ base: 400 }}
+      color="gray.500"
+      fontSize={{ base: '1rem' }}
+      textAlign="justify"
+      {...props}
+    />
+  );
+}
 
 type ParamsType = {
   params: { slug: string };
@@ -49,6 +62,7 @@ type FrontmatterFeature = {
   title: string;
   subtitle?: string;
   text: string;
+  mdxtext?: MDXRemoteSerializeResult;
   image?: string;
   imagealt?: string;
   animate?: boolean;
@@ -74,21 +88,26 @@ type Frontmatter = {
 
 const fieldsToMdx = async (fields: string[], frontmatter: Frontmatter): Promise<Frontmatter> => {
   const mdxFrontmatter = frontmatter;
-  await fields.forEach(async (field) => {
-    const [name, attr] = field.split('.', 2);
-    if (name.indexOf('[]') > 0) {
-      const n = name.replace('[]', '');
-      await frontmatter[n].forEach(async (obj: Frontmatter, idx: number) => {
-        const val = obj[attr];
-        mdxFrontmatter[n][idx][`mdx${attr}`] = await mdxSerialize(val);
-      });
-    }
-  });
+  if (fields) {
+    await fields.forEach(async (field) => {
+      const [name, attr] = field.split('.', 2);
+      if (name.indexOf('[]') > 0) {
+        const n = name.replace('[]', '');
+        const mdxFields = frontmatter[n];
+        if (mdxFields) {
+          await mdxFields.forEach(async (obj: Frontmatter, idx: number) => {
+            const val = obj[attr];
+            mdxFrontmatter[n][idx][`mdx${attr}`] = await mdxSerialize(val);
+          });
+        }
+      }
+    });
+  }
   return mdxFrontmatter;
 };
 
 export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: PageProps }> => {
-  const frontmatterMdxFields = ['steps[].text'];
+  const frontmatterMdxFields = ['steps[].text', 'features[].text'];
   const { source, frontMatter } = await getPageBySlug(LANDING_PAGE_PATH, params.slug);
   const { slug } = params;
   const bgfilename = path.resolve(`src/views/for/${slug}/assets/hero.svg`);
@@ -154,7 +173,8 @@ const SaaSPlatforms: NextPageWithLayout<PageProps> = ({
                   <Title>{feature.title}</Title>
                   {feature.subtitle && <SubTitle>{feature.subtitle}</SubTitle>}
                 </Box>
-                <Description>{feature.text}</Description>
+                {feature.mdxtext && <MDXRemote {...feature.mdxtext} components={mdxComponents} />}
+                {!feature.mdxtext && <Description>{feature.text}</Description>}
               </TextContainer>
               {features.image && (
                 <Box
