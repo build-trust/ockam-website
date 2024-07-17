@@ -66,7 +66,7 @@ export const FOR_COMPANIES = [
   },
   {
     title: 'Platinum',
-    subscriptionInterval: 'year',
+    subscriptionInterval: 'yr',
     price: 250000,
     button: {
       title: 'Start trial',
@@ -77,7 +77,7 @@ export const FOR_COMPANIES = [
       'Ockam support - 4hr response time SLA',
       'Uptime 99.95% SLA',
       'Throughput optimized nodes',
-      'Yearly commit - 20% discount included',
+      'yrly commit - 20% discount included',
       '️Custom Branding / Whitelabel',
       'High Availability Relays',
       'High Availability Credential Authorities',
@@ -88,7 +88,7 @@ export const FOR_COMPANIES = [
 export const FOR_ENTERPRISES = [
   {
     title: 'Enterprise',
-    subscriptionInterval: 'year',
+    subscriptionInterval: 'yr',
     price: 500000,
     button: {
       title: 'Talk to sales',
@@ -99,7 +99,7 @@ export const FOR_ENTERPRISES = [
       'Ockam support - 4hr response time SLA',
       'Uptime 99.95% SLA',
       'Throughput optimized nodes',
-      'Yearly commit - 20% discount included',
+      'yrly commit - 20% discount included',
       'Custom Branding / Whitelabel',
       'High Availability Relays',
       'High Availability Credential Authorities',
@@ -110,7 +110,7 @@ export const FOR_ENTERPRISES = [
   },
   {
     title: 'Business Critical',
-    subscriptionInterval: 'year',
+    subscriptionInterval: 'yr',
     price: 1000000,
     button: {
       title: 'Talk to sales',
@@ -123,7 +123,7 @@ export const FOR_ENTERPRISES = [
       'Ockam support - 4hr response time SLA',
       'Uptime 99.95% SLA',
       'Throughput optimized nodes',
-      'Yearly commit - 20% discount included',
+      'yrly commit - 20% discount included',
       'Custom Branding / Whitelabel',
       'High Availability Relays',
       'High Availability Credential Authorities',
