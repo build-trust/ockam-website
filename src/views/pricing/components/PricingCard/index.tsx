@@ -47,11 +47,19 @@ const PricingCard = ({
         <Text
           fontFamily="neutraface"
           color="brand.800"
-          fontSize={{ base: '1.5rem', lg: '2.5rem' }}
+          fontSize={{ base: '1.5rem', lg: '2rem' }}
           fontWeight={{ base: 700 }}
         >
           {priceFormatter.format(price)}{' '}
-          <Box as="sub" fontSize={{ base: '0.75rem', lg: '1rem' }}>
+          <Box
+            fontFamily="Inter"
+            bottom={0}
+            as="sub"
+            mb={{ base: '0.25rem' }}
+            fontWeight={500}
+            color="gray.500"
+            fontSize={{ base: '0.875rem' }}
+          >
             / {subscriptionInterval}
           </Box>
         </Text>
