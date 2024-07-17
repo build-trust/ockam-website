@@ -3,9 +3,9 @@ import React, { ReactElement, ReactNode } from 'react';
 import { existsSync } from 'node:fs';
 import path from 'path';
 import { Box, Heading, Text, TextProps } from '@chakra-ui/react';
-import Image from 'next/image';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
+import Hero from '@views/for/common/Hero';
 import { generateSlugFromPath, getPageBySlug, pageFilePaths } from '@api/mdxApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import allPageMessageProps, { AllPageMessage, mdxSerialize } from '@utils/appPageMessage';
@@ -23,8 +23,6 @@ import FormSection, { Example } from '@views/for/common/FormSection';
 import SEOHead from '@root/components/SEOHead';
 import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
 import mdxComponents from '@components/mdx';
-
-import Hero from './Hero';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
 
@@ -160,8 +158,7 @@ const SaaSPlatforms: NextPageWithLayout<PageProps> = ({
         animate={animate || false}
         backgroundImage={backgroundImage}
         aspect={imageAspect}
-        animationStartAt={animationStartAt}
-        pt={32}
+        startAt={animationStartAt}
       />
 
       <WhiteContainer>
@@ -176,20 +173,10 @@ const SaaSPlatforms: NextPageWithLayout<PageProps> = ({
                 {feature.mdxtext && <MDXRemote {...feature.mdxtext} components={mdxComponents} />}
                 {!feature.mdxtext && <Description>{feature.text}</Description>}
               </TextContainer>
-              {features.image && (
-                <Box
-                  as={Image}
-                  mx="auto"
-                  src={feature.image}
-                  alt={feature.imagealt}
-                  maxWidth={{ base: '25rem', lg: 'initial' }}
-                  width={{ base: '100%', lg: '50%' }}
-                />
-              )}
               {feature.image && (
                 <ExcalidrawAnimation
                   src={feature.image}
-                  animate={feature.animate}
+                  animate={feature.animate || false}
                   aspect="width"
                   mx="auto"
                   flex={1}
