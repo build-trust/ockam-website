@@ -6,17 +6,23 @@ import CheckIcon from './assets/check.svg';
 
 interface PricingCardProps extends CardProps {
   title: string;
-  description: string;
-  price: string;
+  subscriptionInterval: string;
+  price: number;
   button: {
     title: string;
     href: string;
   };
   features: string[];
 }
+
+const priceFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0,
+});
 const PricingCard = ({
   title,
-  description,
+  subscriptionInterval,
   price,
   button,
   features,
@@ -36,7 +42,7 @@ const PricingCard = ({
       </Text>
       <Box>
         <Text color="gray.500" fontSize={{ base: '0.875rem' }}>
-          {description}
+          starting at
         </Text>
         <Text
           fontFamily="neutraface"
@@ -44,7 +50,10 @@ const PricingCard = ({
           fontSize={{ base: '1.5rem', lg: '2.5rem' }}
           fontWeight={{ base: 700 }}
         >
-          {price}
+          {priceFormatter.format(price)}{' '}
+          <Box as="sub" fontSize={{ base: '0.75rem', lg: '1rem' }}>
+            / {subscriptionInterval}
+          </Box>
         </Text>
       </Box>
       <Button as={NextLink} href={button.href} variant="primary" height={{ base: '3.5rem' }}>

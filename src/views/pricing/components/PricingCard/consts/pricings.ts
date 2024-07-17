@@ -1,8 +1,8 @@
 export const FOR_DEVELOPERS = [
   {
     title: 'Free',
-    description: 'starting at / mo',
-    price: '$0',
+    subscriptionInterval: 'mo',
+    price: 0,
     button: {
       title: 'Get started',
       href: '/download',
@@ -11,8 +11,8 @@ export const FOR_DEVELOPERS = [
   },
   {
     title: 'Premium',
-    description: 'starting at / mo',
-    price: '$5',
+    subscriptionInterval: 'mo',
+    price: 5,
     button: {
       title: 'Start trial',
       href: '/download',
@@ -24,8 +24,8 @@ export const FOR_DEVELOPERS = [
 export const FOR_COMPANIES = [
   {
     title: 'Bronze',
-    description: 'starting at / mo',
-    price: '$500',
+    subscriptionInterval: 'mo',
+    price: 500,
     button: {
       title: 'Get started',
       href: '/download',
@@ -34,8 +34,8 @@ export const FOR_COMPANIES = [
   },
   {
     title: 'Silver',
-    description: 'starting at / mo',
-    price: '$2500',
+    subscriptionInterval: 'mo',
+    price: 2500,
     button: {
       title: 'Start trial',
       href: '/download',
@@ -50,8 +50,8 @@ export const FOR_COMPANIES = [
   },
   {
     title: 'Gold',
-    description: 'starting at / mo',
-    price: '$10 000',
+    subscriptionInterval: 'mo',
+    price: 10000,
     button: {
       title: 'Start trial',
       href: '/download',
@@ -66,8 +66,8 @@ export const FOR_COMPANIES = [
   },
   {
     title: 'Platinum',
-    description: 'starting at / year',
-    price: '$250 000',
+    subscriptionInterval: 'year',
+    price: 250000,
     button: {
       title: 'Start trial',
       href: '/download',
@@ -88,8 +88,8 @@ export const FOR_COMPANIES = [
 export const FOR_ENTERPRISES = [
   {
     title: 'Enterprise',
-    description: 'starting at / year',
-    price: '$500 000',
+    subscriptionInterval: 'year',
+    price: 500000,
     button: {
       title: 'Talk to sales',
       href: '/contact/form',
@@ -110,8 +110,8 @@ export const FOR_ENTERPRISES = [
   },
   {
     title: 'Business Critical',
-    description: 'starting at / year',
-    price: '$1 000 000',
+    subscriptionInterval: 'year',
+    price: 1000000,
     button: {
       title: 'Talk to sales',
       href: '/contact/form',
