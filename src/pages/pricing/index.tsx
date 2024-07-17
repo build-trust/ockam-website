@@ -72,7 +72,7 @@ const PricingPage: NextPageWithLayout<Props> = () => (
       >
         Plans for any{' '}
         <Box as="span" color="brand.500">
-          sale
+          scale
         </Box>
       </Heading>
       <Text fontSize={{ base: '1.125rem', lg: '1.25rem' }} color="white">
