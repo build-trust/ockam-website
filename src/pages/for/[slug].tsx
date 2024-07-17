@@ -1,35 +1,61 @@
-import { ReactElement, ReactNode } from 'react';
-import { Box, Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
+/* eslint-disable react/no-unescaped-entities */
+import React, { ReactElement, ReactNode } from 'react';
+import { existsSync } from 'node:fs';
 import path from 'path';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import Link from 'next/link';
-import styled from 'styled-components';
+import { Box, Heading } from '@chakra-ui/react';
+import Image from 'next/image';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { generateSlugFromPath, getPageBySlug, pageFilePaths } from '@api/mdxApi';
-import mdxComponents from '@components/mdx';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
-import LandingLayout from '@layouts/LandingLayout';
-import { Hero } from '@views/homepage';
+import allPageMessageProps, { AllPageMessage, mdxSerialize } from '@utils/appPageMessage';
+import DarkLayout from '@layouts/DarkLayout';
+import { TextContainer } from '@views/for/common/HeroContainer';
+import {
+  Description,
+  FlexContainer,
+  StackContainer,
+  SubTitle,
+  Title,
+  WhiteContainer,
+} from '@views/for/common/WhiteContainer';
+import FormSection from '@views/for/common/FormSection';
 import SEOHead from '@root/components/SEOHead';
-import { ContactForm } from '@views/contact-form';
-import { Feature } from '@root/views/homepage/Features';
-import { BUILD_DEMO } from '@root/consts/externalResources';
-import Paragraph from '@root/components/mdx/Paragraph';
-import Card from '@root/components/Card';
-import allPageMessageProps, { AllPageMessage, mdxSerialize } from '@root/utils/appPageMessage';
-import SideBySidePanel from '@root/components/mdx/SideBySidePanel';
+import ExcalidrawAnimation from '@components/ExcalidrawAnimation';
+
+import Hero from './Hero';
 
 export const LANDING_PAGE_PATH = path.join(process.cwd(), 'src/content/landing-pages');
 
-const SubButton = styled.span`
-  display: block;
-  font-size: 66%;
-  padding-top: 5px;
-`;
 type ParamsType = {
   params: { slug: string };
 };
-
+type PageProps = {
+  slug: string;
+  source: MDXRemoteSerializeResult;
+  frontMatter: { [key: string]: string | number | boolean };
+  allPageMessage?: AllPageMessage | null;
+  backgroundImage: string;
+};
+// type Example = {
+//   name: string;
+//   url: string;
+// };
+type Step = {
+  heading: string;
+  text: string;
+  mdxtext?: MDXRemoteSerializeResult;
+  image: string;
+};
+type FrontmatterFeature = {
+  icon?: string;
+  title: string;
+  subtitle?: string;
+  text: string;
+  image?: string;
+  imagealt?: string;
+  animate?: boolean;
+};
 export const getStaticPaths = async (): Promise<{
   paths: ParamsType[];
   fallback: boolean;
@@ -42,13 +68,6 @@ export const getStaticPaths = async (): Promise<{
     paths,
     fallback: false,
   };
-};
-
-type PageProps = {
-  slug: string;
-  source: MDXRemoteSerializeResult;
-  frontMatter: { [key: string]: string | number | boolean };
-  allPageMessage?: AllPageMessage | null;
 };
 
 type Frontmatter = {
@@ -75,34 +94,27 @@ export const getStaticProps = async ({ params }: ParamsType): Promise<{ props: P
   const frontmatterMdxFields = ['steps[].text'];
   const { source, frontMatter } = await getPageBySlug(LANDING_PAGE_PATH, params.slug);
   const { slug } = params;
+  const bgfilename = path.resolve(`src/views/for/${slug}/assets/hero.svg`);
+  let backgroundImage;
+  if (existsSync(bgfilename)) {
+    backgroundImage = (await import(`@views/for/${slug}/assets/hero.svg?url`)).default.src;
+  } else {
+    backgroundImage = (await import(`@views/for/saas-platforms/assets/hero.svg?url`)).default.src;
+  }
   return {
     props: {
       slug,
       source,
+      backgroundImage,
       frontMatter: await fieldsToMdx(frontmatterMdxFields, frontMatter),
       allPageMessage: await allPageMessageProps,
     },
   };
 };
-
-type FrontmatterFeature = {
-  icon: string;
-  title: string;
-  text: string;
-};
-
-type Example = {
-  name: string;
-  url: string;
-};
-
-type Step = {
-  heading: string;
-  text: string;
-  mdxtext?: MDXRemoteSerializeResult;
-  image: string;
-};
-const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter }) => {
+const SaaSPlatforms: NextPageWithLayout<PageProps> = ({
+  frontMatter,
+  backgroundImage,
+}): ReactElement => {
   const title = (frontMatter?.metaTitle as string) || (frontMatter?.title as string) || '';
   const text = frontMatter?.hero_text as string;
   const image = frontMatter?.hero_image as string;
@@ -110,159 +122,113 @@ const LandingPage: NextPageWithLayout<PageProps> = ({ slug, source, frontMatter 
   const imageAspect = frontMatter?.hero_aspect_priority as 'width' | 'height';
   const subtext = frontMatter?.subtext as string;
   const animationStartAt = frontMatter?.hero_animation_start_at as number;
-  const examples = frontMatter?.examples as unknown as Example[];
+  // const examples = frontMatter?.examples as unknown as Example[];
   const steps = frontMatter?.steps as unknown as Step[];
-
-  const listFeatures = (
-    typeof frontMatter?.list_features === 'undefined' ? true : frontMatter?.list_features
-  ) as boolean;
   const features: FrontmatterFeature[] =
     (frontMatter?.features as unknown as FrontmatterFeature[]) || [];
-
-  const displayFeatures = (): JSX.Element => {
-    if (!listFeatures) return <></>;
-    if (Array.isArray(features) && features.length < 1) return <></>;
-    return (
-      <SimpleGrid
-        id="features"
-        columns={{ base: 1, md: 1, lg: 1 }}
-        spacingX={{ base: 8, md: 20, lg: 24 }}
-        spacingY={{ base: 8, md: 12, lg: 12 }}
-      >
-        {features.map((feature) => (
-          <Feature
-            key={feature.title}
-            icon={feature.icon}
-            title={feature.title}
-            text={feature.text}
-          />
-        ))}
-      </SimpleGrid>
-    );
-  };
-
-  const displayExamples = (): JSX.Element => {
-    if (!examples || examples.length === 0) {
-      return (
-        <Box>
-          <Heading mx="auto" mt="16" id="contact" textAlign="center">
-            It&apos;s time to&hellip;
-          </Heading>
-          <Box my="16">
-            <Link href={BUILD_DEMO.href} passHref legacyBehavior>
-              <Button
-                mx={0}
-                colorScheme="avocado"
-                color="rgb(40, 40, 40)"
-                border="1px solid white"
-                flexDirection="column"
-                _hover={{
-                  backgroundColor: 'rgb(10, 10, 10)',
-                  color: 'white',
-                }}
-                py={6}
-                px={30}
-                size="lg"
-              >
-                Start Building
-                <SubButton>(for free!)</SubButton>
-              </Button>
-            </Link>
-          </Box>
-        </Box>
-      );
-    }
-    return (
-      <Box>
-        <Heading mx="auto" mt="16" id="contact" textAlign="center">
-          It&apos;s time to start building&hellip;
-        </Heading>
-        <SimpleGrid
-          id="examples"
-          columns={{ base: 3, md: 3, lg: 3 }}
-          spacingX={{ base: 8, md: 20, lg: 24 }}
-          spacingY={{ base: 8, md: 12, lg: 12 }}
-        >
-          {examples.map((example) => (
-            <Link href={example.url} passHref legacyBehavior key={example.name}>
-              <Card px={2} py={2} cursor="pointer">
-                <Heading size="lg">{example.name}</Heading>
-              </Card>
-            </Link>
-          ))}
-        </SimpleGrid>
-      </Box>
-    );
-  };
-
-  const displaySteps = (): JSX.Element | JSX.Element[] => {
-    if (!steps || steps.length === 0) return <></>;
-    const ss = steps.map((step) => (
-      <SideBySidePanel textOrientation="left" image={step.image}>
-        <Heading>{step.heading}</Heading>
-        {step.mdxtext && <MDXRemote {...step.mdxtext} components={mdxComponents} />}
-      </SideBySidePanel>
-    ));
-    ss.unshift(
-      <Heading fontSize="5vh" textAlign="center" width="100%">
-        It&apos;s as simple as
-      </Heading>,
-    );
-    return ss;
-  };
-  const feats = features.map((feature) => feature.title).join('||');
+  const feats = features
+    .slice(0, 2)
+    .map((feature) => feature.title)
+    .join('||');
   const ogImage = `/api/og?title=${encodeURIComponent(
     text.replaceAll('_', ''),
   )}&template=landing&features=${encodeURIComponent(feats)}`;
 
   return (
-    <Box pt={{ base: 0 }}>
+    <Box>
       <SEOHead title={title} ogImageSrc={ogImage} />
       <Hero
         text={text}
         subtext={subtext}
         image={image}
-        landingPage
         animate={animate || false}
+        backgroundImage={backgroundImage}
         aspect={imageAspect}
         animationStartAt={animationStartAt}
         pt={32}
-        color="#242A31"
       />
 
-      <Flex
-        w="full"
-        pt={{ base: 12, md: 24 }}
-        pb={{ base: 24, md: 32 }}
-        px={{
-          base: 5,
-          lg: 20,
-          xl: 30,
-        }}
-        justify={{ base: 'center', lg: 'center' }}
-        align="center"
-        gap={{ base: 0, lg: 10 }}
-        direction="column"
-        mx="auto"
-        id="why"
-      >
-        <MDXRemote {...source} components={mdxComponents} />
-        {displaySteps()}
-        {displayFeatures()}
-        {displayExamples()}
+      <WhiteContainer>
+        <StackContainer>
+          {features.map((feature) => (
+            <FlexContainer key={feature.title}>
+              <TextContainer>
+                <Box>
+                  <Title>{feature.title}</Title>
+                  {feature.subtitle && <SubTitle>{feature.subtitle}</SubTitle>}
+                </Box>
+                <Description>{feature.text}</Description>
+              </TextContainer>
+              {features.image && (
+                <Box
+                  as={Image}
+                  mx="auto"
+                  src={feature.image}
+                  alt={feature.imagealt}
+                  maxWidth={{ base: '25rem', lg: 'initial' }}
+                  width={{ base: '100%', lg: '50%' }}
+                />
+              )}
+              {feature.image && (
+                <ExcalidrawAnimation
+                  src={feature.image}
+                  animate={feature.animate}
+                  aspect="width"
+                  mx="auto"
+                  flex={1}
+                  maxWidth={{ base: '25rem', lg: 'initial' }}
+                  width={{ base: '100%', lg: '50%' }}
+                />
+              )}
+            </FlexContainer>
+          ))}
+        </StackContainer>
 
-        <Heading textAlign="center">&hellip; or, ask our team a question</Heading>
-        <Paragraph textAlign="center">
-          We&apos;ll get back to you within one business day.
-        </Paragraph>
-        <ContactForm landingPage={slug} />
-      </Flex>
+        {steps && steps.length > 0 && (
+          <StackContainer mt={48}>
+            <Heading
+              fontWeight={{ base: 700 }}
+              fontFamily="neutraface"
+              fontSize={{ base: '2.5rem', lg: '5.5rem' }}
+            >
+              Going to production is as easy as&hellip;
+            </Heading>
+            {steps.map((step) => (
+              <FlexContainer key={step.heading}>
+                <TextContainer>
+                  <Box>
+                    <Title>{step.heading}</Title>
+                  </Box>
+                  <Description>{step.text}</Description>
+                </TextContainer>
+                {step.image && (
+                  <ExcalidrawAnimation
+                    src={step.image}
+                    animate={false}
+                    aspect="width"
+                    mx="auto"
+                    flex={1}
+                    maxWidth={{ base: '25rem', lg: 'initial' }}
+                    width={{ base: '100%', lg: '50%' }}
+                  />
+                )}
+              </FlexContainer>
+            ))}
+          </StackContainer>
+        )}
+      </WhiteContainer>
+      <FormSection />
     </Box>
   );
 };
 
-LandingPage.getLayout = (page: ReactElement): ReactNode => (
-  <LandingLayout hideNav>{page}</LandingLayout>
+SaaSPlatforms.getLayout = (page: ReactElement, pageProps?: PageProps): ReactNode => (
+  <DarkLayout
+    except={pageProps?.allPageMessage?.except}
+    message={pageProps?.allPageMessage?.message}
+  >
+    {page}
+  </DarkLayout>
 );
 
-export default LandingPage;
+export default SaaSPlatforms;
