@@ -1,5 +1,13 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { Box, Heading, Slide, Text, TextProps, useDisclosure } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Slide,
+  Text,
+  TextProps,
+  useDimensions,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { FC, useCallback, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
@@ -25,8 +33,9 @@ interface Props {
 const AllPageNotice: FC<Props> = ({ message, except }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const stateKey = 'allpagenotice';
-  const noticeRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const noticeRef = useRef<HTMLDivElement>(null);
+  const noticeDimensions = useDimensions(noticeRef, true);
 
   const shouldShowMessage = useCallback((): boolean => {
     if (except) {
@@ -48,9 +57,14 @@ const AllPageNotice: FC<Props> = ({ message, except }) => {
   };
 
   useEffect(() => {
+    if (isOpen) {
+      const offsetHeight = `${noticeDimensions?.borderBox?.height}px`;
+      document.documentElement.style.setProperty('--navbar-offset', offsetHeight);
+    }
+  }, [isOpen, noticeDimensions]);
+
+  useEffect(() => {
     const openNotice = (): void => {
-      const navbarHeight = `${noticeRef.current?.offsetHeight}px` || '2.5rem';
-      document.documentElement.style.setProperty('--navbar-offset', navbarHeight);
       onOpen();
     };
 
