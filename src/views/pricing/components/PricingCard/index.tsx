@@ -1,19 +1,12 @@
-import { Box, Button, Card, CardProps, Flex, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Card, Flex, Stack, Text } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import NextLink from 'next/link';
 
+import { featuresForTier, Tier } from '@root/components/Packaging/tiers';
+
 import CheckIcon from './assets/check.svg';
 
-interface PricingCardProps extends CardProps {
-  title: string;
-  subscriptionInterval: string;
-  price: number;
-  button: {
-    title: string;
-    href: string;
-  };
-  features: string[];
-}
+type PricingCardProps = Tier;
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -21,11 +14,10 @@ const priceFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 0,
 });
 const PricingCard = ({
-  title,
-  subscriptionInterval,
+  name,
+  price_interval,
   price,
-  button,
-  features,
+  cta,
   ...cardProps
 }: PricingCardProps): ReactElement => (
   <Card
@@ -38,7 +30,7 @@ const PricingCard = ({
   >
     <Stack gap={{ base: '0.75rem', lg: '1rem' }}>
       <Text fontWeight={{ base: 700 }} color="brand.800">
-        {title}
+        {name}
       </Text>
       <Box>
         <Text color="gray.500" fontSize={{ base: '0.875rem' }}>
@@ -60,12 +52,12 @@ const PricingCard = ({
             color="gray.500"
             fontSize={{ base: '0.875rem' }}
           >
-            / {subscriptionInterval}
+            / {price_interval}
           </Box>
         </Text>
       </Box>
-      <Button as={NextLink} href={button.href} variant="primary" height={{ base: '3.5rem' }}>
-        {button.title}
+      <Button as={NextLink} href={cta.url} variant="primary" height={{ base: '3.5rem' }}>
+        {cta.text}
       </Button>
       <Text
         color="gray.500"
@@ -76,11 +68,11 @@ const PricingCard = ({
         Includes:
       </Text>
       <Stack gap={{ base: '0.5rem' }}>
-        {features.map((feature) => (
-          <Flex key={feature} alignItems={{ base: 'center' }} gap={{ base: '0.5rem' }}>
+        {featuresForTier(name, true).map((feature) => (
+          <Flex key={feature.name} alignItems={{ base: 'center' }} gap={{ base: '0.5rem' }}>
             <Box as={CheckIcon} flexShrink={0} />
             <Text color="brand.800" fontWeight={{ base: 500 }} fontSize={{ base: '0.875rem' }}>
-              {feature}
+              {feature.name}
             </Text>
           </Flex>
         ))}

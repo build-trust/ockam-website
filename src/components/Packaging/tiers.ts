@@ -72,7 +72,7 @@ const TIERS: Tier[] = [
   {
     name: 'Free',
     text: 'The Tools for Builders',
-    price: '$0',
+    price: '0',
     price_interval: 'mo',
     isPopular: true,
     cta: {
@@ -84,7 +84,7 @@ const TIERS: Tier[] = [
   {
     name: 'Premium',
     text: 'The Tools for Builders',
-    price: '$5',
+    price: '5',
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
@@ -96,7 +96,7 @@ const TIERS: Tier[] = [
   {
     name: 'Bronze',
     text: 'The Tools for Builders',
-    price: '$500',
+    price: '500',
     price_interval: 'mo',
     onlyFloor: true,
     cta: {
@@ -119,7 +119,7 @@ const TIERS: Tier[] = [
   {
     name: 'Silver',
     text: 'The Tools for Builders',
-    price: '$2500',
+    price: '2500',
     price_interval: 'mo',
     onlyFloor: true,
     cta: {
@@ -142,7 +142,7 @@ const TIERS: Tier[] = [
   {
     name: 'Gold',
     text: 'The Tools for Builders',
-    price: '$10000',
+    price: '10000',
     price_interval: 'mo',
     onlyFloor: true,
     cta: {
@@ -373,6 +373,20 @@ const tierColorLight = (tier: Tier): string | undefined => lighten(tierColor(tie
 
 const tierColorDark = (tier: Tier): string | undefined => darken(tierColor(tier) || 'black');
 
+const tiersForSegment = (segmentName: string): Tier[] => {
+  const segment = SEGMENTS.find((s) => s.name === segmentName);
+  if (segment) {
+    const tiers = TIERS.filter((t) => segment.tiers.includes(t.name));
+    return tiers;
+  }
+  return [];
+};
+
+const featuresForTier = (tierName: string, cardOnly: boolean = true): Feature[] =>
+  FEATURES.filter(
+    (f) => f.tiers.includes(tierName) && (f.onCard === cardOnly || cardOnly === false),
+  );
+
 const tierLimit = (tier: Tier, feature: Feature): string | undefined => {
   if (feature.name in LIMITS) {
     return LIMITS[feature.name][tier.name];
@@ -392,4 +406,6 @@ export {
   tierColorDark,
   tierColorLight,
   tierLimit,
+  tiersForSegment,
+  featuresForTier,
 };
