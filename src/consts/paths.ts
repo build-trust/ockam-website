@@ -1,6 +1,6 @@
 export const HOME_PATH = '/';
 export const MAGIC_ID = 'magic';
-export const MAGIC_PATH = `#${MAGIC_ID}`;
+export const MAGIC_PATH = `/#${MAGIC_ID}`;
 export const USE_CASES_ID = 'use-cases';
 export const USE_CASES_PATH = `/#${USE_CASES_ID}`;
 export const FEATURES_PATH = '/#features';
