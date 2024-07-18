@@ -6,20 +6,16 @@ import { featuresForTier, Tier } from '@root/components/Packaging/tiers';
 
 import CheckIcon from './assets/check.svg';
 
-type PricingCardProps = Tier;
+type PricingCardProps = CardProps & {
+  tier: Tier;
+};
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
   maximumFractionDigits: 0,
 });
-const PricingCard = ({
-  name,
-  price_interval,
-  price,
-  cta,
-  ...cardProps
-}: PricingCardProps & CardProps): ReactElement => (
+const PricingCard = ({ tier, ...cardProps }: PricingCardProps): ReactElement => (
   <Card
     borderRadius={{ base: '0.75rem' }}
     p={{ base: '1rem', lg: '1.5rem' }}
@@ -30,7 +26,7 @@ const PricingCard = ({
   >
     <Stack gap={{ base: '0.75rem', lg: '1rem' }}>
       <Text fontWeight={{ base: 700 }} color="brand.800">
-        {name}
+        {tier.name}
       </Text>
       <Box>
         <Text color="gray.500" fontSize={{ base: '0.875rem' }}>
@@ -42,7 +38,7 @@ const PricingCard = ({
           fontSize={{ base: '1.5rem', lg: '2rem' }}
           fontWeight={{ base: 700 }}
         >
-          {priceFormatter.format(price)}{' '}
+          {priceFormatter.format(tier.price)}{' '}
           <Box
             fontFamily="Inter"
             bottom={0}
@@ -52,12 +48,12 @@ const PricingCard = ({
             color="gray.500"
             fontSize={{ base: '0.875rem' }}
           >
-            / {price_interval}
+            / {tier.price_interval}
           </Box>
         </Text>
       </Box>
-      <Button as={NextLink} href={cta.url} variant="primary" height={{ base: '3.5rem' }}>
-        {cta.text}
+      <Button as={NextLink} href={tier.cta.url} variant="primary" height={{ base: '3.5rem' }}>
+        {tier.cta.text}
       </Button>
       <Text
         color="gray.500"
@@ -68,7 +64,7 @@ const PricingCard = ({
         Includes:
       </Text>
       <Stack gap={{ base: '0.5rem' }}>
-        {featuresForTier(name, true).map((feature) => (
+        {featuresForTier(tier.name, true).map((feature) => (
           <Flex key={feature.name} alignItems={{ base: 'center' }} gap={{ base: '0.5rem' }}>
             <Box as={CheckIcon} flexShrink={0} />
             <Text color="brand.800" fontWeight={{ base: 500 }} fontSize={{ base: '0.875rem' }}>
