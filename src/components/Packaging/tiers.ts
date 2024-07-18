@@ -16,7 +16,7 @@ type Marketplaces = {
 type Tier = {
   name: string;
   text: string;
-  price: string;
+  price: number;
   price_interval?: string;
   price_unit?: string;
   floor?: string;
@@ -72,7 +72,7 @@ const TIERS: Tier[] = [
   {
     name: 'Free',
     text: 'The Tools for Builders',
-    price: '0',
+    price: 0,
     price_interval: 'mo',
     isPopular: true,
     cta: {
@@ -84,7 +84,7 @@ const TIERS: Tier[] = [
   {
     name: 'Premium',
     text: 'The Tools for Builders',
-    price: '5',
+    price: 5,
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
@@ -96,7 +96,7 @@ const TIERS: Tier[] = [
   {
     name: 'Bronze',
     text: 'The Tools for Builders',
-    price: '500',
+    price: 500,
     price_interval: 'mo',
     onlyFloor: true,
     cta: {
@@ -119,7 +119,7 @@ const TIERS: Tier[] = [
   {
     name: 'Silver',
     text: 'The Tools for Builders',
-    price: '2500',
+    price: 2500,
     price_interval: 'mo',
     onlyFloor: true,
     cta: {
@@ -142,7 +142,7 @@ const TIERS: Tier[] = [
   {
     name: 'Gold',
     text: 'The Tools for Builders',
-    price: '10000',
+    price: 10000,
     price_interval: 'mo',
     onlyFloor: true,
     cta: {
@@ -166,7 +166,7 @@ const TIERS: Tier[] = [
   {
     name: 'Platinum',
     text: 'The Tools for Builders',
-    price: '250000',
+    price: 250000,
     price_interval: 'yr',
     onlyFloor: true,
     cta: {
@@ -178,7 +178,7 @@ const TIERS: Tier[] = [
   {
     name: 'Enterprise',
     text: '',
-    price: '500000',
+    price: 500000,
     price_interval: 'yr',
     onlyFloor: true,
     cta: {
@@ -190,7 +190,7 @@ const TIERS: Tier[] = [
   {
     name: 'Business Critical',
     text: 'The Tools for Builders',
-    price: '1000000',
+    price: 1000000,
     price_interval: 'yr',
     onlyFloor: true,
     cta: {
