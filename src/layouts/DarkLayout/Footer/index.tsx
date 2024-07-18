@@ -48,7 +48,6 @@ const Footer = (): ReactElement => (
           as="p"
           color="white"
           fontFamily="neutraface"
-          letterSpacing={{ base: '0rem', lg: '0.01rem' }}
           fontSize={{ base: '2.5rem', lg: '6rem' }}
           fontWeight={{ base: 700 }}
         >
