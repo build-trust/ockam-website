@@ -113,7 +113,7 @@ const Price = (props: PriceProps): JSX.Element => {
     return undefined;
   };
 
-  const formattedPrice = (): string => `$${parseInt(price, 10).toLocaleString()}`;
+  const formattedPrice = (): string => `$${price.toLocaleString()}`;
 
   const priceSize = (): ResponsiveValue<
     (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
