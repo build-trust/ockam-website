@@ -13,12 +13,6 @@ import {
   darken,
 } from '@components/Packaging/tiers';
 
-const hasFeature = (tier: Tier, feature: Feature): boolean => {
-  if (feature.tiers.indexOf('*') >= 0) return true;
-  if (feature.tiers.indexOf(tier.name) >= 0) return true;
-  return false;
-};
-
 const featureValue = (tier: Tier, feature: Feature): ReactNode | string => {
   if (hasFeature(tier, feature)) {
     if (feature.hasLimits) {
