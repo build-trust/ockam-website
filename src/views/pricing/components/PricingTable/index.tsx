@@ -19,18 +19,23 @@ const tiers: Tier[] = SEGMENTS.map((segment) => tiersForSegment(segment.name)).f
 
 const PricingTable = (): ReactElement => {
   const showFeatureState = (tier: Tier, feature: Feature): JSX.Element => {
+    const key = `tier-feature-${tier.name}-${feature.name}`;
     if (hasFeature(tier, feature)) {
       const limit = tierLimit(tier, feature);
       if (limit) {
-        return <Td whiteSpace="nowrap">{limit}</Td>;
+        return (
+          <Td whiteSpace="nowrap" key={key}>
+            {limit}
+          </Td>
+        );
       }
       return (
-        <Td>
+        <Td key={key}>
           <CheckIcon />
         </Td>
       );
     }
-    return <Td>&ndash;</Td>;
+    return <Td key={key}>&ndash;</Td>;
   };
 
   return (
@@ -46,18 +51,20 @@ const PricingTable = (): ReactElement => {
             Plan Comparison
           </Th>
           {SEGMENTS.map((segment) => (
-            <Th colSpan={segment.tiers.length}>{segment.name}</Th>
+            <Th colSpan={segment.tiers.length} key={`th-${segment.name}`}>
+              {segment.name}
+            </Th>
           ))}
         </Tr>
         <Tr>
           {tiers.map((tier) => (
-            <Th>{tier.name}</Th>
+            <Th key={`tier-${tier.name}`}>{tier.name}</Th>
           ))}
         </Tr>
       </Thead>
       <Tbody>
         {FEATURES.map((feature) => (
-          <Tr>
+          <Tr key={`feature-${feature.name}`}>
             <Td>{feature.name}</Td>
             {tiers.map((tier) => showFeatureState(tier, feature))}
           </Tr>
