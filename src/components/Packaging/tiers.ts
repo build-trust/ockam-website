@@ -262,7 +262,11 @@ const FEATURES: Feature[] = [
   { name: 'Portals for Mac', tiers: ['*'] },
   { name: 'Programming libraries', tiers: ['*'] },
   { name: 'Secure Channels', tiers: ['*'], hasLimits: true },
-  { name: 'Secure Channels supported within SLAs', tiers: ['*'], hasLimits: true },
+  {
+    name: 'Secure Channels supported within SLAs',
+    tiers: ['Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
+    hasLimits: true,
+  },
   { name: 'Projects', tiers: ['*'], hasLimits: true },
   {
     name: 'Custom Branding / Whitelabel',
@@ -387,6 +391,12 @@ const featuresForTier = (tierName: string, cardOnly: boolean = true): Feature[] 
     (f) => f.tiers.includes(tierName) && (f.onCard === cardOnly || cardOnly === false),
   );
 
+const hasFeature = (tier: Tier, feature: Feature): boolean => {
+  if (feature.tiers.indexOf('*') >= 0) return true;
+  if (feature.tiers.indexOf(tier.name) >= 0) return true;
+  return false;
+};
+
 const tierLimit = (tier: Tier, feature: Feature): string | undefined => {
   if (feature.name in LIMITS) {
     return LIMITS[feature.name][tier.name];
@@ -408,4 +418,5 @@ export {
   tierLimit,
   tiersForSegment,
   featuresForTier,
+  hasFeature,
 };
