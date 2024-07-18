@@ -1,4 +1,4 @@
-import { Box, Button, Card, Flex, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Card, CardProps, Flex, Stack, Text } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import NextLink from 'next/link';
 
@@ -19,7 +19,7 @@ const PricingCard = ({
   price,
   cta,
   ...cardProps
-}: PricingCardProps): ReactElement => (
+}: PricingCardProps & CardProps): ReactElement => (
   <Card
     borderRadius={{ base: '0.75rem' }}
     p={{ base: '1rem', lg: '1.5rem' }}
