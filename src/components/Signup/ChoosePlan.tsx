@@ -34,7 +34,7 @@ const capitalize = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1)
 
 const cta = (tier: Tier, currentPlan?: string): string => {
   if (currentPlan && capitalize(currentPlan) === tier.name) return 'Your current plan';
-  if (tier.price === '$0') return 'Get started';
+  if (tier.price === 0) return 'Get started';
   if (tier.name === 'Business Critical') return 'Contact Sales';
   return 'Start 14 day trial';
 };
@@ -45,12 +45,7 @@ type Props = {
   showNext: Function;
   currentPlan?: string;
 };
-const ChoosePlan: FC<Props> = ({
-  onComplete,
-  hideNext,
-  showNext,
-  currentPlan,
-}) => {
+const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) => {
   const [purchasing, setPurchasing] = useState(false);
   const [purchased, setPurchased] = useState(false);
   const [purchasedPlan, setPurchasedPlan] = useState<string>();
@@ -75,10 +70,11 @@ const ChoosePlan: FC<Props> = ({
           setSetupSponsorship(true);
         } else if (t?.contactSalesOnly) {
           setPurchased(true);
-          const ctaUrl = `${window.location.protocol}//${window.location.host
-            }${CONTACT_FORM_PATH}?reason=${encodeURI(
-              `The ${plan} plan is only available for purchase via speaking to our sales team.`,
-            )}`;
+          const ctaUrl = `${window.location.protocol}//${
+            window.location.host
+          }${CONTACT_FORM_PATH}?reason=${encodeURI(
+            `The ${plan} plan is only available for purchase via speaking to our sales team.`,
+          )}`;
           setTimeout(() => {
             window.location.href = ctaUrl;
           }, 2000);
@@ -208,7 +204,7 @@ const ChoosePlan: FC<Props> = ({
                   <PricingCard
                     key={card.name}
                     data={{
-                      price: card.price,
+                      price: `$${card.price}`,
                       name: card.name,
                       priceUnit: card.price_unit,
                       priceInterval: card.price_interval,
@@ -228,11 +224,11 @@ const ChoosePlan: FC<Props> = ({
                     flexDirection="column"
                     previousTier={
                       TIERS[
-                      TIERS.findIndex(
-                        (tier: Tier) =>
-                          tier.name ===
-                          segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
-                      )
+                        TIERS.findIndex(
+                          (tier: Tier) =>
+                            tier.name ===
+                            segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
+                        )
                       ]
                     }
                     button={

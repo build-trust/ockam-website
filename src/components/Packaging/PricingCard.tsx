@@ -22,7 +22,7 @@ type Feature = {
 export interface PricingCardData {
   features?: Feature[];
   name: string;
-  price: string;
+  price: number;
   priceInterval?: string;
   priceUnit?: string;
   floor?: string;
@@ -36,7 +36,7 @@ type Cta = {
 type Tier = {
   name: string;
   text: string;
-  price: string;
+  price: number;
   price_interval?: string;
   price_unit?: string;
   floor?: string;
@@ -56,7 +56,7 @@ interface PricingCardProps extends CardProps {
 }
 
 interface PriceProps {
-  price: string;
+  price: number;
   unit?: string;
   interval?: string;
   floor?: string;
@@ -113,10 +113,7 @@ const Price = (props: PriceProps): JSX.Element => {
     return undefined;
   };
 
-  const formattedPrice = (): string => {
-    const numPart = price.replace('$', '');
-    return `$${parseInt(numPart, 10).toLocaleString()}`;
-  };
+  const formattedPrice = (): string => `$${parseInt(price, 10).toLocaleString()}`;
 
   const priceSize = (): ResponsiveValue<
     (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
