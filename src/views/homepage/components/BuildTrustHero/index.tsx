@@ -49,7 +49,6 @@ const BuildTrustHero = (): ReactElement => {
         >
           <Heading
             lineHeight={{ base: 'initial', lg: '95%' }}
-            letterSpacing="0.01rem"
             color="inherit"
             as="h1"
             fontSize={{ base: '2.5rem', lg: '8.75rem' }}
