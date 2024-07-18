@@ -204,7 +204,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) 
                   <PricingCard
                     key={card.name}
                     data={{
-                      price: `$${card.price}`,
+                      price: card.price,
                       name: card.name,
                       priceUnit: card.price_unit,
                       priceInterval: card.price_interval,
