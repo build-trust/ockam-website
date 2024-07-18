@@ -1,6 +1,8 @@
 import { Box, Stack } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 
+import { MAGIC_ID } from '@consts/paths';
+
 import HeadingWithLogo from '../HeadingWithLogo';
 import AnimatedText from '../AnimatedText';
 import useCycleStrings from '../AnimatedText/hooks/useCycleStrings';
@@ -19,6 +21,7 @@ const TheMagic = (): ReactElement => {
   const [magicWord] = useCycleStrings(theMagicWords);
   return (
     <Box
+      id={MAGIC_ID}
       pt={{ base: '3.75rem', lg: '7.5rem' }}
       px={{ base: '0.75rem' }}
       pb={{ base: '4rem', lg: '9rem' }}
