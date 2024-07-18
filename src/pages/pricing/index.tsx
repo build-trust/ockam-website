@@ -95,8 +95,8 @@ const PricingPage: NextPageWithLayout<Props> = () => (
               maxW="34rem"
             >
               <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
-                {FOR_DEVELOPERS.map((cardProps) => (
-                  <PricingCard key={cardProps.name} flexGrow={1} flexShrink={0} {...cardProps} />
+                {FOR_DEVELOPERS.map((t) => (
+                  <PricingCard key={t.name} flexGrow={1} flexShrink={0} tier={t} />
                 ))}
               </Flex>
               <DescriptionText>
@@ -120,13 +120,8 @@ const PricingPage: NextPageWithLayout<Props> = () => (
               maxW="75rem"
             >
               <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
-                {FOR_COMPANIES.map((cardProps) => (
-                  <PricingCard
-                    key={cardProps.name}
-                    flexGrow={1}
-                    flexShrink={{ base: 0, lg: 1 }}
-                    {...cardProps}
-                  />
+                {FOR_COMPANIES.map((t) => (
+                  <PricingCard key={t.name} flexGrow={1} flexShrink={{ base: 0, lg: 1 }} tier={t} />
                 ))}
               </Flex>
               <DescriptionText>
@@ -149,13 +144,8 @@ const PricingPage: NextPageWithLayout<Props> = () => (
               maxW="54rem"
             >
               <Flex gap={{ base: '0.75rem', lg: '1rem' }} flexWrap="nowrap" overflow="auto">
-                {FOR_ENTERPRISES.map((cardProps) => (
-                  <PricingCard
-                    key={cardProps.name}
-                    flexGrow={1}
-                    flexShrink={{ base: 0, lg: 1 }}
-                    {...cardProps}
-                  />
+                {FOR_ENTERPRISES.map((t) => (
+                  <PricingCard key={t.name} flexGrow={1} flexShrink={{ base: 0, lg: 1 }} tier={t} />
                 ))}
               </Flex>
               <DescriptionText>
