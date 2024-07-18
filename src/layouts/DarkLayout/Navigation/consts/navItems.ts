@@ -1,7 +1,7 @@
 import { DOCS } from '@consts/externalResources';
 import {
   BLOG_PATH,
-  HOME_PATH,
+  MAGIC_PATH,
   MISSION_AND_VISION_PATH,
   PRICING_PATH,
   SIGNUP_PATH,
@@ -12,7 +12,7 @@ import {
 export const NAV_ITEMS = [
   {
     name: 'Features',
-    href: HOME_PATH,
+    href: MAGIC_PATH,
   },
   {
     name: 'Use Cases',
