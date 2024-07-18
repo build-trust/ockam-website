@@ -11,6 +11,7 @@ import {
   tierLimit,
   lighten,
   darken,
+  hasFeature,
 } from '@components/Packaging/tiers';
 
 const featureValue = (tier: Tier, feature: Feature): ReactNode | string => {
