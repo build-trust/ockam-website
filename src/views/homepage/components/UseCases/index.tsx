@@ -8,16 +8,14 @@ import {
   SAAS_PLATFORMS_PATH,
   USE_CASES_ID,
 } from '@consts/paths';
+import ExcalidrawAnimation from '@root/components/ExcalidrawAnimation';
 
 import AnimatedText from '../AnimatedText';
 import HeadingWithLogo from '../HeadingWithLogo';
 import useCycleStrings from '../AnimatedText/hooks/useCycleStrings';
 
-import distributedSrc from './assets/distributed.png';
-import secureKafkaSrc from './assets/secure-kafka.png';
-import connectSaaSSrc from './assets/connect-saas.png';
 import useCasesBackgroundSrc from './assets/use-cases-background.svg?url';
-import WhiteTile, { DescriptionText, Image, LearnMoreLink, TitleText } from './WhiteTile';
+import WhiteTile, { DescriptionText, LearnMoreLink, TitleText } from './WhiteTile';
 
 const casesWords = [
   'key management',
@@ -71,8 +69,10 @@ const UseCases = (): ReactElement => {
         backdropFilter="blur(10px)"
       >
         <WhiteTile as={NextLink} href={PRIVATE_CONNECTIVITY_PATH}>
-          <Image src={distributedSrc} alt="Distributed Data visualization" />
-          <Stack gap={{ base: '1rem' }}>
+          <Stack gap={{ base: '1rem' }} w="100%" flexBasis={0} flexGrow={1}>
+            <ExcalidrawAnimation src="app-level" animate={false} aspect="width" />
+          </Stack>
+          <Stack gap={{ base: '1rem' }} flexBasis={0} flexGrow={1}>
             <TitleText>Access Distributed Data</TitleText>
             <DescriptionText mb={{ base: '1rem', lg: '2.5rem' }}>
               Create secure access to private databases - from any application, anywhere!
@@ -85,8 +85,10 @@ const UseCases = (): ReactElement => {
         </WhiteTile>
 
         <WhiteTile as={NextLink} href={KAFKA_PATH}>
-          <Image src={secureKafkaSrc} alt="Secure Kafka Streams visualization" />
-          <Stack gap={{ base: '1rem' }}>
+          <Stack gap={{ base: '1rem' }} w="100%" flexBasis={0} flexGrow={1}>
+            <ExcalidrawAnimation src="kafka-encrypted-ockam" animate={false} aspect="width" />
+          </Stack>
+          <Stack gap={{ base: '1rem' }} flexBasis={0} flexGrow={1}>
             <TitleText>Secure Kafka Streams</TitleText>
             <DescriptionText mb={{ base: '1rem', lg: '2.5rem' }}>
               Guarantee data authenticity and integrity from producers all-the-way to consumers.
@@ -99,8 +101,10 @@ const UseCases = (): ReactElement => {
         </WhiteTile>
 
         <WhiteTile as={NextLink} href={SAAS_PLATFORMS_PATH}>
-          <Image src={connectSaaSSrc} alt="Connect SaaS visualization" />
-          <Stack gap={{ base: '1rem' }}>
+          <Stack gap={{ base: '1rem' }} w="100%" flexBasis={0} flexGrow={1}>
+            <ExcalidrawAnimation src="integrate-customer-systems" animate={false} aspect="width" />
+          </Stack>
+          <Stack gap={{ base: '1rem' }} flexBasis={0} flexGrow={1}>
             <TitleText>Connect SaaS to On-Prem systems</TitleText>
             <DescriptionText mb={{ base: '1rem', lg: '2.5rem' }}>
               Unlock new capabilities with enterprise customers. Stop asking your customers to make
