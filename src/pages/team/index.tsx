@@ -3,23 +3,22 @@ import { Box } from '@chakra-ui/react';
 
 import leverApi from '@api/leverApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
-import MainLayout from '@layouts/MainLayout';
-import { Hero, Quote, Values, OpenRoles } from '@views/team';
+import { Hero, Values, OpenRoles } from '@views/team';
 import { LeverPostingsGroup } from '@typings/lever';
 import SEOHead from '@components/SEOHead';
+import DarkLayout from '@layouts/DarkLayout';
 
 const OpenRolesPage: NextPageWithLayout<{ openRoles: LeverPostingsGroup[] }> = ({ openRoles }) => (
-  <Box pt={{ base: 10, lg: 20 }}>
+  <Box>
     <SEOHead subTitle="Open Roles" />
 
     <Hero />
-    <Quote />
     <Values />
     <OpenRoles openRoles={openRoles} />
   </Box>
 );
 
-OpenRolesPage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
+OpenRolesPage.getLayout = (page: ReactElement): ReactNode => <DarkLayout>{page}</DarkLayout>;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export async function getServerSideProps() {
