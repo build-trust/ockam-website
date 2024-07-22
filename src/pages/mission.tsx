@@ -2,7 +2,7 @@ import { ReactElement, ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
 
 import SEOHead from '@components/SEOHead';
-import { Hero, Values, Virtues, Investors, Team } from '@views/mission';
+import { Hero, Values, Virtues, Team } from '@views/mission';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
 import DarkLayout from '@layouts/DarkLayout';
 
@@ -12,7 +12,6 @@ const MissionAndVisionPage: NextPageWithLayout = () => (
     <Hero />
     <Values />
     <Virtues />
-    <Investors />
     <Team />
   </Box>
 );
