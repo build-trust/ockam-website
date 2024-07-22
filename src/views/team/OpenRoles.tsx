@@ -9,31 +9,47 @@ type OpenRolesProps = {
   openRoles: LeverPostingsGroup[];
 };
 
-const DESCRIPTIONS = ['Ockam is a remote-first, globally distributed team.'];
+const DESCRIPTIONS = [' Ockam is a remote-first team and we are globally distributed.'];
 
 const OpenRoles: FunctionComponent<OpenRolesProps> = ({ openRoles }) => (
-  <Container variant="section" id="open-roles" py={{ base: 16, lg: 24 }}>
-    <Flex direction="column" maxW="xl" textAlign={{ base: 'left', lg: 'center' }}>
-      <Heading as="h2" size="h2" mt={{ base: 1, lg: 0 }} lineHeight={1.3}>
+  <Box
+    id="open-roles"
+    px={{ base: '0.5rem' }}
+    maxW="68.375rem"
+    mx="auto"
+    pb={{ base: '5rem', lg: '12.5rem' }}
+  >
+    <Flex
+      mb={{ base: '2rem', lg: '3.5rem' }}
+      direction="column"
+      textAlign={{ base: 'center' }}
+      gap={{ base: '0.5rem', lg: '1.5rem' }}
+    >
+      <Heading
+        fontFamily="neutraface"
+        fontSize={{ base: '2.5rem', lg: '5.5rem' }}
+        as="h2"
+        size="h2"
+        lineHeight={1.3}
+      >
         Open Roles
       </Heading>
 
-      <Box my={6}>
-        {DESCRIPTIONS.map((text) => (
-          <Text
-            key={text}
-            fontSize={{ lg: 'lg' }}
-            lineHeight={{ base: 1.5, lg: 1.4 }}
-            _notLast={{ mb: 2 }}
-          >
-            {text}
-          </Text>
-        ))}
-      </Box>
+      {DESCRIPTIONS.map((text) => (
+        <Text
+          fontSize={{ base: '1.125rem' }}
+          key={text}
+          lineHeight={{ base: 1.4 }}
+          fontWeight={{ base: 500 }}
+          color="gray.500"
+        >
+          {text}
+        </Text>
+      ))}
     </Flex>
 
-    <OpenRolesTabs openRoles={openRoles} py={{ base: 4, lg: 12 }} />
-  </Container>
+    <OpenRolesTabs openRoles={openRoles} />
+  </Box>
 );
 
 export default OpenRoles;
