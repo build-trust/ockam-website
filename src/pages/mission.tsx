@@ -4,12 +4,11 @@ import { Box } from '@chakra-ui/react';
 import SEOHead from '@components/SEOHead';
 import { Hero, Values, Virtues, Investors, Team } from '@views/mission';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
-import MainLayout from '@layouts/MainLayout';
+import DarkLayout from '@layouts/DarkLayout';
 
 const MissionAndVisionPage: NextPageWithLayout = () => (
   <Box pt={{ base: 10, lg: 20 }}>
     <SEOHead subTitle="Our Mission" />
-
     <Hero />
     <Values />
     <Virtues />
@@ -18,6 +17,6 @@ const MissionAndVisionPage: NextPageWithLayout = () => (
   </Box>
 );
 
-MissionAndVisionPage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
+MissionAndVisionPage.getLayout = (page: ReactElement): ReactNode => <DarkLayout>{page}</DarkLayout>;
 
 export default MissionAndVisionPage;
