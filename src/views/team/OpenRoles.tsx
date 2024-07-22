@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { LeverPostingsGroup } from '@typings/lever';
 

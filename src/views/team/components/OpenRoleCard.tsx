@@ -19,14 +19,16 @@ const OpenRoleCard: FunctionComponent<OpenRoleCardProps> = ({ text, categories, 
   >
     <Card
       as="a"
-      boldBorderPosition="Left"
-      boldBorderOnHover
-      _hover={{ svg: { color: 'avocado.500' } }}
+      _hover={{ svg: { color: 'brand.500' } }}
       maxW="initial"
       direction="row"
-      mb={4}
-      py={6}
-      px={5}
+      boldBorderColor="gray.200"
+      border="1px solid"
+      borderRadius="0.75rem"
+      borderBottom="1px solid"
+      borderColor="gray.200"
+      p="1.5rem"
+      mb="1rem"
     >
       <Box flex={1}>
         <Text lineHeight={1.3} fontWeight="bold" fontSize="xl" color="brand.900" mb={2}>

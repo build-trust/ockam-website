@@ -31,6 +31,8 @@ const OpenRolesTabs: FunctionComponent<OpenRolesProps> = ({ openRoles, ...restPr
         borderColor="gray.200"
         maxW={{ base: 'full', lg: '17rem' }}
         w={{ base: 'full' }}
+        mr={{ base: 0, lg: '2.5rem' }}
+        flexDir={{ base: 'column' }}
       >
         {openRolesToRender.map(({ title, postings }) => (
           <CustomTab itemCount={postings?.length} key={title} id={title}>
