@@ -71,6 +71,10 @@ const AllPageNotice: FC<Props> = ({ message, except }) => {
     if (message) {
       if (shouldShowMessage()) setTimeout(openNotice, 2000);
     }
+
+    if (!message) {
+      document.documentElement.style.setProperty('--navbar-offset', '0px');
+    }
   }, [onOpen, message, shouldShowMessage]);
 
   if (!message) return <></>;
