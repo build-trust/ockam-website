@@ -1,11 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
+import Flag from 'react-world-flags';
 
 import ImageWithPlaceholder from '@components/ImageWithPlaceholder';
 import PlaceholderSilverImage from '@assets/images/placeholders/placeholder-team-member-silver.png';
 import PlaceholderBlueImage from '@assets/images/placeholders/placeholder-team-member-blue.png';
 import PlaceholderGreenImage from '@assets/images/placeholders/placeholder-team-member-green.png';
-import getEmojiFlagFromCountryCode from '@utils/getEmojiFlagFromCountryCode';
 import getRandomImage from '@utils/getRandomImage';
 
 type TeamMemberCardProps = {
@@ -15,12 +15,6 @@ type TeamMemberCardProps = {
   description: string;
   photo: string;
   country: string;
-  bgColor?: string;
-};
-
-const IMG_SIZES = {
-  w: '10.25rem',
-  h: '14.3125rem',
 };
 
 const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
@@ -30,81 +24,67 @@ const TeamMemberCard: FunctionComponent<TeamMemberCardProps> = ({
   description,
   photo,
   country,
-  bgColor,
 }) => {
   const placeholderImg = useMemo(
     () => getRandomImage([PlaceholderSilverImage, PlaceholderBlueImage, PlaceholderGreenImage]),
-    []
+    [],
   );
 
   return (
     <Flex
-      position="relative"
-      maxW="xl"
       w="full"
-      borderRadius="base"
-      margin="0 auto"
-      overflow="hidden"
+      p="1rem"
+      border="1px solid"
+      borderColor="gray.200"
+      borderRadius="0.75rem"
+      gap={{ base: '1rem' }}
     >
       <Box
-        w={{ base: '7.875rem', sm: IMG_SIZES.w }}
-        h={IMG_SIZES.h}
+        h="150px"
+        w="111px"
+        borderRadius="0.75rem"
+        overflow="hidden"
         position="relative"
-        backgroundColor={photo ? bgColor : 'transparent'}
+        bg="linear-gradient(0deg, rgba(255, 224, 194, 0.20) 9.03%, rgba(122, 174, 252, 0.20) 44.82%, rgba(184, 193, 252, 0.20) 61.78%, rgba(210, 212, 212, 0.20) 98.29%)"
       >
         <ImageWithPlaceholder
           src={`/team/${photo}`}
           alt={`${name} photo`}
           placeholderImg={placeholderImg}
           layout="fill"
-          objectFit="cover"
         />
       </Box>
 
-      <Box
-        flex={1}
-        px={{ base: 4, lg: 6 }}
-        py={4}
-        borderWidth="1px"
-        border="gray.50"
-        borderLeft={0}
-        borderRightRadius="base"
-        maxH={IMG_SIZES.h}
-        overflowY="auto"
-        position="relative"
-      >
-        <Box pr={8} mb={4}>
-          <Text
-            color="brand.900"
-            fontWeight="bold"
-            fontSize={{ md: 'lg' }}
-            whiteSpace="pre-wrap"
-            display="flex"
-            flexDirection="column"
-            lineHeight={1.2}
-            mb={2}
-          >
-            <span>{name}</span>
-            <span>{surname}</span>
-          </Text>
+      <Box flex={1} position="relative">
+        <Text
+          color="brand.900"
+          fontWeight={700}
+          fontSize={{ base: '1rem' }}
+          mb={{ base: '0.25rem' }}
+        >
+          {name} {surname}
+        </Text>
 
-          <Text fontSize="sm">{position}</Text>
-        </Box>
-
-        <Text fontSize="sm" fontWeight="regular">
-          {description}
+        <Text fontWeight={500} fontSize={{ base: '1rem' }} mb={{ base: '0.5rem' }} lineHeight={1.5}>
+          {position}
         </Text>
 
         <Box
+          display="block"
           as="span"
-          position="absolute"
-          right={4}
-          top={3}
-          fontSize={{ base: '2.5xl', md: '4xl' }}
-          lineHeight={1}
+          position={{ base: 'static', lg: 'absolute' }}
+          mb={{ base: '0.5rem', lg: 0 }}
+          right="0"
+          top="0.25rem"
+          height="1rem"
+          width="1.5rem"
         >
-          {getEmojiFlagFromCountryCode(country as string)}
+          <Flag code={country} />
         </Box>
+
+        <Text fontSize={{ base: '0.875rem' }} fontWeight={400}>
+          {description}
+        </Text>
       </Box>
     </Flex>
   );

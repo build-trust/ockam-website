@@ -9,16 +9,6 @@ export const CATEGORIES = {
 
 export const MEMBERS = enhanceTeamMembers([
   {
-    name: 'Mrinal',
-    surname: 'Wadhwa',
-    position: 'CTO',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'mrinal-wadhwa.png',
-    description: 'Loves rock-n-roll and has a dog named Sargent Pepper',
-    bgColor: colors.extras.pictonBlue,
-  },
-  {
     name: 'Matthew',
     surname: 'Gregory',
     position: 'CEO',
@@ -27,6 +17,16 @@ export const MEMBERS = enhanceTeamMembers([
     photo: 'matthew-gregory.png',
     description: 'Started his career in professional sailing and has a passion for meteorology',
     bgColor: colors.extras.iceCold,
+  },
+  {
+    name: 'Mrinal',
+    surname: 'Wadhwa',
+    position: 'CTO',
+    categories: [CATEGORIES.FULL_TIME_MEMBERS],
+    country: 'US',
+    photo: 'mrinal-wadhwa.png',
+    description: 'Loves rock-n-roll and has a dog named Sargent Pepper',
+    bgColor: colors.extras.pictonBlue,
   },
   {
     name: 'Glenn',

@@ -15,11 +15,11 @@ import TeamMemberCard from './TeamMemberCard';
 
 const ALL_MEMBERS_KEY = 'all-members';
 const categoriesHashes = ['all', ...Object.values(CATEGORIES)].map((category) =>
-  category.split(' ')[0].toLowerCase()
+  category.split(' ')[0].toLowerCase(),
 );
 
 const getMembersForSpecificCategory = (
-  category: typeof CATEGORIES[keyof typeof CATEGORIES]
+  category: (typeof CATEGORIES)[keyof typeof CATEGORIES],
 ): Partial<typeof MEMBERS> => MEMBERS.filter((member) => member.categories.includes(category));
 
 const TeamTabs: FunctionComponent<Omit<TabsProps, 'children'>> = (props) => {
@@ -30,7 +30,14 @@ const TeamTabs: FunctionComponent<Omit<TabsProps, 'children'>> = (props) => {
 
   return (
     <CustomTabs index={tabIndex} onChange={handleTabsChange} {...props}>
-      <CustomTabList minW={250} w={{ base: 'full', lg: 'auto' }} mr={{ lg: 20, xl: 18 }}>
+      <CustomTabList
+        borderBottom="1px solid"
+        borderColor="gray.200"
+        maxW={{ base: 'full', lg: '17.5rem' }}
+        w={{ base: 'full' }}
+        mr={{ base: 0, lg: '2.5rem' }}
+        flexDir={{ base: 'column' }}
+      >
         <CustomTab itemCount={MEMBERS.length} key={ALL_MEMBERS_KEY} id={ALL_MEMBERS_KEY}>
           All Team Members
         </CustomTab>
@@ -48,14 +55,10 @@ const TeamTabs: FunctionComponent<Omit<TabsProps, 'children'>> = (props) => {
 
       <CustomTabPanels>
         <CustomTabPanel id={ALL_MEMBERS_KEY} key={ALL_MEMBERS_KEY}>
-          <SimpleGrid
-            columns={{ base: 1, xl: 2 }}
-            spacingY={{ base: 5, lg: 8 }}
-            spacingX={{ lg: 6 }}
-          >
+          <SimpleGrid columns={{ base: 1, xl: 2 }} spacing={{ base: '1rem', lg: '1.5rem' }}>
             {MEMBERS.map(
               (member) =>
-                member && <TeamMemberCard key={`${member.name}_${member.surname}`} {...member} />
+                member && <TeamMemberCard key={`${member.name}_${member.surname}`} {...member} />,
             )}
           </SimpleGrid>
         </CustomTabPanel>
@@ -64,13 +67,12 @@ const TeamTabs: FunctionComponent<Omit<TabsProps, 'children'>> = (props) => {
           <CustomTabPanel id={category} key={category}>
             <SimpleGrid
               columns={{ base: 1, xl: 2 }}
-              spacingY={{ base: 5, lg: 8 }}
-              spacingX={{ lg: 6 }}
+              spacing={{ base: '1rem', lg: '1.5rem' }}
               id={category}
             >
               {getMembersForSpecificCategory(category)?.map(
                 (member) =>
-                  member && <TeamMemberCard key={`${member.name}_${member.surname}`} {...member} />
+                  member && <TeamMemberCard key={`${member.name}_${member.surname}`} {...member} />,
               )}
             </SimpleGrid>
           </CustomTabPanel>
