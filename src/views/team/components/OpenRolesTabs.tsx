@@ -26,7 +26,12 @@ const OpenRolesTabs: FunctionComponent<OpenRolesProps> = ({ openRoles, ...restPr
 
   return (
     <CustomTabs {...restProps}>
-      <CustomTabList minW={270} w={{ base: 'full', lg: 270 }} mr={{ lg: 20, xl: 36 }}>
+      <CustomTabList
+        borderBottom="1px solid"
+        borderColor="gray.200"
+        maxW={{ base: 'full', lg: '17rem' }}
+        w={{ base: 'full' }}
+      >
         {openRolesToRender.map(({ title, postings }) => (
           <CustomTab itemCount={postings?.length} key={title} id={title}>
             {title}
@@ -37,9 +42,7 @@ const OpenRolesTabs: FunctionComponent<OpenRolesProps> = ({ openRoles, ...restPr
       <CustomTabPanels>
         {openRolesToRender.map(({ title, postings }) => (
           <CustomTabPanel id={title} key={title}>
-            {postings?.map((role) => (
-              <OpenRoleCard key={`${role.text}_${title}}`} {...role} />
-            ))}
+            {postings?.map((role) => <OpenRoleCard key={`${role.text}_${title}}`} {...role} />)}
           </CustomTabPanel>
         ))}
       </CustomTabPanels>

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  forwardRef,
-  useMultiStyleConfig,
-  useTab,
-  useTheme,
-} from '@chakra-ui/react';
+import { Button, Flex, forwardRef, useMultiStyleConfig, useTab } from '@chakra-ui/react';
 
 const selectedTabStyle = {
   textDecoration: 'underline',
@@ -17,7 +9,6 @@ const CustomTab = forwardRef(({ itemCount, ...restProps }, ref) => {
   const tabProps = useTab({ ...restProps, ref });
   const isSelected = !!tabProps['aria-selected'];
   const styles = useMultiStyleConfig('Tabs', tabProps);
-  const { gradients } = useTheme();
 
   return (
     <Flex
@@ -37,7 +28,7 @@ const CustomTab = forwardRef(({ itemCount, ...restProps }, ref) => {
         _active={selectedTabStyle}
         px={1}
         py={4}
-        fontSize={{ lg: 'lg' }}
+        fontSize={{ base: '1.125rem' }}
         textAlign="left"
         variant="link"
         {...tabProps}
@@ -45,18 +36,22 @@ const CustomTab = forwardRef(({ itemCount, ...restProps }, ref) => {
         {tabProps.children}
       </Button>
 
-      <Box
+      <Flex
         as="span"
-        ml={3}
-        py="5px"
-        px="3px"
-        borderRadius="base"
-        fontSize="sm"
-        bg={isSelected ? gradients.primary : 'gray.100'}
-        color={isSelected ? 'white' : 'inherit'}
+        ml="0.75rem"
+        w="1.5rem"
+        h="1.5rem"
+        flexShrink={0}
+        alignItems="center"
+        justifyContent="center"
+        borderRadius="0.25rem"
+        fontSize={{ base: '0.875rem' }}
+        fontWeight={{ base: 600 }}
+        bg={isSelected ? 'brand.500' : 'gray.100'}
+        color={isSelected ? 'white' : 'brand.900'}
       >
         {itemCount}
-      </Box>
+      </Flex>
     </Flex>
   );
 });
