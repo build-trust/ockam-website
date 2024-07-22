@@ -11,7 +11,6 @@ import DarkLayout from '@layouts/DarkLayout';
 const OpenRolesPage: NextPageWithLayout<{ openRoles: LeverPostingsGroup[] }> = ({ openRoles }) => (
   <Box>
     <SEOHead subTitle="Open Roles" />
-
     <Hero />
     <Values />
     <OpenRoles openRoles={openRoles} />
