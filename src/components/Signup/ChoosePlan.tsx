@@ -36,6 +36,7 @@ const cta = (tier: Tier, currentPlan?: string): string => {
   if (currentPlan && capitalize(currentPlan) === tier.name) return 'Your current plan';
   if (tier.price === 0) return 'Get started';
   if (tier.name === 'Business Critical') return 'Contact Sales';
+  if (tier.name === 'Enterprise') return 'Contact Sales';
   return 'Start 14 day trial';
 };
 

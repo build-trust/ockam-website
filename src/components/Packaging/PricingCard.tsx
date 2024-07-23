@@ -213,7 +213,7 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
           fontWeight="extrabold"
           key={`price-head-${name}`}
           color={segmentColor}
-          width="min-content"
+          width="100%"
         >
           {name}
         </Heading>
