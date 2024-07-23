@@ -13,6 +13,8 @@ const Hero: FunctionComponent = () => (
     bgRepeat="no-repeat"
     bgPosition="center -80px, center top"
     pt={{ base: '2.5rem', lg: '10.5rem' }}
+    px={{ base: '0.5rem' }}
+    pb={{ base: '3rem', lg: '10rem' }}
   >
     <Box maxW="70rem" mx="auto">
       <Box textAlign="center" mb={{ base: '5.5rem', lg: '8.75rem' }}>
