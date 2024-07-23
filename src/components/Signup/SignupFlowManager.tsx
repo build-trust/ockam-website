@@ -120,7 +120,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         // @ts-ignore: this dict type actually works here
         const params = new URLSearchParams(query);
         maybeStoreSubDetails(params).then(() => {
-          router.replace('/auth/signin');
+          router.replace('/auth/signup');
         });
       }
     });
