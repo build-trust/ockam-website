@@ -31,7 +31,7 @@ export const MEMBERS = enhanceTeamMembers([
   {
     name: 'Glenn',
     surname: 'Gillen',
-    position: 'VP of Product / GTM',
+    position: 'VP of Product, GTM',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'AU',
     photo: 'glenn-gillen.png',
@@ -95,7 +95,7 @@ export const MEMBERS = enhanceTeamMembers([
   {
     name: 'Michael',
     surname: 'Uti',
-    position: 'Engineer',
+    position: 'Business Operations',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
     country: 'NG',
     photo: 'michael-uti.png',
