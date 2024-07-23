@@ -56,34 +56,30 @@ const Values: FunctionComponent = () => {
 
   return (
     <>
-      <Container variant="section" pt={16}>
-        <Heading as="h2" size="h2" fontWeight="bold" lineHeight={1.3} mb={{ lg: 10 }}>
-          The Team is Built with Trust
-        </Heading>
+      <Heading as="h2" size="h2" fontWeight="bold" lineHeight={1.3} mb={{ lg: 10 }}>
+        The Team is Built on Trust
+      </Heading>
 
-        {MISSION_AND_VISION_CARDS.map((card, index) => (
-          <ValueCard key={card.title} {...card} itemPosition={index % 2 ? 'right' : 'left'} />
-        ))}
-      </Container>
+      {MISSION_AND_VISION_CARDS.map((card, index) => (
+        <ValueCard key={card.title} {...card} itemPosition={index % 2 ? 'right' : 'left'} />
+      ))}
 
-      <Container variant="section" pt={{ base: 32, lg: 24 }} pb={{ base: 20, lg: 30 }}>
-        <StepsLabel>
-          <LineDivider
-            h={{ base: 28, lg: 40 }}
-            bottom={{ base: '150%', lg: '100%' }}
-            bg={gradients.tertiary}
-          />
-          Our Only Value
-        </StepsLabel>
+      <StepsLabel>
+        <LineDivider
+          h={{ base: 28, lg: 40 }}
+          bottom={{ base: '150%', lg: '100%' }}
+          bg={gradients.tertiary}
+        />
+        Our Only Value
+      </StepsLabel>
 
-        <Heading as="h2" size="h2" fontWeight="bold" lineHeight={1.3} my={6}>
-          We believe in Trust
-        </Heading>
+      <Heading as="h2" size="h2" fontWeight="bold" lineHeight={1.3} my={6}>
+        We believe in Trust
+      </Heading>
 
-        {TRUST_VALUES_CARDS.map((card, index) => (
-          <ValueCard key={card.title} {...card} itemPosition={index % 2 ? 'right' : 'left'} />
-        ))}
-      </Container>
+      {TRUST_VALUES_CARDS.map((card, index) => (
+        <ValueCard key={card.title} {...card} itemPosition={index % 2 ? 'right' : 'left'} />
+      ))}
     </>
   );
 };
