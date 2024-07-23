@@ -229,7 +229,12 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       <Box transition="opacity 1s 0s ease-in-out" opacity={transitioning ? '0' : '1'} width="100%">
         {displayStep(activeStep)}
         <Flex direction="row" justifyContent="space-between">
-          {displayNext() && (
+          {displayNext() && activeStep === 1 && (
+            <Button colorScheme="avocado" mb="8" onClick={next}>
+              Skip this for now
+            </Button>
+          )}
+          {displayNext() && activeStep !== 1 && (
             <Button colorScheme="avocado" mb="8" onClick={next}>
               I&apos;ve completed this step
             </Button>

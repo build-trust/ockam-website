@@ -1,5 +1,5 @@
 import { FC, FunctionComponent } from 'react';
-import { Box, Heading, Link } from '@chakra-ui/react';
+import { Box, Heading, Link, Text } from '@chakra-ui/react';
 
 import MarketplaceButton from '@root/components/Packaging/MarketplaceButton';
 import AwsLogo from '@assets/images/logos/aws.svg';
@@ -29,7 +29,8 @@ const AWS: FC<Props> = ({ plan }) => (
       shadow="lg"
       _hover={{ shadow: 'sm', cursor: 'hand' }}
     >
-      <AwsLogo style={{ maxWidth: '100%', maxHeight: '100%' }} />
+      <AwsLogo style={{ maxWidth: '100%', maxHeight: '50px', minHeight: '40px' }} />
+      <Text my={2}>Setup payment in AWS Marketplace</Text>
     </MarketplaceButton>
   </Link>
 );
