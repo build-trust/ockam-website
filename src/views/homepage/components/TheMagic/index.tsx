@@ -79,13 +79,13 @@ const TheMagic = (): ReactElement => {
           <Stack flex={1}>
             <TitleText>Virtual Adjacency</TitleText>
             <DescriptionText>
-              An Ockam Portal does something that feels like magic; It virtually moves your remote application through the Portal so that it is available on {' '}
+              An Ockam Portal does something that feels like magic; It virtually moves your remote application through the Portal so that it\'s available on {' '}
               <Box as="span" color="gray.500" fontWeight={700}>
                 localhost.
               </Box>{' '} 
               <br />
               <br />
-             You won't have to change your network layer configurations, or even to understand them - at all. 
+             You won\'t have to change your network layer configurations, or even to understand them - at all. 
              <br />
              <br />
               <Box as="span" color="gray.500" fontWeight={700}>
