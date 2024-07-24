@@ -77,8 +77,11 @@ const UseCases = (): ReactElement => {
             <DescriptionText mb={{ base: '1rem', lg: '2.5rem' }}>
               Create secure access to private databases - from any application, anywhere!
               <br />
-              Stop exposing private data to the public internet with service ports. Start isolating
-              data exposure to the endpoint of your application.
+              <br />
+              Stop exposing private data to the public internet with service ports.
+              <br />
+              <br />
+              Start isolating data exposure to the endpoint of your application.
             </DescriptionText>
             <LearnMoreLink />
           </Stack>
@@ -93,7 +96,11 @@ const UseCases = (): ReactElement => {
             <DescriptionText mb={{ base: '1rem', lg: '2.5rem' }}>
               Guarantee data authenticity and integrity from producers all-the-way to consumers.
               <br />
-              Stop exposing the broker to your data streams. Start encrypting data-in-motion through
+              <br />
+              Stop exposing the broker to your data streams. 
+              <br />
+              <br />
+              Start encrypting data-in-motion through
               Kafka.
             </DescriptionText>
             <LearnMoreLink />
@@ -105,10 +112,15 @@ const UseCases = (): ReactElement => {
             <ExcalidrawAnimation src="integrate-customer-systems" animate={false} aspect="width" />
           </Stack>
           <Stack gap={{ base: '1rem' }} flexBasis={0} flexGrow={1}>
-            <TitleText>Connect SaaS to On-Prem systems</TitleText>
+            <TitleText>Connect Products to Private systems</TitleText>
             <DescriptionText mb={{ base: '1rem', lg: '2.5rem' }}>
-              Unlock new capabilities with enterprise customers. Stop asking your customers to make
-              network changes. Integrate into your existing platform within minutes.
+              Create security product features for your enterprise customers. 
+              <br />
+              <br />
+              Stop asking your customers to make network configuration changes. 
+              <br />
+              <br />
+              Build Ockam into your existing products - in minutes.
             </DescriptionText>
             <LearnMoreLink />
           </Stack>
