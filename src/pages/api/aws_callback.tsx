@@ -8,6 +8,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
     if ('x-amzn-marketplace-token' in params) {
         response.redirect(`/get-started?${JSON.stringify(params)}`);
     } else {
-        response.redirect('/')
+        response.redirect('/get-started')
     }
 }
