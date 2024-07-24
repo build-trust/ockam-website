@@ -119,7 +119,7 @@ const OpenRole: FunctionComponent<OpenRoleProps> = ({ openRole }) => {
 
       <Flex
         direction={{ base: 'column', lg: 'row' }}
-        align={{ lg: 'center' }}
+        align={{ base: 'center' }}
         gap={{ base: '2rem' }}
         justifyContent={{ lg: 'space-between' }}
         mb={{ base: '2rem', lg: '6rem' }}
