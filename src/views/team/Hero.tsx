@@ -82,7 +82,8 @@ const OpenRolesHero = (): ReactElement => (
       >
         <Flex
           overflow="hidden"
-          background="white"
+          bgColor="white"
+          bgImage="linear-gradient(0deg, rgba(255, 224, 194, 0.20) 9.03%, rgba(122, 174, 252, 0.20) 44.82%, rgba(184, 193, 252, 0.20) 61.78%, rgba(210, 212, 212, 0.20) 98.29%)"
           borderRadius="0.4rem"
           w={{ base: '16.5rem', lg: '7rem' }}
           height={{ base: '21rem', lg: '9.5rem' }}
