@@ -1,13 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export default async function handler(request: NextApiRequest, response: NextApiResponse) {
+type ParamsType = {
+  [key: string]: string;
+};
+const createQueryString = (params: { [key: string]: string }): string => {
+  const urlParams = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    urlParams.set(key, value);
+  });
+  return urlParams.toString();
+};
 
-    const params = request.body;
-
-    if ('x-amzn-marketplace-token' in params) {
-        response.redirect(`/get-started?${JSON.stringify(params)}`);
-    } else {
-        response.redirect('/get-started')
-    }
+export default async function handler(
+  request: NextApiRequest,
+  response: NextApiResponse,
+): Promise<void> {
+  let params: ParamsType = { ...{}, ...request.query };
+  if (request.method === 'POST') {
+    params = { ...params, ...request.body };
+  }
+  response.redirect(`/get-started?${createQueryString(params)}`);
 }
