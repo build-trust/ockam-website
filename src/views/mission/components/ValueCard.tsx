@@ -1,10 +1,5 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import { Box, Flex, Text, Icon, useBreakpointValue, useTheme } from '@chakra-ui/react';
-
-import { DashedLineDivider } from '@components/LineDivider';
-import Card from '@components/Card';
-import GreenIconWrapper from '@components/GreenIconWrapper';
-import BorderDot from '@components/BorderDot';
+import { Flex, Text, Icon, Stack } from '@chakra-ui/react';
 
 type TimeLineItemProps = {
   icon: FunctionComponent<SVGAttributes<SVGElement>>;
@@ -18,54 +13,62 @@ const ValueCard: FunctionComponent<TimeLineItemProps> = ({
   title,
   texts,
   itemPosition = 'left',
-}) => {
-  const { gradients } = useTheme();
-  const inOnMobile = useBreakpointValue({ base: true, lg: false });
-
-  return (
+}) => (
+  <Flex
+    justifyContent={{ base: 'center', lg: itemPosition === 'right' ? 'flex-start' : 'flex-end' }}
+    w="full"
+    position="relative"
+    alignItems="center"
+    mb={{ base: '3rem', lg: '5rem' }}
+    _before={{
+      display: { base: 'none', lg: 'block' },
+      content: '""',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      width: '8px',
+      height: '8px',
+      backgroundColor: 'white',
+      borderRadius: '50%',
+      transform: 'translate(-50%, -50%)',
+    }}
+  >
     <Flex
-      justifyContent={{ base: 'center', lg: itemPosition === 'right' ? 'flex-start' : 'flex-end' }}
-      w="full"
+      maxW="32.0625rem"
+      p="1.75rem"
+      borderRadius="0.75rem"
+      border="1px solid rgba(116, 223, 255, 0.20)"
+      background="linear-gradient(109deg, rgba(5, 39, 75, 0.40) 8.18%, rgba(6, 53, 60, 0.40) 88.15%)"
+      backdropFilter="blur(3px)"
+      gap={{ base: '1.5rem' }}
+      flexDirection={{ base: 'column', lg: 'row' }}
       position="relative"
-      py={{ lg: 6 }}
+      w={{ lg: '50%' }}
     >
-      {/* TODO: Change line dividers and dot implementations */}
+      <Flex
+        borderRadius="0.75rem"
+        alignItems="center"
+        justifyContent="center"
+        alignSelf="flex-start"
+        p="0.5rem"
+        bg="rgba(116, 223, 255, 0.15)"
+      >
+        <Icon as={icon} color="white" w={6} h={6} />
+      </Flex>
 
-      <DashedLineDivider withDot />
+      <Stack gap="0.75rem">
+        <Text fontFamily="neutraface" fontWeight={700} fontSize={{ base: '1.75rem' }} color="white">
+          {title}
+        </Text>
 
-      <DashedLineDivider display={{ base: 'block', lg: 'none' }} h="72px" top="16px" />
-      <BorderDot
-        display={{ base: 'block', lg: 'none' }}
-        zIndex={1}
-        left="calc(50% - 8.5px)"
-        top="72px"
-      />
-
-      <Box position="relative" w={{ lg: '50%' }} px={{ lg: 10 }} pt={{ base: 26, lg: 0 }}>
-        <Card
-          {...(inOnMobile ? {} : { speachBubbleTriangle: itemPosition })}
-          boldBorderGradient={gradients.primary}
-          p={6}
-        >
-          <Flex align="center" mb={5}>
-            <GreenIconWrapper mr={6}>
-              <Icon as={icon} color="white" w={6} h={6} />
-            </GreenIconWrapper>
-
-            <Text fontWeight="bold" fontSize="2xl" color="brand.900">
-              {title}
-            </Text>
-          </Flex>
-
-          {texts.map((text) => (
-            <Text key={text} fontSize={{ base: 'lg', lg: 'xl' }} _notLast={{ mb: 2 }}>
-              {text}
-            </Text>
-          ))}
-        </Card>
-      </Box>
+        {texts.map((text) => (
+          <Text key={text} fontSize={{ base: '1rem' }} lineHeight={1.5} color="white">
+            {text}
+          </Text>
+        ))}
+      </Stack>
     </Flex>
-  );
-};
+  </Flex>
+);
 
 export default ValueCard;
