@@ -59,17 +59,17 @@ const TheMagic = (): ReactElement => {
           <Stack flex={1}>
             <TitleText>Portals</TitleText>
             <DescriptionText>
-              Portals carry various{' '}
+              Portals transport {' '}
               <Box as="span" color="gray.500" fontWeight={700}>
-                protocols
+                data-in-motion
               </Box>{' '}
               over end-to-end encrypted Ockam secure channels. They work at the{' '}
               <Box as="span" color="gray.500" fontWeight={700}>
-                application
+                application layer
               </Box>{' '}
-              level and abstract away the setup, management, and security of the network layer. When
+              and abstract away the setup, management, and security of the network layer. When
               application connectivity and security is decoupled from your network, you no longer
-              need to wait for your IT team to give you permissions to build connections.
+              need to wait for your IT team to give you permissions to build trusted connections.
             </DescriptionText>
           </Stack>
         </WhiteTile>
@@ -79,22 +79,18 @@ const TheMagic = (): ReactElement => {
           <Stack flex={1}>
             <TitleText>Virtual Adjacency</TitleText>
             <DescriptionText>
-              The magical thing that Ockam{' '}
+              An Ockam Portal does something that feels like magic; It virtually moves your remote application through the Portal so that it is available on {' '}
               <Box as="span" color="gray.500" fontWeight={700}>
-                unlocks
-              </Box>{' '}
-              via Portals is what we call Virtual Adjacency. The Portal connects your application to
-              a remote application, and virtually pulls it through the{' '}
-              <Box as="span" color="gray.500" fontWeight={700}>
-                portal
-              </Box>{' '}
-              so that it appears as though they sit next to each other on the same machine. That
-              means applications are available to each other on localhost in a peer-to-peer way.
+                localhost.
+              </Box>{' '} 
               <br />
               <br />
-              What we don&apos;t have to do in this scenario is change any of the network layer
-              configurations or really need to understand anything at the network layer at all. In
-              this way we say Ockam is networkless.
+             You won't have to change your network layer configurations, or even to understand them - at all. 
+             <br />
+             <br />
+              <Box as="span" color="gray.500" fontWeight={700}>
+                Ockam is networkless.
+              </Box>{' '}
             </DescriptionText>
           </Stack>
         </WhiteTile>
