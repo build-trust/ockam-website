@@ -4,18 +4,18 @@ import { useRouter } from 'next/router';
 
 import leverApi from '@api/leverApi';
 import { NextPageWithLayout } from '@typings/NextPageWithLayout';
-import MainLayout from '@layouts/MainLayout';
 import { LeverPosting } from '@typings/lever';
 import { OpenRole } from '@views/open-role';
 import SEOHead from '@components/SEOHead';
 import { OPEN_ROLE_PATH, OPEN_ROLES_PATH } from '@consts/paths';
+import DarkLayout from '@layouts/DarkLayout';
 
 const getMetaDescription = (description: string): string => {
   const META_DESCRIPTION_MAX_LENGTH = 150;
   const trimmedDescription = description.substring(0, META_DESCRIPTION_MAX_LENGTH);
   const trimmedDescriptionWithoutTruncatedWords = trimmedDescription.substring(
     0,
-    Math.min(trimmedDescription.length, trimmedDescription.lastIndexOf(' '))
+    Math.min(trimmedDescription.length, trimmedDescription.lastIndexOf(' ')),
   );
 
   return `${trimmedDescriptionWithoutTruncatedWords} ...`;
@@ -38,7 +38,7 @@ const OpenRolePage: NextPageWithLayout<{ openRole: LeverPosting }> = ({ openRole
   );
 };
 
-OpenRolePage.getLayout = (page: ReactElement): ReactNode => <MainLayout>{page}</MainLayout>;
+OpenRolePage.getLayout = (page: ReactElement): ReactNode => <DarkLayout>{page}</DarkLayout>;
 
 type GetServerSidePropsReturnType = {
   props?: { openRole: LeverPosting };
