@@ -11,6 +11,8 @@ import {
   Flex,
 } from '@chakra-ui/react';
 
+import { MISSION_AND_VISION_VIRTUES_ID } from '@consts/paths';
+
 import TimeIsPreciousImage from './assets/time.svg?url';
 import DefaultToTransparencyImage from './assets/default.svg?url';
 import KeepThingsSimpleImage from './assets/simple.svg?url';
@@ -108,6 +110,7 @@ const Virtues: FunctionComponent = () => (
     maxW="52rem"
     mx="auto"
     bg="white"
+    id={MISSION_AND_VISION_VIRTUES_ID}
     pb={{ base: '8.75rem', lg: '10rem' }}
   >
     <Flex
