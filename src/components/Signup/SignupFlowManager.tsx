@@ -87,8 +87,8 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
         if (response.status === 200) {
           window.sessionStorage.removeItem('pre-auth-params');
-          setHasPaymentMethod(true);
         }
+        setHasPaymentMethod(true);
       }
     },
     [user],
