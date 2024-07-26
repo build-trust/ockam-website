@@ -38,6 +38,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const router = useRouter();
   const [user, setUser] = useState<User>();
+  const [hasPaymentMethod, setHasPaymentMethod] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
   const [currentPlan, setCurrentPlan] = useState<string>();
@@ -50,20 +51,11 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     return p;
   }, [router.query]);
 
-  const getCurrentPlan = useCallback(async (u: User): Promise<string | undefined> => {
-    if (u) {
-      let { userId } = u;
-      if (!userId) {
-        const stored = localStorage.getItem('ajs_user_id');
-        if (!stored) return undefined;
-
-        userId = JSON.parse(stored);
-      }
-      const response = await fetch(`/api/user?userid=${userId}`);
-      if (response) {
-        const data = await response.json();
-        return data?.subscription?.plan?.name;
-      }
+  const getCurrentPlan = useCallback(async (userId: string): Promise<string | undefined> => {
+    const response = await fetch(`/api/user?userid=${userId}`);
+    if (response) {
+      const data = await response.json();
+      return data?.subscription?.plan?.name;
     }
     return undefined;
   }, []);
@@ -73,15 +65,10 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   };
 
   const maybeUpdateSubscription = useCallback(
-    async (u: { userId: String }, params: ParamsDict): Promise<void> => {
+    async (userId: string, params: ParamsDict): Promise<void> => {
       const customerId = params.customer || params.aws_customer_id;
       const productId = params.product || params.aws_product_id;
       const customerAwsID = params.CustomerAWSAccountID;
-      let { userId } = u;
-      if (!userId) {
-        const stored = localStorage.getItem('ajs_user_id');
-        if (stored) userId = JSON.parse(stored);
-      }
 
       if (customerId && productId && userId) {
         const response = await fetch('/api/update_subscription', {
@@ -99,13 +86,12 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         });
 
         if (response.status === 200) {
-          const { pathname } = router;
           window.sessionStorage.removeItem('pre-auth-params');
-          router.replace({ pathname, query: '' }, undefined, { shallow: true });
+          setHasPaymentMethod(true);
         }
       }
     },
-    [router, user],
+    [user],
   );
 
   useEffect(() => {
@@ -114,11 +100,15 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       if (isIn) {
         currentUser().then((u) => {
           if (u) {
-            maybeUpdateSubscription(u, purchaseParams()).then(() => {
-              getCurrentPlan(u).then((plan) => {
+            maybeUpdateSubscription(u.userId, purchaseParams()).then(() => {
+              getCurrentPlan(u.userId).then((plan) => {
                 if (plan) {
-                  setCurrentPlan(plan);
-                  setStep(2);
+                  if (hasPaymentMethod) {
+                    setStep(3);
+                  } else {
+                    setCurrentPlan(plan);
+                    setStep(2);
+                  }
                 } else if (JSON.stringify(u) !== JSON.stringify(user)) {
                   setUser(u);
                   setStep(1);
@@ -145,6 +135,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     setCurrentPlan,
     activeStep,
     purchaseParams,
+    hasPaymentMethod,
   ]);
 
   useEffect(() => {
@@ -197,6 +188,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
             hideNext={hideNext}
             showNext={showNext}
             currentPlan={currentPlan}
+            hasPaymentMethod={hasPaymentMethod}
           />
         );
         break;

@@ -45,21 +45,25 @@ const updateTackle = async (
 };
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
-  const res = await fetch(`${process.env.OCKAM_API_BASE_URL}/update_subscription`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'ockam-api-key': process.env.OCKAM_API_KEY as string,
-    },
-    body: JSON.stringify(request.body),
-  });
+  try {
+    const res = await fetch(`${process.env.OCKAM_API_BASE_URL}/update_subscription`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ockam-api-key': process.env.OCKAM_API_KEY as string,
+      },
+      body: JSON.stringify(request.body),
+    });
 
-  await updateTackle(request.body.productId, request.body.customerId, '', request.body.email, '');
+    await updateTackle(request.body.productId, request.body.customerId, '', request.body.email, '');
 
-  if (res.status === 200) {
-    const data = await res.json();
-    response.json(data);
-  } else {
-    response.status(res.status).send('Error.');
+    if (res.status === 200) {
+      const data = await res.json();
+      response.json(data);
+    } else {
+      response.status(res.status).send('Error.');
+    }
+  } catch (error) {
+    response.status(200).json(error);
   }
 }

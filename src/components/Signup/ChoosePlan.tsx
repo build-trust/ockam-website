@@ -44,9 +44,16 @@ type Props = {
   onComplete: Function;
   hideNext: Function;
   showNext: Function;
+  hasPaymentMethod: boolean;
   currentPlan?: string;
 };
-const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) => {
+const ChoosePlan: FC<Props> = ({
+  onComplete,
+  hideNext,
+  showNext,
+  currentPlan,
+  hasPaymentMethod,
+}) => {
   const [purchasing, setPurchasing] = useState(false);
   const [purchased, setPurchased] = useState(false);
   const [purchasedPlan, setPurchasedPlan] = useState<string>();
@@ -64,8 +71,14 @@ const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) 
       setTimeout(() => {
         const t = TIERS.find((tier) => tier.name === plan);
         if (t?.marketplaceOnly) {
-          showNext();
-          setSetupMarketplace(true);
+          if (hasPaymentMethod) {
+            setTimeout(() => {
+              onComplete();
+            }, 2000);
+          } else {
+            showNext();
+            setSetupMarketplace(true);
+          }
         } else if (t?.sponsorship) {
           showNext();
           setSetupSponsorship(true);
@@ -87,7 +100,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) 
         }
       }, 4000);
     },
-    [onComplete, showNext],
+    [onComplete, showNext, hasPaymentMethod],
   );
 
   useEffect(() => {
