@@ -16,6 +16,10 @@ type Props = {
   install: MDXRemoteSerializeResult;
 };
 
+type ParamsDict = {
+  [key: string]: string;
+};
+
 const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const steps = useMemo(
     () => [
@@ -38,6 +42,14 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const [nextHidden, setNextHidden] = useState(false);
   const [currentPlan, setCurrentPlan] = useState<string>();
 
+  const purchaseParams = useCallback((): ParamsDict => {
+    let p = {};
+    const stashed = window.sessionStorage.getItem('pre-auth-params');
+    if (stashed) p = { ...p, ...JSON.parse(stashed) };
+    if (router.query) p = { ...p, ...router.query };
+    return p;
+  }, [router.query]);
+
   const getCurrentPlan = useCallback(async (u: User): Promise<string | undefined> => {
     if (u) {
       let { userId } = u;
@@ -56,19 +68,15 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     return undefined;
   }, []);
 
-  const maybeStoreSubDetails = async (params: URLSearchParams): Promise<void> => {
-    const customer = params.get('customer');
-    const product = params.get('product');
-    if (customer && product) {
-      window.sessionStorage.setItem('customer', customer);
-      window.sessionStorage.setItem('product', product);
-    }
+  const stashParams = async (params: URLSearchParams): Promise<void> => {
+    window.sessionStorage.setItem('pre-auth-params', JSON.stringify(params.toString()));
   };
 
   const maybeUpdateSubscription = useCallback(
-    async (u: { userId: String }, params: URLSearchParams): Promise<void> => {
-      const customerId = window.sessionStorage.getItem('customer') || params.get('customer');
-      const productId = window.sessionStorage.getItem('product') || params.get('product');
+    async (u: { userId: String }, params: ParamsDict): Promise<void> => {
+      const customerId = params.customer || params.aws_customer_id;
+      const productId = params.product || params.aws_product_id;
+      const customerAwsID = params.CustomerAWSAccountID;
       let { userId } = u;
       if (!userId) {
         const stored = localStorage.getItem('ajs_user_id');
@@ -81,18 +89,23 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId, customerId, productId }),
+          body: JSON.stringify({
+            userId,
+            customerId,
+            productId,
+            customerAwsID,
+            email: user?.email,
+          }),
         });
 
         if (response.status === 200) {
           const { pathname } = router;
-          window.sessionStorage.removeItem('customer');
-          window.sessionStorage.removeItem('product');
+          window.sessionStorage.removeItem('pre-auth-params');
           router.replace({ pathname, query: '' }, undefined, { shallow: true });
         }
       }
     },
-    [router],
+    [router, user],
   );
 
   useEffect(() => {
@@ -101,9 +114,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       if (isIn) {
         currentUser().then((u) => {
           if (u) {
-            // @ts-ignore: this dict type actually works here
-            const params = new URLSearchParams(query);
-            maybeUpdateSubscription(u, params).then(() => {
+            maybeUpdateSubscription(u, purchaseParams()).then(() => {
               getCurrentPlan(u).then((plan) => {
                 if (plan) {
                   setCurrentPlan(plan);
@@ -119,7 +130,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       } else {
         // @ts-ignore: this dict type actually works here
         const params = new URLSearchParams(query);
-        maybeStoreSubDetails(params).then(() => {
+        stashParams(params).then(() => {
           router.replace('/auth/signup');
         });
       }
@@ -133,6 +144,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     getCurrentPlan,
     setCurrentPlan,
     activeStep,
+    purchaseParams,
   ]);
 
   useEffect(() => {
