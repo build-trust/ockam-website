@@ -8,11 +8,25 @@ const updateTackle = async (
   name: string,
 ): Promise<void> => {
   try {
+    const authenticationResponse = await fetch('https://api.tackle.io/v1/authenticate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept: ': 'application/json',
+      },
+      body: JSON.stringify({
+        grant_type: 'client_credentials',
+        client_id: process.env.TACKLE_CLIENT_ID,
+        client_secret: process.env.TACKLE_CLIENT_SECRET,
+      }),
+    });
+    const bearerToken = (await authenticationResponse.json()).access_token;
+
     await fetch('https://api.tackle.io/v1/registrations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization: ': `Bearer ${process.env.TACKLE_TOKEN as string}`,
+        'Authorization: ': `Bearer ${bearerToken}`,
       },
       body: JSON.stringify({
         productid,
