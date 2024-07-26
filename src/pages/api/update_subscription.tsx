@@ -15,8 +15,8 @@ const updateTackle = async (
         'Authorization: ': `Bearer ${process.env.TACKLE_TOKEN as string}`,
       },
       body: JSON.stringify({
-        productid: productid,
-        customerid: customerid,
+        productid,
+        customerid,
         details: {
           Company: company,
           'Email Address': email,
