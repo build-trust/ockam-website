@@ -7,19 +7,15 @@ import colors from '@root/theme/colors';
 
 type Props = {
   user?: User;
-  nextCallback: Function;
 };
-const Welcome: FC<Props> = ({ user, nextCallback }) => {
+const Welcome: FC<Props> = ({ user }) => {
   const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
     if (user && !signedIn) {
       setSignedIn(true);
-      setTimeout(() => {
-        nextCallback();
-      }, 10000);
     }
-  }, [setSignedIn, signedIn, nextCallback, user]);
+  }, [setSignedIn, signedIn, user]);
 
   const doneIcon = (): ReactElement => (
     <Box

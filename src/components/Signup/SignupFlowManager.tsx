@@ -5,12 +5,14 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 
 import { User, currentUser, isSignedIn } from '@root/components/Auth';
+import Orchestrator, { Space } from '@components/Orchestrator';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
 import Deploy from './Deploy';
 import Welcome from './Welcome';
 import Experience from './Experience';
+import MarketplaceSetup from './MarketplaceSetup';
 
 type Props = {
   install: MDXRemoteSerializeResult;
@@ -25,6 +27,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     () => [
       { title: 'Get started', description: 'Setup your account' },
       { title: 'Choose a plan', description: 'Right-size to your needs' },
+      { title: 'Payment', description: 'Attach a payment method' },
       { title: 'Download', description: 'Download & Install Ockam' },
       { title: 'Experience', description: 'Try a hands-on example' },
       { title: 'Deploy', description: 'Create a secure channel' },
@@ -38,10 +41,36 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const router = useRouter();
   const [user, setUser] = useState<User>();
+  const [spaces, setSpaces] = useState<Space[]>();
+  const [space, setSpace] = useState<Space>();
+  const [currentPlan, setCurrentPlan] = useState<string>();
   const [hasPaymentMethod, setHasPaymentMethod] = useState(false);
+
   const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
-  const [currentPlan, setCurrentPlan] = useState<string>();
+
+  const numberForStep = useCallback(
+    (title: string): number => {
+      const idx = steps.findIndex((s) => s.title === title);
+      if (idx) return idx;
+      return 0;
+    },
+    [steps],
+  );
+
+  const determineCurrentStep = useCallback(
+    (u: boolean, s: boolean, cp: boolean, hp: boolean): number => {
+      // const u = user
+      // const s = space
+      // const cp = currentPlan
+      // const hp = hasPaymentMethod
+      if (u && s && cp && hp) return numberForStep('Download');
+      if (u && s && cp) return numberForStep('Payment');
+      if (u && s) return numberForStep('Choose a plan');
+      return 1;
+    },
+    [numberForStep],
+  );
 
   const purchaseParams = useCallback((): ParamsDict => {
     let p = {};
@@ -51,92 +80,62 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     return p;
   }, [router.query]);
 
-  const getCurrentPlan = useCallback(async (userId: string): Promise<string | undefined> => {
-    const response = await fetch(`/api/user?userid=${userId}`);
-    if (response) {
-      const data = await response.json();
-      return data?.subscription?.plan?.name;
-    }
-    return undefined;
-  }, []);
-
   const stashParams = async (params: URLSearchParams): Promise<void> => {
     window.sessionStorage.setItem('pre-auth-params', JSON.stringify(params.toString()));
   };
 
-  const maybeUpdateSubscription = useCallback(
-    async (userId: string, params: ParamsDict): Promise<void> => {
-      const customerId = params.customer || params.aws_customer_id;
-      const productId = params.product || params.aws_product_id;
-      const customerAwsID = params.CustomerAWSAccountID;
+  const signIn = useCallback(async (): Promise<void> => {
+    const { query } = router;
+    // @ts-ignore: this dict type actually works here
+    const params = new URLSearchParams(query);
+    await stashParams(params);
+    router.replace('/auth/signup');
+  }, [router]);
 
-      if (customerId && productId && userId) {
-        const response = await fetch('/api/update_subscription', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId,
-            customerId,
-            productId,
-            customerAwsID,
-            email: user?.email,
-          }),
-        });
-
-        if (response.status === 200) {
-          window.sessionStorage.removeItem('pre-auth-params');
-        }
-        setHasPaymentMethod(true);
-      }
+  const getSpaces = useCallback(
+    async (token: string): Promise<Space[]> => {
+      if (spaces && spaces.length > 0) return spaces;
+      const ss = await Orchestrator.getSpaces(token);
+      setSpaces(ss);
+      return ss || [];
     },
-    [user],
+    [spaces],
   );
 
-  useEffect(() => {
-    const { query } = router;
-    isSignedIn().then((isIn) => {
-      if (isIn) {
-        currentUser().then((u) => {
-          if (u) {
-            maybeUpdateSubscription(u.userId, purchaseParams()).then(() => {
-              getCurrentPlan(u.userId).then((plan) => {
-                if (plan) {
-                  if (hasPaymentMethod) {
-                    setStep(3);
-                  } else {
-                    setCurrentPlan(plan);
-                    setStep(2);
-                  }
-                } else if (JSON.stringify(u) !== JSON.stringify(user)) {
-                  setUser(u);
-                  setStep(1);
-                }
-              });
-            });
-          }
-        });
-      } else {
-        // @ts-ignore: this dict type actually works here
-        const params = new URLSearchParams(query);
-        stashParams(params).then(() => {
-          router.replace('/auth/signup');
-        });
+  const getSpace = useCallback(
+    async (token: string, ss: Space[]): Promise<Space | undefined> => {
+      let s = space;
+      if (s) return s;
+      if (ss && ss.length === 1) [s] = ss;
+      if (!s) {
+        // no spaces, time to create one
       }
-    });
-  }, [
-    router,
-    setStep,
-    setUser,
-    user,
-    maybeUpdateSubscription,
-    getCurrentPlan,
-    setCurrentPlan,
-    activeStep,
-    purchaseParams,
-    hasPaymentMethod,
-  ]);
+      setSpace(s);
+      return s;
+    },
+    [space],
+  );
+
+  const getPlan = useCallback(async (spaceId: string, ss: Space[]): Promise<string | undefined> => {
+    const s = ss.find((e) => e.id === spaceId);
+    if (s) setCurrentPlan(s.subscription_plan.name);
+    return s?.subscription_plan.name;
+  }, []);
+
+  const getPaymentMethod = useCallback(async (): Promise<boolean> => {
+    const params = purchaseParams();
+    const customerId = params.customer || params.aws_customer_id;
+    const productId = params.product || params.aws_product_id;
+    // const customerAwsID = params.CustomerAWSAccountID;
+
+    if (customerId && productId) {
+      // TODO: save marketplace details
+      setHasPaymentMethod(true);
+      window.sessionStorage.removeItem('pre-auth-params');
+      return true;
+    }
+    return false;
+  }, [purchaseParams]);
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
@@ -148,22 +147,35 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     // window.scrollTo(0, 0);
   }, [steps, activeStep]);
 
-  const hideNext = (): void => {
+  const hideNext = useCallback((): void => {
     setNextHidden(true);
-  };
+  }, []);
 
-  const showNext = (): void => {
+  const showNext = useCallback((): void => {
     setNextHidden(false);
-  };
+  }, []);
 
-  const next = (): void => {
+  const next = useCallback((): void => {
     setTransitioning(true);
     setTimeout(() => {
       showNext();
       nextStep();
       setTransitioning(false);
     }, 1200);
-  };
+  }, [nextStep, showNext]);
+
+  const jump = useCallback(
+    (st: number): void => {
+      setTimeout(() => {
+        setTransitioning(true);
+        setTimeout(() => {
+          setStep(st);
+          setTransitioning(false);
+        }, 1200);
+      }, 1200);
+    },
+    [setStep],
+  );
 
   const prev = (): void => {
     setTransitioning(true);
@@ -174,43 +186,82 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     }, 1200);
   };
 
-  useEffect(() => {});
-
-  const displayStep = (step: number): ReactElement => {
-    switch (step) {
-      case 0:
-        return <Welcome user={user} nextCallback={next} />;
-        break;
-      case 1:
-        return (
-          <ChoosePlan
-            onComplete={next}
-            hideNext={hideNext}
-            showNext={showNext}
-            currentPlan={currentPlan}
-            hasPaymentMethod={hasPaymentMethod}
-          />
-        );
-        break;
-      case 2:
-        return <Download install={install} />;
-        break;
-      case 3:
-        return <Experience />;
-        break;
-      case 4:
-        return <Deploy />;
-        break;
-      default:
-        return <></>;
-    }
-  };
+  const displayStep = useCallback(
+    (step: number): ReactElement => {
+      switch (step) {
+        case 0:
+          return <Welcome user={user} />;
+          break;
+        case 1:
+          return (
+            <ChoosePlan
+              onComplete={next}
+              hideNext={hideNext}
+              showNext={showNext}
+              currentPlan={currentPlan}
+              hasPaymentMethod={hasPaymentMethod}
+            />
+          );
+          break;
+        case 2:
+          return <MarketplaceSetup />;
+          break;
+        case 3:
+          return <Download install={install} />;
+          break;
+        case 4:
+          return <Experience />;
+          break;
+        case 5:
+          return <Deploy />;
+          break;
+        default:
+          return <></>;
+      }
+    },
+    [currentPlan, hasPaymentMethod, install, next, hideNext, showNext, user],
+  );
 
   const displayNext = (): boolean =>
     !nextHidden && activeStep !== 0 && activeStep < steps.length - 1;
   // activeStep < steps.length - 1 && activeStep !== 0 && nextHidden === true
 
   const displayBack = (): boolean => activeStep > 0;
+
+  const stateMachine = useCallback(async (): Promise<void> => {
+    const minLoadingTime = 7000;
+    const start = new Date().getTime();
+    const signedIn = await isSignedIn();
+    if (!signedIn) signIn();
+    const u = await currentUser();
+    if (u) {
+      setUser(u);
+      const ss = await getSpaces(u.token);
+      const s = await getSpace(u.token, ss);
+      let cp = false;
+      let hp = false;
+      if (s) {
+        cp = !!(await getPlan(s.id, ss));
+        hp = await getPaymentMethod();
+      }
+      const st = determineCurrentStep(!!u, !!s, cp, hp);
+      const end = new Date().getTime();
+      const duration = end - start;
+      setTimeout(
+        () => {
+          jump(st);
+        },
+        Math.max(minLoadingTime - duration, 0),
+      );
+    }
+  }, [signIn, getSpaces, getSpace, getPlan, getPaymentMethod, determineCurrentStep, jump]);
+
+  useEffect(() => {
+    if (router.isReady) {
+      stateMachine().then(() => {});
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
 
   return (
     <Flex mx="auto" pb="32" p={8} direction={{ base: 'row' }} w="100%">
