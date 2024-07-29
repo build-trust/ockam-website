@@ -1,21 +1,77 @@
-import { FC, ReactElement, useEffect, useState } from 'react';
-import { Box, Flex, Heading, Image, Spinner, Text } from '@chakra-ui/react';
+import { createRef, FC, ReactElement, useEffect, useState } from 'react';
+import {
+  Box,
+  Button,
+  Flex,
+  FlexProps,
+  Heading,
+  Image,
+  Select,
+  Spinner,
+  Text,
+} from '@chakra-ui/react';
 import { HiCheck } from 'react-icons/hi';
 
 import { User } from '@root/components/Auth';
 import colors from '@root/theme/colors';
 
+import Orchestrator, { Space } from '../Orchestrator';
+
 type Props = {
   user?: User;
+  spaces?: Space[];
+  spaceSelected: Function;
 };
-const Welcome: FC<Props> = ({ user }) => {
+
+type SpaceProps = {
+  spaces: Space[];
+  spaceSelected: Function;
+} & FlexProps;
+
+const ChooseSpace: FC<SpaceProps> = ({ spaces, spaceSelected, ...rest }) => {
+  const ref = createRef<HTMLSelectElement>();
+  const submit = (): void => {
+    if (ref.current && ref.current.selectedIndex > 0) {
+      const spaceId = ref.current.options[ref.current.selectedIndex].value;
+      const space = spaces.find((s) => s.id === spaceId);
+      if (space) spaceSelected(space);
+    }
+  };
+
+  return (
+    <Flex direction="column" maxW="2xl" my={8} {...rest}>
+      <Select placeholder="Select space..." ref={ref}>
+        {spaces.map((s) => (
+          <option value={s.id} key={s.id}>
+            {s.name}
+          </option>
+        ))}
+      </Select>
+      <Button colorScheme="avocado" my="4" onClick={submit} maxW="sm">
+        Next
+      </Button>
+    </Flex>
+  );
+};
+
+const Welcome: FC<Props> = ({ user, spaces, spaceSelected }) => {
   const [signedIn, setSignedIn] = useState(false);
+  const [chooseSpace, setChooseSpace] = useState(false);
 
   useEffect(() => {
-    if (user && !signedIn) {
+    if (user && spaces && !signedIn) {
       setSignedIn(true);
+      if (spaces.length === 1) {
+        spaceSelected(spaces[0]);
+      } else if (spaces.length === 0) {
+        Orchestrator.createSpace(user.token, 'developer-free').then((space) => {
+          spaceSelected(space);
+        });
+      } else {
+        setChooseSpace(true);
+      }
     }
-  }, [setSignedIn, signedIn, user]);
+  }, [setSignedIn, signedIn, user, spaces, spaceSelected]);
 
   const doneIcon = (): ReactElement => (
     <Box
@@ -92,11 +148,17 @@ const Welcome: FC<Props> = ({ user }) => {
         Congratulations on creating your account. We&apos;ll now walk you through configuring your
         initial plan, installing Ockam, and then using it to establish your first secure channel.
       </Text>
+      <ChooseSpace
+        spaces={spaces || []}
+        spaceSelected={spaceSelected}
+        opacity={chooseSpace ? '1' : '0'}
+        transition="opacity 1s 3.1s ease-in-out"
+      />
       <Flex
         direction="row"
         justifyContent="flex-start"
         align="center"
-        opacity={signedIn ? '1' : '0'}
+        opacity={signedIn && !chooseSpace ? '1' : '0'}
         transition="opacity 1s 3.1s ease-in-out"
       >
         <Spinner size="xs" />

@@ -60,14 +60,10 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const determineCurrentStep = useCallback(
     (u: boolean, s: boolean, cp: boolean, hp: boolean): number => {
-      // const u = user
-      // const s = space
-      // const cp = currentPlan
-      // const hp = hasPaymentMethod
       if (u && s && cp && hp) return numberForStep('Download');
       if (u && s && cp) return numberForStep('Payment');
       if (u && s) return numberForStep('Choose a plan');
-      return 1;
+      return 0;
     },
     [numberForStep],
   );
@@ -106,6 +102,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     async (token: string, ss: Space[]): Promise<Space | undefined> => {
       let s = space;
       if (s) return s;
+      if (ss && ss.length > 1) return undefined;
       if (ss && ss.length === 1) [s] = ss;
       if (!s) {
         // no spaces, time to create one
@@ -186,11 +183,19 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     }, 1200);
   };
 
+  const spaceSelected = useCallback(
+    (s: Space): void => {
+      setSpace(s);
+      next();
+    },
+    [next],
+  );
+
   const displayStep = useCallback(
     (step: number): ReactElement => {
       switch (step) {
         case 0:
-          return <Welcome user={user} />;
+          return <Welcome user={user} spaces={spaces} spaceSelected={spaceSelected} />;
           break;
         case 1:
           return (
@@ -199,12 +204,18 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
               hideNext={hideNext}
               showNext={showNext}
               currentPlan={currentPlan}
-              hasPaymentMethod={hasPaymentMethod}
             />
           );
           break;
         case 2:
-          return <MarketplaceSetup />;
+          return (
+            <MarketplaceSetup
+              hasPaymentMethod={hasPaymentMethod}
+              complete={next}
+              hideNext={hideNext}
+              user={user}
+            />
+          );
           break;
         case 3:
           return <Download install={install} />;
@@ -219,7 +230,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           return <></>;
       }
     },
-    [currentPlan, hasPaymentMethod, install, next, hideNext, showNext, user],
+    [currentPlan, hasPaymentMethod, install, next, hideNext, showNext, user, spaces, spaceSelected],
   );
 
   const displayNext = (): boolean =>
@@ -236,14 +247,15 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     const u = await currentUser();
     if (u) {
       setUser(u);
-      const ss = await getSpaces(u.token);
+      let ss = await getSpaces(u.token);
+      ss = [];
       const s = await getSpace(u.token, ss);
       let cp = false;
       let hp = false;
       if (s) {
         cp = !!(await getPlan(s.id, ss));
-        hp = await getPaymentMethod();
       }
+      hp = await getPaymentMethod();
       const st = determineCurrentStep(!!u, !!s, cp, hp);
       const end = new Date().getTime();
       const duration = end - start;

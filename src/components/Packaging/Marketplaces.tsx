@@ -50,6 +50,7 @@ const GCP: FC<Props> = ({ plan }) => (
     </MarketplaceButton>
   </Link>
 );
+
 const Marketplaces: FunctionComponent = () => (
   <Box textAlign="center" mt="10" mb="20">
     <Heading
@@ -68,5 +69,6 @@ const Marketplaces: FunctionComponent = () => (
     <GCP />
   </Box>
 );
+
 export { AWS, Azure, GCP };
 export default Marketplaces;

@@ -27,7 +27,6 @@ import PricingCard from '@root/components/Packaging/PricingCard';
 import ActionButton from '@root/components/Packaging/ActionButton';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
-import MarketplaceSetup from './MarketplaceSetup';
 import Sponsorship from './Sponsorship';
 
 const capitalize = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
@@ -44,20 +43,12 @@ type Props = {
   onComplete: Function;
   hideNext: Function;
   showNext: Function;
-  hasPaymentMethod: boolean;
   currentPlan?: string;
 };
-const ChoosePlan: FC<Props> = ({
-  onComplete,
-  hideNext,
-  showNext,
-  currentPlan,
-  hasPaymentMethod,
-}) => {
+const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) => {
   const [purchasing, setPurchasing] = useState(false);
   const [purchased, setPurchased] = useState(false);
   const [purchasedPlan, setPurchasedPlan] = useState<string>();
-  const [setupMarketplace, setSetupMarketplace] = useState<boolean>(false);
   const [setupSponsorship, setSetupSponsorship] = useState<boolean>(false);
 
   const purchase = useCallback(
@@ -71,14 +62,9 @@ const ChoosePlan: FC<Props> = ({
       setTimeout(() => {
         const t = TIERS.find((tier) => tier.name === plan);
         if (t?.marketplaceOnly) {
-          if (hasPaymentMethod) {
-            setTimeout(() => {
-              onComplete();
-            }, 2000);
-          } else {
-            showNext();
-            setSetupMarketplace(true);
-          }
+          setTimeout(() => {
+            onComplete();
+          }, 2000);
         } else if (t?.sponsorship) {
           showNext();
           setSetupSponsorship(true);
@@ -100,17 +86,17 @@ const ChoosePlan: FC<Props> = ({
         }
       }, 4000);
     },
-    [onComplete, showNext, hasPaymentMethod],
+    [onComplete, showNext],
   );
 
   useEffect(() => {
-    if (setupMarketplace || setupSponsorship) {
+    if (setupSponsorship) {
       showNext();
       window.scrollTo(0, 0);
     } else {
       hideNext();
     }
-  }, [hideNext, setupMarketplace, setupSponsorship, showNext]);
+  }, [hideNext, setupSponsorship, showNext]);
 
   const onClick = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault();
@@ -280,8 +266,7 @@ const ChoosePlan: FC<Props> = ({
 
   return (
     <Box transition="opacity 1s ease-in" opacity={purchased ? 0 : 1}>
-      {!setupMarketplace && !setupSponsorship && planSelection()}
-      {setupMarketplace && <MarketplaceSetup plan={purchasedPlan} />}
+      {!setupSponsorship && planSelection()}
       {setupSponsorship && <Sponsorship />}
     </Box>
   );
