@@ -45,6 +45,8 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const [space, setSpace] = useState<Space>();
   const [currentPlan, setCurrentPlan] = useState<string>();
   const [hasPaymentMethod, setHasPaymentMethod] = useState(false);
+  const [customer, setCustomer] = useState<string>();
+  const [product, setProduct] = useState<string>();
 
   const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
@@ -123,6 +125,9 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     const params = purchaseParams();
     const customerId = params.customer || params.aws_customer_id;
     const productId = params.product || params.aws_product_id;
+
+    if (customerId) setCustomer(customerId);
+    if (productId) setProduct(productId);
     // const customerAwsID = params.CustomerAWSAccountID;
 
     if (customerId && productId) {
@@ -163,15 +168,17 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const jump = useCallback(
     (st: number): void => {
-      setTimeout(() => {
-        setTransitioning(true);
+      if (activeStep !== st) {
         setTimeout(() => {
-          setStep(st);
-          setTransitioning(false);
+          setTransitioning(true);
+          setTimeout(() => {
+            setStep(st);
+            setTransitioning(false);
+          }, 1200);
         }, 1200);
-      }, 1200);
+      }
     },
-    [setStep],
+    [setStep, activeStep],
   );
 
   const prev = (): void => {
@@ -214,6 +221,8 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
               complete={next}
               hideNext={hideNext}
               user={user}
+              customer={customer}
+              product={product}
             />
           );
           break;
@@ -230,7 +239,19 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           return <></>;
       }
     },
-    [currentPlan, hasPaymentMethod, install, next, hideNext, showNext, user, spaces, spaceSelected],
+    [
+      currentPlan,
+      hasPaymentMethod,
+      install,
+      next,
+      hideNext,
+      showNext,
+      user,
+      spaces,
+      spaceSelected,
+      customer,
+      product,
+    ],
   );
 
   const displayNext = (): boolean =>

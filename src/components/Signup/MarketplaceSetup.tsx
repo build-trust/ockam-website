@@ -11,19 +11,19 @@ type Props = {
   hasPaymentMethod?: boolean;
   complete?: Function;
   hideNext: Function;
-  customerId?: string;
-  productId?: string;
+  customer?: string;
+  product?: string;
   user?: User;
 };
 
 type BuyerProps = {
   complete?: Function;
   hideNext: Function;
-  productId: string;
-  customerId: string;
+  product: string;
+  customer: string;
   user: User;
 };
-const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, productId, customerId, user }) => {
+const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, product, customer, user }) => {
   const refName = createRef<HTMLInputElement>();
   const refCompany = createRef<HTMLInputElement>();
 
@@ -37,8 +37,8 @@ const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, productId, customerI
     if (name && company && user.email) {
       OrchestratorAPI.updateBuyerContact(
         user.token,
-        productId,
-        customerId,
+        product,
+        customer,
         name,
         company,
         user.email,
@@ -96,25 +96,25 @@ const MarketplaceSetup: FC<Props> = ({
   hasPaymentMethod,
   complete,
   hideNext,
-  customerId,
-  productId,
+  customer,
+  product,
   user,
 }) => {
-  const [showBuyer, setShowBuyer] = useState(true);
+  const [showBuyer, setShowBuyer] = useState(false);
   useEffect(() => {
-    if (hasPaymentMethod && customerId && productId) setShowBuyer(true);
+    if (hasPaymentMethod && customer && product) setShowBuyer(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Box pb={8}>
       {!showBuyer && <MarketplaceDetails plan={plan} />}
-      {showBuyer && productId && customerId && user && (
+      {showBuyer && product && customer && user && (
         <BuyerDetails
           complete={complete}
           hideNext={hideNext}
-          productId={productId}
-          customerId={customerId}
+          product={product}
+          customer={customer}
           user={user}
         />
       )}
