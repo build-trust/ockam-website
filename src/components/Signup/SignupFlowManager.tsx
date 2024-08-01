@@ -13,6 +13,7 @@ import Deploy from './Deploy';
 import Welcome from './Welcome';
 import Experience from './Experience';
 import MarketplaceSetup from './MarketplaceSetup';
+import Notice from './Notice';
 
 type Props = {
   install: MDXRemoteSerializeResult;
@@ -51,6 +52,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
+  const [message, setMessage] = useState<string>();
 
   const numberForStep = useCallback(
     (title: string): number => {
@@ -129,6 +131,9 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     const isFulfilling =
       !!(params.customer || params.aws_customer_id) && !!(params.product || params.aws_product_id);
     setMarketplacceFulfilment(isFulfilling);
+    setMessage(
+      "👋 Welcome back - there's just a few more details required to complete the AWS Marketplace setup...",
+    );
     return isFulfilling;
   }, [purchaseParams]);
 
@@ -324,6 +329,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   return (
     <Flex mx="auto" pb="32" p={8} direction={{ base: 'row' }} w="100%">
+      <Notice message={message} />
       <Box>
         <Steps
           variant="circles"

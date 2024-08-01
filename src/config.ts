@@ -56,6 +56,6 @@ export default {
   // Controls global message shown on homepage.
   allPageMessage: {
     message: `📣 **Just announced:** Redpanda Connect with Ockam &mdash; the world's first zero-trust data streaming platform. **[Learn more](/blog/redpanda_connect_with_ockam)**! 🎉`,
-    except: '/blog/redpanda_connect_with_ockam',
+    except: ['/blog/redpanda_connect_with_ockam', '/get-started'],
   },
 };
