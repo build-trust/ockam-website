@@ -47,6 +47,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const [hasPaymentMethod, setHasPaymentMethod] = useState(false);
   const [customer, setCustomer] = useState<string>();
   const [product, setProduct] = useState<string>();
+  const [marketplaceFulfilment, setMarketplacceFulfilment] = useState<boolean>(false);
 
   const [transitioning, setTransitioning] = useState(false);
   const [nextHidden, setNextHidden] = useState(false);
@@ -61,7 +62,9 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   );
 
   const determineCurrentStep = useCallback(
-    (u: boolean, s: boolean, cp: boolean, hp: boolean): number => {
+    // eslint-disable-next-line complexity
+    (u: boolean, s: boolean, cp: boolean, hp: boolean, mf: boolean): number => {
+      if (mf) return numberForStep('Payment');
       if (u && s && cp && hp) return numberForStep('Download');
       if (u && s && cp) return numberForStep('Payment');
       if (u && s) return numberForStep('Choose a plan');
@@ -121,6 +124,14 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     return s?.subscription_plan.name;
   }, []);
 
+  const checkMarketplaceFulfilment = useCallback(async (): Promise<boolean> => {
+    const params = purchaseParams();
+    const isFulfilling =
+      !!(params.customer || params.aws_customer_id) && !!(params.product || params.aws_product_id);
+    setMarketplacceFulfilment(isFulfilling);
+    return isFulfilling;
+  }, [purchaseParams]);
+
   const getPaymentMethod = useCallback(async (): Promise<boolean> => {
     const params = purchaseParams();
     const customerId = params.customer || params.aws_customer_id;
@@ -162,6 +173,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     setTimeout(() => {
       showNext();
       nextStep();
+      window.scrollTo(0, 0);
       setTransitioning(false);
     }, 1200);
   }, [nextStep, showNext]);
@@ -173,6 +185,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           setTransitioning(true);
           setTimeout(() => {
             setStep(st);
+            window.scrollTo(0, 0);
             setTransitioning(false);
           }, 1200);
         }, 1200);
@@ -186,6 +199,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     setTimeout(() => {
       showNext();
       prevStep();
+      window.scrollTo(0, 0);
       setTransitioning(false);
     }, 1200);
   };
@@ -193,9 +207,11 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const spaceSelected = useCallback(
     (s: Space): void => {
       setSpace(s);
-      next();
+      jump(
+        determineCurrentStep(!!user, true, !!currentPlan, hasPaymentMethod, marketplaceFulfilment),
+      );
     },
-    [next],
+    [user, currentPlan, hasPaymentMethod, marketplaceFulfilment, determineCurrentStep, jump],
   );
 
   const displayStep = useCallback(
@@ -276,8 +292,9 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       if (s) {
         cp = !!(await getPlan(s.id, ss));
       }
+      const mf = await checkMarketplaceFulfilment();
       hp = await getPaymentMethod();
-      const st = determineCurrentStep(!!u, !!s, cp, hp);
+      const st = determineCurrentStep(!!u, !!s, cp, hp, mf);
       const end = new Date().getTime();
       const duration = end - start;
       setTimeout(
@@ -287,7 +304,16 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         Math.max(minLoadingTime - duration, 0),
       );
     }
-  }, [signIn, getSpaces, getSpace, getPlan, getPaymentMethod, determineCurrentStep, jump]);
+  }, [
+    signIn,
+    getSpaces,
+    getSpace,
+    getPlan,
+    getPaymentMethod,
+    determineCurrentStep,
+    checkMarketplaceFulfilment,
+    jump,
+  ]);
 
   useEffect(() => {
     if (router.isReady) {

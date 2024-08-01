@@ -55,8 +55,8 @@ const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, product, customer, u
       </Heading>
       <Box>
         <Text variant="readabilityOptimized">
-          Your subscription details are almost complete! We just need a couple of final pieces of
-          information and your setup will be finalized.
+          Your AWS Marketplace subscription details are almost complete! We just need a couple of
+          final pieces of information and your setup will be finalized.
         </Text>
         <FormControl>
           <FormLabel>Name</FormLabel>

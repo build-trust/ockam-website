@@ -126,6 +126,12 @@ const Welcome: FC<Props> = ({ user, spaces, spaceSelected }) => {
     return undefined;
   };
 
+  const mustChooseSpace = (ifTrue: string, ifFalse: string): string =>
+    signedIn && chooseSpace ? ifTrue : ifFalse;
+
+  const ifSignedInNotChooseSpace = (ifTrue: string, ifFalse: string): string =>
+    signedIn && !chooseSpace ? ifTrue : ifFalse;
+
   return (
     <Box>
       <Heading
@@ -151,14 +157,16 @@ const Welcome: FC<Props> = ({ user, spaces, spaceSelected }) => {
       <ChooseSpace
         spaces={spaces || []}
         spaceSelected={spaceSelected}
-        opacity={chooseSpace ? '1' : '0'}
+        opacity={mustChooseSpace('1', '0')}
+        height={mustChooseSpace('auto', '0')}
         transition="opacity 1s 3.1s ease-in-out"
+        margin={mustChooseSpace('inherit', '0')}
       />
       <Flex
         direction="row"
         justifyContent="flex-start"
         align="center"
-        opacity={signedIn && !chooseSpace ? '1' : '0'}
+        opacity={ifSignedInNotChooseSpace('1', '0')}
         transition="opacity 1s 3.1s ease-in-out"
       >
         <Spinner size="xs" />
