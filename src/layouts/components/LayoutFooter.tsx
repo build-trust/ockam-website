@@ -55,6 +55,11 @@ const NAV = [
         href: 'https://docs.ockam.io/',
         isExternal: true,
       },
+      {
+        name: 'Blog',
+        href: '/blog',
+        isExternal: false,
+      },
     ],
   },
 
