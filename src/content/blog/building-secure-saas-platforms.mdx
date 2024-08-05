@@ -38,7 +38,7 @@ infrastructure.<br/>
 
 
 The most successful products over the coming decade will be the ones that 
-realise that the status-quo approaches are no longer good enough. You don't need
+realise the status-quo approaches are no longer good enough. You don't need
 to take Joel's word for it either, take a read of the details of the recently
 announced [Private Cloud Compute](https://security.apple.com/blog/private-cloud-compute/)
 from Apple. One of the most successful companies over the past two decades 
@@ -61,7 +61,8 @@ Today it's rare that two separate companies
 actually want to connect their entire networks to each other&mdash;it's specific 
 apps and workloads within each network that need to communicate. Yet we've
 continued to use old approaches as the way to "securely" connect our 
-systems. Tthese old approaches expose you transitively to an uncountable number 
+systems. The actual running of cables has been abstracted away but we're virtually
+doing the same thing. These old approaches expose you transitively to an uncountable number 
 of networks, which is an enormous attack surface ripe for exploitation.
 
 ## The need to connect to a private system
@@ -168,9 +169,9 @@ improvement though.
 
 ![IP Allow Lists](/blog/building-secure-saas-platforms/ip-allow-list.png)
 
-Initech won't want to have a tight coupling to their current app instances 
-and the IP addresses, they'll want the flexibility to be able to scale 
-their infrastructure as required without the need to constantly inform their
+At Initech you won't want to have a tight coupling to your current app instances 
+and the IP addresses, you'll want the flexibility to be able to scale 
+infrastructure as required without the need to constantly inform 
 customers of new IP addresses. So the IP addresses will most likely belong to
 a NAT gateway or proxy server. ACME Corp might assume that locking access down
 to only one or two source IP addresses means that only one or two remote machines
@@ -181,7 +182,9 @@ app or machine in, you've permitted an entire remote network.
 
 Even more concerning though is that IP source addresses are [trivially spoofed](https://www.baeldung.com/linux/curl-test-ip-spoofing).
 A potential attacker would be able to create a well formed request, spoof the
-source address, and send data or instructions into the ACME Corp network. 
+source address, and send data or instructions into the ACME Corp network. SaaS
+vendors, Initech included, also inevitably have to document the list of current
+IP addresses so there's a ready-made list of IPs to try and impersonate.
 
 The more sophisticated your approach to IP filtering the more sophisticated an attacker needs to 
 be to compromise it, but none of them are perfect. I've heard people claim in 
@@ -190,7 +193,7 @@ the attacker can't receive the response and so they can't do anything useful.
 Think about the systems we're connecting - how confident are you that there are 
 zero fire and forget API calls that won't dutifully create/update/destroy valuable 
 data? Good security is more than just preventing the exposure of data, it's also 
-about protecting it and guaranteeing it's integrity. 
+about protecting it and guaranteeing its integrity. 
 
 If you're a valuable target, such as a major financial instition, attackers have 
 the motivation to use approaches like this to [launch MitM attacks & intercept comms flows](https://www.kaspersky.com/resource-center/threats/ip-spoofing).
@@ -203,14 +206,14 @@ VPNs are a common solution at many companies to allow employees to
 connect to the "corporate network" when they're outside of the office. They are
 also used to allow other systems to connect to an existing network.
 
-The use case we're talking about though is different. It's about allowing two 
+The use case we're talking about here is different. It's about allowing two 
 separate companies, a SaaS product and their 
 customer(s), being able to communicate with each other. In many of those cases 
 it's only _one_ system at each end of the connection that should be able to talk to 
 each other. Instead we reach for a tool that is designed to connect entire 
 networks. It's like running a virtual patch lead from the router in one company 
 to the router in another. If I asked you to do the physical version of that, 
-to plug a cable from your prod environment directly into the prod environment of 
+to plug a cable from your production environment directly into the production environment of 
 another company, you'd probably give it some pause. A lot of pause. And for good 
 reason. But VPNs are "virtual" and "private" and so easy (relative to running a 
 cable) and so ubiquitous we don't give it as much thought. If all you needed 
@@ -223,7 +226,7 @@ the doors to just the one you want open in each network. It's another example of
 how we've got tools and approaches that are great at what they were designed for, 
 but we're making incremental steps in how we use them to force them to work with 
 our evolved needs. Doing that securely means layering in more complexity and 
-hoping the we get all of the detail in all of those layer right, all of the time.
+hoping the we get all of the detail in all of those layers right, all of the time.
 Getting it wrong carries risks of transitive
 access beyond the original intentions.
 
@@ -246,7 +249,7 @@ access beyond the original intentions.
 > &mdash; [Mitchell Johnson](https://www.sonatype.com/blog/uncovering-the-invisible-threat-why-your-network-may-still-be-at-risk), Sonatype
 
 The problem with each of these approaches is that to assume it's 
-secure requires additional assumptions: that nobody on the internet will try to
+secure requires many additional assumptions: that nobody on the internet will try to
 compromise you, that you can trust the source IP of the requests, that the 
 remote network is solely composed of good actors, that these assumptions will 
 continue to be true both now and indefinitely into the future&hellip; 
@@ -262,22 +265,28 @@ many networks. Each SaaS vendor will have their own set of services they use
 which multiplies this out further. Not only can you not trust the network, you
 can't trust anybody else's either. Any participant in this picture is only a
 network misconfiguration or compromised dependency away from transmitting that
-risk through the network(s).
+risk through the network(s). And this picture is the most zoomed in example of 
+a fractal of this problem! Zoom out, and each vendor is connected to their own
+set of customers, with their own vendors, with their own customers... the
+risk surface area grows exponentionally.
 
 ## So let's solve it!
 
 ![Connection via an agent](/blog/building-secure-saas-platforms/agent.png)
 
-We can build security as a feature into our product within minutes! 
-We're going to stop pushing the problems onto 
+We can build security as a feature into our product within minutes! We'll
+raise the security bar by providing a more focussed and granular solution. 
+We're also going to stop pushing the problems onto 
 customer's like ACME Corp by asking them to make network-level changes. Instead
 we're going to shift secure connectivity up to an application-level concern, and 
 provide a holistic product experience by extending the Initech Platform into 
-the specific places it needs to me.
+the specific places it needs to me. 
 
 The example here is going to walk through how Initech Platform can establish 
 a connection to a self-hosted GitHub Enterprise server that's managed by ACME
-Corp.
+Corp. The final result will look like:
+
+![Final secure connected product](/blog/building-secure-saas-platforms/secure-example-final.png)
 
 ### Step 1 - Setup a new project
 
@@ -403,7 +412,7 @@ ticket, which is then piped to a file named `saas.ticket`.
 
 Move the `saas.ticket` (from the previous step) to a machine on the same network 
 as the Initech Platform. We're going to create a reusable configuration file
-names `saas.yaml` that we'll use to setup our Ockam node that will run on the
+named `saas.yaml` that we'll use to setup our Ockam node that will run on the
 SaaS platform:
 
 ```yaml saas.yaml
@@ -541,6 +550,10 @@ a route to this node.
 
 </CH.Scrollycoding>
 
+So far we've setup the highlighted parts of our infrastructure:
+
+![Initial secure platform node](/blog/building-secure-saas-platforms/secure-example-platform-step.png)
+
 ### Step 3 - ACME Corp connects to Initech
 
 Move `acme.ticket` (from the previous step) to a machine in ACME Corp's 
@@ -603,7 +616,7 @@ ockam node create customer.yaml \
 
 After creating the node ACME Corp within the ACME Corp network, a relay is 
 created using the value of the `RELAY` variable (i.e., `acme-relay`). This
-relay is what allows the Initect Platform to create a portal into to the
+relay is what allows the Initech Platform to create a portal into to the
 required service within the ACME Corp network &mdash; without requiring ACME
 Corp to expose listening ports to the Internet!
 
@@ -723,6 +736,12 @@ to connect to.
 
 </CH.Scrollycoding>
 
+Our secure and private connectivity between ACME Corp and the Initech Platform
+is almost complete:
+
+![Initial secure platform node](/blog/building-secure-saas-platforms/secure-example-customer-step.png)
+
+
 ### Step 4 - Initech connects to ACME Corp (as required)
 
 In the Initech Platform application's environment, run:
@@ -741,17 +760,22 @@ The result of this is that requests from the Initech Platform to `0.0.0.0:8000`
 will resolve to the private GitHub Enterprise server running inside the
 ACME Corp network.
 
+We've now added the final piece to our architecture diagram:
+
+![Private and secure connection to GitHub Enterprise self-hosted](/blog/building-secure-saas-platforms/secure-example-platform-final-step.png)
+
 This connection does not need to be long-lived either, and can be created
 on-demand only when the Initech Platform requires access to the ACME Corp 
-GitHub server. To access the Jira and database outlets it's as simple as running:
+GitHub server. To access the Jira and database outlets (from the optional outlets
+earlier) it's as simple as running:
 
 ```bash
-ockam tcp-inlet create --from 0.0.0.0:7000 --via acme-relay --to jira
+ockam tcp-inlet create --from 0.0.0.0:6000 --via acme-relay --to jira
 ockam tcp-inlet create --from 0.0.0.0:9000 --via acme-relay --to database
 ```
 
 The Jira and database sytems will now be available to the Initech Platform at
-`localhost` on ports `7000` and `9000` respectively.
+`localhost` on ports `6000` and `9000` respectively.
 
 ## Wrapping it up
 
@@ -761,10 +785,10 @@ takes only minutes to implement and run each step. Within those few minutes we'v
 * Establish an Ockam Portal between two applications in two separate networks. 
 * See how a customer can quickly create a private path to a service without the 
 need to make network or infrastructure changes.
-* Allow a SaaS platform to provide a completely private connection to their own service
+* Allow a SaaS platform to provide a completely private connection to their own service.
 
 For the SaaS platforms there's only a small step required to wrap the customer-facing
 command and config into a single script or binary wrapper. That could then be used 
 as the initial basis for a broker or agent-like experience products like Snyk or 
 Buildkite already provide 
-(for example, just rename it to `initech-agent`! 😉). 
+(for example, just rename the wrapper script to `initech-agent`! 😉). 
