@@ -132,9 +132,10 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     const isFulfilling =
       !!(params.customer || params.aws_customer_id) && !!(params.product || params.aws_product_id);
     setMarketplacceFulfilment(isFulfilling);
-    setMessage(
-      "👋 Welcome back - there's just a few more details required to complete the AWS Marketplace setup...",
-    );
+    if (isFulfilling)
+      setMessage(
+        "👋 Welcome back - there's just a few more details required to complete the AWS Marketplace setup...",
+      );
     return isFulfilling;
   }, [purchaseParams]);
 
