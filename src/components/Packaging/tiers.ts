@@ -106,7 +106,7 @@ const TIERS: Tier[] = [
     marketplaceOnly: true,
     marketplaces: {
       aws: {
-        link: 'https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk',
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
       },
       azure: {
         link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=azure`,
@@ -129,7 +129,7 @@ const TIERS: Tier[] = [
     marketplaceOnly: true,
     marketplaces: {
       aws: {
-        link: 'https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk',
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
       },
       azure: {
         link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=azure`,
@@ -152,7 +152,7 @@ const TIERS: Tier[] = [
     marketplaceOnly: true,
     marketplaces: {
       aws: {
-        link: 'https://aws.amazon.com/marketplace/pp/prodview-wsd42efzcpsxk',
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
       },
       azure: {
         link: `${CONTACT_FORM_PATH}?feature=marketplace&marketplace=azure`,
