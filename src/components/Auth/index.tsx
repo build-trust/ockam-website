@@ -104,6 +104,15 @@ const identify = async (): Promise<void> => {
     }
   }
 };
+
+const stashParams = async (): Promise<void> => {
+  if (window.location.search.length > 1) {
+    const params = new URLSearchParams(window.location.search);
+    const pObj = Object.fromEntries(params);
+    window.sessionStorage.setItem('pre-auth-params', JSON.stringify(pObj));
+  }
+};
+
 const Auth: FunctionComponent<Props> = ({
   signinPath,
   signupPath,
@@ -122,7 +131,7 @@ const Auth: FunctionComponent<Props> = ({
     }
   };
 
-  const signin = async (): Promise<void> => {
+  const signin = useCallback(async (): Promise<void> => {
     await Auth0.loginWithRedirect({
       authorizationParams: {
         scope,
@@ -130,9 +139,9 @@ const Auth: FunctionComponent<Props> = ({
         source: 'ockam-website',
       },
     });
-  };
+  }, []);
 
-  const signup = async (): Promise<void> => {
+  const signup = useCallback(async (): Promise<void> => {
     await Auth0.loginWithRedirect({
       authorizationParams: {
         scope,
@@ -141,7 +150,7 @@ const Auth: FunctionComponent<Props> = ({
         source: 'ockam-website',
       },
     });
-  };
+  }, []);
 
   const callbackResult = useCallback(async () => {
     await Auth0.handleRedirectCallback();
@@ -151,7 +160,16 @@ const Auth: FunctionComponent<Props> = ({
       window.sessionStorage.setItem('avatar', user?.picture as string);
       window.sessionStorage.setItem('userId', user?.sub as string);
     }
-    router.replace('/download');
+    let p = {};
+    const stashed = window.sessionStorage.getItem('pre-auth-params');
+    if (stashed) {
+      p = { ...p, ...JSON.parse(stashed) };
+      window.sessionStorage.removeItem('pre-auth-params');
+      const sp = new URLSearchParams(p);
+      router.replace(`/get-started?${sp.toString()}`);
+    } else {
+      router.replace('/get-started');
+    }
   }, [router]);
 
   const signout = useCallback(async () => {
@@ -189,7 +207,17 @@ const Auth: FunctionComponent<Props> = ({
       default:
         break;
     }
-  }, [router, signinPath, signupPath, signoutPath, signout, callbackPath, callbackResult]);
+  }, [
+    router,
+    signin,
+    signup,
+    signinPath,
+    signupPath,
+    signoutPath,
+    signout,
+    callbackPath,
+    callbackResult,
+  ]);
 
   useEffect(() => {
     checkSignedIn().catch();
@@ -199,5 +227,5 @@ const Auth: FunctionComponent<Props> = ({
 };
 
 export type { User };
-export { currentUser, isSignedIn, isSignedUp, identify };
+export { currentUser, isSignedIn, isSignedUp, identify, stashParams };
 export default Auth;

@@ -4,7 +4,7 @@ import { Box, Button, Flex, theme } from '@chakra-ui/react';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 
-import { User, currentUser, isSignedIn } from '@root/components/Auth';
+import { User, currentUser, isSignedIn, stashParams } from '@root/components/Auth';
 import OrchestratorAPI, { Space } from '@components/Orchestrator';
 
 import ChoosePlan from './ChoosePlan';
@@ -79,21 +79,12 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const purchaseParams = useCallback((): ParamsDict => {
     let p = {};
-    const stashed = window.sessionStorage.getItem('pre-auth-params');
-    if (stashed) p = { ...p, ...JSON.parse(stashed) };
     if (router.query) p = { ...p, ...router.query };
     return p;
   }, [router.query]);
 
-  const stashParams = async (params: URLSearchParams): Promise<void> => {
-    window.sessionStorage.setItem('pre-auth-params', JSON.stringify(params.toString()));
-  };
-
   const signIn = useCallback(async (): Promise<void> => {
-    const { query } = router;
-    // @ts-ignore: this dict type actually works here
-    const params = new URLSearchParams(query);
-    await stashParams(params);
+    await stashParams();
     router.replace('/auth/signup');
   }, [router]);
 
@@ -154,7 +145,6 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         const pm = await a.createPaymentMethod(productId, customerId, customerAwsID);
         if (pm) await a.updatePaymentMethod(s.id, pm.id);
         setHasPaymentMethod(true);
-        window.sessionStorage.removeItem('pre-auth-params');
         return true;
       }
       if (s.payment_method) {
