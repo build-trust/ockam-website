@@ -300,7 +300,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     if (u) {
       setUser(u);
       const a = new OrchestratorAPI(
-        process.env.OCKAM_API_BASE_URL || 'https://subscriptions.orchestrator.ockam.io/api',
+        process.env.OCKAM_API_BASE_URL || 'https://subscriptions.orchestrator.ockam.io/',
         u.token,
       );
       setApi(a);
