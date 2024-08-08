@@ -60,7 +60,7 @@ const Welcome: FC<Props> = ({ user, spaces, spaceSelected, api }) => {
   const [chooseSpace, setChooseSpace] = useState(false);
 
   useEffect(() => {
-    if (user && spaces && !signedIn) {
+    if (user && spaces && !signedIn && api) {
       setSignedIn(true);
       if (spaces.length === 1) {
         spaceSelected(spaces[0]);
