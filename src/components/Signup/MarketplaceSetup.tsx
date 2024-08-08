@@ -98,7 +98,7 @@ const MarketplaceSetup: FC<Props> = ({
   useEffect(() => {
     if (hasPaymentMethod && customer && product) setShowBuyer(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [hasPaymentMethod, customer, product]);
 
   return (
     <Box pb={8}>

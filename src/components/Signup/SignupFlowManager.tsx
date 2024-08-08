@@ -41,6 +41,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   });
 
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [user, setUser] = useState<User>();
   const [api, setApi] = useState<OrchestratorAPI>();
   const [spaces, setSpaces] = useState<Space[]>();
@@ -238,7 +239,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   );
 
   const displayStep = useCallback(
-    (step: number): ReactElement => {
+    (step: number, cp?: string, c?: string, p?: string): ReactElement => {
       switch (step) {
         case 0:
           return <Welcome user={user} spaces={spaces} spaceSelected={spaceSelected} api={api} />;
@@ -249,7 +250,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
               onComplete={planChosen}
               hideNext={hideNext}
               showNext={showNext}
-              currentPlan={currentPlan}
+              currentPlan={cp}
             />
           );
           break;
@@ -260,9 +261,9 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
               complete={next}
               hideNext={hideNext}
               user={user}
-              customer={customer}
-              product={product}
-              plan={currentPlan}
+              customer={c}
+              product={p}
+              plan={cp}
             />
           );
           break;
@@ -280,7 +281,6 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       }
     },
     [
-      currentPlan,
       hasPaymentMethod,
       install,
       next,
@@ -289,8 +289,6 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       user,
       spaces,
       spaceSelected,
-      customer,
-      product,
       api,
       planChosen,
     ],
@@ -315,8 +313,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         u.token,
       );
       setApi(a);
-      let ss = await getSpaces(a);
-      ss = [];
+      const ss = await getSpaces(a);
       const s = await getSpace(ss);
       let cp = false;
       let hp = false;
@@ -331,6 +328,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       setTimeout(
         () => {
           jump(st);
+          setIsLoaded(true);
         },
         Math.max(minLoadingTime - duration, 0),
       );
@@ -347,11 +345,11 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   ]);
 
   useEffect(() => {
-    if (router.isReady) {
+    if (router.isReady && !isLoaded) {
       stateMachine().then(() => {});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady]);
+  }, [router.isReady, isLoaded]);
 
   return (
     <Flex mx="auto" pb="32" p={8} direction={{ base: 'row' }} w="100%">
@@ -373,7 +371,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         </Steps>
       </Box>
       <Box transition="opacity 1s 0s ease-in-out" opacity={transitioning ? '0' : '1'} width="100%">
-        {displayStep(activeStep)}
+        {displayStep(activeStep, currentPlan, customer, product)}
         <Flex direction="row" justifyContent="space-between">
           {displayNext() && activeStep === 1 && (
             <Button colorScheme="avocado" mb="8" onClick={next}>

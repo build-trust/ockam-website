@@ -13,8 +13,6 @@ type Props = {
 };
 
 const getMarketplaceLink = (platform: string, plan?: string): string => {
-  console.log('platform: ', platform);
-  console.log('plan: ', plan);
   const tier = TIERS.find((t) => t.name === plan);
   if (tier?.marketplaces) {
     const marketplace = tier.marketplaces[platform];
