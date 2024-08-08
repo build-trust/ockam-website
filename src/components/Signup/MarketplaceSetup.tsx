@@ -3,7 +3,7 @@ import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Text } from 
 
 import { AWS } from '@root/components/Packaging/Marketplaces';
 
-import { OrchestratorAPI } from '../Orchestrator';
+import OrchestratorAPI from '../Orchestrator';
 import { User } from '../Auth';
 
 type Props = {
@@ -22,8 +22,9 @@ type BuyerProps = {
   product: string;
   customer: string;
   user: User;
+  api?: OrchestratorAPI;
 };
-const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, product, customer, user }) => {
+const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, product, customer, user, api }) => {
   const refName = createRef<HTMLInputElement>();
   const refCompany = createRef<HTMLInputElement>();
 
@@ -34,15 +35,8 @@ const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, product, customer, u
   const submit = (): void => {
     const name = refName.current?.value;
     const company = refCompany.current?.value;
-    if (name && company && user.email) {
-      OrchestratorAPI.updateBuyerContact(
-        user.token,
-        product,
-        customer,
-        name,
-        company,
-        user.email,
-      ).then(() => {
+    if (name && company && user.email && api) {
+      api.updateBuyerContact(name, company, user.email, product, customer).then(() => {
         if (complete) complete();
       });
     }

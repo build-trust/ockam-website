@@ -59,14 +59,19 @@ class OrchestratorAPI {
     return this.request('put', url, data);
   };
 
+  // eslint-disable-next-line class-methods-use-this
   updateBuyerContact = async (
     name: string,
     company: string,
     email: string,
-  ): Promise<Space | undefined> => {
+    productId: string,
+    customerId: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): Promise<any> => {
+    const api = axios.create({ baseURL: 'https://www.ockam.io' });
     const url = '/api/update_subscription';
-    const data = { company, name, email };
-    return this.request('post', url, data);
+    const data = { company, name, email, productId, customerId };
+    return api.post(url, data);
   };
 
   getSpaces = async (): Promise<Space[] | undefined> => {
