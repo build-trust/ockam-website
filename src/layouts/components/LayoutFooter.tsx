@@ -198,33 +198,35 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
         </Heading>
         <Box>
           {!signedIn && (
-            <Button
-              as="a"
-              href={SIGNUP_PATH}
-              textAlign="center"
-              target="_blank"
-              colorScheme="avocado"
-              color="black"
-              size="lg"
-              display={{ base: 'block', lg: 'inline-block' }}
-              mr={{ base: 0, lg: 8 }}
-              my={{ base: 2, lg: 0 }}
-            >
-              Sign Up
-            </Button>
+            <>
+              <Button
+                as="a"
+                href={SIGNUP_PATH}
+                textAlign="center"
+                target="_blank"
+                colorScheme="avocado"
+                color="black"
+                size="lg"
+                display={{ base: 'block', lg: 'inline-block' }}
+                mr={{ base: 0, lg: 8 }}
+                my={{ base: 2, lg: 0 }}
+              >
+                Sign Up
+              </Button>
+              <Button
+                as="a"
+                href={contactFormPath()}
+                colorScheme="avocado"
+                color="black"
+                size="lg"
+                display={{ base: 'block', lg: 'inline-block' }}
+                mr={{ base: 0, lg: 0 }}
+                my={{ base: 2, lg: 0 }}
+              >
+                Get a Demo
+              </Button>
+            </>
           )}
-          <Button
-            as="a"
-            href={contactFormPath()}
-            colorScheme="avocado"
-            color="black"
-            size="lg"
-            display={{ base: 'block', lg: 'inline-block' }}
-            mr={{ base: 0, lg: 0 }}
-            my={{ base: 2, lg: 0 }}
-          >
-            Get a Demo
-          </Button>
         </Box>
       </Flex>
 
