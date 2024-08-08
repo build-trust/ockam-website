@@ -1,121 +1,106 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
 type Subscription = {
   name: string;
 };
+type PaymentMethod = {
+  id: string;
+  created_by: string;
+  customer_id: string;
+  marketplace: string;
+};
 type Space = {
   id: string;
   name: string;
-  insertedAt: Date;
-  subscription_plan: Subscription;
+  subscription_plan?: Subscription;
+  payment_method?: PaymentMethod;
 };
 
 const logError = (error: unknown): void => {
   if (console) {
+    // eslint-disable-next-line no-console
     console.log('ERR - Orchestrator: ', error);
   }
 };
 class OrchestratorAPI {
-  static updateBuyerContact = async (
-    token: string,
-    productId: string,
-    customerId: string,
-    name: string,
-    company: string,
-    email: string,
-  ): Promise<AxiosResponse> => {
-    const response = await axios.post('/api/update_subscription', {
-      productId,
-      customerId,
-      company,
-      name,
-      email,
-    });
-    return response.data;
-  };
-
   private api: AxiosInstance;
 
-  private baseServicePath?: string;
-
-  constructor(baseUrl: string, path?: string) {
-    this.api = axios.create({ baseURL: baseUrl });
-    this.baseServicePath = path || '';
+  constructor(baseUrl: string, token: string) {
+    this.api = axios.create({
+      baseURL: baseUrl,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
-  getSpaces = async (token: string): Promise<Space[] | undefined> => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  request = async (method: string, url: string, data?: { [key: string]: string }): Promise<any> => {
     try {
-      const url = `${this.baseServicePath}/space`;
-      const spaces = await this.api.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return spaces.data;
-    } catch (error) {
-      logError(error);
-      return undefined;
-    }
-  };
-
-  getSpace = async (token: string, spaceId: string): Promise<Space | undefined> => {
-    try {
-      const url = `${this.baseServicePath}/space/${spaceId}`;
-      const space = await this.api.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return space.data;
-    } catch (error) {
-      logError(error);
-      return undefined;
-    }
-  };
-
-  createSpace = async (token: string, plan: string): Promise<Space | undefined> => {
-    try {
-      const url = `${this.baseServicePath}/space`;
-      const response = await this.api.put(
-        url,
-        {
-          plan,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const response = await this.api.request({ method, url, data });
       return response.data;
     } catch (error) {
       logError(error);
+      return undefined;
     }
-    return undefined;
   };
 
-  updatePlan = async (token: string, spaceId: string, plan: string): Promise<void> => {
-    try {
-      const url = `${this.baseServicePath}/space/${spaceId}`;
-      await this.api.post(
-        url,
-        {
-          plan,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-    } catch (error) {
-      logError(error);
-    }
+  createPaymentMethod = async (
+    productId: string,
+    customerId: string,
+    accountId: string,
+  ): Promise<PaymentMethod | undefined> => {
+    const url = '/payment_method';
+    const data = {
+      aws_product_id: productId,
+      aws_customer_id: customerId,
+      aws_account_id: accountId,
+    };
+    return this.request('put', url, data);
+  };
+
+  updateBuyerContact = async (
+    name: string,
+    company: string,
+    email: string,
+  ): Promise<Space | undefined> => {
+    const url = '/api/update_subscription';
+    const data = { company, name, email };
+    return this.request('post', url, data);
+  };
+
+  getSpaces = async (): Promise<Space[] | undefined> => {
+    const url = `/space`;
+    return this.request('get', url);
+  };
+
+  getSpace = async (spaceId: string): Promise<Space | undefined> => {
+    const url = `/space/${spaceId}`;
+    return this.request('get', url);
+  };
+
+  createSpace = async (plan: string): Promise<Space | undefined> => {
+    const url = `/space`;
+    const data = { plan };
+    return this.request('put', url, data);
+  };
+
+  updatePlan = async (spaceId: string, plan: string): Promise<Space | undefined> => {
+    const url = `/space/${spaceId}`;
+    const data = { plan };
+    return this.request('post', url, data);
+  };
+
+  updatePaymentMethod = async (
+    spaceId: string,
+    paymentMethodId: string,
+  ): Promise<Space | undefined> => {
+    const url = `/space/${spaceId}`;
+    const data = { payment_method_id: paymentMethodId };
+    return this.request('post', url, data);
   };
 }
 
 export type { Space };
 export { OrchestratorAPI };
-export default new OrchestratorAPI(
-  process.env.OCKAM_API_BASE_URL || 'https://subscriptions.orchestrator.ockam.io/',
-);
+export default OrchestratorAPI;

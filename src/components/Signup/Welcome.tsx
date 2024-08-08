@@ -15,12 +15,13 @@ import { HiCheck } from 'react-icons/hi';
 import { User } from '@root/components/Auth';
 import colors from '@root/theme/colors';
 
-import Orchestrator, { Space } from '../Orchestrator';
+import OrchestratorAPI, { Space } from '../Orchestrator';
 
 type Props = {
   user?: User;
   spaces?: Space[];
   spaceSelected: Function;
+  api?: OrchestratorAPI;
 };
 
 type SpaceProps = {
@@ -54,7 +55,7 @@ const ChooseSpace: FC<SpaceProps> = ({ spaces, spaceSelected, ...rest }) => {
   );
 };
 
-const Welcome: FC<Props> = ({ user, spaces, spaceSelected }) => {
+const Welcome: FC<Props> = ({ user, spaces, spaceSelected, api }) => {
   const [signedIn, setSignedIn] = useState(false);
   const [chooseSpace, setChooseSpace] = useState(false);
 
@@ -64,14 +65,14 @@ const Welcome: FC<Props> = ({ user, spaces, spaceSelected }) => {
       if (spaces.length === 1) {
         spaceSelected(spaces[0]);
       } else if (spaces.length === 0) {
-        Orchestrator.createSpace(user.token, 'developer-free').then((space) => {
+        api.createSpace('developer-free').then((space) => {
           spaceSelected(space);
         });
       } else {
         setChooseSpace(true);
       }
     }
-  }, [setSignedIn, signedIn, user, spaces, spaceSelected]);
+  }, [setSignedIn, signedIn, user, spaces, spaceSelected, api]);
 
   const doneIcon = (): ReactElement => (
     <Box

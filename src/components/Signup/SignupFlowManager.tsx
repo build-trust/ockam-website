@@ -5,7 +5,7 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 
 import { User, currentUser, isSignedIn } from '@root/components/Auth';
-import Orchestrator, { Space } from '@components/Orchestrator';
+import OrchestratorAPI, { Space } from '@components/Orchestrator';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
@@ -42,6 +42,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const router = useRouter();
   const [user, setUser] = useState<User>();
+  const [api, setApi] = useState<OrchestratorAPI>();
   const [spaces, setSpaces] = useState<Space[]>();
   const [space, setSpace] = useState<Space>();
   const [currentPlan, setCurrentPlan] = useState<string>();
@@ -96,9 +97,9 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   }, [router]);
 
   const getSpaces = useCallback(
-    async (token: string): Promise<Space[]> => {
+    async (a: OrchestratorAPI): Promise<Space[]> => {
       if (spaces && spaces.length > 0) return spaces;
-      const ss = await Orchestrator.getSpaces(token);
+      const ss = await a.getSpaces();
       setSpaces(ss);
       return ss || [];
     },
@@ -106,7 +107,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   );
 
   const getSpace = useCallback(
-    async (token: string, ss: Space[]): Promise<Space | undefined> => {
+    async (ss: Space[]): Promise<Space | undefined> => {
       let s = space;
       if (s) return s;
       if (ss && ss.length > 1) return undefined;
@@ -122,8 +123,8 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const getPlan = useCallback(async (spaceId: string, ss: Space[]): Promise<string | undefined> => {
     const s = ss.find((e) => e.id === spaceId);
-    if (s) setCurrentPlan(s.subscription_plan.name);
-    return s?.subscription_plan.name;
+    if (s && s.subscription_plan) setCurrentPlan(s.subscription_plan.name);
+    return s?.subscription_plan?.name;
   }, []);
 
   const checkMarketplaceFulfilment = useCallback(async (): Promise<boolean> => {
@@ -137,23 +138,31 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     return isFulfilling;
   }, [purchaseParams]);
 
-  const getPaymentMethod = useCallback(async (): Promise<boolean> => {
-    const params = purchaseParams();
-    const customerId = params.customer || params.aws_customer_id;
-    const productId = params.product || params.aws_product_id;
+  const getPaymentMethod = useCallback(
+    async (a: OrchestratorAPI, s: Space): Promise<boolean> => {
+      const params = purchaseParams();
+      const customerId = params.customer || params.aws_customer_id;
+      const productId = params.product || params.aws_product_id;
 
-    if (customerId) setCustomer(customerId);
-    if (productId) setProduct(productId);
-    // const customerAwsID = params.CustomerAWSAccountID;
+      if (customerId) setCustomer(customerId);
+      if (productId) setProduct(productId);
+      const customerAwsID = params.CustomerAWSAccountID;
 
-    if (customerId && productId) {
-      // TODO: save marketplace details
-      setHasPaymentMethod(true);
-      window.sessionStorage.removeItem('pre-auth-params');
-      return true;
-    }
-    return false;
-  }, [purchaseParams]);
+      if (customerId && productId) {
+        const pm = await a.createPaymentMethod(productId, customerId, customerAwsID);
+        if (pm) await a.updatePaymentMethod(s.id, pm.id);
+        setHasPaymentMethod(true);
+        window.sessionStorage.removeItem('pre-auth-params');
+        return true;
+      }
+      if (s.payment_method) {
+        setHasPaymentMethod(true);
+        return true;
+      }
+      return false;
+    },
+    [purchaseParams],
+  );
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
@@ -223,7 +232,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     (step: number): ReactElement => {
       switch (step) {
         case 0:
-          return <Welcome user={user} spaces={spaces} spaceSelected={spaceSelected} />;
+          return <Welcome user={user} spaces={spaces} spaceSelected={spaceSelected} api={api} />;
           break;
         case 1:
           return (
@@ -272,6 +281,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       spaceSelected,
       customer,
       product,
+      api,
     ],
   );
 
@@ -289,16 +299,21 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     const u = await currentUser();
     if (u) {
       setUser(u);
-      let ss = await getSpaces(u.token);
+      const a = new OrchestratorAPI(
+        process.env.OCKAM_API_BASE_URL || 'https://subscriptions.orchestrator.ockam.io/api',
+        u.token,
+      );
+      setApi(a);
+      let ss = await getSpaces(a);
       ss = [];
-      const s = await getSpace(u.token, ss);
+      const s = await getSpace(ss);
       let cp = false;
       let hp = false;
+      const mf = await checkMarketplaceFulfilment();
       if (s) {
         cp = !!(await getPlan(s.id, ss));
+        hp = await getPaymentMethod(a, s);
       }
-      const mf = await checkMarketplaceFulfilment();
-      hp = await getPaymentMethod();
       const st = determineCurrentStep(!!u, !!s, cp, hp, mf);
       const end = new Date().getTime();
       const duration = end - start;
