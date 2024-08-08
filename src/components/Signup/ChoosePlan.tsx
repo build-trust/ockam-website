@@ -63,7 +63,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) 
         const t = TIERS.find((tier) => tier.name === plan);
         if (t?.marketplaceOnly) {
           setTimeout(() => {
-            onComplete();
+            onComplete(plan);
           }, 2000);
         } else if (t?.sponsorship) {
           showNext();
@@ -81,7 +81,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) 
         } else {
           setPurchased(true);
           setTimeout(() => {
-            onComplete();
+            onComplete(plan);
           }, 2000);
         }
       }, 4000);

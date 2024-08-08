@@ -79,6 +79,11 @@ const TIERS: Tier[] = [
       text: 'Get started →',
       url: '/download',
     },
+    marketplaces: {
+      aws: {
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
+      },
+    },
   },
 
   {
@@ -89,6 +94,11 @@ const TIERS: Tier[] = [
     cta: {
       text: 'Start 14-day trial →',
       url: '/download',
+    },
+    marketplaces: {
+      aws: {
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
+      },
     },
     sponsorship: true,
   },
@@ -173,6 +183,11 @@ const TIERS: Tier[] = [
       text: 'Talk to sales →',
       url: `${CONTACT_FORM_PATH}`,
     },
+    marketplaces: {
+      aws: {
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
+      },
+    },
     contactSalesOnly: true,
   },
   {
@@ -185,6 +200,11 @@ const TIERS: Tier[] = [
       text: 'Talk to sales →',
       url: `${CONTACT_FORM_PATH}`,
     },
+    marketplaces: {
+      aws: {
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
+      },
+    },
     contactSalesOnly: true,
   },
   {
@@ -196,6 +216,11 @@ const TIERS: Tier[] = [
     cta: {
       text: 'Talk to sales →',
       url: `${CONTACT_FORM_PATH}`,
+    },
+    marketplaces: {
+      aws: {
+        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
+      },
     },
     contactSalesOnly: true,
   },

@@ -229,6 +229,14 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     [user, currentPlan, hasPaymentMethod, marketplaceFulfilment, determineCurrentStep, jump],
   );
 
+  const planChosen = useCallback(
+    (plan: string): void => {
+      setCurrentPlan(plan);
+      next();
+    },
+    [next],
+  );
+
   const displayStep = useCallback(
     (step: number): ReactElement => {
       switch (step) {
@@ -238,7 +246,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         case 1:
           return (
             <ChoosePlan
-              onComplete={next}
+              onComplete={planChosen}
               hideNext={hideNext}
               showNext={showNext}
               currentPlan={currentPlan}
@@ -254,6 +262,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
               user={user}
               customer={customer}
               product={product}
+              plan={currentPlan}
             />
           );
           break;
@@ -283,6 +292,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       customer,
       product,
       api,
+      planChosen,
     ],
   );
 
