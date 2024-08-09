@@ -254,6 +254,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
               customer={c}
               product={p}
               plan={cp}
+              api={api}
             />
           );
           break;

@@ -14,6 +14,7 @@ type Props = {
   customer?: string;
   product?: string;
   user?: User;
+  api?: OrchestratorAPI;
 };
 
 type BuyerProps = {
@@ -27,12 +28,14 @@ type BuyerProps = {
 const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, product, customer, user, api }) => {
   const refName = createRef<HTMLInputElement>();
   const refCompany = createRef<HTMLInputElement>();
+  const [saving, setSaving] = useState<boolean>(false);
 
   useEffect(() => {
     hideNext();
   });
 
   const submit = (): void => {
+    setSaving(true);
     const name = refName.current?.value;
     const company = refCompany.current?.value;
     if (name && company && user.email && api) {
@@ -57,7 +60,7 @@ const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, product, customer, u
           <Input type="text" placeholder="Your name..." mb={4} ref={refName} />
           <FormLabel>Company</FormLabel>
           <Input type="text" placeholder="ACME Widgets" mb={4} ref={refCompany} />
-          <Button colorScheme="avocado" my="4" onClick={submit} maxW="sm">
+          <Button colorScheme="avocado" my="4" onClick={submit} maxW="sm" isLoading={saving}>
             Save
           </Button>
         </FormControl>
@@ -93,6 +96,7 @@ const MarketplaceSetup: FC<Props> = ({
   customer,
   product,
   user,
+  api,
 }) => {
   const [showBuyer, setShowBuyer] = useState(false);
   useEffect(() => {
@@ -110,6 +114,7 @@ const MarketplaceSetup: FC<Props> = ({
           product={product}
           customer={customer}
           user={user}
+          api={api}
         />
       )}
     </Box>
