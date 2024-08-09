@@ -78,11 +78,6 @@ const NAV = [
       },
       { name: 'SaaS Connectivity', href: '/for/saas-connectivity', isExternal: false },
       {
-        name: 'Sales Engineers',
-        href: '/for/sales-engineers',
-        isExternal: false,
-      },
-      {
         name: 'Zero-trust Streaming Data',
         href: 'https://www.ockam.io/blog/redpanda_connect_with_ockam',
         isExternal: true,
