@@ -4,7 +4,6 @@ import {
   MISSION_AND_VISION_PATH,
   MISSION_AND_VISION_TEAM_SECTION,
   PRIVATE_CONNECTIVITY_PATH,
-  SALES_ENGINEERS_PATH,
   STYLE_GUIDE_PATH,
   TEAM_PATH,
 } from '@consts/paths';
@@ -49,10 +48,6 @@ export const FOOTER_LINKS = [
         href: KAFKA_PATH,
       },
       { name: 'SaaS Connectivity', href: '/for/saas-connectivity' },
-      {
-        name: 'Sales Engineers',
-        href: SALES_ENGINEERS_PATH,
-      },
       {
         name: 'Zero-trust Streaming Data',
         href: 'https://www.ockam.io/blog/redpanda_connect_with_ockam',
