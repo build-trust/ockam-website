@@ -47,7 +47,7 @@ export const FOOTER_LINKS = [
         name: 'Kafka Encryption',
         href: KAFKA_PATH,
       },
-      { name: 'SaaS Connectivity', href: '/for/saas-connectivity' },
+      { name: 'SaaS Platforms', href: '/for/saas-platforms' },
       {
         name: 'Zero-trust Streaming Data',
         href: 'https://www.ockam.io/blog/redpanda_connect_with_ockam',

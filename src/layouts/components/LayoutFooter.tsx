@@ -76,7 +76,7 @@ const NAV = [
         href: '/for/kafka',
         isExternal: false,
       },
-      { name: 'SaaS Connectivity', href: '/for/saas-connectivity', isExternal: false },
+      { name: 'SaaS Platforms', href: '/for/saas-platforms', isExternal: false },
       {
         name: 'Zero-trust Streaming Data',
         href: 'https://www.ockam.io/blog/redpanda_connect_with_ockam',
