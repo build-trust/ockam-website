@@ -58,7 +58,11 @@ const FormSection: FC<Props> = ({ examples }): ReactElement => (
           fontFamily="neutraface"
         >
           {examples &&
-            examples.map((example) => <ExampleLink href={example.url}>{example.name}</ExampleLink>)}
+            examples.map((example) => (
+              <ExampleLink href={example.url} key={example.name}>
+                {example.name}
+              </ExampleLink>
+            ))}
         </Stack>
       </Stack>
 
