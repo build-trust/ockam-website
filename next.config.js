@@ -2,7 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { redirectJobs, redirectDocs } = require('./lib/redirects');
+const { redirectJobs, redirectDocs, redirectPages } = require('./lib/redirects');
 
 const nextConfig = {
   experimental: {
@@ -92,6 +92,7 @@ const nextConfig = {
     },
     ...redirectDocs,
     ...redirectJobs,
+    ...redirectPages,
   ],
 };
 
