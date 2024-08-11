@@ -143,10 +143,12 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
         pt={6}
         w="full"
         align={{ base: 'center', lg: 'flex-start' }}
+        alignItems={{ base: 'center', lg: 'flex-start' }}
       >
         {NAV.map((section) => (
           <VStack
             align={{ base: 'center', lg: 'flex-start' }}
+            alignItems={{ base: 'center', lg: 'flex-start' }}
             verticalAlign="top"
             key={section.heading}
             mx={0}
@@ -169,7 +171,7 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
                   fontSize="sm"
                   textAlign={{ base: 'center', md: 'left' }}
                 >
-                  {link.name}
+                  aaaaaaa{link.name}
                 </Text>
               </ChakraLink>
             ))}

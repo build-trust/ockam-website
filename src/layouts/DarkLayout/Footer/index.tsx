@@ -77,7 +77,7 @@ const Footer = (): ReactElement => (
         {FOOTER_LINKS.map((section) => (
           <VStack
             gap={{ base: '1rem', lg: '0.5rem' }}
-            align={{ base: 'flex-start' }}
+            align={{ base: 'center', lg: 'flex-start' }}
             key={section.heading}
           >
             <Heading as="h4" color="white" fontSize={{ base: '1rem' }} fontWeight={{ base: 700 }}>
