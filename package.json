@@ -111,7 +111,7 @@
     "lint-staged": "12.4.2",
     "next-sitemap": "4.2.3",
     "prettier": "3.2.5",
-    "typescript": "4.7.2"
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
     "@masterborn/eslint-config": "0.0.14"
