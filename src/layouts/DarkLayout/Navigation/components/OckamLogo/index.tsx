@@ -7,8 +7,7 @@ import { HOME_PATH } from '@consts/paths';
 
 import OckamLogoIcon from './assets/logo.svg';
 
-interface OckamLogoProps extends BoxProps {}
-const OckamLogo = (boxProps: OckamLogoProps): ReactElement => {
+const OckamLogo = (boxProps: BoxProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const closePopover = (): void => setIsOpen(false);
   const openPopover = (e: MouseEvent): void => {

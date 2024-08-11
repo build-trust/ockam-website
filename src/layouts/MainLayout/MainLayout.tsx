@@ -25,7 +25,6 @@ const MainLayout: FunctionComponent<LayoutProps> = ({
   const headerRef = useRef<HTMLDivElement>(null);
   return (
     <MobileNavbarProvider>
-      {/* @ts-ignore */}
       <MainLayoutHeader ref={headerRef} hasGradient={hasGradient || !!gradient} />
       <Box
         as="main"

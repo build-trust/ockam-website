@@ -158,10 +158,8 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   useEffect(() => {
     const stepName = steps[activeStep].title;
-    // @ts-ignore window.analytics undefined below
     window.analytics.track(`Signup - Step - ${stepName}`);
     const generatedUrl = `${window.location.protocol}//${window.location.host}/${window.location.pathname}/${stepName}`;
-    // @ts-ignore window.analytics undefined below
     window.analytics.page(generatedUrl);
     // window.scrollTo(0, 0);
   }, [steps, activeStep]);
@@ -339,7 +337,6 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     if (router.isReady && !isLoaded) {
       stateMachine().then(() => {});
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady, isLoaded]);
 
   return (

@@ -70,7 +70,6 @@ const FIELDS = [
 type Props = {
   landingPage?: string;
 };
-// TODO Types for react-hook-form - inputs, errors;
 const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
   const {
     register,
@@ -85,7 +84,6 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
 
   const contactFormRef = useRef<HTMLFormElement>(null);
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const onSubmit = async (e: FormEvent) => {
     const results = await trigger();
     if (!results) {
@@ -160,7 +158,6 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
         >
           {FIELDS.map((field) => (
             <GridItem key={field.name} {...field.wrapperStyles}>
-              {/* @ts-ignore */}
               <FormInput
                 type={field.type}
                 label={field.label}
@@ -226,7 +223,6 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
                 type="hidden"
                 {...register('recaptcha', { required: 'Recaptcha is required' })}
               />
-              {/* @ts-ignore */}
               <FormErrorMessage>{errors?.recaptcha?.message}</FormErrorMessage>
             </FormControl>
           </GridItem>

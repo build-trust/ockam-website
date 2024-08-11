@@ -19,7 +19,6 @@ const Notice: FC<Props> = ({ message }) => {
         onOpen();
       }, 1000);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message]);
 
   return (

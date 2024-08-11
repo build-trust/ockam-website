@@ -48,7 +48,7 @@ const TheRazorSignupPage: NextPageWithLayout<PageProps> = ({
       <Heading mb={2}>Previous episodes</Heading>
       <List>
         {previousEpisodes.map((data) => (
-          <ListItem my={4}>
+          <ListItem my={4} key={data.data.title}>
             {data.data.title} &mdash;{' '}
             <Link
               href={`/the-razor/${data.filePath.replace(/\.mdx$/, '')}`}

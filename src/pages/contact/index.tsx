@@ -13,16 +13,12 @@ const ContactPage: NextPageWithLayout = () => {
   const toast = useToast();
 
   const onSuccessContactFormSending = useCallback((): void => {
-    // @ts-ignore window.* undefined below
     if (window.gtag) window.gtag('config', 'AW-11100272214');
-    // @ts-ignore window.* undefined below
     if (window.analytics) {
-      // @ts-ignore window.* undefined below
       window.analytics.track('New Lead - Contact Form', {
         landingPage: 'unknown',
       });
     }
-    // @ts-ignore window.* undefined below
     if (window.lintrk) window.lintrk('track', { conversion_id: 13498706 });
     toast({
       position: 'top',

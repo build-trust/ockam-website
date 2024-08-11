@@ -3,7 +3,6 @@ import RocketIcon from '@assets/icons/rocket.svg';
 import UsersIcon from '@assets/icons/users.svg';
 import { DOCS } from '@consts/externalResources';
 
-// eslint-disable-next-line import/prefer-default-export
 export const NAV_MENU_ITEMS = [
   {
     text: 'Features',

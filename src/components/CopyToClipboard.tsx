@@ -31,7 +31,6 @@ const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({ codeText, ..
     icon={<Icon as={CopyIcon} w={6} h={6} />}
     zIndex={1}
     data-code={codeText}
-    // @ts-ignore
     onClick={copyClicked}
     {...restProps}
   />

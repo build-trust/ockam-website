@@ -4,7 +4,7 @@ export interface CardProps extends BoxProps {
   isPopular?: boolean;
 }
 const Card = (props: CardProps): JSX.Element => {
-  const { children, isPopular, ...rest } = props;
+  const { children, ...rest } = props;
 
   return (
     <Box

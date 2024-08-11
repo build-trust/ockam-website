@@ -57,8 +57,7 @@ export const Image = (props: ImageProps): ReactElement => (
   />
 );
 
-interface LearnMoreLinkProps extends BoxProps {}
-export const LearnMoreLink = ({ children, ...props }: LearnMoreLinkProps): ReactElement => (
+export const LearnMoreLink = ({ ...props }: BoxProps): ReactElement => (
   <Flex
     gap={{ base: '0.5rem' }}
     color="brand.600"

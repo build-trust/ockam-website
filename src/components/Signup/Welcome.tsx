@@ -20,12 +20,14 @@ import OrchestratorAPI, { Space } from '../Orchestrator';
 type Props = {
   user?: User;
   spaces?: Space[];
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   spaceSelected: Function;
   api?: OrchestratorAPI;
 };
 
 type SpaceProps = {
   spaces: Space[];
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   spaceSelected: Function;
 } & FlexProps;
 

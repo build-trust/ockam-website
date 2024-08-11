@@ -3,8 +3,7 @@ import React, { ReactElement } from 'react';
 
 import ExcalidrawAnimation, { ExcalidrawAnimationProps } from '@components/ExcalidrawAnimation';
 
-interface HeroHeadingProps extends HeadingProps {}
-export const HeroHeading = ({ children, ...headingProps }: HeroHeadingProps): ReactElement => (
+export const HeroHeading = ({ children, ...headingProps }: HeadingProps): ReactElement => (
   <Heading
     color="white"
     fontWeight={{ base: 700 }}
@@ -16,8 +15,7 @@ export const HeroHeading = ({ children, ...headingProps }: HeroHeadingProps): Re
   </Heading>
 );
 
-interface HeroDescriptionProps extends TextProps {}
-export const HeroDescription = ({ children, ...textProps }: HeroDescriptionProps): ReactElement => (
+export const HeroDescription = ({ children, ...textProps }: TextProps): ReactElement => (
   <Text
     color="white"
     fontWeight={{ base: 500 }}

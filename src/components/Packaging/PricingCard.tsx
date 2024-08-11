@@ -154,19 +154,7 @@ const Price = (props: PriceProps): JSX.Element => {
   );
 };
 const PricingCard = (props: PricingCardProps): JSX.Element => {
-  const {
-    data,
-    icon,
-    button,
-    isPopular,
-    previousTier,
-    segmentColor,
-    slim,
-    fade,
-    current,
-    showPrice,
-    ...rest
-  } = props;
+  const { data, button, isPopular, segmentColor, slim, fade, current, showPrice, ...rest } = props;
   const { features, price, priceUnit, priceInterval, name, floor, onlyFloor } = data;
 
   const Stack = slim ? HStack : VStack;

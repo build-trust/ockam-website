@@ -47,6 +47,7 @@ const SideBySidePanel: FC<Props> = ({
     };
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   const panelProps = (): {} => {
     if (!isPanel)
       return {
@@ -79,6 +80,7 @@ const SideBySidePanel: FC<Props> = ({
     };
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   const hoverStyle = (): {} => {
     if (isMinimal && href)
       return {

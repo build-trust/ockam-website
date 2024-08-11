@@ -69,7 +69,7 @@ export async function getStaticProps({
       },
       revalidate: 60,
     };
-  } catch (e) {
+  } catch {
     return {
       redirect: {
         destination: OPEN_ROLES_PATH,

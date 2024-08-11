@@ -29,7 +29,7 @@ export async function getServerSideProps() {
         openRoles: [...data] || [],
       },
     };
-  } catch (e) {
+  } catch {
     return {
       props: {},
     };

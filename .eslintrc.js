@@ -11,9 +11,15 @@ module.exports = {
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   settings: {
     'import/extensions': ['.js', '.js', '.jsx', '.ts', '.tsx'],
+    react: {
+      version: 'detect',
+    },
   },
   rules: {
     'react/react-in-jsx-scope': 'off',

@@ -71,8 +71,7 @@ function renderMobileNavigationItem({ items, name, href }: NavItem): ReactElemen
   );
 }
 
-interface MobileNavigationProps extends Omit<IconButtonProps, 'aria-label'> {}
-const MobileNavigation = (props: MobileNavigationProps): ReactElement => {
+const MobileNavigation = (props: Omit<IconButtonProps, 'aria-label'>): ReactElement => {
   const { isOpen, onOpen: openDrawer, onClose: closeDrawer } = useDisclosure();
   const { breakpoints } = useTheme();
   const [isDesktop] = useMediaQuery(`(min-width: ${breakpoints.lg})`);

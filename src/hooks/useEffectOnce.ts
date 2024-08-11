@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-type VoidCallback = () => void
+type VoidCallback = () => void;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
 const useEffectOnce = (callback: () => VoidCallback | undefined, deps: any[] = []) => {
@@ -13,8 +13,7 @@ const useEffectOnce = (callback: () => VoidCallback | undefined, deps: any[] = [
       mounted.current = true;
     }
 
-    return unmountCallbackRef.current
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return unmountCallbackRef.current;
   }, deps);
 };
 

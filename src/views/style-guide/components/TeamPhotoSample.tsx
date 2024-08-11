@@ -14,7 +14,7 @@ const TeamPhotoSampleCard: FunctionComponent<TeamPhotoSampleContent> = ({
     <Box minWidth="160px" height="220px" position="relative" mr={4}>
       <Image
         layout="fill"
-        // eslint-disable-next-line import/no-dynamic-require, global-require
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         src={require(`@assets/images/teamPhotos/${image}.png`)}
         alt="Dan Abramov"
       />

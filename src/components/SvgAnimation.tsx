@@ -2,6 +2,7 @@ import { ComponentType, FunctionComponent, useEffect, useRef, useState } from 'r
 
 type Props = {
   name: string;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   onLoad: Function;
   aspect?: 'width' | 'height';
 };
@@ -21,7 +22,7 @@ const SvgAnimation: FunctionComponent<Props> = ({ name, onLoad, aspect }) => {
 
   type SvgProps = {
     ref?: React.RefCallback<HTMLElement>;
-    style: {};
+    style?: { [key: string]: string };
   };
 
   useEffect(() => {
@@ -41,7 +42,6 @@ const SvgAnimation: FunctionComponent<Props> = ({ name, onLoad, aspect }) => {
       }
     };
     importSvg();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
 
   if (!loading && ImportedSvgRef.current) {

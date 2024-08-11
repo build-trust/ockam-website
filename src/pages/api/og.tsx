@@ -1,7 +1,7 @@
 import { ImageResponse } from '@vercel/og';
-// eslint-disable-next-line @next/next/no-server-import-in-page
 import { NextRequest } from 'next/server';
 import { FC } from 'react';
+import { Property } from 'csstype';
 
 export const config = {
   runtime: 'edge',
@@ -96,7 +96,7 @@ const Features: FC<FeaturesProps> = ({ features, template }) => {
 
   const featureListStyles = {
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column' as Property.FlexDirection,
     width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -105,10 +105,10 @@ const Features: FC<FeaturesProps> = ({ features, template }) => {
 
   const featureStyles = {
     display: 'flex',
-    flexDirection: 'row' as 'row',
+    flexDirection: 'row' as Property.FlexDirection,
     width: '90%',
     gap: 20,
-    textAlign: 'left' as 'left',
+    textAlign: 'left' as Property.TextAlign,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   };
@@ -134,7 +134,7 @@ const Features: FC<FeaturesProps> = ({ features, template }) => {
 export default async function handler(request: NextRequest) {
   try {
     const fontData = await fetch(
-      new URL('../../assets/fonts/Inter-Black.ttf', import.meta.url)
+      new URL('../../assets/fonts/Inter-Black.ttf', import.meta.url),
     ).then((res) => res.arrayBuffer());
 
     const { searchParams } = new URL(request.url);
@@ -180,7 +180,7 @@ export default async function handler(request: NextRequest) {
             style: 'normal',
           },
         ],
-      }
+      },
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {

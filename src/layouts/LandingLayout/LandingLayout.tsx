@@ -17,7 +17,6 @@ const LandingLayout: FunctionComponent<Props> = ({ hideNav, children }) => {
 
   const nav = (): ReactNode => {
     if (hideNav) return <></>;
-    /* @ts-ignore */
     return <LandingLayoutHeader ref={headerRef} />;
   };
 

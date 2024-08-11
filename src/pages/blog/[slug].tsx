@@ -2,7 +2,6 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { Flex, ImageProps, TextProps } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-// eslint-disable-next-line import/extensions
 import { CH } from '@code-hike/mdx/dist/components.cjs.js';
 import '@code-hike/mdx/styles.css';
 
@@ -37,7 +36,12 @@ type BlogPostPageProps = {
   allPageMessage?: AllPageMessage | null;
 };
 
-const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({ source, frontMatter, posts, allPageMessage }) => {
+const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({
+  source,
+  frontMatter,
+  posts,
+  allPageMessage,
+}) => {
   const router = useRouter();
   const blogPostBodyRef = useRef<HTMLDivElement | null>(null);
 

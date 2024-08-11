@@ -10,8 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 
-interface WhiteContainerProps extends BoxProps {}
-export const WhiteContainer = ({ children, ...boxProps }: WhiteContainerProps): ReactElement => (
+export const WhiteContainer = ({ children, ...boxProps }: BoxProps): ReactElement => (
   <Box
     pt={{ base: '3.75rem', lg: '7.5rem' }}
     px={{ base: '0.75rem' }}

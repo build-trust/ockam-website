@@ -41,7 +41,6 @@ const ListItemWrapper: FunctionComponent<ListItemProps> = ({ children, ...restPr
   </ListItem>
 );
 
-// @ts-ignore
 const replaceListItem: HTMLReactParserOptions['replace'] = ({ children }) => {
   if (!children) return null;
 

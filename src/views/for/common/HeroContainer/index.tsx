@@ -20,8 +20,7 @@ export const HeroContainer = ({
   </Box>
 );
 
-interface HeroContentWrapperProps extends FlexProps {}
-export const HeroContentWrapper = ({ children }: HeroContentWrapperProps): ReactElement => (
+export const HeroContentWrapper = ({ children }: FlexProps): ReactElement => (
   <Flex
     maxW="70rem"
     mx="auto"
@@ -34,8 +33,7 @@ export const HeroContentWrapper = ({ children }: HeroContentWrapperProps): React
   </Flex>
 );
 
-interface ButtonContainerProps extends FlexProps {}
-export const ButtonContainer = ({ children, ...flexProps }: ButtonContainerProps): ReactElement => (
+export const ButtonContainer = ({ children, ...flexProps }: FlexProps): ReactElement => (
   <Flex
     alignItems={{ base: 'center', lg: 'flex-start' }}
     flexDirection={{ base: 'column', lg: 'row' }}
@@ -46,8 +44,7 @@ export const ButtonContainer = ({ children, ...flexProps }: ButtonContainerProps
   </Flex>
 );
 
-interface TextContainerProps extends StackProps {}
-export const TextContainer = ({ children, ...stackProps }: TextContainerProps): ReactElement => (
+export const TextContainer = ({ children, ...stackProps }: StackProps): ReactElement => (
   <Stack gap="1.5rem" maxW={{ base: '33.75rem' }} {...stackProps}>
     {children}
   </Stack>

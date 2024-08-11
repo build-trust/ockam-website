@@ -73,11 +73,8 @@ const isSignedUp = async (): Promise<boolean> => {
 const trackSignup = (user: User): void => {
   const signup = window.sessionStorage.getItem('signup') as string | undefined;
   if (signup !== '1') {
-    // @ts-ignore window.analytics undefined below
     window.analytics.track(`Signup`);
-    // @ts-ignore window.rdt undefined below
     if (window.rdt) {
-      // @ts-ignore window.rdt undefined below
       window.rdt('track', 'SignUp', {
         currency: 'USD',
         transactionId: user.userId,
@@ -98,7 +95,6 @@ const identify = async (): Promise<void> => {
   if (await isSignedIn()) {
     const user = await currentUser();
     if (user) {
-      // @ts-ignore window.analytics undefined below
       window.analytics.identify(user.userId, { email: user.email });
       trackSignup(user);
     }
@@ -126,7 +122,7 @@ const Auth: FunctionComponent<Props> = ({
   const checkSignedIn = async (): Promise<void> => {
     try {
       await isSignedIn();
-    } catch (e) {
+    } catch {
       /* Do nothing */
     }
   };

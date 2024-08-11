@@ -52,7 +52,6 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newsletterPopup]);
 
   useEffect(() => {

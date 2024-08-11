@@ -29,7 +29,6 @@ const BlogPostRightNavigation = ({
       {...restProps}
     >
       <Card
-        /* @ts-ignore */
         ref={stickySidebarRef}
         w="full"
         overflow="scroll"

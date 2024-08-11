@@ -48,12 +48,6 @@ type Props = {
   darkGradient?: boolean;
   animationStartAt?: number;
   ctas?: ReactElement;
-  textSize?: ResponsiveValue<
-    (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
-  >;
-  subtextSize?: ResponsiveValue<
-    (string & {}) | '3xl' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'xs' | '4xl'
-  >;
   color?: string;
 } & BoxProps;
 
@@ -62,8 +56,6 @@ const Hero: FunctionComponent<Props> = ({
   subtext,
   image,
   landingPage,
-  textSize,
-  subtextSize,
   animate,
   aspect,
   darkGradient,
@@ -203,7 +195,6 @@ const Hero: FunctionComponent<Props> = ({
             background="white"
             borderTopLeftRadius="3xl"
             borderTopRightRadius="3xl"
-            // maxW="container.max"
           >
             <ExcalidrawAnimation
               src={image}

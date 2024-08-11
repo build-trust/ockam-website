@@ -19,20 +19,7 @@ type FormInputExternalProps = {
 type FormInputProps = FormInputExternalProps & InputProps & TextareaProps;
 
 const FormInput: FunctionComponent<FormInputProps> = forwardRef(
-  (
-    {
-      name,
-      type,
-      label,
-      placeholder,
-      errorMessage,
-      isRequired,
-      isInvalid,
-      isDisabled,
-      ...restProps
-    },
-    ref,
-  ) => {
+  ({ name, type, label, placeholder, errorMessage, isInvalid, isDisabled, ...restProps }, ref) => {
     const InputComponent = type === 'textarea' ? Textarea : Input;
 
     return (

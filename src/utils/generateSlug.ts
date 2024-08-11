@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const generateSlug = (text: string): string =>
   text
     ? text

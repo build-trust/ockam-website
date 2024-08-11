@@ -31,7 +31,7 @@ type AppPropsWithLayout = AppProps & {
 const App: FunctionComponent<AppPropsWithLayout> = (props) => {
   const {
     Component,
-    pageProps: { session, ...pageProps },
+    pageProps: { ...pageProps },
   } = props;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-shadow,@typescript-eslint/no-unused-vars
   const { getLayout = (page: ReactElement, pageProps: any): ReactNode => page } = Component;
@@ -51,12 +51,10 @@ const App: FunctionComponent<AppPropsWithLayout> = (props) => {
       if (isBrowser && !initialRouteTracked && window.location.search === '') {
         setInitialRouteTracked(true);
         await identify();
-        // @ts-ignore window.analytics undefined below
         window.analytics.page(window.location.href);
       }
       events.on('routeChangeComplete', async (url) => {
         await identify();
-        // @ts-ignore window.analytics undefined below
         window.analytics.page(url);
       });
     }

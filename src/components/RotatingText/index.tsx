@@ -49,6 +49,7 @@ const makeElements = (
 ): ((props: AnimatedProps<{ style: CSSProperties }>) => React.ReactElement)[] =>
   words.map(
     (word) =>
+      // eslint-disable-next-line react/display-name
       function ({ style }: AnimatedProps<{ style: CSSProperties }>) {
         return (
           <animated.div style={{ ...style, ...styles }} key={`ani-${word}`}>

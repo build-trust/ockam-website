@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import { createRef, FC, useEffect, useState } from 'react';
 import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Text } from '@chakra-ui/react';
 
@@ -101,7 +102,6 @@ const MarketplaceSetup: FC<Props> = ({
   const [showBuyer, setShowBuyer] = useState(false);
   useEffect(() => {
     if (hasPaymentMethod && customer && product) setShowBuyer(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPaymentMethod, customer, product]);
 
   return (

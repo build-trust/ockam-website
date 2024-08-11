@@ -1,4 +1,3 @@
-// @ts-nocheck
 /* eslint-disable  */
 type Checkpoint = {
   [key: string]: number;
