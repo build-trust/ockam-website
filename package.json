@@ -53,6 +53,7 @@
     "chakra-ui-steps": "^2.1.0",
     "chroma-js": "^2.4.2",
     "csstype": "^3.1.2",
+    "fast-xml-parser": "^4.4.1",
     "file-saver": "2.0.5",
     "focus-visible": "5.2.0",
     "framer-motion": "7.10.3",
