@@ -1,7 +1,7 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 class ApiError extends Error {
-  config: AxiosRequestConfig;
+  config?: AxiosRequestConfig;
 
   data: AxiosResponse['data'];
 

@@ -12,7 +12,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
+import parse, { domToReact, Element, DOMNode } from 'html-react-parser';
 
 import { OPEN_ROLES_PATH } from '@consts/paths';
 import { LeverPosting, LeverPostingList } from '@typings/lever';
@@ -41,15 +41,18 @@ const ListItemWrapper: FunctionComponent<ListItemProps> = ({ children, ...restPr
   </ListItem>
 );
 
-const replaceListItem: HTMLReactParserOptions['replace'] = ({ children }) => {
+const replaceListItem = ({ children }: Element) => {
   if (!children) return null;
 
-  return <ListItemWrapper>{domToReact(children)}</ListItemWrapper>;
+  return <ListItemWrapper>{domToReact(children as DOMNode[])}</ListItemWrapper>;
 };
 
 const DetailsList: FunctionComponent<LeverPostingList> = ({ text, content }): JSX.Element => {
   const parsedListItems = parse(content, {
-    replace: replaceListItem,
+    replace: (domNode) => {
+      const domElement: Element = domNode as Element;
+      return replaceListItem(domElement);
+    },
   });
 
   return (

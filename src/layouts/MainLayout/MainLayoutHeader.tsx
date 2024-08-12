@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, RefObject } from 'react';
+import { useContext, RefObject } from 'react';
 import { Box, Container, Flex, forwardRef, useDisclosure, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
@@ -13,7 +13,7 @@ import BrandAssetPopover, { BrandAssetPopoverTrigger } from '@root/components/Br
 
 import LayoutMobileHeader from '../components/LayoutMobileHeader';
 
-const MainLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
+const MainLayoutHeader = forwardRef((props, ref) => {
   const { hasGradient } = props;
   const { isScrolled } = useScroll(40, true, ref as RefObject<HTMLDivElement>);
   const { isBelowSmallLaptop } = useContext(MobileNavbarContext);

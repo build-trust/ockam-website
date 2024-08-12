@@ -223,7 +223,9 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
                 type="hidden"
                 {...register('recaptcha', { required: 'Recaptcha is required' })}
               />
-              <FormErrorMessage>{errors?.recaptcha?.message}</FormErrorMessage>
+              <FormErrorMessage>
+                <>{errors?.recaptcha?.message}</>
+              </FormErrorMessage>
             </FormControl>
           </GridItem>
         </SimpleGrid>

@@ -16,7 +16,7 @@ const BlogPostRightNavigation = ({
   tableOfContentSource,
   ...restProps
 }: BlogPostRightNavigationProps): JSX.Element => {
-  const stickySidebarRef = useRef<HTMLDivElement>();
+  const stickySidebarRef = useRef<HTMLDivElement>(null);
   useSetFullMaxHeightReducedByTopOffset(stickySidebarRef);
 
   return (

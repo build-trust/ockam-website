@@ -53,8 +53,6 @@ const RazorLayout: FunctionComponent<RazorProps> = ({ children, title, subtext, 
         >
           <Hero
             text={title || 'The Razor'}
-            textSize={{ base: '3em', sm: '3em', md: '6em', lg: '8em' }}
-            subtextSize={{ base: '2em', sm: '2em', md: '4em' }}
             subtext={
               subtext ||
               'The latest & most interesting news about secure-by-design systems, developer experience, and related tooling'

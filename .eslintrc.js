@@ -8,6 +8,7 @@ module.exports = {
   plugins: ['@typescript-eslint', '@emotion'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaVersion: 2023,
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
     sourceType: 'module',

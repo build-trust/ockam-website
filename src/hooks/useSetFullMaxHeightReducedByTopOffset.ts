@@ -16,11 +16,19 @@ const setMaxHeightBasedOnOffset =
   };
 
 const useSetFullMaxHeightReducedByTopOffset = (
-  ref: MutableRefObject<HTMLDivElement | undefined>,
-  condition = true
+  ref: MutableRefObject<HTMLDivElement | null>,
+  condition = true,
 ): void => {
-  useScrollPosition(setMaxHeightBasedOnOffset(ref, condition), [ref, condition]);
-  useEffect(() => setMaxHeightBasedOnOffset(ref, condition), [ref, condition]);
+  if (ref.current) {
+    useScrollPosition(
+      setMaxHeightBasedOnOffset(ref as MutableRefObject<HTMLDivElement>, condition),
+      [ref, condition],
+    );
+    useEffect(
+      () => setMaxHeightBasedOnOffset(ref as MutableRefObject<HTMLDivElement>, condition),
+      [ref, condition],
+    );
+  }
 };
 
 export default useSetFullMaxHeightReducedByTopOffset;

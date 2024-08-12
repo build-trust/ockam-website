@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from 'react';
+import { useContext } from 'react';
 import { Box, Container, Flex, forwardRef } from '@chakra-ui/react';
 import Link from 'next/link';
 
@@ -10,7 +10,7 @@ import { MobileNavbarContext } from '@contextProviders/MobileNavbarProvider';
 
 import LayoutMobileHeader from '../components/LayoutMobileHeader';
 
-const LandingLayoutHeader: FunctionComponent = forwardRef((props, ref) => {
+const LandingLayoutHeader = forwardRef((props, ref) => {
   const { isBelowSmallLaptop } = useContext(MobileNavbarContext);
 
   if (isBelowSmallLaptop) {

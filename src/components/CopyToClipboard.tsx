@@ -1,17 +1,18 @@
-import React, { FunctionComponent } from 'react';
-import { BoxProps, Icon, IconButton } from '@chakra-ui/react';
+import React, { FunctionComponent, MouseEvent, MouseEventHandler } from 'react';
+import { Icon, IconButton, IconButtonProps } from '@chakra-ui/react';
 
 import CopyIcon from '@assets/icons/copy.svg';
 
-type CopyToClipboardProps = {
+type CopyToClipboardProps = Omit<IconButtonProps, 'aria-label'> & {
   codeText?: string;
-} & BoxProps;
+  'aria-label'?: string;
+};
 
 const copyToClipboard = (codeText: string): void => {
   if (typeof navigator !== 'undefined') navigator.clipboard.writeText(codeText);
 };
 
-const copyClicked = (event: MouseEvent): void => {
+const copyClicked: MouseEventHandler = (event: MouseEvent<HTMLButtonElement>): void => {
   const el = event.target as HTMLElement;
   let codeText = (el.closest('Button[data-code]') as HTMLElement)?.dataset.code;
   if (!codeText) {
@@ -23,7 +24,6 @@ const copyClicked = (event: MouseEvent): void => {
 
 const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({ codeText, ...restProps }) => (
   <IconButton
-    aria-label="Copy code to clipboard"
     colorScheme="avocado"
     bgColor="transparent"
     _hover={{ bgColor: 'brand.900' }}
@@ -33,6 +33,7 @@ const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({ codeText, ..
     data-code={codeText}
     onClick={copyClicked}
     {...restProps}
+    aria-label="Copy code to clipboard"
   />
 );
 

@@ -73,7 +73,7 @@ const FIELDS = [
       colSpan: { md: 2 },
     },
     inputStyles: {
-      resize: 'none',
+      resize: { base: undefined },
       h: '158px',
     },
   },
@@ -221,7 +221,9 @@ const ContactForm: FunctionComponent<Props> = ({ landingPage }) => {
                 type="hidden"
                 {...register('recaptcha', { required: 'Recaptcha is required' })}
               />
-              <FormErrorMessage>{errors?.recaptcha?.message}</FormErrorMessage>
+              <FormErrorMessage>
+                <>{errors?.recaptcha?.message}</>
+              </FormErrorMessage>
             </FormControl>
           </GridItem>
 

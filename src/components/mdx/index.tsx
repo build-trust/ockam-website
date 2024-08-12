@@ -1,4 +1,4 @@
-import { MDXRemoteProps } from 'next-mdx-remote';
+import { MDXComponents } from 'mdx/types';
 import { SimpleGrid } from '@chakra-ui/react';
 
 import StyleGuideResourceItem from '@root/components/StyleGuideResourceItem';
@@ -48,4 +48,4 @@ export default {
   SimpleGrid,
   ExcalidrawAnimation,
   SideBySidePanel,
-} as MDXRemoteProps['components'];
+} as MDXComponents;

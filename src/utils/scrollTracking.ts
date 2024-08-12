@@ -10,24 +10,24 @@ type Checkpoint = {
  * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Underscore may be freely distributed under the MIT license.
  */
-function throttle(func, wait) {
-  var context, args, result;
-  var timeout = null;
-  var previous = 0;
+function throttle(func: Function, wait: number) {
+  var context: Function, args: any, result: any;
+  var timeout: NodeJS.Timeout | undefined = undefined;
+  var previous: number = 0;
   var later = function () {
-    previous = new Date();
-    timeout = null;
+    previous = new Date().getTime();
+    timeout = undefined;
     result = func.apply(context, args);
   };
-  return function () {
-    var now = new Date();
+  return function (this: any) {
+    var now = new Date().getTime();
     if (!previous) previous = now;
     var remaining = wait - (now - previous);
     context = this;
     args = arguments;
     if (remaining <= 0) {
       clearTimeout(timeout);
-      timeout = null;
+      timeout = undefined;
       previous = now;
       result = func.apply(context, args);
     } else if (!timeout) {
@@ -47,7 +47,7 @@ const findMaxCheckpoint = (checkpoints: Checkpoint[], depth: number): string | v
   }
 };
 
-const tracked = [];
+const tracked: string[] = [];
 const trackScrollDepth = (): void => {
   const minHeight = 100;
   const docHeight = document.documentElement.scrollHeight;

@@ -16,7 +16,7 @@ const RotatingHeading: FC<Props> = ({ text, as, ...rest }) => {
   const rotatingWords = (): string[] => {
     if (text && text.match(re)) {
       const matched = text.match(re);
-      return matched[1].split('|');
+      if (matched && matched[1]) return matched[1].split('|');
     }
     return [];
   };
