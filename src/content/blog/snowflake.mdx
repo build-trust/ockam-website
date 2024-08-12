@@ -13,10 +13,11 @@ authorAvatar: /blog/glenn-gillen.jpg
 
 So you've got most of your organization's data consolidated into The Data Cloud
 that we call Snowflake. Colleagues are busy analyzing the data and generating 
-new insights, and now you need to get those insights back out various other
-systems to they can act upon them.
+new insights. What if I told you there was a way to stream 
+those insights in real-time back to the systems that can act upon them, and it 
+will take you less than 15 minutes to setup?
 
-Welcome to the world of reverse ETL!
+Welcome to the world of Reverse ETL!
 
 ## What is "Reverse ETL"?
 
@@ -28,738 +29,171 @@ data typically gets into The Data Cloud is by one of:
 
 * Writing directly to it!
 * Syncing logs, metrics, and other data via a connector
-* An Extract, Transform, and Load (ETL) that runs regularly to move data from 
+* An Extract, Transform, and Load (ETL) process that runs regularly to move data from 
 one system and load it into Snowflake
 
 Reverse ETL is, as the name implies, simply running that process in the opposite
 direction. Once the magic has been done in Snowflake one or more of your other
-systems probably needs to act on the updated insight. Maybe the website needs to
+systems probably needs to act on the updated insights. Maybe the website needs to
 know some additional data about a user? Maybe a CRM or email list needs to be 
 updated? Whatever the reason, you need a way to get that data back out to the 
 edges as quickly as possible. 
 
 In this post I'm going to show you how to:
 
-* Setup a Snowflake Stream to capture changes 
+* Setup a Snowflake Stream to capture changes to a table in Snowflake
+* Setup a managed Kafka cluster in AWS
+* Connect Snowflake to Kafka with a private encrypted connection - without needing
+to expose either system to the public internet!
 
 ## Snowflake streams 
 
-Snowflake streams are a away to capture every change made to a table (i.e., every
+Snowflake streams are a way to capture every change made to a table (i.e., every
 insert, update, and delete) and record it somewhere else. It'll often be referred
 to as Change Data Capture (CDC) and it's an effective way to respond to changes 
 in the data that you care about. 
 
+### Setting up stream...
 
+TBD
 
-
-
-In today’s data-driven world, organizations are collecting more information than ever before. As businesses strive to leverage this data to drive decision-making, platforms like Snowflake have become indispensable. Snowflake’s cloud-native data warehousing solution has revolutionized how companies store, process, and analyze data, offering unparalleled scalability, flexibility, and performance. But as powerful as Snowflake is, maximizing its potential often requires going beyond traditional ETL (Extract, Transform, Load) processes—this is where reverse ETL comes into play.
-
-Why So Many Organizations Rely on Snowflake
-
-Snowflake has quickly become a cornerstone for organizations looking to manage and analyze vast amounts of data. Its unique architecture, which separates storage and compute, allows businesses to scale resources independently, optimizing costs and performance. Snowflake’s ability to integrate seamlessly with a wide range of data sources and its robust support for SQL make it a go-to choice for data engineers and analysts alike.
-
-With Snowflake, organizations can centralize their data into a single source of truth, enabling advanced analytics and data-driven strategies. Whether it’s powering BI dashboards, running complex queries, or supporting machine learning models, Snowflake’s capabilities are a game-changer for data-centric businesses.
-
-The Need for Reverse ETL
-
-While traditional ETL processes are designed to move data from various sources into a centralized data warehouse like Snowflake, reverse ETL flips this process on its head. Reverse ETL involves extracting data from Snowflake and pushing it back into operational systems such as CRM tools, marketing platforms, or custom applications. This enables organizations to operationalize their data, making it actionable in real-time.
-
-The need for reverse ETL arises from the growing demand for real-time, data-driven decision-making. For example, customer insights stored in Snowflake can be fed directly into marketing automation tools, enabling personalized campaigns that respond to user behavior in real-time. Similarly, sales teams can benefit from having the latest data on customer interactions and purchase history directly within their CRM, empowering them to engage more effectively.
-
-Why Use Apache Kafka for Reverse ETL?
+## Amazon Managed Streaming for Kafka (MSK)
 
 When implementing a reverse ETL process, the choice of tools can significantly impact the reliability, scalability, and efficiency of the solution. This is where Apache Kafka comes into play. Kafka is an open-source stream-processing platform that excels in handling real-time data feeds with high throughput and low latency.
 
-Reliability and Durability: One of the key reasons to use Kafka in a reverse ETL process is its robust architecture that ensures data reliability and durability. Kafka’s distributed nature means it can handle large volumes of data while maintaining data integrity, even in the face of failures. This is crucial for organizations that need to ensure their operational systems are always receiving up-to-date and accurate information from Snowflake.
+### Setting up MSK
 
-Scalability: As your organization’s data grows, so does the need for scalable solutions. Kafka’s ability to handle massive streams of data in real-time makes it an ideal choice for organizations with large and complex data pipelines. Kafka’s scalability ensures that as your business and data requirements evolve, your reverse ETL process can keep up without compromising performance.
-
-Integration and Flexibility: Kafka’s extensive ecosystem allows for seamless integration with Snowflake and other systems. With Kafka Connect, you can easily set up connectors to pull data from Snowflake and push it to a variety of downstream systems. This flexibility is essential for creating a reverse ETL process that fits your specific operational needs.
-
-Conclusion
-
-Incorporating reverse ETL into your data strategy can unlock new levels of operational efficiency and real-time decision-making. By leveraging Snowflake’s powerful data warehousing capabilities and Apache Kafka’s reliable, scalable streaming platform, organizations can ensure that their data is not only stored and analyzed but also made actionable where it matters most.
-
-Whether you’re looking to enhance your marketing automation, improve customer relationship management, or drive real-time analytics, a reverse ETL process with Snowflake and Kafka offers a robust, scalable, and reliable solution. By operationalizing your data, you can turn insights into action and drive your business forward with precision and speed.
-
-
-# Native App Flow
-
-<CodeTour>
-## !!steps A Game of Thrones
-
-A Game of Thrones is the first book in the A Song of Ice and Fire series by George R.R. Martin. Set in a world where seasons last for years, it introduces a complex plot and a wide cast of characters, ranging from noble families vying for the Iron Throne to the supernatural threats in the North.
-
-```js ! george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
-
-const winner =
-  houses[
-    Math.floor(
-      Math.random() * houses.length,
-    )
-  ]
-
-console.log(`Iron Throne: ${winner}`)
-```
-
-## !!steps A Clash of Kings
-
-A Clash of Kings, the second book in the series, continues the epic saga. The Seven Kingdoms are plunged into war, with kings rising and falling. Meanwhile, Daenerys Targaryen seeks to return to Westeros with her growing dragons.
-
-```js ! george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
-
-const clash = () => {
-  const winner =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${winner} wins the battle!`
-}
-
-console.log(clash())
-```
-
-## !!steps A Storm of Swords
-
-The third book, A Storm of Swords, is known for its intense and shocking developments. Battles rage on, alliances shift, and characters face unexpected challenges and betrayals, making it one of the most thrilling books in the series.
-
-```js ! george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-]
-
-const reveal = () => {
-  const traitor =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${traitor} betrays the alliance!`
-}
-
-console.log(reveal())
-```
-
-## !!steps A Feast for Crows
-
-A Feast for Crows, the fourth book, explores the aftermath of the wars, with a focus on the characters in the southern regions of Westeros. It delves into the politics and power struggles in a kingdom weary of battle.
-
-```js ! george.js
-const houses = [
-  "Martell",
-  "Lannister",
-  "Baratheon",
-  "Tyrell",
-]
-
-const intrigue = () => {
-  const ally1 =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  const ally2 =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${ally1} and ${ally2} form an alliance!`
-}
-
-console.log(intrigue())
-```
-
-## !!steps A Dance with Dragons
-
-A Dance with Dragons, the fifth book, runs concurrently with A Feast for Crows and focuses on the characters in the North and across the Narrow Sea. The story advances with dragons, the Night’s Watch, and the lingering threat of winter.
-
-```js ! george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-]
-
-const dragons = () => {
-  const dragon =
-    houses[
-      Math.floor(
-        Math.random() * houses.length,
-      )
-    ]
-  return `${dragon} has a dragon!`
-}
-
-console.log(dragons())
-```
-
-## !!steps The Winds of Winter
-
-The Winds of Winter, the anticipated sixth book, is expected to continue the intricate storylines and bring new twists and turns to the world of Westeros. Fans eagerly await its release.
-
-```js ! george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
-
-const winterIsComing = () => {
-  const isComing = Math.random() > 0.99
-  if (isComing) {
-    return "Winter is coming!"
-  } else {
-    return "Winter is not coming."
-  }
-}
-
-console.log(winterIsComing())
-```
-
-## !!steps A Dream of Spring
-
-A Dream of Spring is the proposed final book in the series, anticipated to conclude the epic saga. It remains one of the most awaited books in modern fantasy literature.
-
-```js ! george.js
-const houses = [
-  "Stark",
-  "Lannister",
-  "Baratheon",
-  "Targaryen",
-  "Martell",
-  "Tyrell",
-  "Greyjoy",
-]
-
-const keepDreaming = () => {
-  return "Not gonna happen..."
-}
-
-console.log(keepDreaming())
-```
-</CodeTour>
-
-## Images
+## Connecting Snowflake to Kafka
 
 <ImageTour>
-## !!steps An Image of Thrones
+### !!steps Select a warehouse
 
-A Game of Thrones is the first book in the A Song of Ice and Fire series by George R.R. Martin. Set in a world where seasons last for years, it introduces a complex plot and a wide cast of characters, ranging from noble families vying for the Iron Throne to the supernatural threats in the North.
+Dolore amet irure tempor incididunt officia. Laborum duis in proident ex. Fugiat aliqua eu labore excepteur labore quis. In magna eiusmod sunt consequat ullamco do aliquip. Sit ullamco in eu mollit est aute enim nostrud Lorem deserunt minim reprehenderit. Exercitation anim ea ullamco voluptate nisi officia eiusmod. Officia cillum consectetur mollit adipisicing minim et ut ut.
 
-![!tour Players on the Field](/blog/team/baseball.png)
+![!tour Select a warehouse](/blog/snowflake-reverse-etl/select-warehouse.png)
 
-## !!steps Doop doop
+### !!steps Grant account privileges
 
-Consectetur proident esse occaecat aliqua reprehenderit cillum. Duis fugiat aute labore sit fugiat. Voluptate deserunt pariatur culpa nostrud eu et pariatur. Pariatur nostrud deserunt qui consectetur laborum velit exercitation labore. Excepteur occaecat qui et consectetur.
+Minim aliquip enim amet exercitation qui ipsum officia et mollit labore aute velit. Cupidatat veniam occaecat ex elit occaecat. Nostrud dolore ea minim voluptate. Velit nostrud sint laborum magna esse irure nulla nostrud excepteur culpa. Aliqua labore laboris laborum duis qui elit est veniam velit duis velit.
 
-![!tour Performance Levels](/blog/team/levels.png)
+![!tour Grant account privileges](/blog/snowflake-reverse-etl/grant-account.png)
 
-## !!steps A Storm of Swords chink ghing
+### !!steps Activate app
 
-The third book, A Storm of Swords, is known for its intense and shocking developments. Battles rage on, alliances shift, and characters face unexpected challenges and betrayals, making it one of the most thrilling books in the series.
+Mollit aliquip proident esse reprehenderit adipisicing ea consectetur et ea. Velit adipisicing id aliqua aliquip sit sint sit. Officia enim minim veniam non ea reprehenderit enim nostrud duis aliqua tempor ullamco nisi. Ex exercitation esse minim aliquip commodo non mollit excepteur in dolor et esse.
 
-## !!steps A Feast for Crows
+![!tour Activate app](/blog/snowflake-reverse-etl/activate-app.png)
 
-A Feast for Crows, the fourth book, explores the aftermath of the wars, with a focus on the characters in the southern regions of Westeros. It delves into the politics and power struggles in a kingdom weary of battle.
+### !!steps Launch app
 
-## !!steps A Dance with Dragons
+Magna aute dolore tempor elit. Cillum non quis ullamco ullamco est minim in. Fugiat veniam excepteur enim Lorem pariatur id occaecat mollit sunt cupidatat. Exercitation et consequat est consectetur est veniam mollit dolore id quis Lorem excepteur.
 
-A Dance with Dragons, the fifth book, runs concurrently with A Feast for Crows and focuses on the characters in the North and across the Narrow Sea. The story advances with dragons, the Night’s Watch, and the lingering threat of winter.
+![!tour Launch app](/blog/snowflake-reverse-etl/launch-app.png)
 
-## !!steps The Winds of Winter
+### !!steps Get started
 
-The Winds of Winter, the anticipated sixth book, is expected to continue the intricate storylines and bring new twists and turns to the world of Westeros. Fans eagerly await its release.
+Consequat ea incididunt ullamco sit. Deserunt sit occaecat consectetur enim minim anim. Velit nulla ea occaecat duis qui dolor anim veniam sunt quis quis non. Occaecat labore mollit adipisicing mollit commodo nostrud Lorem esse commodo non incididunt id. Laboris deserunt cupidatat occaecat Lorem in quis labore qui mollit.
 
-## !!steps A Dream of Spring
+![!tour Get started](/blog/snowflake-reverse-etl/get-started.png)
 
-A Dream of Spring is the proposed final book in the series, anticipated to conclude the epic saga. It remains one of the most awaited books in modern fantasy literature.
+### !!!steps Setup admin account
+
+Consectetur aute esse magna aliqua et Lorem aliqua. Veniam sint et ad nisi exercitation minim consequat. Quis excepteur minim eu nulla reprehenderit occaecat qui proident proident irure nostrud exercitation magna cupidatat. Laboris sunt cupidatat Lorem ex.
+
+![!tour Setup admin account](/blog/snowflake-reverse-etl/get-started-enroll.png)
+
+### !!!steps Generate enrollment ticket for Kafka
+
+Aute officia magna Lorem sit dolore consequat eiusmod enim velit. Nostrud et ea sint Lorem nulla in. Quis officia aliquip aliqua culpa ex deserunt sit in dolor mollit tempor. Dolor non mollit commodo amet id est. Quis reprehenderit reprehenderit adipisicing aute esse sint eu eiusmod aute enim.
+
+![!tour Create outlets](/blog/snowflake-reverse-etl/create-outlets.png)
+
+### !!!steps Launch Ockam node for Amazon MSK
+
+Enim pariatur et anim anim minim amet excepteur enim dolore ipsum id quis aliquip. Excepteur labore esse non commodo qui aute tempor. Nostrud est amet non duis id ea mollit tempor eiusmod et sit magna.
+
+### !!!steps Enter stack details
+
+Dolore et aliquip pariatur aute ipsum tempor incididunt amet. Sint pariatur aliqua sit voluptate. Veniam amet Lorem dolor reprehenderit eu est enim dolore voluptate voluptate occaecat occaecat. Excepteur adipisicing commodo labore laborum in. Ut non eu culpa ea laborum non est velit pariatur excepteur aliqua deserunt pariatur. Fugiat esse veniam reprehenderit tempor.
+
+### !!!steps Generate enrollment ticket for Snowflake
+
+Id nostrud aliqua enim officia anim dolore laboris labore magna nulla magna. Sunt proident sunt sint aute exercitation culpa do dolore nisi nulla dolore commodo. Officia reprehenderit proident ex non aliqua reprehenderit proident et quis ea labore ipsum. Dolor irure est qui ipsum commodo. Elit occaecat deserunt fugiat fugiat id ipsum cupidatat consequat laboris veniam ex incididunt anim ut.
+
+### !!!steps Configure connection details
+
+Incididunt pariatur veniam duis est sunt qui consequat officia irure mollit sint. Consequat sunt occaecat culpa laborum. Magna dolor eu aliquip magna nisi sunt qui anim quis ad ullamco consectetur ad. Pariatur ex non cillum duis proident reprehenderit amet non eu. Qui eiusmod anim culpa reprehenderit nisi proident sunt in ex adipisicing. Aute laboris voluptate dolor aute officia minim aute ad anim non ut Lorem ea et.
+
+### !!!steps Map Snowflake stream to Kafka topic
+
+Occaecat ullamco aliqua culpa eiusmod velit amet. Fugiat cupidatat aute eu sit dolore magna fugiat ullamco commodo culpa fugiat. Laborum occaecat sit qui id dolore. Irure nulla nisi non mollit proident irure aliqua eu aliquip voluptate sint commodo.
+
+### !!!steps Grant privileges
+
+Nulla sit est officia ad tempor laboris voluptate. Est eu et mollit quis sit ad quis exercitation enim eiusmod magna velit ullamco adipisicing. Qui pariatur elit qui ex fugiat enim pariatur sint magna ea et. Ullamco esse dolore reprehenderit aute duis minim ex amet cupidatat sint. Velit aliquip quis nostrud id laboris consectetur proident. Exercitation culpa sint incididunt adipisicing qui.
+
+### !!!steps Manually grant additional privileges
+
+Reprehenderit aute ullamco elit sit irure pariatur mollit. Aute amet id pariatur non fugiat ullamco nisi ullamco irure. Proident dolore ut Lorem do occaecat ut sit non labore qui consectetur ipsum. Nostrud dolor esse voluptate laborum sint duis nostrud occaecat quis nostrud qui sint qui ullamco. Magna velit fugiat ut nostrud duis incididunt deserunt ex ullamco sint esse ullamco incididunt. Lorem sunt incididunt tempor amet occaecat duis cillum anim. Nisi incididunt eiusmod laborum nisi sit anim incididunt consequat commodo Lorem amet eiusmod sit.
 
 </ImageTour>
 
-[Authenticate to Snowflake](https://docs.snowflake.com/en/developer-guide/snowflake-cli-v2/connecting/specify-credentials)
-```bash
-snow connection add
-```
-
-
-
-
-
-## Setting up Kafka
-
-
-
-
-
-
-
-
-## Ockam setup
-
-<CH.Scrollycoding style={{marginTop: '5rem', marginBottom: '5rem'}}>
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL \
-    https://install.command.ockam.io | \
-    bash && source "$HOME/.ockam/env"
-
-ockam enroll
-
-ockam project ticket \
-    --usage-count 1 --expires-in 10h \
-    --attribute snowflake-kafka-inlet \
-    > inlet.ticket
-ockam project ticket \
-    --usage-count 1 --expires-in 10h \
-    --attribute snowflake-kafka-outlet \
-    --relay kafka \
-    > outlet.ticket
-
-```
-
----
-
-```bash focus=1:3
-```
-
----
-
-```bash focus=5
-```
-
----
-
-```bash focus=7
-```
-
----
-
-```bash focus=8
-```
-
----
-
-```bash focus=9
-```
-
----
-
-```bash focus=10
-```
-
----
-
-```bash focus=11:15
-```
-
----
-
-```bash focus=12,14
-```
-
----
-
-```bash focus=13
-```
-</CH.Scrollycoding>
-
-### Get egress
-```bash
-ockam project show --jq .egress_allow_list
-```
-
-## Start Ockam MSK node via AWS marketplace
-
-## Setup Snowflake
-
-<CH.Scrollycoding style={{marginTop: '5rem', marginBottom: '5rem'}}>
-```sql
-USE ROLE ACCOUNTADMIN;
-
--- CREATE ROLES
-CREATE OR REPLACE ROLE CDC_TEST_ROLE;
-
--- CREATE DATABASE
-CREATE DATABASE IF NOT EXISTS CDC_TEST_DB;
-
--- CREATE WAREHOUSE
-CREATE OR REPLACE WAREHOUSE CDC_TEST_WH WITH WAREHOUSE_SIZE='X-SMALL';
-
--- CREATE SCHEMA
-CREATE SCHEMA IF NOT EXISTS CDC_TEST_SCHEMA;
-
--- CREATE COMPUTE POOL
-CREATE COMPUTE POOL CDC_TEST_CP
-  MIN_NODES = 1
-  MAX_NODES = 5
-  INSTANCE_FAMILY = CPU_X64_XS;
-
--- WAIT
-DESCRIBE COMPUTE POOL CDC_TEST_CP;
-
--- CREATE IMAGE REPOSITORY
-CREATE IMAGE REPOSITORY IF NOT EXISTS CDC_TEST_REPO;
-
---Note repository_url value to be used to build and publish consumer image to snowflake
-SHOW IMAGE REPOSITORIES;
-
--- GRANTS
-GRANT ROLE CDC_TEST_ROLE TO ROLE ACCOUNTADMIN;
-GRANT ALL ON DATABASE CDC_TEST_DB TO ROLE CDC_TEST_ROLE;
-GRANT ALL ON WAREHOUSE CDC_TEST_WH TO ROLE CDC_TEST_ROLE;
-GRANT ALL ON SCHEMA CDC_TEST_SCHEMA TO ROLE CDC_TEST_ROLE;
-GRANT ALL ON COMPUTE POOL CDC_TEST_CP TO ROLE CDC_TEST_ROLE;
-GRANT READ ON IMAGE REPOSITORY CDC_TEST_REPO TO ROLE CDC_TEST_ROLE;
-GRANT CREATE INTEGRATION ON ACCOUNT TO ROLE CDC_TEST_ROLE;
-
-USE ROLE CDC_TEST_ROLE;
-USE DATABASE CDC_TEST_DB;
-USE WAREHOUSE CDC_TEST_WH;
-USE SCHEMA CDC_TEST_SCHEMA;
-
--- CREATE TABLE
-CREATE OR REPLACE TABLE CDC_TEST_TABLE (
-    KEY VARCHAR(256),
-    VALUE VARCHAR(256)
-);
-GRANT ALL ON TABLE CDC_TEST_TABLE TO ROLE CDC_TEST_ROLE;
-
--- CREATE STREAM
-CREATE OR REPLACE STREAM CDC_TEST_TABLE_STREAM ON TABLE CDC_TEST_TABLE;
-GRANT ALL ON STREAM CDC_TEST_TABLE_STREAM TO ROLE CDC_TEST_ROLE;
-```
-
----
-
-```sql focus=1
-```
-
----
-
-```sql focus=3:4
-```
-
----
-
-```sql focus=6:7
-```
-
----
-
-```sql focus=9:10
-```
-
----
-
-```sql focus=12:13
-```
-
----
-
-```sql focus=15:19
-```
-
----
-
-```sql focus=21:22
-```
-
----
-
-
-```sql focus=24:25
-```
-
----
-
-
-```sql focus=27:28
-```
-
----
-
-
-```sql focus=30:37
-```
-
----
-
-
-```sql focus=39
-```
-
----
-
-```sql focus=40
-```
-
----
-
-```sql focus=41
-```
-
----
-
-```sql focus=42
-```
-
----
-
-```sql focus=44:48
-```
-
----
-
-
-```sql focus=49
-```
-
----
-
-```sql focus=51:53
-```
-
----
-</CH.Scrollycoding>
-
-## Build & push Python app image
-
-<CH.Scrollycoding style={{marginTop: '5rem', marginBottom: '5rem'}}>
-```bash
-cd snowflake_cdc_publisher
-
-docker login hycwvdm-ekb57526.registry.snowflakecomputing.com/cdc_test_db/cdc_test_schema/cdc_test_repo
-docker build --rm --platform linux/amd64 -t \
-    hycwvdm-ekb57526.registry.snowflakecomputing.com/cdc_test_db/cdc_test_schema/cdc_test_repo/snowflake_cdc_kafka_bridge \
-    .
-docker push hycwvdm-ekb57526.registry.snowflakecomputing.com/cdc_test_db/cdc_test_schema/cdc_test_repo/snowflake_cdc_kafka_bridge
-
-docker login <repository_url>
-docker build --rm --platform linux/amd64 -t \
-    <repository_url>/snowflake_cdc_kafka_bridge .
-docker push <repository_url>/snowflake_cdc_kafka_bridge
-```
-
----
-
-```bash focus=1
-```
-
----
-
-```bash focus=3
-```
-
----
-
-```bash focus=4:6
-```
-
----
-
-```bash focus=7
-```
-
----
-
-```bash focus=9
-```
-
----
-
-```bash focus=10:11
-```
-
----
-
-```bash focus=12
-```
-</CH.Scrollycoding>
-
-
-## Deploy to Snowpark
-
-<CH.Scrollycoding style={{marginTop: '5rem', marginBottom: '5rem'}}>
 
 ```sql
-USE ROLE CDC_TEST_ROLE;
-USE DATABASE CDC_TEST_DB;
-USE WAREHOUSE CDC_TEST_WH;
-USE SCHEMA CDC_TEST_SCHEMA;
-
-CREATE OR REPLACE NETWORK RULE CDC_TEST_OSCP_OUT
-TYPE = 'HOST_PORT' MODE= 'EGRESS'
-VALUE_LIST = ('ocsp.snowflakecomputing.com:80');
-
-CREATE NETWORK RULE CDC_TEST_OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
-VALUE_LIST = ('TODO:TODO', 'TODO:TODO');
-
--- Create access integration
-USE ROLE ACCOUNTADMIN;
-
-CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION CDC_TEST_EXTERNAL_ACCESS_INT
-ALLOWED_NETWORK_RULES = (CDC_TEST_OSCP_OUT, CDC_TEST_OCKAM_OUT)
-ENABLED = true;
-
-GRANT USAGE ON INTEGRATION CDC_TEST_EXTERNAL_ACCESS_INT TO ROLE CDC_TEST_ROLE;
-
--- Create service
-USE ROLE CDC_TEST_ROLE;
-
-DROP SERVICE IF EXISTS SNOWFLAKE_CDC_KAFKA_BRIDGE;
-
-CREATE SERVICE SNOWFLAKE_CDC_KAFKA_BRIDGE
-  IN COMPUTE POOL CDC_TEST_CP
-  FROM SPECIFICATION
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
 $$
-    spec:
-      containers:
-      - name: publisher
-        image: /cdc_test_db/cdc_test_schema/cdc_test_repo/snowflake_cdc_kafka_bridge
-        env:
-          STREAM_NAME: CDC_TEST_DB.CDC_TEST_SCHEMA.CDC_TEST_TABLE_STREAM
-          KAFKA_BOOTSTRAP_SERVERS: 127.0.0.1:9092
-          KAFKA_TOPIC_NAME: test-topic
-          SNOWFLAKE_WAREHOUSE: CDC_TEST_WH
-          JOB_SUCCESS_SLEEP_TIME: 30
-          JOB_ERROR_SLEEP_TIME: 60
-          OCKAM_DISABLE_UPGRADE_CHECK: true
-          OCKAM_OPENTELEMETRY_EXPORT: false
-          ENROLLMENT_TICKET: "<OCKAM_ENROLLMENT_TICKET>"
-$$
-EXTERNAL_ACCESS_INTEGRATIONS = (CDC_TEST_EXTERNAL_ACCESS_INT)
-MIN_INSTANCES=1
-MAX_INSTANCES=1;
+    // Define the fixed application name
+    var APP_NAME = 'OCKAM_PUSH_TO_KAFKA_CONNECTOR_APP';
 
-SHOW SERVICES;
-SELECT SYSTEM$GET_SERVICE_STATUS('SNOWFLAKE_CDC_KAFKA_BRIDGE');
-DESCRIBE SERVICE SNOWFLAKE_CDC_KAFKA_BRIDGE;
-CALL SYSTEM$GET_SERVICE_LOGS('SNOWFLAKE_CDC_KAFKA_BRIDGE', '0', 'publisher', 1000);
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
 ```
-
----
-
-```sql focus=1:4
-```
-
----
-
-```sql focus=6:8
-```
-
----
-
-```sql focus=10:11
-```
-
----
-
-```sql focus=13:20
-```
-
----
-
-```sql focus=22:29
-```
-
----
-
-```sql focus=30:45
-```
-
----
-
-```sql focus=34
-```
-
----
-
-```sql focus=36
-```
-
----
-
-```sql focus=37
-```
-
----
-
-```sql focus=38
-```
-
----
-
-```sql focus=39
-```
-
----
-
-```sql focus=44
-```
-
----
-
-```sql focus=46:48
-```
-
----
-
-```sql focus=50:53
-```
-</CH.Scrollycoding>
-
-## Verify
 
 ```sql
--- Insert records
-INSERT INTO CDC_TEST_TABLE
-SELECT UUID_STRING(), randstr(255, RANDOM())
-FROM TABLE(GENERATOR(ROWCOUNT => 100));
-
--- Verify Test Table and CDC Table
-SELECT * FROM CDC_TEST_TABLE;
-SELECT * FROM CDC_TEST_TABLE_STREAM;
-
--- Publisher checks for changes every 30 seconds. Looks at logs
-CALL SYSTEM$GET_SERVICE_LOGS('SNOWFLAKE_CDC_KAFKA_BRIDGE', '0', 'publisher', 100);
-
--- Check for messages delivered to Kafka
-
--- Insert, Update and Delete
-INSERT INTO CDC_TEST_TABLE (key, value) VALUES 
-('key1', 'value1');
-
-UPDATE CDC_TEST_TABLE SET value = 'updated_value1' WHERE key = 'key1';
-
--- Check for messages delivered to Kafka
-
--- Clear existing data
-TRUNCATE TABLE CDC_TEST_TABLE;
-
--- Check for messages delivered to Kafka
+CALL grant_stream_permissions('OPTKC_TEST_DATABASE.TEST_SCHEMA.CUSTOMERS_STREAM');
 ```

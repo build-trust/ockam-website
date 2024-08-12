@@ -61,9 +61,11 @@ const ImageTour: FC = (props) => {
           <Selection
             from={
               steps &&
-              steps.map((step, i) => {
-                // if (!step.tour) return <></>
-                return <TourImage key={i} src={step.tour?.url} alt={step.tour?.alt} />;
+              steps.map((step) => {
+                // eslint-disable-next-line react/jsx-key
+                // return <TourImage src={step.tour?.url} alt={step.tour?.alt} />;
+                // eslint-disable-next-line react/jsx-key
+                return <WindowFrame src={step.tour?.url} alt={step.tour?.alt} />;
               })
             }
           />
@@ -78,9 +80,66 @@ type TourImageProps = {
   alt?: string;
 };
 
+const WindowFrame: FC<TourImageProps> = ({ src, alt }) => {
+  const Window = styled.div`
+    display: block;
+    border-radius: 5px;
+    border: 2px solid #222;
+    width: 100%;
+    padding: 0;
+  `;
+  const Bar = styled.div`
+    display: block;
+    background: #808080;
+    padding: 2px 5px 2px 7px;
+  `;
+  const Close = styled.span`
+    display: inline-block;
+    background: #ff5f58;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 3px;
+  `;
+  const Minimize = styled.span`
+    display: inline-block;
+    background: #febb30;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 3px
+    margin-left: 3px
+  `;
+  const Maximize = styled.span`
+    display: inline-block;
+    background: #2bc840;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 3px;
+  `;
+  const Main = styled.div`
+    display: block;
+    padding: 2px;
+  `;
+
+  return (
+    <Window>
+      <Bar>
+        <Close />
+        <Minimize />
+        <Maximize />
+      </Bar>
+      <Main>
+        <TourImage src={src} alt={alt} />
+      </Main>
+    </Window>
+  );
+};
+
 const TourImage: FC<TourImageProps> = ({ src, alt }) => {
-  const [imgSrc, setImgSrc] = useState(src);
-  const [imgAlt, setImageAlt] = useState(alt);
+  const [imgSrc, setImgSrc] = useState<string>(src);
+  const [imgAlt, setImageAlt] = useState<string>(alt);
   const [isChanging, setIsChanging] = useState(false);
 
   const imgRef = useRef<HTMLImageElement>(null);
@@ -109,18 +168,16 @@ const TourImage: FC<TourImageProps> = ({ src, alt }) => {
   const transitionEvent = whichTransitionEvent();
 
   const updateImage = () => {
-    if (imgRef.current) {
-      imgRef.current.removeEventListener(transitionEvent, updateImage);
-      setImgSrc(src);
-      setImageAlt(alt);
-      setIsChanging(false);
-    }
+    imgRef.current?.removeEventListener(transitionEvent, updateImage);
+    setImgSrc(src || '');
+    setImageAlt(alt || '');
+    setIsChanging(false);
   };
 
   useEffect(() => {
     if (src !== imgSrc || alt !== imgAlt) {
       if (!imgRef.current) return;
-      imgRef.current.addEventListener(transitionEvent, updateImage);
+      imgRef.current?.addEventListener(transitionEvent, updateImage);
       setIsChanging(true);
     }
   }, [src, alt]);
