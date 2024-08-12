@@ -19,7 +19,7 @@ const useSetFullMaxHeightReducedByTopOffset = (
   ref: MutableRefObject<HTMLDivElement | null>,
   condition = true,
 ): void => {
-  if (ref.current) {
+  if (ref) {
     useScrollPosition(
       setMaxHeightBasedOnOffset(ref as MutableRefObject<HTMLDivElement>, condition),
       [ref, condition],
