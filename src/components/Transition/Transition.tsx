@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useRef } from 'react';
-import { animated, useSpring } from 'react-spring';
+import { animated, useSpring } from '@react-spring/web';
 
 import useEffectOnce from '@root/hooks/useEffectOnce';
 
