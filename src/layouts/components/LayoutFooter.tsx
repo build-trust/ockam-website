@@ -171,7 +171,7 @@ const LayoutFooter: FunctionComponent<Props> = ({ landingPage, ...restProps }) =
                   fontSize="sm"
                   textAlign={{ base: 'center', md: 'left' }}
                 >
-                  aaaaaaa{link.name}
+                  {link.name}
                 </Text>
               </ChakraLink>
             ))}
