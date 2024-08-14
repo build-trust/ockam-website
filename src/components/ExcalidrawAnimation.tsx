@@ -27,7 +27,7 @@ const ExcalidrawAnimation: FunctionComponent<ExcalidrawAnimationProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [isPlayable, setIsPlayable] = useState(false);
   const [isNested, setIsNested] = useState(false);
-  const [interval, setInter] = useState<NodeJS.Timer>();
+  const [interval, setInter] = useState<NodeJS.Timeout>();
 
   const isScrollable = useCallback((node: Element): boolean => {
     if (!(node instanceof HTMLElement || node instanceof SVGElement)) {
