@@ -56,7 +56,6 @@ const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) 
     async (plan: string): Promise<void> => {
       setPurchasing(true);
       setPurchasedPlan(plan);
-      setPurchasing(true);
       setTimeout(() => {
         const t = TIERS.find((tier) => tier.name === plan);
         if (t?.marketplaceOnly) {
