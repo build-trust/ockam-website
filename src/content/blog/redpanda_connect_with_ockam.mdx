@@ -76,12 +76,13 @@ First, copy the code block below and save it to a file named `consumer.yaml`:
 
 input:
   ockam_kafka:
-    seed_brokers: [rp-node-0:9092]
-    topics: [topic_A]
-    consumer_group: example_group
-    ockam_allow_producer: producer
-    ockam_relay: consumer_relay
-    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+    kafka:
+      seed_brokers: [rp-node-0:9092]
+      topics: [topic_A]
+      consumer_group: example_group
+    allow_producer: producer
+    relay: consumer_relay
+    enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
 
 pipeline:
   processors:
@@ -117,11 +118,12 @@ input:
 
 output:
   ockam_kafka:
-    seed_brokers: [rp-node-0:9092]
-    topic: topic_A
-    ockam_route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
-    ockam_allow_consumer: consumer
-    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+    kafka:
+      seed_brokers: [rp-node-0:9092]
+      topic: topic_A
+    route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
+    allow_consumer: consumer
+    enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
 ```
 
 All that's left is to run the commands below to start the services, and data will start flowing.
@@ -240,23 +242,24 @@ The `consumer.yaml` file defines how to receive the data:
 ```yaml
 input:
   ockam_kafka:
-    seed_brokers: [rp-node-0:9092]
-    topics: [topic_A]
-    consumer_group: example_group
-    ockam_allow_producer: producer
-    ockam_relay: consumer_relay
-    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+    kafka:
+      seed_brokers: [rp-node-0:9092]
+      topics: [topic_A]
+      consumer_group: example_group
+    allow_producer: producer
+    relay: consumer_relay
+    enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
 ```
 
-This input block shows the standard kafka configuration options that specify the
-broker, topics, and consumer group to use. The following three lines are the 
+This input block shows the standard kafka configuration options under the `kafka` element,
+these specify the broker, topics, and consumer group to use. The following three lines are the 
 Ockam-specific additions that allow this input source to receive and process
 end-to-end encrypted data streams:
 
-* `ockam_allow_producer`: the attribute that needs to exist on the other node before
+* `allow_producer`: the attribute that needs to exist on the other node before
 allowing each node to establish a trusted channel between each other.
-* `ockam_relay`: the name of the relay to connect this node to.
-* `ockam_enrollment_ticket`: the enrollment ticket to use to admit this node into
+* `relay`: the name of the relay to connect this node to.
+* `enrollment_ticket`: the enrollment ticket to use to admit this node into
 the Ockam Orchestrator project.
 
 ```yaml
@@ -348,20 +351,21 @@ use a Mongo database as the input source for a producer.
 ```yaml
 output:
   ockam_kafka:
-    seed_brokers: [rp-node-0:9092]
-    topic: topic_A
-    ockam_route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
-    ockam_allow_consumer: consumer
-    ockam_enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
+    kafka:
+      seed_brokers: [rp-node-0:9092]
+      topic: topic_A
+    route_to_consumer: /project/default/service/forward_to_consumer_relay/secure/api
+    allow_consumer: consumer
+    enrollment_ticket: ${OCKAM_ENROLLMENT_TICKET}
 ```
 
 The output block in `producer.yaml` contains the standard kafka configuration,
 along with three Ockam-specific options:
 
-* `ockam_route_to_consumer`: the full route to the relay that was setup for the consumer.
-* `ockam_allow_consumer`: the attribute that needs to exist on the other node before
+* `route_to_consumer`: the full route to the relay that was setup for the consumer.
+* `allow_consumer`: the attribute that needs to exist on the other node before
 allowing each node to establish a trusted channel between each other.
-* `ockam_enrollment_ticket`: the enrollment ticket to use to admit this node into
+* `enrollment_ticket`: the enrollment ticket to use to admit this node into
 the Ockam Orchestrator project.
 
 Now everything is setup and running. You'll see in the log output that the
