@@ -38,7 +38,7 @@ export const NAV_ITEMS = [
     href: DOCS.href,
   },
   {
-    name: 'Login',
+    name: 'Sign up',
     href: SIGNUP_PATH,
   },
 ];

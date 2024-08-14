@@ -5,7 +5,7 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 
 import { User, currentUser, isSignedIn, stashParams } from '@root/components/Auth';
-import OrchestratorAPI, { Space } from '@components/Orchestrator';
+import OrchestratorAPI, { Space, UnverifiedEmailError } from '@components/Orchestrator';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
@@ -290,37 +290,48 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const displayBack = (): boolean => activeStep > 0;
 
   const stateMachine = useCallback(async (): Promise<void> => {
-    const minLoadingTime = 7000;
-    const start = new Date().getTime();
-    const signedIn = await isSignedIn();
-    if (!signedIn) signIn();
-    const u = await currentUser();
-    if (u) {
-      setUser(u);
-      const a = new OrchestratorAPI(
-        process.env.OCKAM_API_BASE_URL || 'https://subscriptions.orchestrator.ockam.io/',
-        u.token,
-      );
-      setApi(a);
-      const ss = await getSpaces(a);
-      const s = await getSpace(ss);
-      let cp = false;
-      let hp = false;
-      const mf = await checkMarketplaceFulfilment();
-      if (s) {
-        cp = !!(await getPlan(s.id, ss));
-        hp = await getPaymentMethod(a, s);
+    try {
+      const minLoadingTime = 7000;
+      const start = new Date().getTime();
+      const signedIn = await isSignedIn();
+      if (!signedIn) signIn();
+      const u = await currentUser();
+      if (u) {
+        setUser(u);
+        const a = new OrchestratorAPI(
+          process.env.OCKAM_API_BASE_URL || 'https://subscriptions.orchestrator.ockam.io/',
+          u.token,
+        );
+        setApi(a);
+        const ss = await getSpaces(a);
+        const s = await getSpace(ss);
+        let cp = false;
+        let hp = false;
+        const mf = await checkMarketplaceFulfilment();
+        if (s) {
+          cp = !!(await getPlan(s.id, ss));
+          hp = await getPaymentMethod(a, s);
+        }
+        const st = determineCurrentStep(!!u, !!s, cp, hp, mf);
+        const end = new Date().getTime();
+        const duration = end - start;
+        setTimeout(
+          () => {
+            jump(st);
+            setIsLoaded(true);
+          },
+          Math.max(minLoadingTime - duration, 0),
+        );
       }
-      const st = determineCurrentStep(!!u, !!s, cp, hp, mf);
-      const end = new Date().getTime();
-      const duration = end - start;
-      setTimeout(
-        () => {
-          jump(st);
-          setIsLoaded(true);
-        },
-        Math.max(minLoadingTime - duration, 0),
-      );
+    } catch (error) {
+      if (error instanceof UnverifiedEmailError) {
+        setMessage('📨 Check your inbox! Verify your email address and then refresh this page');
+        setTimeout(() => {
+          router.reload();
+        }, 5000);
+      } else {
+        console.error(error);
+      }
     }
   }, [
     signIn,

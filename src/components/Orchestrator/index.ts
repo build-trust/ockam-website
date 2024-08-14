@@ -22,6 +22,8 @@ const logError = (error: unknown): void => {
     console.log('ERR - Orchestrator: ', error);
   }
 };
+
+class UnverifiedEmailError extends Error {}
 class OrchestratorAPI {
   private api: AxiosInstance;
 
@@ -40,6 +42,15 @@ class OrchestratorAPI {
       const response = await this.api.request({ method, url, data });
       return response.data;
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error?.response?.data) {
+          switch (error.response.data) {
+            case 'Unverified Email':
+              throw new UnverifiedEmailError();
+              break;
+          }
+        }
+      }
       logError(error);
       return undefined;
     }
@@ -107,5 +118,5 @@ class OrchestratorAPI {
 }
 
 export type { Space };
-export { OrchestratorAPI };
+export { OrchestratorAPI, UnverifiedEmailError };
 export default OrchestratorAPI;
