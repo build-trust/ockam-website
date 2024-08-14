@@ -56,9 +56,6 @@ const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) 
     async (plan: string): Promise<void> => {
       setPurchasing(true);
       setPurchasedPlan(plan);
-      // if (user) {
-      //   Auth0Api.managementApi.updateUserMetadata(user.token, user.userId, { plan });
-      // }
       setPurchasing(true);
       setTimeout(() => {
         const t = TIERS.find((tier) => tier.name === plan);
