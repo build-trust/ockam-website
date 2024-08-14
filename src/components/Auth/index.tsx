@@ -20,7 +20,6 @@ type User = {
 };
 
 const { publicRuntimeConfig } = getConfig();
-const scope = 'read:current_user';
 const audience = `https://${publicRuntimeConfig.auth0.audience}/api/v2/`;
 
 const Auth0 = new Auth0Client({
@@ -39,7 +38,6 @@ const currentUser = async (): Promise<User | void> => {
     const userId = window.sessionStorage.getItem('userId') as string | '';
     const token = await Auth0.getTokenSilently({
       authorizationParams: {
-        scope,
         audience,
       },
     });
@@ -130,7 +128,6 @@ const Auth: FunctionComponent<Props> = ({
   const signin = useCallback(async (): Promise<void> => {
     await Auth0.loginWithRedirect({
       authorizationParams: {
-        scope,
         audience,
         source: 'ockam-website',
       },
@@ -140,7 +137,6 @@ const Auth: FunctionComponent<Props> = ({
   const signup = useCallback(async (): Promise<void> => {
     await Auth0.loginWithRedirect({
       authorizationParams: {
-        scope,
         audience,
         screen_hint: 'signup',
         source: 'ockam-website',
