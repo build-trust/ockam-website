@@ -69,7 +69,7 @@ const RotatingText: FC<Props> = ({ words, interval, delay, styles }) => {
   const wordRef = useRef<HTMLDivElement>(null);
   const wordElements = makeElements(words, styles);
 
-  let intervId: NodeJS.Timer | null;
+  let intervId: NodeJS.Timeout | null;
 
   const elementScrollPosition = useCallback((): number | undefined => {
     const viewportY = document.documentElement.clientHeight;
