@@ -45,7 +45,7 @@
     "@next/bundle-analyzer": "12.1.6",
     "@react-spring/web": "^9.7.4",
     "@vercel/og": "^0.5.19",
-    "axios": "^1.7.3",
+    "axios": "^1.7.4",
     "braces": "^3.0.3",
     "chakra-ui-steps": "^2.1.0",
     "chroma-js": "^2.4.2",
