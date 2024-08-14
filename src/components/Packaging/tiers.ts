@@ -77,7 +77,7 @@ const TIERS: Tier[] = [
     isPopular: true,
     cta: {
       text: 'Get started →',
-      url: '/download',
+      url: '/get-started',
     },
     marketplaces: {
       aws: {
@@ -93,7 +93,7 @@ const TIERS: Tier[] = [
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
-      url: '/download',
+      url: '/get-started',
     },
     marketplaces: {
       aws: {
@@ -111,7 +111,7 @@ const TIERS: Tier[] = [
     onlyFloor: true,
     cta: {
       text: 'Start 14-day trial →',
-      url: '/download',
+      url: '/get-started',
     },
     marketplaceOnly: true,
     marketplaces: {
@@ -134,7 +134,7 @@ const TIERS: Tier[] = [
     onlyFloor: true,
     cta: {
       text: 'Start 14-day trial →',
-      url: '/download',
+      url: '/get-started',
     },
     marketplaceOnly: true,
     marketplaces: {
@@ -157,7 +157,7 @@ const TIERS: Tier[] = [
     onlyFloor: true,
     cta: {
       text: 'Start 14-day trial →',
-      url: `${CONTACT_FORM_PATH}`,
+      url: '/get-started',
     },
     marketplaceOnly: true,
     marketplaces: {
