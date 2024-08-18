@@ -29,6 +29,7 @@ import ActionButton from '@root/components/Packaging/ActionButton';
 import { CONTACT_FORM_PATH } from '@root/consts/paths';
 
 import Sponsorship from './Sponsorship';
+import OrchestratorAPI from '../Orchestrator';
 
 const capitalize = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -42,11 +43,22 @@ const cta = (tier: Tier, currentPlan?: string): string => {
 
 type Props = {
   onComplete: Function;
+  updatePlan: Function;
   hideNext: Function;
   showNext: Function;
   currentPlan?: string;
+  api?: OrchestratorAPI;
+  spaceId?: string;
 };
-const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) => {
+const ChoosePlan: FC<Props> = ({
+  onComplete,
+  updatePlan,
+  hideNext,
+  showNext,
+  currentPlan,
+  api,
+  spaceId,
+}) => {
   const [purchasing, setPurchasing] = useState(false);
   const [purchased, setPurchased] = useState(false);
   const [purchasedPlan, setPurchasedPlan] = useState<string>();
@@ -56,12 +68,11 @@ const ChoosePlan: FC<Props> = ({ onComplete, hideNext, showNext, currentPlan }) 
     async (plan: string): Promise<void> => {
       setPurchasing(true);
       setPurchasedPlan(plan);
+      await updatePlan(api, spaceId, plan);
       setTimeout(() => {
         const t = TIERS.find((tier) => tier.name === plan);
         if (t?.marketplaceOnly) {
-          setTimeout(() => {
-            onComplete(plan);
-          }, 2000);
+          onComplete(plan);
         } else if (t?.sponsorship) {
           showNext();
           setSetupSponsorship(true);

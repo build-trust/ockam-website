@@ -97,13 +97,15 @@ class OrchestratorAPI {
 
   createSpace = async (plan: string): Promise<Space | undefined> => {
     const url = `/space`;
-    const data = { plan };
+    const data = { plan: plan.toLowerCase() };
     return this.request('put', url, data);
   };
 
   updatePlan = async (spaceId: string, plan: string): Promise<Space | undefined> => {
+    let p = plan.toLocaleLowerCase();
+    if (p === 'free' || p === 'premium') p = 'developer-' + p;
     const url = `/space/${spaceId}`;
-    const data = { plan };
+    const data = { plan: p };
     return this.request('post', url, data);
   };
 

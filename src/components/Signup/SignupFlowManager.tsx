@@ -218,8 +218,15 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     [user, currentPlan, hasPaymentMethod, marketplaceFulfilment, determineCurrentStep, jump],
   );
 
+  const updatePlan = useCallback(
+    async (a: OrchestratorAPI, spaceId: string, plan: string): Promise<void> => {
+      await a.updatePlan(spaceId, plan);
+    },
+    [],
+  );
+
   const planChosen = useCallback(
-    (plan: string): void => {
+    async (plan: string): Promise<void> => {
       setCurrentPlan(plan);
       next();
     },
@@ -235,6 +242,9 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         case 1:
           return (
             <ChoosePlan
+              spaceId={space?.id}
+              api={api}
+              updatePlan={updatePlan}
               onComplete={planChosen}
               hideNext={hideNext}
               showNext={showNext}
