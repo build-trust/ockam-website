@@ -185,13 +185,11 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const jump = useCallback(
     (st: number): void => {
       if (activeStep !== st) {
+        setTransitioning(true);
         setTimeout(() => {
-          setTransitioning(true);
-          setTimeout(() => {
-            setStep(st);
-            window.scrollTo(0, 0);
-            setTransitioning(false);
-          }, 1200);
+          setStep(st);
+          window.scrollTo(0, 0);
+          setTransitioning(false);
         }, 1200);
       }
     },
@@ -393,8 +391,8 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           minW={{ base: '250px' }}
           onClickStep={stepClicked}
           sx={{
-            '& .cui-steps__step-icon-container': {
-              _active: { cursor: 'pointer' },
+            '& .cui-steps__vertical-step-container': {
+              _hover: { cursor: 'pointer' },
             },
           }}
         >
