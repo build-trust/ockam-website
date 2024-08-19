@@ -31,10 +31,10 @@ import { CONTACT_FORM_PATH } from '@root/consts/paths';
 import Sponsorship from './Sponsorship';
 import OrchestratorAPI from '../Orchestrator';
 
-const capitalize = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
-
 const cta = (tier: Tier, currentPlan?: string): string => {
-  if (currentPlan && capitalize(currentPlan) === tier.name) return 'Your current plan';
+  let cp = currentPlan?.toLowerCase();
+  cp = cp?.replace('developer-', '');
+  if (currentPlan && cp === tier.name.toLowerCase()) return 'Your current plan';
   if (tier.price === 0) return 'Get started';
   if (tier.name === 'Business Critical') return 'Contact Sales';
   if (tier.name === 'Enterprise') return 'Contact Sales';
