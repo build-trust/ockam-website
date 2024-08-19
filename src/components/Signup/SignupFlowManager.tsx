@@ -198,6 +198,24 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     [setStep, activeStep],
   );
 
+  const stepClicked = useCallback(
+    (i: number) => {
+      if (
+        i <=
+        determineCurrentStep(
+          !!user,
+          !!space,
+          !!currentPlan,
+          hasPaymentMethod,
+          marketplaceFulfilment,
+        )
+      ) {
+        jump(i);
+      }
+    },
+    [user, space, currentPlan, hasPaymentMethod, marketplaceFulfilment],
+  );
+
   const prev = (): void => {
     setTransitioning(true);
     setTimeout(() => {
@@ -373,6 +391,12 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           mb={12}
           size="sm"
           minW={{ base: '250px' }}
+          onClickStep={stepClicked}
+          sx={{
+            '& .cui-steps__step-icon-container': {
+              _active: { cursor: 'pointer' },
+            },
+          }}
         >
           {steps.map(({ title, description }) => (
             <Step key={`step-${title}`} label={title} description={description} />
