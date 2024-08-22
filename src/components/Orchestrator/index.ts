@@ -1,5 +1,14 @@
 import axios, { AxiosInstance } from 'axios';
 
+type UserDetails = {
+  name?: string;
+  company?: string;
+};
+type User = {
+  email: string;
+  accepted_tos: boolean;
+  details?: UserDetails;
+};
 type Subscription = {
   name: string;
 };
@@ -14,6 +23,12 @@ type Space = {
   name: string;
   subscription_plan?: Subscription;
   payment_method?: PaymentMethod;
+};
+type PaymentDelegate = {
+  email: string;
+  id: string;
+  inserted_at: Date;
+  space_id: string;
 };
 
 const logError = (error: unknown): void => {
@@ -37,7 +52,11 @@ class OrchestratorAPI {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  request = async (method: string, url: string, data?: { [key: string]: string }): Promise<any> => {
+  request = async (
+    method: string,
+    url: string,
+    data?: { [key: string]: string | boolean | { [key: string]: string } },
+  ): Promise<any> => {
     try {
       const response = await this.api.request({ method, url, data });
       return response.data;
@@ -54,6 +73,18 @@ class OrchestratorAPI {
       logError(error);
       return undefined;
     }
+  };
+
+  getUser = async (): Promise<User | undefined> => {
+    return this.request('get', '/user');
+  };
+
+  updateToS = async (accepted_tos: boolean): Promise<User | undefined> => {
+    return this.request('put', '/user', { accepted_tos });
+  };
+
+  updateUserDetails = async (details: { [key: string]: string }) => {
+    return this.request('put', '/user', { details });
   };
 
   createPaymentMethod = async (
@@ -116,6 +147,22 @@ class OrchestratorAPI {
     const url = `/space/${spaceId}`;
     const data = { payment_method_id: paymentMethodId };
     return this.request('post', url, data);
+  };
+
+  createPaymentDelegate = async (
+    spaceId: string,
+    email: string,
+  ): Promise<PaymentDelegate | undefined> => {
+    const data = {
+      space_id: spaceId,
+      email,
+    };
+    return this.request('put', '/payment_delegate', data);
+  };
+
+  getPaymentDelegate = async (delegateId: string): Promise<PaymentDelegate | undefined> => {
+    const url = `/payment_delegate/${delegateId}`;
+    return this.request('get', url);
   };
 }
 
