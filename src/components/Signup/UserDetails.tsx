@@ -233,6 +233,18 @@ const UserDetails: FC<Props> = ({ next, updated, userDetails, api, terms }) => {
       >
         {currentStep === 3 ? 'I accept' : 'Next'}
       </Button>
+      {currentStep > 0 && (
+        <Button
+          colorScheme="gray"
+          mb="8"
+          onClick={() => {
+            setStep(currentStep - 1);
+          }}
+          mx={4}
+        >
+          Go back
+        </Button>
+      )}
     </Box>
   );
 };
