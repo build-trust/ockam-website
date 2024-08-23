@@ -3,10 +3,11 @@ import axios, { AxiosInstance } from 'axios';
 type UserDetails = {
   name?: string;
   company?: string;
+  company_domain?: string;
 };
 type User = {
-  email: string;
-  accepted_tos: boolean;
+  email?: string;
+  accepted_tos?: boolean;
   details?: UserDetails;
 };
 type Subscription = {
@@ -56,6 +57,7 @@ class OrchestratorAPI {
     method: string,
     url: string,
     data?: { [key: string]: string | boolean | { [key: string]: string } },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> => {
     try {
       const response = await this.api.request({ method, url, data });
@@ -166,6 +168,6 @@ class OrchestratorAPI {
   };
 }
 
-export type { Space };
+export type { Space, User };
 export { OrchestratorAPI, UnverifiedEmailError };
 export default OrchestratorAPI;

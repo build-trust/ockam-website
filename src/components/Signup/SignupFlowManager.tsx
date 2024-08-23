@@ -1,11 +1,15 @@
 import { Steps, Step, useSteps } from 'chakra-ui-steps';
 import { FC, ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
-import { Box, Button, Flex, theme } from '@chakra-ui/react';
+import { Box, Flex, theme } from '@chakra-ui/react';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useRouter } from 'next/router';
 
 import { User, currentUser, isSignedIn, stashParams } from '@root/components/Auth';
-import OrchestratorAPI, { Space, UnverifiedEmailError } from '@components/Orchestrator';
+import OrchestratorAPI, {
+  Space,
+  User as OUser,
+  UnverifiedEmailError,
+} from '@components/Orchestrator';
 
 import ChoosePlan from './ChoosePlan';
 import Download from './Download';
@@ -14,19 +18,22 @@ import Welcome from './Welcome';
 import Experience from './Experience';
 import MarketplaceSetup from './MarketplaceSetup';
 import Notice from './Notice';
+import UserDetails from './UserDetails';
 
 type Props = {
   install: MDXRemoteSerializeResult;
+  terms: MDXRemoteSerializeResult;
 };
 
 type ParamsDict = {
   [key: string]: string;
 };
 
-const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
+const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   const steps = useMemo(
     () => [
       { title: 'Get started', description: 'Setup your account' },
+      { title: 'Update details', description: 'Tell us who you are' },
       { title: 'Choose a plan', description: 'Right-size to your needs' },
       { title: 'Payment', description: 'Attach a payment method' },
       { title: 'Download', description: 'Download & Install Ockam' },
@@ -36,13 +43,14 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     [],
   );
 
-  const { nextStep, prevStep, activeStep, setStep } = useSteps({
+  const { nextStep, activeStep, setStep } = useSteps({
     initialStep: 0,
   });
 
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [user, setUser] = useState<User>();
+  const [userDetails, setUserDetails] = useState<OUser>();
   const [api, setApi] = useState<OrchestratorAPI>();
   const [spaces, setSpaces] = useState<Space[]>();
   const [space, setSpace] = useState<Space>();
@@ -53,7 +61,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   const [marketplaceFulfilment, setMarketplacceFulfilment] = useState<boolean>(false);
 
   const [transitioning, setTransitioning] = useState(false);
-  const [nextHidden, setNextHidden] = useState(false);
+  // const [nextHidden, setNextHidden] = useState(false);
   const [message, setMessage] = useState<string>();
 
   const numberForStep = useCallback(
@@ -67,7 +75,16 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
 
   const determineCurrentStep = useCallback(
     // eslint-disable-next-line complexity
-    (u: boolean, s: boolean, cp: boolean, hp: boolean, mf: boolean): number => {
+    (
+      u: boolean,
+      ud: OUser | undefined,
+      s: boolean,
+      cp: boolean,
+      hp: boolean,
+      mf: boolean,
+    ): number => {
+      if (!ud?.accepted_tos || !ud?.details?.name || !ud?.details?.company)
+        return numberForStep('Update details');
       if (mf) return numberForStep('Payment');
       if (u && s && cp && hp) return numberForStep('Download');
       if (u && s && cp) return numberForStep('Payment');
@@ -87,6 +104,10 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     await stashParams();
     router.replace('/auth/signup');
   }, [router]);
+
+  const getUserDetails = async (a: OrchestratorAPI): Promise<OUser | undefined> => {
+    return a.getUser();
+  };
 
   const getSpaces = useCallback(
     async (a: OrchestratorAPI): Promise<Space[]> => {
@@ -165,11 +186,11 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
   }, [steps, activeStep]);
 
   const hideNext = useCallback((): void => {
-    setNextHidden(true);
+    // setNextHidden(true);
   }, []);
 
   const showNext = useCallback((): void => {
-    setNextHidden(false);
+    // setNextHidden(false);
   }, []);
 
   const next = useCallback((): void => {
@@ -202,6 +223,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
         i <=
         determineCurrentStep(
           !!user,
+          userDetails,
           !!space,
           !!currentPlan,
           hasPaymentMethod,
@@ -214,21 +236,28 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     [user, space, currentPlan, hasPaymentMethod, marketplaceFulfilment],
   );
 
-  const prev = (): void => {
-    setTransitioning(true);
-    setTimeout(() => {
-      showNext();
-      prevStep();
-      window.scrollTo(0, 0);
-      setTransitioning(false);
-    }, 1200);
-  };
+  // const prev = (): void => {
+  //   setTransitioning(true);
+  //   setTimeout(() => {
+  //     showNext();
+  //     prevStep();
+  //     window.scrollTo(0, 0);
+  //     setTransitioning(false);
+  //   }, 1200);
+  // };
 
   const spaceSelected = useCallback(
     (s: Space): void => {
       setSpace(s);
       jump(
-        determineCurrentStep(!!user, true, !!currentPlan, hasPaymentMethod, marketplaceFulfilment),
+        determineCurrentStep(
+          !!user,
+          userDetails,
+          true,
+          !!currentPlan,
+          hasPaymentMethod,
+          marketplaceFulfilment,
+        ),
       );
     },
     [user, currentPlan, hasPaymentMethod, marketplaceFulfilment, determineCurrentStep, jump],
@@ -249,6 +278,10 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
     [next],
   );
 
+  const updatedUserDetails = (userDetails: OUser) => {
+    setUserDetails(userDetails);
+  };
+
   const displayStep = useCallback(
     (step: number, cp?: string, c?: string, p?: string): ReactElement => {
       switch (step) {
@@ -256,6 +289,17 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           return <Welcome user={user} spaces={spaces} spaceSelected={spaceSelected} api={api} />;
           break;
         case 1:
+          return (
+            <UserDetails
+              next={next}
+              updated={updatedUserDetails}
+              userDetails={userDetails}
+              api={api}
+              terms={terms}
+            />
+          );
+          break;
+        case 2:
           return (
             <ChoosePlan
               spaceId={space?.id}
@@ -268,7 +312,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
             />
           );
           break;
-        case 2:
+        case 3:
           return (
             <MarketplaceSetup
               hasPaymentMethod={hasPaymentMethod}
@@ -282,13 +326,13 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
             />
           );
           break;
-        case 3:
+        case 4:
           return <Download install={install} />;
           break;
-        case 4:
+        case 5:
           return <Experience />;
           break;
-        case 5:
+        case 6:
           return <Deploy />;
           break;
         default:
@@ -306,14 +350,15 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       spaceSelected,
       api,
       planChosen,
+      terms,
     ],
   );
 
-  const displayNext = (): boolean =>
-    !nextHidden && activeStep !== 0 && activeStep < steps.length - 1;
-  // activeStep < steps.length - 1 && activeStep !== 0 && nextHidden === true
+  // const displayNext = (): boolean =>
+  //   !nextHidden && activeStep !== 0 && activeStep < steps.length - 1;
+  // // activeStep < steps.length - 1 && activeStep !== 0 && nextHidden === true
 
-  const displayBack = (): boolean => activeStep > 0;
+  // const displayBack = (): boolean => activeStep > 0;
 
   const stateMachine = useCallback(async (): Promise<void> => {
     try {
@@ -329,6 +374,8 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           u.token,
         );
         setApi(a);
+        const ud = await getUserDetails(a);
+        setUserDetails(ud);
         const ss = await getSpaces(a);
         const s = await getSpace(ss);
         let cp = false;
@@ -338,7 +385,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
           cp = !!(await getPlan(s.id, ss));
           hp = await getPaymentMethod(a, s);
         }
-        const st = determineCurrentStep(!!u, !!s, cp, hp, mf);
+        const st = determineCurrentStep(!!u, ud, !!s, cp, hp, mf);
         const end = new Date().getTime();
         const duration = end - start;
         setTimeout(
@@ -403,7 +450,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
       </Box>
       <Box transition="opacity 1s 0s ease-in-out" opacity={transitioning ? '0' : '1'} width="100%">
         {displayStep(activeStep, currentPlan, customer, product)}
-        <Flex direction="row" justifyContent="space-between">
+        {/* <Flex direction="row" justifyContent="space-between">
           {displayNext() && activeStep === 1 && (
             <Button colorScheme="avocado" mb="8" onClick={next}>
               Skip this for now
@@ -419,7 +466,7 @@ const SignupFlowManager: FC<Props> = ({ install }): ReactElement => {
               Go back
             </Button>
           )}
-        </Flex>
+        </Flex> */}
       </Box>
     </Flex>
   );
