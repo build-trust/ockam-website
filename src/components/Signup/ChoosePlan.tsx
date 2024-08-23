@@ -64,7 +64,6 @@ const ChoosePlan: FC<Props> = ({ onComplete, updatePlan, currentPlan, api, space
         if (t?.marketplaceOnly) {
           onComplete(plan);
         } else if (t?.sponsorship) {
-          showNext();
           setSetupSponsorship(true);
         } else if (t?.contactSalesOnly) {
           setPurchased(true);
@@ -84,7 +83,7 @@ const ChoosePlan: FC<Props> = ({ onComplete, updatePlan, currentPlan, api, space
         }
       }, 4000);
     },
-    [onComplete, showNext],
+    [onComplete],
   );
 
   useEffect(() => {
