@@ -200,23 +200,14 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
     // window.scrollTo(0, 0);
   }, [steps, activeStep]);
 
-  const hideNext = useCallback((): void => {
-    // setNextHidden(true);
-  }, []);
-
-  const showNext = useCallback((): void => {
-    // setNextHidden(false);
-  }, []);
-
   const next = useCallback((): void => {
     setTransitioning(true);
     setTimeout(() => {
-      showNext();
       nextStep();
-      window.scrollTo(0, 0);
       setTransitioning(false);
+      window.scrollTo(0, 0);
     }, 1200);
-  }, [nextStep, showNext]);
+  }, [nextStep]);
 
   const jump = useCallback(
     (st: number): void => {
@@ -254,10 +245,9 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   const prev = (): void => {
     setTransitioning(true);
     setTimeout(() => {
-      showNext();
       prevStep();
-      window.scrollTo(0, 0);
       setTransitioning(false);
+      window.scrollTo(0, 0);
     }, 1200);
   };
 
@@ -321,8 +311,6 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
               api={api}
               updatePlan={updatePlan}
               onComplete={planChosen}
-              hideNext={hideNext}
-              showNext={showNext}
               currentPlan={cp}
             />
           );
@@ -332,7 +320,6 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
             <MarketplaceSetup
               hasPaymentMethod={hasPaymentMethod}
               complete={next}
-              hideNext={hideNext}
               user={user}
               customer={c}
               product={p}
@@ -354,19 +341,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
           return <></>;
       }
     },
-    [
-      hasPaymentMethod,
-      install,
-      next,
-      hideNext,
-      showNext,
-      user,
-      spaces,
-      spaceSelected,
-      api,
-      planChosen,
-      terms,
-    ],
+    [hasPaymentMethod, install, next, user, spaces, spaceSelected, api, planChosen, terms],
   );
 
   // const displayNext = (): boolean =>
@@ -398,7 +373,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         const mf = await checkMarketplaceFulfilment();
         if (s) {
           cp = await getPlan(s.id, ss);
-          hp = await getPaymentMethod(a, s, cp, ud);
+          if (cp && ud) hp = await getPaymentMethod(a, s, cp, ud);
         }
         const st = determineCurrentStep(!!u, ud, !!s, !!cp, hp, mf);
         const end = new Date().getTime();

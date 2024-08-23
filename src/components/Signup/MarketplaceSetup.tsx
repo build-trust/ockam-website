@@ -12,7 +12,6 @@ type Props = {
   plan?: string;
   hasPaymentMethod?: boolean;
   complete?: Function;
-  hideNext: Function;
   customer?: string;
   product?: string;
   user?: User;

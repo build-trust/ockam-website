@@ -44,21 +44,11 @@ const cta = (tier: Tier, currentPlan?: string): string => {
 type Props = {
   onComplete: Function;
   updatePlan: Function;
-  hideNext: Function;
-  showNext: Function;
   currentPlan?: string;
   api?: OrchestratorAPI;
   spaceId?: string;
 };
-const ChoosePlan: FC<Props> = ({
-  onComplete,
-  updatePlan,
-  hideNext,
-  showNext,
-  currentPlan,
-  api,
-  spaceId,
-}) => {
+const ChoosePlan: FC<Props> = ({ onComplete, updatePlan, currentPlan, api, spaceId }) => {
   const [purchasing, setPurchasing] = useState(false);
   const [purchased, setPurchased] = useState(false);
   const [purchasedPlan, setPurchasedPlan] = useState<string>();
