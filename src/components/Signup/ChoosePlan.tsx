@@ -88,12 +88,9 @@ const ChoosePlan: FC<Props> = ({ onComplete, updatePlan, currentPlan, api, space
 
   useEffect(() => {
     if (setupSponsorship) {
-      showNext();
       window.scrollTo(0, 0);
-    } else {
-      hideNext();
     }
-  }, [hideNext, setupSponsorship, showNext]);
+  }, [setupSponsorship]);
 
   const onClick = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault();
