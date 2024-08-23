@@ -29,25 +29,10 @@ export interface PricingCardData {
   onlyFloor?: boolean;
 }
 
-type Cta = {
-  text: string;
-  url: string;
-};
-type Tier = {
-  name: string;
-  text: string;
-  price: number;
-  price_interval?: string;
-  price_unit?: string;
-  floor?: string;
-  isPopular?: boolean;
-  cta: Cta;
-};
 interface PricingCardProps extends CardProps {
   data: PricingCardData;
   icon?: ElementType;
   button: ReactElement;
-  previousTier?: Tier;
   segmentColor: string;
   slim?: boolean;
   fade?: boolean;
@@ -154,7 +139,7 @@ const Price = (props: PriceProps): JSX.Element => {
   );
 };
 const PricingCard = (props: PricingCardProps): JSX.Element => {
-  const { data, button, isPopular, segmentColor, slim, fade, current, showPrice, ...rest } = props;
+  const { data, button, segmentColor, slim, fade, current, showPrice, ...rest } = props;
   const { features, price, priceUnit, priceInterval, name, floor, onlyFloor } = data;
 
   const Stack = slim ? HStack : VStack;
@@ -181,7 +166,6 @@ const PricingCard = (props: PricingCardProps): JSX.Element => {
   return (
     <Card
       {...rest}
-      isPopular={isPopular}
       pt={4}
       width={slim ? { base: 'xs' } : '100%'}
       opacity={fade ? 0.2 : 1}

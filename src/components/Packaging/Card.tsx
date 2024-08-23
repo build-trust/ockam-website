@@ -1,9 +1,6 @@
 import { Box, BoxProps, useColorModeValue } from '@chakra-ui/react';
 
-export interface CardProps extends BoxProps {
-  isPopular?: boolean;
-}
-const Card = (props: CardProps): JSX.Element => {
+const Card = (props: BoxProps): JSX.Element => {
   const { children, ...rest } = props;
 
   return (
@@ -18,7 +15,6 @@ const Card = (props: CardProps): JSX.Element => {
       width="100%"
       {...rest}
     >
-      {/* {isPopular && <CardBadge>Start here</CardBadge>} */}
       {children}
     </Box>
   );

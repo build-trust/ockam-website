@@ -21,7 +21,6 @@ type Tier = {
   price_unit?: string;
   floor?: string;
   onlyFloor?: boolean;
-  isPopular?: boolean;
   cta: Cta;
   marketplaceOnly?: boolean;
   sponsorship?: boolean;
@@ -74,7 +73,6 @@ const TIERS: Tier[] = [
     text: 'The Tools for Builders',
     price: 0,
     price_interval: 'mo',
-    isPopular: true,
     cta: {
       text: 'Get started →',
       url: '/get-started',

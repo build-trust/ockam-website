@@ -19,6 +19,7 @@ import Experience from './Experience';
 import MarketplaceSetup from './MarketplaceSetup';
 import Notice from './Notice';
 import UserDetails from './UserDetails';
+import { TIERS } from '../Packaging/tiers';
 
 type Props = {
   install: MDXRemoteSerializeResult;
@@ -153,7 +154,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   }, [purchaseParams]);
 
   const getPaymentMethod = useCallback(
-    async (a: OrchestratorAPI, s: Space): Promise<boolean> => {
+    async (a: OrchestratorAPI, s: Space, cp: string, ud: OUser): Promise<boolean> => {
       const params = purchaseParams();
       const customerId = params.customer || params.aws_customer_id;
       const productId = params.product || params.aws_product_id;
@@ -165,10 +166,24 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
       if (customerId && productId) {
         const pm = await a.createPaymentMethod(productId, customerId, customerAwsID);
         if (pm) await a.updatePaymentMethod(s.id, pm.id);
+        if (ud.details?.name && ud.details?.company && ud.email) {
+          await a.updateBuyerContact(
+            ud.details.name,
+            ud.details.company,
+            ud.email,
+            productId,
+            customerId,
+          );
+        }
         setHasPaymentMethod(true);
         return true;
       }
       if (s.payment_method) {
+        setHasPaymentMethod(true);
+        return true;
+      }
+      const tier = TIERS.find((t) => t.name === cp.replace('developer-', ''));
+      if (tier && !tier.marketplaceOnly) {
         setHasPaymentMethod(true);
         return true;
       }
@@ -378,14 +393,14 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         setUserDetails(ud);
         const ss = await getSpaces(a);
         const s = await getSpace(ss);
-        let cp = false;
+        let cp;
         let hp = false;
         const mf = await checkMarketplaceFulfilment();
         if (s) {
-          cp = !!(await getPlan(s.id, ss));
-          hp = await getPaymentMethod(a, s);
+          cp = await getPlan(s.id, ss);
+          hp = await getPaymentMethod(a, s, cp, ud);
         }
-        const st = determineCurrentStep(!!u, ud, !!s, cp, hp, mf);
+        const st = determineCurrentStep(!!u, ud, !!s, !!cp, hp, mf);
         const end = new Date().getTime();
         const duration = end - start;
         setTimeout(

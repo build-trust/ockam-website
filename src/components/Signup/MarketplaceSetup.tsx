@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
-import { createRef, FC, useEffect, useState } from 'react';
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Text } from '@chakra-ui/react';
+import { FC, useEffect } from 'react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { AWS } from '@root/components/Packaging/Marketplaces';
 
 import OrchestratorAPI from '../Orchestrator';
 import { User } from '../Auth';
+import { TIERS } from '../Packaging/tiers';
 
 type Props = {
   plan?: string;
@@ -16,58 +17,6 @@ type Props = {
   product?: string;
   user?: User;
   api?: OrchestratorAPI;
-};
-
-type BuyerProps = {
-  complete?: Function;
-  hideNext: Function;
-  product: string;
-  customer: string;
-  user: User;
-  api?: OrchestratorAPI;
-};
-const BuyerDetails: FC<BuyerProps> = ({ complete, hideNext, product, customer, user, api }) => {
-  const refName = createRef<HTMLInputElement>();
-  const refCompany = createRef<HTMLInputElement>();
-  const [saving, setSaving] = useState<boolean>(false);
-
-  useEffect(() => {
-    hideNext();
-  });
-
-  const submit = (): void => {
-    setSaving(true);
-    const name = refName.current?.value;
-    const company = refCompany.current?.value;
-    if (name && company && user.email && api) {
-      api.updateBuyerContact(name, company, user.email, product, customer).then(() => {
-        if (complete) complete();
-      });
-    }
-  };
-
-  return (
-    <Flex direction="column" maxW="45em">
-      <Heading as="h2" size="h2" mb="8">
-        Update your details
-      </Heading>
-      <Box>
-        <Text variant="readabilityOptimized">
-          Your AWS Marketplace subscription details are almost complete! We just need a couple of
-          final pieces of information and your setup will be finalized.
-        </Text>
-        <FormControl>
-          <FormLabel>Name</FormLabel>
-          <Input type="text" placeholder="Your name..." mb={4} ref={refName} />
-          <FormLabel>Company</FormLabel>
-          <Input type="text" placeholder="ACME Widgets" mb={4} ref={refCompany} />
-          <Button colorScheme="avocado" my="4" onClick={submit} maxW="sm" isLoading={saving}>
-            Save
-          </Button>
-        </FormControl>
-      </Box>
-    </Flex>
-  );
 };
 
 type DetailsProps = {
@@ -89,34 +38,20 @@ const MarketplaceDetails: FC<DetailsProps> = ({ plan }) => (
   </Flex>
 );
 
-const MarketplaceSetup: FC<Props> = ({
-  plan,
-  hasPaymentMethod,
-  complete,
-  hideNext,
-  customer,
-  product,
-  user,
-  api,
-}) => {
-  const [showBuyer, setShowBuyer] = useState(false);
+const MarketplaceSetup: FC<Props> = ({ plan, hasPaymentMethod, complete }) => {
   useEffect(() => {
-    if (hasPaymentMethod && customer && product) setShowBuyer(true);
-  }, [hasPaymentMethod, customer, product]);
+    if (complete) {
+      if (hasPaymentMethod) complete();
+      if (plan) {
+        const tier = TIERS.find((t) => t.name === plan.replace('developer-', ''));
+        if (tier && !tier.marketplaceOnly) complete();
+      }
+    }
+  }, []);
 
   return (
     <Box pb={8}>
-      {!showBuyer && <MarketplaceDetails plan={plan} />}
-      {showBuyer && product && customer && user && (
-        <BuyerDetails
-          complete={complete}
-          hideNext={hideNext}
-          product={product}
-          customer={customer}
-          user={user}
-          api={api}
-        />
-      )}
+      <MarketplaceDetails plan={plan} />
     </Box>
   );
 };

@@ -227,18 +227,17 @@ const ChoosePlan: FC<Props> = ({
                     borderColor="#ddd"
                     borderWidth="1px"
                     borderRadius={15}
-                    isPopular={card.isPopular}
                     display="flex"
                     flexDirection="column"
-                    previousTier={
-                      TIERS[
-                        TIERS.findIndex(
-                          (tier: Tier) =>
-                            tier.name ===
-                            segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
-                        )
-                      ]
-                    }
+                    // previousTier={
+                    //   TIERS[
+                    //     TIERS.findIndex(
+                    //       (tier: Tier) =>
+                    //         tier.name ===
+                    //         segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
+                    //     )
+                    //   ]
+                    // }
                     button={
                       <ActionButton
                         variant="outline"

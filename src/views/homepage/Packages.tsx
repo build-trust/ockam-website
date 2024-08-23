@@ -17,7 +17,7 @@ import CONFIG from '@config';
 import ActionButton from '@components/Packaging/ActionButton';
 import PricingCard from '@components/Packaging/PricingCard';
 import Marketplaces from '@components/Packaging/Marketplaces';
-import { Tier, TIERS, FEATURES, SEGMENTS, tierLimit } from '@components/Packaging/tiers';
+import { TIERS, FEATURES, SEGMENTS, tierLimit } from '@components/Packaging/tiers';
 import FeatureTable from '@root/components/Packaging/FeatureTable';
 
 // const hasFeature = (tier: Tier, feature: Feature): boolean => {
@@ -126,18 +126,17 @@ const Packages: FunctionComponent = () => {
                       borderColor="#ddd"
                       borderWidth="1px"
                       borderRadius={15}
-                      isPopular={card.isPopular}
                       display="flex"
                       flexDirection="column"
-                      previousTier={
-                        TIERS[
-                          TIERS.findIndex(
-                            (tier: Tier) =>
-                              tier.name ===
-                              segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
-                          )
-                        ]
-                      }
+                      // previousTier={
+                      //   TIERS[
+                      //     TIERS.findIndex(
+                      //       (tier: Tier) =>
+                      //         tier.name ===
+                      //         segment.tiers[segment.tiers.findIndex((t) => t === card.name) - 1],
+                      //     )
+                      //   ]
+                      // }
                       button={
                         <ActionButton
                           variant="outline"
