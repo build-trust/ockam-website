@@ -1,4 +1,5 @@
 import {
+  BoxProps,
   ComponentWithAs,
   Heading,
   HStack,
@@ -11,7 +12,7 @@ import {
 import { PiCheckCircleDuotone as Check } from 'react-icons/pi';
 import { ElementType, ReactElement } from 'react';
 
-import Card, { CardProps } from './Card';
+import Card from './Card';
 
 type Feature = {
   icon?: ComponentWithAs<'svg'>;
@@ -29,7 +30,7 @@ export interface PricingCardData {
   onlyFloor?: boolean;
 }
 
-interface PricingCardProps extends CardProps {
+interface PricingCardProps extends BoxProps {
   data: PricingCardData;
   icon?: ElementType;
   button: ReactElement;
