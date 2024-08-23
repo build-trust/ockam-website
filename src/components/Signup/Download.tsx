@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Text } from '@chakra-ui/react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { FC } from 'react';
 
@@ -12,8 +12,10 @@ const components = {
 
 type DownloadProps = {
   install: MDXRemoteSerializeResult;
+  next: () => void;
+  prev: () => void;
 };
-const Download: FC<DownloadProps> = ({ install }) => (
+const Download: FC<DownloadProps> = ({ install, next, prev }) => (
   <Box>
     <Heading as="h2" size="lg" mb="4">
       Install Ockam Command
@@ -23,6 +25,14 @@ const Download: FC<DownloadProps> = ({ install }) => (
       your local machine:
     </Text>
     <MDXRemote {...install} components={components} />
+    <Box my={8}>
+      <Button colorScheme="avocado" mb="8" onClick={next}>
+        I&apos;ve completed this step
+      </Button>
+      <Button colorScheme="gray" mb="8" onClick={prev} mx={4}>
+        Go back
+      </Button>
+    </Box>
   </Box>
 );
 

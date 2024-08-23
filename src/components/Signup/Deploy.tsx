@@ -1,7 +1,10 @@
-import { Box, Heading, Link, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { Box, Button, Heading, Link, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import { FC } from 'react';
 
-const Deploy: FC = () => (
+type Props = {
+  prev: () => void;
+};
+const Deploy: FC<Props> = ({ prev }) => (
   <Box mb={4}>
     <Heading as="h2" size="lg" mb="4">
       Deploy
@@ -37,6 +40,11 @@ const Deploy: FC = () => (
         - Share the 💙, see updates in your feed, help others discover Ockam
       </ListItem>
     </UnorderedList>
+    <Box my={8}>
+      <Button colorScheme="gray" mb="8" onClick={prev}>
+        Go back
+      </Button>
+    </Box>
   </Box>
 );
 

@@ -44,7 +44,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
     [],
   );
 
-  const { nextStep, activeStep, setStep } = useSteps({
+  const { nextStep, prevStep, activeStep, setStep } = useSteps({
     initialStep: 0,
   });
 
@@ -251,15 +251,15 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
     [user, space, currentPlan, hasPaymentMethod, marketplaceFulfilment],
   );
 
-  // const prev = (): void => {
-  //   setTransitioning(true);
-  //   setTimeout(() => {
-  //     showNext();
-  //     prevStep();
-  //     window.scrollTo(0, 0);
-  //     setTransitioning(false);
-  //   }, 1200);
-  // };
+  const prev = (): void => {
+    setTransitioning(true);
+    setTimeout(() => {
+      showNext();
+      prevStep();
+      window.scrollTo(0, 0);
+      setTransitioning(false);
+    }, 1200);
+  };
 
   const spaceSelected = useCallback(
     (s: Space): void => {
@@ -342,13 +342,13 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
           );
           break;
         case 4:
-          return <Download install={install} />;
+          return <Download install={install} next={next} prev={prev} />;
           break;
         case 5:
-          return <Experience />;
+          return <Experience next={next} prev={prev} />;
           break;
         case 6:
-          return <Deploy />;
+          return <Deploy prev={prev} />;
           break;
         default:
           return <></>;

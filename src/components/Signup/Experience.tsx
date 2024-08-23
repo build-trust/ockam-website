@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardBody,
   CardHeader,
@@ -32,7 +33,11 @@ const examples = [
   },
 ];
 
-const Experience: FC = () => {
+type Props = {
+  next: () => void;
+  prev: () => void;
+};
+const Experience: FC<Props> = ({ next, prev }) => {
   const theme = useTheme();
 
   return (
@@ -69,6 +74,14 @@ const Experience: FC = () => {
           </LinkBox>
         ))}
       </Flex>
+      <Box my={8}>
+        <Button colorScheme="avocado" mb="8" onClick={next}>
+          I&apos;ve completed this step
+        </Button>
+        <Button colorScheme="gray" mb="8" onClick={prev} mx={4}>
+          Go back
+        </Button>
+      </Box>
     </Box>
   );
 };
