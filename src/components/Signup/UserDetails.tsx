@@ -11,7 +11,7 @@ import {
   VStack,
   chakra,
 } from '@chakra-ui/react';
-import { FC, KeyboardEventHandler, RefObject, useRef, useState } from 'react';
+import { FC, KeyboardEventHandler, RefObject, useEffect, useRef, useState } from 'react';
 import OrchestratorAPI, { User } from '../Orchestrator';
 import { useForm, SubmitHandler, FieldErrors, useWatch } from 'react-hook-form';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
@@ -201,6 +201,12 @@ const UserDetails: FC<Props> = ({ next, updated, userDetails, api, terms }) => {
       </VStack>
     </>
   );
+
+  useEffect(() => {
+    if (formContainerRef.current) {
+      formContainerRef.current.querySelectorAll('input')[currentStep]?.focus();
+    }
+  }, [formContainerRef.current, currentStep]);
 
   return (
     <Box>
