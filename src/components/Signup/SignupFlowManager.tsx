@@ -384,12 +384,17 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         setUserDetails(ud);
         const ss = await getSpaces(a);
         let s = await getSpace(ss);
-        const rd = !!router.query.pdid;
+        const pdid = router.query.pdid || window.sessionStorage.getItem('pdid');
+        const rd = !!pdid;
         if (rd) {
           setReturningDelegate(true);
           const pd = await a.getPaymentDelegate(router.query.pdid as string);
-          if (pd?.space_id) {
-            s = { id: pd.space_id, name: '' };
+          if (pd) {
+            window.sessionStorage.setItem('pdid', pd.id);
+            if (pd.space_id) {
+              s = { id: pd.space_id, name: '' };
+            }
+            setSpace(s);
           }
         }
         let cp;
