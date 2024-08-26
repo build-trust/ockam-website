@@ -20,15 +20,13 @@ import OrchestratorAPI, { Space } from '../Orchestrator';
 type Props = {
   user?: User;
   spaces?: Space[];
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-  spaceSelected: Function;
+  spaceSelected: (s: Space) => void;
   api?: OrchestratorAPI;
 };
 
 type SpaceProps = {
   spaces: Space[];
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-  spaceSelected: Function;
+  spaceSelected: (s: Space) => void;
 } & FlexProps;
 
 const ChooseSpace: FC<SpaceProps> = ({ spaces, spaceSelected, ...rest }) => {
@@ -65,10 +63,12 @@ const Welcome: FC<Props> = ({ user, spaces, spaceSelected, api }) => {
     if (user && spaces && !signedIn && api) {
       setSignedIn(true);
       if (spaces.length === 1) {
-        spaceSelected(spaces[0]);
+        setTimeout(() => {
+          spaceSelected(spaces[0]);
+        }, 6000);
       } else if (spaces.length === 0) {
         api.createSpace('developer-free').then((space) => {
-          spaceSelected(space);
+          if (space) spaceSelected(space);
         });
       } else {
         setChooseSpace(true);

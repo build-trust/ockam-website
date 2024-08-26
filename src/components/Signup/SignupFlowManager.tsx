@@ -288,21 +288,10 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
     ],
   );
 
-  const spaceSelected = useCallback(
-    (s: Space): void => {
-      setSpace(s);
-      jumpToLatest({ leaveMessage: true });
-    },
-    [
-      user,
-      returningDelegate,
-      currentPlan,
-      hasPaymentMethod,
-      marketplaceFulfilment,
-      determineCurrentStep,
-      jump,
-    ],
-  );
+  const spaceSelected = (s: Space): void => {
+    setSpace(s);
+    jumpToLatest({ leaveMessage: true });
+  };
 
   const updatePlan = useCallback(
     async (a: OrchestratorAPI, spaceId: string, plan: string): Promise<void> => {
@@ -399,8 +388,6 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
 
   const stateMachine = useCallback(async (): Promise<void> => {
     try {
-      const minLoadingTime = 7000;
-      const start = new Date().getTime();
       const signedIn = await isSignedIn();
       if (!signedIn) signIn();
       const u = await currentUser();
@@ -432,22 +419,12 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
           }
         }
         let cp;
-        let hp = false;
-        const mf = await checkMarketplaceFulfilment();
+        await checkMarketplaceFulfilment();
         if (s) {
           cp = await getPlan(s.id, ss);
-          if (cp && ud) hp = await getPaymentMethod(a, s, cp, ud);
+          if (cp && ud) await getPaymentMethod(a, s, cp, ud);
         }
-        const st = determineCurrentStep(!!u, rd, ud, !!s, !!cp, hp, mf);
-        const end = new Date().getTime();
-        const duration = end - start;
-        setTimeout(
-          () => {
-            jump(st);
-            setIsLoaded(true);
-          },
-          Math.max(minLoadingTime - duration, 0),
-        );
+        setIsLoaded(true);
       }
     } catch (error) {
       if (error instanceof UnverifiedEmailError) {
