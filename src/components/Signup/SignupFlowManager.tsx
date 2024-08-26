@@ -186,9 +186,8 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         return true;
       }
       if (s.payment_method) {
-        // TODO: re-enable this
-        // setHasPaymentMethod(true);
-        // return true;
+        setHasPaymentMethod(true);
+        return true;
       }
       const tier = TIERS.find((t) => t.name === cp.replace('developer-', ''));
       if (tier && !tier.marketplaceOnly) {
