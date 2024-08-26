@@ -397,12 +397,6 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
     ],
   );
 
-  // const displayNext = (): boolean =>
-  //   !nextHidden && activeStep !== 0 && activeStep < steps.length - 1;
-  // // activeStep < steps.length - 1 && activeStep !== 0 && nextHidden === true
-
-  // const displayBack = (): boolean => activeStep > 0;
-
   const stateMachine = useCallback(async (): Promise<void> => {
     try {
       const minLoadingTime = 7000;
@@ -509,23 +503,6 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
       </Box>
       <Box transition="opacity 1s 0s ease-in-out" opacity={transitioning ? '0' : '1'} width="100%">
         {displayStep(activeStep, currentPlan, customer, product, completedDelegate)}
-        {/* <Flex direction="row" justifyContent="space-between">
-          {displayNext() && activeStep === 1 && (
-            <Button colorScheme="avocado" mb="8" onClick={next}>
-              Skip this for now
-            </Button>
-          )}
-          {displayNext() && activeStep !== 1 && (
-            <Button colorScheme="avocado" mb="8" onClick={next}>
-              I&apos;ve completed this step
-            </Button>
-          )}
-          {displayBack() && (
-            <Button colorScheme="gray" mb="8" onClick={prev}>
-              Go back
-            </Button>
-          )}
-        </Flex> */}
       </Box>
     </Flex>
   );
