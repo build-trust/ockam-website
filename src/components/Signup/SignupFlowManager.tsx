@@ -60,6 +60,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   const [customer, setCustomer] = useState<string>();
   const [product, setProduct] = useState<string>();
   const [marketplaceFulfilment, setMarketplacceFulfilment] = useState<boolean>(false);
+  const [returningDelegate, setReturningDelegate] = useState<boolean>(false);
 
   const [transitioning, setTransitioning] = useState(false);
   // const [nextHidden, setNextHidden] = useState(false);
@@ -78,18 +79,23 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
     // eslint-disable-next-line complexity
     (
       u: boolean,
+      rd: boolean,
       ud: OUser | undefined,
       s: boolean,
       cp: boolean,
       hp: boolean,
       mf: boolean,
     ): number => {
-      if (!ud?.accepted_tos || !ud?.details?.name || !ud?.details?.company)
-        return numberForStep('Update details');
-      if (mf) return numberForStep('Payment');
-      if (u && s && cp && hp) return numberForStep('Download');
-      if (u && s && cp) return numberForStep('Payment');
-      if (u && s) return numberForStep('Choose a plan');
+      if (rd) {
+        if (u && s) return numberForStep('Payment');
+      } else {
+        if (!ud?.accepted_tos || !ud?.details?.name || !ud?.details?.company)
+          return numberForStep('Update details');
+        if (mf) return numberForStep('Payment');
+        if (u && s && cp && hp) return numberForStep('Download');
+        if (u && s && cp) return numberForStep('Payment');
+        if (u && s) return numberForStep('Choose a plan');
+      }
       return 0;
     },
     [numberForStep],
@@ -179,8 +185,9 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         return true;
       }
       if (s.payment_method) {
-        setHasPaymentMethod(true);
-        return true;
+        // TODO: re-enable this
+        // setHasPaymentMethod(true);
+        // return true;
       }
       const tier = TIERS.find((t) => t.name === cp.replace('developer-', ''));
       if (tier && !tier.marketplaceOnly) {
@@ -229,6 +236,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         i <=
         determineCurrentStep(
           !!user,
+          returningDelegate,
           userDetails,
           !!space,
           !!currentPlan,
@@ -239,7 +247,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         jump(i);
       }
     },
-    [user, space, currentPlan, hasPaymentMethod, marketplaceFulfilment],
+    [user, returningDelegate, space, currentPlan, hasPaymentMethod, marketplaceFulfilment],
   );
 
   const prev = (): void => {
@@ -257,6 +265,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
       jump(
         determineCurrentStep(
           !!user,
+          returningDelegate,
           userDetails,
           true,
           !!currentPlan,
@@ -265,7 +274,15 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         ),
       );
     },
-    [user, currentPlan, hasPaymentMethod, marketplaceFulfilment, determineCurrentStep, jump],
+    [
+      user,
+      returningDelegate,
+      currentPlan,
+      hasPaymentMethod,
+      marketplaceFulfilment,
+      determineCurrentStep,
+      jump,
+    ],
   );
 
   const updatePlan = useCallback(
@@ -326,6 +343,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
                 api={api}
                 companyDomain={userDetails?.details?.company_domain}
                 spaceId={space.id}
+                isDelegate={returningDelegate}
               />
             );
           }
@@ -365,7 +383,15 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         const ud = await getUserDetails(a);
         setUserDetails(ud);
         const ss = await getSpaces(a);
-        const s = await getSpace(ss);
+        let s = await getSpace(ss);
+        const rd = !!router.query.pdid;
+        if (rd) {
+          setReturningDelegate(true);
+          const pd = await a.getPaymentDelegate(router.query.pdid as string);
+          if (pd?.space_id) {
+            s = { id: pd.space_id, name: '' };
+          }
+        }
         let cp;
         let hp = false;
         const mf = await checkMarketplaceFulfilment();
@@ -373,7 +399,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
           cp = await getPlan(s.id, ss);
           if (cp && ud) hp = await getPaymentMethod(a, s, cp, ud);
         }
-        const st = determineCurrentStep(!!u, ud, !!s, !!cp, hp, mf);
+        const st = determineCurrentStep(!!u, rd, ud, !!s, !!cp, hp, mf);
         const end = new Date().getTime();
         const duration = end - start;
         setTimeout(

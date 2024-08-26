@@ -32,31 +32,48 @@ type Props = {
   api: OrchestratorAPI;
   companyDomain: string;
   spaceId: string;
+  isDelegate: boolean;
 };
 
 type DetailsProps = {
   plan: string;
   onDelegate: () => void;
+  isDelegate: boolean;
 };
-const MarketplaceDetails: FC<DetailsProps> = ({ plan, onDelegate }) => (
-  <Flex direction="column" maxW="45em">
-    <Heading as="h2" size="h2" mb="8">
-      Add subscription via your cloud marketplace
-    </Heading>
-    <Text variant="readabilityOptimized">
-      Ockam&apos;s plans can be paid for via your cloud marketplace. By subscribing via the
+const MarketplaceDetails: FC<DetailsProps> = ({ plan, onDelegate, isDelegate }) => {
+  const title = () => {
+    if (isDelegate) return 'Attach marketplace subscription';
+    return 'Add subscription via your cloud marketplace';
+  };
+
+  const text = () => {
+    if (isDelegate) {
+      return `At teammate has already completed most of your account setup. To ensure they 
+      can continue using the service uninterrupted a subscription in the AWS marketplace must be attached.`;
+    }
+    return `Ockam's plans can be paid for via your cloud marketplace. By subscribing via the
       marketplace the process is as frictionless as possible for you and your team. You&apos;re able
       to utilize existing spend commitments with your cloud providers, there&apos;s no paperwork to
-      fill out, no budget approvals, and no vendor onboarding.
-    </Text>
+      fill out, no budget approvals, and no vendor onboarding.`;
+  };
 
-    <AWS plan={plan} />
+  return (
+    <Flex direction="column" maxW="45em">
+      <Heading as="h2" size="h2" mb="8">
+        {title()}
+      </Heading>
+      <Text variant="readabilityOptimized">{text()}</Text>
 
-    <Button colorScheme="gray" mx={4} my={8} onClick={onDelegate}>
-      I don&apos;t have the required permissions to complete this
-    </Button>
-  </Flex>
-);
+      <AWS plan={plan} />
+
+      {!isDelegate && (
+        <Button colorScheme="gray" mx={4} my={8} onClick={onDelegate}>
+          I don&apos;t have the required permissions to complete this
+        </Button>
+      )}
+    </Flex>
+  );
+};
 
 type Inputs = {
   email: string;
@@ -158,6 +175,7 @@ const MarketplaceSetup: FC<Props> = ({
   companyDomain,
   api,
   spaceId,
+  isDelegate,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [showDelegate, setShowDelegate] = useState(false);
@@ -182,7 +200,9 @@ const MarketplaceSetup: FC<Props> = ({
 
   return (
     <Box pb={8} style={{ transition: '200ms opacity ease-in', opacity: '1' }} ref={containerRef}>
-      {!showDelegate && <MarketplaceDetails plan={plan} onDelegate={toggle} />}
+      {!showDelegate && (
+        <MarketplaceDetails plan={plan} onDelegate={toggle} isDelegate={isDelegate} />
+      )}
       {showDelegate && (
         <MarketplaceDelegation
           companyDomain={companyDomain}
