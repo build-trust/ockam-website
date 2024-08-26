@@ -48,13 +48,20 @@ const MarketplaceDetails: FC<DetailsProps> = ({ plan, onDelegate, isDelegate }) 
 
   const text = () => {
     if (isDelegate) {
-      return `At teammate has already completed most of your account setup. To ensure they 
-      can continue using the service uninterrupted a subscription in the AWS marketplace must be attached.`;
+      return [
+        `Your teammate has already completed most of your account setup. To ensure they 
+      can continue using the service uninterrupted a subscription in the AWS marketplace must be attached 
+      — and they've requested that you complete that process for them.`,
+
+        `Click the button below to complete the setup.`,
+      ];
     }
-    return `Ockam's plans can be paid for via your cloud marketplace. By subscribing via the
+    return [
+      `Ockam's plans can be paid for via your cloud marketplace. By subscribing via the
       marketplace the process is as frictionless as possible for you and your team. You&apos;re able
       to utilize existing spend commitments with your cloud providers, there&apos;s no paperwork to
-      fill out, no budget approvals, and no vendor onboarding.`;
+      fill out, no budget approvals, and no vendor onboarding.`,
+    ];
   };
 
   return (
@@ -62,7 +69,11 @@ const MarketplaceDetails: FC<DetailsProps> = ({ plan, onDelegate, isDelegate }) 
       <Heading as="h2" size="h2" mb="8">
         {title()}
       </Heading>
-      <Text variant="readabilityOptimized">{text()}</Text>
+      {text().map((t, ix) => (
+        <Text variant="readabilityOptimized" key={`mpt-${ix}`}>
+          {t}
+        </Text>
+      ))}
 
       <AWS plan={plan} />
 
