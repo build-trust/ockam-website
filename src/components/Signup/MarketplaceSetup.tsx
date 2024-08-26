@@ -33,21 +33,35 @@ type Props = {
   companyDomain: string;
   spaceId: string;
   isDelegate: boolean;
+  completedDelegate: boolean;
 };
 
 type DetailsProps = {
   plan: string;
   onDelegate: () => void;
   isDelegate: boolean;
+  completedDelegate: boolean;
 };
-const MarketplaceDetails: FC<DetailsProps> = ({ plan, onDelegate, isDelegate }) => {
+const MarketplaceDetails: FC<DetailsProps> = ({
+  plan,
+  onDelegate,
+  isDelegate,
+  completedDelegate,
+}) => {
+  console.log('compde: ', completedDelegate);
   const title = () => {
+    if (isDelegate && completedDelegate) return '🎉 All done!';
     if (isDelegate) return 'Attach marketplace subscription';
     return 'Add subscription via your cloud marketplace';
   };
 
   const text = () => {
     if (isDelegate) {
+      if (completedDelegate) {
+        return [
+          `The marketplace setup is complete. Your team can continue using Ockam Orchestrator.`,
+        ];
+      }
       return [
         `Your teammate has already completed most of your account setup. To ensure they 
       can continue using the service uninterrupted a subscription in the AWS marketplace must be attached 
@@ -75,7 +89,7 @@ const MarketplaceDetails: FC<DetailsProps> = ({ plan, onDelegate, isDelegate }) 
         </Text>
       ))}
 
-      <AWS plan={plan} />
+      {!completedDelegate && <AWS plan={plan} />}
 
       {!isDelegate && (
         <Button colorScheme="gray" mx={4} my={8} onClick={onDelegate}>
@@ -187,6 +201,7 @@ const MarketplaceSetup: FC<Props> = ({
   api,
   spaceId,
   isDelegate,
+  completedDelegate,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [showDelegate, setShowDelegate] = useState(false);
@@ -212,7 +227,12 @@ const MarketplaceSetup: FC<Props> = ({
   return (
     <Box pb={8} style={{ transition: '200ms opacity ease-in', opacity: '1' }} ref={containerRef}>
       {!showDelegate && (
-        <MarketplaceDetails plan={plan} onDelegate={toggle} isDelegate={isDelegate} />
+        <MarketplaceDetails
+          plan={plan}
+          onDelegate={toggle}
+          isDelegate={isDelegate}
+          completedDelegate={completedDelegate}
+        />
       )}
       {showDelegate && (
         <MarketplaceDelegation

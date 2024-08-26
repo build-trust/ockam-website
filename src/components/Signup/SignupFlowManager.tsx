@@ -62,6 +62,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   const [product, setProduct] = useState<string>();
   const [marketplaceFulfilment, setMarketplacceFulfilment] = useState<boolean>(false);
   const [returningDelegate, setReturningDelegate] = useState<boolean>(false);
+  const [completedDelegate, setCompletedDelegate] = useState<boolean>(false);
 
   const [transitioning, setTransitioning] = useState(false);
   // const [nextHidden, setNextHidden] = useState(false);
@@ -151,9 +152,10 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
       !!(params.customer || params.aws_customer_id) && !!(params.product || params.aws_product_id);
     setMarketplacceFulfilment(isFulfilling);
     if (isFulfilling)
-      setMessage(
-        "👋 Welcome back - there's just a few more details required to complete the AWS Marketplace setup...",
-      );
+      setMessage("👋 Welcome back - We're completing the AWS Marketplace setup for you...");
+    setTimeout(() => {
+      setMessage(undefined);
+    }, 5000);
     return isFulfilling;
   }, [purchaseParams]);
 
@@ -168,6 +170,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
       const customerAwsID = params.CustomerAWSAccountID;
 
       if (customerId && productId) {
+        console.log('goinnnnnnn');
         const pm = await a.createPaymentMethod(productId, customerId, customerAwsID);
         if (pm) await a.updatePaymentMethod(s.id, pm.id);
         if (ud.details?.name && ud.details?.company && ud.email) {
@@ -179,6 +182,8 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
             customerId,
           );
         }
+        setCompletedDelegate(true);
+        console.log('completing del');
         setHasPaymentMethod(true);
         return true;
       }
@@ -256,8 +261,8 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
     }, 1200);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const jumpToLatest = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (data?: { [key: string]: any }) => {
       const leaveMessage = data?.leaveMessage;
       const ud = data?.userDetails;
@@ -320,7 +325,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   };
 
   const displayStep = useCallback(
-    (step: number, cp?: string, c?: string, p?: string): ReactElement => {
+    (step: number, cp?: string, c?: string, p?: string, cd?: boolean): ReactElement => {
       switch (step) {
         case 0:
           return <Welcome user={user} spaces={spaces} spaceSelected={spaceSelected} api={api} />;
@@ -359,6 +364,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
                 companyDomain={userDetails?.details?.company_domain}
                 spaceId={space.id}
                 isDelegate={returningDelegate}
+                completedDelegate={!!cd}
               />
             );
           }
@@ -372,7 +378,24 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
           return <></>;
       }
     },
-    [hasPaymentMethod, install, next, user, spaces, spaceSelected, api, planChosen, terms],
+    [
+      hasPaymentMethod,
+      install,
+      next,
+      user,
+      spaces,
+      spaceSelected,
+      api,
+      planChosen,
+      terms,
+      customer,
+      product,
+      currentPlan,
+      userDetails,
+      space,
+      returningDelegate,
+      completedDelegate,
+    ],
   );
 
   // const displayNext = (): boolean =>
@@ -406,7 +429,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
           setMessage(
             `You've been asked to complete the setup of this Ockam Orchestrator account. We need to capture a few details…`,
           );
-          const pd = await a.getPaymentDelegate(router.query.pdid as string);
+          const pd = await a.getPaymentDelegate(pdid as string);
           if (pd) {
             window.sessionStorage.setItem('pdid', pd.id);
             if (pd.space_id) {
@@ -462,7 +485,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
 
   return (
     <Flex mx="auto" pb="32" p={8} direction={{ base: 'row' }} w="100%">
-      <Notice message={message} />
+      {message && <Notice message={message} />}
       <Box style={{ transition: '200ms ease-in opacity', opacity: returningDelegate ? '0' : '1' }}>
         <Steps
           variant="circles"
@@ -486,7 +509,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         </Steps>
       </Box>
       <Box transition="opacity 1s 0s ease-in-out" opacity={transitioning ? '0' : '1'} width="100%">
-        {displayStep(activeStep, currentPlan, customer, product)}
+        {displayStep(activeStep, currentPlan, customer, product, completedDelegate)}
         {/* <Flex direction="row" justifyContent="space-between">
           {displayNext() && activeStep === 1 && (
             <Button colorScheme="avocado" mb="8" onClick={next}>
