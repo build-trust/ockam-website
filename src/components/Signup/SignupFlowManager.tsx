@@ -170,7 +170,6 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
       const customerAwsID = params.CustomerAWSAccountID;
 
       if (customerId && productId) {
-        console.log('goinnnnnnn');
         const pm = await a.createPaymentMethod(productId, customerId, customerAwsID);
         if (pm) await a.updatePaymentMethod(s.id, pm.id);
         if (ud.details?.name && ud.details?.company && ud.email) {
@@ -183,7 +182,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
           );
         }
         setCompletedDelegate(true);
-        console.log('completing del');
+        window.sessionStorage.removeItem('pdid');
         setHasPaymentMethod(true);
         return true;
       }
