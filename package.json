@@ -83,7 +83,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.18.2",
-    "@commitlint/cli": "17.0.1",
+    "@commitlint/cli": "19.4.0",
     "@commitlint/config-conventional": "17.0.0",
     "@emotion/babel-plugin": "11.11.0",
     "@emotion/babel-preset-css-prop": "^11.12.0",
