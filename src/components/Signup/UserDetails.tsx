@@ -61,6 +61,7 @@ const UserDetails: FC<Props> = ({ next, updated, userDetails, api, terms }) => {
   });
 
   const [currentStep, setStep] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const save: SubmitHandler<Inputs> = async () => {
     if (currentStep < 3) return step(formContainerRef);
@@ -96,11 +97,16 @@ const UserDetails: FC<Props> = ({ next, updated, userDetails, api, terms }) => {
       if (ref && ref.current) {
         if (currentStep < 3) {
           ref.current.style.opacity = '0';
+          ref.current.style.left = '-100%';
           setTimeout(() => {
-            setStep(currentStep + 1);
-            if (ref && ref.current) ref.current.style.opacity = '1';
-          }, 200);
+            if (ref && ref.current) ref.current.style.left = '0';
+            setTimeout(() => {
+              if (ref && ref.current) ref.current.style.opacity = '1';
+              setStep(currentStep + 1);
+            }, 200);
+          }, 400);
         } else {
+          setIsSubmitting(true);
           handleSubmit(save)();
         }
       }
@@ -209,8 +215,12 @@ const UserDetails: FC<Props> = ({ next, updated, userDetails, api, terms }) => {
       <Heading as="h2" size="lg" mb="4">
         {currentStep === 3 ? 'Accept Terms of Service' : 'Enter your details'}
       </Heading>
-      <Box my={8}>
-        <Box ref={formContainerRef} style={{ transition: 'opacity 100ms', opacity: '1' }}>
+      <Box my={8} overflow="hidden" position="relative">
+        <Box
+          ref={formContainerRef}
+          style={{ transition: '300ms ease-in', opacity: '1' }}
+          position="relative"
+        >
           <chakra.form
             onSubmit={handleSubmit(() => {
               step(formContainerRef);
@@ -226,6 +236,8 @@ const UserDetails: FC<Props> = ({ next, updated, userDetails, api, terms }) => {
         onClick={() => {
           step(formContainerRef);
         }}
+        disabled={isSubmitting}
+        isLoading={isSubmitting}
       >
         {currentStep === 3 ? 'I accept' : 'Next'}
       </Button>
@@ -237,6 +249,7 @@ const UserDetails: FC<Props> = ({ next, updated, userDetails, api, terms }) => {
             setStep(currentStep - 1);
           }}
           mx={4}
+          disabled={isSubmitting}
         >
           Go back
         </Button>
