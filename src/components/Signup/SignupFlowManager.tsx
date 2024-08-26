@@ -49,6 +49,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   });
 
   const router = useRouter();
+
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [user, setUser] = useState<User>();
   const [userDetails, setUserDetails] = useState<OUser>();
@@ -445,7 +446,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   return (
     <Flex mx="auto" pb="32" p={8} direction={{ base: 'row' }} w="100%">
       <Notice message={message} />
-      <Box>
+      <Box style={{ transition: '200ms ease-in opacity', opacity: returningDelegate ? '0' : '1' }}>
         <Steps
           variant="circles"
           orientation="vertical"
