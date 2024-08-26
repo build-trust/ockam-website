@@ -303,7 +303,6 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
               terms={terms}
             />
           );
-          break;
         case 2:
           return (
             <ChoosePlan
@@ -314,29 +313,28 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
               currentPlan={cp}
             />
           );
-          break;
         case 3:
-          return (
-            <MarketplaceSetup
-              hasPaymentMethod={hasPaymentMethod}
-              complete={next}
-              user={user}
-              customer={c}
-              product={p}
-              plan={cp}
-              api={api}
-            />
-          );
-          break;
+          if (user && cp && api && space && userDetails?.details?.company_domain) {
+            return (
+              <MarketplaceSetup
+                hasPaymentMethod={hasPaymentMethod}
+                complete={next}
+                user={user}
+                customer={c}
+                product={p}
+                plan={cp}
+                api={api}
+                companyDomain={userDetails?.details?.company_domain}
+                spaceId={space.id}
+              />
+            );
+          }
         case 4:
           return <Download install={install} next={next} prev={prev} />;
-          break;
         case 5:
           return <Experience next={next} prev={prev} />;
-          break;
         case 6:
           return <Deploy prev={prev} />;
-          break;
         default:
           return <></>;
       }
