@@ -37,7 +37,7 @@
     "@chakra-ui/anatomy": "2.0.1",
     "@chakra-ui/icons": "2.0.2",
     "@chakra-ui/react": "^2.8.1",
-    "@chakra-ui/theme-tools": "2.0.2",
+    "@chakra-ui/theme-tools": "2.1.2",
     "@code-hike/mdx": "^0.9.0",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "11.8.1",
