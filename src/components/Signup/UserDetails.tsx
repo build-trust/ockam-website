@@ -22,7 +22,8 @@ const components = {
 };
 
 type Props = {
-  next: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  next: (data?: { [key: string]: any }) => void;
   updated: (userDetails: User) => void;
   userDetails?: User;
   api?: OrchestratorAPI;
@@ -58,27 +59,22 @@ const UserDetails: FC<Props> = ({ next, updated, userDetails, api, terms }) => {
     control,
     defaultValue: userDetails?.details?.company_domain,
   });
-  const acceptedToS = useWatch({
-    name: 'acceptedToS',
-    control,
-    defaultValue: userDetails?.accepted_tos,
-  });
 
   const [currentStep, setStep] = useState(0);
 
-  const save: SubmitHandler<Inputs> = () => {
+  const save: SubmitHandler<Inputs> = async () => {
     if (currentStep < 3) return step(formContainerRef);
     if (!userDetails?.accepted_tos) api?.updateToS(true);
     const details = { name, company, company_domain: companyDomain };
     if (name && company && companyDomain) {
-      api?.updateUserDetails(details);
+      await api?.updateUserDetails(details);
     }
     const data: User = {
-      accepted_tos: acceptedToS,
+      accepted_tos: true,
       details,
     };
     updated(data);
-    next();
+    next({ userDetails: data });
   };
 
   const isStepValid = async (): Promise<boolean> => {

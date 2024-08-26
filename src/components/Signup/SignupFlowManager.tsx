@@ -87,16 +87,13 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
       hp: boolean,
       mf: boolean,
     ): number => {
-      if (rd) {
-        if (u && s) return numberForStep('Payment');
-      } else {
-        if (!ud?.accepted_tos || !ud?.details?.name || !ud?.details?.company)
-          return numberForStep('Update details');
-        if (mf) return numberForStep('Payment');
-        if (u && s && cp && hp) return numberForStep('Download');
-        if (u && s && cp) return numberForStep('Payment');
-        if (u && s) return numberForStep('Choose a plan');
-      }
+      if (!ud?.accepted_tos || !ud?.details?.name || !ud?.details?.company)
+        return numberForStep('Update details');
+      if (rd && u && s) return numberForStep('Payment');
+      if (mf) return numberForStep('Payment');
+      if (u && s && cp && hp) return numberForStep('Download');
+      if (u && s && cp) return numberForStep('Payment');
+      if (u && s) return numberForStep('Choose a plan');
       return 0;
     },
     [numberForStep],
@@ -259,20 +256,38 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
     }, 1200);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const jumpToLatest = useCallback(
+    (data?: { [key: string]: any }) => {
+      const leaveMessage = data?.leaveMessage;
+      const ud = data?.userDetails;
+      if (!leaveMessage) setMessage(undefined);
+      const latestStep = determineCurrentStep(
+        !!user,
+        returningDelegate,
+        ud || userDetails,
+        !!space,
+        !!currentPlan,
+        hasPaymentMethod,
+        marketplaceFulfilment,
+      );
+      jump(latestStep);
+    },
+    [
+      user,
+      returningDelegate,
+      userDetails,
+      space,
+      currentPlan,
+      hasPaymentMethod,
+      marketplaceFulfilment,
+    ],
+  );
+
   const spaceSelected = useCallback(
     (s: Space): void => {
       setSpace(s);
-      jump(
-        determineCurrentStep(
-          !!user,
-          returningDelegate,
-          userDetails,
-          true,
-          !!currentPlan,
-          hasPaymentMethod,
-          marketplaceFulfilment,
-        ),
-      );
+      jumpToLatest({ leaveMessage: true });
     },
     [
       user,
@@ -313,7 +328,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         case 1:
           return (
             <UserDetails
-              next={next}
+              next={jumpToLatest}
               updated={updatedUserDetails}
               userDetails={userDetails}
               api={api}
@@ -388,6 +403,9 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         const rd = !!pdid;
         if (rd) {
           setReturningDelegate(true);
+          setMessage(
+            `You've been asked to complete the setup of this Ockam Orchestrator account. We need to capture a few details…`,
+          );
           const pd = await a.getPaymentDelegate(router.query.pdid as string);
           if (pd) {
             window.sessionStorage.setItem('pdid', pd.id);
