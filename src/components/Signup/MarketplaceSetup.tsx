@@ -48,7 +48,6 @@ const MarketplaceDetails: FC<DetailsProps> = ({
   isDelegate,
   completedDelegate,
 }) => {
-  console.log('compde: ', completedDelegate);
   const title = () => {
     if (isDelegate && completedDelegate) return '🎉 All done!';
     if (isDelegate) return 'Attach marketplace subscription';
