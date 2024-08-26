@@ -15,6 +15,8 @@ import {
   chakra,
 } from '@chakra-ui/react';
 import { useForm, useWatch } from 'react-hook-form';
+import { useWindowSize } from 'react-use';
+import Confetti from 'react-confetti';
 
 import { AWS } from '@root/components/Packaging/Marketplaces';
 
@@ -48,6 +50,15 @@ const MarketplaceDetails: FC<DetailsProps> = ({
   isDelegate,
   completedDelegate,
 }) => {
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
+  const { width, height } = useWindowSize();
+
+  useEffect(() => {
+    setWindowWidth(width);
+    setWindowHeight(height);
+  });
+
   const title = () => {
     if (isDelegate && completedDelegate) return '🎉 All done!';
     if (isDelegate) return 'Attach marketplace subscription';
@@ -79,6 +90,7 @@ const MarketplaceDetails: FC<DetailsProps> = ({
 
   return (
     <Flex direction="column" maxW="45em">
+      {completedDelegate && <Confetti width={windowWidth} height={windowHeight} recycle={false} />}
       <Heading as="h2" size="h2" mb="8">
         {title()}
       </Heading>
