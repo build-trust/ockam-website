@@ -26,6 +26,7 @@ const Auth0 = new Auth0Client({
   domain: publicRuntimeConfig.auth0.issuerBaseHost as string,
   clientId: publicRuntimeConfig.auth0.clientId as string,
   authorizationParams: {
+    scope: 'openid',
     redirect_uri: `${publicRuntimeConfig.auth0.baseUrl}/auth/callback`,
   },
 });
@@ -38,6 +39,7 @@ const currentUser = async (): Promise<User | void> => {
     const userId = window.sessionStorage.getItem('userId') as string | '';
     const token = await Auth0.getTokenSilently({
       authorizationParams: {
+        scope: 'openid',
         audience,
       },
     });
@@ -128,6 +130,7 @@ const Auth: FunctionComponent<Props> = ({
   const signin = useCallback(async (): Promise<void> => {
     await Auth0.loginWithRedirect({
       authorizationParams: {
+        scope: 'openid',
         audience,
         source: 'ockam-website',
       },
@@ -137,6 +140,7 @@ const Auth: FunctionComponent<Props> = ({
   const signup = useCallback(async (): Promise<void> => {
     await Auth0.loginWithRedirect({
       authorizationParams: {
+        scope: 'openid',
         audience,
         screen_hint: 'signup',
         source: 'ockam-website',
