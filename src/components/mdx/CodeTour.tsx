@@ -10,6 +10,7 @@ import { tokenTransitions } from './transition/TokenTransition';
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Heading } from '@chakra-ui/react';
+import { CheckIcon, CopyIcon } from '@chakra-ui/icons';
 
 const StyledSelectable = styled(Selectable)`
   padding: 0.5rem 1.25rem 0.5rem 1.25rem;
@@ -100,23 +101,45 @@ const CodeTour: FC = (props) => {
   );
 };
 
+const CopyButton = ({ text }: { text: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <button
+      className="..."
+      aria-label="Copy to clipboard"
+      onClick={() => {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1200);
+      }}
+      style={{ right: '4px', position: 'absolute', top: '2px' }}
+    >
+      {copied ? <CheckIcon color="white" /> : <CopyIcon color="white" />}
+    </button>
+  );
+};
+
 type CodeProps = {
   codeblock: HighlightedCode;
 };
 const Code: FC<CodeProps> = ({ codeblock }) => {
   return (
-    <Pre
-      code={codeblock}
-      handlers={[tokenTransitions]}
-      style={{
-        minHeight: '40rem',
-        borderRadius: '6px',
-        backgroundColor: '#002b36',
-        fontFamily: 'SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-        fontSize: '14px',
-        padding: '15px 40px 15px 40px',
-      }}
-    />
+    <div style={{ position: 'relative' }}>
+      <CopyButton text={codeblock.code} />
+      <Pre
+        code={codeblock}
+        handlers={[tokenTransitions]}
+        style={{
+          minHeight: '40rem',
+          borderRadius: '6px',
+          backgroundColor: '#002b36',
+          fontFamily: 'SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+          fontSize: '14px',
+          padding: '15px 40px 15px 40px',
+        }}
+      />
+    </div>
   );
 };
 
