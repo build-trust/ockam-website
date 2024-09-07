@@ -49,6 +49,7 @@
     "braces": "^3.0.3",
     "chakra-ui-steps": "^2.1.0",
     "chroma-js": "^2.4.2",
+    "codehike": "^1.0.1",
     "csstype": "^3.1.2",
     "fast-xml-parser": "^4.4.1",
     "file-saver": "2.0.5",
@@ -115,6 +116,7 @@
     "lint-staged": "^15.2.9",
     "next-sitemap": "4.2.3",
     "prettier": "3.2.5",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "zod": "^3.23.8"
   }
 }

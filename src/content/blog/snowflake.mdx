@@ -1,5 +1,5 @@
 ---
-title: How to send Change Data Capture from Snowflake to Kafka
+title: Reverse ETL with Snowflake and Kafka
 codetour: true
 category: Learning
 date: '2024-08-12'
@@ -10,6 +10,277 @@ authorAvatar: /blog/glenn-gillen.jpg
 ---
 
 {/* <!-- vale off--> */}
+
+So you've got most of your organization's data consolidated into The Data Cloud
+that we call Snowflake. Colleagues are busy analyzing the data and generating 
+new insights, and now you need to get those insights back out various other
+systems to they can act upon them.
+
+Welcome to the world of reverse ETL!
+
+## What is "Reverse ETL"?
+
+Snowflake has rapidly become _the_ place to support workloads such as data
+warehouses, data lakes, data science / ML / AI, and even cybersecurity. This
+centralization brings a huge amount of convenience in terms of breaking down
+data silos and allowing teams to make smart data-informed decisions. The way
+data typically gets into The Data Cloud is by one of:
+
+* Writing directly to it!
+* Syncing logs, metrics, and other data via a connector
+* An Extract, Transform, and Load (ETL) that runs regularly to move data from 
+one system and load it into Snowflake
+
+Reverse ETL is, as the name implies, simply running that process in the opposite
+direction. Once the magic has been done in Snowflake one or more of your other
+systems probably needs to act on the updated insight. Maybe the website needs to
+know some additional data about a user? Maybe a CRM or email list needs to be 
+updated? Whatever the reason, you need a way to get that data back out to the 
+edges as quickly as possible. 
+
+In this post I'm going to show you how to:
+
+* Setup a Snowflake Stream to capture changes 
+
+## Snowflake streams 
+
+Snowflake streams are a away to capture every change made to a table (i.e., every
+insert, update, and delete) and record it somewhere else. It'll often be referred
+to as Change Data Capture (CDC) and it's an effective way to respond to changes 
+in the data that you care about. 
+
+
+
+
+
+In today’s data-driven world, organizations are collecting more information than ever before. As businesses strive to leverage this data to drive decision-making, platforms like Snowflake have become indispensable. Snowflake’s cloud-native data warehousing solution has revolutionized how companies store, process, and analyze data, offering unparalleled scalability, flexibility, and performance. But as powerful as Snowflake is, maximizing its potential often requires going beyond traditional ETL (Extract, Transform, Load) processes—this is where reverse ETL comes into play.
+
+Why So Many Organizations Rely on Snowflake
+
+Snowflake has quickly become a cornerstone for organizations looking to manage and analyze vast amounts of data. Its unique architecture, which separates storage and compute, allows businesses to scale resources independently, optimizing costs and performance. Snowflake’s ability to integrate seamlessly with a wide range of data sources and its robust support for SQL make it a go-to choice for data engineers and analysts alike.
+
+With Snowflake, organizations can centralize their data into a single source of truth, enabling advanced analytics and data-driven strategies. Whether it’s powering BI dashboards, running complex queries, or supporting machine learning models, Snowflake’s capabilities are a game-changer for data-centric businesses.
+
+The Need for Reverse ETL
+
+While traditional ETL processes are designed to move data from various sources into a centralized data warehouse like Snowflake, reverse ETL flips this process on its head. Reverse ETL involves extracting data from Snowflake and pushing it back into operational systems such as CRM tools, marketing platforms, or custom applications. This enables organizations to operationalize their data, making it actionable in real-time.
+
+The need for reverse ETL arises from the growing demand for real-time, data-driven decision-making. For example, customer insights stored in Snowflake can be fed directly into marketing automation tools, enabling personalized campaigns that respond to user behavior in real-time. Similarly, sales teams can benefit from having the latest data on customer interactions and purchase history directly within their CRM, empowering them to engage more effectively.
+
+Why Use Apache Kafka for Reverse ETL?
+
+When implementing a reverse ETL process, the choice of tools can significantly impact the reliability, scalability, and efficiency of the solution. This is where Apache Kafka comes into play. Kafka is an open-source stream-processing platform that excels in handling real-time data feeds with high throughput and low latency.
+
+Reliability and Durability: One of the key reasons to use Kafka in a reverse ETL process is its robust architecture that ensures data reliability and durability. Kafka’s distributed nature means it can handle large volumes of data while maintaining data integrity, even in the face of failures. This is crucial for organizations that need to ensure their operational systems are always receiving up-to-date and accurate information from Snowflake.
+
+Scalability: As your organization’s data grows, so does the need for scalable solutions. Kafka’s ability to handle massive streams of data in real-time makes it an ideal choice for organizations with large and complex data pipelines. Kafka’s scalability ensures that as your business and data requirements evolve, your reverse ETL process can keep up without compromising performance.
+
+Integration and Flexibility: Kafka’s extensive ecosystem allows for seamless integration with Snowflake and other systems. With Kafka Connect, you can easily set up connectors to pull data from Snowflake and push it to a variety of downstream systems. This flexibility is essential for creating a reverse ETL process that fits your specific operational needs.
+
+Conclusion
+
+Incorporating reverse ETL into your data strategy can unlock new levels of operational efficiency and real-time decision-making. By leveraging Snowflake’s powerful data warehousing capabilities and Apache Kafka’s reliable, scalable streaming platform, organizations can ensure that their data is not only stored and analyzed but also made actionable where it matters most.
+
+Whether you’re looking to enhance your marketing automation, improve customer relationship management, or drive real-time analytics, a reverse ETL process with Snowflake and Kafka offers a robust, scalable, and reliable solution. By operationalizing your data, you can turn insights into action and drive your business forward with precision and speed.
+
+
+# Native App Flow
+
+<CodeTour>
+## !!steps A Game of Thrones
+
+A Game of Thrones is the first book in the A Song of Ice and Fire series by George R.R. Martin. Set in a world where seasons last for years, it introduces a complex plot and a wide cast of characters, ranging from noble families vying for the Iron Throne to the supernatural threats in the North.
+
+```js ! george.js
+const houses = [
+  "Stark",
+  "Lannister",
+  "Baratheon",
+  "Targaryen",
+]
+
+const winner =
+  houses[
+    Math.floor(
+      Math.random() * houses.length,
+    )
+  ]
+
+console.log(`Iron Throne: ${winner}`)
+```
+
+## !!steps A Clash of Kings
+
+A Clash of Kings, the second book in the series, continues the epic saga. The Seven Kingdoms are plunged into war, with kings rising and falling. Meanwhile, Daenerys Targaryen seeks to return to Westeros with her growing dragons.
+
+```js ! george.js
+const houses = [
+  "Stark",
+  "Lannister",
+  "Baratheon",
+  "Targaryen",
+]
+
+const clash = () => {
+  const winner =
+    houses[
+      Math.floor(
+        Math.random() * houses.length,
+      )
+    ]
+  return `${winner} wins the battle!`
+}
+
+console.log(clash())
+```
+
+## !!steps A Storm of Swords
+
+The third book, A Storm of Swords, is known for its intense and shocking developments. Battles rage on, alliances shift, and characters face unexpected challenges and betrayals, making it one of the most thrilling books in the series.
+
+```js ! george.js
+const houses = [
+  "Stark",
+  "Lannister",
+  "Baratheon",
+]
+
+const reveal = () => {
+  const traitor =
+    houses[
+      Math.floor(
+        Math.random() * houses.length,
+      )
+    ]
+  return `${traitor} betrays the alliance!`
+}
+
+console.log(reveal())
+```
+
+## !!steps A Feast for Crows
+
+A Feast for Crows, the fourth book, explores the aftermath of the wars, with a focus on the characters in the southern regions of Westeros. It delves into the politics and power struggles in a kingdom weary of battle.
+
+```js ! george.js
+const houses = [
+  "Martell",
+  "Lannister",
+  "Baratheon",
+  "Tyrell",
+]
+
+const intrigue = () => {
+  const ally1 =
+    houses[
+      Math.floor(
+        Math.random() * houses.length,
+      )
+    ]
+  const ally2 =
+    houses[
+      Math.floor(
+        Math.random() * houses.length,
+      )
+    ]
+  return `${ally1} and ${ally2} form an alliance!`
+}
+
+console.log(intrigue())
+```
+
+## !!steps A Dance with Dragons
+
+A Dance with Dragons, the fifth book, runs concurrently with A Feast for Crows and focuses on the characters in the North and across the Narrow Sea. The story advances with dragons, the Night’s Watch, and the lingering threat of winter.
+
+```js ! george.js
+const houses = [
+  "Stark",
+  "Lannister",
+  "Baratheon",
+  "Targaryen",
+]
+
+const dragons = () => {
+  const dragon =
+    houses[
+      Math.floor(
+        Math.random() * houses.length,
+      )
+    ]
+  return `${dragon} has a dragon!`
+}
+
+console.log(dragons())
+```
+
+## !!steps The Winds of Winter
+
+The Winds of Winter, the anticipated sixth book, is expected to continue the intricate storylines and bring new twists and turns to the world of Westeros. Fans eagerly await its release.
+
+```js ! george.js
+const houses = [
+  "Stark",
+  "Lannister",
+  "Baratheon",
+  "Targaryen",
+  "Martell",
+  "Tyrell",
+  "Greyjoy",
+]
+
+const winterIsComing = () => {
+  const isComing = Math.random() > 0.99
+  if (isComing) {
+    return "Winter is coming!"
+  } else {
+    return "Winter is not coming."
+  }
+}
+
+console.log(winterIsComing())
+```
+
+## !!steps A Dream of Spring
+
+A Dream of Spring is the proposed final book in the series, anticipated to conclude the epic saga. It remains one of the most awaited books in modern fantasy literature.
+
+```js ! george.js
+const houses = [
+  "Stark",
+  "Lannister",
+  "Baratheon",
+  "Targaryen",
+  "Martell",
+  "Tyrell",
+  "Greyjoy",
+]
+
+const keepDreaming = () => {
+  return "Not gonna happen..."
+}
+
+console.log(keepDreaming())
+```
+</CodeTour>
+
+[Authenticate to Snowflake](https://docs.snowflake.com/en/developer-guide/snowflake-cli-v2/connecting/specify-credentials)
+```bash
+snow connection add
+```
+
+
+
+
+
+## Setting up Kafka
+
+
+
+
+
+
+
 
 ## Ockam setup
 

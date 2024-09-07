@@ -9,6 +9,8 @@ import RemarkPrism from 'remark-prism';
 import RehypeKeywordLinks from '@root/utils/keywordLinks';
 import codeHikeTheme from '@code-hike/lighter/themes/solarized-dark.json';
 import { remarkCodeHike } from '@code-hike/mdx';
+import * as v1 from 'codehike/mdx';
+import * as CodeTour from '@root/components/mdx/CodeTour';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guide');
@@ -56,6 +58,13 @@ export const getAllUseCases = (noContent) => {
 };
 
 export const getPageBySlug = async (folder, slug) => {
+  /** @type {import('codehike/mdx').CodeHikeConfig} */
+  const chConfig = {
+    syntaxHighlighting: { theme: 'dracula' },
+    components: { code: 'pre' },
+    ignoreCode: ({ meta }) => !meta || !meta.startsWith('tour'),
+  };
+
   const codeHikeOptions = {
     theme: 'dracula',
     lineNumbers: true,
@@ -73,11 +82,18 @@ export const getPageBySlug = async (folder, slug) => {
     chCodeConfig: codeHikeOptions,
     ...data,
   };
+  // console.log('plugincontent: ', content)
   const mdxSource = await serialize(content, {
     // Optionally pass remark/rehype plugins
     mdxOptions: {
       // remarkPlugins: [[remarkCodeHike, { autoImport: true, theme: 'solarized-dark' }]],
-      remarkPlugins: [[remarkCodeHike, codeHikeOptions], RemarkGFM, RemarkPrism],
+      remarkPlugins: [
+        [v1.remarkCodeHike, chConfig],
+        [remarkCodeHike, codeHikeOptions],
+        RemarkGFM,
+        RemarkPrism,
+      ],
+      recmaPlugins: [[v1.recmaCodeHike, chConfig]],
       rehypePlugins: [RehypeSlug],
       remarkRehypeOptions: { fragment: true },
     },
