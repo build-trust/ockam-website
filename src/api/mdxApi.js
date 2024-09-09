@@ -10,7 +10,6 @@ import RehypeKeywordLinks from '@root/utils/keywordLinks';
 import codeHikeTheme from '@code-hike/lighter/themes/solarized-dark.json';
 import { remarkCodeHike } from '@code-hike/mdx';
 import * as v1 from 'codehike/mdx';
-import * as CodeTour from '@root/components/mdx/CodeTour';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src/content/blog');
 export const STYLE_GUIDE_PATH = path.join(process.cwd(), 'src/content/style-guide');

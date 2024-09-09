@@ -10,6 +10,7 @@ import headingsComponents from './Headings';
 import CodeInline from './CodeInline';
 import CodeBlock from './CodeBlock';
 import CodeTour from './CodeTour';
+import ImageTour from './ImageTour';
 import Pre from './Pre';
 import Link from './Link';
 import Blockquote from './Blockqute';
@@ -50,4 +51,5 @@ export default {
   ExcalidrawAnimation,
   SideBySidePanel,
   CodeTour,
+  ImageTour,
 } as MDXComponents;

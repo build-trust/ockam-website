@@ -34,6 +34,7 @@ const Schema = Block.extend({
 });
 
 const CodeTour: FC = (props) => {
+  const uid = Math.random().toString(36).substr(2, 5);
   const data = parseProps(props, Schema);
   const [steps, setSteps] = useState<typeof data.steps>([]);
   useEffect(() => {
@@ -57,7 +58,7 @@ const CodeTour: FC = (props) => {
       >
         {steps.map((step, i) => (
           <StyledSelectable
-            key={i}
+            key={`${uid}-${i}`}
             index={i}
             selectOn={['click', 'scroll']}
             style={{
