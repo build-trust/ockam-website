@@ -53,7 +53,7 @@ insert, update, and delete) and record it somewhere else. It'll often be referre
 to as Change Data Capture (CDC) and it's an effective way to respond to changes 
 in the data that you care about. 
 
-### Setting up stream...
+### Create a stream
 
 TBD
 
@@ -61,85 +61,397 @@ TBD
 
 When implementing a reverse ETL process, the choice of tools can significantly impact the reliability, scalability, and efficiency of the solution. This is where Apache Kafka comes into play. Kafka is an open-source stream-processing platform that excels in handling real-time data feeds with high throughput and low latency.
 
-### Setting up MSK
+<ImageTour>
 
-## Connecting Snowflake to Kafka
+### !!steps Create an MSK cluster
+
+Within your [AWS Console](https://console.aws.amazon.com/) search for 
+`MSK` in the search field at the top and select the matching result. Visit the 
+`Clusters` screen, and then click `Create Cluster`.
+
+The `Quick Create` option provides a good set of defaults for creating a
+Kafka cluster, so unless you've previous knowledge or experience to know you
+might want something different I'd suggest just confirming the detauls and 
+then clicking `Create cluster` at the bottom of the screen.
+
+Once you've started the cluster creation it may take about 15 minutes for
+provisioning to complete and for your broker to be available.
+
+![!tour Select a warehouse](/blog/snowflake-reverse-etl/create-msk.png)
+
+</ImageTour>
+
+## Connect Snowflake to Kafka
 
 <ImageTour>
+### !!steps Get the app
+
+The Snowflake Push to Kafka Connector by Ockam is currently 
+[invite only](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector),
+to be invited drop us an email at [hello@ockam.io](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector).
+
+Once invited you'll receive an email with a link to get the app.
+
 ### !!steps Select a warehouse
 
-Dolore amet irure tempor incididunt officia. Laborum duis in proident ex. Fugiat aliqua eu labore excepteur labore quis. In magna eiusmod sunt consequat ullamco do aliquip. Sit ullamco in eu mollit est aute enim nostrud Lorem deserunt minim reprehenderit. Exercitation anim ea ullamco voluptate nisi officia eiusmod. Officia cillum consectetur mollit adipisicing minim et ut ut.
+The first screen you're presented with will ask you to select the warehouse where
+this app should be installed. This will determine the cluster where the required
+compute resources for the Kafka Connector will be run (?? Is this accurate?).
 
 ![!tour Select a warehouse](/blog/snowflake-reverse-etl/select-warehouse.png)
 
 ### !!steps Grant account privileges
 
-Minim aliquip enim amet exercitation qui ipsum officia et mollit labore aute velit. Cupidatat veniam occaecat ex elit occaecat. Nostrud dolore ea minim voluptate. Velit nostrud sint laborum magna esse irure nulla nostrud excepteur culpa. Aliqua labore laboris laborum duis qui elit est veniam velit duis velit.
+Click the `Grant` button to the right of this screen. The app will then be
+automatically granted permissions to create a warehouse and create a compute
+pool. 
 
 ![!tour Grant account privileges](/blog/snowflake-reverse-etl/grant-account.png)
 
 ### !!steps Activate app
 
-Mollit aliquip proident esse reprehenderit adipisicing ea consectetur et ea. Velit adipisicing id aliqua aliquip sit sint sit. Officia enim minim veniam non ea reprehenderit enim nostrud duis aliqua tempor ullamco nisi. Ex exercitation esse minim aliquip commodo non mollit excepteur in dolor et esse.
+Once the permissions have been granted, and `Activate` button will appear. Click
+it and the activation process will begin.
 
 ![!tour Activate app](/blog/snowflake-reverse-etl/activate-app.png)
 
 ### !!steps Launch app
 
-Magna aute dolore tempor elit. Cillum non quis ullamco ullamco est minim in. Fugiat veniam excepteur enim Lorem pariatur id occaecat mollit sunt cupidatat. Exercitation et consequat est consectetur est veniam mollit dolore id quis Lorem excepteur.
+After the app is activate you'll be presented with a page that summarizes the 
+privileges that have been granted to the application. There's nothing we need 
+to review or update on these screens yet, so proceed by clicking the `Launch app` button.
 
 ![!tour Launch app](/blog/snowflake-reverse-etl/launch-app.png)
 
-### !!steps Get started
+### !!steps Download Ockam Command
 
-Consequat ea incididunt ullamco sit. Deserunt sit occaecat consectetur enim minim anim. Velit nulla ea occaecat duis qui dolor anim veniam sunt quis quis non. Occaecat labore mollit adipisicing mollit commodo nostrud Lorem esse commodo non incididunt id. Laboris deserunt cupidatat occaecat Lorem in quis labore qui mollit.
+Run the following command on your local workstation:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io \
+  | bash source "$HOME/.ockam/env"
+```
+
+This will install the ockam command and source in the required environment 
+settings. If you've previously installed ockam you can skip this step.
 
 ![!tour Get started](/blog/snowflake-reverse-etl/get-started.png)
 
-### !!!steps Setup admin account
+### !!steps Setup admin account
 
-Consectetur aute esse magna aliqua et Lorem aliqua. Veniam sint et ad nisi exercitation minim consequat. Quis excepteur minim eu nulla reprehenderit occaecat qui proident proident irure nostrud exercitation magna cupidatat. Laboris sunt cupidatat Lorem ex.
+Once Ockam Command has been installed you can run:
+
+```bash
+ockam enroll
+```
+
+Wrapped up in this single ockam enroll command is a number of steps that will 
+bootstrap your first project and get you ready to go. It will:
+
+* Generate an Ockam Identity and store its secret keys in a file system based Ockam Vault.
+* Create an account with Ockam Orchestrator.
+* Provision a trial Space and Project in the Orchestrator.
+* Make your Ockam Identity the administrator of your new Project.
 
 ![!tour Setup admin account](/blog/snowflake-reverse-etl/get-started-enroll.png)
 
-### !!!steps Generate enrollment ticket for Kafka
+### !!steps Generate enrollment ticket for Kafka
 
-Aute officia magna Lorem sit dolore consequat eiusmod enim velit. Nostrud et ea sint Lorem nulla in. Quis officia aliquip aliqua culpa ex deserunt sit in dolor mollit tempor. Dolor non mollit commodo amet id est. Quis reprehenderit reprehenderit adipisicing aute esse sint eu eiusmod aute enim.
+The next step is to generate an enrollment ticket to allow a new Ockam Node to 
+join the project that was just created. This node will run adjacent to the 
+Kafka broker, in the network where the Kafka is running:
+
+```bash
+ockam project ticket --usage-count 1 \
+  --expires-in 24h --attribute kafka \
+  --relay kafka > kafka.ticket
+```
 
 ![!tour Create outlets](/blog/snowflake-reverse-etl/create-outlets.png)
 
-### !!!steps Launch Ockam node for Amazon MSK
+</ImageTour>
 
-Enim pariatur et anim anim minim amet excepteur enim dolore ipsum id quis aliquip. Excepteur labore esse non commodo qui aute tempor. Nostrud est amet non duis id ea mollit tempor eiusmod et sit magna.
+<CodeTour>
 
-### !!!steps Enter stack details
+### !!steps 
 
-Dolore et aliquip pariatur aute ipsum tempor incididunt amet. Sint pariatur aliqua sit voluptate. Veniam amet Lorem dolor reprehenderit eu est enim dolore voluptate voluptate occaecat occaecat. Excepteur adipisicing commodo labore laborum in. Ut non eu culpa ea laborum non est velit pariatur excepteur aliqua deserunt pariatur. Fugiat esse veniam reprehenderit tempor.
+In this command we've set the new ticket to expire in `24 hours`, and a usage 
+count of `1`. This means the generated ticket can only be used a single time, and 
+that it must be used within 24 hours. A single usage ticket means there is low 
+risk associated with this ticket being mishandled after use, there's no means 
+for an attacker to re-use it like a credential to access any system. 
 
-### !!!steps Generate enrollment ticket for Snowflake
+```shell ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 24h \
+  --attribute kafka \
+  --relay kafka > kafka.ticket
+```
 
-Id nostrud aliqua enim officia anim dolore laboris labore magna nulla magna. Sunt proident sunt sint aute exercitation culpa do dolore nisi nulla dolore commodo. Officia reprehenderit proident ex non aliqua reprehenderit proident et quis ea labore ipsum. Dolor irure est qui ipsum commodo. Elit occaecat deserunt fugiat fugiat id ipsum cupidatat consequat laboris veniam ex incididunt anim ut.
+### !!steps 
 
-### !!!steps Configure connection details
+The Project Membership Credential that is issued will include additional 
+attributes that will be cryptographically attested to by the Project's 
+Membership Authority. These attributes can then be used to apply policies with 
+Attribute Based Access Controls (ABAC) to allow or restrict specfic actions and 
+communucation paths between nodes.
 
-Incididunt pariatur veniam duis est sunt qui consequat officia irure mollit sint. Consequat sunt occaecat culpa laborum. Magna dolor eu aliquip magna nisi sunt qui anim quis ad ullamco consectetur ad. Pariatur ex non cillum duis proident reprehenderit amet non eu. Qui eiusmod anim culpa reprehenderit nisi proident sunt in ex adipisicing. Aute laboris voluptate dolor aute officia minim aute ad anim non ut Lorem ea et.
+In this example the attribute being set is `kafka`. 
 
-### !!!steps Map Snowflake stream to Kafka topic
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+# !focus(1:1)
+  --attribute kafka \
+  --relay kafka > kafka.ticket
+```
 
-Occaecat ullamco aliqua culpa eiusmod velit amet. Fugiat cupidatat aute eu sit dolore magna fugiat ullamco commodo culpa fugiat. Laborum occaecat sit qui id dolore. Irure nulla nisi non mollit proident irure aliqua eu aliquip voluptate sint commodo.
+### !!steps 
 
-### !!!steps Grant privileges
+The `--relay kafka` flag is a shortcut for creating a policy that allows this 
+node to create a relay at the address `kafka`. 
 
-Nulla sit est officia ad tempor laboris voluptate. Est eu et mollit quis sit ad quis exercitation enim eiusmod magna velit ullamco adipisicing. Qui pariatur elit qui ex fugiat enim pariatur sint magna ea et. Ullamco esse dolore reprehenderit aute duis minim ex amet cupidatat sint. Velit aliquip quis nostrud id laboris consectetur proident. Exercitation culpa sint incididunt adipisicing qui.
+This relay will allow your Snowflake warehouse to establish a secure end-to-end 
+encrypted connection to your Kafka broker, without requiring your to expose any 
+endpoints to the public Internet.
 
-### !!!steps Manually grant additional privileges
+Finally we pipe the generated ticket to a file named `kafka.ticket`.
 
-Reprehenderit aute ullamco elit sit irure pariatur mollit. Aute amet id pariatur non fugiat ullamco nisi ullamco irure. Proident dolore ut Lorem do occaecat ut sit non labore qui consectetur ipsum. Nostrud dolor esse voluptate laborum sint duis nostrud occaecat quis nostrud qui sint qui ullamco. Magna velit fugiat ut nostrud duis incididunt deserunt ex ullamco sint esse ullamco incididunt. Lorem sunt incididunt tempor amet occaecat duis cillum anim. Nisi incididunt eiusmod laborum nisi sit anim incididunt consequat commodo Lorem amet eiusmod sit.
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute kafka \
+# !focus(1:1)
+  --relay kafka > kafka.ticket
+```
+
+### !!steps Create a configuration file
+
+We're going to pass the configuration for our Ockam Node as a JSON file, so 
+save the config to the right into a file named `kafka.json`.
+
+```javascript ! tour
+{
+  "relay": "kafka",
+  "kafka-outlet": {
+    "bootstrap-server": "$BOOTSTRAP_SERVER_WITH_PORT",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+After the node is created this configuration file will the processed, with the
+first instruction being to create a relay with the name `kafka`. This relay will 
+allow Snowflake to establish a secure end-to-end encrypted connection to your
+Kafka broker. It provides the ability to have entirely isolated infrastructure 
+running within a private network, without requiring you to expose any endpoints
+to the public Internet and no configuring of allowlists to custom network routes.
+
+```javascript ! tour
+{
+// !focus(1:1)
+  "relay": "kafka",
+  "kafka-outlet": {
+    "bootstrap-server": "$BOOTSTRAP_SERVER_WITH_PORT",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+A Kafka outlet decrypts any Kafka messages received by the node and 
+then forwards them to the specified broker address.
+
+```javascript ! tour
+{
+  "relay": "kafka",
+// !focus(1:4)  
+  "kafka-outlet": {
+    "bootstrap-server": "$BOOTSTRAP_SERVER_WITH_PORT",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+In this example we're giving the interpolating the value from the environment
+variable `BOOTSTRAP_SERVER_WITH_PORT`, which we'll set in a later step when we
+start the node.
+
+```javascript ! tour
+{
+  "relay": "kafka",
+  "kafka-outlet": {
+// !focus(1:1)  
+    "bootstrap-server": "$BOOTSTRAP_SERVER_WITH_PORT",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+We will shortly setup the Kafka Inlet that runs alongside our Snowflake 
+warehouse. Before we do that though, we can define a policy to restrict what 
+nodes can connect to our outlet.
+
+This policy applies Attribute Based Access Controls (ABAC) to only allow 
+other nodes that have the attribute `snowflake` as part of their attested 
+credentials.
+
+```javascript ! tour
+{
+  "relay": "kafka",
+  "kafka-outlet": {
+    "bootstrap-server": "$BOOTSTRAP_SERVER_WITH_PORT",
+// !focus(1:1)      
+    "allow": "snowflake"
+  }
+}
+```
+
+</CodeTour> 
+
+<ImageTour>
+
+### !!steps Launch Ockam node for Amazon MSK
+
+The Ockam Node for Amazon MSK is a streamlined way to provision a managed Ockam Node
+within your private AWS VPC. 
+
+To deploy the node that will allow Snowflake to reach your Kafka broker visit
+the [Ockam Node for Amazon MSK listing in the AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-iztqd27voc4xg), and click the `Continue to Subscribe` button, and then
+`Continue to Configuration`. 
+
+On the configuration page choose the region that your Amazon MSK cluster is
+running in, and then click `Continue to Launch` followed by `Launch`.
+
+![!tour Ockam node for Amazon MSK](/blog/snowflake-reverse-etl/aws-marketplace-msk.png)
+
+### !!steps Enter stack details
+
+The information on the initial Create Stack screen is prefilled with the correct
+information for your node, so you can press `Next` to proceed.
+
+![!tour Ockam node for Amazon MSK - create stack screen](/blog/snowflake-reverse-etl/create-stack.png)
+
+### !!steps Enter node configuration
+
+This screen has a number of important details to be filled in:
+
+* **Stack name:** Give this stack a recognisable name, you'll see this in various locations in the AWS Console. It'll also make it easier to clean these resources up later if you with to remove them.
+* **VPC ID:** The ID of the Virtual Private Cloud network that this node should be deployed in. Make sure it is the same VPC that your Amazon MSK cluster is deployed in.
+* **Subnet ID:** Choose one of the subnets within your VPC, ensure MSK has a broker address available in that subnet.
+* **Enrollment ticket:** Copy the contents of the `kafka.ticket` file we created earlier and paste it in here.
+* **Amazon MSK Bootstrap Server with Port:** In the client configuration details for your Amazon MSK cluster you will have a list of bootstrap servers. Copy the `hostname:port` value for the Private endpoint that is in the same subnet you chose above.
+* **JSON Node Configuration:** Copy the contents of the `kafka.json` file we created earlier and paste it in here.
+
+![!tour Ockam node for Amazon MSK - node configuration screen](/blog/snowflake-reverse-etl/stack-details.png)
+
+### !!steps Generate enrollment ticket for Snowflake
+
+One end of our connection is now setup, it's time to connect the Snowflake end. 
+We need to generate an enrollment ticket to allow another Ockam Node tp
+join our project. This node will run in our Snowflake warehouse:
+
+```bash
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+  --attribute snowflake > snowflake.ticket
+```
+
+![!tour Create Snowflake ticket](/blog/snowflake-reverse-etl/snowflake-ticket.png)
 
 </ImageTour>
 
+<CodeTour>
 
-```sql
+### !!steps
+
+As we did with the earlier ticket, we've reduced the risk associated with
+mishandling a ticket by restricting how soon it must be used and how many 
+times it can be used. We've again set a usage count of `1`, but with a tighter
+expiry time of just `2 hours`.
+
+```bash ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 2h \
+  --attribute snowflake > snowflake.ticket
+```
+
+### !!steps
+
+This credential will include an attestable attribute of `snowflake`. You'll 
+recall in an earlier step we applied a policy to say that only nodes in our 
+project that have an attribute of `snowflake` will be permitted to connect to 
+the Kafka outlet. The node that enrolls with this ticket will also have the
+attribute `snowflake`, and so it will be able to communicate with our kafka 
+node. 
+
+The ticket is that saved to a file called `snowflake.ticket`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+# !focus(1:1)
+  --attribute snowflake > snowflake.ticket
+```
+
+</CodeTour>
+
+
+<ImageTour>
+
+### !!steps Configure connection details
+
+Take the contents of the file `snowflake.ticket` that we just created and paste
+it into "Provide the above Enrollment Ticket" form field in the "Configure app"
+setup screen in Snowflake.
+
+![!tour Create Snowflake ticket](/blog/snowflake-reverse-etl/snowflake-ticket.png)
+
+### !!steps Map Snowflake stream to Kafka topic
+
+Each stream of changes in Snowflake needs to be sent to a topic in Kafka, and we
+need to define the mapping between each stream and topic. Enter in the stream
+you want to send (in the format of `database.schema.stream`) and then the name
+of the topic in Kafka.
+
+If the topic doesn't exists it will be created (?? is this accurate?)
+
+### !!steps Grant privileges
+
+To be able to successfully authenticate with Ockam Orchestrator and then 
+discover the route to our Kafka outlet, the Snowflake app needs to allow 
+outbound connections to your Ockam project. Toggle the 
+`Grant access to egress and reach your Project` and approve the connection by
+pressing `Connect`.
+
+![!tour Grant egress](/blog/snowflake-reverse-etl/grant-privileges.png)
+
+</ImageTour>
+
+<CodeTour>
+
+### !!steps Manually grant additional privileges
+
+There are a number of other permissions that must be manually granted to allow
+the app to read the changes and send them to Kafka. If you're managing multiple
+streams this can be a cumbersome and error-prone approach of copy, pasting,
+and modifying numerous lines. To simplify this we've created a stored procedure
+that can be called with the required values.
+
+Copy the code to the right and run it in a Worksheet to create the procedure.
+Now, let's walk through exactly what the stored procedure is doing&hellip;
+
+```javascript ! tour
 CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
 RETURNS STRING
 LANGUAGE JAVASCRIPT
@@ -194,6 +506,447 @@ $$
 $$;
 ```
 
-```sql
-CALL grant_stream_permissions('OPTKC_TEST_DATABASE.TEST_SCHEMA.CUSTOMERS_STREAM');
+### !!steps Create a stored procedure
+
+Here we're defining stored procedure, written in Javascript, that will return 
+a string. The string output will be success or error message reporting on the
+outcome of our commands. It expects a single string argument &mdash; the name of the 
+stream.
+
+```javascript ! tour
+// !focus(1:3)
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'OCKAM_PUSH_TO_KAFKA_CONNECTOR_APP';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
 ```
+
+### !!steps Specify the app name
+
+This is the name of Ockam's Snowflake Native App and will be used in the 
+locations where we specify which app is requesting permissions. 
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+// !focus(1:2)
+    // Define the fixed application name
+    var APP_NAME = 'OCKAM_PUSH_TO_KAFKA_CONNECTOR_APP';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Lookup stream metadata
+
+This function `getStreamMetadata` will take a stream name as a passed argument,
+and then use the `DESCRIBE STREAM` command to get the metadata the stream. The
+function then extracts the `database_name`, `schema_name`, and `table_name`
+associated with the stream and returns those values.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'OCKAM_PUSH_TO_KAFKA_CONNECTOR_APP';
+
+// !focus(1:14)
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Error if no metadata
+
+If the stream name provided doesn't exist it will return no metadata, and so 
+we exit at this point with an error message.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'OCKAM_PUSH_TO_KAFKA_CONNECTOR_APP';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+// !focus(1:3)
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Assign values
+
+For a successful metadata lookup, we take the values out of the return metadata
+object and assign them to individual variables.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'OCKAM_PUSH_TO_KAFKA_CONNECTOR_APP';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+// !focus(1:1)
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+// !focus(1:3)
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Define required permissions
+
+There are 4 separate permissions that are required to be manually granted for
+each stream. One on the database, one on the schema, one on the table(s), and 
+then one on the stream itself. We use the variables we assigned in the previous
+section to interpolate the values into each command, and put those commands into
+an array.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'OCKAM_PUSH_TO_KAFKA_CONNECTOR_APP';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+// !focus(1:7)
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Grant permissions
+
+Finally the procedure will loop over the array of `GRANT` commands and execute
+each individually. If any command fails an error message will be returned, 
+otherwise a success message is returned.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'OCKAM_PUSH_TO_KAFKA_CONNECTOR_APP';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+// !focus(1:10)    
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+</CodeTour>
+
+<br/> 
+
+Now that the stored procedure has been created, it's time to run it. Copy the
+code below and run it in a Snowflake Worksheet, replacing 
+`database.schema.stream` with the correct value for your stream:
+
+```sql
+CALL grant_stream_permissions('database.schema.stream');
+```
+
+## Next steps
+
+Velit excepteur anim do ullamco enim qui velit. Laboris ad et cupidatat commodo sit qui aliquip duis eu irure. In dolor non laboris deserunt do. Ea culpa culpa fugiat officia Lorem voluptate. Nisi magna dolor eu ex minim in velit sit officia esse. Duis mollit excepteur enim consequat culpa laborum excepteur. Aute aute commodo qui do quis reprehenderit non quis cillum exercitation amet ut dolore magna.
