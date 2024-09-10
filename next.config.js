@@ -21,6 +21,20 @@ const nextConfig = {
       audience: process.env.AUTH0_AUDIENCE,
     },
   },
+  headers: async () => {
+    return [
+      {
+        // Apply these headers to all routes
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'self'",
+          },
+        ],
+      },
+    ];
+  },
   redirects: async () => [
     {
       source: '/blog/redpanda_connect_w_ockam',
