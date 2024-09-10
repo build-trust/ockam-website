@@ -47,58 +47,42 @@ type Segment = {
 const SEGMENTS: Segment[] = [
   {
     name: 'Developers',
-    tiers: ['Free', 'Premium'],
-    color: '#52C7EA',
+    tiers: ['Developer'],
+    color: '#CDD9E7',
     expanded: false,
-    text: 'The Developer editions of Ockam are intended to be used by individual developers, that are working on hobby projects, and not by companies. Support is via our community in Discord and GitHub, and does not come with an SLA. If you are using Portals for Mac you will need a developer edition license to use the application.',
+    text: 'The Developer edition of Ockam is intended to be used by individual developers, that are working on hobby projects, and not by companies. Support is via our community in Discord and GitHub, and does not come with an SLA. If you are using Portals for Mac you will need a developer edition license to use the application.',
   },
   {
     name: 'Companies',
     tiers: ['Bronze', 'Silver', 'Gold', 'Platinum'],
-    color: '#3AC6A3',
+    color: '#B7FDD7',
     expanded: true,
     text: "Ockam's Company Editions are built for production workloads, with direct support from the Ockam team, and can elastically scale to your needs. This product is purchased through your cloud marketplace vendor, so you can start building today with your 14 day free trial.",
   },
   {
     name: 'Enterprises',
     tiers: ['Enterprise', 'Business Critical'],
-    color: '#744D95',
+    color: '#B5EEFF',
     expanded: false,
     text: 'Ockam is offered in a bring-your-own-cloud (BYOC) Enterprise Edition for companies that are committed to running software entirely within their own network boundaries. These plans are highly customizable. Please contact Ockam’s sales team for a technical consultation.',
   },
 ];
 const TIERS: Tier[] = [
   {
-    name: 'Free',
+    name: 'Developer',
     text: 'The Tools for Builders',
-    price: 0,
-    price_interval: 'mo',
-    cta: {
-      text: 'Get started →',
-      url: '/get-started',
-    },
-    marketplaces: {
-      aws: {
-        link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
-      },
-    },
-  },
-
-  {
-    name: 'Premium',
-    text: 'The Tools for Builders',
-    price: 5,
+    price: 70,
     price_interval: 'mo',
     cta: {
       text: 'Start 14-day trial →',
       url: '/get-started',
     },
+    marketplaceOnly: true,
     marketplaces: {
       aws: {
         link: 'https://aws.amazon.com/marketplace/pp/prodview-m3url7jixicii',
       },
     },
-    sponsorship: true,
   },
 
   {
@@ -230,7 +214,7 @@ const FEATURES: Feature[] = [
     tiers: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
     onCard: true,
   },
-  { name: 'Pay-as-you-go', tiers: ['Free', 'Premium', 'Bronze', 'Silver', 'Gold'], onCard: true },
+  { name: 'Pay-as-you-go', tiers: ['Developer', 'Bronze', 'Silver', 'Gold'], onCard: true },
   { name: 'Bring Your Own Cloud (BYOC) Relays', tiers: ['Business Critical'], onCard: true },
   {
     name: 'Bring Your Own Cloud (BYOC) Credential Authorities',
@@ -267,7 +251,7 @@ const FEATURES: Feature[] = [
   // { name: 'Long-term contracts', tiers: ['Gold', 'Business Critical'], onCard: true },
   // { name: 'Customized terms', tiers: ['Platinum', 'Enterprise', 'Business Critical'] },
 
-  { name: 'Community-based support', tiers: ['Free', 'Premium'], onCard: true },
+  { name: 'Community-based support', tiers: ['Developer'], onCard: true },
   { name: 'Dedicated nodes', tiers: ['Silver'], onCard: true },
   {
     name: 'Throughput optimized nodes',
@@ -322,13 +306,12 @@ const FEATURES: Feature[] = [
     tiers: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Enterprise', 'Business Critical'],
     hasLimits: true,
   },
-  { name: 'Data transfer cap', tiers: ['Free', 'Premium'], hasLimits: true },
+  { name: 'Data transfer cap', tiers: ['Developer'], hasLimits: true },
 ];
 
 const LIMITS: { [id: string]: { [id: string]: string } } = {
   Projects: {
-    Free: '1',
-    Premium: '1',
+    Developer: '1',
     Bronze: '1',
     Silver: '3',
     Gold: '10',
@@ -337,8 +320,7 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
     'Business Critical': 'Unlimited',
   },
   'Secure Channels': {
-    Free: '1',
-    Premium: '5',
+    Developer: '1',
     Bronze: '10',
     Silver: 'Unlimited',
     Gold: 'Unlimited',
@@ -355,24 +337,21 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
   },
 
   'Project authority nodes': {
-    Free: 'Up to 1',
-    Premium: 'Up to 1',
+    Developer: 'Up to 1',
     Bronze: 'Unlimited',
     Silver: 'Unlimited',
     Gold: 'Unlimited',
     'Business Critical': 'Unlimited',
   },
   'Credential authorities': {
-    Free: 'Up to 1',
-    Premium: 'Up to 1',
+    Developer: 'Up to 1',
     Bronze: 'Unlimited',
     Silver: 'Unlimited',
     Gold: 'Unlimited',
     'Business Critical': 'Unlimited',
   },
   'Data transfer cap': {
-    Free: '1GB/day',
-    Premium: '1GB/day',
+    Developer: '1GB/day',
   },
   'Data transfer': {
     Bronze: '$0.10/GB',
@@ -384,17 +363,25 @@ const LIMITS: { [id: string]: { [id: string]: string } } = {
   },
 };
 
+const segmentForTier = (tier: Tier) => {
+  return SEGMENTS.find((s) => s.tiers.includes(tier.name));
+};
+
 const darken = (color: string): string | undefined =>
   chroma(color).darken(0.75).saturate(0.75).hex();
 
 const lighten = (color: string): string | undefined =>
-  chroma(color).brighten(2.5).desaturate(0.4).hex();
+  chroma(color).brighten(1).desaturate(0.2).hex();
 
 const gentlyLighten = (color: string): string | undefined =>
-  chroma(color).brighten(1.5).desaturate(0.75).hex();
+  chroma(color).brighten(0.5).desaturate(0.3).hex();
 
-const tierColor = (tier: Tier): string | undefined =>
-  SEGMENTS.find((s) => s.tiers.includes(tier.name))?.color;
+const tierColor = (tier: Tier): string => segmentForTier(tier)!.color;
+
+const peerTiers = (tier: Tier) => {
+  const segment = segmentForTier(tier);
+  if (segment) return tiersForSegment(segment.name);
+};
 
 const tierColorLight = (tier: Tier): string | undefined => lighten(tierColor(tier) || 'white');
 
@@ -407,6 +394,12 @@ const tiersForSegment = (segmentName: string): Tier[] => {
     return tiers;
   }
   return [];
+};
+
+const isLastTierInSegment = (tier: Tier): boolean => {
+  const tiers = peerTiers(tier);
+  if (!tiers) return false;
+  return tiers!.indexOf(tier) === tiers!.length - 1;
 };
 
 const featuresForTier = (tierName: string, cardOnly: boolean = true): Feature[] =>
@@ -442,4 +435,5 @@ export {
   tiersForSegment,
   featuresForTier,
   hasFeature,
+  isLastTierInSegment,
 };

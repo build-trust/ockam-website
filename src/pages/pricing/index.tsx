@@ -101,9 +101,9 @@ const PricingPage: NextPageWithLayout<Props> = () => (
               </Flex>
               <DescriptionText>
                 <Box as="span" color="brand.500">
-                  The Developer editions
+                  The Developer edition
                 </Box>{' '}
-                of Ockam are intended to be used by individual developers, that are working on hobby
+                of Ockam is intended to be used by individual developers, that are working on hobby
                 projects, and not by companies. Support is via our community in Discord and GitHub,
                 and does not come with an SLA. If you are using Portals for Mac you will need a
                 developer edition license to use the application with your 14 day free trial.
