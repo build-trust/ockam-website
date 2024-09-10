@@ -7,6 +7,7 @@ import { HighlightedCode, Pre, highlight } from 'codehike/code';
 // import Content from "./content.md"
 // From token-transitions example
 import { tokenTransitions } from './transition/TokenTransition';
+import { focus } from './transition/Focus';
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Heading } from '@chakra-ui/react';
@@ -130,14 +131,20 @@ const Code: FC<CodeProps> = ({ codeblock }) => {
       <CopyButton text={codeblock.code} />
       <Pre
         code={codeblock}
-        handlers={[tokenTransitions]}
+        handlers={[tokenTransitions, focus]}
         style={{
-          minHeight: '40rem',
+          // maxHeight: '50vh',
+          scrollBehavior: 'smooth',
+          overflow: 'auto',
+          // minHeight: '40rem',
           borderRadius: '6px',
           backgroundColor: '#002b36',
-          fontFamily: 'SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+          fontFamily:
+            'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace',
+          fontFeatureSettings: 'normal',
+          fontVariationSettings: 'normal',
           fontSize: '14px',
-          padding: '15px 40px 15px 40px',
+          padding: '15px',
         }}
       />
     </div>
