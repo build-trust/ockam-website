@@ -9,6 +9,7 @@ const Blockquote = chakra('blockquote', {
     ml: 0,
     pl: '2rem',
     mb: 8,
+    mt: 8,
   },
 });
 

@@ -6,6 +6,7 @@ import Input from './input';
 import Textarea from './textarea';
 import FormLabel from './label';
 import FormError from './FormError';
+import List, { UnorderedList } from './list';
 import Steps from './steps';
 import Tabs from './tabs';
 import Table from './table';
@@ -22,6 +23,8 @@ const components = {
   Steps,
   Tabs,
   Table,
+  List,
+  UnorderedList,
 };
 
 export default components;

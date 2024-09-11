@@ -1,5 +1,5 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { Flex, ImageProps, TextProps } from '@chakra-ui/react';
+import { Flex, ImageProps, ListProps, Text, TextProps, UnorderedList } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { CH } from '@code-hike/mdx/dist/components.cjs.js';
@@ -27,6 +27,12 @@ if (mdxComponents) {
   mdxComponents.CH = CH;
   mdxComponents.img = (props: ImageProps): JSX.Element => (
     <LinkedImage maxW="min(40em, 100%)" {...props} />
+  );
+  mdxComponents.p = (props: TextProps): JSX.Element => (
+    <Text variant="readabilityOptimized" {...props} />
+  );
+  mdxComponents.ul = (props: ListProps): JSX.Element => (
+    <UnorderedList variant="readabilityOptimized" {...props} />
   );
 }
 type BlogPostPageProps = {
