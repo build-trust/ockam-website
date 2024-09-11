@@ -229,7 +229,7 @@ const WindowFrame: FC<WindowFrameProps> = memo(({ images }) => {
     const imgs = containerRef.current.querySelectorAll('img');
     const prev = imgs[previousIndex];
     setPreviousIndex(selectedIndex);
-    prev.removeEventListener(transitionEvent, updateImage);
+    if (transitionEvent) prev.removeEventListener(transitionEvent, updateImage);
     const curr = imgs[selectedIndex];
     curr.style.opacity = '1';
   }, [selectedIndex, previousIndex, containerRef]);
@@ -238,7 +238,7 @@ const WindowFrame: FC<WindowFrameProps> = memo(({ images }) => {
     if (!containerRef.current) return;
     const imgs = containerRef.current.querySelectorAll('img');
     const prev = imgs[previousIndex];
-    if (prev.style.opacity !== '0') {
+    if (prev.style.opacity !== '0' && transitionEvent) {
       prev.addEventListener(transitionEvent, updateImage);
       prev.style.opacity = '0';
     } else {
