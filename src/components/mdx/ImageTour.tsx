@@ -85,7 +85,9 @@ const StyledSelectable = styled(Selectable)`
 `;
 
 const Schema = Block.extend({
-  steps: z.array(Block.extend({ tour: z.object({ url: z.string(), alt: z.string() }) })),
+  steps: z.array(
+    Block.extend({ tour: z.optional(z.object({ url: z.string(), alt: z.string() })) }),
+  ),
 });
 const ImageTour: FC = (props) => {
   const data = parseProps(props, Schema);
@@ -205,7 +207,7 @@ const WindowFrame: FC<WindowFrameProps> = memo(({ images }) => {
       let t;
       const el = document.createElement('fakeelement');
 
-      const transitions = {
+      const transitions: { [key: string]: string } = {
         transition: 'transitionend',
         OTransition: 'oTransitionEnd',
         MozTransition: 'transitionend',
@@ -213,7 +215,7 @@ const WindowFrame: FC<WindowFrameProps> = memo(({ images }) => {
       };
 
       for (t in transitions) {
-        if (el.style[t] !== undefined) {
+        if (el.style[t as keyof CSSStyleDeclaration] !== undefined) {
           return transitions[t];
         }
       }
