@@ -115,7 +115,7 @@ const CopyButton = ({ text }: { text: string }) => {
         setCopied(true);
         setTimeout(() => setCopied(false), 1200);
       }}
-      style={{ right: '4px', position: 'absolute', top: '2px' }}
+      style={{ right: '4px', position: 'absolute', top: '2px', zIndex: '1000' }}
     >
       {copied ? <CheckIcon color="white" /> : <CopyIcon color="white" />}
     </button>

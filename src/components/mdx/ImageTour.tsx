@@ -1,9 +1,76 @@
 'use client';
-import { Selection, Selectable, SelectionProvider } from 'codehike/utils/selection';
+import { z } from 'zod';
+import { ObservedDiv, Scroller } from './transition/Scroller';
 
-import { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Heading, Image } from '@chakra-ui/react';
+import { Block, parseProps } from 'codehike/blocks';
+
+const StepsContext = React.createContext<{
+  selectedIndex: number;
+  selectIndex: React.Dispatch<React.SetStateAction<number>>;
+}>({
+  selectedIndex: 0,
+  selectIndex: () => {},
+});
+
+const SelectionProvider = ({
+  children,
+  rootMargin,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement> & {
+  rootMargin?: string;
+}) => {
+  const [selectedIndex, selectIndex] = React.useState<number>(0);
+  return (
+    <div data-selected-index={selectedIndex} {...rest}>
+      <Scroller onIndexChange={selectIndex} rootMargin={rootMargin}>
+        <StepsContext.Provider
+          value={{
+            selectedIndex,
+            selectIndex,
+          }}
+        >
+          {children}
+        </StepsContext.Provider>
+      </Scroller>
+    </div>
+  );
+};
+
+const Selectable = ({
+  index,
+  selectOn = ['click'],
+  ...rest
+}: {
+  index: number;
+  selectOn?: ('click' | 'hover' | 'scroll')[];
+} & React.HTMLAttributes<HTMLDivElement>) => {
+  const { selectedIndex, selectIndex } = React.useContext(StepsContext);
+  const eventHandlers = React.useMemo(() => {
+    const handlers: Record<string, () => void> = {};
+    if (selectOn.includes('click')) {
+      handlers.onClick = () => selectIndex(index);
+    }
+    if (selectOn.includes('hover')) {
+      handlers.onMouseEnter = () => selectIndex(index);
+    }
+    return handlers;
+  }, [index, selectIndex, selectOn]);
+
+  const props = {
+    'data-selected': selectedIndex === index,
+    ...eventHandlers,
+    ...rest,
+  };
+
+  return selectOn.includes('scroll') ? (
+    <ObservedDiv index={index} {...props} />
+  ) : (
+    <div {...props} />
+  );
+};
 
 const StyledSelectable = styled(Selectable)`
   padding: 0.5rem 1.25rem 0.5rem 1.25rem;
@@ -17,9 +84,12 @@ const StyledSelectable = styled(Selectable)`
   }
 `;
 
+const Schema = Block.extend({
+  steps: z.array(Block.extend({ tour: z.object({ url: z.string(), alt: z.string() }) })),
+});
 const ImageTour: FC = (props) => {
-  const uid = Math.random().toString(36).slice(2, 5);
-  const { steps } = props;
+  const data = parseProps(props, Schema);
+  const { steps } = data;
 
   return (
     <SelectionProvider style={{ display: 'flex', gap: '0', flexDirection: 'row' }}>
@@ -29,7 +99,7 @@ const ImageTour: FC = (props) => {
       >
         {steps.map((step, i) => (
           <StyledSelectable
-            key={`${uid}-${i}`}
+            key={i}
             index={i}
             selectOn={['click', 'scroll']}
             style={{
@@ -57,15 +127,12 @@ const ImageTour: FC = (props) => {
           borderRadius: '4px',
         }}
       >
-        <div style={{ top: '4rem', position: 'sticky', overflow: 'auto' }}>
-          <Selection
-            from={
+        <div style={{ top: '8rem', position: 'sticky', overflow: 'auto' }}>
+          <WindowFrame
+            images={
               steps &&
               steps.map((step) => {
-                // eslint-disable-next-line react/jsx-key
-                // return <TourImage src={step.tour?.url} alt={step.tour?.alt} />;
-                // eslint-disable-next-line react/jsx-key
-                return <WindowFrame src={step.tour?.url} alt={step.tour?.alt} />;
+                return { src: step.tour?.url, alt: step.tour?.alt };
               })
             }
           />
@@ -80,7 +147,16 @@ type TourImageProps = {
   alt?: string;
 };
 
-const WindowFrame: FC<TourImageProps> = ({ src, alt }) => {
+type WindowFrameProps = {
+  images: TourImageProps[];
+};
+const WindowFrame: FC<WindowFrameProps> = memo(({ images }) => {
+  const { selectedIndex } = React.useContext(StepsContext);
+  const [previousIndex, setPreviousIndex] = useState(selectedIndex);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const windowRef = useRef<HTMLDivElement>(null);
+
   const Window = styled.div`
     display: block;
     border-radius: 5px;
@@ -123,27 +199,6 @@ const WindowFrame: FC<TourImageProps> = ({ src, alt }) => {
     padding: 2px;
   `;
 
-  return (
-    <Window>
-      <Bar>
-        <Close />
-        <Minimize />
-        <Maximize />
-      </Bar>
-      <Main>
-        <TourImage src={src} alt={alt} />
-      </Main>
-    </Window>
-  );
-};
-
-const TourImage: FC<TourImageProps> = ({ src, alt }) => {
-  const [imgSrc, setImgSrc] = useState<string>(src);
-  const [imgAlt, setImageAlt] = useState<string>(alt);
-  const [isChanging, setIsChanging] = useState(false);
-
-  const imgRef = useRef<HTMLImageElement>(null);
-
   // Function from David Walsh: http://davidwalsh.name/css-animation-callback
   const whichTransitionEvent = () => {
     if (typeof window !== 'undefined') {
@@ -167,32 +222,58 @@ const TourImage: FC<TourImageProps> = ({ src, alt }) => {
 
   const transitionEvent = whichTransitionEvent();
 
-  const updateImage = () => {
-    imgRef.current?.removeEventListener(transitionEvent, updateImage);
-    setImgSrc(src || '');
-    setImageAlt(alt || '');
-    setIsChanging(false);
-  };
+  const updateImage = useCallback(() => {
+    if (!containerRef.current) return;
+    const imgs = containerRef.current.querySelectorAll('img');
+    const prev = imgs[previousIndex];
+    setPreviousIndex(selectedIndex);
+    prev.removeEventListener(transitionEvent, updateImage);
+    const curr = imgs[selectedIndex];
+    curr.style.opacity = '1';
+  }, [selectedIndex, previousIndex, containerRef]);
 
   useEffect(() => {
-    if (src !== imgSrc || alt !== imgAlt) {
-      if (!imgRef.current) return;
-      imgRef.current?.addEventListener(transitionEvent, updateImage);
-      setIsChanging(true);
+    if (!containerRef.current) return;
+    const imgs = containerRef.current.querySelectorAll('img');
+    const prev = imgs[previousIndex];
+    if (prev.style.opacity !== '0') {
+      prev.addEventListener(transitionEvent, updateImage);
+      prev.style.opacity = '0';
+    } else {
+      updateImage();
     }
-  }, [src, alt]);
+  }, [selectedIndex]);
 
-  if (src) {
-    return (
-      <Image
-        ref={imgRef}
-        src={imgSrc}
-        alt={imgAlt || ''}
-        style={{ opacity: isChanging ? 0 : 1, transition: 'opacity 0.3s ease-in' }}
-      />
-    );
-  }
-  return <></>;
-};
+  useEffect(() => {
+    updateImage();
+  }, []);
 
+  return (
+    <Window ref={windowRef}>
+      <Bar>
+        <Close />
+        <Minimize />
+        <Maximize />
+      </Bar>
+      <Main>
+        <div style={{ display: 'grid' }} ref={containerRef}>
+          {images &&
+            images.map((img, ix) => (
+              <Image
+                key={img.src}
+                src={img.src}
+                alt={img.alt}
+                style={{
+                  transition: 'opacity 0.3s ease-in',
+                  gridArea: '1 / 1 / 1 / 1',
+                  opacity: ix == selectedIndex ? '1' : 0,
+                }}
+              />
+            ))}
+        </div>
+      </Main>
+    </Window>
+  );
+});
+WindowFrame.displayName = 'WindowFrame';
 export default ImageTour;
