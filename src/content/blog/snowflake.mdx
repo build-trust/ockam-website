@@ -1,69 +1,135 @@
 ---
-title: Reverse ETL with Snowflake and Kafka
+title: Sync data from Snowflake to Kafka
 codetour: true
-category: Learning
-date: '2024-08-12'
+category: Learning, Quickstart
+date: '2024-09-15'
 description: 
-image: /blog/building-secure-saas-platforms/build-secure-saas.png
+image: /blog/snowflake-reverse-etl/snowflake-reverse-etl-kafka.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
+isFeatured: true
+featuredOrder: 2
 ---
 
-{/* <!-- vale off--> */}
+{/* <!-- vale Microsoft.We = NO --> */}
+{/* <!-- vale Microsoft.FirstPerson = NO --> */}
+{/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
 
-So you've got most of your organization's data consolidated into The Data Cloud
-that we call Snowflake. Colleagues are busy analyzing the data and generating 
-new insights. What if I told you there was a way to stream 
-those insights in real-time back to the systems that can act upon them, and it 
+
+What if I told you there was a way to stream 
+those insights in real-time back to the your private Kafka systems, that it'll
+use private point-to-point connections that don't require you to manage IP
+allow lists, open firewall ports, or setup services like PrivateLink, and that it
 will take you less than 15 minutes to setup?
 
-Welcome to the world of Reverse ETL!
+Introducing the Snowflake Push to Kafka Connector!
 
-## What is "Reverse ETL"?
+## Snowflake 💙 Apache Kafka
 
-Snowflake has rapidly become _the_ place to support workloads such as data
+Snowflake has become The Data Cloud and the place to support workloads such as data
 warehouses, data lakes, data science / ML / AI, and even cybersecurity. This
-centralization brings a huge amount of convenience in terms of breaking down
-data silos and allowing teams to make smart data-informed decisions. The way
-data typically gets into The Data Cloud is by one of:
+centralization brings a huge amount of convenience through breaking down
+data silos and allowing teams to make smart data-informed decisions. 
 
-* Writing directly to it!
-* Syncing logs, metrics, and other data via a connector
-* An Extract, Transform, and Load (ETL) process that runs regularly to move data from 
-one system and load it into Snowflake
+After enriching the data and finding new insights, those insights need to
+make their way back out to the other apps and business systems that can act 
+upon them. Apache Kafka (and Kafka-compatible alternatives) is the system of
+choice for building flexible, scalable, and reliable streaming platform to 
+connect data producers and consumers. Connecting to your Kafka broker can be
+problematic depending on your network topology. It would be convenient to give
+the broker a public address, but that's a significant increase in risk for a 
+system that handles a lot of important data. Managing IP allow lists and updating
+firewall ingress rules improves security but can be cumbersome to manage. 
+Alternatives like PrivateLink are better, but they too can be cumbersome to
+setup and require your systems to be on the same public cloud and in the same
+region.
 
-Reverse ETL is, as the name implies, simply running that process in the opposite
-direction. Once the magic has been done in Snowflake one or more of your other
-systems probably needs to act on the updated insights. Maybe the website needs to
-know some additional data about a user? Maybe a CRM or email list needs to be 
-updated? Whatever the reason, you need a way to get that data back out to the 
-edges as quickly as possible. 
-
-In this post I'm going to show you how to:
+In this post I'm going to show you, in just a few minutes, how to securely
+connect Snowflake to your private Apache Kafka broker. We will:
 
 * Setup a Snowflake Stream to capture changes to a table in Snowflake
 * Setup a managed Kafka cluster in AWS
 * Connect Snowflake to Kafka with a private encrypted connection - without needing
 to expose either system to the public internet!
 
+The final architecture diagram will look like this:
+
+![Reverse ETL from Snowflake to Kafka](/blog/snowflake-reverse-etl/snowflake-reverse-etl-kafka.png)
+
+
 ## Snowflake streams 
 
-Snowflake streams are a way to capture every change made to a table (i.e., every
-insert, update, and delete) and record it somewhere else. It'll often be referred
-to as Change Data Capture (CDC) and it's an effective way to respond to changes 
+Snowflake streams are a way to capture every change made to a table (that is, every
+insert, update, and delete) and record it somewhere else. You may hear it called
+Change Data Capture (CDC) and it's an effective way to respond to changes 
 in the data that you care about. 
 
 ### Create a stream
 
-TBD
+<CodeTour>
+
+### !!steps
+
+Run the code here in a Snowflake worksheet. It will create a new table, and then
+create a stream attached to that table.
+
+```sql ! tour
+CREATE OR REPLACE TABLE customers (
+  id number(8) NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL
+);
+
+CREATE OR REPLACE STREAM customers_stream ON TABLE customers;
+```
+
+### !!steps 
+
+This section creates a new table, or replaces an existing one, to hold 
+details about our customers. If you've already got a table within Snowflake
+that you want to create a stream on you can skip this step.
+
+```sql ! tour
+--!focus(1:5)
+CREATE OR REPLACE TABLE customers (
+  id number(8) NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL
+);
+
+CREATE OR REPLACE STREAM customers_stream ON TABLE customers;
+```
+
+## !!steps 
+
+Once we've a table, adding a stream to it's a single command where
+we specific the name for the stream (`customers_stream`), and the
+name of the table to attach it to (`customers`).
+
+```sql ! tour
+CREATE OR REPLACE TABLE customers (
+  id number(8) NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL
+);
+
+--!focus(1:1)
+CREATE OR REPLACE STREAM customers_stream ON TABLE customers;
+```
+
+</CodeTour>
 
 ## Amazon Managed Streaming for Kafka (MSK)
 
-When implementing a reverse ETL process, the choice of tools can significantly impact the reliability, scalability, and efficiency of the solution. This is where Apache Kafka comes into play. Kafka is an open-source stream-processing platform that excels in handling real-time data feeds with high throughput and low latency.
+We're going to provision an MSK cluster so we can see an end-to-end 
+experience of data moving from Snowflake to Kafka. If you've an existing Kafka 
+broker you're able to use you can skip this step.
+
+### Create an MSK cluster
 
 <ImageTour>
 
-### !!steps Create an MSK cluster
+### !!steps
 
 Within your [AWS Console](https://console.aws.amazon.com/) search for 
 `MSK` in the search field at the top and select the matching result. Visit the 
@@ -71,7 +137,7 @@ Within your [AWS Console](https://console.aws.amazon.com/) search for
 
 The `Quick Create` option provides a good set of defaults for creating a
 Kafka cluster, so unless you've previous knowledge or experience to know you
-might want something different I'd suggest just confirming the detauls and 
+might want something different I'd suggest just confirming the details and 
 then clicking `Create cluster` at the bottom of the screen.
 
 Once you've started the cluster creation it may take about 15 minutes for
@@ -83,20 +149,27 @@ provisioning to complete and for your broker to be available.
 
 ## Connect Snowflake to Kafka
 
+We've created a stream, Kafka is running. It's now time to connect the two! The
+next stage is going to complete the picture below, but creating a point-to-point
+connection between the two systems &mdash; without the need to expose any systems
+to the public internet!
+
+![Reverse ETL from Snowflake to Kafka](/blog/snowflake-reverse-etl/aws-complete.png)
+
 <ImageTour>
 ### !!steps Get the app
 
-The Snowflake Push to Kafka Connector by Ockam is currently 
+The Snowflake Push to Kafka Connector by Ockam is  
 [invite only](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector),
-to be invited drop us an email at [hello@ockam.io](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector).
+to get an invite please drop us an email at [hello@ockam.io](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector).
 
 Once invited you'll receive an email with a link to get the app.
 
 ### !!steps Select a warehouse
 
 The first screen you're presented with will ask you to select the warehouse where
-this app should be installed. This will determine the cluster where the required
-compute resources for the Kafka Connector will be run (?? Is this accurate?).
+to install the app. This will determine the cluster where the to provision the required
+compute resources for the Kafka Connector (?? Is this accurate?).
 
 ![!tour Select a warehouse](/blog/snowflake-reverse-etl/select-warehouse.png)
 
@@ -110,15 +183,15 @@ pool.
 
 ### !!steps Activate app
 
-Once the permissions have been granted, and `Activate` button will appear. Click
+Once the permissions grants complete, an `Activate` button will appear. Click
 it and the activation process will begin.
 
 ![!tour Activate app](/blog/snowflake-reverse-etl/activate-app.png)
 
 ### !!steps Launch app
 
-After the app is activate you'll be presented with a page that summarizes the 
-privileges that have been granted to the application. There's nothing we need 
+After the app activates you'll see a page that summarizes the 
+privileges that have the application now has. There's nothing we need 
 to review or update on these screens yet, so proceed by clicking the `Launch app` button.
 
 ![!tour Launch app](/blog/snowflake-reverse-etl/launch-app.png)
@@ -133,20 +206,20 @@ curl --proto '=https' --tlsv1.2 -sSfL \
   | bash source "$HOME/.ockam/env"
 ```
 
-This will install the ockam command and source in the required environment 
-settings. If you've previously installed ockam you can skip this step.
+This will install the Ockam Command and source in the required environment 
+settings. If you've installed Ockam Command before you can skip this step.
 
 ![!tour Get started](/blog/snowflake-reverse-etl/get-started.png)
 
 ### !!steps Setup admin account
 
-Once Ockam Command has been installed you can run:
+Once Ockam Command installation is complete you can run:
 
 ```bash
 ockam enroll
 ```
 
-Wrapped up in this single ockam enroll command is a number of steps that will 
+Wrapped up in this single `ockam enroll` command are several steps that will 
 bootstrap your first project and get you ready to go. It will:
 
 * Generate an Ockam Identity and store its secret keys in a file system based Ockam Vault.
@@ -158,8 +231,13 @@ bootstrap your first project and get you ready to go. It will:
 
 ### !!steps Generate enrollment ticket for Kafka
 
-The next step is to generate an enrollment ticket to allow a new Ockam Node to 
-join the project that was just created. This node will run adjacent to the 
+In this section we're going to provision an Ockam node that will run alongside
+our Kafka broker, and provide one of the ends of our point-to-point connection.
+
+![Reverse ETL from Snowflake to Kafka](/blog/snowflake-reverse-etl/aws-kafka-setup.png)
+
+We need to generate an enrollment ticket to allow a new Ockam Node to 
+join the project that was just created. This node will run alongside the 
 Kafka broker, in the network where the Kafka is running:
 
 ```bash
@@ -177,9 +255,9 @@ ockam project ticket --usage-count 1 \
 ### !!steps 
 
 In this command we've set the new ticket to expire in `24 hours`, and a usage 
-count of `1`. This means the generated ticket can only be used a single time, and 
-that it must be used within 24 hours. A single usage ticket means there is low 
-risk associated with this ticket being mishandled after use, there's no means 
+count of `1`. This means the generated ticket is valid for a single use, and 
+that it's valid for 24 hours. A single usage ticket means there is low 
+risk associated with mishandling this ticket after use; there's no means 
 for an attacker to re-use it like a credential to access any system. 
 
 ```shell ! tour
@@ -192,13 +270,13 @@ ockam project ticket \
 
 ### !!steps 
 
-The Project Membership Credential that is issued will include additional 
+The Project Membership Credential that's issued will include  
 attributes that will be cryptographically attested to by the Project's 
-Membership Authority. These attributes can then be used to apply policies with 
-Attribute Based Access Controls (ABAC) to allow or restrict specfic actions and 
-communucation paths between nodes.
+Membership Authority. You can use these attributes to apply policies with 
+Attribute Based Access Controls (ABAC) to allow or restrict specific actions and 
+communication paths between nodes.
 
-In this example the attribute being set is `kafka`. 
+In this example we assign a single attribute of `kafka`. 
 
 ```bash ! tour
 ockam project ticket \
@@ -217,7 +295,7 @@ This relay will allow your Snowflake warehouse to establish a secure end-to-end
 encrypted connection to your Kafka broker, without requiring your to expose any 
 endpoints to the public Internet.
 
-Finally we pipe the generated ticket to a file named `kafka.ticket`.
+As the final part of this command we pipe the generated ticket to a file named `kafka.ticket`.
 
 ```bash ! tour
 ockam project ticket \
@@ -230,7 +308,7 @@ ockam project ticket \
 ### !!steps Create a configuration file
 
 We're going to pass the configuration for our Ockam Node as a JSON file, so 
-save the config to the right into a file named `kafka.json`.
+save the configuration to the right into a file named `kafka.json`.
 
 ```javascript ! tour
 {
@@ -244,12 +322,12 @@ save the config to the right into a file named `kafka.json`.
 
 ### !!steps
 
-After the node is created this configuration file will the processed, with the
+Ockam Command will process the configuration file after the node starts, with the
 first instruction being to create a relay with the name `kafka`. This relay will 
 allow Snowflake to establish a secure end-to-end encrypted connection to your
 Kafka broker. It provides the ability to have entirely isolated infrastructure 
 running within a private network, without requiring you to expose any endpoints
-to the public Internet and no configuring of allowlists to custom network routes.
+to the public Internet and no configuring of allow lists to custom network routes.
 
 ```javascript ! tour
 {
@@ -264,7 +342,7 @@ to the public Internet and no configuring of allowlists to custom network routes
 
 ### !!steps
 
-A Kafka outlet decrypts any Kafka messages received by the node and 
+A outlet decrypts any messages received by the node and 
 then forwards them to the specified broker address.
 
 ```javascript ! tour
@@ -280,7 +358,7 @@ then forwards them to the specified broker address.
 
 ### !!steps
 
-In this example we're giving the interpolating the value from the environment
+In this example we're giving the interpolated the value from the environment
 variable `BOOTSTRAP_SERVER_WITH_PORT`, which we'll set in a later step when we
 start the node.
 
@@ -297,13 +375,13 @@ start the node.
 
 ### !!steps
 
-We will shortly setup the Kafka Inlet that runs alongside our Snowflake 
-warehouse. Before we do that though, we can define a policy to restrict what 
+We will setup the Kafka Inlet that runs alongside our Snowflake 
+warehouse in a moment. Before we do that though, we can define a policy to restrict what 
 nodes can connect to our outlet.
 
-This policy applies Attribute Based Access Controls (ABAC) to only allow 
+This policy applies Attribute Based Access Controls (ABAC) to allow 
 other nodes that have the attribute `snowflake` as part of their attested 
-credentials.
+credentials. The system denies access to nodes without the `snowflake` attribute.
 
 ```javascript ! tour
 {
@@ -336,28 +414,35 @@ running in, and then click `Continue to Launch` followed by `Launch`.
 
 ### !!steps Enter stack details
 
-The information on the initial Create Stack screen is prefilled with the correct
+The initial Create Stack screen pre-fills the fields with the correct
 information for your node, so you can press `Next` to proceed.
 
 ![!tour Ockam node for Amazon MSK - create stack screen](/blog/snowflake-reverse-etl/create-stack.png)
 
 ### !!steps Enter node configuration
 
-This screen has a number of important details to be filled in:
+This screen has important details to you need to fill in:
 
 * **Stack name:** Give this stack a recognisable name, you'll see this in various locations in the AWS Console. It'll also make it easier to clean these resources up later if you with to remove them.
-* **VPC ID:** The ID of the Virtual Private Cloud network that this node should be deployed in. Make sure it is the same VPC that your Amazon MSK cluster is deployed in.
+* **VPC ID:** The ID of the Virtual Private Cloud network to deploy the node in. Make sure it's the same VPC where you've deployed your Amazon MSK cluster.
 * **Subnet ID:** Choose one of the subnets within your VPC, ensure MSK has a broker address available in that subnet.
 * **Enrollment ticket:** Copy the contents of the `kafka.ticket` file we created earlier and paste it in here.
-* **Amazon MSK Bootstrap Server with Port:** In the client configuration details for your Amazon MSK cluster you will have a list of bootstrap servers. Copy the `hostname:port` value for the Private endpoint that is in the same subnet you chose above.
+* **Amazon MSK Bootstrap Server with Port:** In the client configuration details for your Amazon MSK cluster you will have a list of bootstrap servers. Copy the `hostname:port` value for the Private endpoint that's in the same subnet you chose above.
 * **JSON Node Configuration:** Copy the contents of the `kafka.json` file we created earlier and paste it in here.
+
+We've not completed the highlighted part of the diagram below, and our Kafka
+broker node is waiting for another node to connect.
+
+![Reverse ETL from Snowflake to Kafka](/blog/snowflake-reverse-etl/aws-kafka-setup.png)
 
 ![!tour Ockam node for Amazon MSK - node configuration screen](/blog/snowflake-reverse-etl/stack-details.png)
 
 ### !!steps Generate enrollment ticket for Snowflake
 
+![Setting up Ockam Node as native Snowflake app](/blog/snowflake-reverse-etl/aws-snowflake-setup.png)
+
 One end of our connection is now setup, it's time to connect the Snowflake end. 
-We need to generate an enrollment ticket to allow another Ockam Node tp
+We need to generate an enrollment ticket to allow another Ockam Node to
 join our project. This node will run in our Snowflake warehouse:
 
 ```bash
@@ -375,8 +460,8 @@ ockam project ticket \
 ### !!steps
 
 As we did with the earlier ticket, we've reduced the risk associated with
-mishandling a ticket by restricting how soon it must be used and how many 
-times it can be used. We've again set a usage count of `1`, but with a tighter
+mishandling a ticket by restricting it's permitted usage window. We've again set 
+a usage count of `1`, but with a tighter
 expiry time of just `2 hours`.
 
 ```bash ! tour
@@ -389,10 +474,10 @@ ockam project ticket \
 ### !!steps
 
 This credential will include an attestable attribute of `snowflake`. You'll 
-recall in an earlier step we applied a policy to say that only nodes in our 
-project that have an attribute of `snowflake` will be permitted to connect to 
-the Kafka outlet. The node that enrolls with this ticket will also have the
-attribute `snowflake`, and so it will be able to communicate with our kafka 
+recall in an earlier step we applied a policy to say that nodes in our 
+project must have an attribute of `snowflake` to connect to 
+the outlet. The node that enrolls with this ticket will also have the
+attribute `snowflake`, and so it will be able to communicate with our Kafka 
 node. 
 
 The ticket is that saved to a file called `snowflake.ticket`.
@@ -419,17 +504,16 @@ setup screen in Snowflake.
 
 ### !!steps Map Snowflake stream to Kafka topic
 
-Each stream of changes in Snowflake needs to be sent to a topic in Kafka, and we
-need to define the mapping between each stream and topic. Enter in the stream
-you want to send (in the format of `database.schema.stream`) and then the name
-of the topic in Kafka.
+Snowflake sends each stream of changes to a topic in Kafka, and we need to 
+define the mapping between each stream and topic. Enter the stream you want to 
+send (in the format of database.schema.stream), and then enter the name of the topic in Kafka.
 
-If the topic doesn't exists it will be created (?? is this accurate?)
+If the topic doesn't exists the system will create it (?? is this accurate?)
 
 ### !!steps Grant privileges
 
-To be able to successfully authenticate with Ockam Orchestrator and then 
-discover the route to our Kafka outlet, the Snowflake app needs to allow 
+To be able to authenticate with Ockam Orchestrator and then 
+discover the route to our outlet, the Snowflake app needs to allow 
 outbound connections to your Ockam project. Toggle the 
 `Grant access to egress and reach your Project` and approve the connection by
 pressing `Connect`.
@@ -442,14 +526,17 @@ pressing `Connect`.
 
 ### !!steps Manually grant additional privileges
 
-There are a number of other permissions that must be manually granted to allow
-the app to read the changes and send them to Kafka. If you're managing multiple
-streams this can be a cumbersome and error-prone approach of copy, pasting,
-and modifying numerous lines. To simplify this we've created a stored procedure
-that can be called with the required values.
+Not all the permissions the app requires have a toggle available
+in the Snowflake UI, so you must manually grant several other permissions to allow 
+the app to read the changes and send them to Kafka. This process can be
+cumbersome and error-prone, involving copying, pasting, and modifying many lines. 
+To simplify the process, we've created a stored procedure that you can call 
+with the required values.
 
-Copy the code to the right and run it in a Worksheet to create the procedure.
-Now, let's walk through exactly what the stored procedure is doing&hellip;
+If you just want to get things working you can copy the code to the right and 
+run it in a Worksheet to create the procedure and then skip to the next section. 
+If you're curious to know what exactly the procedure is doing, let's walk through 
+it line by line&hellip;
 
 ```javascript ! tour
 CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
@@ -508,7 +595,7 @@ $$;
 
 ### !!steps Create a stored procedure
 
-Here we're defining stored procedure, written in Javascript, that will return 
+Here we're defining stored procedure, written in JavaScript, that will return 
 a string. The string output will be success or error message reporting on the
 outcome of our commands. It expects a single string argument &mdash; the name of the 
 stream.
@@ -570,7 +657,7 @@ $$;
 
 ### !!steps Specify the app name
 
-This is the name of Ockam's Snowflake Native App and will be used in the 
+This is the name of Ockam's Snowflake Native App and we will use it in the 
 locations where we specify which app is requesting permissions. 
 
 ```javascript ! tour
@@ -813,7 +900,7 @@ $$;
 
 ### !!steps Define required permissions
 
-There are 4 separate permissions that are required to be manually granted for
+Four separate permissions need to be manually granted for
 each stream. One on the database, one on the schema, one on the table(s), and 
 then one on the stream itself. We use the variables we assigned in the previous
 section to interpolate the values into each command, and put those commands into
@@ -876,9 +963,9 @@ $$;
 
 ### !!steps Grant permissions
 
-Finally the procedure will loop over the array of `GRANT` commands and execute
-each individually. If any command fails an error message will be returned, 
-otherwise a success message is returned.
+The procedure will then loop over the array of `GRANT` commands and execute
+each individually. If any command failures return an error message, 
+otherwise you'll see a success message.
 
 ```javascript ! tour
 CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
@@ -939,7 +1026,7 @@ $$;
 
 <br/> 
 
-Now that the stored procedure has been created, it's time to run it. Copy the
+Now that you've created the stored procedure, it's time to run it. Copy the
 code below and run it in a Snowflake Worksheet, replacing 
 `database.schema.stream` with the correct value for your stream:
 
@@ -947,6 +1034,21 @@ code below and run it in a Snowflake Worksheet, replacing
 CALL grant_stream_permissions('database.schema.stream');
 ```
 
+With that, we've completed the last step in the setup. We've now got a complete
+point-to-point connection that allows our Snowflake warehouse to securely
+push data through to our private Kafka broker.
+
+![Reverse ELT with Snowflake and Kafka complete](/blog/snowflake-reverse-etl/aws-complete.png)
+
 ## Next steps
 
-Velit excepteur anim do ullamco enim qui velit. Laboris ad et cupidatat commodo sit qui aliquip duis eu irure. In dolor non laboris deserunt do. Ea culpa culpa fugiat officia Lorem voluptate. Nisi magna dolor eu ex minim in velit sit officia esse. Duis mollit excepteur enim consequat culpa laborum excepteur. Aute aute commodo qui do quis reprehenderit non quis cillum exercitation amet ut dolore magna.
+Any updates to your data in your Snowflake table will now create a new record in your 
+Snowflake stream, which are then sent over your Ockam portal to your Kafka broker.
+To see it in action insert a row into your Snowflake table, then use your usual
+Kafka admin tooling to see the message arrive in your topic.
+
+If you'd like to explore some other capabilities of Ockam I'd recommend:
+
+* [Encrypting data _through_ Kafka](https://docs.ockam.io/portals/kafka)
+* [Zero-trust data streaming with Redpanda Connect](/blog/redpanda_connect_with_ockam#connect-secure-and-streamall-in-one-simple-platform)
+* [Adding security as a feature in your SaaS product](/blog/building-secure-saas-platforms)
