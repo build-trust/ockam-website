@@ -175,19 +175,4 @@ const Code: FC<CodeProps> = ({ codeblock }) => {
   );
 };
 
-// const CodeTour = ({ codeblock }: { codeblock: HighlightedCode }) => {
-//   return (
-//     <Pre
-//       code={codeblock}
-//       style={{
-//         borderRadius: '6px',
-//         background: '#002b36',
-//         fontFamily: 'SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-//         fontSize: '14px',
-//         padding: '15px 40px 15px 40px',
-//       }}
-//     />
-//   )
-// }
-
 export default CodeTour;
