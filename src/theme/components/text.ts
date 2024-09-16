@@ -5,6 +5,7 @@ const Text = {
   },
   variants: {
     readabilityOptimized: {
+      color: 'inherit',
       mx: 0,
       maxW: '45em',
       letterSpacing: '-0.2px',

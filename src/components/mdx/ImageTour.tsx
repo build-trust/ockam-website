@@ -74,7 +74,8 @@ const Selectable = ({
 
 const StyledSelectable = styled(Selectable)`
   padding: 0.5rem 1.25rem 0.5rem 1.25rem;
-  margin-bottom: 24px;
+  margin-bottom: 35vh;
+  margin-top: 35vh;
   background-color: white;
   opacity: 0.3;
   transition: opacity 0.5s ease-in;

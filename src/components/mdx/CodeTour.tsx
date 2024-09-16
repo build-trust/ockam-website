@@ -8,25 +8,28 @@ import { HighlightedCode, Pre, highlight } from 'codehike/code';
 // From token-transitions example
 import { tokenTransitions } from './transition/TokenTransition';
 import { focus } from './transition/Focus';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Heading } from '@chakra-ui/react';
 import { CheckIcon, CopyIcon } from '@chakra-ui/icons';
 
 const StyledSelectable = styled(Selectable)`
   padding: 0.5rem 1.25rem 0.5rem 1.25rem;
-  margin-bottom: 24px;
+  margin-bottom: 35vh;
+  margin-top: 35vh;
   background-color: white;
   border: 4px solid transparent;
   border-right: none;
   opacity: 0.3;
-  transition: opacity 0.5s ease-in;
+  transition: all 0.3s ease-in;
 
   &[data-selected='true'] {
     opacity: 1;
     border-radius: 4px 0 0 4px;
     border: 4px solid #002b36;
     border-right: none;
+    background-color: #002b36;
+    color: white;
   }
 `;
 
@@ -35,9 +38,26 @@ const Schema = Block.extend({
 });
 
 const CodeTour: FC = (props) => {
-  const uid = Math.random().toString(36).substr(2, 5);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const uid = Math.random().toString(36).slice(2, 5);
   const data = parseProps(props, Schema);
   const [steps, setSteps] = useState<typeof data.steps>([]);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    if (typeof window !== 'undefined') {
+      console.log('recalculating...');
+      const containerY = document.documentElement.clientHeight;
+      const codeY = ref.current.clientHeight;
+      let top = 0;
+      if (codeY < containerY) {
+        top = (containerY - codeY * 2) / 2;
+      }
+      ref.current.style.top = `${top}px`;
+    }
+  }, [ref.current]);
+
   useEffect(() => {
     const parseSteps = async () => {
       const ss = await Promise.all(
@@ -66,12 +86,16 @@ const CodeTour: FC = (props) => {
               borderColor: 'border-color: rgb(63 63 70)',
               padding: '0.5rem 1.25rem 0.5rem 1.25rem',
               marginBottom: '24px',
-              backgroundColor: 'white',
             }}
           >
             <Heading
               as="h2"
-              style={{ marginTop: '1rem', fontSize: '1.25rem', lineHeight: '1.75rem' }}
+              style={{
+                marginTop: '1rem',
+                fontSize: '1.25rem',
+                lineHeight: '1.75rem',
+                color: 'inherit',
+              }}
             >
               {step.title}
             </Heading>
@@ -87,7 +111,7 @@ const CodeTour: FC = (props) => {
           borderRadius: '4px',
         }}
       >
-        <div style={{ top: '4rem', position: 'sticky', overflow: 'auto' }}>
+        <div ref={ref} style={{ top: '10vh', position: 'sticky', overflow: 'auto' }}>
           <Selection
             from={
               steps &&
