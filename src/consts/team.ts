@@ -113,15 +113,6 @@ export const MEMBERS = enhanceTeamMembers([
   },
   {
     name: 'Chris',
-    surname: 'McNeill',
-    position: 'Account Executive',
-    categories: [CATEGORIES.FULL_TIME_MEMBERS],
-    country: 'US',
-    photo: 'chris-mcneill.png',
-    description: 'Loves big dogs, beach fishing, and restoring cars.',
-  },
-  {
-    name: 'Chris',
     surname: 'Hildebrand',
     position: 'Engineer',
     categories: [CATEGORIES.FULL_TIME_MEMBERS],
