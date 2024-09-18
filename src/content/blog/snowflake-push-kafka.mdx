@@ -169,7 +169,7 @@ Once invited you'll receive an email with a link to get the app.
 
 The first screen you're presented with will ask you to select the warehouse where
 to install the app. This will determine the cluster where the to provision the required
-compute resources for the Kafka Connector (?? Is this accurate?).
+compute resources for the Kafka Connector.
 
 ![!tour Select a warehouse](/blog/snowflake-push-kafka/select-warehouse.png)
 
@@ -508,7 +508,9 @@ Snowflake sends each stream of changes to a topic in Kafka, and we need to
 define the mapping between each stream and topic. Enter the stream you want to 
 send (in the format of database.schema.stream), and then enter the name of the topic in Kafka.
 
-If the topic doesn't exists the system will create it (?? is this accurate?)
+If the topic doesn't exists the system will create it.
+
+![!tour Map streams to Kafka topics](/blog/snowflake-push-kafka/map-topics.png)
 
 ### !!steps Grant privileges
 
