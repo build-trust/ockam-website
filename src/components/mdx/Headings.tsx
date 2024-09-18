@@ -38,15 +38,28 @@ const h1 = (props: HeadingProps): JSX.Element => (
   <CustomHeading
     as="h1"
     fontSize={{ base: '2xl', lg: '2.5xl' }}
-    mb={{ base: 6, lg: 10 }}
+    mb={{ base: 1, lg: 4 }}
+    mt={{ base: 6, lg: 8 }}
     {...props}
   />
 );
 const h2 = (props: HeadingProps): JSX.Element => (
-  <CustomHeading as="h2" fontSize={{ base: 'xl', lg: '2xl' }} mb={{ base: 4, lg: 6 }} {...props} />
+  <CustomHeading
+    as="h2"
+    fontSize={{ base: 'xl', lg: '2xl' }}
+    mb={{ base: 2, lg: 4 }}
+    mt={{ base: 6, lg: 8 }}
+    {...props}
+  />
 );
 const h3 = (props: HeadingProps): JSX.Element => (
-  <CustomHeading as="h3" fontSize={{ base: 'lg', lg: 'xl' }} mb={{ base: 4, lg: 6 }} {...props} />
+  <CustomHeading
+    as="h3"
+    fontSize={{ base: 'lg', lg: 'xl' }}
+    mb={{ base: 2, lg: 4 }}
+    mt={{ base: 6, lg: 8 }}
+    {...props}
+  />
 );
 const h4 = (props: HeadingProps): JSX.Element => (
   <CustomHeading as="h4" fontSize={{ base: 'md', lg: 'lg' }} {...props} />
