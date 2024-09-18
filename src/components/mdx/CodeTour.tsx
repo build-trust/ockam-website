@@ -47,11 +47,10 @@ const CodeTour: FC = (props) => {
   useEffect(() => {
     if (!ref.current) return;
     if (typeof window !== 'undefined') {
-      console.log('recalculating...');
       const containerY = document.documentElement.clientHeight;
       const codeY = ref.current.clientHeight;
       let top = 0;
-      if (codeY < containerY) {
+      if (codeY < containerY && codeY > 0) {
         top = (containerY - codeY * 2) / 2;
       }
       ref.current.style.top = `${top}px`;
