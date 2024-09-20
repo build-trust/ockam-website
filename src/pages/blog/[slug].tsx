@@ -71,6 +71,7 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({
       codetour={frontMatter?.codetour as boolean}
     >
       <SEOHead
+        title={title}
         subTitle={title}
         description={description}
         canonicalPath={canonicalPath}
