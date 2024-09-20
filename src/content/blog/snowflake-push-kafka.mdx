@@ -14,6 +14,7 @@ featuredOrder: 2
 {/* <!-- vale Microsoft.We = NO --> */}
 {/* <!-- vale Microsoft.FirstPerson = NO --> */}
 {/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
+{/* <!-- vale Microsoft.Contractions = NO --> */}
 
 What if I told you there was a way to stream all
 those insights you've got in Snowflake in real-time back to the your private 
@@ -26,7 +27,7 @@ Introducing the Snowflake Push to Kafka Connector!
 
 ## Snowflake 💙 Apache Kafka
 
-Snowflake has become The Data Cloud and the place to support workloads such as data
+Snowflake is The Data Cloud and the place to support workloads such as data
 warehouses, data lakes, data science / ML / AI, and even cybersecurity. This
 centralization brings a huge amount of convenience through breaking down
 data silos and allowing teams to make smart data-informed decisions. 
@@ -34,7 +35,7 @@ data silos and allowing teams to make smart data-informed decisions.
 After enriching the data and finding new insights, those insights need to
 make their way back out to the other apps and business systems that can act 
 upon them. Apache Kafka (and Kafka-compatible alternatives) is the system of
-choice for building flexible, scalable, and reliable streaming platform to 
+choice for building flexible, scalable, and reliable streaming platforms to 
 connect data producers and consumers. Connecting to your Kafka broker can be
 problematic depending on your network topology. It would be convenient to give
 the broker a public address, but that's a significant increase in risk for a 
@@ -44,8 +45,8 @@ Alternatives like PrivateLink are better, but they too can be cumbersome to
 setup and require your systems to be on the same public cloud and in the same
 region.
 
-In this post I'm going to show you, in just a few minutes, how to securely
-connect Snowflake to your private Apache Kafka broker. We will:
+In this post I'm going to show you how to securely
+connect Snowflake to your private Apache Kafka broker, in just a few minutes. We will:
 
 * Setup a Snowflake Stream to capture changes to a table in Snowflake
 * Setup a managed Kafka cluster in AWS
@@ -102,7 +103,7 @@ CREATE OR REPLACE STREAM customers_stream ON TABLE customers;
 
 ## !!steps 
 
-Once we've a table, adding a stream to it's a single command where
+Once we have a table, adding a stream to it is a single command where
 we specific the name for the stream (`customers_stream`), and the
 name of the table to attach it to (`customers`).
 
@@ -122,7 +123,7 @@ CREATE OR REPLACE STREAM customers_stream ON TABLE customers;
 ## Amazon Managed Streaming for Kafka (MSK)
 
 We're going to provision an MSK cluster so we can see an end-to-end 
-experience of data moving from Snowflake to Kafka. If you've an existing Kafka 
+experience of data moving from Snowflake to Kafka. If you have an existing Kafka 
 broker you're able to use you can skip this step.
 
 ### Create an MSK cluster
@@ -168,7 +169,7 @@ Once invited you'll receive an email with a link to get the app.
 ### !!steps Select a warehouse
 
 The first screen you're presented with will ask you to select the warehouse where
-to install the app. This will determine the cluster where the to provision the required
+to install the app. This will determine where the to provision the required
 compute resources for the Kafka Connector.
 
 ![!tour Select a warehouse](/blog/snowflake-push-kafka/select-warehouse.png)
@@ -191,7 +192,7 @@ it and the activation process will begin.
 ### !!steps Launch app
 
 After the app activates you'll see a page that summarizes the 
-privileges that have the application now has. There's nothing we need 
+privileges that the application now has. There's nothing we need 
 to review or update on these screens yet, so proceed by clicking the `Launch app` button.
 
 ![!tour Launch app](/blog/snowflake-push-kafka/launch-app.png)
@@ -292,7 +293,7 @@ The `--relay kafka` flag is a shortcut for creating a policy that allows this
 node to create a relay at the address `kafka`. 
 
 This relay will allow your Snowflake warehouse to establish a secure end-to-end 
-encrypted connection to your Kafka broker, without requiring your to expose any 
+encrypted connection to your Kafka broker, without requiring you to expose any 
 endpoints to the public Internet.
 
 As the final part of this command we pipe the generated ticket to a file named `kafka.ticket`.
@@ -342,7 +343,7 @@ to the public Internet and no configuring of allow lists to custom network route
 
 ### !!steps
 
-A outlet decrypts any messages received by the node and 
+An outlet decrypts any messages received by the node and 
 then forwards them to the specified broker address.
 
 ```javascript ! tour
@@ -358,7 +359,7 @@ then forwards them to the specified broker address.
 
 ### !!steps
 
-In this example we're giving the interpolated the value from the environment
+In this example we're giving the interpolated value from the environment
 variable `BOOTSTRAP_SERVER_WITH_PORT`, which we'll set in a later step when we
 start the node.
 
@@ -480,7 +481,7 @@ the outlet. The node that enrolls with this ticket will also have the
 attribute `snowflake`, and so it will be able to communicate with our Kafka 
 node. 
 
-The ticket is that saved to a file called `snowflake.ticket`.
+The ticket is then saved to a file called `snowflake.ticket`.
 
 ```bash ! tour
 ockam project ticket \
@@ -529,7 +530,7 @@ pressing `Connect`.
 ### !!steps Manually grant additional privileges
 
 Not all the permissions the app requires have a toggle available
-in the Snowflake UI, so you must manually grant several other permissions to allow 
+in the Snowflake UI, so you must manually grant some other permissions to allow 
 the app to read the changes and send them to Kafka. This process can be
 cumbersome and error-prone, involving copying, pasting, and modifying many lines. 
 To simplify the process, we've created a stored procedure that you can call 
@@ -597,7 +598,7 @@ $$;
 
 ### !!steps Create a stored procedure
 
-Here we're defining stored procedure, written in JavaScript, that will return 
+Here we're defining a stored procedure, written in JavaScript, that will return 
 a string. The string output will be success or error message reporting on the
 outcome of our commands. It expects a single string argument &mdash; the name of the 
 stream.
@@ -720,7 +721,7 @@ $$;
 ### !!steps Lookup stream metadata
 
 This function `getStreamMetadata` will take a stream name as a passed argument,
-and then use the `DESCRIBE STREAM` command to get the metadata the stream. The
+and then use the `DESCRIBE STREAM` command to get the stream metadata. The
 function then extracts the `database_name`, `schema_name`, and `table_name`
 associated with the stream and returns those values.
 
