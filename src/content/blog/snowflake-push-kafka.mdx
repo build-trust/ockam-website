@@ -1,9 +1,9 @@
 ---
-title: Sync data from Snowflake to Kafka
+title: Real-Time CDC Pipeline from Snowflake to Kafka
 codetour: true
 category: Learning
-date: '2024-09-15'
-description: 
+date: '2024-09-20'
+description: Setup a private point-to-point data stream between Snowflake and Kafka.
 image: /blog/snowflake-push-kafka/snowflake-push-kafka.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
@@ -16,12 +16,12 @@ featuredOrder: 2
 {/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
 {/* <!-- vale Microsoft.Contractions = NO --> */}
 
-What if I told you there was a way to stream all
-those insights you've got in Snowflake in real-time back to the your private 
+What if I told you there was a way to use Change Data Capture (CDC) to stream all
+those insights you've got in Snowflake, in real-time, back to the your private 
 Kafka systems? That it'll
 use private point-to-point connections that don't require you to manage IP
 allow lists, open firewall ports, or setup services like PrivateLink, and that it
-will take you less than 15 minutes to setup?
+will take you less than 15 minutes to setup!
 
 Introducing the Snowflake Push to Kafka Connector!
 
@@ -476,7 +476,7 @@ ockam project ticket \
 
 ### !!steps
 
-This credential will include an attestable attribute of `snowflake`. You'll 
+This credential will include an attested attribute of `snowflake`. You'll 
 recall in an earlier step we applied a policy to say that nodes in our 
 project must have an attribute of `snowflake` to connect to 
 the outlet. The node that enrolls with this ticket will also have the
@@ -1051,6 +1051,11 @@ Any updates to your data in your Snowflake table will now create a new record in
 Snowflake stream, which are then sent over your Ockam portal to your Kafka broker.
 To see it in action insert a row into your Snowflake table, then use your usual
 Kafka admin tooling to see the message arrive in your topic.
+
+From here you can take advantage of the existing Kafka infrastructure
+and ecosystem. Write consumers that update data as required in your CRM and
+marketing systems, or use it as the foundations for a highly scalable reverse ETL
+process. The possibilities are limitless!
 
 If you'd like to explore some other capabilities of Ockam I'd recommend:
 
