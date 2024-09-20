@@ -166,6 +166,8 @@ to get an invite please drop us an email at [hello@ockam.io](mailto:hello@ockam.
 
 Once invited you'll receive an email with a link to get the app.
 
+![!tour Get the app](/blog/snowflake-push-kafka/app-store.png)
+
 ### !!steps Select a warehouse
 
 The first screen you're presented with will ask you to select the warehouse where
@@ -259,7 +261,7 @@ In this command we've set the new ticket to expire in `24 hours`, and a usage
 count of `1`. This means the generated ticket is valid for a single use, and 
 that it's valid for 24 hours. A single usage ticket means there is low 
 risk associated with mishandling this ticket after use; there's no means 
-for an attacker to re-use it like a credential to access any system. 
+for an attacker to re-use it like an API token to access any system. 
 
 ```shell ! tour
 ockam project ticket \
