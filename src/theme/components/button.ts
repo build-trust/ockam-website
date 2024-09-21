@@ -15,11 +15,12 @@ const Button = defineStyleConfig({
     },
     ghost: {
       bg: 'transparent',
-      color: 'white',
+      color: 'brand.500',
       border: '1px solid',
       borderColor: 'brand.500',
       _hover: {
         bg: 'brand.400',
+        color: 'white',
       },
     },
   },

@@ -66,8 +66,8 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
   return (
     <BlogPostsProvider blogPosts={blogPosts}>
       <AllPageNotice message={allPage?.message} except={allPage?.except} />
-      <BlogLayoutMobileNav />
-      <BlogLayoutSidebar display={{ base: 'none', lg: codetour ? 'none' : 'flex' }} />
+      <BlogLayoutMobileNav isCodetour={codetour} />
+      <BlogLayoutSidebar className={codetour ? 'codetour' : ''} />
 
       <>
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -96,7 +96,11 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
       <Flex
         w="full"
         direction="column"
-        pl={{ base: 'none', lg: codetour ? 'none' : theme.sizes.container.sidebar }}
+        pl={{
+          base: 'none',
+          lg: codetour ? 'none' : theme.sizes.container.sidebar,
+          huge: theme.sizes.container.sidebar,
+        }}
       >
         <Box w="full" maxW={!codetour ? 'container.blogBodyMax' : ''} mx="auto">
           <Box as="main" w="full" h="full" mx="auto" px={{ base: 5, md: 4, '1.5xl': 12 }}>

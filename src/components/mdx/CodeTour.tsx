@@ -104,10 +104,11 @@ const CodeTour: FC = (props) => {
       </div>
       <div
         style={{
-          width: '40vw',
-          maxWidth: '36rem',
+          maxWidth: '50%',
           backgroundColor: '#002b36',
           borderRadius: '4px',
+          flexGrow: '1',
+          flexShrink: '1',
         }}
       >
         <div ref={ref} style={{ top: '10vh', position: 'sticky', overflow: 'auto' }}>

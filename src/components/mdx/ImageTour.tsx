@@ -124,8 +124,9 @@ const ImageTour: FC = (props) => {
       </div>
       <div
         style={{
-          width: '40vw',
-          maxWidth: '36rem',
+          flexGrow: '1',
+          flexShrink: '1',
+          maxWidth: '50%',
           backgroundColor: 'white',
           borderRadius: '4px',
         }}

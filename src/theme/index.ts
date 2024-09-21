@@ -50,6 +50,7 @@ const breakpoints = {
   '1.25xl': '83.125em', // 1330px
   '1.5xl': '87.5em', // 1400px
   '1.5md': '87.5em',
+  huge: '93.75em',
 };
 
 const themeExtension = {
