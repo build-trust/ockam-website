@@ -66,7 +66,7 @@ const BlogLayout: FunctionComponent<BlogLayoutProps> = ({
   return (
     <BlogPostsProvider blogPosts={blogPosts}>
       <AllPageNotice message={allPage?.message} except={allPage?.except} />
-      <BlogLayoutMobileNav isCodetour={codetour} />
+      <BlogLayoutMobileNav isCodetour={!!codetour} />
       <BlogLayoutSidebar className={codetour ? 'codetour' : ''} />
 
       <>
