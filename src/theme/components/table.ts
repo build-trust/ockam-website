@@ -41,18 +41,15 @@ const Table = defineMultiStyleConfig({
 
             // Developers Cell
             '&:nth-child(2)': {
-              width: '12.75rem',
-              background: '#CDD9E7',
+              // width: '12.75rem',
             },
             // Companies Cell
             '&:nth-child(3)': {
-              width: '25.25rem',
-              background: '#B7FDD7',
+              // width: '25.25rem',
             },
             // Enterprises Cell
             '&:nth-child(4)': {
-              width: '12.75rem',
-              background: '#B5EEFF',
+              // width: '12.75rem',
             },
           },
         },
@@ -63,24 +60,6 @@ const Table = defineMultiStyleConfig({
             borderBottom: '1px solid',
             borderColor: 'gray.100',
             whiteSpace: 'break-spaces',
-            '&:nth-child(2),&:nth-child(6)': {
-              borderRight: '1px solid',
-              borderColor: 'gray.100',
-            },
-            // Developers Cells
-            '&:nth-child(1), &:nth-child(2)': {
-              background: '#E7EEF5',
-            },
-
-            // Companies Cells
-            '&:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)': {
-              background: '#DBFEEB',
-            },
-
-            // Enterprises Cells
-            '&:nth-child(7), &:nth-child(8)': {
-              background: '#DAF7FF',
-            },
           },
         },
       },
@@ -108,21 +87,6 @@ const Table = defineMultiStyleConfig({
         '&:nth-child(3),&:nth-child(7)': {
           borderRight: '1px solid',
           borderColor: 'gray.100',
-        },
-
-        // Developers Cells
-        '&:nth-child(2), &:nth-child(3)': {
-          background: '#FCFEFF',
-        },
-
-        // Companies Cells
-        '&:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7)': {
-          background: '#F7FFFD',
-        },
-
-        // Enterprises Cells
-        '&:nth-child(8), &:nth-child(9)': {
-          background: '#F4FDFF',
         },
       },
     },

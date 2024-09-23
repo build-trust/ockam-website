@@ -4,9 +4,13 @@ import { Table, Thead, Tbody, Tr, Th, Td, Box } from '@chakra-ui/react';
 import {
   Feature,
   FEATURES,
+  gentlyLighten,
   hasFeature,
+  isLastTierInSegment,
   SEGMENTS,
   Tier,
+  tierColor,
+  tierColorLight,
   tierLimit,
   tiersForSegment,
 } from '@root/components/Packaging/tiers';
@@ -17,6 +21,8 @@ const CheckIcon = (): ReactElement => <Box as={BaseCheckIcon} display="inline-bl
 
 const tiers: Tier[] = SEGMENTS.map((segment) => tiersForSegment(segment.name)).flat();
 
+const columnEdgeStyle = '1px solid #EFF1F1';
+
 const PricingTable = (): ReactElement => {
   const showFeatureState = (tier: Tier, feature: Feature): JSX.Element => {
     const key = `tier-feature-${tier.name}-${feature.name}`;
@@ -24,18 +30,35 @@ const PricingTable = (): ReactElement => {
       const limit = tierLimit(tier, feature);
       if (limit) {
         return (
-          <Td whiteSpace="nowrap" key={key}>
+          <Td
+            whiteSpace="nowrap"
+            key={key}
+            backgroundColor={tierColorLight(tier)}
+            style={{ borderRight: isLastTierInSegment(tier) ? columnEdgeStyle : 'none' }}
+          >
             {limit}
           </Td>
         );
       }
       return (
-        <Td key={key}>
+        <Td
+          key={key}
+          backgroundColor={tierColorLight(tier)}
+          style={{ borderRight: isLastTierInSegment(tier) ? columnEdgeStyle : 'none' }}
+        >
           <CheckIcon />
         </Td>
       );
     }
-    return <Td key={key}>&ndash;</Td>;
+    return (
+      <Td
+        key={key}
+        backgroundColor={tierColorLight(tier)}
+        style={{ borderRight: isLastTierInSegment(tier) ? columnEdgeStyle : 'none' }}
+      >
+        &ndash;
+      </Td>
+    );
   };
 
   return (
@@ -51,14 +74,20 @@ const PricingTable = (): ReactElement => {
             Plan Comparison
           </Th>
           {SEGMENTS.map((segment) => (
-            <Th colSpan={segment.tiers.length} key={`th-${segment.name}`}>
+            <Th
+              colSpan={segment.tiers.length}
+              key={`th-${segment.name}`}
+              backgroundColor={segment.color}
+            >
               {segment.name}
             </Th>
           ))}
         </Tr>
         <Tr>
           {tiers.map((tier) => (
-            <Th key={`tier-${tier.name}`}>{tier.name}</Th>
+            <Th key={`tier-${tier.name}`} backgroundColor={gentlyLighten(tierColor(tier))}>
+              {tier.name}
+            </Th>
           ))}
         </Tr>
       </Thead>
