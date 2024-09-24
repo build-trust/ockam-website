@@ -13,6 +13,14 @@ import styled from 'styled-components';
 import { Heading } from '@chakra-ui/react';
 import { CheckIcon, CopyIcon } from '@chakra-ui/icons';
 
+const StyledPre = styled(Pre)`
+  &::-webkit-scrollbar {
+    display: block;
+    width: 0;
+    height: 0;
+  }
+`;
+
 const StyledSelectable = styled(Selectable)`
   padding: 0.5rem 1.25rem 0.5rem 1.25rem;
   margin-bottom: 35vh;
@@ -153,7 +161,7 @@ const Code: FC<CodeProps> = ({ codeblock }) => {
   return (
     <div style={{ position: 'relative' }}>
       <CopyButton text={codeblock.code} />
-      <Pre
+      <StyledPre
         code={codeblock}
         handlers={[tokenTransitions, focus]}
         style={{
