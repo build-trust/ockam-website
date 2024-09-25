@@ -1,0 +1,260 @@
+---
+title: Private APIs in Snowflake
+codetour: true
+category: Learning
+date: '2024-09-30'
+description: TBD
+image: /blog/snowflake-push-kafka/snowflake-push-kafka.png
+author: Glenn Gillen
+authorAvatar: /blog/glenn-gillen.jpg
+---
+
+{/* <!-- vale Microsoft.We = NO --> */}
+{/* <!-- vale Microsoft.FirstPerson = NO --> */}
+{/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
+{/* <!-- vale Microsoft.Contractions = NO --> */}
+
+https://github.com/mrinalwadhwa/sfquickstarts/blob/mrinal/add-private-api-guide/site/sfguides/src/build_a_private_custom_api_in_python/build_a_private_custom_api_in_python.md
+
+```
+USE ROLE ACCOUNTADMIN;
+CREATE WAREHOUSE DATA_API_WH WITH WAREHOUSE_SIZE='xsmall';
+```
+
+```
+USE ROLE ACCOUNTADMIN;
+CREATE ROLE DATA_API_ROLE;
+
+GRANT USAGE ON WAREHOUSE DATA_API_WH TO ROLE DATA_API_ROLE;
+GRANT IMPORTED PRIVILEGES ON DATABASE SNOWFLAKE_SAMPLE_DATA TO ROLE DATA_API_ROLE;
+
+GRANT ROLE DATA_API_ROLE TO ROLE ACCOUNTADMIN;
+```
+
+```
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+
+```
+docker build -t dataapi .
+```
+
+```
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+```
+docker login <repository_url>
+docker build -t <repository_url>/dataapi .
+docker push <repository_url>/dataapi
+```
+
+```
+USE ROLE ACCOUNTADMIN;
+
+CREATE COMPUTE POOL API_POOl
+  MIN_NODES = 1
+  MAX_NODES = 5
+  INSTANCE_FAMILY = CPU_X64_XS;
+
+GRANT USAGE ON COMPUTE POOL API_POOl TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOl TO ROLE DATA_API_ROLE;
+```
+
+```
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOl
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+```
+CALL SYSTEM$GET_SERVICE_STATUS('api');
+CALL SYSTEM$GET_SERVICE_LOGS('api.private.api', 0, 'api');
+```
+
+```
+SHOW ENDPOINTS IN SERVICE API;
+```
+
+```
+SHOW SERVICES;
+```
+
+```
+# Install Ockam Command
+curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash && source "$HOME/.ockam/env"
+
+# Enroll with Ockam Orchestrator
+ockam enroll
+
+# Create an enrollment ticket for the node that will run inside container services
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet --relay snowflake-api-service-relay > ticket
+
+# Print the egress allow list for your Ockam project
+ockam project show --jq '.egress_allow_list[]'
+```
+
+```
+docker pull ghcr.io/build-trust/ockam
+docker tag ghcr.io/build-trust/ockam <repository_url>/ockam
+docker push <repository_url>/ockam
+```
+
+```
+# Example
+VALUE_LIST = ("4ed9ff5d-4953-4080-83c7-e69a3477a545.projects.orchestrator.ockam.io:443");
+```
+
+```
+USE ROLE ACCOUNTADMIN;
+
+-- Update VALUE_LIST with ockam egress details
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: api.private.api.snowflakecomputing.internal:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+```
+CALL SYSTEM$GET_SERVICE_STATUS('API_OCKAM_OUTLET');
+CALL SYSTEM$GET_SERVICE_LOGS('API_OCKAM_OUTLET', '0', 'ockam-outlet', 1000);
+```
+
+```
+docker run --rm -d  --name ockam-inlet -p 8001:8001 \
+  ghcr.io/build-trust/ockam node create --foreground \
+  --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
+  --configuration "
+    tcp-inlet:
+      from: 0.0.0.0:8001
+      via: snowflake-api-service-relay
+      allow: snowflake-api-service-outlet
+  "
+```
+
+```
+curl -X GET "http://localhost:8001/connector/customers/top10?start_range=1995-02-01&end_range=1995-02-14"
+```
+
+```
+curl -X GET "http://localhost:8001/snowpark/customers/top10?start_range=1995-02-01&end_range=1995-02-14"
+```
+
+```
+curl -X GET "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
+```
+
+```
+curl -X GET "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
+```
+
+```
+USE ROLE DATA_API_ROLE;
+ALTER SERVICE API.PRIVATE.API SUSPEND;
+```
+
+```
+USE ROLE DATA_API_ROLE;
+
+DROP SERVICE API.PRIVATE.API;
+DROP SERVICE API_OCKAM_OUTLET;
+```
+
+```
+USE ROLE ACCOUNTADMIN;
+
+DROP ROLE IF EXISTS DATA_API_ROLE;
+DROP DATABASE IF EXISTS API;
+DROP INTEGRATION IF EXISTS OCKAM;
+DROP COMPUTE POOL IF EXISTS API_POOL;
+DROP WAREHOUSE IF EXISTS DATA_API_WH;
+```
