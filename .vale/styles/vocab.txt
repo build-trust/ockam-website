@@ -38,3 +38,9 @@ Initech
 attestable
 subnet
 subnets
+Codespace
+Codespaces
+Culberson
+repo
+hostname
+Snowpark

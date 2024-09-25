@@ -1,0 +1,1603 @@
+---
+title: Build completely private APIs in Snowflake
+codetour: true
+category: Learning
+date: '2024-10-03'
+description: TBD
+image: /blog/snowflake-private-api/cover.png
+author: Glenn Gillen
+authorAvatar: /blog/glenn-gillen.jpg
+---
+
+{/* <!-- vale Microsoft.We = NO --> */}
+{/* <!-- vale Microsoft.FirstPerson = NO --> */}
+{/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
+{/* <!-- vale Microsoft.Contractions = NO --> */}
+
+If you've stored data in Snowflake then chances are you've also got an 
+enterprise application that needs to access it, and a common way to do that is 
+through an HTTP API. This is your organization's _private_ data though, so 
+making it available through an API that is accessible on the _public_ internet 
+is not the best approach.
+
+In this guide I'm going to walk you through how to build, deploy, and host a 
+_private_ custom API powered by Snowflake.
+
+The API will not have an endpoint exposed to the Internet. Your application 
+will, instead, access this API over private endpoints that are only available 
+within your enterprise's VPC and other private environments.
+
+The example will build a reporting endpoint (in Python) to return data from the 
+[TPC-H](https://docs.snowflake.com/en/user-guide/sample-data-tpch) dataset 
+already included in your Snowflake account. 
+
+## Prerequisites
+
+- A [Snowflake](https://snowflake.com) account in an AWS commercial region. 
+    - Privileges necessary to create a user, database, warehouse, compute pool, 
+repository, network rule, external access integration, and service in Snowflake.
+    - Privileges necessary to access the tables in the 
+`SNOWFLAKE_SAMPLE_DATA.TPCH_SF10` database and schema.
+    - Access to run SQL in the Snowflake console or SnowSQL
+- An [Ockam](https://www.ockam.io/) account to securely expose your private API
+- [Docker](https://docs.docker.com/engine/install/)
+- [Git](https://github.com/git-guides/install-git)
+- Basic knowledge of Snowflake, Docker, Git, SQL, and Python
+
+
+## Setup Snowflake
+
+<CodeTour>
+
+## !!steps Create a Warehouse
+
+Using the Snowflake console or using SnowSQL run these commands
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE WAREHOUSE DATA_API_WH WITH WAREHOUSE_SIZE='xsmall';
+```
+
+## !!steps 
+
+Creating a warehouse requires `ACCOUNTADMIN` level permissions, so we'll first
+switch to this role.
+
+```sql ! tour
+--!focus(1:1)
+USE ROLE ACCOUNTADMIN;
+CREATE WAREHOUSE DATA_API_WH WITH WAREHOUSE_SIZE='xsmall';
+```
+
+## !!steps 
+
+We then create a new warehouse named `DATA_API_WH`, with a size of `xsmall`. 
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+--!focus(1:1)
+CREATE WAREHOUSE DATA_API_WH WITH WAREHOUSE_SIZE='xsmall';
+```
+
+## !!steps Create app role
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE ROLE DATA_API_ROLE;
+
+GRANT USAGE ON WAREHOUSE DATA_API_WH TO ROLE DATA_API_ROLE;
+GRANT IMPORTED PRIVILEGES ON DATABASE SNOWFLAKE_SAMPLE_DATA TO ROLE DATA_API_ROLE;
+
+GRANT ROLE DATA_API_ROLE TO ROLE ACCOUNTADMIN;
+```
+</CodeTour>
+
+## Python API code
+
+The code in this guide comes from a lab that Brad Culberson and the team at 
+Snowflake deliver to customers. You won't need to make any changes to the code,
+but you will need to clone the code locally so that we can build the container
+images with Docker.
+
+<Alert status="info" variant="solid" borderRadius="base" mb="8">
+The API has implementations using both 
+Snowflake Connector (`src/connector.py`) and Snowpark (`src/snowpark.py`) to
+query the data. The two implementations are only there to serve as examples 
+of how each approach would be used &mdash; you only need to do one! Choose 
+whichever approach you prefer for your own APIs.
+
+I will only discuss details in the Snowflake Connector approach in this 
+post given its SQL syntax is more recognisable to those who might 
+not have used Snowflake before.
+</Alert>
+
+<CodeTour>
+
+## !!steps
+
+Run the following to clone the repo locally:
+
+```bash ! tour
+git clone https://github.com/sfc-gh-bculberson/lab_data_api_python
+```
+
+
+## !!steps Top 10 API endpoint
+
+In the `src/connector.py` file you'll find the code that defines the API
+and generates responses for a number of endpoints that are served under the
+`/connector` path. We're going to walk through just one of the endpoints as 
+and example of how to retrieve data out of Snowflake and return it as JSON. 
+
+
+Within `src/connector.py` find the line `@connector.route('/customers/top10')`,
+the code block below it defines and API response that returns the top 10 customers
+between a given date
+
+
+```python ! tour
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+
+## !!steps
+
+This line uses a `Blueprint` route decorator to define a route at the path 
+`/customers/top10` (within `app.py` everything in this file is mounted under
+the sub-path of `/connector`, so the final exposed path will end up being
+`/connector/customers/top10`). The decorator tells Flask that the function that
+immediately follows is what it should use to generate the response for 
+any requests that come to this path.
+
+```python ! tour
+#!focus(1:1)
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+
+## !!steps
+
+We want to provide the functionality to return the top 10 customers within a 
+given time range. To do that, we check the request parameters to find values 
+for `start_range` and `end_range`, and if they are not set we  
+set default values of `1995-01-01` and `1995-03-31` respectively.
+
+Those variables are then parsed into `datetime` objects using `strptime`, if 
+that fails we return an error stating the date formats are invalid.
+
+```python ! tour
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    #!focus(1:7)
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+
+# !!steps
+
+We then build a SQL statement that queries the `tpch_sf10.orders` table, 
+returning rows where the `o_orderdate` is between the placeholders of our start 
+and end range, we group by `o_custkey`, order the results descending by the 
+`sum` of `o_totalprice` for each grouped customer, and finally `limit` to the 
+top `10` rows.
+
+The end result is a query that returns the top 10 customers by spend within a
+date range.
+
+```python ! tour
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    #!focus(1:11)        
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+
+# !!steps
+
+The SQL string is then formatted by interpolating the `datetime` values for our
+start and end dates into the appropriate place within string. We then use the
+connection to Snowflake (`conn`, established earlier in the `connector.py` file)
+to execute the query using a `DictCursor` which will return results with
+column names as key values. 
+
+Once we initialize the query we call the `fetchall()` method to return all 
+of the results, which are then passed to `jsonify()` to serialize them to JSON,
+before passing to `make_response()` to return the result to the client.
+
+```python ! tour
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    #!focus(1:6)            
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+</CodeTour>
+
+## Build & publish app container
+
+We're ready to build the API into a Docker container and make the resulting 
+image available in an image repository in Snowflake.
+
+<CodeTour>
+
+## !!steps 
+
+In your terminal run this command, it will build a container based on configuration in the 
+current working directory (`.`) and then tag the resulting image with the name
+`dataapi`.
+
+```bash ! tour
+docker build -t dataapi .
+```
+
+## !!steps Create the image registry
+
+Using the Snowflake console or using SnowSQL run these commands:
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+Everything we're going to do here us going to require admin access, so we ensure
+we're using the appropriate role.
+
+```sql ! tour
+--!focus(1:1)
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+Now we create a database named `API` specifically to contain our API related 
+data. 
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+--!focus(1:1)
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+The `DATA_API_ROLE` role (created earlier in the Setup Snowflake steps) is
+granted full access to the `API` database. Withing that database we then create 
+a new schema named `PRIVATE` and grant full access on that schema too.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+--!focus(1:3)
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+We ensure we're using the `API` database and the `PRIVATE` schema and create
+an image repository named `API`, and then grant the `DATA_API_ROLE` full access 
+to it.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+--!focus(1:4)
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+Running the `SHOW IMAGE REPOSITORIES` command will return the details for the
+repository we just created, it will something like:
+
+{/* <!-- vale ockam.spelling = NO --> */}
+{/* <!-- vale Microsoft.RangeFormat = NO --> */}
+| created_on                    | name                | database_name | schema_name | repository_url                                                                                                  | owner     | owner_role_type | comment |
+|-------------------------------|---------------------|---------------|-------------|-----------------------------------------------------------------------------------------------------------------|-----------|-----------------|---------|
+| 2024-10-04 14:27:19.459 -0700 | API | API   | PRIVATE | orgname-acctname.registry.snowflakecomputing.com/api/private/api | DATA_API_ROLE | ROLE            |         |
+{/* <!-- vale ockam.spelling = YES --> */}
+{/* <!-- vale Microsoft.RangeFormat = YES --> */}
+
+ Take note of the value of `repository_url`, as we're 
+going to need it in a moment.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+--!focus(1:1)
+SHOW IMAGE REPOSITORIES;
+```
+
+
+
+## !!steps Push the container
+
+Switch back to your terminal and run these commands, replacing
+`<repository_url>` with the value of `repository_url` from the previous step.
+
+```bash ! tour
+docker login <repository_url>
+docker build -t <repository_url>/dataapi .
+docker push <repository_url>/dataapi
+```
+
+## !!steps 
+
+Docker will prompt you for your Snowflake username and password, and then 
+authenticate you against the container registry.
+
+```bash ! tour
+# !focus(1:1)
+docker login <repository_url>
+docker build -t <repository_url>/dataapi .
+docker push <repository_url>/dataapi
+```
+
+## !!steps 
+
+We now rebuild the container, tagging it with the full URL to our 
+repository and appending `/dataapi`, and then pushing the final image to 
+the repository
+
+```bash ! tour
+docker login <repository_url>
+# !focus(1:2)
+docker build -t <repository_url>/dataapi .
+docker push <repository_url>/dataapi
+```
+</CodeTour>
+
+## Run in Snowflake
+
+Switch back to your Snowflake console or SnowSQL and we will configure Snowpark 
+to run our container.
+
+<CodeTour>
+## !!steps Create the compute pool
+
+The first step here is to create a compute pool where our container can run.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE COMPUTE POOL API_POOL
+  MIN_NODES = 1
+  MAX_NODES = 5
+  INSTANCE_FAMILY = CPU_X64_XS;
+
+GRANT USAGE ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+```
+
+## !!steps 
+
+Creating a new compute pool requires admin privileges so we switch to the 
+`ACCOUNTADMIN` role.
+
+```sql ! tour
+-- !focus(1:1)
+USE ROLE ACCOUNTADMIN;
+
+CREATE COMPUTE POOL API_POOL
+  MIN_NODES = 1
+  MAX_NODES = 5
+  INSTANCE_FAMILY = CPU_X64_XS;
+
+GRANT USAGE ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+```
+
+## !!steps 
+
+We then create a compute pool named `API_POOL`, specifying that we 
+want it to run between `1` and `5` extra small (`CPU_X64_XS`) nodes.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+-- !focus(1:4)
+CREATE COMPUTE POOL API_POOL
+  MIN_NODES = 1
+  MAX_NODES = 5
+  INSTANCE_FAMILY = CPU_X64_XS;
+
+GRANT USAGE ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+```
+
+## !!steps 
+
+The `DATA_API_ROLE` we created for our API is then granted the 
+`USAGE` and `MONITOR` permissions on the compute pool.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE COMPUTE POOL API_POOL
+  MIN_NODES = 1
+  MAX_NODES = 5
+  INSTANCE_FAMILY = CPU_X64_XS;
+
+-- !focus(1:2)
+GRANT USAGE ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+```
+
+## !!steps Create the app service
+
+Next we need to create the service that will host our python application. Run
+this command and the container image we built will be run on the compute pool
+we created in the previous step.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+# !!steps 
+
+Our API will be a service endpoint so we use grant the required permission
+to the `DATA_API_ROLE` role.
+
+```sql ! tour
+-- !focus(1:2)
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+We don't need admin for these commands as we've already granted `DATA_API_ROLE`
+the required permissions, so we switch to that role.
+
+```sql ! tour
+-- !focus(1:1)
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+We create a new service named `API.PRIVATE.API` in the `API_POOL` compute
+pool we just created. The definition of that service follows between the `$$`
+marks.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+-- !focus(1:4)
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+-- !focus(1:1)
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+We give the container a name of `api`, and configured to use the `latest` image
+version/tag available at the repository path of `/api/private/api/dataapi`.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+-- !focus(1:3)
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+The resource `requests` definition tells Snowpark the average resource usage 
+that expected for this service so that it can best allocate resources within
+the service pool. We've specified here that we expect typical usage of `0.5` 
+virtual core units, and `128M` of memory.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    -- !focus(1:4)    
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+The `limits` definition puts a ceiling on the amount of resource that Snowpark
+will allocate. Here we've said to not provide more than `1` vCPU and no more
+than `256M` of memory.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      -- !focus(1:3)            
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+A single `endpoint` definition is added. We explicitly set `public: false`
+to ensure that this API is not accessible from the internet and set the service
+to listen on port `8001`. 
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  -- !focus(1:4)                    
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+The `DATA_PI_WH` warehouse is where the container connects to execute any 
+queries.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+-- !focus(1:1)
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+It will take a few minutes for the service to be created. You can check the 
+status of creation with these commands.
+
+```sql ! tour
+CALL SYSTEM$GET_SERVICE_STATUS('api');
+CALL SYSTEM$GET_SERVICE_LOGS('api.private.api', 0, 'api');
+```
+
+## !!steps 
+
+Once the service is setup and starting you can run the `SHOW ENDPOINTS` command 
+to see the access details for the service. Note that `is_public` is `false` and
+`ingress_url` is empty. This means the service can not be accessed anywhere
+from the public internet.
+
+```sql ! tour
+SHOW ENDPOINTS IN SERVICE API;
+```
+
+## !!steps 
+
+Now run `SHOW SERVICES` to see DNS
+information for the service we just created. Copy the hostname value as we'll
+need it later (also not that it's set to an internal hostname!).
+
+```sql ! tour
+SHOW SERVICES;
+```
+
+</CodeTour>
+
+## Setup Ockam
+
+It's now time to setup Ockam to allow you to securely connect your private
+systems. We're going to run the following commands in a terminal on your local
+workstation.
+
+<CodeTour>
+
+## !!steps 
+
+This will install the Ockam Command and source in the required environment 
+settings. If you've installed Ockam Command before you can skip this step.
+
+```bash ! tour
+# !focus(1:3)
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps 
+
+Wrapped up in this single `ockam enroll` command are several steps that will 
+bootstrap your first project and get you ready to go. It will:
+
+* Generate an Ockam Identity and store its secret keys in a file system based Ockam Vault.
+* Create an account with Ockam Orchestrator.
+* Provision a trial Space and Project in the Orchestrator.
+* Make your Ockam Identity the administrator of your new Project.
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+# !focus(1:1)
+ockam enroll
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps 
+
+We need to generate an enrollment ticket to allow a new Ockam Node to 
+join the project that was just created. This node will run alongside the 
+python API container in Snowpark:
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+# !focus(1:3)
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps 
+
+In this command we've set the new ticket to have a usage limit of `1` and to 
+expire in `1 hour`. This means the generated ticket is valid for a single use, 
+and that it's valid for 1 hour. A single usage ticket means there is low 
+risk associated with mishandling this ticket after use; there's no means 
+for an attacker to re-use it like an API token to access any system. 
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+# !focus(1:1)
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps 
+
+The Project Membership Credential that's issued will include  
+attributes that will be cryptographically attested to by the Project's 
+Membership Authority. You can use these attributes to apply policies with 
+Attribute Based Access Controls (ABAC) to allow or restrict specific actions and 
+communication paths between nodes.
+
+In this example we assign a single attribute of `snowflake-api-service-outlet`. 
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+ockam project ticket --usage-count 1 --expires-in 1h \
+# !focus(1:1)
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps 
+
+The `--relay snowflake-api-service-relay` flag is a shortcut for creating a 
+policy that allows this node to create a relay at the address 
+`snowflake-api-service-relay`. 
+
+This relay will allow other Ockam nodes running anywhere, if they meet all
+of your policy requirements, to establish a secure end-to-end 
+encrypted connection to your python API &mdash; without requiring you to expose
+any endpoints to the public Internet. 
+
+As the final part of this command we pipe the generated ticket to a file named 
+`ticket`.
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+# !focus(1:1)  
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps
+
+To allow Ockam nodes to enroll with the Credential Authority and discover routes
+to other nodes, we need to allow outbound access to your Ockam Project. Run this
+command and capture the output for later.
+
+```bash ! tour
+ockam project show --jq '.egress_allow_list[]'
+```
+
+## !!steps 
+
+Replace the value of `<repository_url>` with the URL to the Snowflake image 
+repository we created earlier. This step then pulls down the latest Docker image
+containing Ockam, tags it with the URL to your image repository, and then pushes
+the image to Snowflake so we can use it later.
+
+```bash ! tour
+docker pull ghcr.io/build-trust/ockam
+docker tag ghcr.io/build-trust/ockam <repository_url>/ockam
+docker push <repository_url>/ockam
+```
+
+## !!steps 
+
+In the Snowflake console or SnowSQL, run these SQL commands. Replace the 
+following strings:
+
+* `<EGRESS_ALLOW_LIST>`: the egress list that was returned from 
+`ockam project show`.
+* `<OCKAM_ENROLLMENT_TICKET>`: the contents of the file named `ticket` that was 
+saved earlier.
+* `<API_DNS_NAME>`: the internal hostname returned from `SHOW SERVICES`.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: api.private.api.snowflakecomputing.internal:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+Create a network rule named `OCKAM_OUT` that allows outbound (`EGRESS`) 
+connectivity to be 
+initiated to a specific host and port for your Ockam project node. Then create
+an integration named `OCKAM` and enable the network rule for our integration. 
+
+The role we're using for our API (`DATA_API_ROLE`) is then granted permission 
+to use the `OCKAM` integration.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+-- !focus(1:7)
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: <API_DNS_NAME>:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+The remaining steps do not need admin access, so we switch to the `DATA_API_ROLE`
+role.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+-- !focus(1:1)
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: <API_DNS_NAME>:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+We create a new service named `API_OCKAM_OUTLET` to run in our `API_POOL` 
+compute pool. Again we define a YAML specification between the `$$` marks.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+-- !focus(1:4)
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: <API_DNS_NAME>:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+-- !focus(1:1)
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+The app container will pull the `latest` version/tag of the `ockam` container 
+from your image registry.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  -- !focus(1:2)
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: <API_DNS_NAME>:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+On startup the node will enroll with your Ockam Project using the single use
+enrollment ticket we created earlier. We're then instructing it to create a 
+relay at `snowflake-api-service-relay`, clients will use that name to establish
+a route to our API service. We also create a TCP outlet which will redirect
+any packets it receives to `api.private.api.snowflakecomputer.internal` on 
+port `8001`. If you recall this is the internal-only hostname and port that our
+Python API is listening on. The final configuration detail is an
+Attribute Based Access Control (ABAC) policy that states only the nodes permitted
+to connect are those with an 
+attribute of `snowflake-api-service-inlet` set.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      -- !focus(1:8)
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: <API_DNS_NAME>:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+We need to explicitly add out outbound connectivity integration to this service
+so that your Ockam node can establish a connection to your project.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: <API_DNS_NAME>:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+-- !focus(1:1)
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+Starting the service may take a few minutes, so you can use these commands to
+determine when it has started.
+
+```sql ! tour
+CALL SYSTEM$GET_SERVICE_STATUS('API_OCKAM_OUTLET');
+CALL SYSTEM$GET_SERVICE_LOGS('API_OCKAM_OUTLET', '0', 'ockam-outlet', 1000);
+```
+
+## !!steps 
+
+To access the Python API hosted in Snowflake from our local workstation we can
+start an Ockam node locally and create a TCP inlet. The TCP inlet will form the
+other (that is, client-side) end of our secure point-to-point connection.
+
+The first part of this command starts a Docker container and exposes the port
+`8001` from the container as port `8001` on our local host workstation.
+
+```bash ! tour
+# !focus(1:1)
+docker run --rm -d  --name ockam-inlet -p 8001:8001 \
+  ghcr.io/build-trust/ockam node create --foreground \
+  --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
+  --configuration "
+    tcp-inlet:
+      from: 0.0.0.0:8001
+      via: snowflake-api-service-relay
+      allow: snowflake-api-service-outlet
+  "
+```
+
+## !!steps 
+
+Using the `build-trust/ockam` container image we create a new node within the 
+container.
+
+```bash ! tour
+docker run --rm -d  --name ockam-inlet -p 8001:8001 \
+  # !focus(1:1)
+  ghcr.io/build-trust/ockam node create --foreground \
+  --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
+  --configuration "
+    tcp-inlet:
+      from: 0.0.0.0:8001
+      via: snowflake-api-service-relay
+      allow: snowflake-api-service-outlet
+  "
+```
+
+## !!steps 
+
+We create a new enrollment ticket for our project (`$(...)`) and pass the value
+inline to the `--enrollment-ticket` argument. It's important to note that when
+we create the ticket we specify an attribute of `snowflake-api-service-inlet`. 
+Any node that enrolls using this ticket will be assigned this attribute, we 
+defined a policy earlier that stated presence of this attribute was a requirement
+to connect. If this attribute is not set then our attempts to connect to the API
+would be refused.
+
+```bash ! tour
+docker run --rm -d  --name ockam-inlet -p 8001:8001 \
+  ghcr.io/build-trust/ockam node create --foreground \
+  # !focus(1:1)
+  --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
+  --configuration "
+    tcp-inlet:
+      from: 0.0.0.0:8001
+      via: snowflake-api-service-relay
+      allow: snowflake-api-service-outlet
+  "
+```
+
+## !!steps 
+
+On this node we create a TCP inlet that will listen on port `8001` within the
+container, any packets it receives will be forwarded to the relay named 
+`snowflake-api-service-relay` but only if the node at the end of that relay 
+has the attribute `snowflake-api-service-outlet` set.
+
+The `docker run` command has port `8001` on our host machine send those packets 
+to `8001` in the container, with is a TCP inlet that forwards those packet to
+relay, which are then received by the TCP outlet running in Snowpark, which
+forwards them to `api.private.api.snowflakecomputer.internal:8001`, which is 
+the interface that our Python API in Snowpark is listening on. 
+
+```bash ! tour
+docker run --rm -d  --name ockam-inlet -p 8001:8001 \
+  ghcr.io/build-trust/ockam node create --foreground \
+  --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
+  # !focus(2:5)
+  --configuration "
+    tcp-inlet:
+      from: 0.0.0.0:8001
+      via: snowflake-api-service-relay
+      allow: snowflake-api-service-outlet
+  "
+```
+
+## !!steps 
+
+All that means that a request to `localhost:8001` will now be sent over 
+a private point-to-point connection to the Python API. We can test this by 
+running `curl` to return the JSON results for the top 10 customers.
+
+```bash ! tour
+curl -X GET "http://localhost:8001/connector/customers/top10"
+```
+
+## !!steps 
+
+The other API endpoints defined in the Python app will also work. If you
+want to retrieve the monthly sales for clerk `000000002` for the year `1995`
+
+```bash ! tour
+curl -X GET "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
+```
+
+</CodeTour>
+
+## Clean up
+
+Once you're done with this demo you may want to remove everything we've setup.
+
+
+<CodeTour>
+
+## !!steps Stop the API
+
+Make sure to stop the service before you try to remove anything.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+ALTER SERVICE API.PRIVATE.API SUSPEND;
+```
+
+## !!steps Remove the services
+
+Now that the service has stopped, use the `DATA_API_ROLE` to remove it.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+DROP SERVICE API.PRIVATE.API;
+DROP SERVICE API_OCKAM_OUTLET;
+```
+
+## !!steps Delete the resources
+
+Finally as an admin you can permanently remove the compute and data resources
+we created.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+DROP ROLE IF EXISTS DATA_API_ROLE;
+DROP DATABASE IF EXISTS API;
+DROP INTEGRATION IF EXISTS OCKAM;
+DROP COMPUTE POOL IF EXISTS API_POOL;
+DROP WAREHOUSE IF EXISTS DATA_API_WH;
+```
+
+</CodeTour>
+
+## Next steps
+
+In this demo we've been able to provide an example of an API that will
+return data in Snowflake as JSON, and shown how we can restrict connectivity
+to the API to only specific clients within our Organization.
+
+Any data that within Snowflake can be securely shared with any other system
+that is able to retrieve data via a JSON REST API. You could further extend this
+example by adding authentication to the python app, and implementing Role Based Access
+Controls (RBAC) to further lock down which data an authenticated client can
+retrieve.
+
+If you'd like to explore some other capabilities of Ockam I'd recommend:
+
+* [Real-time pipelines from Snowflake to Kafka](/blog/snowflake-push-kafka)
+* [Adding security as a feature in your SaaS product](/blog/building-secure-saas-platforms)
+* [Zero-trust data streaming with Redpanda Connect](/blog/redpanda_connect_with_ockam#connect-secure-and-streamall-in-one-simple-platform)
