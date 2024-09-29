@@ -1,6 +1,11 @@
 'use client';
 import { z } from 'zod';
-import { Selection, Selectable, SelectionProvider } from 'codehike/utils/selection';
+import {
+  Selection,
+  Selectable,
+  SelectionProvider,
+  useSelectedIndex,
+} from 'codehike/utils/selection';
 import { Block, HighlightedCodeBlock, parseProps } from 'codehike/blocks';
 import { HighlightedCode, Pre, highlight } from 'codehike/code';
 
@@ -45,25 +50,30 @@ const Schema = Block.extend({
   steps: z.array(Block.extend({ code: HighlightedCodeBlock })),
 });
 
-const CodeTour: FC = (props) => {
+const Tour: FC = (props) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [selectedIndex] = useSelectedIndex();
 
   const uid = Math.random().toString(36).slice(2, 5);
   const data = parseProps(props, Schema);
   const [steps, setSteps] = useState<typeof data.steps>([]);
 
   useEffect(() => {
+    console.log('index: ', selectedIndex);
     if (!ref.current) return;
     if (typeof window !== 'undefined') {
       const containerY = document.documentElement.clientHeight;
       const codeY = ref.current.clientHeight;
       let top = 0;
+      console.log('container: ', containerY);
+      console.log('code: ', codeY);
       if (codeY < containerY && codeY > 0) {
-        top = (containerY - codeY * 2) / 2;
+        top = (containerY - codeY) / 2;
       }
+      console.log('top: ', top);
       ref.current.style.top = `${top}px`;
     }
-  }, [ref.current]);
+  }, [ref.current, selectedIndex]);
 
   useEffect(() => {
     const parseSteps = async () => {
@@ -78,8 +88,9 @@ const CodeTour: FC = (props) => {
     };
     parseSteps();
   }, []);
+
   return (
-    <SelectionProvider style={{ display: 'flex', gap: '0', flexDirection: 'row' }}>
+    <>
       <div
         className="prose prose-invert"
         style={{ flex: '1 1 0%', marginTop: '8rem', marginBottom: '8rem', marginLeft: '0' }}
@@ -131,6 +142,13 @@ const CodeTour: FC = (props) => {
           />
         </div>
       </div>
+    </>
+  );
+};
+const CodeTour: FC = (props) => {
+  return (
+    <SelectionProvider style={{ display: 'flex', gap: '0', flexDirection: 'row' }}>
+      <Tour {...props} />
     </SelectionProvider>
   );
 };
