@@ -101,7 +101,6 @@ const BlogPostPage: NextPageWithLayout<BlogPostPageProps> = ({
             <MDXRemote {...source} components={mdxComponents} />
             <BlogsPagination />
           </Flex>
-
           <BlogPostRightNavigation
             slug={router.query.slug as string}
             tableOfContentSource={blogPostBodyRef?.current}

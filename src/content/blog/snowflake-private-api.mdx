@@ -1,10 +1,10 @@
 ---
-title: Private APIs in Snowflake
+title: Build completely private APIs in Snowflake
 codetour: true
 category: Learning
-date: '2024-09-30'
+date: '2024-09-26'
 description: TBD
-image: /blog/snowflake-push-kafka/snowflake-push-kafka.png
+image: /blog/snowflake-private-api/cover.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
 ---
@@ -14,14 +14,73 @@ authorAvatar: /blog/glenn-gillen.jpg
 {/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
 {/* <!-- vale Microsoft.Contractions = NO --> */}
 
+If you've stored data in Snowflake then chances are you've also got an 
+enterprise application that needs to access it, and a common way to do that is 
+through an HTTP API. This is your organization's _private_ data though, so 
+making it available through an API that is accessible on the _public_ internet 
+is not the best approach.
+
+In this guide I'm going to walk you through how to build, deploy, and host a 
+_private_ custom API powered by Snowflake.
+
+The API will not have an endpoint exposed to the Internet. Your application 
+will, instead, access this API over private endpoints that are only available 
+within your enterprise's VPC and other private environments.
+
+The example will build a reporting endpoint (in Python) to return data from the 
+[TPC-H](https://docs.snowflake.com/en/user-guide/sample-data-tpch) dataset 
+already included in your Snowflake account. 
+
+## Prerequisites
+
+- [Snowflake](https://snowflake.com) Account in an AWS commercial region. 
+    - Privileges necessary to create a user, database, warehouse, compute pool, 
+repository, network rule, external access integration, and service in Snowflake.
+    - Privileges necessary to access the tables in the 
+`SNOWFLAKE_SAMPLE_DATA.TPCH_SF10` database and schema.
+    - Access to run SQL in the Snowflake console or SnowSQL
+- [GitHub](https://github.com/) Account with credits for Codespaces + basic 
+experience using git.
+- [Ockam](https://www.ockam.io/) Account to securely expose your private API
+- Intermediate knowledge of Python
+
 https://github.com/mrinalwadhwa/sfquickstarts/blob/mrinal/add-private-api-guide/site/sfguides/src/build_a_private_custom_api_in_python/build_a_private_custom_api_in_python.md
 
-```
+<CodeTour>
+
+## !!steps Create a Warehouse
+
+Using the Snowflake console or using SnowSQL run these commands
+
+```sql ! tour
 USE ROLE ACCOUNTADMIN;
 CREATE WAREHOUSE DATA_API_WH WITH WAREHOUSE_SIZE='xsmall';
 ```
 
+## !!steps 
+
+Creating a warehouse requires `ACCOUNTADMIN` level permissions, so we'll first
+switch to this role.
+
+```sql ! tour
+--!focus(1:1)
+USE ROLE ACCOUNTADMIN;
+CREATE WAREHOUSE DATA_API_WH WITH WAREHOUSE_SIZE='xsmall';
 ```
+
+# !!steps 
+
+We then create a new warehouse named `DATA_API_WH`, with a size of `xsmall`. 
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+--!focus(1:1)
+CREATE WAREHOUSE DATA_API_WH WITH WAREHOUSE_SIZE='xsmall';
+```
+
+## !!steps Create app role
+
+```sql ! tour
 USE ROLE ACCOUNTADMIN;
 CREATE ROLE DATA_API_ROLE;
 
@@ -30,8 +89,19 @@ GRANT IMPORTED PRIVILEGES ON DATABASE SNOWFLAKE_SAMPLE_DATA TO ROLE DATA_API_ROL
 
 GRANT ROLE DATA_API_ROLE TO ROLE ACCOUNTADMIN;
 ```
+</CodeTour>
 
-```
+## Setup development environment
+
+?? notes on how to setup Codespace
+
+## Python app code
+
+<CodeTour>
+
+## !!steps Top 10 API endpoint
+
+```sql ! tour
 @connector.route('/customers/top10')
 def customers_top10():
     # Validate arguments
@@ -60,12 +130,20 @@ def customers_top10():
     except:
         abort(500, "Error reading from Snowflake. Check the logs for details.")
 ```
+</CodeTour>
 
-```
+## Build & publish app container
+<CodeTour>
+
+## !!steps 
+
+```bash ! tour
 docker build -t dataapi .
 ```
 
-```
+## !!steps Create the image registry
+
+```sql ! tour
 USE ROLE ACCOUNTADMIN;
 CREATE DATABASE API;
 
@@ -80,13 +158,17 @@ GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
 SHOW IMAGE REPOSITORIES;
 ```
 
-```
+## !!steps Push the container
+
+```bash ! tour
 docker login <repository_url>
 docker build -t <repository_url>/dataapi .
 docker push <repository_url>/dataapi
 ```
 
-```
+## !!steps Create the compute pool
+
+```sql ! tour
 USE ROLE ACCOUNTADMIN;
 
 CREATE COMPUTE POOL API_POOl
@@ -98,7 +180,9 @@ GRANT USAGE ON COMPUTE POOL API_POOl TO ROLE DATA_API_ROLE;
 GRANT MONITOR ON COMPUTE POOL API_POOl TO ROLE DATA_API_ROLE;
 ```
 
-```
+## !!steps Create the app pool
+
+```sql ! tour
 USE ROLE DATA_API_ROLE;
 
 CREATE SERVICE API.PRIVATE.API
@@ -124,46 +208,94 @@ $$
 QUERY_WAREHOUSE = DATA_API_WH;
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 CALL SYSTEM$GET_SERVICE_STATUS('api');
 CALL SYSTEM$GET_SERVICE_LOGS('api.private.api', 0, 'api');
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 SHOW ENDPOINTS IN SERVICE API;
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 SHOW SERVICES;
 ```
 
-```
-# Install Ockam Command
-curl --proto '=https' --tlsv1.2 -sSfL https://install.command.ockam.io | bash && source "$HOME/.ockam/env"
+</CodeTour>
 
-# Enroll with Ockam Orchestrator
+## Setup Ockam
+
+<CodeTour>
+
+## !!steps 
+
+```bash ! tour
+# !focus(1:3)
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
 ockam enroll
-
-# Create an enrollment ticket for the node that will run inside container services
 ockam project ticket --usage-count 1 --expires-in 1h \
-  --attribute snowflake-api-service-outlet --relay snowflake-api-service-relay > ticket
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
 
-# Print the egress allow list for your Ockam project
+## !!steps 
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+# !focus(1:1)
+ockam enroll
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps 
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+# !focus(1:3)
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps
+
+```bash ! tour
 ockam project show --jq '.egress_allow_list[]'
 ```
 
-```
+## !!steps 
+
+```bash ! tour
 docker pull ghcr.io/build-trust/ockam
 docker tag ghcr.io/build-trust/ockam <repository_url>/ockam
 docker push <repository_url>/ockam
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 # Example
 VALUE_LIST = ("4ed9ff5d-4953-4080-83c7-e69a3477a545.projects.orchestrator.ockam.io:443");
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 USE ROLE ACCOUNTADMIN;
 
 -- Update VALUE_LIST with ockam egress details
@@ -204,12 +336,16 @@ $$
 EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 CALL SYSTEM$GET_SERVICE_STATUS('API_OCKAM_OUTLET');
 CALL SYSTEM$GET_SERVICE_LOGS('API_OCKAM_OUTLET', '0', 'ockam-outlet', 1000);
 ```
 
-```
+## !!steps 
+
+```bash ! tour
 docker run --rm -d  --name ockam-inlet -p 8001:8001 \
   ghcr.io/build-trust/ockam node create --foreground \
   --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
@@ -221,35 +357,49 @@ docker run --rm -d  --name ockam-inlet -p 8001:8001 \
   "
 ```
 
-```
+## !!steps 
+
+```bash ! tour
 curl -X GET "http://localhost:8001/connector/customers/top10?start_range=1995-02-01&end_range=1995-02-14"
 ```
 
-```
+## !!steps 
+
+```bash ! tour
 curl -X GET "http://localhost:8001/snowpark/customers/top10?start_range=1995-02-01&end_range=1995-02-14"
 ```
 
-```
+## !!steps 
+
+```bash ! tour
 curl -X GET "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
 ```
 
-```
+## !!steps 
+
+```bash ! tour
 curl -X GET "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 USE ROLE DATA_API_ROLE;
 ALTER SERVICE API.PRIVATE.API SUSPEND;
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 USE ROLE DATA_API_ROLE;
 
 DROP SERVICE API.PRIVATE.API;
 DROP SERVICE API_OCKAM_OUTLET;
 ```
 
-```
+## !!steps 
+
+```sql ! tour
 USE ROLE ACCOUNTADMIN;
 
 DROP ROLE IF EXISTS DATA_API_ROLE;
@@ -258,3 +408,5 @@ DROP INTEGRATION IF EXISTS OCKAM;
 DROP COMPUTE POOL IF EXISTS API_POOL;
 DROP WAREHOUSE IF EXISTS DATA_API_WH;
 ```
+
+</CodeTour>

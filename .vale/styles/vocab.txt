@@ -38,3 +38,5 @@ Initech
 attestable
 subnet
 subnets
+Codespace
+Codespaces
