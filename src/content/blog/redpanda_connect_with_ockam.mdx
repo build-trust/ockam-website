@@ -144,7 +144,7 @@ ockam project ticket --usage-count 1 --expires-in 10m \
 
 docker run --rm --network redpanda --name consumer \
   -v "$(pwd)/consumer.yaml:/connect.yaml" \
-  -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
+  -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" docker.redpanda.com/redpandadata/connect
 
 # The previous command will block and print the output so you can see 
 # the messages being consumed by the consumer.
@@ -158,7 +158,7 @@ for i in $(seq 1 3); do
 
   docker run --rm -d --network redpanda --name "producer$i" \
     -v "$(pwd)/producer.yaml:/connect.yaml" \
-    -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
+    -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" docker.redpanda.com/redpandadata/connect
 done
 
 # It can take a minute or so for the messages to start flowing.
@@ -230,7 +230,7 @@ a file named `ticket`.
 ```bash
 docker run --rm --network redpanda --name consumer \
   -v "$(pwd)/consumer.yaml:/connect.yaml" \
-  -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" ghcr.io/build-trust/redpanda-connect
+  -e OCKAM_ENROLLMENT_TICKET="$(cat ticket)" docker.redpanda.com/redpandadata/connect
 ```
 
 This is where you start your consumer with Redpanda Connect. It uses Docker to 
@@ -298,7 +298,7 @@ for i in $(seq 1 3); do
 
   docker run --rm -d --network redpanda --name "producer$i" \
     -v "$(pwd)/producer.yaml:/connect.yaml" \
-    -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" ghcr.io/build-trust/redpanda-connect
+    -e OCKAM_ENROLLMENT_TICKET="$(cat ./ticket)" docker.redpanda.com/redpandadata/connect
 done
 ```
 
