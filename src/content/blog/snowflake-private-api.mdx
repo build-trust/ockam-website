@@ -44,7 +44,7 @@ experience using git.
 - [Ockam](https://www.ockam.io/) Account to securely expose your private API
 - Intermediate knowledge of Python
 
-https://github.com/mrinalwadhwa/sfquickstarts/blob/mrinal/add-private-api-guide/site/sfguides/src/build_a_private_custom_api_in_python/build_a_private_custom_api_in_python.md
+## Setup Snowflake
 
 <CodeTour>
 
@@ -93,15 +93,35 @@ GRANT ROLE DATA_API_ROLE TO ROLE ACCOUNTADMIN;
 
 ## Setup development environment
 
-?? notes on how to setup Codespace
+The code in this guide comes from a lab that Brad Culberson and the team at 
+Snowflake deliver to customers. We're going to use GitHub Codespaces as our 
+development environment to make any changes we need to the code and to 
+package it for deployment. Here's how to set it up:
+
+* [Visit the `sfc-gh-bculberson/lab_data_api_python` repo](https://github.com/sfc-gh-bculberson/lab_data_api_python).
+* Press `.`&hellip; _or_ click the green `<> Code` button choose `Codespaces` and click
+`Create codespace on main`.
+
+GitHub will then load a new Codespace environment with the code from this
+repository.
 
 ## Python app code
+
+In the `src/connector.py` file you'll find the code that defines the API
+and generates responses for a number of endpoints that are served under the
+`/connector` path. We're going to walk through just one of the endpoints as 
+and example of how to retrieve data out of Snowflake and return it as JSON.
+
 
 <CodeTour>
 
 ## !!steps Top 10 API endpoint
 
-```sql ! tour
+Within the `src/connector.py` find the line `@connector.route('/customers/top10')`,
+the code block below it defines and API response that returns the top 10 customers
+between a given date
+
+```python ! tour
 @connector.route('/customers/top10')
 def customers_top10():
     # Validate arguments
@@ -130,18 +150,196 @@ def customers_top10():
     except:
         abort(500, "Error reading from Snowflake. Check the logs for details.")
 ```
+
+## !!steps
+
+This line uses a `Blueprint` route decorator to define a route at the path 
+`/customers/top10` (within `app.py` everything in this file is mounted under
+the sub-path of `/connector, so the final exposed path will end up being
+`/connector/customers/top10`). The decorator tells Flask that the function that
+immediately follows is what it should use to generate the response for 
+any requests that come to this path.
+
+```python ! tour
+#!focus(1:1)
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+
+## !!steps
+
+We want to provide the functionality to return the top 10 customers within a 
+given time range. To do that, we check the request parameters to find values 
+for `start_range` and `end_range`, and if they are not set we  
+set default values of `1995-01-01` and `1995-03-31` respectively.
+
+Those variables are then parsed into `datetime` objects using `strptime`, if 
+that fails we return an error stating the date formats are invalid.
+
+```python ! tour
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    #!focus(1:7)
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+
+# !!steps
+
+We then build a SQL statement that queries the `tpch_sf10.orders` table, 
+returning rows where the `o_orderdate` is between the placeholders of our start 
+and end range, we group by `o_custkey`, order the results descending by the 
+`sum` of `o_totalprice` for each grouped customer, and finally `limit` to the 
+top `10` rows.
+
+The end result is a query that returns the top 10 customers by spend within a
+date range.
+
+```python ! tour
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    #!focus(1:11)        
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
+
+# !!steps
+
+The SQL string is then formatted by interpolating the `datetime` values for our
+start and end dates into the appropriate place within string. We then use the
+connection to Snowflake (`conn`, established earlier in the `connector.py` file)
+to execute the query using a `DictCursor` which will return results with
+column names as key values. 
+
+Once we initialize the query we call the `fetchall()` method to return all 
+of the results, which are then passed to `jsonify()` to serialize them to JSON,
+before passing to `make_response()` to return the result to the client.
+
+```python ! tour
+@connector.route('/customers/top10')
+def customers_top10():
+    # Validate arguments
+    sdt_str = request.args.get('start_range') or '1995-01-01'
+    edt_str = request.args.get('end_range') or '1995-03-31'
+    try:
+        sdt = datetime.datetime.strptime(sdt_str, dateformat)
+        edt = datetime.datetime.strptime(edt_str, dateformat)
+    except:
+        abort(400, "Invalid start and/or end dates.")
+    sql_string = '''
+        SELECT
+            o_custkey
+          , SUM(o_totalprice) AS sum_totalprice
+        FROM snowflake_sample_data.tpch_sf10.orders
+        WHERE o_orderdate >= '{sdt}'
+          AND o_orderdate <= '{edt}'
+        GROUP BY o_custkey
+        ORDER BY sum_totalprice DESC
+        LIMIT 10
+    '''
+    #!focus(1:6)            
+    sql = sql_string.format(sdt=sdt, edt=edt)
+    try:
+        res = conn.cursor(DictCursor).execute(sql)
+        return make_response(jsonify(res.fetchall()))
+    except:
+        abort(500, "Error reading from Snowflake. Check the logs for details.")
+```
 </CodeTour>
 
 ## Build & publish app container
+
+In Codespaces click the hamburger menu icon (`☰`) > `Terminal` > `New Terminal`. 
+Choose `Continue working in GitHub Codespaces` and select the smallest instance
+possible (at the time of writing that's 2 cores).
+
 <CodeTour>
 
 ## !!steps 
+
+In the terminal window at the bottom of your Codespace run the `docker build` 
+command to the right. It will build a container based on configuration in the 
+current working directory (`.`) and then tag the resulting image with the name
+`dataapi`.
 
 ```bash ! tour
 docker build -t dataapi .
 ```
 
 ## !!steps Create the image registry
+
+Using the Snowflake console or using SnowSQL run these commands:
 
 ```sql ! tour
 USE ROLE ACCOUNTADMIN;
@@ -158,7 +356,130 @@ GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
 SHOW IMAGE REPOSITORIES;
 ```
 
+## !!steps 
+
+Everything we're going to do here us going to require admin access, so we ensure
+we're using the appropriate role.
+
+```sql ! tour
+--!focus(1:1)
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+Now we create a database named `API` specifically to contain our API related 
+data. 
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+--!focus(1:1)
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+The `DATA_API_ROLE` role (created earlier in the Setup Snowflake steps) is
+granted full access to the `API` database. Withing that database we then create 
+a new schema named `PRIVATE` and grant full access on that schema too.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+--!focus(1:3)
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+We ensure we're using the `API` database and the `PRIVATE` schema and create
+an image repository named `API`, and then grant the `DATA_API_ROLE` full access 
+to it.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+--!focus(1:4)
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+SHOW IMAGE REPOSITORIES;
+```
+
+## !!steps 
+
+Running the `SHOW IMAGE REPOSITORIES` command will return the details for the
+repository we just created, it will something like:
+
+{/* <!-- vale ockam.spelling = NO --> */}
+{/* <!-- vale Microsoft.RangeFormat = NO --> */}
+| created_on                    | name                | database_name | schema_name | repository_url                                                                                                  | owner     | owner_role_type | comment |
+|-------------------------------|---------------------|---------------|-------------|-----------------------------------------------------------------------------------------------------------------|-----------|-----------------|---------|
+| 2024-10-04 14:27:19.459 -0700 | API | API   | PRIVATE | orgname-acctname.registry.snowflakecomputing.com/api/private/api | DATA_API_ROLE | ROLE            |         |
+{/* <!-- vale ockam.spelling = YES --> */}
+{/* <!-- vale Microsoft.RangeFormat = YES --> */}
+
+ Take note of the value of `repository_url`, as we're 
+going to need it in a moment.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+CREATE DATABASE API;
+
+GRANT ALL ON DATABASE API TO ROLE DATA_API_ROLE;
+CREATE SCHEMA IF NOT EXISTS API.PRIVATE;
+GRANT ALL ON SCHEMA API.PRIVATE TO ROLE DATA_API_ROLE;
+
+USE DATABASE API;
+USE SCHEMA PRIVATE;
+CREATE OR REPLACE IMAGE REPOSITORY API;
+GRANT READ ON IMAGE REPOSITORY API TO ROLE DATA_API_ROLE;
+--!focus(1:1)
+SHOW IMAGE REPOSITORIES;
+```
+
+
+
 ## !!steps Push the container
+
+Switch back to the terminal in your Codespace and run these commands, replacing
+`<repository_url>` with the value of `repository_url` from the previous step.
 
 ```bash ! tour
 docker login <repository_url>
@@ -166,6 +487,34 @@ docker build -t <repository_url>/dataapi .
 docker push <repository_url>/dataapi
 ```
 
+## !!steps 
+
+Do stuff
+
+```bash ! tour
+# !focus(1:1)
+docker login <repository_url>
+docker build -t <repository_url>/dataapi .
+docker push <repository_url>/dataapi
+```
+
+## !!steps 
+
+Do stuff
+
+```bash ! tour
+docker login <repository_url>
+# !focus(1:2)
+docker build -t <repository_url>/dataapi .
+docker push <repository_url>/dataapi
+```
+</CodeTour>
+
+## Run in Snowflake
+
+??
+
+<CodeTour>
 ## !!steps Create the compute pool
 
 ```sql ! tour
