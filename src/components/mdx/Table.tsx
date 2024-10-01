@@ -29,7 +29,9 @@ const Table = (props: TableProps): JSX.Element => (
 export const tableIntegralComponents = {
   tr: (props: TableRowProps): JSX.Element => <Tr {...props} />,
   td: (props: TableCellProps): JSX.Element => <Td {...props} />,
-  th: (props: TableColumnHeaderProps): JSX.Element => <Th fontFamily="blogPostBody" {...props} />,
+  th: (props: TableColumnHeaderProps): JSX.Element => (
+    <Th fontFamily="blogPostBody" style={{ color: 'inherit ' }} {...props} />
+  ),
   tbody: (props: TableBodyProps): JSX.Element => <Tbody {...props} />,
   thead: (props: TableHeadProps): JSX.Element => <Thead {...props} />,
   tfoot: (props: TableFooterProps): JSX.Element => <Tfoot {...props} />,
