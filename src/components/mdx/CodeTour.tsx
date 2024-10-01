@@ -15,7 +15,7 @@ import { tokenTransitions } from './transition/TokenTransition';
 import { focus } from './transition/Focus';
 import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Heading } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 import { CheckIcon, CopyIcon } from '@chakra-ui/icons';
 
 const StyledPre = styled(Pre)`
@@ -93,7 +93,13 @@ const Tour: FC = (props) => {
     <>
       <div
         className="prose prose-invert"
-        style={{ flex: '1 1 0%', marginTop: '8rem', marginBottom: '8rem', marginLeft: '0' }}
+        style={{
+          flex: '1 1 0%',
+          marginTop: '8rem',
+          marginBottom: '8rem',
+          marginLeft: '0',
+          maxWidth: '50%',
+        }}
       >
         {steps.map((step, i) => (
           <StyledSelectable
@@ -117,7 +123,9 @@ const Tour: FC = (props) => {
             >
               {step.title}
             </Heading>
-            <div>{step.children}</div>
+            <Box maxW="100%" overflowX="auto">
+              {step.children}
+            </Box>
           </StyledSelectable>
         ))}
       </div>

@@ -45,6 +45,7 @@ const LayoutMobileHeader: FunctionComponent<LayoutMobileHeaderProps> = ({
     >
       <Container
         variant="section"
+        maxW="100%"
         h={isOpenMobileNav ? '100vh' : '4.25rem'}
         px={0}
         pos="absolute"
