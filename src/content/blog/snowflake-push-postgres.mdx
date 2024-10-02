@@ -1,0 +1,1056 @@
+---
+title: Real-Time CDC Pipelines from Snowflake to PostgreSQL
+codetour: true
+category: Learning
+date: '2024-09-20'
+description: Setup a private point-to-point data stream between Snowflake and Kafka.
+image: /blog/snowflake-push-kafka/snowflake-push-kafka.png
+author: Glenn Gillen
+authorAvatar: /blog/glenn-gillen.jpg
+isFeatured: false
+featuredOrder: 2
+---
+
+{/* <!-- vale Microsoft.We = NO --> */}
+{/* <!-- vale Microsoft.FirstPerson = NO --> */}
+{/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
+{/* <!-- vale Microsoft.Contractions = NO --> */}
+
+What if I told you there was a way to use Change Data Capture (CDC) to stream all
+those insights you've got in Snowflake, in real-time, back to the your private 
+PostgreSQL Database? That it'll
+use private point-to-point connections that don't require you to manage IP
+allow lists, open firewall ports, or setup services like PrivateLink, and that it
+will take you less than 15 minutes to setup!
+
+Introducing the Snowflake Push to PostgreSQL Connector!
+
+## Snowflake 💙 PostgreSQL
+
+Snowflake is The Data Cloud and the place to support workloads such as data
+warehouses, data lakes, data science / ML / AI, and even cybersecurity. This
+centralization brings a huge amount of convenience through breaking down
+data silos and allowing teams to make smart data-informed decisions. 
+
+After enriching the data and finding new insights, those insights need to
+make their way back out to the other apps and business systems that can act 
+upon them. PostgreSQL is a powerful, open-source relational database system 
+that's widely used for storing and managing structured data. Connecting to your 
+PostgreSQL database can be problematic depending on your network topology. It 
+would be convenient to give the database a public address, but that's a 
+significant increase in risk for a system that handles a lot of important data. 
+Managing IP allow lists and updating firewall ingress rules improves security 
+but can be cumbersome to manage. Alternatives like PrivateLink are better, but 
+they too can be cumbersome to setup and require your systems to be on the same 
+public cloud and in the same region.
+
+In this post I'm going to show you how to securely connect Snowflake to your 
+private PostgreSQL database, in just a few minutes. We will:
+
+* Setup a Snowflake Stream to capture changes to a table in Snowflake
+* Setup a PostgreSQL database in AWS
+* Connect Snowflake to PostgreSQL with a private encrypted connection
+to expose either system to the public internet!
+
+![Snowflake push to Kafka](/blog/snowflake-push-postgres/snowflake-push-postgres.png)
+
+
+## Snowflake streams 
+
+Snowflake streams are a way to capture every change made to a table (that is, every
+insert, update, and delete) and record it somewhere else. You may hear it called
+Change Data Capture (CDC) and it's an effective way to respond to changes 
+in the data that you care about. 
+
+### Create a stream
+
+<CodeTour>
+
+### !!steps
+
+Run the code here in a Snowflake worksheet. It will create a new table, and then
+create a stream attached to that table.
+
+```sql ! tour
+CREATE OR REPLACE TABLE customers (
+  id number(8) NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL
+);
+
+CREATE OR REPLACE STREAM customers_stream ON TABLE customers;
+```
+
+### !!steps 
+
+This section creates a new table, or replaces an existing one, to hold 
+details about our customers. If you've already got a table within Snowflake
+that you want to create a stream on you can skip this step.
+
+```sql ! tour
+--!focus(1:5)
+CREATE OR REPLACE TABLE customers (
+  id number(8) NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL
+);
+
+CREATE OR REPLACE STREAM customers_stream ON TABLE customers;
+```
+
+## !!steps 
+
+Once we have a table, adding a stream to it is a single command where
+we specific the name for the stream (`customers_stream`), and the
+name of the table to attach it to (`customers`).
+
+```sql ! tour
+CREATE OR REPLACE TABLE customers (
+  id number(8) NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL
+);
+
+--!focus(1:1)
+CREATE OR REPLACE STREAM customers_stream ON TABLE customers;
+```
+
+</CodeTour>
+
+## Amazon Relational Database Service (RDS) for PostgreSQL
+
+We're going to provision an Amazon RDS PostgreSQL Database so we can see an end-to-end 
+experience of data moving from Snowflake to PostgreSQL. If you have an existing 
+PostgreSQL database you're able to use you can skip this step.
+
+### Create a PostgreSQL database
+
+<ImageTour>
+
+### !!steps
+
+Within your [AWS Console](https://console.aws.amazon.com/) search for 
+`RDS` in the search field at the top and select the matching result. Visit the 
+`Databases` screen, and then click `Create Database`.
+
+The `Standard Create` option provides a good set of defaults for creating a
+RDS Database, so unless you've previous knowledge or experience to know you
+might want something different I'd suggest choosing "PostgreSQL" and confirming the details and 
+then clicking `Create database` at the bottom of the screen.
+
+Once you've started the database creation it may take about 15 minutes for
+provisioning to complete and for your database to be available.
+
+![!tour Create a database](/blog/snowflake-push-postgres/create-rds.png)
+
+</ImageTour>
+
+## Connect Snowflake to PostgreSQL
+
+We've created a stream, PostgreSQL is running. It's now time to connect the two! The
+next stage is going to complete the picture below, but creating a point-to-point
+connection between the two systems &mdash; without the need to expose any systems
+to the public internet!
+
+![Snowflake push to Amazon RDS](/blog/snowflake-push-postgres/aws-complete.png)
+
+<ImageTour>
+### !!steps Get the app
+
+The Snowflake Push to PostgreSQL Connector by Ockam is [invite only](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector),
+to get an invite please drop us an email at [hello@ockam.io](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector).
+
+Once invited you'll receive an email with a link to get the app.
+
+![!tour Get the app](/blog/snowflake-push-postgres/app-store.png)
+
+### !!steps Select a warehouse
+
+The first screen you're presented with will ask you to select the warehouse to utilize to activate the app.
+
+### !!steps Grant account privileges
+
+Click the `Grant` button to the right of this screen. The app will then be
+automatically granted permissions to create a warehouse and create a compute
+pool. 
+
+![!tour Grant account privileges](/blog/snowflake-push-postgres/grant-account.png)
+
+### !!steps Activate app
+
+Once the permissions grants complete, an `Activate` button will appear. Click
+it and the activation process will begin.
+
+![!tour Activate app](/blog/snowflake-push-postgres/activate-app.png)
+
+### !!steps Launch app
+
+After the app activates you'll see a page that summarizes the 
+privileges that the application now has. There's nothing we need 
+to review or update on these screens yet, so proceed by clicking the `Launch app` button.
+
+![!tour Launch app](/blog/snowflake-push-postgres/launch-app.png)
+
+### !!steps Download Ockam Command
+
+Run the following command on your local workstation:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io \
+  | bash source "$HOME/.ockam/env"
+```
+
+This will install the Ockam Command and source in the required environment 
+settings. If you've installed Ockam Command before you can skip this step.
+
+
+### !!steps Setup admin account
+
+Once Ockam Command installation is complete you can run:
+
+```bash
+ockam enroll
+```
+
+Wrapped up in this single `ockam enroll` command are several steps that will 
+bootstrap your first project and get you ready to go. It will:
+
+* Generate an Ockam Identity and store its secret keys in a file system based Ockam Vault.
+* Create an account with Ockam Orchestrator.
+* Provision a trial Space and Project in the Orchestrator.
+* Make your Ockam Identity the administrator of your new Project.
+
+### !!steps Generate enrollment ticket for PostgreSQL
+
+In this section we're going to provision an Ockam node that will run alongside
+our PostgreSQL database, and provide one of the ends of our point-to-point connection.
+
+![Amazon RDS PostgreSQL setup screen](/blog/snowflake-push-postgres/aws-rds-setup.png)
+
+We need to generate an enrollment ticket to allow a new Ockam Node to 
+join the project that was just created. This node will run alongside the 
+Amazon RDS Database, in the network where the Amazon RDS is running:
+
+```bash
+ockam project ticket --usage-count 1 \
+  --expires-in 24h --attribute postgres \
+  --relay postgres > postgres.ticket
+```
+
+</ImageTour>
+
+<CodeTour>
+
+### !!steps 
+
+In this command we've set the new ticket to expire in `24 hours`, and a usage 
+count of `1`. This means the generated ticket is valid for a single use, and 
+that it's valid for 24 hours. A single usage ticket means there is low 
+risk associated with mishandling this ticket after use; there's no means 
+for an attacker to re-use it like an API token to access any system. 
+
+```shell ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 24h \
+  --attribute postgres \
+  --relay postgres > postgres.ticket
+```
+
+### !!steps 
+
+The Project Membership Credential that's issued will include  
+attributes that will be cryptographically attested to by the Project's 
+Membership Authority. You can use these attributes to apply policies with 
+Attribute Based Access Controls (ABAC) to allow or restrict specific actions and 
+communication paths between nodes.
+
+In this example we assign a single attribute of `postgres`. 
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+# !focus(1:1)
+  --attribute postgres \
+  --relay postgres > postgres.ticket
+```
+
+### !!steps 
+
+The `--relay postgres` flag is a shortcut for creating a policy that allows this 
+node to create a relay at the address `postgres`. 
+
+This relay will allow your Snowflake warehouse to establish a secure end-to-end 
+encrypted connection to your PostgreSQL database, without requiring you to expose any 
+endpoints to the public Internet.
+
+As the final part of this command we pipe the generated ticket to a file named `postgres.ticket`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute postgres \
+# !focus(1:1)
+  --relay postgres > postgres.ticket
+```
+
+### !!steps Create a configuration file
+
+We're going to pass the configuration for our Ockam Node as a JSON file, so 
+save the configuration to the right into a file named `postgres.json`.
+
+```javascript ! tour
+{
+  "relay": "postgres",
+  "tcp-outlet": {
+    "to": "$POSTGRES_ENDPOINT:5432",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+Ockam Command will process the configuration file after the node starts, with the
+first instruction being to create a relay with the name `postgres`. This relay will 
+allow Snowflake to establish a secure end-to-end encrypted connection to your
+RDS Database. It provides the ability to have entirely isolated infrastructure 
+running within a private network, without requiring you to expose any endpoints
+to the public Internet and no configuring of allow lists to custom network routes.
+
+```javascript ! tour
+{
+// !focus(1:1)
+  "relay": "postgres",
+  "tcp-outlet": {
+    "to": "$POSTGRES_ENDPOINT:5432",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+An outlet decrypts any messages received by the node and 
+then forwards them to the specified broker address.
+
+```javascript ! tour
+{
+  "relay": "postgres",
+// !focus(1:4)  
+  "tcp-outlet": {
+    "to": "$POSTGRES_ENDPOINT:5432",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+In this example we're giving the interpolated value from the environment
+variable `POSTGRES_ENDPOINT`, which we'll set in a later step when we
+start the node.
+
+```javascript ! tour
+{
+  "relay": "postgres",
+  "tcp-outlet": {
+// !focus(1:1)  
+    "to": "$POSTGRES_ENDPOINT:5432",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+We will setup the Kafka Inlet that runs alongside our Snowflake 
+warehouse in a moment. Before we do that though, we can define a policy to restrict what 
+nodes can connect to our outlet.
+
+This policy applies Attribute Based Access Controls (ABAC) to allow 
+other nodes that have the attribute `snowflake` as part of their attested 
+credentials. The system denies access to nodes without the `snowflake` attribute.
+
+```javascript ! tour
+{
+  "relay": "postgres",
+  "tcp-outlet": {
+    "to": "$POSTGRES_ENDPOINT:5432",
+// !focus(1:1)      
+    "allow": "snowflake"
+  }
+}
+```
+
+</CodeTour> 
+
+<ImageTour>
+
+### !!steps Launch Ockam node for Amazon RDS
+
+The Ockam Node for Amazon RDS is a streamlined way to provision a managed Ockam Node
+within your private AWS VPC. 
+
+To deploy the node that will allow Snowflake to reach your Kafka broker visit
+the [Ockam Node for Amazon RDS Postgres listing in the AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-zjugwdx5hp2le), and click the `Continue to Subscribe` button, and then
+`Continue to Configuration`. 
+
+On the configuration page choose the region that your Amazon RDS cluster is
+running in, and then click `Continue to Launch` followed by `Launch`.
+
+![!tour Ockam node for Amazon RDS Postgres](/blog/snowflake-push-postgres/aws-marketplace-rds.png)
+
+### !!steps Enter stack details
+
+The initial Create Stack screen pre-fills the fields with the correct
+information for your node, so you can press `Next` to proceed.
+
+![!tour Ockam node for Amazon RDS - create stack screen](/blog/snowflake-push-postgres/create-stack.png)
+
+### !!steps Enter node configuration
+
+This screen has important details to you need to fill in:
+
+* **Stack name:** Give this stack a recognisable name, you'll see this in various locations in the AWS Console. It'll also make it easier to clean these resources up later if you with to remove them.
+* **VPC ID:** The ID of the Virtual Private Cloud network to deploy the node in. Make sure it's the same VPC where you've deployed your Amazon MSK cluster.
+* **Subnet ID:** Choose one of the subnets within your VPC, ensure MSK has a broker address available in that subnet.
+* **Enrollment ticket:** Copy the contents of the `kafka.ticket` file we created earlier and paste it in here.
+* **RDS Postgres Database Endpoint:** In the _Connectivity & security_ for your Amazon RDS Database you will find Endpoint details. Copy the `Endpoint` value for the Private RDS Database that's in the same subnet you chose above.
+* **JSON Node Configuration:** Copy the contents of the `postgres.json` file we created earlier and paste it in here.
+
+We've now completed the highlighted part of the diagram below, and our Kafka
+broker node is waiting for another node to connect.
+
+![Amazon RDS Postgres setup](/blog/snowflake-push-postgres/aws-rds-setup.png)
+
+![!tour Ockam node for Amazon RDS Postgres - node configuration screen](/blog/snowflake-push-postgres/stack-details.png)
+
+### !!steps Generate enrollment ticket for Snowflake
+
+![Setting up Ockam Node as native Snowflake app](/blog/snowflake-push-postgres/snowflake-setup.png)
+
+One end of our connection is now setup, it's time to connect the Snowflake end. 
+We need to generate an enrollment ticket to allow another Ockam Node to
+join our project. This node will run in our Snowflake warehouse:
+
+```bash
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+  --attribute snowflake > snowflake.ticket
+```
+</ImageTour>
+
+<CodeTour>
+
+### !!steps
+
+As we did with the earlier ticket, we've reduced the risk associated with
+mishandling a ticket by restricting it's permitted usage window. We've again set 
+a usage count of `1`, but with a tighter
+expiry time of just `2 hours`.
+
+```bash ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 2h \
+  --attribute snowflake > snowflake.ticket
+```
+
+### !!steps
+
+This credential will include an attested attribute of `snowflake`. You'll 
+recall in an earlier step we applied a policy to say that nodes in our 
+project must have an attribute of `snowflake` to connect to 
+the outlet. The node that enrolls with this ticket will also have the
+attribute `snowflake`, and so it will be able to communicate with our Kafka 
+node. 
+
+The ticket is then saved to a file called `snowflake.ticket`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+# !focus(1:1)
+  --attribute snowflake > snowflake.ticket
+```
+
+</CodeTour>
+
+
+<ImageTour>
+
+### !!steps Configure connection details
+
+Click "Get started" to open the Snowflake setup screen.
+
+![!tour Create Snowflake ticket](/blog/snowflake-push-postgres/snowflake-get-started-app.png)
+
+Take the contents of the file `snowflake.ticket` that we just created and paste
+it into "Provide the above Enrollment Ticket" form field in the "Configure app"
+setup screen in Snowflake.
+
+![!tour Create Snowflake ticket](/blog/snowflake-push-postgres/snowflake-ticket.png)
+
+### !!steps Map Snowflake stream to Kafka topic
+
+Snowflake sends each stream of changes to a table in PostgreSQL database, and we need to define the database and mapping between each stream and table. Enter the stream you want to 
+send (in the format of database.schema.stream), and then enter the name of the tables in PostgreSQL.
+
+Table should existing in PostgreSQL database.
+
+![!tour Map streams to Kafka topics](/blog/snowflake-push-postgres/map-streams-to-tables.png)
+
+### !!steps Grant privileges
+
+To be able to authenticate with Ockam Orchestrator and then 
+discover the route to our outlet, the Snowflake app needs to allow 
+outbound connections to your Ockam project. 
+
+Toggle the `Grant access to egress and reach your Project` and approve the connection by
+pressing `Connect`. 
+
+Toggle the `Grant access to your postgre database` and enter the username and password for your 
+PostgreSQL database and store it as a secret in snowflake.
+
+
+![!tour Grant egress](/blog/snowflake-push-postgres/grant-privileges.png)
+
+
+</ImageTour>
+
+<CodeTour>
+
+### !!steps Manually grant additional privileges
+
+Not all the permissions the app requires have a toggle available
+in the Snowflake UI, so you must manually grant some other permissions to allow 
+the app to read the changes and send them to PostgreSQL. This process can be
+cumbersome and error-prone, involving copying, pasting, and modifying many lines. 
+To simplify the process, we've created a stored procedure that you can call 
+with the required values.
+
+If you just want to get things working you can copy the code to the right and 
+run it in a Worksheet to create the procedure and then skip to the next section. 
+If you're curious to know what exactly the procedure is doing, let's walk through 
+it line by line&hellip;
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    var APP_NAME = 'Push_to_PostgreSQL__Connector';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Create a stored procedure
+
+Here we're defining a stored procedure, written in JavaScript, that will return 
+a string. The string output will be success or error message reporting on the
+outcome of our commands. It expects a single string argument &mdash; the name of the 
+stream.
+
+```javascript ! tour
+// !focus(1:3)
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'Push_to_PostgreSQL__Connector';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Specify the app name
+
+This is the name of Ockam's Snowflake Native App and we will use it in the 
+locations where we specify which app is requesting permissions. 
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+// !focus(1:2)
+    // Define the fixed application name
+    var APP_NAME = 'Push_to_PostgreSQL__Connector';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Lookup stream metadata
+
+This function `getStreamMetadata` will take a stream name as a passed argument,
+and then use the `DESCRIBE STREAM` command to get the stream metadata. The
+function then extracts the `database_name`, `schema_name`, and `table_name`
+associated with the stream and returns those values.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'Push_to_PostgreSQL__Connector';
+
+// !focus(1:14)
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Error if no metadata
+
+If the stream name provided doesn't exist it will return no metadata, and so 
+we exit at this point with an error message.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'Push_to_PostgreSQL__Connector';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+// !focus(1:3)
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Assign values
+
+For a successful metadata lookup, we take the values out of the return metadata
+object and assign them to individual variables.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'Push_to_PostgreSQL__Connector';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+// !focus(1:1)
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+// !focus(1:3)
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Define required permissions
+
+Four separate permissions need to be manually granted for
+each stream. One on the database, one on the schema, one on the table(s), and 
+then one on the stream itself. We use the variables we assigned in the previous
+section to interpolate the values into each command, and put those commands into
+an array.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'Push_to_PostgreSQL__Connector';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+// !focus(1:7)
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+### !!steps Grant permissions
+
+The procedure will then loop over the array of `GRANT` commands and execute
+each individually. If any command failures return an error message, 
+otherwise you'll see a success message.
+
+```javascript ! tour
+CREATE OR REPLACE PROCEDURE grant_stream_permissions(STREAM_NAME STRING)
+RETURNS STRING
+LANGUAGE JAVASCRIPT
+AS
+$$
+    // Define the fixed application name
+    var APP_NAME = 'Push_to_PostgreSQL__Connector';
+
+    // Function to get metadata by describing the stream
+    function getStreamMetadata(streamName) {
+        var sqlText = `DESCRIBE STREAM IDENTIFIER('${streamName}')`;
+        var result = snowflake.execute({sqlText: sqlText});
+        if (result.next()) {
+            return {
+                databaseName: result.getColumnValue("database_name"),
+                schemaName: result.getColumnValue("schema_name"),
+                baseTables: result.getColumnValue("table_name")
+            };
+        } else {
+            return null;
+        }
+    }
+
+    var metadata = getStreamMetadata(STREAM_NAME);
+
+    if (!metadata) {
+        return `Stream ${STREAM_NAME} not found or no metadata available.`;
+    }
+
+    var DB_NAME = metadata.databaseName;
+    var SCHEMA_NAME = metadata.schemaName;
+    var BASE_TABLES = metadata.baseTables;
+
+    // Construct the GRANT statements
+    var grants = [
+        `GRANT USAGE ON DATABASE ${DB_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT USAGE ON SCHEMA ${DB_NAME}.${SCHEMA_NAME} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON TABLE ${BASE_TABLES} TO APPLICATION ${APP_NAME}`,
+        `GRANT SELECT ON STREAM ${STREAM_NAME} TO APPLICATION ${APP_NAME}`
+    ];
+// !focus(1:10)    
+    // Execute the GRANT statements
+    for (var i = 0; i < grants.length; i++) {
+        try {
+            snowflake.execute({sqlText: grants[i]});
+        } catch (err) {
+            return "Error executing: " + grants[i] + ". Error: " + err.message;
+        }
+    }
+
+    return "All grants executed successfully";
+$$;
+```
+
+</CodeTour>
+
+<br/> 
+
+Now that you've created the stored procedure, it's time to run it. Copy the
+code below and run it in a Snowflake Worksheet, replacing 
+`database.schema.stream` with the correct value for your stream:
+
+```sql
+CALL grant_stream_permissions('database.schema.stream');
+```
+
+With that, we've completed the last step in the setup. We've now got a complete
+point-to-point connection that allows our Snowflake warehouse to securely
+push data through to our private PostgreSQL database.
+
+![Snowflake push to Kafka setup complete](/blog/snowflake-push-postgres/aws-snowflake-complete.png)
+
+## Next steps
+
+Any updates to your data in your Snowflake table will now create a new record in your 
+Snowflake stream, which are then sent over your Ockam portal to your table in PostgreSQL.
+To see it in action insert a row into your Snowflake table, then use your usual
+sql tooling to see the record arrive in your table.
+
+From here you can take advantage of the existing PostgreSQL infrastructure
+and ecosystem. Write consumers that update data as required in your CRM and
+marketing systems, or use it as the foundations for a highly scalable reverse ETL
+process. The possibilities are limitless!
+
+If you'd like to explore some other capabilities of Ockam I'd recommend:
+
+* [Encrypting data _through_ Kafka](https://docs.ockam.io/portals/kafka)
+* [Zero-trust data streaming with Redpanda Connect](/blog/redpanda_connect_with_ockam#connect-secure-and-streamall-in-one-simple-platform)
+* [Adding security as a feature in your SaaS product](/blog/building-secure-saas-platforms)
