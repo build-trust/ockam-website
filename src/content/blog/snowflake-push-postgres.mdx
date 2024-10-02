@@ -3,8 +3,8 @@ title: Real-Time CDC Pipelines from Snowflake to PostgreSQL
 codetour: true
 category: Learning
 date: '2024-09-20'
-description: Setup a private point-to-point data stream between Snowflake and Kafka.
-image: /blog/snowflake-push-kafka/snowflake-push-kafka.png
+description: Setup a private point-to-point data stream between Snowflake and PostgreSQL.
+image: /blog/snowflake-push-postgres/snowflake-push-postgres.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
 isFeatured: false
@@ -52,7 +52,7 @@ private PostgreSQL database, in just a few minutes. We will:
 * Connect Snowflake to PostgreSQL with a private encrypted connection
 to expose either system to the public internet!
 
-![Snowflake push to Kafka](/blog/snowflake-push-postgres/snowflake-push-postgres.png)
+![Snowflake push to PostgreSQL](/blog/snowflake-push-postgres/snowflake-push-postgres.png)
 
 
 ## Snowflake streams 
@@ -157,8 +157,8 @@ to the public internet!
 <ImageTour>
 ### !!steps Get the app
 
-The Snowflake Push to PostgreSQL Connector by Ockam is [invite only](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector),
-to get an invite please drop us an email at [hello@ockam.io](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20Kafka%20Connector).
+The Snowflake Push to PostgreSQL Connector by Ockam is [invite only](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20PostgreSQL%20Connector),
+to get an invite please drop us an email at [hello@ockam.io](mailto:hello@ockam.io?subject=Invite%20for%20Push%20to%20PostgreSQL%20Connector).
 
 Once invited you'll receive an email with a link to get the app.
 
@@ -365,7 +365,7 @@ start the node.
 
 ### !!steps
 
-We will setup the Kafka Inlet that runs alongside our Snowflake 
+We will setup the PostgreSQL Inlet that runs alongside our Snowflake 
 warehouse in a moment. Before we do that though, we can define a policy to restrict what 
 nodes can connect to our outlet.
 
@@ -393,7 +393,7 @@ credentials. The system denies access to nodes without the `snowflake` attribute
 The Ockam Node for Amazon RDS is a streamlined way to provision a managed Ockam Node
 within your private AWS VPC. 
 
-To deploy the node that will allow Snowflake to reach your Kafka broker visit
+To deploy the node that will allow Snowflake to reach your Amazon RDS PostgreSQL database visit
 the [Ockam Node for Amazon RDS Postgres listing in the AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-zjugwdx5hp2le), and click the `Continue to Subscribe` button, and then
 `Continue to Configuration`. 
 
@@ -416,12 +416,11 @@ This screen has important details to you need to fill in:
 * **Stack name:** Give this stack a recognisable name, you'll see this in various locations in the AWS Console. It'll also make it easier to clean these resources up later if you with to remove them.
 * **VPC ID:** The ID of the Virtual Private Cloud network to deploy the node in. Make sure it's the same VPC where you've deployed your Amazon MSK cluster.
 * **Subnet ID:** Choose one of the subnets within your VPC, ensure MSK has a broker address available in that subnet.
-* **Enrollment ticket:** Copy the contents of the `kafka.ticket` file we created earlier and paste it in here.
+* **Enrollment ticket:** Copy the contents of the `postgres.ticket` file we created earlier and paste it in here.
 * **RDS Postgres Database Endpoint:** In the _Connectivity & security_ for your Amazon RDS Database you will find Endpoint details. Copy the `Endpoint` value for the Private RDS Database that's in the same subnet you chose above.
 * **JSON Node Configuration:** Copy the contents of the `postgres.json` file we created earlier and paste it in here.
 
-We've now completed the highlighted part of the diagram below, and our Kafka
-broker node is waiting for another node to connect.
+We've now completed the highlighted part of the diagram below, and our Amazon RDS PostgreSQL node is waiting for another node to connect.
 
 ![Amazon RDS Postgres setup](/blog/snowflake-push-postgres/aws-rds-setup.png)
 
@@ -464,7 +463,7 @@ This credential will include an attested attribute of `snowflake`. You'll
 recall in an earlier step we applied a policy to say that nodes in our 
 project must have an attribute of `snowflake` to connect to 
 the outlet. The node that enrolls with this ticket will also have the
-attribute `snowflake`, and so it will be able to communicate with our Kafka 
+attribute `snowflake`, and so it will be able to communicate with our PostgreSQL 
 node. 
 
 The ticket is then saved to a file called `snowflake.ticket`.
@@ -493,14 +492,14 @@ setup screen in Snowflake.
 
 ![!tour Create Snowflake ticket](/blog/snowflake-push-postgres/snowflake-ticket.png)
 
-### !!steps Map Snowflake stream to Kafka topic
+### !!steps Map Snowflake stream to PostgreSQL table
 
 Snowflake sends each stream of changes to a table in PostgreSQL database, and we need to define the database and mapping between each stream and table. Enter the stream you want to 
 send (in the format of database.schema.stream), and then enter the name of the tables in PostgreSQL.
 
 Table should existing in PostgreSQL database.
 
-![!tour Map streams to Kafka topics](/blog/snowflake-push-postgres/map-streams-to-tables.png)
+![!tour Map streams to PostgreSQL tables](/blog/snowflake-push-postgres/map-streams-to-tables.png)
 
 ### !!steps Grant privileges
 
@@ -1035,7 +1034,7 @@ With that, we've completed the last step in the setup. We've now got a complete
 point-to-point connection that allows our Snowflake warehouse to securely
 push data through to our private PostgreSQL database.
 
-![Snowflake push to Kafka setup complete](/blog/snowflake-push-postgres/aws-snowflake-complete.png)
+![Snowflake push to PostgreSQL setup complete](/blog/snowflake-push-postgres/aws-snowflake-complete.png)
 
 ## Next steps
 
@@ -1051,6 +1050,5 @@ process. The possibilities are limitless!
 
 If you'd like to explore some other capabilities of Ockam I'd recommend:
 
-* [Encrypting data _through_ Kafka](https://docs.ockam.io/portals/kafka)
-* [Zero-trust data streaming with Redpanda Connect](/blog/redpanda_connect_with_ockam#connect-secure-and-streamall-in-one-simple-platform)
+* [Encrypting data _through_ databases](https://docs.ockam.io/portals/databases)
 * [Adding security as a feature in your SaaS product](/blog/building-secure-saas-platforms)
