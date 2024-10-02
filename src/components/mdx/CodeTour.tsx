@@ -15,7 +15,7 @@ import { tokenTransitions } from './transition/TokenTransition';
 import { focus } from './transition/Focus';
 import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Button, Heading } from '@chakra-ui/react';
 import { CheckIcon, CopyIcon } from '@chakra-ui/icons';
 
 const StyledPre = styled(Pre)`
@@ -65,12 +65,9 @@ const Tour: FC = (props) => {
       const containerY = document.documentElement.clientHeight;
       const codeY = ref.current.clientHeight;
       let top = 0;
-      console.log('container: ', containerY);
-      console.log('code: ', codeY);
       if (codeY < containerY && codeY > 0) {
         top = (containerY - codeY) / 2;
       }
-      console.log('top: ', top);
       ref.current.style.top = `${top}px`;
     }
   }, [ref.current, selectedIndex]);
@@ -165,18 +162,21 @@ const CopyButton = ({ text }: { text: string }) => {
   const [copied, setCopied] = useState(false);
 
   return (
-    <button
-      className="..."
+    <Button
+      variant="link"
       aria-label="Copy to clipboard"
       onClick={() => {
         navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(() => setCopied(false), 1200);
       }}
-      style={{ right: '4px', position: 'absolute', top: '2px', zIndex: '1000' }}
+      right="4px"
+      pos="absolute"
+      zIndex="1000"
+      top={{ base: 14, huge: '2px' }}
     >
       {copied ? <CheckIcon color="white" /> : <CopyIcon color="white" />}
-    </button>
+    </Button>
   );
 };
 
@@ -185,13 +185,13 @@ type CodeProps = {
 };
 const Code: FC<CodeProps> = ({ codeblock }) => {
   return (
-    <div style={{ position: 'relative' }}>
+    <Box style={{ position: 'relative' }} pt={{ base: 14, huge: 0 }}>
       <CopyButton text={codeblock.code} />
       <StyledPre
         code={codeblock}
         handlers={[tokenTransitions, focus]}
         style={{
-          // maxHeight: '50vh',
+          maxHeight: '80vh',
           scrollBehavior: 'smooth',
           overflow: 'auto',
           // minHeight: '40rem',
@@ -205,7 +205,7 @@ const Code: FC<CodeProps> = ({ codeblock }) => {
           padding: '15px',
         }}
       />
-    </div>
+    </Box>
   );
 };
 
