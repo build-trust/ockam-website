@@ -86,10 +86,12 @@ USE ROLE ACCOUNTADMIN;
 CREATE ROLE DATA_API_ROLE;
 
 GRANT USAGE ON WAREHOUSE DATA_API_WH TO ROLE DATA_API_ROLE;
+CREATE DATABASE IF NOT EXISTS SNOWFLAKE_SAMPLE_DATA FROM SHARE SFC_SAMPLES.SAMPLE_DATA;
 GRANT IMPORTED PRIVILEGES ON DATABASE SNOWFLAKE_SAMPLE_DATA TO ROLE DATA_API_ROLE;
 
 GRANT ROLE DATA_API_ROLE TO ROLE ACCOUNTADMIN;
 ```
+
 </CodeTour>
 
 ## Python API code
@@ -246,7 +248,7 @@ def customers_top10():
         abort(500, "Error reading from Snowflake. Check the logs for details.")
 ```
 
-# !!steps
+## !!steps
 
 We then build a SQL statement that queries the `tpch_sf10.orders` table, 
 returning rows where the `o_orderdate` is between the placeholders of our start 
@@ -288,7 +290,7 @@ def customers_top10():
         abort(500, "Error reading from Snowflake. Check the logs for details.")
 ```
 
-# !!steps
+## !!steps
 
 The SQL string is then formatted by interpolating the `datetime` values for our
 start and end dates into the appropriate place within string. We then use the
@@ -608,8 +610,10 @@ this command and the container image we built will be run on the compute pool
 we created in the previous step.
 
 ```sql ! tour
-USE ROLE DATA_API_ROLE;
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
 
+USE ROLE DATA_API_ROLE;
 CREATE SERVICE API.PRIVATE.API
  IN COMPUTE POOL API_POOL
  FROM SPECIFICATION
@@ -673,9 +677,11 @@ We don't need admin for these commands as we've already granted `DATA_API_ROLE`
 the required permissions, so we switch to that role.
 
 ```sql ! tour
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
+
 -- !focus(1:1)
 USE ROLE DATA_API_ROLE;
-
 CREATE SERVICE API.PRIVATE.API
  IN COMPUTE POOL API_POOL
  FROM SPECIFICATION
@@ -706,6 +712,9 @@ pool we just created. The definition of that service follows between the `$$`
 marks.
 
 ```sql ! tour
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
+
 USE ROLE DATA_API_ROLE;
 -- !focus(1:4)
 CREATE SERVICE API.PRIVATE.API
@@ -738,8 +747,10 @@ We give the container a name of `api`, and configured to use the `latest` image
 version/tag available at the repository path of `/api/private/api/dataapi`.
 
 ```sql ! tour
-USE ROLE DATA_API_ROLE;
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
 
+USE ROLE DATA_API_ROLE;
 CREATE SERVICE API.PRIVATE.API
  IN COMPUTE POOL API_POOL
  FROM SPECIFICATION
@@ -772,8 +783,10 @@ the service pool. We've specified here that we expect typical usage of `0.5`
 virtual core units, and `128M` of memory.
 
 ```sql ! tour
-USE ROLE DATA_API_ROLE;
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
 
+USE ROLE DATA_API_ROLE;
 CREATE SERVICE API.PRIVATE.API
  IN COMPUTE POOL API_POOL
  FROM SPECIFICATION
@@ -805,8 +818,10 @@ will allocate. Here we've said to not provide more than `1` vCPU and no more
 than `256M` of memory.
 
 ```sql ! tour
-USE ROLE DATA_API_ROLE;
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
 
+USE ROLE DATA_API_ROLE;
 CREATE SERVICE API.PRIVATE.API
  IN COMPUTE POOL API_POOL
  FROM SPECIFICATION
@@ -838,8 +853,10 @@ to ensure that this API is not accessible from the internet and set the service
 to listen on port `8001`. 
 
 ```sql ! tour
-USE ROLE DATA_API_ROLE;
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
 
+USE ROLE DATA_API_ROLE;
 CREATE SERVICE API.PRIVATE.API
  IN COMPUTE POOL API_POOL
  FROM SPECIFICATION
@@ -870,8 +887,10 @@ The `DATA_PI_WH` warehouse is where the container connects to execute any
 queries.
 
 ```sql ! tour
-USE ROLE DATA_API_ROLE;
+USE ROLE ACCOUNTADMIN;
+GRANT BIND SERVICE ENDPOINT ON ACCOUNT TO ROLE DATA_API_ROLE;
 
+USE ROLE DATA_API_ROLE;
 CREATE SERVICE API.PRIVATE.API
  IN COMPUTE POOL API_POOL
  FROM SPECIFICATION
@@ -1121,7 +1140,7 @@ spec:
       - |
         relay: snowflake-api-service-relay
         tcp-outlet:
-          to: api.private.api.snowflakecomputing.internal:8001
+          to: <API_DNS_NAME>:8001
           allow: snowflake-api-service-inlet
     env:
         OCKAM_DISABLE_UPGRADE_CHECK: true
