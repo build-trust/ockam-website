@@ -55,7 +55,7 @@ export default {
   },
   // Controls global message shown on homepage.
   allPageMessage: {
-    message: `📣 Redpanda Connect with Ockam &mdash; the world's first zero-trust data streaming platform. **[Learn more](/blog/redpanda_connect_with_ockam)**! 🎉`,
-    except: ['/blog/redpanda_connect_with_ockam', '/get-started'],
+    message: `❄️ Latest: Snowflake customers &mdash; stream your data to Kafka! **[Learn more](/blog/snowflake-push-kafka)**! ❄️`,
+    except: ['/blog/snowflake-push-kafka', '/get-started'],
   },
 };
