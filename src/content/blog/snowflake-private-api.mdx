@@ -155,7 +155,7 @@ def customers_top10():
 
 This line uses a `Blueprint` route decorator to define a route at the path 
 `/customers/top10` (within `app.py` everything in this file is mounted under
-the sub-path of `/connector, so the final exposed path will end up being
+the sub-path of `/connector`, so the final exposed path will end up being
 `/connector/customers/top10`). The decorator tells Flask that the function that
 immediately follows is what it should use to generate the response for 
 any requests that come to this path.
@@ -489,7 +489,8 @@ docker push <repository_url>/dataapi
 
 ## !!steps 
 
-Do stuff
+Docker will prompt you for your Snowflake username and password, and then 
+authenticate you against the container registry.
 
 ```bash ! tour
 # !focus(1:1)
@@ -500,7 +501,9 @@ docker push <repository_url>/dataapi
 
 ## !!steps 
 
-Do stuff
+We now rebuild the container, tagging it with the full URL to our 
+repository and appending `/dataapi`, and then pushing the final image to 
+the repository
 
 ```bash ! tour
 docker login <repository_url>
@@ -512,30 +515,91 @@ docker push <repository_url>/dataapi
 
 ## Run in Snowflake
 
-??
+Switch back to your Snowflake console or SnowSQL and we will configure Snowpark 
+to run our container.
 
 <CodeTour>
 ## !!steps Create the compute pool
 
+The first step here is to create a compute pool where our container can run.
+
 ```sql ! tour
 USE ROLE ACCOUNTADMIN;
 
-CREATE COMPUTE POOL API_POOl
+CREATE COMPUTE POOL API_POOL
   MIN_NODES = 1
   MAX_NODES = 5
   INSTANCE_FAMILY = CPU_X64_XS;
 
-GRANT USAGE ON COMPUTE POOL API_POOl TO ROLE DATA_API_ROLE;
-GRANT MONITOR ON COMPUTE POOL API_POOl TO ROLE DATA_API_ROLE;
+GRANT USAGE ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
 ```
 
-## !!steps Create the app pool
+## !!steps 
+
+Creating a new compute pool requires admin privileges so we switch to the 
+`ACCOUNTADMIN` role.
+
+```sql ! tour
+-- !focus(1:1)
+USE ROLE ACCOUNTADMIN;
+
+CREATE COMPUTE POOL API_POOL
+  MIN_NODES = 1
+  MAX_NODES = 5
+  INSTANCE_FAMILY = CPU_X64_XS;
+
+GRANT USAGE ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+```
+
+## !!steps 
+
+We then create a compute pool named `API_POOL`, specifying that we 
+want it to run between `1` and `5` extra small (`CPU_X64_XS`) nodes.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+-- !focus(1:4)
+CREATE COMPUTE POOL API_POOL
+  MIN_NODES = 1
+  MAX_NODES = 5
+  INSTANCE_FAMILY = CPU_X64_XS;
+
+GRANT USAGE ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+```
+
+## !!steps 
+
+The `DATA_API_ROLE` we created for our API is then granted the 
+`USAGE` and `MONITOR` permissions on the compute pool.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE COMPUTE POOL API_POOL
+  MIN_NODES = 1
+  MAX_NODES = 5
+  INSTANCE_FAMILY = CPU_X64_XS;
+
+-- !focus(1:2)
+GRANT USAGE ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+GRANT MONITOR ON COMPUTE POOL API_POOL TO ROLE DATA_API_ROLE;
+```
+
+## !!steps Create the app service
+
+Next we need to create the service that will host our python application. Run
+this command and the container image we built will be run on the compute pool
+we created in the previous step.
 
 ```sql ! tour
 USE ROLE DATA_API_ROLE;
 
 CREATE SERVICE API.PRIVATE.API
- IN COMPUTE POOL API_POOl
+ IN COMPUTE POOL API_POOL
  FROM SPECIFICATION
 $$
 spec:
@@ -559,6 +623,238 @@ QUERY_WAREHOUSE = DATA_API_WH;
 
 ## !!steps 
 
+We don't need admin for these commands as we've already granted `DATA_API_ROLE`
+the required permissions, so we switch to that role.
+
+```sql ! tour
+-- !focus(1:1)
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+We create a new service named `API.PRIVATE.API` in the `API_POOL` compute
+pool we just created. The definition of that service follows between the `$$`
+marks.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+-- !focus(1:3)
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+We give the container a name of `api`, and configured to use the `latest` image
+version/tag available at the repository path of `/api/private/api/dataapi`.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+-- !focus(1:3)
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+The resource `requests` definition tells Snowpark the average resource usage 
+that expected for this service so that it can best allocate resources within
+the service pool. We've specified here that we expect typical usage of `0.5` 
+virtual core units, and `128M` of memory.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    -- !focus(1:4)    
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+The `limits` definition puts a ceiling on the amount of resource that Snowpark
+will allocate. Here we've said to not provide more than `1` vCPU and no more
+than `256M` of memory.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      -- !focus(1:3)            
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+A single `endpoint` definition is added. We explicitly set `public: false`
+to ensure that this API is not accessible from the internet and set the service
+to listen on port `8001`. 
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  -- !focus(1:4)                    
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+The `DATA_PI_WH` warehouse is where the container connects to execute any 
+queries.
+
+```sql ! tour
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API.PRIVATE.API
+ IN COMPUTE POOL API_POOL
+ FROM SPECIFICATION
+$$
+spec:
+  container:
+  - name: api
+    image: /api/private/api/dataapi:latest
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 128M
+      limits:
+        cpu: 1
+        memory: 256M
+  endpoint:
+  - name: api
+    port: 8001
+    public: false
+$$
+-- !focus(1:1)
+QUERY_WAREHOUSE = DATA_API_WH;
+```
+
+## !!steps 
+
+It will take a few minutes for the service to be created. You can check the 
+status of creation with these commands.
+
 ```sql ! tour
 CALL SYSTEM$GET_SERVICE_STATUS('api');
 CALL SYSTEM$GET_SERVICE_LOGS('api.private.api', 0, 'api');
@@ -566,11 +862,20 @@ CALL SYSTEM$GET_SERVICE_LOGS('api.private.api', 0, 'api');
 
 ## !!steps 
 
+Once the service is setup and starting you can run the `SHOW ENDPOINTS` command 
+to see the access details for the service. Note that `is_public` is `false` and
+`ingress_url` is empty. This means the service can not be accessed anywhere
+from the public internet.
+
 ```sql ! tour
 SHOW ENDPOINTS IN SERVICE API;
 ```
 
 ## !!steps 
+
+For one final confirmation of setup we can run `SHOW SERVICES` to see DNS
+information for the service we just created. You'll see that the value is 
+set to an internal hostname of `api.private.api.snowflakecomputing.internal`.
 
 ```sql ! tour
 SHOW SERVICES;
@@ -580,9 +885,16 @@ SHOW SERVICES;
 
 ## Setup Ockam
 
+It's now time to setup Ockam to allow you to securely connect your private
+systems. We're going to run the following commands in a terminal on your local
+workstation.
+
 <CodeTour>
 
 ## !!steps 
+
+This will install the Ockam Command and source in the required environment 
+settings. If you've installed Ockam Command before you can skip this step.
 
 ```bash ! tour
 # !focus(1:3)
@@ -596,6 +908,14 @@ ockam project ticket --usage-count 1 --expires-in 1h \
 ```
 
 ## !!steps 
+
+Wrapped up in this single `ockam enroll` command are several steps that will 
+bootstrap your first project and get you ready to go. It will:
+
+* Generate an Ockam Identity and store its secret keys in a file system based Ockam Vault.
+* Create an account with Ockam Orchestrator.
+* Provision a trial Space and Project in the Orchestrator.
+* Make your Ockam Identity the administrator of your new Project.
 
 ```bash ! tour
 curl --proto '=https' --tlsv1.2 -sSfL \
@@ -610,6 +930,10 @@ ockam project ticket --usage-count 1 --expires-in 1h \
 
 ## !!steps 
 
+We need to generate an enrollment ticket to allow a new Ockam Node to 
+join the project that was just created. This node will run alongside the 
+python API container in Snowpark:
+
 ```bash ! tour
 curl --proto '=https' --tlsv1.2 -sSfL \
   https://install.command.ockam.io | \
@@ -621,7 +945,76 @@ ockam project ticket --usage-count 1 --expires-in 1h \
   --relay snowflake-api-service-relay > ticket
 ```
 
+## !!steps 
+
+In this command we've set the new ticket to have a usage limit of `1` and to 
+expire in `1 hour`. This means the generated ticket is valid for a single use, 
+and that it's valid for 1 hour. A single usage ticket means there is low 
+risk associated with mishandling this ticket after use; there's no means 
+for an attacker to re-use it like an API token to access any system. 
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+# !focus(1:1)
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps 
+
+The Project Membership Credential that's issued will include  
+attributes that will be cryptographically attested to by the Project's 
+Membership Authority. You can use these attributes to apply policies with 
+Attribute Based Access Controls (ABAC) to allow or restrict specific actions and 
+communication paths between nodes.
+
+In this example we assign a single attribute of `snowflake-api-service-outlet`. 
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+ockam project ticket --usage-count 1 --expires-in 1h \
+# !focus(1:1)
+  --attribute snowflake-api-service-outlet \
+  --relay snowflake-api-service-relay > ticket
+```
+
+## !!steps 
+
+The `--relay snowflake-api-service-relay` flag is a shortcut for creating a 
+policy that allows this node to create a relay at the address 
+`snowflake-api-service-relay`. 
+
+This relay will allow other Ockam nodes running anywhere, if they meet all
+of your policy requirements, to establish a secure end-to-end 
+encrypted connection to your python API &mdash; without requiring you to expose
+any endpoints to the public Internet. 
+
+As the final part of this command we pipe the generated ticket to a file named 
+`ticket`.
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io | \
+  bash && source "$HOME/.ockam/env"
+ockam enroll
+ockam project ticket --usage-count 1 --expires-in 1h \
+  --attribute snowflake-api-service-outlet \
+# !focus(1:1)  
+  --relay snowflake-api-service-relay > ticket
+```
+
 ## !!steps
+
+To allow Ockam nodes to enroll with the Credential Authority and discover routes
+to other nodes, we need to allow outbound access to your Ockam Project. Run this
+command and capture the output for later.
 
 ```bash ! tour
 ockam project show --jq '.egress_allow_list[]'
@@ -629,17 +1022,15 @@ ockam project show --jq '.egress_allow_list[]'
 
 ## !!steps 
 
+Replace the value of `<repository_url>` with the URL to the Snowflake image 
+repository we created earlier. This step then pulls down the latest Docker image
+containing Ockam, tags it with the URL to your image repository, and then pushes
+the image to Snowflake so we can use it later.
+
 ```bash ! tour
 docker pull ghcr.io/build-trust/ockam
 docker tag ghcr.io/build-trust/ockam <repository_url>/ockam
 docker push <repository_url>/ockam
-```
-
-## !!steps 
-
-```sql ! tour
-# Example
-VALUE_LIST = ("4ed9ff5d-4953-4080-83c7-e69a3477a545.projects.orchestrator.ockam.io:443");
 ```
 
 ## !!steps 
