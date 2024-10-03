@@ -1035,10 +1035,13 @@ docker push <repository_url>/ockam
 
 ## !!steps 
 
+In the Snowflake console or SnowSQL, run these SQL commands. Replace 
+`<EGRESS_ALLOW_LIST>` and `<OCKAM_ENROLLMENT_TICKET>` strings with the values
+we captured earlier. 
+
 ```sql ! tour
 USE ROLE ACCOUNTADMIN;
 
--- Update VALUE_LIST with ockam egress details
 CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
 VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
 
@@ -1078,6 +1081,299 @@ EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
 
 ## !!steps 
 
+Create a network rule named `OCKAM_OUT` that allows outbound (`EGRESS`) 
+connectivity to be 
+initiated to a specific host and port for your Ockam project node. Then create
+an integration named `OCKAM` and enable the network rule for our integration. 
+
+The role we're using for our API (`DATA_API_ROLE`) is then granted permission 
+to use the `OCKAM` integration.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+-- !focus(1:7)
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: api.private.api.snowflakecomputing.internal:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+The remaining steps do not need admin access, so we switch to the `DATA_API_ROLE`
+role.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+-- !focus(1:1)
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: api.private.api.snowflakecomputing.internal:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+We create a new service named `API_OCKAM_OUTLET` to run in our `API_POOL` 
+compute pool. Again we define a YAML specification between the `$$` marks.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+-- !focus(1:4)
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: api.private.api.snowflakecomputing.internal:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+-- !focus(1:1)
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+The app container will pull the `latest` version/tag of the `ockam` container 
+from your image registry.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  -- !focus(1:2)
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: api.private.api.snowflakecomputing.internal:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+On startup the node will enroll with your Ockam Project using the single use
+enrollment ticket we created earlier. We're then instructing it to create a 
+relay at `snowflake-api-service-relay`, clients will use that name to establish
+a route to our API service. We also create a TCP outlet which will redirect
+any packets it receives to `api.private.api.snowflakecomputer.internal` on 
+port `8001`. If you recall this is the internal-only hostname and port that our
+Python API is listening on. The final configuration detail is an
+Attribute Based Access Control (ABAC) policy that states only the nodes permitted
+to connect are those with an 
+attribute of `snowflake-api-service-inlet` set.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      -- !focus(1:8)
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: api.private.api.snowflakecomputing.internal:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+We need to explicitly add out outbound connectivity integration to this service
+so that your Ockam node can establish a connection to your project.
+
+```sql ! tour
+USE ROLE ACCOUNTADMIN;
+
+CREATE OR REPLACE NETWORK RULE OCKAM_OUT TYPE = 'HOST_PORT' MODE = 'EGRESS'
+VALUE_LIST = ("<EGRESS_ALLOW_LIST>");
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION OCKAM
+ALLOWED_NETWORK_RULES = (OCKAM_OUT) ENABLED = true;
+
+GRANT USAGE ON INTEGRATION OCKAM TO ROLE DATA_API_ROLE;
+
+USE ROLE DATA_API_ROLE;
+
+CREATE SERVICE API_OCKAM_OUTLET
+IN COMPUTE POOL API_POOL
+FROM SPECIFICATION
+$$
+spec:
+  containers:
+  - name: ockam-outlet
+    image: /api/private/api/ockam:latest
+    args:
+      - node
+      - create
+      - --foreground
+      - --enrollment-ticket
+      - "<OCKAM_ENROLLMENT_TICKET>"
+      - --node-config
+      - |
+        relay: snowflake-api-service-relay
+        tcp-outlet:
+          to: api.private.api.snowflakecomputing.internal:8001
+          allow: snowflake-api-service-inlet
+    env:
+        OCKAM_DISABLE_UPGRADE_CHECK: true
+        OCKAM_OPENTELEMETRY_EXPORT: false
+$$
+-- !focus(1:1)
+EXTERNAL_ACCESS_INTEGRATIONS = (OCKAM);
+```
+
+## !!steps 
+
+Starting the service may take a few minutes, so you can use these commands to
+determine when it has started.
+
 ```sql ! tour
 CALL SYSTEM$GET_SERVICE_STATUS('API_OCKAM_OUTLET');
 CALL SYSTEM$GET_SERVICE_LOGS('API_OCKAM_OUTLET', '0', 'ockam-outlet', 1000);
@@ -1085,7 +1381,15 @@ CALL SYSTEM$GET_SERVICE_LOGS('API_OCKAM_OUTLET', '0', 'ockam-outlet', 1000);
 
 ## !!steps 
 
+To access the Python API hosted in Snowflake from our local workstation we can
+start an Ockam node locally and create a TCP inlet. The TCP inlet will form the
+other (that is, client-side) end of our secure point-to-point connection.
+
+The first part of this command starts a Docker container and exposes the port
+`8001` from the container as port `8001` on our local host workstation.
+
 ```bash ! tour
+# !focus(1:1)
 docker run --rm -d  --name ockam-inlet -p 8001:8001 \
   ghcr.io/build-trust/ockam node create --foreground \
   --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
@@ -1099,36 +1403,111 @@ docker run --rm -d  --name ockam-inlet -p 8001:8001 \
 
 ## !!steps 
 
+Using the `build-trust/ockam` container image we create a new node within the 
+container.
+
 ```bash ! tour
-curl -X GET "http://localhost:8001/connector/customers/top10?start_range=1995-02-01&end_range=1995-02-14"
+docker run --rm -d  --name ockam-inlet -p 8001:8001 \
+  # !focus(1:1)
+  ghcr.io/build-trust/ockam node create --foreground \
+  --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
+  --configuration "
+    tcp-inlet:
+      from: 0.0.0.0:8001
+      via: snowflake-api-service-relay
+      allow: snowflake-api-service-outlet
+  "
 ```
 
 ## !!steps 
 
+We create a new enrollment ticket for our project (`$(...)`) and pass the value
+inline to the `--enrollment-ticket` argument. It's important to note that when
+we create the ticket we specify an attribute of `snowflake-api-service-inlet`. 
+Any node that enrolls using this ticket will be assigned this attribute, we 
+defined a policy earlier that stated presence of this attribute was a requirement
+to connect. If this attribute is not set then our attempts to connect to the API
+would be refused.
+
 ```bash ! tour
-curl -X GET "http://localhost:8001/snowpark/customers/top10?start_range=1995-02-01&end_range=1995-02-14"
+docker run --rm -d  --name ockam-inlet -p 8001:8001 \
+  ghcr.io/build-trust/ockam node create --foreground \
+  # !focus(1:1)
+  --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
+  --configuration "
+    tcp-inlet:
+      from: 0.0.0.0:8001
+      via: snowflake-api-service-relay
+      allow: snowflake-api-service-outlet
+  "
 ```
 
 ## !!steps 
+
+On this node we create a TCP inlet that will listen on port `8001` within the
+container, any packets it receives will be forwarded to the relay named 
+`snowflake-api-service-relay` but only if the node at the end of that relay 
+has the attribute `snowflake-api-service-outlet` set.
+
+The `docker run` command has port `8001` on our host machine send those packets 
+to `8001` in the container, with is a TCP inlet that forwards those packet to
+relay, which are then received by the TCP outlet running in Snowpark, which
+forwards them to `api.private.api.snowflakecomputer.internal:8001`, which is 
+the interface that our Python API in Snowpark is listening on. 
+
+```bash ! tour
+docker run --rm -d  --name ockam-inlet -p 8001:8001 \
+  ghcr.io/build-trust/ockam node create --foreground \
+  --enrollment-ticket "$(ockam project ticket --usage-count 1 --expires-in 1h --attribute snowflake-api-service-inlet)" \
+  # !focus(2:5)
+  --configuration "
+    tcp-inlet:
+      from: 0.0.0.0:8001
+      via: snowflake-api-service-relay
+      allow: snowflake-api-service-outlet
+  "
+```
+
+## !!steps 
+
+All that means that a request to `localhost:8001` will now be sent over 
+a private point-to-point connection to the Python API. We can test this by 
+running `curl` to return the JSON results for the top 10 customers.
+
+```bash ! tour
+curl -X GET "http://localhost:8001/connector/customers/top10"
+```
+
+## !!steps 
+
+The other API endpoints defined in the Python app will also work. If you
+want to retrieve the monthly sales for clerk `000000002` for the year `1995`
 
 ```bash ! tour
 curl -X GET "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
 ```
 
-## !!steps 
+</CodeTour>
 
-```bash ! tour
-curl -X GET "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
-```
+## Clean up
 
-## !!steps 
+Once you're done with this demo you may want to remove everything we've setup.
+
+
+<CodeTour>
+
+## !!steps Stop the API
+
+Make sure to stop the service before you try to remove anything.
 
 ```sql ! tour
 USE ROLE DATA_API_ROLE;
 ALTER SERVICE API.PRIVATE.API SUSPEND;
 ```
 
-## !!steps 
+## !!steps Remove the services
+
+Now that the service has stopped, use the `DATA_API_ROLE` to remove it.
 
 ```sql ! tour
 USE ROLE DATA_API_ROLE;
@@ -1137,7 +1516,10 @@ DROP SERVICE API.PRIVATE.API;
 DROP SERVICE API_OCKAM_OUTLET;
 ```
 
-## !!steps 
+## !!steps Delete the resources
+
+Finally as an admin you can permanently remove the compute and data resources
+we created.
 
 ```sql ! tour
 USE ROLE ACCOUNTADMIN;
