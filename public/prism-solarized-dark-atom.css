@@ -56,6 +56,15 @@ pre[class*="language-"], code[data-ch-lang] {
 	opacity: 0.15;
 }
 
+.ch-codeblock .ch-code-button {
+  display: none;
+}
+  
+.ch-codeblock:hover .ch-code-button {
+  display: block;
+  color: white;
+}
+
 .ch-scrollycoding-step-content[data-selected] {
 	opacity: 1;
 	border-color: transparent !important;

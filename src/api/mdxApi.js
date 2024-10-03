@@ -7,7 +7,7 @@ import RemarkGFM from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
 import RemarkPrism from 'remark-prism';
 import RehypeKeywordLinks from '@root/utils/keywordLinks';
-import codeHikeTheme from '@code-hike/lighter/themes/solarized-dark.json';
+import codeHikeTheme from '@code-hike/lighter/themes/github-dark.json';
 import { remarkCodeHike } from '@code-hike/mdx';
 import * as v1 from 'codehike/mdx';
 
@@ -59,13 +59,13 @@ export const getAllUseCases = (noContent) => {
 export const getPageBySlug = async (folder, slug) => {
   /** @type {import('codehike/mdx').CodeHikeConfig} */
   const chConfig = {
-    syntaxHighlighting: { theme: 'dracula' },
+    syntaxHighlighting: { theme: 'github-dark' },
     components: { code: 'pre' },
     ignoreCode: ({ meta }) => !meta || !meta.startsWith('tour'),
   };
 
   const codeHikeOptions = {
-    theme: 'dracula',
+    theme: 'github-dark',
     lineNumbers: true,
     tabSize: 2,
     showCopyButton: true,
