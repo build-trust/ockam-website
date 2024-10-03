@@ -120,7 +120,8 @@ not have used Snowflake before.
 Run the following to clone the repo locally:
 
 ```bash ! tour
-git clone https://github.com/sfc-gh-bculberson/lab_data_api_python
+git clone \
+  https://github.com/sfc-gh-bculberson/lab_data_api_python
 ```
 
 
@@ -529,7 +530,7 @@ docker push <repository_url>/dataapi
 
 ## Run in Snowflake
 
-Switch back to your Snowflake console or SnowSQL and we will configure Snowpark 
+Switch back to your Snowflake console or SnowSQL and we will configure Snowflake 
 to run our container.
 
 <CodeTour>
@@ -637,7 +638,7 @@ $$
 QUERY_WAREHOUSE = DATA_API_WH;
 ```
 
-# !!steps 
+## !!steps 
 
 Our API will be a service endpoint so we use grant the required permission
 to the `DATA_API_ROLE` role.
@@ -777,7 +778,7 @@ QUERY_WAREHOUSE = DATA_API_WH;
 
 ## !!steps 
 
-The resource `requests` definition tells Snowpark the average resource usage 
+The resource `requests` definition tells Snowflake the average resource usage 
 that expected for this service so that it can best allocate resources within
 the service pool. We've specified here that we expect typical usage of `0.5` 
 virtual core units, and `128M` of memory.
@@ -813,7 +814,7 @@ QUERY_WAREHOUSE = DATA_API_WH;
 
 ## !!steps 
 
-The `limits` definition puts a ceiling on the amount of resource that Snowpark
+The `limits` definition puts a ceiling on the amount of resource that Snowflake
 will allocate. Here we've said to not provide more than `1` vCPU and no more
 than `256M` of memory.
 
@@ -997,7 +998,7 @@ ockam project ticket --usage-count 1 --expires-in 1h \
 
 We need to generate an enrollment ticket to allow a new Ockam Node to 
 join the project that was just created. This node will run alongside the 
-python API container in Snowpark:
+python API container in Snowflake:
 
 ```bash ! tour
 curl --proto '=https' --tlsv1.2 -sSfL \
@@ -1345,8 +1346,8 @@ On startup the node will enroll with your Ockam Project using the single use
 enrollment ticket we created earlier. We're then instructing it to create a 
 relay at `snowflake-api-service-relay`, clients will use that name to establish
 a route to our API service. We also create a TCP outlet which will redirect
-any packets it receives to `api.private.api.snowflakecomputer.internal` on 
-port `8001`. If you recall this is the internal-only hostname and port that our
+any packets it receives to the internal hostname of our app container on 
+port `8001`. If you recall this is the internal hostname and port that our
 Python API is listening on. The final configuration detail is an
 Attribute Based Access Control (ABAC) policy that states only the nodes permitted
 to connect are those with an 
@@ -1521,9 +1522,9 @@ has the attribute `snowflake-api-service-outlet` set.
 
 The `docker run` command has port `8001` on our host machine send those packets 
 to `8001` in the container, with is a TCP inlet that forwards those packet to
-relay, which are then received by the TCP outlet running in Snowpark, which
-forwards them to `api.private.api.snowflakecomputer.internal:8001`, which is 
-the interface that our Python API in Snowpark is listening on. 
+relay, which are then received by the TCP outlet running in Snowflake, which
+forwards them to internal hostname of our app container on port `8001`, which is 
+the interface that our Python API in Snowflake is listening on. 
 
 ```bash ! tour
 docker run --rm -d  --name ockam-inlet -p 8001:8001 \
@@ -1545,7 +1546,8 @@ a private point-to-point connection to the Python API. We can test this by
 running `curl` to return the JSON results for the top 10 customers.
 
 ```bash ! tour
-curl -X GET "http://localhost:8001/connector/customers/top10"
+curl -X GET \
+  "http://localhost:8001/connector/customers/top10"
 ```
 
 ## !!steps 
@@ -1554,7 +1556,8 @@ The other API endpoints defined in the Python app will also work. If you
 want to retrieve the monthly sales for clerk `000000002` for the year `1995`
 
 ```bash ! tour
-curl -X GET "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
+curl -X GET \
+  "http://localhost:8001/connector/clerk/000000002/yearly_sales/1995"
 ```
 
 </CodeTour>
