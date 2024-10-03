@@ -168,6 +168,8 @@ Once invited you'll receive an email with a link to get the app.
 
 The first screen you're presented with will ask you to select the warehouse to utilize to activate the app.
 
+![!tour Select a warehouse](/blog/snowflake-push-postgres/select-warehouse.png)
+
 ### !!steps Grant account privileges
 
 Click the `Grant` button to the right of this screen. The app will then be
@@ -191,11 +193,14 @@ to review or update on these screens yet, so proceed by clicking the `Launch app
 
 ![!tour Launch app](/blog/snowflake-push-postgres/launch-app.png)
 
+</ImageTour>
+
+<CodeTour>
 ### !!steps Download Ockam Command
 
 Run the following command on your local workstation:
 
-```bash
+```bash ! tour
 curl --proto '=https' --tlsv1.2 -sSfL \
   https://install.command.ockam.io \
   | bash source "$HOME/.ockam/env"
@@ -209,7 +214,7 @@ settings. If you've installed Ockam Command before you can skip this step.
 
 Once Ockam Command installation is complete you can run:
 
-```bash
+```bash ! tour
 ockam enroll
 ```
 
@@ -232,15 +237,12 @@ We need to generate an enrollment ticket to allow a new Ockam Node to
 join the project that was just created. This node will run alongside the 
 Amazon RDS PostgreSQL Database, in the network where the Amazon RDS is running:
 
-```bash
-ockam project ticket --usage-count 1 \
-  --expires-in 24h --attribute postgres \
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute postgres \
   --relay postgres > postgres.ticket
 ```
-
-</ImageTour>
-
-<CodeTour>
 
 ### !!steps 
 
@@ -394,13 +396,13 @@ The Ockam Node for Amazon RDS is a streamlined way to provision a managed Ockam 
 within your private AWS VPC. 
 
 To deploy the node that will allow Snowflake to reach your Amazon RDS PostgreSQL database visit
-the [Ockam Node for Amazon RDS Postgres listing in the AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-zjugwdx5hp2le), and click the `Continue to Subscribe` button, and then
+the [Ockam Node for Amazon RDS PostgreSQL listing in the AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-zjugwdx5hp2le), and click the `Continue to Subscribe` button, and then
 `Continue to Configuration`. 
 
 On the configuration page choose the region that your Amazon RDS cluster is
 running in, and then click `Continue to Launch` followed by `Launch`.
 
-![!tour Ockam node for Amazon RDS Postgres](/blog/snowflake-push-postgres/aws-marketplace-rds.png)
+![!tour Ockam node for Amazon RDS PostgreSQL](/blog/snowflake-push-postgres/aws-marketplace-rds.png)
 
 ### !!steps Enter stack details
 
@@ -417,14 +419,18 @@ This screen has important details to you need to fill in:
 * **VPC ID:** The ID of the Virtual Private Cloud network to deploy the node in. Make sure it's the same VPC where you've deployed your Amazon MSK cluster.
 * **Subnet ID:** Choose one of the subnets within your VPC, ensure MSK has a broker address available in that subnet.
 * **Enrollment ticket:** Copy the contents of the `postgres.ticket` file we created earlier and paste it in here.
-* **RDS Postgres Database Endpoint:** In the _Connectivity & security_ for your Amazon RDS Database you will find Endpoint details. Copy the `Endpoint` value for the Private RDS Database that's in the same subnet you chose above.
+* **RDS PostgreSQL Database Endpoint:** In the _Connectivity & security_ for your Amazon RDS Database you will find Endpoint details. Copy the `Endpoint` value for the Private RDS Database that's in the same subnet you chose above.
 * **JSON Node Configuration:** Copy the contents of the `postgres.json` file we created earlier and paste it in here.
 
 We've now completed the highlighted part of the diagram below, and our Amazon RDS PostgreSQL node is waiting for another node to connect.
 
-![Amazon RDS Postgres setup](/blog/snowflake-push-postgres/aws-rds-setup.png)
+![Amazon RDS PostgreSQL setup](/blog/snowflake-push-postgres/aws-rds-setup.png)
 
-![!tour Ockam node for Amazon RDS Postgres - node configuration screen](/blog/snowflake-push-postgres/stack-details.png)
+![!tour Ockam node for Amazon RDS PostgreSQL - node configuration screen](/blog/snowflake-push-postgres/stack-details.png)
+
+</ImageTour>
+
+<CodeTour>
 
 ### !!steps Generate enrollment ticket for Snowflake
 
@@ -434,14 +440,11 @@ One end of our connection is now setup, it's time to connect the Snowflake end.
 We need to generate an enrollment ticket to allow another Ockam Node to
 join our project. This node will run in our Snowflake warehouse:
 
-```bash
+```bash ! tour
 ockam project ticket \
   --usage-count 1 --expires-in 2h \
   --attribute snowflake > snowflake.ticket
 ```
-</ImageTour>
-
-<CodeTour>
 
 ### !!steps
 
@@ -1041,7 +1044,7 @@ push data through to our private PostgreSQL database.
 Any updates to your data in your Snowflake table will now create a new record in your 
 Snowflake stream, which are then sent over your Ockam portal to your table in PostgreSQL.
 To see it in action insert a row into your Snowflake table, then use your usual
-sql tooling to see the record arrive in your table.
+SQL tooling to see the record arrive in your table.
 
 From here you can take advantage of the existing PostgreSQL infrastructure
 and ecosystem. Write consumers that update data as required in your CRM and
@@ -1050,5 +1053,5 @@ process. The possibilities are limitless!
 
 If you'd like to explore some other capabilities of Ockam I'd recommend:
 
-* [Encrypting data _through_ databases](https://docs.ockam.io/portals/databases)
+* [Creating private point-to-point connections with _any_ database](https://docs.ockam.io/portals/databases)
 * [Adding security as a feature in your SaaS product](/blog/building-secure-saas-platforms)

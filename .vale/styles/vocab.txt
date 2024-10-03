@@ -12,7 +12,7 @@ stdout
 const
 async
 subnet
-Postgresql
+PostgreSQL
 Kafka
 Apache
 plaintext
