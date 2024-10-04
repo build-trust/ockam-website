@@ -112,7 +112,7 @@ const BuildTrustHero = (): ReactElement => {
               <>
                 Ockam works at
                 <br />
-                application layer.
+                the application layer.
                 <br />
                 When application security is
                 <br />
