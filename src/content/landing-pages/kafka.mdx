@@ -25,12 +25,25 @@ features:
     image: kafka-encrypted-ockam
     text: |
       Kafka applications that are handling sensitive data require more than 
-      encryption to the "end". Where's the "end"? What's needed to meet modern 
+      encryption to the "end". Where's the "end"? What you need to meet modern 
       data governance expectations are guarantees that the intended applications 
-      are exclusively the apps that can participate in a sensitive message 
+      are exclusively the apps that can participate in a message 
       stream. Ockam moves trust to the application layer by building a 
       mutually authenticated and encrypted communication channel between all of 
       your Kafka apps _through_ your Kafka brokers.
+  - title: Flexible encryption options
+    image: field-level-encryption
+    text: |
+      Encryption is _just_ about adding privacy, it also gives you guarantees
+      of data integrity and trust in the authenticity of what your data 
+      consumers have received. Ockam's whole message encryption means your
+      data consumers can have confidence that the data they receive has not 
+      been tampered with in-flight. Nor has an attacker been able to re-use 
+      access credentials to impersonate a producer. 
+
+      For scenarios where you want to relax data privacy requirements we also 
+      support field-level encryption so you've specific granular controls over
+      which fields to encrypt, and which consumers are permitted to read them.
   - title: No more shared secret keys
     image: kafka-key-layers
     animate: true
