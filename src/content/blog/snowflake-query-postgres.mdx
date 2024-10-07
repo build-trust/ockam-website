@@ -1,0 +1,525 @@
+---
+title: Run Queries on Remote PostgreSQL from Snowflake
+codetour: true
+category: Learning
+date: '2024-09-20'
+description: Setup a private point-to-point connection between Snowflake and a remote PostgreSQL database.
+image: /blog/snowflake-query-postgres/snowflake-query-postgres.png
+author: Glenn Gillen
+authorAvatar: /blog/glenn-gillen.jpg
+isFeatured: false
+featuredOrder: 2
+---
+
+{/* <!-- vale Microsoft.We = NO --> */}
+{/* <!-- vale Microsoft.FirstPerson = NO --> */}
+{/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
+{/* <!-- vale Microsoft.Contractions = NO --> */}
+
+What if I told you there was a way to securely query your private PostgreSQL database 
+directly from Snowflake, in real-time? That it'll use private point-to-point 
+connections that don't require you to manage IP allow lists, open firewall ports, 
+or setup services like PrivateLink, and that it will take you less than 15 minutes 
+to setup!
+
+Introducing the Snowflake Query Remote PostgreSQL Connector!
+
+## Snowflake 💙 PostgreSQL
+
+Snowflake is The Data Cloud and the place to support workloads such as data
+warehouses, data lakes, data science / ML / AI, and even cybersecurity. This
+centralization brings a huge amount of convenience through breaking down
+data silos and allowing teams to make smart data-informed decisions. 
+
+After enriching the data and finding new insights, those insights need to
+make their way back out to the other apps and business systems that can act 
+upon them. PostgreSQL is a powerful, open-source relational database system 
+that's widely used for storing and managing structured data. Connecting to your 
+PostgreSQL database can be problematic depending on your network topology. It 
+would be convenient to give the database a public address, but that's a 
+significant increase in risk for a system that handles a lot of important data. 
+Managing IP allow lists and updating firewall ingress rules improves security 
+but can be cumbersome to manage. Alternatives like PrivateLink are better, but 
+they too can be cumbersome to setup and require your systems to be on the same 
+public cloud and in the same region.
+
+In this post I'm going to show you how to securely connect Snowflake to your 
+private PostgreSQL database, in just a few minutes. We will:
+
+* Setup a PostgreSQL database in AWS
+* Connect Snowflake to PostgreSQL with a private encrypted connection
+* Run a query from Snowflake against the remote PostgreSQL database
+
+![Snowflake push to PostgreSQL](/blog/snowflake-query-postgres/snowflake-query-postgres.png)
+
+
+## Amazon Relational Database Service (RDS) for PostgreSQL
+
+We're going to provision an Amazon RDS PostgreSQL Database so we can see an end-to-end 
+experience of data moving from Snowflake to PostgreSQL. If you have an existing 
+PostgreSQL database you're able to use you can skip this step.
+
+### Create a PostgreSQL database
+
+<ImageTour>
+
+### !!steps
+
+Within your [AWS Console](https://console.aws.amazon.com/) search for 
+`RDS` in the search field at the top and select the matching result. Visit the 
+`Databases` screen, and then click `Create Database`.
+
+The `Standard Create` option provides a good set of defaults for creating a
+RDS Database, so unless you've previous knowledge or experience to know you
+might want something different I'd suggest choosing "PostgreSQL" and confirming the details and 
+then clicking `Create database` at the bottom of the screen.
+
+Once you've started the database creation it may take about 15 minutes for
+provisioning to complete and for your database to be available.
+
+![!tour Create a database](/blog/snowflake-query-postgres/create-rds.png)
+
+</ImageTour>
+
+## Connect Snowflake to PostgreSQL
+
+We've created a PostgreSQL database, now it's time to connect it to Snowflake! The
+next stage is going to complete the picture below, but creating a point-to-point
+connection between the two systems &mdash; without the need to expose any systems
+to the public internet!
+
+![Snowflake push to Amazon RDS](/blog/snowflake-push-postgres/aws-complete.png)
+
+<ImageTour>
+### !!steps Get the app
+
+The Snowflake Query Remote PostgreSQL Connector by Ockam is [invite only](mailto:hello@ockam.io?subject=Invite%20for%20Query%20Remote%20PostgreSQL%20Connector),
+to get an invite please drop us an email at [hello@ockam.io](mailto:hello@ockam.io?subject=Invite%20for%20Query%20Remote%20PostgreSQL%20Connector).
+
+Once invited you'll receive an email with a link to get the app.
+
+![!tour Get the app](/blog/snowflake-push-postgres/app-store.png)
+
+### !!steps Select a warehouse
+
+The first screen you're presented with will ask you to select the warehouse to utilize to activate the app.
+
+![!tour Select a warehouse](/blog/snowflake-query-postgres/select-warehouse.png)
+
+### !!steps Grant account privileges
+
+Click the `Grant` button to the right of this screen. The app will then be
+automatically granted permissions to create a warehouse and create a compute
+pool. 
+
+![!tour Grant account privileges](/blog/snowflake-query-postgres/grant-account.png)
+
+### !!steps Activate app
+
+Once the permissions grants complete, an `Activate` button will appear. Click
+it and the activation process will begin.
+
+![!tour Activate app](/blog/snowflake-query-postgres/activate-app.png)
+
+### !!steps Launch app
+
+After the app activates you'll see a page that summarizes the 
+privileges that the application now has. There's nothing we need 
+to review or update on these screens yet, so proceed by clicking the `Launch app` button.
+
+![!tour Launch app](/blog/snowflake-query-postgres/launch-app.png)
+
+</ImageTour>
+
+<CodeTour>
+### !!steps Download Ockam Command
+
+Run the following command on your local workstation:
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io \
+  | bash source "$HOME/.ockam/env"
+```
+
+This will install the Ockam Command and source in the required environment 
+settings. If you've installed Ockam Command before you can skip this step.
+
+
+### !!steps Setup admin account
+
+Once Ockam Command installation is complete you can run:
+
+```bash ! tour
+ockam enroll
+```
+
+Wrapped up in this single `ockam enroll` command are several steps that will 
+bootstrap your first project and get you ready to go. It will:
+
+* Generate an Ockam Identity and store its secret keys in a file system based Ockam Vault.
+* Create an account with Ockam Orchestrator.
+* Provision a trial Space and Project in the Orchestrator.
+* Make your Ockam Identity the administrator of your new Project.
+
+### !!steps Generate enrollment ticket for PostgreSQL
+
+In this section we're going to provision an Ockam node that will run alongside
+our PostgreSQL database, and provide one of the ends of our point-to-point connection.
+
+![Amazon RDS PostgreSQL setup screen](/blog/snowflake-push-postgres/aws-rds-setup.png)
+
+We need to generate an enrollment ticket to allow a new Ockam Node to 
+join the project that was just created. This node will run alongside the 
+Amazon RDS PostgreSQL Database, in the network where the Amazon RDS is running:
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute postgres \
+  --relay postgres > postgres.ticket
+```
+
+### !!steps 
+
+In this command we've set the new ticket to expire in `24 hours`, and a usage 
+count of `1`. This means the generated ticket is valid for a single use, and 
+that it's valid for 24 hours. A single usage ticket means there is low 
+risk associated with mishandling this ticket after use; there's no means 
+for an attacker to re-use it like an API token to access any system. 
+
+```shell ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 24h \
+  --attribute postgres \
+  --relay postgres > postgres.ticket
+```
+
+### !!steps 
+
+The Project Membership Credential that's issued will include  
+attributes that will be cryptographically attested to by the Project's 
+Membership Authority. You can use these attributes to apply policies with 
+Attribute Based Access Controls (ABAC) to allow or restrict specific actions and 
+communication paths between nodes.
+
+In this example we assign a single attribute of `postgres`. 
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+# !focus(1:1)
+  --attribute postgres \
+  --relay postgres > postgres.ticket
+```
+
+### !!steps 
+
+The `--relay postgres` flag is a shortcut for creating a policy that allows this 
+node to create a relay at the address `postgres`. 
+
+This relay will allow your Snowflake warehouse to establish a secure end-to-end 
+encrypted connection to your PostgreSQL database, without requiring you to expose any 
+endpoints to the public Internet.
+
+As the final part of this command we pipe the generated ticket to a file named `postgres.ticket`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute postgres \
+# !focus(1:1)
+  --relay postgres > postgres.ticket
+```
+
+### !!steps Create a configuration file
+
+We're going to pass the configuration for our Ockam Node as a JSON file, so 
+save the configuration to the right into a file named `postgres.json`.
+
+```javascript ! tour
+{
+  "relay": "postgres",
+  "tcp-outlet": {
+    "to": "$POSTGRES_ENDPOINT:5432",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+Ockam Command will process the configuration file after the node starts, with the
+first instruction being to create a relay with the name `postgres`. This relay will 
+allow Snowflake to establish a secure end-to-end encrypted connection to your
+RDS Database. It provides the ability to have entirely isolated infrastructure 
+running within a private network, without requiring you to expose any endpoints
+to the public Internet and no configuring of allow lists to custom network routes.
+
+```javascript ! tour
+{
+// !focus(1:1)
+  "relay": "postgres",
+  "tcp-outlet": {
+    "to": "$POSTGRES_ENDPOINT:5432",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+An outlet decrypts any messages received by the node and 
+then forwards them to the specified broker address.
+
+```javascript ! tour
+{
+  "relay": "postgres",
+// !focus(1:4)  
+  "tcp-outlet": {
+    "to": "$POSTGRES_ENDPOINT:5432",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+In this example we're giving the interpolated value from the environment
+variable `POSTGRES_ENDPOINT`, which we'll set in a later step when we
+start the node.
+
+```javascript ! tour
+{
+  "relay": "postgres",
+  "tcp-outlet": {
+// !focus(1:1)  
+    "to": "$POSTGRES_ENDPOINT:5432",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+We will setup the PostgreSQL Inlet that runs alongside our Snowflake 
+warehouse in a moment. Before we do that though, we can define a policy to restrict what 
+nodes can connect to our outlet.
+
+This policy applies Attribute Based Access Controls (ABAC) to allow 
+other nodes that have the attribute `snowflake` as part of their attested 
+credentials. The system denies access to nodes without the `snowflake` attribute.
+
+```javascript ! tour
+{
+  "relay": "postgres",
+  "tcp-outlet": {
+    "to": "$POSTGRES_ENDPOINT:5432",
+// !focus(1:1)      
+    "allow": "snowflake"
+  }
+}
+```
+
+</CodeTour> 
+
+<ImageTour>
+
+### !!steps Launch Ockam node for Amazon RDS
+
+The Ockam Node for Amazon RDS is a streamlined way to provision a managed Ockam Node
+within your private AWS VPC. 
+
+To deploy the node that will allow Snowflake to reach your Amazon RDS PostgreSQL database visit
+the [Ockam Node for Amazon RDS PostgreSQL listing in the AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-zjugwdx5hp2le), and click the `Continue to Subscribe` button, and then
+`Continue to Configuration`. 
+
+On the configuration page choose the region that your Amazon RDS cluster is
+running in, and then click `Continue to Launch` followed by `Launch`.
+
+![!tour Ockam node for Amazon RDS PostgreSQL](/blog/snowflake-push-postgres/aws-marketplace-rds.png)
+
+### !!steps Enter stack details
+
+The initial Create Stack screen pre-fills the fields with the correct
+information for your node, so you can press `Next` to proceed.
+
+![!tour Ockam node for Amazon RDS - create stack screen](/blog/snowflake-push-postgres/create-stack.png)
+
+### !!steps Enter node configuration
+
+This screen has important details to you need to fill in:
+
+* **Stack name:** Give this stack a recognisable name, you'll see this in various locations in the AWS Console. It'll also make it easier to clean these resources up later if you with to remove them.
+* **VPC ID:** The ID of the Virtual Private Cloud network to deploy the node in. Make sure it's the same VPC where you've deployed your Amazon MSK cluster.
+* **Subnet ID:** Choose one of the subnets within your VPC, ensure MSK has a broker address available in that subnet.
+* **Enrollment ticket:** Copy the contents of the `postgres.ticket` file we created earlier and paste it in here.
+* **RDS PostgreSQL Database Endpoint:** In the _Connectivity & security_ for your Amazon RDS Database you will find Endpoint details. Copy the `Endpoint` value for the Private RDS Database that's in the same subnet you chose above.
+* **JSON Node Configuration:** Copy the contents of the `postgres.json` file we created earlier and paste it in here.
+
+We've now completed the highlighted part of the diagram below, and our Amazon RDS PostgreSQL node is waiting for another node to connect.
+
+![Amazon RDS PostgreSQL setup](/blog/snowflake-push-postgres/aws-rds-setup.png)
+
+![!tour Ockam node for Amazon RDS PostgreSQL - node configuration screen](/blog/snowflake-push-postgres/stack-details.png)
+
+</ImageTour>
+
+<CodeTour>
+
+### !!steps Generate enrollment ticket for Snowflake
+
+![Setting up Ockam Node as native Snowflake app](/blog/snowflake-push-postgres/snowflake-setup.png)
+
+One end of our connection is now setup, it's time to connect the Snowflake end. 
+We need to generate an enrollment ticket to allow another Ockam Node to
+join our project. This node will run in our Snowflake warehouse:
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+  --attribute snowflake > snowflake.ticket
+```
+
+### !!steps
+
+As we did with the earlier ticket, we've reduced the risk associated with
+mishandling a ticket by restricting it's permitted usage window. We've again set 
+a usage count of `1`, but with a tighter
+expiry time of just `2 hours`.
+
+```bash ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 2h \
+  --attribute snowflake > snowflake.ticket
+```
+
+### !!steps
+
+This credential will include an attested attribute of `snowflake`. You'll 
+recall in an earlier step we applied a policy to say that nodes in our 
+project must have an attribute of `snowflake` to connect to 
+the outlet. The node that enrolls with this ticket will also have the
+attribute `snowflake`, and so it will be able to communicate with our PostgreSQL 
+node. 
+
+The ticket is then saved to a file called `snowflake.ticket`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+# !focus(1:1)
+  --attribute snowflake > snowflake.ticket
+```
+
+</CodeTour>
+
+
+<ImageTour>
+
+### !!steps Configure connection details
+
+Click "Get started" to open the Snowflake setup screen.
+
+![!tour Create Snowflake ticket](/blog/snowflake-query-postgres/snowflake-get-started-app.png)
+
+Take the contents of the file `snowflake.ticket` that we just created and paste
+it into "Provide the above Enrollment Ticket" form field in the "Configure app"
+setup screen in Snowflake.
+
+![!tour Create Snowflake ticket](/blog/snowflake-query-postgres/snowflake-ticket.png)
+
+### !!steps Grant privileges
+
+To be able to authenticate with Ockam Orchestrator and then 
+discover the route to our outlet, the Snowflake app needs to allow 
+outbound connections to your Ockam project. 
+
+Toggle the `Grant access to egress and reach your Project` and approve the connection by
+pressing `Connect`. 
+
+Toggle the `Grant access to your postgre database` and enter the username and password for your 
+PostgreSQL database and store it as a secret in snowflake.
+
+
+![!tour Grant egress](/blog/snowflake-query-postgres/grant-privileges.png)
+
+### !!steps Configure PostgreSQL database 
+
+Enter the name of the PostgreSQL database.
+
+![!tour Map streams to PostgreSQL tables](/blog/snowflake-query-postgres/configure-database.png)
+
+
+</ImageTour>
+
+
+With that, we've completed the last step in the setup. We've now got a complete
+point-to-point connection that allows our Snowflake warehouse to securely
+query private PostgreSQL database.
+
+![Snowflake push to PostgreSQL setup complete](/blog/snowflake-push-postgres/aws-snowflake-complete.png)
+
+## Running a Query
+
+Now that we have our secure connection set up between Snowflake and PostgreSQL, let's run some queries!
+
+<CodeTour>
+
+### !!steps Create and populate a table in PostgreSQL
+
+First, let's create a table in our PostgreSQL database and insert some data. We can do this directly from Snowflake using the `OCKAM_POSTGRES_EXECUTE` procedure:
+
+```sql ! tour
+CALL QUERY_REMOTE_POSTGRESQL__CONNECTOR.EXTERNAL.OCKAM_POSTGRES_EXECUTE($$
+DROP TABLE IF EXISTS PETS;
+CREATE TABLE IF NOT EXISTS PETS (NAME VARCHAR(100), BREED VARCHAR(100));
+INSERT INTO PETS VALUES ('Max', 'Golden Retriever');
+INSERT INTO PETS VALUES ('Bella', 'Poodle');
+$$);
+```
+
+This query does the following:
+1. Drops the `PETS` table if it exists
+2. Creates a new `PETS` table with `NAME` and `BREED` columns
+3. Inserts two rows of data into the table
+
+### !!steps Query the PostgreSQL table
+
+Now that we have data in our PostgreSQL table, let's query it from Snowflake:
+
+```sql ! tour
+CALL QUERY_REMOTE_POSTGRESQL__CONNECTOR.EXTERNAL.OCKAM_POSTGRES_QUERY('SELECT * FROM PETS;');
+```
+
+This query will return all rows from the `PETS` table in our PostgreSQL database.
+
+</CodeTour>
+
+The result of this query should be a table with two rows:
+
+| NAME  | BREED             |
+|-------|-------------------|
+| Max   | Golden Retriever  |
+| Bella | Poodle            |
+
+As you can see, we've successfully created a table in PostgreSQL and queried it directly from Snowflake, all through our secure, point-to-point connection!
+
+## Next steps
+
+You now have a secure, point-to-point connection that allows your Snowflake warehouse to
+query your private PostgreSQL database directly. This opens up a world of possibilities
+for data integration and analysis.
+
+From here you can:
+
+* Join data from Snowflake and PostgreSQL in a single query
+* Use PostgreSQL data to enrich your Snowflake datasets
+* Perform real-time queries on your operational PostgreSQL database from within Snowflake
+
+If you'd like to explore some other capabilities of Ockam I'd recommend:
+
+* [Creating private point-to-point connections with _any_ database](https://docs.ockam.io/portals/databases)
+* [Adding security as a feature in your SaaS product](/blog/building-secure-saas-platforms)
