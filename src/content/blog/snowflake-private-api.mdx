@@ -18,7 +18,7 @@ If you've stored data in Snowflake then chances are you've also got an
 enterprise application that needs to access it, and a common way to do that is 
 through an HTTP API. This is your organization's _private_ data though, so 
 making it available through an API that is accessible on the _public_ internet 
-is not the best approach.
+is not acceptable.
 
 In this guide I'm going to walk you through how to build, deploy, and host a 
 _private_ custom API powered by Snowflake.
@@ -373,7 +373,7 @@ SHOW IMAGE REPOSITORIES;
 
 ## !!steps 
 
-Everything we're going to do here us going to require admin access, so we ensure
+Everything we're going to do here is going to require admin access, so we ensure
 we're using the appropriate role.
 
 ```sql ! tour
@@ -1521,7 +1521,7 @@ container, any packets it receives will be forwarded to the relay named
 has the attribute `snowflake-api-service-outlet` set.
 
 The `docker run` command has port `8001` on our host machine send those packets 
-to `8001` in the container, with is a TCP inlet that forwards those packet to
+to `8001` in the container, which is a TCP inlet that forwards those packet to
 relay, which are then received by the TCP outlet running in Snowflake, which
 forwards them to internal hostname of our app container on port `8001`, which is 
 the interface that our Python API in Snowflake is listening on. 
