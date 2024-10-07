@@ -20,6 +20,7 @@ import MarketplaceSetup from './MarketplaceSetup';
 import Notice from './Notice';
 import UserDetails from './UserDetails';
 import { TIERS } from '../Packaging/tiers';
+import VerifyEmailModal from './VerifyEmail';
 
 type Props = {
   install: MDXRemoteSerializeResult;
@@ -63,6 +64,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   const [marketplaceFulfilment, setMarketplacceFulfilment] = useState<boolean>(false);
   const [returningDelegate, setReturningDelegate] = useState<boolean>(false);
   const [completedDelegate, setCompletedDelegate] = useState<boolean>(false);
+  const [verifyEmail, setVerifyEmail] = useState<boolean>(false);
 
   const [transitioning, setTransitioning] = useState(false);
   // const [nextHidden, setNextHidden] = useState(false);
@@ -427,11 +429,13 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
         setIsLoaded(true);
       }
     } catch (error) {
+      setVerifyEmail(true);
       if (error instanceof UnverifiedEmailError) {
-        setMessage('📨 Check your inbox! Verify your email address and then refresh this page');
-        setTimeout(() => {
-          router.reload();
-        }, 5000);
+        setVerifyEmail(true);
+        // setMessage('📨 Check your inbox! Verify your email address and then refresh this page');
+        // setTimeout(() => {
+        //   router.reload();
+        // }, 5000);
       } else {
         console.error(error);
       }
@@ -456,6 +460,7 @@ const SignupFlowManager: FC<Props> = ({ install, terms }): ReactElement => {
   return (
     <Flex mx="auto" pb="32" p={8} direction={{ base: 'row' }} w="100%">
       {message && <Notice message={message} />}
+      <VerifyEmailModal open={verifyEmail} />
       <Box style={{ transition: '200ms ease-in opacity', opacity: returningDelegate ? '0' : '1' }}>
         <Steps
           variant="circles"
