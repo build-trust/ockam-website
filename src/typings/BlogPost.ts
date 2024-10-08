@@ -10,6 +10,7 @@ export type BlogPostData = {
   isFeatured?: boolean;
   image: string;
   authorPosition: string;
+  codetour?: boolean;
 };
 
 export type BlogPost = {

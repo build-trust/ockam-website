@@ -16,7 +16,7 @@ type BlogPostHeaderProps = {
 };
 
 const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
-  const { title, category, image, author, authorAvatar, authorPosition, date } = post;
+  const { title, category, image, author, authorAvatar, authorPosition, date, codetour } = post;
   const { breakpoints } = useTheme();
 
   const placeholderImg = useMemo(
@@ -26,7 +26,7 @@ const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
         PlaceholderBlogPostBlue,
         PlaceholderBlogPostSilver,
       ]),
-    []
+    [],
   );
 
   return (
@@ -45,7 +45,7 @@ const BlogPostHeader: FunctionComponent<BlogPostHeaderProps> = ({ post }) => {
         </Heading>
 
         <AuthorSignature
-          withDate
+          withDate={!codetour}
           author={author}
           authorAvatar={authorAvatar}
           authorPosition={authorPosition}
