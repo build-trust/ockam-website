@@ -88,7 +88,7 @@ next stage is going to complete the picture below, but creating a point-to-point
 connection between the two systems &mdash; without the need to expose any systems
 to the public internet!
 
-![Snowflake push to Amazon RDS](/blog/snowflake-push-postgres/aws-complete.png)
+![Snowflake push to Amazon RDS](/blog/snowflake-query-postgres/aws-complete.png)
 
 <ImageTour>
 ### !!steps Get the app
@@ -98,7 +98,7 @@ to get an invite please drop us an email at [hello@ockam.io](mailto:hello@ockam.
 
 Once invited you'll receive an email with a link to get the app.
 
-![!tour Get the app](/blog/snowflake-push-postgres/app-store.png)
+![!tour Get the app](/blog/snowflake-query-postgres/app-store.png)
 
 ### !!steps Select a warehouse
 
@@ -167,7 +167,7 @@ bootstrap your first project and get you ready to go. It will:
 In this section we're going to provision an Ockam node that will run alongside
 our PostgreSQL database, and provide one of the ends of our point-to-point connection.
 
-![Amazon RDS PostgreSQL setup screen](/blog/snowflake-push-postgres/aws-rds-setup.png)
+![Amazon RDS PostgreSQL setup screen](/blog/snowflake-query-postgres/aws-rds-setup.png)
 
 We need to generate an enrollment ticket to allow a new Ockam Node to 
 join the project that was just created. This node will run alongside the 
@@ -338,14 +338,14 @@ the [Ockam Node for Amazon RDS PostgreSQL listing in the AWS Marketplace](https:
 On the configuration page choose the region that your Amazon RDS cluster is
 running in, and then click `Continue to Launch` followed by `Launch`.
 
-![!tour Ockam node for Amazon RDS PostgreSQL](/blog/snowflake-push-postgres/aws-marketplace-rds.png)
+![!tour Ockam node for Amazon RDS PostgreSQL](/blog/snowflake-query-postgres/aws-marketplace-rds.png)
 
 ### !!steps Enter stack details
 
 The initial Create Stack screen pre-fills the fields with the correct
 information for your node, so you can press `Next` to proceed.
 
-![!tour Ockam node for Amazon RDS - create stack screen](/blog/snowflake-push-postgres/create-stack.png)
+![!tour Ockam node for Amazon RDS - create stack screen](/blog/snowflake-query-postgres/create-stack.png)
 
 ### !!steps Enter node configuration
 
@@ -360,9 +360,9 @@ This screen has important details to you need to fill in:
 
 We've now completed the highlighted part of the diagram below, and our Amazon RDS PostgreSQL node is waiting for another node to connect.
 
-![Amazon RDS PostgreSQL setup](/blog/snowflake-push-postgres/aws-rds-setup.png)
+![Amazon RDS PostgreSQL setup](/blog/snowflake-query-postgres/aws-rds-setup.png)
 
-![!tour Ockam node for Amazon RDS PostgreSQL - node configuration screen](/blog/snowflake-push-postgres/stack-details.png)
+![!tour Ockam node for Amazon RDS PostgreSQL - node configuration screen](/blog/snowflake-query-postgres/stack-details.png)
 
 </ImageTour>
 
@@ -370,7 +370,7 @@ We've now completed the highlighted part of the diagram below, and our Amazon RD
 
 ### !!steps Generate enrollment ticket for Snowflake
 
-![Setting up Ockam Node as native Snowflake app](/blog/snowflake-push-postgres/snowflake-setup.png)
+![Setting up Ockam Node as native Snowflake app](/blog/snowflake-query-postgres/snowflake-setup.png)
 
 One end of our connection is now setup, it's time to connect the Snowflake end. 
 We need to generate an enrollment ticket to allow another Ockam Node to
@@ -460,7 +460,7 @@ With that, we've completed the last step in the setup. We've now got a complete
 point-to-point connection that allows our Snowflake warehouse to securely
 query private PostgreSQL database.
 
-![Snowflake push to PostgreSQL setup complete](/blog/snowflake-push-postgres/aws-snowflake-complete.png)
+![Snowflake push to PostgreSQL setup complete](/blog/snowflake-query-postgres/aws-snowflake-complete.png)
 
 ## Running a Query
 
