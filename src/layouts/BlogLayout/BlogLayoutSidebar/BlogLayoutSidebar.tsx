@@ -16,7 +16,11 @@ const BlogLayoutSidebar: FunctionComponent<FlexProps> = (props) => {
 
   return (
     <Flex
-      display={{ base: props.className?.includes('codetour') ? 'none' : 'flex', huge: 'flex' }}
+      display={{
+        base: 'none',
+        sm: props.className?.includes('codetour') ? 'none' : 'flex',
+        huge: 'flex',
+      }}
       as="aside"
       w="container.sidebar"
       minW="container.sidebar"
