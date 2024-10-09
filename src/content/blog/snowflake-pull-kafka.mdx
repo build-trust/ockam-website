@@ -2,13 +2,11 @@
 title: Real-Time Data Ingestion from Kafka to Snowflake
 codetour: true
 category: Learning
-date: '2024-09-20'
+date: '2024-10-10'
 description: Setup a private point-to-point data stream from Kafka to Snowflake.
 image: /blog/snowflake-push-kafka/snowflake-push-kafka.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
-isFeatured: true
-featuredOrder: 2
 ---
 
 {/* <!-- vale Microsoft.We = NO --> */}
@@ -17,9 +15,18 @@ featuredOrder: 2
 {/* <!-- vale Microsoft.Contractions = NO --> */}
 
 
-In today's data-driven world, organizations are constantly seeking ways to harness the power of real-time data for analytics and decision-making. Apache Kafka has emerged as a powerhouse for handling high-volume, real-time data streams, while Snowflake offers unparalleled capabilities for data warehousing and analytics. But what if you could seamlessly combine the strengths of both platforms in less than 15 minutes, without the headaches of managing IP allowlists, opening firewall ports, or navigating the complexities of services like PrivateLink?
+In today's data-driven world, organizations are constantly seeking ways to harness 
+the power of real-time data for analytics and decision-making. Apache Kafka has 
+emerged as a powerhouse for handling high-volume, real-time data streams, while 
+Snowflake offers unparalleled capabilities for data warehousing and analytics. 
 
-Today, we're excited to introduce a solution that makes this vision a reality: the Pull from Kafka Connector!
+What if you could seamlessly combine the strengths of both platforms in less 
+than 15 minutes, without the headaches of managing IP allow
+lists, opening firewall ports, or navigating the complexities of services like 
+PrivateLink?
+
+Today, we're excited to introduce a solution that makes this vision a reality: 
+the Pull from Kafka Connector!
 
 ## Snowflake 💙 Apache Kafka
 
@@ -33,7 +40,13 @@ warehouses, data lakes, data science / ML / AI, and even cybersecurity. This
 centralization brings a huge amount of convenience through breaking down
 data silos and allowing teams to make smart data-informed decisions. 
 
-Connecting your Kafka broker to Snowflake can be problematic depending on your network topology. It would be convenient to give the broker a public address, but that's a significant increase in risk for a system that handles a lot of important data. Managing IP allow lists and updating firewall ingress rules improves security but can be cumbersome to manage. Alternatives like PrivateLink are better, but they too can be cumbersome to setup and require your systems to be on the same public cloud and in the same region.
+Connecting your Kafka broker to Snowflake can be problematic depending on your 
+network topology. It would be convenient to give the broker a public address, 
+but that's a significant increase in risk for a system that handles a lot of 
+important data. Managing IP allow lists and updating firewall ingress rules 
+improves security but can be cumbersome to manage. Alternatives like PrivateLink 
+are better, but they too can be cumbersome to setup and require your systems to 
+be on the same public cloud and in the same region.
 
 In this post I'm going to show you how to securely
 connect Snowflake to your private Apache Kafka broker, in just a few minutes. We will:
@@ -460,9 +473,14 @@ Toggle the `Grant access to the tables where Kafka messages must be inserted` an
 
 ### !!steps Map Kafka topics to Snowflake tables
 
-Enter the name of the Kafka topic you want to map to the Snowflake table. In this example, the topic is `customers`.
+Enter the name of the Kafka topic you want to map to the Snowflake table. In 
+this example, the topic is `customers`.
 
-Check "Messages are encoded with a schema" if you have a schema registry and the messages are encoded with a schema.  The configuration to use to Launch Ockam node for Amazon MSK will need to be updated to include the schema registry details. Update `$SCHEMA_REGISTRY_ADDRESS` with the address of the schema registry. Make sure the ockam node has access to the schema registry.
+Check "Messages are encoded with a schema" if you have a schema registry and the 
+messages are encoded with a schema. The configuration to use to Launch Ockam 
+node for Amazon MSK will need to be updated to include the schema registry 
+details. Update `$SCHEMA_REGISTRY_ADDRESS` with the address of the schema 
+registry. Make sure the ockam node has access to the schema registry.
 
 ```bash
 {
