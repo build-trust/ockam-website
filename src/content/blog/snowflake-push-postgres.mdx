@@ -145,10 +145,33 @@ provisioning to complete and for your database to be available.
 
 </ImageTour>
 
+### Create the destination tables
+
+<CodeTour>
+
+### !!steps 
+
+Our pipeline will need the destination tables to already exist to successfully
+process the changes. Connect to your PostgreSQL database (using 
+your preferred client tools) and create a table that will match the
+schema of the Snowflake source. Note that `number(8)` isn't a valid data type
+in PostgreSQL so I've mapped it here to an `int`.
+
+```sql ! tour
+CREATE TABLE customers (
+  id int NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL
+);
+```
+
+</CodeTour>
+
 ## Connect Snowflake to PostgreSQL
 
-We've created a stream, PostgreSQL is running. It's now time to connect the two! The
-next stage is going to complete the picture below, but creating a point-to-point
+We've created a stream, PostgreSQL is running, our table is waiting for data. 
+It's now time to connect the everything! The
+next stage is going to complete the picture below, by creating a point-to-point
 connection between the two systems &mdash; without the need to expose any systems
 to the public internet!
 
@@ -495,10 +518,13 @@ setup screen in Snowflake.
 
 ### !!steps Map Snowflake stream to PostgreSQL table
 
-Snowflake sends each stream of changes to a table in PostgreSQL database, and we need to define the database and mapping between each stream and table. Enter the stream you want to 
-send (in the format of database.schema.stream), and then enter the name of the tables in PostgreSQL.
+Snowflake sends each stream of changes to a table in PostgreSQL database, and we 
+need to define the database and mapping between each stream and table. Enter the 
+stream you want to send (in the format of database.schema.stream), and then enter 
+the name of the tables in PostgreSQL.
 
-Table should existing in PostgreSQL database.
+The table(s) should already exist in PostgreSQL database! If you've not created
+the destination tables go and do that now.
 
 ![!tour Map streams to PostgreSQL tables](/blog/snowflake-push-postgres/map-streams-to-tables.png)
 
