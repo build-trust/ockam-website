@@ -11,6 +11,8 @@ isFeatured: false
 featuredOrder: 2
 ---
 
+{/* <!-- vale off --> */}
+
 {/* <!-- vale Microsoft.We = NO --> */}
 {/* <!-- vale Microsoft.FirstPerson = NO --> */}
 {/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
@@ -416,7 +418,9 @@ LIST @"SECURE";
 
 We can also list the contents of the stage with another `curl` command, using the WebDAV `PROPFIND` method
 ```shell ! tour
-curl -X PROPFIND -u user:password http://localhost:8001/ -H "Depth: 1"
+curl -X PROPFIND \
+  -u user:password http://localhost:8001/ \
+  -H "Depth: 1"
 ```
 
 ### !!steps Download a file
@@ -424,7 +428,8 @@ curl -X PROPFIND -u user:password http://localhost:8001/ -H "Depth: 1"
 We can download that same file from the stage
 
 ```shell ! tour
-curl -u user:password -O http://localhost:8001/hello.txt
+curl -u user:password \
+  -O http://localhost:8001/hello.txt
 ```
 
 ### !!steps Delete a file
@@ -432,7 +437,8 @@ curl -u user:password -O http://localhost:8001/hello.txt
 And finally we can remove the file from the stage
 
 ```shell ! tour
-curl -X DELETE -u user:password http://localhost:8001/hello.txt
+curl -X DELETE \
+  -u user:password http://localhost:8001/hello.txt
 ```
 
 </CodeTour> 

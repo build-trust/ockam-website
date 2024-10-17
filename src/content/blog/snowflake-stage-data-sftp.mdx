@@ -11,6 +11,8 @@ isFeatured: false
 featuredOrder: 2
 ---
 
+{/* <!-- vale off --> */}
+
 {/* <!-- vale Microsoft.We = NO --> */}
 {/* <!-- vale Microsoft.FirstPerson = NO --> */}
 {/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
@@ -422,7 +424,9 @@ credentials. The system denies access to nodes without the `sftp` attribute.
 We can now finally start the Ockam inlet node with this command
 
 ```shell ! tour
-ockam node create --configuration sftp.json --enrollment-ticket sftp-client.ticket
+ockam node create \
+  --configuration sftp.json \
+  --enrollment-ticket sftp-client.ticket
 ```
 
 </CodeTour> 
