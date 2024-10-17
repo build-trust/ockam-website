@@ -1,10 +1,10 @@
 ---
-title: Access a Snowflake stage with SFTP
+title: Access a Snowflake stage with WebDAV
 codetour: true
 category: Learning
 date: '2024-10-15'
-description: Setup a SFTP server inside Snowflake to access stage data with a point-to-point connection
-image: /blog/snowflake-stage-data-sftp/snowflake-stage-data-sftp.png
+description: Setup a WebDAV server inside Snowflake to access stage data with a point-to-point connection
+image: /blog/snowflake-stage-data-webdav/snowflake-stage-data-webdav.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
 isFeatured: false
@@ -17,16 +17,15 @@ featuredOrder: 2
 {/* <!-- vale Microsoft.Contractions = NO --> */}
 {/* <!-- vale Microsoft.Avoid = NO --> */}
 
-Wouldn't it be nice to access files in a Snowflake stage, using SFTP, as if they were locally mounted on your machine?
+Wouldn't it be nice to access files in a Snowflake stage, using HTTP requests, as if they were locally mounted on your machine?
 Wouldn't it be even better if it was not necessary to manage IP allow lists, open firewall ports, or setup services like PrivateLink? 
 Would you believe me if I told you that it would take you less than 15 minutes to setup?
 
-Introducing the Snowflake Stage Data with SFTP Connector!
+Introducing the Snowflake Stage Data with WebDAV Connector!
 
-## Snowflake 💙 SFTP
+## Snowflake 💙 WebDAV
 
-SFTP, the Secure File Transfer Protocol, is an ubiquitous protocol for securely transferring files,
-based on the SSH (Secure Shell) protocol.
+WebDAV, is a protocol for authoring and exchanging documents, based on the HTTP protocol.
 
 Snowflake is The Data Cloud and the place to support workloads such as data
 warehouses, data lakes, data science / ML / AI, and even cybersecurity. This
@@ -36,17 +35,17 @@ data silos and allowing teams to make smart data-informed decisions.
 One way to import data into Snowflake is to use the [`snow` command line client](https://docs.snowflake.com/en/developer-guide/snowflake-cli/installation/installation) 
 or the [`snowflake-connector-python` Python library](https://docs.snowflake.com/en/developer-guide/python-connector/python-connector-install) to upload files and 
 have them be mapped to tables for later processing. Unfortunately, both those tools require a specific installation, and an OAuth authentication,
-whereas SFTP is installed on many Linux distributions and only needs SSH keys.
+whereas HTTP commands can be easily executed with an ubiquitous utility like `curl`.
 
-In this post I'm going to show you how to securely access a Snowflake stage in your account, with SFTP, in just a few minutes. 
+In this post I'm going to show you how to securely access a Snowflake stage in your account, with WebDAV, in just a few minutes. 
 We will:
 
 * Create a stage associated to your Snowflake account.
-* Create a SFTP server on Snowflake with a private encrypted connection.
-* Upload, list, download and remove files with SFTP commands.
+* Create a WebDAV server on Snowflake with a private encrypted connection.
+* Upload, list, download and remove files with WebDAV commands.
 
 
-![Snowflake stage data with SFTP](/blog/snowflake-stage-data-sftp/snowflake-stage-data-sftp.png)
+![Snowflake stage data with WebDAV](/blog/snowflake-stage-data-webdav/snowflake-stage-data-webdav.png)
 
 
 ## Create a stage
@@ -54,12 +53,12 @@ We will:
 This can be done with just a few commands in the Snowsight editor:
 ```sql
 -- create a test database
-CREATE DATABASE IF NOT EXISTS SFTP_TEST_DATABASE;
-USE DATABASE SFTP_TEST_DATABASE;
+CREATE DATABASE IF NOT EXISTS WEBDAV_TEST_DATABASE;
+USE DATABASE WEBDAV_TEST_DATABASE;
 
 -- create a test schema
-CREATE SCHEMA IF NOT EXISTS SFTP_TEST_SCHEMA;
-USE SCHEMA SFTP_TEST_SCHEMA;
+CREATE SCHEMA IF NOT EXISTS WEBDAV_TEST_SCHEMA;
+USE SCHEMA WEBDAV_TEST_SCHEMA;
 
 -- create an internal stage
 CREATE STAGE IF NOT EXISTS SECURE ENCRYPTION = (type = 'SNOWFLAKE_SSE');
@@ -72,24 +71,24 @@ LIST @"SECURE";
 
 And the stage should be empty for now!
 
-## Setup a SFTP server inside Snowflake
+## Setup a WebDAV server inside Snowflake
 
-We are now going to create a SFTP server for the previous stage inside Snowflake.
+We are now going to create a WebDAV server for the previous stage inside Snowflake.
 This will create a point-to-point connection between the two systems &mdash; without the need to expose
 any systems to the public internet!
 
 <ImageTour>
 ### !!steps Get the app
 
-The Snowflake stage data with SFTP Connector by Ockam is [available in the Snowflake Marketplace - FIXME](https://app.snowflake.com/marketplace/listing/TODO).
+The Snowflake stage data with WebDAV Connector by Ockam is [available in the Snowflake Marketplace - FIXME](https://app.snowflake.com/marketplace/listing/TODO).
 
-![!tour Get the app - FIXME](/blog/snowflake-stage-data-sftp/app-store.png)
+![!tour Get the app - FIXME](/blog/snowflake-stage-data-webdav/app-store.png)
 
 ### !!steps Select a warehouse
 
 The first screen you're presented with will ask you to select the warehouse to utilize to activate the app and can choose to change the application name.
 
-![!tour Select a warehouse](/blog/snowflake-stage-data-sftp/select-warehouse.png)
+![!tour Select a warehouse](/blog/snowflake-stage-data-webdav/select-warehouse.png)
 
 ### !!steps Grant account privileges
 
@@ -97,14 +96,14 @@ Click the `Grant` button to the right of this screen. The app will then be
 automatically granted permissions to create a warehouse and create a compute
 pool.
 
-![!tour Grant account privileges](/blog/snowflake-stage-data-sftp/grant-account.png)
+![!tour Grant account privileges](/blog/snowflake-stage-data-webdav/grant-account.png)
 
 ### !!steps Activate app
 
 Once the permissions grants complete, an `Activate` button will appear. Click
 it and the activation process will begin.
 
-![!tour Activate app](/blog/snowflake-stage-data-sftp/activate-app.png)
+![!tour Activate app](/blog/snowflake-stage-data-webdav/activate-app.png)
 
 ### !!steps Launch app
 
@@ -112,7 +111,7 @@ After the app activates you'll see a page that summarizes the
 privileges that the application now has. There's nothing we need
 to review or update on these screens yet, so proceed by clicking the `Launch app` button.
 
-![!tour Launch app](/blog/snowflake-stage-data-sftp/launch-app.png)
+![!tour Launch app](/blog/snowflake-stage-data-webdav/launch-app.png)
 
 </ImageTour>
 
@@ -121,7 +120,7 @@ to review or update on these screens yet, so proceed by clicking the `Launch app
 We are now going to configure the application. We first need to:
 
  - Create an Ockam project and issue an enrollment ticket
- - Create some SSH keys for both the SFTP server and the SFTP user.
+ - Configure the user name and password which will be used to access the server.
 
 
 <CodeTour>
@@ -159,16 +158,16 @@ bootstrap your first project and get you ready to go. It will:
 ### !!steps Generate enrollment ticket for Snowflake
 
 In this section we're going to provision an Ockam node that will run alongside
-the SFTP started by the "Stage data with SFTP - Connector" application, and provide one of the ends of our point-to-point connection.
+the WebDAV started by the "Stage data with WebDAV - Connector" application, and provide one of the ends of our point-to-point connection.
 
 We need to generate an enrollment ticket to allow a new Ockam Node to
-join the project that was just created. This node will run alongside the SFTP server, inside your Snowflake account:
+join the project that was just created. This node will run alongside the WebDAV server, inside your Snowflake account:
 
 ```bash ! tour
 ockam project ticket \
   --usage-count 1 --expires-in 24h \
-  --attribute sftp \
-  --relay sftp > sftp.ticket
+  --attribute webdav \
+  --relay webdav > webdav.ticket
 ```
 
 ### !!steps
@@ -183,8 +182,8 @@ for an attacker to re-use it like an API token to access any system.
 ockam project ticket \
 # !focus(1:1)
   --usage-count 1 --expires-in 24h \
-  --attribute sftp \
-  --relay sftp > sftp.ticket
+  --attribute webdav \
+  --relay webdav > webdav.ticket
 ```
 
 ### !!steps
@@ -195,69 +194,33 @@ Membership Authority. You can use these attributes to apply policies with
 Attribute Based Access Controls (ABAC) to allow or restrict specific actions and
 communication paths between nodes.
 
-In this example we assign a single attribute of `sftp`.
+In this example we assign a single attribute of `webdav`.
 
 ```bash ! tour
 ockam project ticket \
   --usage-count 1 --expires-in 24h \
 # !focus(1:1)
-  --attribute sftp \
-  --relay sftp > sftp.ticket
+  --attribute webdav \
+  --relay webdav > webdav.ticket
 ```
 
 ### !!steps
 
-The `--relay sftp` flag is a shortcut for creating a policy that allows this
-node to create a relay at the address `sftp`.
+The `--relay webdav` flag is a shortcut for creating a policy that allows this
+node to create a relay at the address `webdav`.
 
-This relay will allow a SFTP client to establish a secure end-to-end
-encrypted connection to the SFTP server, running in your Snowflake account, without requiring you to expose any
+This relay will allow a WebDAV client to establish a secure end-to-end
+encrypted connection to the WebDAV server, running in your Snowflake account, without requiring you to expose any
 endpoints to the public Internet.
 
-As the final part of this command we pipe the generated ticket to a file named `sftp.ticket`.
+As the final part of this command we pipe the generated ticket to a file named `webdav.ticket`.
 
 ```bash ! tour
 ockam project ticket \
   --usage-count 1 --expires-in 24h \
-  --attribute sftp \
+  --attribute webdav \
 # !focus(1:1)
-  --relay sftp > sftp.ticket
-```
-
-</CodeTour>
-
-## Generating SSH keys
-
-In order to setup both the SFTP server and the SFTP client, we will need to generate three SSH key pairs:
-
-- One pair for the user.
-- Two pairs for the server (we support both RSA and ED25519 signatures).
-
-<CodeTour>
-
-### !!steps Generate the user keys
-
-
-This command generates a private key in the `id_rsa` file and the corresponding public key in the `id_rsa.pub` file.
-
-```bash ! tour
-ssh-keygen -t rsa -b 4096 -f id_rsa -N ""
-```
-
-### !!steps Generate the server ED25519 keys
-
-This command generates a private key in the `ssh_host_ed25519_key` file and the corresponding public key in the `ssh_host_ed25519_key.pub` file.
-
-```bash ! tour
-ssh-keygen -t ed25519 -N "" -f ssh_host_ed25519_key
-```
-
-### !!steps Generate the server RSA keys
-
-This command generates a private key in the `ssh_host_rsa_key` file and the corresponding public key in the `ssh_host_rsa_key.pub` file.
-
-```bash ! tour
-ssh-keygen -t rsa -b 4096 -N "" -f ssh_host_rsa_key
+  --relay webdav > webdav.ticket
 ```
 
 </CodeTour>
@@ -270,23 +233,21 @@ ssh-keygen -t rsa -b 4096 -N "" -f ssh_host_rsa_key
 
 Click "Get started" to open the Snowflake setup screen.
 
-![!tour Create Snowflake ticket](/blog/snowflake-stage-data-sftp/snowflake-get-started-app.png)
+![!tour Create Snowflake ticket](/blog/snowflake-stage-data-webdav/snowflake-get-started-app.png)
 
-Take the contents of the file `sftp.ticket` that we just created and paste
+Take the contents of the file `webdav.ticket` that we just created and paste
 it into "Provide the above Enrollment Ticket" form field in the "Configure app"
 setup screen in Snowflake.
 
-![!tour Create Snowflake ticket](/blog/snowflake-stage-data-sftp/snowflake-ticket.png)
+![!tour Create Snowflake ticket](/blog/snowflake-stage-data-webdav/snowflake-ticket.png)
 
 ### !!steps Configure the stage access
 
 In this screen, we need to enter:
 
- - The full name of the stage we want to access: `SFTP_TEST_DATABASE.SFTP_TEST_SCHEMA.SECURE`.
- - The name of a SFTP user which will access the server, for example `user`.
- - The public SSH key which we generated earlier: paste the content of the `id_rsa.pub` file. 
+ - The full name of the stage we want to access: `WEBDAV_TEST_DATABASE.WEBDAV_TEST_SCHEMA.SECURE`.
 
-![!tour Configure the stage access](/blog/snowflake-stage-data-sftp/snowflake-configure-stage-access.png)
+![!tour Configure the stage access](/blog/snowflake-stage-data-webdav/snowflake-configure-stage-access.png)
 
 ### !!steps Grant privileges
 
@@ -297,41 +258,38 @@ outbound connections to your Ockam project.
 Toggle the `Grant access to egress and reach your Project` button and approve the connection by
 pressing `Connect`.
 
-Toggle the `Grant access to your SSH host ED25519 private key` button and paste the contents of the `ssh_host_ed25519_key` file.
+Toggle the `Grant access to your user` button, enter `user` for the user name and `password` for the user password.
 
-Toggle the `Grant access to your SSH host RSA private key` button and paste the contents of the `ssh_host_rsa_key` file.
-
-![!tour Grant egress](/blog/snowflake-stage-data-sftp/snowflake-grant-privileges.png)
+![!tour Grant egress](/blog/snowflake-stage-data-webdav/snowflake-grant-privileges.png)
 
 
-### !!steps Start the SFTP server
+### !!steps Start the WebDAV server
 
-Press "Next" and wait for the SFTP server to start. Once started, you should be able to check the SFTP server logs,
-and see that the server is listening on port 2222:
+Press "Next" and wait for the WebDAV server to start. Once started, you should be able to see the WebDAV server logs.
 
-![!tour Start server](/blog/snowflake-stage-data-sftp/snowflake-start-server.png)
+![!tour Start server](/blog/snowflake-stage-data-webdav/snowflake-start-server.png)
 
 You can also notice a tab containing the logs for an Ockam node. That Ockam node is a portal outlet which:
 
-  - Created a relay named `sftp` in the Ockam project.
-  - Declares that only clients with the attribute `sftp-client` can access the relay.
+  - Created a relay named `webdav` in the Ockam project.
+  - Declares that only clients with the attribute `webdav-client` can access the relay.
 
 </ImageTour>
 
-## Connect the SFTP client
+## Connect the WebDAV client
 
 <CodeTour>
 
-### !!steps Generate an enrollment ticket for the SFTP client
+### !!steps Generate an enrollment ticket for the WebDAV client
 
-One end of our connection is now setup, it's time to connect the SFTP server.
+One end of our connection is now setup, it's time to connect the WebDAV server.
 We need to generate an enrollment ticket to allow another Ockam Node to
 join our project. This node will run on our local machine:
 
 ```bash ! tour
 ockam project ticket \
   --usage-count 1 --expires-in 2h \
-  --attribute sftp-client > sftp-client.ticket
+  --attribute webdav-client > webdav-client.ticket
 ```
 
 ### !!steps
@@ -345,21 +303,21 @@ expiry time of just `2 hours`.
 ockam project ticket \
 # !focus(1:1)
   --usage-count 1 --expires-in 2h \
-  --attribute sftp-client > sftp-client.ticket
+  --attribute webdav-client > webdav-client.ticket
 ```
 
 ### !!steps
 
-This credential will include an attested attribute of `sftp-client`, corresponding to the attribute expected by 
+This credential will include an attested attribute of `webdav-client`, corresponding to the attribute expected by 
 the Ockam outlet node started in your Snowflake account.
 
-The ticket is then saved to a file called `sftp-client.ticket`.
+The ticket is then saved to a file called `webdav-client.ticket`.
 
 ```bash ! tour
 ockam project ticket \
   --usage-count 1 --expires-in 2h \
 # !focus(1:1)
-  --attribute sftp-client > sftp-client.ticket
+  --attribute webdav-client > webdav-client.ticket
 ```
 
 </CodeTour>
@@ -369,14 +327,14 @@ ockam project ticket \
 ### !!steps Create a configuration file
 
 We're now going to pass the configuration for our local Ockam Node as a JSON file, so
-save the configuration to the right into a file named `sftp.json`.
+save the configuration to the right into a file named `webdav.json`.
 
 ```javascript ! tour
 {
   "tcp-inlet": {
-    "via": "sftp",
-    "allow": "sftp",
-    "from": "0.0.0.0:2222"
+    "from": "0.0.0.0:8001",
+    "via": "webdav",
+    "allow": "webdav"
   }
 }
 ```
@@ -385,15 +343,15 @@ save the configuration to the right into a file named `sftp.json`.
 
 Ockam Command will process the configuration file after the node starts, instructing the node
 to create a portal inlet. An inlet receives message sent to the local `from` address, encrypts them and 
-forwards them to the project relay named `sftp`.
+forwards them to the project relay named `webdav`.
 
 ```javascript ! tour
 {
 // !focus(1:1)
   "tcp-inlet": {
-    "from": "0.0.0.0:2222",
-    "via": "sftp",
-    "allow": "sftp"
+    "from": "0.0.0.0:8001",
+    "via": "webdav",
+    "allow": "webdav"
   }
 }
 ```
@@ -403,16 +361,16 @@ forwards them to the project relay named `sftp`.
 We also define a policy to restrict which are nodes that are expected to be connected to our inlet.
 
 This policy applies Attribute Based Access Controls (ABAC) to allow
-other nodes that have the attribute `sftp` as part of their attested
-credentials. The system denies access to nodes without the `sftp` attribute.
+other nodes that have the attribute `webdav` as part of their attested
+credentials. The system denies access to nodes without the `webdav` attribute.
 
 ```javascript ! tour
 {
   "tcp-inlet": {
-    "from": "0.0.0.0:2222",
-    "via": "sftp",
+    "from": "0.0.0.0:8001",
+    "via": "webdav",
 // !focus(1:1)      
-    "allow": "sftp"
+    "allow": "webdav"
   }
 }
 ```
@@ -422,7 +380,7 @@ credentials. The system denies access to nodes without the `sftp` attribute.
 We can now finally start the Ockam inlet node with this command
 
 ```shell ! tour
-ockam node create --configuration sftp.json --enrollment-ticket sftp-client.ticket
+ockam node create --configuration webdav.json --enrollment-ticket webdav-client.ticket
 ```
 
 </CodeTour> 
@@ -430,7 +388,7 @@ ockam node create --configuration sftp.json --enrollment-ticket sftp-client.tick
 ## Testing the connection
 
 <CodeTour> 
-We are now ready to access our Snowflake stage, with SFTP, via a fully secure point-to-point connection!
+We are now ready to access our Snowflake stage, with WebDAV, via a fully secure point-to-point connection!
 
 ### !!steps Create a file
 
@@ -440,19 +398,11 @@ Before connecting we create a file which will be uploaded to Snowflake
 echo "Hello Snowflake!" > hello.txt
 ```
 
-### !!steps Connect to the SFTP server
-
-This command uses the `id_rsa` file containing the user private key, to connect the user `user` to the local address `127.0.0.1:2222`.
-
-```shell ! tour
-sftp -i id_rsa -P 2222 user@127.0.0.1
-```
-
 ### !!steps Upload a file
 
-This opens a SFTP session where we can enter our first SFTP command, a `put` command to upload the file to the `secure` stage
+The `hello.txt` file can now be uploaded with a simple `curl` command
 ```shell ! tour
-> put hello.txt /secure
+curl -T test/hello.txt -u user:password http://localhost:8001
 ```
 
 ### !!steps List files on the Snowflake stage
@@ -464,9 +414,9 @@ LIST @"SECURE";
 
 ### !!steps List remote files
 
-We can also list the contents of the stage from the SFTP session
+We can also list the contents of the stage with another `curl` command, using the WebDAV `PROPFIND` method
 ```shell ! tour
-> ls /secure
+curl -X PROPFIND -u user:password http://localhost:8001/ -H "Depth: 1"
 ```
 
 ### !!steps Download a file
@@ -474,7 +424,7 @@ We can also list the contents of the stage from the SFTP session
 We can download that same file from the stage
 
 ```shell ! tour
-> get /secure/hello.txt retrieved.txt
+curl -u user:password -O http://localhost:8001/hello.txt
 ```
 
 ### !!steps Delete a file
@@ -482,7 +432,7 @@ We can download that same file from the stage
 And finally we can remove the file from the stage
 
 ```shell ! tour
-> rm /secure/hello.txt
+curl -X DELETE -u user:password http://localhost:8001/hello.txt
 ```
 
 </CodeTour> 
@@ -491,7 +441,7 @@ And finally we can remove the file from the stage
 ## Next steps
 
 In summary, we are now able to securely access the contents of a Snowflake private stage, without exposing any port to the
-internet, with a few simple SFTP commands.
+internet, with a few simple WebDAV commands.
 
 If you'd like to explore some other capabilities of Ockam I'd recommend:
 
