@@ -348,12 +348,19 @@ information for your node, so you can press `Next` to proceed.
 
 This screen has important details to you need to fill in:
 
-* **Stack name:** Give this stack a recognisable name, you'll see this in various locations in the AWS Console. It'll also make it easier to clean these resources up later if you with to remove them.
-* **VPC ID:** The ID of the Virtual Private Cloud network to deploy the node in. Make sure it's the same VPC where you've deployed your Amazon MSK cluster.
-* **Subnet ID:** Choose one of the subnets within your VPC, ensure MSK has a broker address available in that subnet.
-* **Enrollment ticket:** Copy the contents of the `postgres.ticket` file we created earlier and paste it in here.
-* **RDS PostgreSQL Database Endpoint:** In the _Connectivity & security_ for your Amazon RDS Database you will find Endpoint details. Copy the `Endpoint` value for the Private RDS Database that's in the same subnet you chose above.
-* **JSON Node Configuration:** Copy the contents of the `postgres.json` file we created earlier and paste it in here.
+* **Stack name:** Give this stack a recognisable name, you'll see this in 
+various locations in the AWS Console. It'll also make it easier to clean these 
+resources up later if you wish to remove them.
+* **VPC ID:** The ID of the Virtual Private Cloud network to deploy the node in. 
+Make sure it's the same VPC where you've deployed your RDS instance.
+* **Subnet ID:** Choose same subnet where your RDS instance is deployed.
+* **Enrollment ticket:** Copy the contents of the `postgres.ticket` file we 
+created earlier and paste it in here.
+* **RDS PostgreSQL Database Endpoint:** In the _Connectivity & security_ for 
+your Amazon RDS Database you will find Endpoint details. Copy the `Endpoint` 
+value for the Private RDS Database that's in the same subnet you chose above.
+* **JSON Node Configuration:** Copy the contents of the `postgres.json` file we 
+created earlier and paste it in here.
 
 We've now completed the highlighted part of the diagram below, and our Amazon RDS PostgreSQL node is waiting for another node to connect.
 
