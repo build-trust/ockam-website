@@ -2,13 +2,11 @@
 title: Query a remote API
 codetour: true
 category: Learning
-date: '2024-10-15'
+date: '2024-06-15'
 description: Query a remote API, from your Snowflake account
 image: /blog/snowflake-query-remote-api/snowflake-query-remote-api.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
-isFeatured: false
-featuredOrder: 2
 ---
 
 {/* <!-- vale off --> */}
@@ -196,9 +194,10 @@ setup screen in Snowflake.
 
 ![!tour Create Snowflake ticket](/blog/snowflake-query-remote-api/snowflake-ticket.png)
 
-### !!steps Configure the API access
+### !!steps Configure API access
 
-In this screen, we need to select an authorization method:
+In this screen we need to select an authorization method. For this tutorial you 
+can select `Digest` and continue. The other options available to use are:
 
  - `None` No credentials are required to access the remote API.
  - `Basic` The remote API is accessible with a user name and password.
@@ -206,7 +205,6 @@ In this screen, we need to select an authorization method:
  - `Bearer token` The remote API is accessible with a token passed with an `Authorization` header.
  - `API Key` The remote API is accessible with an API Key passed with a specific extension header (for example `X-api-key`).
 
-For this tutorial, you can select `Digest`.
 
 ![!tour Configure the stage access](/blog/snowflake-query-remote-api/snowflake-configure-stage-access.png)
 
@@ -216,10 +214,11 @@ To be able to authenticate with Ockam Orchestrator and then
 discover the route to our outlet, the Snowflake app needs to allow
 outbound connections to your Ockam project.
 
-Toggle the `Grant access to egress and reach your Project` button and approve the connection by
+Toggle the `Grant access to your credentials` button, enter `user` for the user name and `password` for the user password.
+
+Toggle the `Grant access to your Ockam Project` button and approve the connection by
 pressing `Connect`.
 
-Toggle the `Grant access to your user credentials` button, enter `user` for the user name and `password` for the user password.
 
 ![!tour Grant egress](/blog/snowflake-query-remote-api/snowflake-grant-privileges.png)
 
