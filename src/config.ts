@@ -55,7 +55,7 @@ export default {
   },
   // Controls global message shown on homepage.
   allPageMessage: {
-    message: `❄️ Latest: Snowflake customers &mdash; stream your data to Kafka! **[Learn more](/blog/snowflake-push-kafka)**! ❄️`,
-    except: ['/blog/snowflake-push-kafka', '/get-started'],
+    message: `❄️ Latest: Snowflake customers &mdash; stream your data to Postgres! **[Learn more](/blog/snowflake-push-postgres)**! 🐘`,
+    except: ['/blog/snowflake-push-postgres', '/get-started'],
   },
 };

@@ -2,13 +2,13 @@
 title: Real-Time CDC Pipelines from Snowflake to PostgreSQL
 codetour: true
 category: Learning
-date: '2024-10-08'
+date: '2024-10-22'
 description: Setup a private point-to-point data stream from Snowflake to PostgreSQL.
-image: /blog/snowflake-push-postgres/snowflake-push-postgres.png
+image: /blog/snowflake-push-postgres/video-cover.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
-isFeatured: false
-featuredOrder: 2
+isFeatured: true
+featuredOrder: 1
 ---
 
 {/* <!-- vale Microsoft.We = NO --> */}
@@ -16,14 +16,23 @@ featuredOrder: 2
 {/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
 {/* <!-- vale Microsoft.Contractions = NO --> */}
 
-What if I told you there was a way to use Change Data Capture (CDC) to stream all
-those insights you've got in Snowflake, in real-time, back to the your private 
-PostgreSQL Database? That it'll
-use private point-to-point connections that don't require you to manage IP
-allow lists, open firewall ports, or setup services like PrivateLink, and that it
-will take you less than 15 minutes to setup!
+Snowflake is an amazing place to store from across your entire 
+organization so that you have a single place to aggregate it, query it, and find new
+insights. What happens when you want your apps to act on those aggregates and
+insights? You need a way to stream the changes in real-time back out to your
+transactional database.
 
 Introducing the Snowflake Push to PostgreSQL Connector!
+
+<AspectRatio maxW="50%" ratio={16 / 9}>
+  <iframe
+    src="https://www.youtube.com/embed/BHZHb1UXfyc?si=040EOY7Nidi2yowg"
+    title="Securely push data from Snowflake to Kafka"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</AspectRatio>
 
 ## Snowflake 💙 PostgreSQL
 
@@ -49,7 +58,8 @@ private PostgreSQL database, in just a few minutes. We will:
 
 * Setup a Snowflake Stream to capture changes to a table in Snowflake
 * Setup a PostgreSQL database in AWS
-* Connect Snowflake to PostgreSQL with a private encrypted connection
+* Connect Snowflake to PostgreSQL with a **private, mutually 
+authenticated, end-to-end encrypted connection** &mdash; without needing
 to expose either system to the public internet!
 
 ![Snowflake push to PostgreSQL](/blog/snowflake-push-postgres/snowflake-push-postgres.png)
@@ -1085,4 +1095,5 @@ process. The possibilities are limitless!
 If you'd like to explore some other capabilities of Ockam I'd recommend:
 
 * [Creating private point-to-point connections with _any_ database](https://docs.ockam.io/portals/databases)
+* [Streaming real-time changes from Snowflake to Kafka](/blog/snowflake-push-kafka)
 * [Adding security as a feature in your SaaS product](/blog/building-secure-saas-platforms)
