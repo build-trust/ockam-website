@@ -1,0 +1,422 @@
+---
+title: Query a remote API
+codetour: true
+category: Learning
+date: '2024-10-15'
+description: Query a remote API, from your Snowflake account
+image: /blog/snowflake-query-remote-api/snowflake-query-remote-api.png
+author: Glenn Gillen
+authorAvatar: /blog/glenn-gillen.jpg
+isFeatured: false
+featuredOrder: 2
+---
+
+{/* <!-- vale off --> */}
+
+{/* <!-- vale Microsoft.We = NO --> */}
+{/* <!-- vale Microsoft.FirstPerson = NO --> */}
+{/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
+{/* <!-- vale Microsoft.Contractions = NO --> */}
+{/* <!-- vale Microsoft.Avoid = NO --> */}
+
+Wouldn't it be nice to be able call a remote API that's only available inside your private network, with a simple Snowflake procedure call?
+Wouldn't it be even better if it was not necessary to manage IP allow lists, open firewall ports, or setup services like PrivateLink? 
+Would you believe me if I told you that it would take you less than 15 minutes to setup?
+
+Introducing the Snowflake Query Remote API Connector!
+
+## Snowflake 💙 APIs
+
+Many services offer a HTTP API in addition to a web interface. This makes data retrieval from the command-line very easy, using a 
+simple `curl` command.
+
+Snowflake is The Data Cloud and the place to support workloads such as data
+warehouses, data lakes, data science / ML / AI, and even cybersecurity. This
+centralization brings a huge amount of convenience through breaking down
+data silos and allowing teams to make smart data-informed decisions.
+
+You might wonder though how it can be possible to tap into HTTP services from Snowflake applications, if those
+services are hosted in private networks. You might also wonder if it is possible to join the results of a remote call
+with one of your database tables as if the remote data was available as a local table.
+
+In this post I'm going to show you how to securely access a remote API, hosted in a private network, in just a few minutes. 
+We will:
+
+* Install and configure the Query remote API connector.
+* Make a stored procedure call to retrieve data as if it was a table select.
+* Make a stored procedure call to post data to the API.
+
+
+![Snowflake query remote API](/blog/snowflake-query-remote-api/snowflake-query-remote-api.png)
+
+## Install and configure the Query Remote API Connector
+
+We are now going to create a set of stored procedures and a portal to access your private API.
+
+<ImageTour>
+### !!steps Get the app
+
+The Query Remote API Connector by Ockam is [available in the Snowflake Marketplace - FIXME](https://app.snowflake.com/marketplace/listing/TODO).
+
+![!tour Get the app](/blog/snowflake-query-remote-api/app-store.png)
+
+### !!steps Select a warehouse
+
+The first screen you're presented with will ask you to select the warehouse to utilize to activate the app and can choose to change the application name.
+
+![!tour Select a warehouse](/blog/snowflake-query-remote-api/select-warehouse.png)
+
+### !!steps Grant account privileges
+
+Click the `Grant` button to the right of this screen. The app will then be
+automatically granted permissions to create a warehouse and create a compute
+pool.
+
+![!tour Grant account privileges](/blog/snowflake-query-remote-api/grant-account.png)
+
+### !!steps Activate app
+
+Once the permissions grants complete, an `Activate` button will appear. Click
+it and the activation process will begin.
+
+![!tour Activate app](/blog/snowflake-query-remote-api/activate-app.png)
+
+### !!steps Launch app
+
+After the app activates you'll see a page that summarizes the
+privileges that the application now has. There's nothing we need
+to review or update on these screens yet, so proceed by clicking the `Launch app` button.
+
+![!tour Launch app](/blog/snowflake-query-remote-api/launch-app.png)
+
+</ImageTour>
+
+## Configuration
+
+We are now going to configure the application. We first need to:
+
+ - Create an Ockam project and issue an enrollment ticket
+ - Configure the user name and password which will be used to access the server.
+
+
+<CodeTour>
+
+### !!steps Download Ockam Command
+
+Run the following command on your local workstation:
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io \
+  | bash && source "$HOME/.ockam/env"
+```
+
+This will install the Ockam Command and source in the required environment
+settings. If you've installed Ockam Command before you can skip this step.
+
+
+### !!steps Setup admin account
+
+Once Ockam Command installation is complete you can run:
+
+```bash ! tour
+ockam enroll
+```
+
+Wrapped up in this single `ockam enroll` command are several steps that will
+bootstrap your first project and get you ready to go. It will:
+
+* Generate an Ockam Identity and store its secret keys in a file system based Ockam Vault.
+* Create an account with Ockam Orchestrator.
+* Provision a trial Space and Project in the Orchestrator.
+* Make your Ockam Identity the administrator of your new Project.
+
+### !!steps Generate enrollment ticket for Snowflake
+
+In this section we're going to provision an Ockam node that will allow you to connect to your remote API.
+
+We need to generate an enrollment ticket to allow a new Ockam Node to
+join the project that was just created. This node will be used by the connector stored procedures to make HTTP calls
+from inside your Snowflake account:
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute snowflake > snowflake.ticket
+```
+
+### !!steps
+
+In this command we've set the new ticket to expire in `24 hours`, and a usage
+count of `1`. This means the generated ticket is valid for a single use, and
+that it's valid for 24 hours. A single usage ticket means there is low
+risk associated with mishandling this ticket after use; there's no means
+for an attacker to re-use it like an API token to access any system.
+
+```shell ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 24h \
+  --attribute snowflake > snowflake.ticket
+```
+
+### !!steps
+
+The Project Membership Credential that's issued will include  
+attributes that will be cryptographically attested to by the Project's
+Membership Authority. You can use these attributes to apply policies with
+Attribute Based Access Controls (ABAC) to allow or restrict specific actions and
+communication paths between nodes.
+
+In this example we assign a single attribute of `snowflake`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+# !focus(1:1)
+  --attribute snowflake \
+  --relay snowflake > snowflake.ticket
+```
+
+</CodeTour>
+
+## Configuring the application
+
+<ImageTour>
+
+### !!steps Configure connection details
+
+Click "Get started" to open the Snowflake setup screen.
+
+![!tour Create Snowflake ticket](/blog/snowflake-query-remote-api/snowflake-get-started-app.png)
+
+Take the contents of the file `snowflake.ticket` that we just created and paste
+it into "Provide the above Enrollment Ticket" form field in the "Configure app"
+setup screen in Snowflake.
+
+![!tour Create Snowflake ticket](/blog/snowflake-query-remote-api/snowflake-ticket.png)
+
+### !!steps Configure the API access
+
+In this screen, we need to select an authorization method:
+
+ - `None` No credentials are required to access the remote API.
+ - `Basic` The remote API is accessible with a user name and password.
+ - `Digest` The remote API is accessible with a user name and password, but they are not transmitted in clear text.
+ - `Bearer token` The remote API is accessible with a token passed with an `Authorization` header.
+ - `API Key` The remote API is accessible with an API Key passed with a specific extension header (for example `X-api-key`).
+
+For this tutorial, you can select `Digest`.
+
+![!tour Configure the stage access](/blog/snowflake-query-remote-api/snowflake-configure-stage-access.png)
+
+### !!steps Grant privileges
+
+To be able to authenticate with Ockam Orchestrator and then
+discover the route to our outlet, the Snowflake app needs to allow
+outbound connections to your Ockam project.
+
+Toggle the `Grant access to egress and reach your Project` button and approve the connection by
+pressing `Connect`.
+
+Toggle the `Grant access to your user credentials` button, enter `user` for the user name and `password` for the user password.
+
+![!tour Grant egress](/blog/snowflake-query-remote-api/snowflake-grant-privileges.png)
+
+
+### !!steps Start the application
+
+Press "Next" and wait for the application to start. Once started, you should be able to see the server logs.
+
+![!tour Start server](/blog/snowflake-query-remote-api/snowflake-start-server.png)
+
+You can also notice a tab containing the logs for an Ockam node. That Ockam node is a portal inlet:
+
+  - Which accesses a relay named `api` in the Ockam project.
+  - Declares that only services with the attribute `api` can be connected to the inlet.
+
+</ImageTour>
+
+## Setup an Ockam outlet on the API side
+
+<CodeTour>
+
+### !!steps Generate an enrollment ticket for the Ockam outlet
+
+One end of our connection is now setup, it's time to connect the remote API
+We need to generate an enrollment ticket to allow another Ockam Node to
+join our project. This node will run in the same network as your remote API:
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+  --attribute api
+  --relay api > api.ticket
+```
+
+### !!steps
+
+As we did with the earlier ticket, we've reduced the risk associated with
+mishandling a ticket by restricting it's permitted usage window. We've again set
+a usage count of `1`, but with a tighter
+expiry time of just `2 hours`.
+
+```bash ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 2h \
+  --attribute api
+  --relay api > api.ticket
+```
+
+### !!steps
+
+This credential will include an attested attribute of `api`, corresponding to the attribute expected by 
+the Ockam inlet node started in your Snowflake account.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+  # !focus(1:1)
+  --attribute api
+  --relay api > api.ticket
+```
+
+### !!steps
+
+This credential declares the creation of a relay named `api` to make the service accessible via your Ockam project. 
+
+The ticket is then saved to a file called `api.ticket`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 2h \
+  --attribute api
+  # !focus(1:1)
+  --relay api > api.ticket
+```
+
+</CodeTour>
+
+<CodeTour> 
+
+### !!steps Create a configuration file
+
+We're now going to pass the configuration for our local Ockam Node as a JSON file, so
+save the configuration to the right into a file named `api.json`.
+
+```javascript ! tour
+{
+  "tcp-outlet": {
+    "to": "private-network-host:8000",
+    "relay": "api",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+Ockam Command will process the configuration file after the node starts, instructing the node
+to create a portal outlet. An outlet receives message sent to the project relay, named `api`, decrypts them and 
+forwards them to the service located at `private-network-host:8000`.
+
+```javascript ! tour
+{
+// !focus(1:1)
+  "tcp-outlet": {
+    "to": "private-network-host:8000",
+    "relay": "api",
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps
+
+We also define a policy to restrict which are nodes that are expected to be connected to our outlet.
+
+This policy applies Attribute Based Access Controls (ABAC) to allow
+other nodes that have the attribute `snowflake` as part of their attested
+credentials. The system denies access to nodes without the `snowflake` attribute.
+
+```javascript ! tour
+{
+  "tcp-inlet": {
+    "to": "private-network-host:8000",
+    "relay": "api",
+// !focus(1:1)
+    "allow": "snowflake"
+  }
+}
+```
+
+### !!steps Start the Ockam outlet node
+
+We can now finally start the Ockam outlet node with this command
+
+```shell ! tour
+ockam node create --configuration api.json --enrollment-ticket api.ticket
+```
+
+</CodeTour> 
+
+## Testing the connection
+
+<CodeTour> 
+We are now ready to test access to the remote API, via a fully secure point-to-point connection!
+
+### !!steps Getting data
+
+Let's assume that your HTTP API provides an endpoint named `/customers` to get a list of customers.
+You can make a `GET` query to retrieve all the customers as a table:
+
+```sql ! tour
+CALL QUERY_REMOTE_API__CONNECTOR.external.get('/customers');
+```
+
+### !!steps Getting data with query parameters
+
+You can also parametrize your query with query parameters, provided as a comma-separated list of `key:value`s
+
+```sql ! tour
+CALL QUERY_REMOTE_API__CONNECTOR.external.get('/customers', 'min-age:20,max-age:50');
+```
+
+### !!steps Getting data with query parameters and headers
+
+Some API also use headers to control the API behaviour. If you need to pass a specific set of headers, you can 
+specify them in addition to the query parameters:
+
+```sql ! tour
+CALL QUERY_REMOTE_API__CONNECTOR.external.get('/customers', 'min-age:20,max-age:50', 'Content-Language:en-US,X-start-date:2023-01-01');
+```
+
+### !!steps Post / Put / Patch data
+
+It is also possible to send data to your API with a `POST` query. This data needs to be sent as a JSON payload:
+
+```sql ! tour
+CALL QUERY_REMOTE_API__CONNECTOR.external.POST('/customers', '{"name":"john", "age":50}');
+```
+
+### !!steps Delete data
+
+Finally you can delete data with a `DELETE` query to the appropriate endpoint:
+
+```sql ! tour
+CALL QUERY_REMOTE_API__CONNECTOR.external.DELETE('/customers/241031');
+```
+
+</CodeTour> 
+
+
+## Next steps
+
+In summary, we are now able to securely access a remote API, using Snowflake stored procedures, without exposing any port to the
+internet.
+
+If you'd like to explore some other capabilities of Ockam I'd recommend:
+
+* [Creating private point-to-point connections with _any_ database](https://docs.ockam.io/portals/databases)
+* [Adding security as a feature in your SaaS product](/blog/building-secure-saas-platforms)
