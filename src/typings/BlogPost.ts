@@ -11,6 +11,7 @@ export type BlogPostData = {
   image: string;
   authorPosition: string;
   codetour?: boolean;
+  published?: boolean;
 };
 
 export type BlogPost = {

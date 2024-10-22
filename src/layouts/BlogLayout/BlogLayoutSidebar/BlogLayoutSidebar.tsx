@@ -10,10 +10,25 @@ import BlogLayoutSocials from '../BlogLayoutSocials';
 import BlogSearchInput from '../BlogSearchInput';
 
 import BlogLayoutSidebarNavigation from './BlogLayoutSidebarNavigation';
+import { GroupedBlogPosts } from '@root/typings/BlogPost';
 
 const BlogLayoutSidebar: FunctionComponent<FlexProps> = (props) => {
   const { groupedBlogPostsByCategory } = useBlogPostsContext();
 
+  console.log(groupedBlogPostsByCategory);
+
+  const onlyPublishedPosts = (groupedPosts: GroupedBlogPosts) => {
+    const publishedPosts = Object.entries(groupedPosts).map(([category, posts]) => {
+      return [
+        category,
+        posts.filter(
+          (post) =>
+            post.data && (post.data.published || typeof post.data.published === 'undefined'),
+        ),
+      ];
+    });
+    return Object.fromEntries(publishedPosts);
+  };
   return (
     <Flex
       display={{
@@ -44,7 +59,7 @@ const BlogLayoutSidebar: FunctionComponent<FlexProps> = (props) => {
       <BlogSearchInput mt={14} />
 
       <BlogLayoutSidebarNavigation
-        posts={groupedBlogPostsByCategory}
+        posts={onlyPublishedPosts(groupedBlogPostsByCategory)}
         overflowY="scroll"
         overflowX="hidden"
         mt={10}
