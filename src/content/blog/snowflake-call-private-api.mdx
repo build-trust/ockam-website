@@ -1,10 +1,10 @@
 ---
-title: Query a remote API
+title: Call a private API
 codetour: true
 category: Learning
 date: '2024-06-15'
-description: Query a remote API, from your Snowflake account
-image: /blog/snowflake-query-remote-api/snowflake-query-remote-api.png
+description: Make HTTP calls to a private API, from your Snowflake account
+image: /blog/snowflake-call-private-api/snowflake-call-private-api.png
 author: Glenn Gillen
 authorAvatar: /blog/glenn-gillen.jpg
 ---
@@ -17,11 +17,11 @@ authorAvatar: /blog/glenn-gillen.jpg
 {/* <!-- vale Microsoft.Contractions = NO --> */}
 {/* <!-- vale Microsoft.Avoid = NO --> */}
 
-Wouldn't it be nice to be able call a remote API that's only available inside your private network, with a simple Snowflake procedure call?
+Wouldn't it be nice to be able call a private API that's only available inside your private network, with a simple Snowflake procedure call?
 Wouldn't it be even better if it was not necessary to manage IP allow lists, open firewall ports, or setup services like PrivateLink? 
 Would you believe me if I told you that it would take you less than 15 minutes to setup?
 
-Introducing the Snowflake Query Remote API Connector!
+Introducing the Snowflake Call Private API Connector!
 
 ## Snowflake 💙 APIs
 
@@ -37,32 +37,32 @@ You might wonder though how it can be possible to tap into HTTP services from Sn
 services are hosted in private networks. You might also wonder if it is possible to join the results of a remote call
 with one of your database tables as if the remote data was available as a local table.
 
-In this post I'm going to show you how to securely access a remote API, hosted in a private network, in just a few minutes. 
+In this post I'm going to show you how to securely access a private API, hosted in a private network, in just a few minutes. 
 We will:
 
-* Install and configure the Query remote API connector.
+* Install and configure the Call private API connector.
 * Make a stored procedure call to retrieve data as if it was a table select.
 * Make a stored procedure call to post data to the API.
 
 
-![Snowflake query remote API](/blog/snowflake-query-remote-api/snowflake-query-remote-api.png)
+![Snowflake call private API](/blog/snowflake-call-private-api/snowflake-call-private-api.png)
 
-## Install and configure the Query Remote API Connector
+## Install and configure the Call private API Connector
 
 We are now going to create a set of stored procedures and a portal to access your private API.
 
 <ImageTour>
 ### !!steps Get the app
 
-The Query Remote API Connector by Ockam is [available in the Snowflake Marketplace - FIXME](https://app.snowflake.com/marketplace/listing/TODO).
+The Call private API Connector by Ockam is [available in the Snowflake Marketplace - FIXME](https://app.snowflake.com/marketplace/listing/TODO).
 
-![!tour Get the app](/blog/snowflake-query-remote-api/app-store.png)
+![!tour Get the app](/blog/snowflake-call-private-api/app-store.png)
 
 ### !!steps Select a warehouse
 
 The first screen you're presented with will ask you to select the warehouse to utilize to activate the app and can choose to change the application name.
 
-![!tour Select a warehouse](/blog/snowflake-query-remote-api/select-warehouse.png)
+![!tour Select a warehouse](/blog/snowflake-call-private-api/select-warehouse.png)
 
 ### !!steps Grant account privileges
 
@@ -70,14 +70,14 @@ Click the `Grant` button to the right of this screen. The app will then be
 automatically granted permissions to create a warehouse and create a compute
 pool.
 
-![!tour Grant account privileges](/blog/snowflake-query-remote-api/grant-account.png)
+![!tour Grant account privileges](/blog/snowflake-call-private-api/grant-account.png)
 
 ### !!steps Activate app
 
 Once the permissions grants complete, an `Activate` button will appear. Click
 it and the activation process will begin.
 
-![!tour Activate app](/blog/snowflake-query-remote-api/activate-app.png)
+![!tour Activate app](/blog/snowflake-call-private-api/activate-app.png)
 
 ### !!steps Launch app
 
@@ -85,7 +85,7 @@ After the app activates you'll see a page that summarizes the
 privileges that the application now has. There's nothing we need
 to review or update on these screens yet, so proceed by clicking the `Launch app` button.
 
-![!tour Launch app](/blog/snowflake-query-remote-api/launch-app.png)
+![!tour Launch app](/blog/snowflake-call-private-api/launch-app.png)
 
 </ImageTour>
 
@@ -131,7 +131,7 @@ bootstrap your first project and get you ready to go. It will:
 
 ### !!steps Generate enrollment ticket for Snowflake
 
-In this section we're going to provision an Ockam node that will allow you to connect to your remote API.
+In this section we're going to provision an Ockam node that will allow you to connect to your private API.
 
 We need to generate an enrollment ticket to allow a new Ockam Node to
 join the project that was just created. This node will be used by the connector stored procedures to make HTTP calls
@@ -186,27 +186,27 @@ ockam project ticket \
 
 Click "Get started" to open the Snowflake setup screen.
 
-![!tour Create Snowflake ticket](/blog/snowflake-query-remote-api/snowflake-get-started-app.png)
+![!tour Create Snowflake ticket](/blog/snowflake-call-private-api/snowflake-get-started-app.png)
 
 Take the contents of the file `snowflake.ticket` that we just created and paste
 it into "Provide the above Enrollment Ticket" form field in the "Configure app"
 setup screen in Snowflake.
 
-![!tour Create Snowflake ticket](/blog/snowflake-query-remote-api/snowflake-ticket.png)
+![!tour Create Snowflake ticket](/blog/snowflake-call-private-api/snowflake-ticket.png)
 
 ### !!steps Configure API access
 
 In this screen we need to select an authorization method. For this tutorial you 
 can select `Digest` and continue. The other options available to use are:
 
- - `None` No credentials are required to access the remote API.
- - `Basic` The remote API is accessible with a user name and password.
- - `Digest` The remote API is accessible with a user name and password, but they are not transmitted in clear text.
- - `Bearer token` The remote API is accessible with a token passed with an `Authorization` header.
- - `API Key` The remote API is accessible with an API Key passed with a specific extension header (for example `X-api-key`).
+ - `None` No credentials are required to access the private API.
+ - `Basic` The private API is accessible with a user name and password.
+ - `Digest` The private API is accessible with a user name and password, but they are not transmitted in clear text.
+ - `Bearer token` The private API is accessible with a token passed with an `Authorization` header.
+ - `API Key` The private API is accessible with an API Key passed with a specific extension header (for example `X-api-key`).
 
 
-![!tour Configure the stage access](/blog/snowflake-query-remote-api/snowflake-configure-stage-access.png)
+![!tour Configure the stage access](/blog/snowflake-call-private-api/snowflake-configure-stage-access.png)
 
 ### !!steps Grant privileges
 
@@ -220,14 +220,14 @@ Toggle the `Grant access to your Ockam Project` button and approve the connectio
 pressing `Connect`.
 
 
-![!tour Grant egress](/blog/snowflake-query-remote-api/snowflake-grant-privileges.png)
+![!tour Grant egress](/blog/snowflake-call-private-api/snowflake-grant-privileges.png)
 
 
 ### !!steps Start the application
 
 Press "Next" and wait for the application to start. Once started, you should be able to see the server logs.
 
-![!tour Start server](/blog/snowflake-query-remote-api/snowflake-start-server.png)
+![!tour Start server](/blog/snowflake-call-private-api/snowflake-start-server.png)
 
 You can also notice a tab containing the logs for an Ockam node. That Ockam node is a portal inlet:
 
@@ -242,9 +242,9 @@ You can also notice a tab containing the logs for an Ockam node. That Ockam node
 
 ### !!steps Generate an enrollment ticket for the Ockam outlet
 
-One end of our connection is now setup, it's time to connect the remote API
+One end of our connection is now setup, it's time to connect the private API
 We need to generate an enrollment ticket to allow another Ockam Node to
-join our project. This node will run in the same network as your remote API:
+join our project. This node will run in the same network as your private API:
 
 ```bash ! tour
 ockam project ticket \
@@ -363,7 +363,7 @@ ockam node create --configuration api.json --enrollment-ticket api.ticket
 ## Testing the connection
 
 <CodeTour> 
-We are now ready to test access to the remote API, via a fully secure point-to-point connection!
+We are now ready to test access to the private API, via a fully secure point-to-point connection!
 
 ### !!steps Getting data
 
@@ -371,7 +371,7 @@ Let's assume that your HTTP API provides an endpoint named `/customers` to get a
 You can make a `GET` query to retrieve all the customers as a table:
 
 ```sql ! tour
-CALL QUERY_REMOTE_API__CONNECTOR.external.get('/customers');
+CALL CALL_PRIVATE_API__CONNECTOR.external.get('/customers');
 ```
 
 ### !!steps Getting data with query parameters
@@ -379,7 +379,7 @@ CALL QUERY_REMOTE_API__CONNECTOR.external.get('/customers');
 You can also parametrize your query with query parameters, provided as a comma-separated list of `key:value`s
 
 ```sql ! tour
-CALL QUERY_REMOTE_API__CONNECTOR.external.get('/customers', 'min-age:20,max-age:50');
+CALL CALL_PRIVATE_API__CONNECTOR.external.get('/customers', 'min-age:20,max-age:50');
 ```
 
 ### !!steps Getting data with query parameters and headers
@@ -388,7 +388,7 @@ Some API also use headers to control the API behaviour. If you need to pass a sp
 specify them in addition to the query parameters:
 
 ```sql ! tour
-CALL QUERY_REMOTE_API__CONNECTOR.external.get('/customers', 'min-age:20,max-age:50', 'Content-Language:en-US,X-start-date:2023-01-01');
+CALL CALL_PRIVATE_API__CONNECTOR.external.get('/customers', 'min-age:20,max-age:50', 'Content-Language:en-US,X-start-date:2023-01-01');
 ```
 
 ### !!steps Post / Put / Patch data
@@ -396,7 +396,7 @@ CALL QUERY_REMOTE_API__CONNECTOR.external.get('/customers', 'min-age:20,max-age:
 It is also possible to send data to your API with a `POST` query. This data needs to be sent as a JSON payload:
 
 ```sql ! tour
-CALL QUERY_REMOTE_API__CONNECTOR.external.POST('/customers', '{"name":"john", "age":50}');
+CALL CALL_PRIVATE_API__CONNECTOR.external.POST('/customers', '{"name":"john", "age":50}');
 ```
 
 ### !!steps Delete data
@@ -404,7 +404,7 @@ CALL QUERY_REMOTE_API__CONNECTOR.external.POST('/customers', '{"name":"john", "a
 Finally you can delete data with a `DELETE` query to the appropriate endpoint:
 
 ```sql ! tour
-CALL QUERY_REMOTE_API__CONNECTOR.external.DELETE('/customers/241031');
+CALL CALL_PRIVATE_API__CONNECTOR.external.DELETE('/customers/241031');
 ```
 
 </CodeTour> 
@@ -412,7 +412,7 @@ CALL QUERY_REMOTE_API__CONNECTOR.external.DELETE('/customers/241031');
 
 ## Next steps
 
-In summary, we are now able to securely access a remote API, using Snowflake stored procedures, without exposing any port to the
+In summary, we are now able to securely access a private API, using Snowflake stored procedures, without exposing any port to the
 internet.
 
 If you'd like to explore some other capabilities of Ockam I'd recommend:
