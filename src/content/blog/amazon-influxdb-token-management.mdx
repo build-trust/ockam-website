@@ -1,0 +1,608 @@
+---
+title: Secure token management for Amazon InfluxDB
+codetour: true
+category: Learning
+date: '2024-10-23'
+description: Learn how to implement secure, time-based token management for Amazon InfluxDB using Ockam
+image: /blog/amazon-influxdb-token-management/amazon-influxdb-token-management.png
+author: Glenn Gillen
+authorAvatar: /blog/glenn-gillen.jpg
+isFeatured: false
+featuredOrder: 2
+---
+
+{/* <!-- vale off --> */}
+
+{/* <!-- vale Microsoft.We = NO --> */}
+{/* <!-- vale Microsoft.FirstPerson = NO --> */}
+{/* <!-- vale ockam.h1-h6_sentence-case = NO --> */}
+{/* <!-- vale Microsoft.Contractions = NO --> */}
+{/* <!-- vale Microsoft.Avoid = NO --> */}
+
+Want automated, secure token management for your Amazon Timestream for InfluxDB?
+How about issuing time-based, revocable, and least-privilege access credentials instead of sharing a long-lived influxdb token among multiple influxdb clients?
+
+Introducing the Amazon InfluxDB Token Management with Ockam!
+
+## Prerequisites
+Before getting started, ensure you have:
+
+- An AWS account with appropriate permissions
+- Docker and Docker Compose installed 
+- AWS CLI configured 
+- Basic familiarity with AWS services (VPC, EC2, CloudFormation)
+- Approximately 1 hour of time for complete setup
+
+## Amazon Timestream InfluxDB 💙 Ockam
+
+Amazon Timestream for InfluxDB offers a managed time-series database engine that empowers application developers and DevOps teams to run InfluxDB databases on AWS. It supports real-time time-series applications using open-source APIs and delivers single-digit millisecond query response times.
+
+Ockam enhances Amazon Timestream for InfluxDB by automatically granting uniquely identifiable, least privilege, time-limited credentials to each client connecting to InfluxDB.
+
+### The challenge of managing access at scale
+
+Managing credentials for thousands of discrete clients challenges organizations at scale. The operational burden of issuing unique credentials often leads companies to share a single credential across their client services and devices. This approach increases risk - any compromised client could expose secrets used by the entire fleet. When credentials leak, organizations must scramble to revoke and deploy new credentials across their entire infrastructure simultaneously. Industry best practices recommend regular credential auditing and rotation to reduce business risk. However, this continuous revocation and rotation creates ongoing operational complexity that grows with the client base.
+
+### Securing your InfluxDB instance
+
+Ockam with Amazon Timestream for InfluxDB lets you keep your InfluxDB instance private. Using Ockam's secure channels, you can restrict access to authenticated and authorized Ockam nodes only. This provides:
+
+- **Reduced Attack Surface**: Keeping your InfluxDB instance off the public internet significantly limits potential attack vectors.
+- **Enhanced Security**: Ockam's secure channels encrypt data in transit and restrict access to authorized clients only.
+- **Simplified Network Configuration**: You eliminate the need for complex firewall rules or VPNs.
+
+Ockam's Automated token management solution works with any InfluxDB client out of the box. Organizations can define standardized policies for uniquely identifiable, least privilege, time-limited credentials. Each client requests its own credential and uses it wherever InfluxDB credentials apply. The time-limited design automatically revokes expired credentials, prompting clients to request new ones to maintain communication.
+
+This post shows you how to set up automated, secure token management for Amazon Timestream InfluxDB using Ockam in four steps:
+
+ - Step 1: Create a private Amazon Timestream InfluxDB instance (30 minutes)
+ - Step 2: Sign up for Ockam and create enrollment tickets (5 minutes)
+ - Step 3: Set up an Ockam _outlet_ node with the lease manager alongside your private InfluxDB instance (15 minutes)
+ - Step 4: Set up an Ockam _inlet_ node on your client device to request credentials and communicate with InfluxDB (10 minutes)
+
+![Amazon Timestream InfluxDB token management with Ockam](/blog/amazon-influxdb-token-management/amazon-influxdb-token-management.png)
+
+
+## Step 1: Create a private Amazon Timestream InfluxDB instance
+
+![Amazon Timestream InfluxDB](/blog/amazon-influxdb-token-management/arch-influxdb.png)
+
+Let's create a private Amazon Timestream InfluxDB instance to demonstrate an end-to-end example of automated, secure token management using telegraf to send data to the database. If you already have a private InfluxDB instance, you can skip this section.
+
+### Create InfluxDB instance using cloudformation template
+
+For ease of use, we have prepared a CloudFormation template that deploys all the required infrastructure for you. This template simplifies the setup process by automating the creation of resources.
+
+To create these resources, click the button below to launch the stack in the `us-east-1` Region, and follow the instructions:
+
+[Launch Stack](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=InfluxDBStack&templateURL=https://ockam-awsmp-fulfillment-cf-templates.s3.us-east-1.amazonaws.com/blog-artifacts/influxdb.yaml)
+
+
+The cloudformation template will create
+- InfluxDB instance on the provided VPC and subnets
+- Create and attach a security group to InfluxDB that allows inbound traffic from the VPC CIDR block.
+- Creates an EC2 instance in one of the subnets with the InfluxDB client downloaded to use in `/opt` directory.
+
+### Create InfluxDB instance manually
+
+<ImageTour>
+
+### !!steps Deploy manually via AWS Console
+
+- Navigate to the AWS Console
+- Search for `influxdb` in the search field at the top
+- Select the matching result and visit the InfluxDB databases screen
+- Click `Create InfluxDB Database`
+
+Configure the following settings:
+
+- **Database credentials:** Enter the required details
+- **Instance configuration/Storage configuration/Availability settings:** Update as needed
+- **Connectivity configuration:** Choose a VPC, choose (private) subnets.
+  - Choose a security group
+    - Inbound rules: Custom TCP rule for port 8086 and source IP address range of your VPC or limit it to a subnet that will be used by the Ockam node
+    - Outbound rules: All traffic to `0.0.0.0/0` 
+  - **Publicly accessible:** Select "Not publicly accessible"
+  - **Database port:** Leave the default value of `8086`
+- **Parameter group:** Leave the default value
+- **Tags:** Add any tags you want to help with billing and resource management
+
+Click `Create InfluxDB Database`
+
+Note: Database creation takes approximately 15 minutes to complete.
+
+![!tour Create a database](/blog/amazon-influxdb-token-management/influxdb-create.png)
+
+</ImageTour>
+
+### Create an All Access InfluxDB Token and Obtain Org ID
+
+Note: If you used the cloudformation template to create your InfluxDB instance, you will also have an ec2 machine created that you can use to run the below commands on. If not, run the commands on a machine in your VPC after downloading the InfluxDB client.
+
+- Use Influx CLI to create a token. For instructions, please see: [Install and use the influx CLI](https://docs.influxdata.com/influxdb/v2/tools/influx-cli/).
+
+
+```bash
+INFLUXDB_ORG="REPLACE_WITH_ORG_NAME"
+INFLUXDB_USERNAME="REPLACE_WITH_USERNAME"
+INFLUXDB_PASSWORD="REPLACE_WITH_PASSWORD"
+INFLUXDB_ENDPOINT="https://REPLACE_WITH_INFLUXDB_ENDPOINT:8086"
+
+influx config create --active --config-name testconfig \
+  --host-url $INFLUXDB_ENDPOINT \
+  --org $INFLUXDB_ORG \
+  --username-password "$INFLUXDB_USERNAME:$INFLUXDB_PASSWORD"
+```
+- Obtain and note your Organization ID:
+
+```bash
+influx org list
+```
+- Create and retrieve an all-access token:
+
+```bash
+# Create token
+influx auth create --all-access --description "All-access token for Ockam integration" --json 
+
+# List tokens to verify creation
+influx auth list 
+```
+
+- Store the InfluxDB token in AWS Secrets Manager:
+
+```bash
+# Define variables
+SECRET_NAME="influxdb-token" #Update as necessary
+INFLUXDB_TOKEN="REPLACE_WITH_TOKEN"
+AWS_REGION="us-east-1" #Update as necessary
+
+# Create secret
+aws secretsmanager create-secret \
+--region $AWS_REGION \
+--name $SECRET_NAME \
+--description "Ockam node InfluxDB lessor token" \
+--secret-string "$INFLUXDB_TOKEN"
+
+# Get and note the ARN of the secret
+aws secretsmanager describe-secret \
+--region $AWS_REGION \
+--secret-id $SECRET_NAME \
+--query ARN --output text
+```
+
+## Step 2: Sign up for Ockam and create enrollment tickets
+
+Enrollment tickets provision Ockam nodes. We'll create two enrollment tickets:
+
+ - One for the Ockam _Outlet_ node that runs alongside the private InfluxDB instance containing the lease manager.
+ - One for the Ockam _Inlet_ node that runs on your client devices to communicate with the Ockam Outlet node.
+
+<CodeTour>
+
+### !!steps Install Ockam Command
+
+Run the following command on your local workstation:
+
+```bash ! tour
+curl --proto '=https' --tlsv1.2 -sSfL \
+  https://install.command.ockam.io \
+  | bash && source "$HOME/.ockam/env"
+```
+
+This will install the Ockam Command and source in the required environment 
+settings. Skip this step if you've previously installed Ockam Command.
+
+### !!steps Setup admin account
+
+Initialize your Ockam environment:
+
+```bash ! tour
+ockam enroll
+```
+
+Wrapped up in this single `ockam enroll` command are several steps that will
+bootstrap your first project and get you ready to go. It will:
+
+* Generate an Ockam Identity and store its secret keys in a file system based Ockam Vault.
+* Create an account with Ockam Orchestrator.
+* Provision a trial Space and Project in the Orchestrator.
+* Make your Ockam Identity the administrator of your new Project.
+
+### !!steps Generate enrollment ticket for Ockam Outlet node.
+
+We need to generate an enrollment ticket to allow a new Ockam Outlet Node to
+join the project that was just created. This node will run alongside the private InfluxDB instance:
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute amazon-influxdb-outlet \
+  --relay influxdb \
+    > outlet.ticket
+```
+
+### !!steps
+
+In this command we've set the new ticket to expire in `24 hours`, and a usage
+count of `1`. This means the generated ticket is valid for a single use, and
+that it's valid for 24 hours. A single usage ticket means there is low
+risk associated with mishandling this ticket after use; there's no means
+for an attacker to re-use it like an API token to access any system.
+
+```shell ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 24h \
+  --attribute amazon-influxdb-outlet \
+  --relay influxdb \
+    > outlet.ticket
+```
+
+### !!steps
+
+The Project Membership Credential that's issued will include  
+attributes that will be cryptographically attested to by the Project's
+Membership Authority. You can use these attributes to apply policies with
+Attribute Based Access Controls (ABAC) to allow or restrict specific actions and
+communication paths between nodes.
+
+In this example we assign a single attribute of `amazon-influxdb-outlet`.
+
+```shell ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+# !focus(1:1)
+  --attribute amazon-influxdb-outlet \
+  --relay influxdb \
+    > outlet.ticket
+```
+
+### !!steps
+
+The `--relay influxdb` flag is a shortcut for creating a policy that allows this
+node to create a relay at the address `influxdb`.
+
+This relay will allow a influxdb client to establish a secure end-to-end
+encrypted connection to the influxdb server, running in your amazon account, without requiring you to expose any endpoints to the public Internet.
+
+As the final part of this command we pipe the generated ticket to a file named `outlet.ticket`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute amazon-influxdb-outlet \
+# !focus(1:1)
+  --relay influxdb \
+    > outlet.ticket
+```
+
+</CodeTour> 
+
+<CodeTour>
+### !!steps Generate enrollment ticket for Ockam Inlet node.
+
+We need to generate an enrollment ticket to allow a new Ockam Inlet Node to
+join the project that was just created. This node will run alongside the influxdb client.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute amazon-influxdb-inlet \
+  --tls \
+    > inlet.ticket
+```
+
+### !!steps
+
+In this command we've set the new ticket to expire in `24 hours`, and a usage
+count of `1`. This means the generated ticket is valid for a single use, and
+that it's valid for 24 hours. A single usage ticket means there is low
+risk associated with mishandling this ticket after use; there's no means
+for an attacker to re-use it like an API token to access any system.
+
+```shell ! tour
+ockam project ticket \
+# !focus(1:1)
+  --usage-count 1 --expires-in 24h \
+  --attribute amazon-influxdb-inlet \
+  --tls
+    > inlet.ticket
+```
+
+### !!steps
+
+The Project Membership Credential that's issued will include  
+attributes that will be cryptographically attested to by the Project's
+Membership Authority. You can use these attributes to apply policies with
+Attribute Based Access Controls (ABAC) to allow or restrict specific actions and
+communication paths between nodes.
+
+In this example we assign a single attribute of `amazon-influxdb-inlet`.
+
+```shell ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+# !focus(1:1)
+  --attribute amazon-influxdb-inlet \
+  --tls
+    > inlet.ticket
+```
+
+### !!steps
+
+The `--tls` flag allows the Ockam node to request a TLS certificate to use for the connection.
+
+As the final part of this command we pipe the generated ticket to a file named `inlet.ticket`.
+
+```bash ! tour
+ockam project ticket \
+  --usage-count 1 --expires-in 24h \
+  --attribute amazon-influxdb-inlet \
+# !focus(1:1)
+  --tls
+    > inlet.ticket
+```
+
+</CodeTour> 
+
+
+## Step 3: Deploy the Ockam Outlet Node
+
+![Amazon Timestream InfluxDB token management with Ockam](/blog/amazon-influxdb-token-management/arch-ockam-outlet.png)
+
+The Ockam Node for Amazon Timestream InfluxDB streamlines deploying a managed Ockam Node in your AWS VPC.
+
+To deploy the node that will allow your influxdb client to reach your Amazon Timestream InfluxDB instance visit
+the ["Ockam - Node for Amazon Timestream InfluxDB"](https://aws.amazon.com/marketplace/pp/prodview-yitol6hljwilq?sr=0-1&ref_=beagle&applicationId=AWSMPContessa), and click the `Continue to Subscribe` button, and then `Continue to Configuration`. 
+
+On the configuration page choose the region that your Amazon Timestream InfluxDB instance is
+running in, and then click `Continue to Launch` followed by `Launch`.
+
+<ImageTour>
+
+![!tour Ockam node for Amazon Timestream InfluxDB](/blog/amazon-influxdb-token-management/marketplace-influxdb.png)
+
+
+### !!steps Enter stack details
+
+The initial Create Stack screen pre-fills the fields with the correct
+information for your node, so you can press `Next` to proceed.
+
+![!tour Ockam node for Amazon Timestream InfluxDB - create stack screen](/blog/amazon-influxdb-token-management/marketplace-create-stack.png)
+
+### !!steps Enter node configuration
+
+This screen has important details to you need to fill in:
+
+* **Stack name:** Give this stack a recognizable name, you'll see this in 
+various locations in the AWS Console. It'll also make it easier to clean these 
+resources up later if you wish to remove them.
+* **VPC ID:** The ID of the Virtual Private Cloud network to deploy the node in. 
+Make sure it's the same VPC where you've deployed your InfluxDB instance.
+* **Subnet ID:** Choose a suitable Subnet ID within the chosen VPC that has access to Amazon Timestream InfluxDB Database. Note that the subnet's IP address range must be added to the InfluxDB security group inbound rules.
+* **EC2 instance type:** Choose a suitable EC2 instance type. Default instance type is `m6a.large`. Adjust instance type depending on your use case. If you would like to have predictable network bandwidth of 12.5 Gbps use `m6a.8xlarge`. Make sure the instance type is available in the subnet you are launching in.
+* **Enrollment ticket:** Copy the contents of the `outlet.ticket` file we 
+created earlier and paste it in here.
+* **InfluxDB Endpoint:** Copy the `Endpoint` value for the InfluxDB Database.
+* **InfluxDB Org ID:** Copy the `Org ID` value for the InfluxDB Database.
+* **InfluxDB Token Secret ARN:** Copy the ARN of the secret we created earlier.
+* **InfluxDB Leased Token Permission:** JSON array of permission objects for InfluxDB leased token in the below format. Update as needed. Leave the variable `INFLUX_ORG_ID` as it will be replaced during runtime. For this example we will use below permissions that allows read and write access to all buckets.
+
+```json
+[
+    {
+      "action": "read",
+      "resource": {
+        "type": "buckets",
+        "orgID": "INFLUX_ORG_ID"
+      }
+    },
+    {
+      "action": "write",
+      "resource": {
+        "type": "buckets",
+        "orgID": "INFLUX_ORG_ID"
+      }
+    }
+]
+
+```   
+* **JSON Node Configuration:** Copy and paste the below configuration. Note that the configuration values for `relay` and `allow` match with the enrollment tickets created in the previous step. `INFLUX_ENDPOINT`, `INFLUX_ORG_ID` and `INFLUX_TOKEN` will be replaced with the values provided in the cloudformation stack details.
+
+```json
+{
+    "http-server-port": 23345,
+    "relay": "influxdb",
+    "influxdb-outlet": {
+      "to": "INFLUX_ENDPOINT:8086",
+      "tls": true,
+      "allow": "amazon-influxdb-inlet",
+      "org-id": "INFLUX_ORG_ID",
+      "all-access-token": "INFLUX_TOKEN",
+      "leased-token-expires-in": "300",
+      "leased-token-permissions": "LEASED_TOKEN_PERMISSIONS"
+    }
+}
+```
+
+Ockam Command will process the configuration file after the node starts, with the
+first instruction being to create a relay with the name `influxdb`. This relay will 
+allow InfluxDB client to establish a secure end-to-end encrypted connection to your
+InfluxDB Database. It provides the ability to have entirely isolated infrastructure 
+running within a private network, without requiring you to expose any endpoints
+to the public Internet and no configuring of allow lists to custom network routes.
+
+An outlet decrypts any messages received by the node and then forwards them to the specified influxDB address.
+
+Click Next to launch the CloudFormation run.
+
+A successful CloudFormation stack run configures the Ockam Timestream InfluxDB Outlet node on an EC2 machine.
+
+- EC2 machine mounts an EFS volume created in the same subnet. Ockam state is stored in the EFS volume.
+- A security group with egress access to the internet will be attached to the EC2 machine.
+- Connect to the EC2 machine via AWS Session Manager. 
+  - To view the log file, run `sudo cat /var/log/cloud-init-output.log`.
+  - Successful run will show `Ockam node setup completed successfully` in the logs
+- View the Ockam node status in CloudWatch.
+  - Navigate to Cloudwatch -> Log Group and select `STACK_NAME-status-logs`. Select the Logstream for the EC2 instance. 
+  - The Cloudformation template creates a subscription filter that sends data to a Cloudwatch alarm `STACK_NAME-OckamNodeDownAlarm`.Alarm will turn green upon ockam node successfully running. 
+- An Autoscaling group ensures at least one EC2 instance is running at all times
+
+![!tour Ockam node for Amazon Timestream InfluxDB- create stack screen](/blog/amazon-influxdb-token-management/marketplace-specify-stack-details.png)
+
+</ImageTour>
+
+
+## Step 4: Deploy the Ockam Inlet Node
+
+You can set up an Ockam Timestream InfluxDB Inlet Node locally using Docker or command line.
+
+![Ockam InfluxDB Inlet Node](/blog/amazon-influxdb-token-management/arch-ockam-inlet.png)
+
+### Setup an Ockam Inlet Node along with telegraf client in Docker
+
+To set up an Inlet Node locally and interact with it outside of AWS, use Docker Compose. 
+
+- Get your Ockam project ID:
+
+```bash
+# Below command will find your ockam project id 
+ockam project show --jq .id 
+```
+
+- Create `docker-compose.yml`:
+
+
+```bash
+
+services:
+  ockam:
+    image: ghcr.io/build-trust/ockam
+    container_name: influxdb-inlet
+    environment:
+      ENROLLMENT_TICKET: ${ENROLLMENT_TICKET:-}
+      OCKAM_DEVELOPER: ${OCKAM_DEVELOPER:-false}
+      OCKAM_LOGGING: true
+      OCKAM_LOG_LEVEL: info
+    command:
+      - node
+      - create
+      - --foreground
+      - --node-config
+      - |
+        ticket: ${ENROLLMENT_TICKET}
+
+        influxdb-inlet:
+          from: 0.0.0.0:8086
+          via: influxdb
+          allow: amazon-influxdb-outlet
+          tls: true
+    network_mode: host
+
+  telegraf-client:
+    image: telegraf:1.26
+    container_name: telegraf-client
+    command: |
+      /bin/sh -c '
+      cat << EOF > /tmp/telegraf.conf
+      [agent]
+        interval = "60s"
+        round_interval = true
+        metric_batch_size = 1000
+        metric_buffer_limit = 10000
+        collection_jitter = "0s"
+        flush_interval = "60s"
+        flush_jitter = "0s"
+        precision = ""
+        hostname = ""
+        omit_hostname = false
+
+      [[outputs.influxdb_v2]]
+        urls = ["https://influxdb-inlet.${OCKAM_PROJECT_ID}.ockam.network:8086"]
+        token = "OCKAM_MANAGED"
+        organization = "${INFLUXDB_ORG}"
+        bucket = "${INFLUXDB_BUCKET}"
+
+      [[inputs.cpu]]
+        percpu = true
+        totalcpu = true
+        collect_cpu_time = false
+        report_active = false
+
+      [[inputs.disk]]
+        ignore_fs = ["tmpfs", "devtmpfs", "devfs", "iso9660", "overlay", "aufs", "squashfs"]
+
+      [[inputs.mem]]
+
+      [[inputs.system]]
+      EOF
+      telegraf --config /tmp/telegraf.conf
+      '
+    environment:
+      - OCKAM_PROJECT_ID=${OCKAM_PROJECT_ID:-}
+      - INFLUXDB_ORG=${INFLUXDB_ORG:-}
+      - INFLUXDB_BUCKET=${INFLUXDB_BUCKET:-}
+    depends_on:
+      - ockam
+    network_mode: host
+
+```
+
+- Copy the `inlet.ticket` to same location as the docker-compose.yml file and run the following command to create an Ockam Timestream InfluxDB inlet that can connect to the outlet running in AWS , along with telegraf client container that pushes metrics to InfluxDB via secure encrypted connection.
+  - Update `YOUR_PROJECT_ID` placeholder with the project id you noted down in the previous step. 
+  - Update `YOUR_ORG_NAME` with the name of the organization in InfluxDB
+  - Update `YOUR_BUCKET_NAME` with the name of the bucket in InfluxDB
+
+```bash
+ENROLLMENT_TICKET=$(cat inlet.ticket) \
+OCKAM_PROJECT_ID="YOUR_PROJECT_ID" \
+INFLUXDB_ORG="YOUR_ORG_NAME" \
+INFLUXDB_BUCKET="YOUR_BUCKET_NAME" \
+   docker-compose up -d
+```
+
+You have now successfully setup end to end encrypted connection between your InfluxDB instance running in AWS and your local machine running the telegraf client. Final setup looks like this:
+
+![Amazon Timestream InfluxDB token management with Ockam](/blog/amazon-influxdb-token-management/amazon-influxdb-token-management.png)
+
+You can validate everything working as expected by querying the bucket using influx cli to see the data being sent to InfluxDB from telegraf client. Update `REPLACE_WITH_YOUR_BUCKET_NAME` with the name of the bucket in InfluxDB
+
+```bash
+# Check CPU metrics
+./influx query 'from(bucket:"REPLACE_WITH_YOUR_BUCKET_NAME")
+  |> range(start: -10h)
+  |> filter(fn: (r) => r._measurement == "cpu")
+  |> yield()'
+
+# Check memory metrics
+./influx query 'from(bucket:"REPLACE_WITH_YOUR_BUCKET_NAME")
+  |> range(start: -10h)
+  |> filter(fn: (r) => r._measurement == "mem")
+  |> yield()'
+
+# Check disk metrics
+./influx query 'from(bucket:"REPLACE_WITH_YOUR_BUCKET_NAME")
+  |> range(start: -10h)
+  |> filter(fn: (r) => r._measurement == "disk")
+  |> yield()'
+```
+
+You can issue an inlet enrollment ticket to any number of machines and they'll all be able to securely connect to your InfluxDB instance. Each inlet node will request a leased token from the outlet node and use it to authenticate with the InfluxDB instance. The outlet node will rotate the leased token based on the expiry time set in the configuration to ensure the security of the connection.
+
+## Troubleshooting
+
+Common issues and solutions:
+
+1. **Connection Issues:**
+    - Ensure the InfluxDB endpoint and port (8086) are correct.
+    - Verify that the InfluxDB instance is reachable from the Ockam _outlet_ node.
+    - Check security group settings on both the InfluxDB instance and the Ockam _outlet_ node.
+2. **Ockam Node Issues:**
+    - Verify token attributes match the configuration.
+    - Ensure the enrollment ticket is correct and valid.
+3. **InfluxDB Issues:**
+    - Verify the InfluxDB token has the necessary permissions.
+    - Check organization name and bucket name in the telegraf client configuration.
+    - Review lease manager configuration
+
+If you continue to experience issues, please reach out to us https://www.ockam.io/contact/form for further assistance.
